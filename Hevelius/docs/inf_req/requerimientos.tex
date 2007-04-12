@@ -18,7 +18,7 @@
 %\usepackage{fancyvrb}
 \usepackage{graphicx}
 %\usepackage{wasysym}
-\renewcommand{\baselinestretch}{1.5}
+%\renewcommand{\baselinestretch}{1.5}
 \parskip=7mm
 \pagestyle{myheadings}
 \geometry{tmargin=2.5cm, bmargin=2.5cm, lmargin=2.5cm, rmargin=2.5cm}
@@ -26,7 +26,7 @@
 
 
 %opening
-\title{{\Huge \bf Proyecto Hevelius} \\ {\Large Empresa DevNull}}
+\title{{\Huge \bf Proyecto Hevelius} \\ {\Large Empresa DevNull} \\ {\small Requerimientos}}
 
 \author{
 {\bf Carlos Guajardo Miranda} \\ Jefe de Proyecto \\ \url{cguajard@alumnos.inf.utfsm.cl} \\ cel. 09-95046118 
@@ -39,7 +39,7 @@
 }
 
 
-\date{31 de marzo de 2007}
+\date{13 de abril de 2007}
 
 
 \begin{document}
@@ -53,16 +53,46 @@
 \newpage
 
 \section{Resumen Proyecto}
+El proyecto Hevelius, a cargo de la pre-Empresa DevNull, pretende, como objetivo principal, crear un software de control de telescopios, que sirva de impulso hacia la creaci\'on de un control gen\'erico de telespios. Hevelius, debe poseer flexibilidad en su estructura como software, de manera que permita la futura implementaci\'on de funcionalidades extras y el reemplazo de otras.
+
+\begin{center}
+\it{``Control de telescopio amateur bajo interfaz de control profesional''}
+\end{center}
 
 
 \section{Lista de Requerimientos}
 \subsection{Requerimientos Funcionales Propias de la Aplicaci\'on}
+\begin{itemize}
+	\item Ajustar posici\'on del telescopio bajo sistema de coordenadas ecuatoriales.
+	\item Mover el telescopio a la velocidad de la hora sideral.
+	\item Impedir observaci\'on a lugares donde exista Luminosidad Lunar.
+	\item Mostrar un modelo visual del estado f\'isico del telescopio.
+	\item Ajustar manualmente el telescopio.
+%	\item Conectar software a alg\'un cat\'alogo de estrellas.
+	\item Detener de forma inmediata el telescopio en caso de emergencia.
+%	\item Adquirir datos de la observaci\'on (videos, im\'agenes, etc.)
+\end{itemize}
+
 
 \subsection{Requerimientos Funcionales Gen\'ericos}
+\begin{itemize}
+	\item Guardar coordenadas de observaciones realizadas.
+	\item Controlar acceso a la aplicaci\'on (sesiones).
+\end{itemize}
+
 
 \subsection{Requerimientos Funcionales Distintivos}
+\begin{itemize}
+	\item Crear software bajo plataforma ACS.
+\end{itemize}
+
 
 \subsection{Requerimientos No Funcionales Distintivos}
+\begin{itemize}
+	\item Documentar y comentar c\'odigo en ingl\'es.
+	\item Crear Manuales y/o Informes T\'ecnicos con formato est\'andar de ALMA.
+\end{itemize}
+
 
 \newpage
 
@@ -80,4 +110,48 @@
 
 
 \section{Anexo: Detalle de los Requerimientos}
+
+\subsection{Requerimientos Funcionales Propias de la Aplicaci\'on}
+
+\subsubsection{Ajustar posici\'on del telescopio bajo sistema de coordenadas ecuatoriales.}
+Es necesario ajustar el telescopio a una posición fija, esto debe hacerse respecto al sistema de coordenadas ecuatoriales R.A.DEC., el cual permite conocer la ubicación de la estrella por periodos, es decir, se puede considerar que la estrella no se mueve en periodos cortos de tiempo. Pero todavía queda el problema de que la tierra se mueve a medida que pasa el tiempo, para esto, se considera la hora sideral, la cual considera estos movimientos, de manera que a una misma hora en días distintos, durante alguno de estos periodos se puede ver la estrella en el mismo lugar. El presetting no puede demorar mucho, por lo que los movimientos del telescopio tienen que ser relativamente grandes.
+
+\subsubsection{Mover el telescopio a la velocidad de la hora sideral.}
+El sistema debe dar la posibilidad de tracking, de manera que el telescopio pueda seguir el punto que se está observando a través del tiempo, a pesar de los movimientos de la tierra. Para esto, se debe implementar un sistema distinto al presetting, en el sentido que este tiene que ser más sutil, ya que los movimientos son mucho más pequeños, y no queremos que el telescopio se mueva mucho para no afectar a los estudios que se puedan estar haciendo.
+
+\subsubsection{Impedir observaci\'on a lugares donde exista Luminosidad Lunar.}
+Al observar las estrellas en presencia de la luna, uno se percata que existe una disminución en la calidad de la observación debido a la luminosidad de la luna y a su volumen. El software Hevelius debe advertir al controlador del telescopio que este se dirige a un punto en donde la observación no será de calidad, por lo que se cuidarán tanto el tiempo de observación como los lentes de los telescopios sensibles a mucha luminosidad.
+
+\subsubsection{Mostrar un modelo visual del estado f\'isico del telescopio.}
+Un operador de telescopio puede estar situado: en el telescopio mismo, en un centro de control, o en cualquier otro lugar, por lo que no siempre tendrá la oportunidad de observar cuál es el movimiento real del telescopio que controla. Hevelius debe simular el movimiento del telescopio para que el operador, esté donde esté, pueda tener una visión del comportamiento de este y así permitir diagnosticar alguna falla en la observación.
+
+\subsubsection{Ajustar manualmente la posici\'on del telescopio.}
+Al realizar las tareas de presetting y tracking existe la posibilidad de que no se vea lo que se supone, es decir, que exista un ligero corrimiento de lo que se debiera ver, por diversos motivos, como son las características de material del telescopio, ya que en algunas posiciones este puede doblarse por acción de su propio peso, generando una pequeña diferencia con lo esperado. Es por esto que se requiere de un sistema de pointing manual, que permita al operador del telescopio realizar movimientos manuales para ajustar el telescopio. Cabe destacar, que este sistema de pointing debe ir por debajo del presetting y del tracking, afectando a lo que se ve realmente, pero sin cambiar las coordenadas y horas con las que ellos trabajan.
+
+%\subsubsection{Conectar software a alg\'un cat\'alogo de estrellas.}
+
+\subsubsection{Detener de forma inmediata el telescopio en caso de emergencia.}
+En general los telescopios son aparatos delicados a condiciones climáticas, de luz y muchos otros factores. Es por esto que se debe contar con una opción para proteger al telescopio de estas situaciones. Esta opción es un botón de pánico que debe hacer que el telescopio quede protegido de manera "instantánea" y, debe lograrlo, considerando que trabaja sobre la plataforma ACS de manera distribuida, es decir, puede estar siendo operado de cualquier parte del mundo. Se debe asegurar que aún en estas situaciones, el botón de pánico funcione rápidamente.
+
+%\subsubsection{Adquirir datos de la observaci\'on (videos, im\'agenes, etc.)}
+
+
+\subsection{Requerimientos Funcionales Gen\'ericos}
+\subsubsection{Guardar coordenadas de observaciones realizadas.}
+
+\subsubsection{Controlar acceso a la aplicaci\'on (sesiones).}
+
+
+
+\subsection{Requerimientos Funcionales Distintivos}
+\subsubsection{Crear software bajo plataforma ACS.}
+
+
+
+\subsection{Requerimientos No Funcionales Distintivos}
+\subsubsection{Documentar y comentar c\'odigo en ingl\'es.}
+
+\subsubsection{Crear Manuales y/o Informes T\'ecnicos con formato est\'andar de ALMA.}
+
+
 \end{document}
