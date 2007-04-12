@@ -86,11 +86,10 @@ El proyecto Hevelius, a cargo de la pre-Empresa DevNull, pretende, como objetivo
 	\item Crear software bajo plataforma ACS.
 \end{itemize}
 
-
 \subsection{Requerimientos No Funcionales Distintivos}
 \begin{itemize}
-	\item Documentar y comentar c\'odigo en ingl\'es.
-	\item Crear Manuales y/o Informes T\'ecnicos con formato est\'andar de ALMA.
+	\item Conectar a sistema diferente de Pointing Automático.
+	\item Documentar, crear manuales y/o informes t\'ecnicos con formato est\'andar de ALMA.
 \end{itemize}
 
 
@@ -98,14 +97,42 @@ El proyecto Hevelius, a cargo de la pre-Empresa DevNull, pretende, como objetivo
 
 
 \section{Especificaciones del Software}
+La plataforma en la que desarrollaremos el proyecto es en base a los requerimientos que nuestro cliente pide, el cual consiste en una plataforma Linux y ACS 6.0 (puede ser otra versión, pero ACS 6.0 cumple con el estándar).
+Para el desarrollo de nuestro proyecto, debemos cumplir ciertos estándares, los cuales correspoden a utilizar lenguajes como Java, C, C++ o Python.
 
+\subsection{Especificación de Hardware}
+Los equipos con los cuales se desarrollará nuestro proyecto poseen de las siguientes características:
+
+\begin{itemize}
+	\item Procesador Pentium IV 3.0 Ghz de 32 bits.
+	\item 1Gb RAM
+	\item Telescopio NEXSTAR 4 SE que posee computador manual de 16 carácteres con pantalla LCD y 19 botones. Algunas de sus características son: posee una apertura de 102 mm, un largo focal de 1325 mm, radio focal de 12.99 mm, entre otras cosas.
+	\item Se añadirá al telescopio un CCS para poder obtener imágenes.
+\end{itemize}
+
+El riesgo que se corre con respecto a la adquicicion del hardware es la obtención del telescopio, puesto que tanto el resto del equipo a utilizar y la plataforma de software ya estaán disponibles.
+Sin embargo, a la fecha de la creacion de este informe, se informó que el Telescopio será comprado dentro de esta semana (9 al 13 del presente mes), por lo que el riesgo de hardware se reduce conciderablemente.
 
 \newpage
 
 
 \section{Presentaci\'on Cliente y Usuario}
+Hevelius está inserto en un Proyecto de mayor magnitud, por lo que nuestro proyecto se debe al proyecto ``Software development for ALMA-CONICYT: Building up expertise to meet ALMA-CONICYT software requirements within a Chilean University''. Los representantes de dicho proyecto son Mauricio Araya y Horst Von Brand.
+
+{\bf Mauricio Alejandro Araya López}, estudiante de Ingeniería Civil Informática y Postgrado de la Universidad Tecnica Federico Santa Maria. 
+
+Su experiencia en el tema que Hevelius abarca consiste en:
+Trabajó como ACS UTFSM Team Leader, Partnership, donde colaboró en el ALMA Common Software
+liderado por European Southern Observatory en diversas aplicaciones sobre ACS y en el desarrollo del mismo framework ACS. Actualmente trabajando en un proyecto Conicyt-ALMA de colaboración
+internacional.
+
+
+
+
 
 \subsection{Contacto}
+
+
 \newpage
 
 
@@ -138,20 +165,24 @@ En general los telescopios son aparatos delicados a condiciones climáticas, de 
 
 \subsection{Requerimientos Funcionales Gen\'ericos}
 \subsubsection{Guardar coordenadas de observaciones realizadas.}
+Cada vez que se utiliza Hevelius se realiza una serie de investigaciones u observaciones que son de gran importancia para los que lo realizan, es por ello que Hevelius a través del sistema de sesión guardará un registro de todas las coordenadas de observación que se realicen durante su sesión, la cual al terminar ésta, generará un registro.
 
 \subsubsection{Controlar acceso a la aplicaci\'on (sesiones).}
-
+Para tener un control de la gente que usará Hevelius, el control del telescopio, contará con un sistema de sesiones, en donde cada usuario, debidamente registrado por un administrador, ingresará al software para realizar sus trabajos, los cuales quedan registrados.
 
 
 \subsection{Requerimientos Funcionales Distintivos}
 \subsubsection{Crear software bajo plataforma ACS.}
-
+La plataforma ACS (Alma Common Software) es un framework que facilita el uso de sistemas distribuidos. Se caracteriza por su modelo Componente-Container, el cual permite utilizar aplicaciones desarrolladas en otro sitio como si estuvieran donde uno desarrolla. Hevelius debe utilizar aplicaciones ya creadas (para no replizar código), crear aplicaciones para el resto del mundo y utilizar todo el sistema en sí para contruir el software.
 
 
 \subsection{Requerimientos No Funcionales Distintivos}
-\subsubsection{Documentar y comentar c\'odigo en ingl\'es.}
+\subsubsection{Conectar a sistema diferente de Pointing Automático.}
+El poiting, posicionamiento del telescopio en alguna coordenada, puede ser desarrollado de diversas formas, según el telescopio a utilizar. Hevelius será capaz de poder ajustarse a nuevos sistemas de pointing automático, lo cual permitirá desarrollar en mejor manera esta función y poder ser probado en diversos telescopios que utilicen el sistema de pointing automático.
 
-\subsubsection{Crear Manuales y/o Informes T\'ecnicos con formato est\'andar de ALMA.}
-
+\subsubsection{Documentar, crear manuales y/o informes t\'ecnicos con formato est\'andar de ALMA.}
+El proyecto Hevelius al enmarcarse en el proyecto de ALMA y Conicyt ``Software development for ALMA-CONICYT: Building up expertise to meet ALMA-CONICYT software requirements within a Chilean University'', debe cumplir ciertos estándares, como son el formato y lenguajes de programación. 
+Toda la documentación del proyecto, así como el código fuente y comentarios estarán realizados en Inglés, puesto que el proyecto tiene un carácter internacional.
+Otro estándar a seguir, son los tipos de lenguajes permitidos, puesto que el proyecto funciona con el framework ACS 6.0, Hevelius utilizará solo los lenguajes Java, Phyton, C y C++ , esto con la finalidad de poder ser utilizado por el sistema distribuido de ACS 6.0 tal y como se mencionó anteriormente.
 
 \end{document}
