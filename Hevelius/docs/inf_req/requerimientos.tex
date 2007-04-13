@@ -88,7 +88,7 @@ El proyecto Hevelius, a cargo de la pre-Empresa DevNull, pretende, como objetivo
 
 \subsection{Requerimientos No Funcionales Distintivos}
 \begin{itemize}
-	\item Conectar a sistema diferente de Pointing Autom\'atico.
+	\item Permitir conexion a sistema diferente de Pointing Autom\'atico.
 	\item Documentar, crear manuales y/o informes t\'ecnicos con formato est\'andar de ALMA.
 \end{itemize}
 
@@ -116,14 +116,11 @@ Sin embargo, a la fecha de la creaci\'on de este informe, se inform\'o que el Te
 
 
 \section{Presentaci\'on Cliente y Usuario}
-Hevelius se enmarca en un proyecto de mayor magnitud, llamdo ``Software development for ALMA-CONICYT: Building up expertise to meet ALMA-CONICYT software requirements within a Chilean University''. Los representantes de dicho proyecto son Mauricio Araya y Horst Von Brand.
+Hevelius se enmarca en un proyecto de mayor magnitud, llamado ``Software development for ALMA-CONICYT: Building up expertise to meet ALMA-CONICYT software requirements within a Chilean University''. Los representantes de dicho proyecto son Mauricio Araya y Horst Von Brand.
 
-{\bf Mauricio Alejandro Araya L\'opez}, estudiante de Ingenier\'ia Civil Inform\'atica y Mag\'ister en Inform\'atica en la Universidad T\'ecnica Federico Santa Mar\'ia. Se ha desempe\~nado como Team Leader y Partnership del ACS-UTFSM, donde colabor\'o en el ALMA Common Software
-liderado por European Southern Observatory en diversas aplicaciones sobre ACS y en el desarrollo del mismo framework ACS. 
+{\bf Mauricio Alejandro Araya L\'opez}, estudiante de Ingenier\'ia Civil Inform\'atica y Mag\'ister en Inform\'atica en la Universidad T\'ecnica Federico Santa Mar\'ia. Se ha desempe\~nado como Team Leader y Partnership del ACS-UTFSM, donde colabor\'o en el ALMA Common Software, liderado por European Southern Observatory en diversas aplicaciones sobre ACS y en el desarrollo del mismo framework ACS. 
 
-{\bf Horst von Brand}, es profe, compila su propio kernel y toma cafe.
-
-
+{\bf Horst von Brand}, PhD en Computer Science de la Louisiana State University. Actualmente se desempe\~na como profesor del Departamento de Inform\'atica de la Universidad T\'ecnica Federico Santa Mar\'ia, adem\'as de ser Jefe del Proyecto ``Software development for ALMA-CONICYT: Building up expertise to meet ALMA-CONICYT software requirements within a Chilean University''.
 
 
 
@@ -141,7 +138,7 @@ A Horst von Brand, a trav\'es de la Secretar\'ia del Departamento de Inform\'ati
 \subsection{Requerimientos Funcionales Propias de la Aplicaci\'on}
 
 \subsubsection{Ajustar posici\'on del telescopio bajo sistema de coordenadas ecuatoriales.}
-Es necesario ajustar el telescopio a una posici\'on fija, esto debe hacerse respecto al sistema de coordenadas ecuatoriales R.A.DEC., el cual permite conocer la ubicaci\'on de la estrella por periodos, es decir, se puede considerar que la estrella no se mueve en periodos cortos de tiempo. Pero todav\'ia queda el problema de que la tierra se mueve a medida que pasa el tiempo, para esto, se considera la hora sideral, la cual considera estos movimientos, de manera que a una misma hora en d\'ias distintos, durante alguno de estos periodos se puede ver la estrella en el mismo lugar. El presetting no puede demorar mucho, por lo que los movimientos del telescopio tienen que ser relativamente grandes.
+Es necesario ajustar el telescopio a una posici\'on fija, esto debe hacerse respecto al sistema de coordenadas ecuatoriales R.A.DEC., el cual permite conocer la ubicaci\'on de la estrella por periodos, es decir, se puede considerar que la estrella no se mueve en periodos cortos de tiempo. Pero todav\'ia queda el problema de que la tierra se mueve a medida que pasa el tiempo. Para esto, se utiliza la hora sideral, la cual considera estos movimientos, de manera que a una misma hora en d\'ias distintos, durante alguno de estos periodos se puede ver la estrella en el mismo lugar. El presetting no puede demorar mucho, por lo que los movimientos del telescopio tienen que ser relativamente r\'apidos \footnote{M\'as Informaci\'on: \url{http://es.wikipedia.org/wiki/Coordenadas_ecuatoriales}}.
 
 \subsubsection{Mover el telescopio a la velocidad de la hora sideral.}
 El sistema debe dar la posibilidad de tracking, de manera que el telescopio pueda seguir el punto que se est\'a observando a trav\'es del tiempo, a pesar de los movimientos de la tierra. Para esto, se debe implementar un sistema distinto al presetting, en el sentido que este tiene que ser m\'as sutil, ya que los movimientos son mucho m\'as peque\~nos, y no queremos que el telescopio se mueva mucho para no afectar a los estudios que se puedan estar haciendo.
@@ -158,31 +155,31 @@ Al realizar las tareas de presetting y tracking existe la posibilidad de que no 
 %\subsubsection{Conectar software a alg\'un cat\'alogo de estrellas.}
 
 \subsubsection{Detener de forma inmediata el telescopio en caso de emergencia.}
-En general los telescopios son aparatos delicados a condiciones clim\'aticas, de luz y muchos otros factores. Es por esto que se debe contar con una opci\'on para proteger al telescopio de estas situaciones. Esta opci\'on es un bot\'on de p\'anico que debe hacer que el telescopio quede protegido de manera "instant\'anea" y, debe lograrlo, considerando que trabaja sobre la plataforma ACS de manera distribuida, es decir, puede estar siendo operado de cualquier parte del mundo. Se debe asegurar que a\'un en estas situaciones, el bot\'on de p\'anico funcione r\'apidamente.
+En general, los telescopios son aparatos delicados a condiciones clim\'aticas, de luz y muchos otros factores. Es por esto que se debe contar con una opci\'on para proteger al telescopio de estas situaciones. Esta opci\'on es un bot\'on de p\'anico que debe hacer que el telescopio quede protegido de manera ``instant\'anea'' y, debe lograrlo, considerando que trabaja sobre la plataforma ACS de manera distribuida, es decir, puede estar siendo operado de cualquier parte del mundo. Se debe asegurar que a\'un en estas situaciones, el bot\'on de p\'anico funcione r\'apidamente.
 
 %\subsubsection{Adquirir datos de la observaci\'on (videos, im\'agenes, etc.)}
 
 
 \subsection{Requerimientos Funcionales Gen\'ericos}
 \subsubsection{Guardar coordenadas de observaciones realizadas.}
-Cada vez que se utiliza Hevelius se realiza una serie de investigaciones u observaciones que son de gran importancia para los que lo realizan, es por ello que Hevelius a trav\'es del sistema de sesi\'on guardar\'a un registro de todas las coordenadas de observaci\'on que se realicen durante su sesi\'on, la cual al terminar \'esta, generar\'a un registro.
+Cada vez que se utiliza Hevelius se realiza una serie de investigaciones u observaciones que son de gran importancia para los que lo realizan, es por ello que Hevelius guardar\'a un registro de todas las coordenadas de observaci\'on que se realicen durante una sesi\'on, generando un reporte con la informaci\'on obtenida.
 
 \subsubsection{Controlar acceso a la aplicaci\'on (sesiones).}
-Para tener un control de la gente que usar\'a Hevelius, el control del telescopio, contar\'a con un sistema de sesiones, en donde cada usuario, debidamente registrado por un administrador, ingresar\'a al software para realizar sus trabajos, los cuales quedan registrados.
+Para tener un control de la gente que usar\'a Hevelius, se implementar\'a un sistema de sesiones, en donde cada usuario debidamente registrado, ingresar\'a al software para realizar sus trabajos.
 
 
 \subsection{Requerimientos Funcionales Distintivos}
 \subsubsection{Crear software bajo plataforma ACS.}
-La plataforma ACS (Alma Common Software) es un framework que facilita el uso de sistemas distribuidos. Se caracteriza por su modelo Componente-Container, el cual permite utilizar aplicaciones desarrolladas en otro sitio como si estuvieran donde uno desarrolla. Hevelius debe utilizar aplicaciones ya creadas (para no replizar c\'odigo), crear aplicaciones para el resto del mundo y utilizar todo el sistema en s\'i para contruir el software.
+La plataforma ACS (Alma Common Software) es un framework que facilita el uso de sistemas distribuidos. Se caracteriza por su modelo Componente-Container, el cual permite utilizar aplicaciones desarrolladas en otro sitio como si estuvieran donde uno desarrolla. Hevelius debe utilizar aplicaciones ya creadas (para no replicar c\'odigo), crear aplicaciones para el resto del mundo y utilizar todo el sistema en s\'i para contruir el software.
 
 
 \subsection{Requerimientos No Funcionales Distintivos}
-\subsubsection{Conectar a sistema diferente de Pointing Autom\'atico.}
-El poiting, posicionamiento del telescopio en alguna coordenada, puede ser desarrollado de diversas formas, seg\'un el telescopio a utilizar. Hevelius ser\'a capaz de poder ajustarse a nuevos sistemas de pointing autom\'atico, lo cual permitir\'a desarrollar en mejor manera esta funci\'on y poder ser probado en diversos telescopios que utilicen el sistema de pointing autom\'atico.
+\subsubsection{Permitir conexion a sistema diferente de Pointing Autom\'atico.}
+El pointing, posicionamiento del telescopio en alguna coordenada, puede ser desarrollado de diversas formas, seg\'un el telescopio a utilizar. Hevelius ser\'a capaz de poder ajustarse a nuevos sistemas de pointing autom\'atico, lo cual permite a Hevelius ser un software modular.
 
-\subsubsection{Documentar, crear manuales y/o informes t\'ecnicos con formato est\'andar de ALMA.}
+\subsubsection{Documentar, crear manuales e/o informes t\'ecnicos con formato est\'andar de ALMA.}
 El proyecto Hevelius al enmarcarse en el proyecto de ALMA y Conicyt ``Software development for ALMA-CONICYT: Building up expertise to meet ALMA-CONICYT software requirements within a Chilean University'', debe cumplir ciertos est\'andares, como son el formato y lenguajes de programaci\'on. 
-Toda la documentaci\'on del proyecto, as\'i como el c\'odigo fuente y comentarios estar\'an realizados en Ingl\'es, puesto que el proyecto tiene un car\'acter internacional.
-Otro est\'andar a seguir, son los tipos de lenguajes permitidos, puesto que el proyecto funciona con el framework ACS 6.0, Hevelius utilizar\'a solo los lenguajes Java, Phyton, C y C++ , esto con la finalidad de poder ser utilizado por el sistema distribuido de ACS 6.0 tal y como se mencion\'o anteriormente.
+Toda la documentaci\'on del proyecto y comentarios en el c\'odigo fuente estar\'an realizados en Ingl\'es, puesto que el proyecto tiene un car\'acter internacional.
+Otro est\'andar a seguir, son los tipos de lenguajes permitidos, puesto que el proyecto funciona con el framework ACS 6.0, Hevelius puede utilizar s\'olo los lenguajes Java, Phyton, C y C++.
 
 \end{document}
