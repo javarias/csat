@@ -55,20 +55,38 @@
 \section{Identificar y listar en orden de prioridad los 3 riesgos principales asociados al desarrollo del producto (carácter técnico).}
 
 \begin{itemize}
-	\item No poder convertir de manera correcta las coordenadas R.A.Dec. en hora sideral a Altitud/Azimuth.
-	\item No ser modular
-	\item No poseer interfaz amigable
+	\item Convertir de manera correcta las coordenadas R.A.Dec. en hora sideral a Altitud/Azimuth.
+	\item Permitir uso de otro sistema de pointing (modularidad).
+	\item Interfaz amigable para el uso de astr\'onomos
 \end{itemize}
 
 
 \section{Seleccionar y justificar el riesgo principal a abordar.}
 
-Riesgo Principal: \bf{No poder convertir de manera correcta las coordenadas R.A.Dec. en hora sideral a Altitud/Azimuth.}\\*
+Riesgo Principal: \bf{Convertir de manera correcta las coordenadas R.A.Dec. en hora sideral a Altitud/Azimuth.}\\*
+
+Cuando un astr\'onomo quiere realizar observaciones tiene que tener presente el lugar donde se ubica el objeto en cuesti''on.
+Se sabe que los astr\'onomos poseen una definici\'on de tiempo diferente a la que se usa normalmente, llamada \textit{hora sideral},
+la cual se define como la medida del tiempo basada en el movimiento de la Tierra respecto de las estrellas (el tiempo entre 2 
+pasos consecutivos de una estrella cualquiera por el meridiano del lugar nos definen el d\'ia sideral); aqu\'i se produce un 
+ligero desfase diario respecto al d\'ia solar, debido al movimiento de traslaci\'on de la Tierra, superando \'este en 3 minutos 
+y 56 segundos al d\'ia sideral.
+
+Al poseer esta hora y el ángulo de ubicaci\'on del objeto respecto al plano ecuatorial, un astr\'onomo sabe hacia donde debe mirar. 
+Sin embargo, un telescopio y su software ocupan el Sistema de Coordenadas Horizontales, el cual para determinar la posici\'on de 
+un objeto, un observador deber\'a medir su altura que es la distancia angular desde el horizonte hasta la estrella. En segundo lugar, 
+tendrá que determinar el \'angulo que forma la estrella con una direcci\'on que se toma como origen, generalmente el sur, medida 
+sobre el horizonte y en sentido horario.
+
+El riesgo de que Hevelius transforme de manera err\'onea las coordenadas es latente e implicar\'ia que el telescopio no observe
+lo que se espera, por lo que se perder\'ia tiempo de observaci\'on en corregir los errores de software (valioso recurso para los
+astr\'onomos), se apuntar\'ia a lugares potencialmente peligrosos para el lente del telescopio y har\'ia que Hevelius fuera un software
+inutilizable en los observatorios.
 
 
-Como ya hemos mencionado en trabajos anteriores, Hevelius se basa en el mundo de la astronom\'ia. Es por esto que debemos preocuparnos por los sistemas de coordenadas que ellos usan, tal como mencionamos en nuestro informe de requerimientos, la conversi\'on de coordenadas R.A.Dec. en horas siderales a Altitud/Azimuth, relacionada a la ubicaci\'on de los objetos de observaci\'on es de gran importancia. Esto porque una falla en este c\'alculo podr\'ia traer consecuencias graves, como la p\'erdida de horas de observaci\'on, que son bastante caras, sin contar que retrasa la investigaci\'on que se est\'e realizando, adem\'as, el equipo corre un gran riesgo, ya que al moverse a alguna coordenada err\'onea puede da\~nar al telescopio.
 
 \section{Identificar medidas de mitigaci\'on para el riesgo principal (indicar qu\'al artefactos se construir\'on para afrontar el riesgo).}
+
 \begin{itemize}
 	\item Modelo de caso de usos de la tranformaci\'on de las coordenadas.
 	\item Investigaci\'on de las coordenadas.
