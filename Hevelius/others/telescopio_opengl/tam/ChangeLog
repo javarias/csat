@@ -1,0 +1,11 @@
+2004-08-12  Steve Joiner  <steve@daisyhill.net>
+
+	* configure.in:  Changed version number to 1.0.1.
+
+	* threeaxis.glade (help_dialog):  Fixed typo in contents of help
+	dialog.
+
+2004-08-06  Steve Joiner  <steve@daisyhill.net>
+
+	* Initial release of threeaxis 1.0.0.
+
