@@ -70,9 +70,9 @@ Como ya hemos mencionado en trabajos anteriores, Hevelius se basa en el mundo de
 
 \section{Identificar medidas de mitigaci\'on para el riesgo principal (indicar qu\'al artefactos se construir\'on para afrontar el riesgo).}
 \begin{itemize}
-	\item modelo de caso de usos de la tranformacion de las coordenadas.
-	\item investigacion de las coordenadas.
-	\item contratos derivados de los casos de uso de la transformacion de las coordenadas.
+	\item Modelo de caso de usos de la tranformaci\'on de las coordenadas.
+	\item Investigaci\'on de las coordenadas.
+	\item Contratos derivados de los casos de uso de la transformaci\'on de las coordenadas.
 \end{itemize}
 
 
@@ -80,7 +80,15 @@ Como ya hemos mencionado en trabajos anteriores, Hevelius se basa en el mundo de
 
 \subsection{Modelo de Casos de Uso}
 
+Al realizar un modelo de casos de uso de la acci\'on, podemos identificar de mejor manera los problemas que podr\'ian ocurrir en el c\'alculo de las coordenadas, ya que separan los pasos de la acci\'on. De esta manera, podemos ver y separar los problemas que pueden ocurrir, ya sea por ingreso de datos err\'oneos, error en los c\'alculos mismos, en la salida de los datos, entre otros. Y, de esta manera, asegurar que el telescopio no reciba coordenadas que inesperadas.
+
 \subsection{Investigaci\'on de las Coordenadas}
+
+Es necesario investigar sobre las coordenadas, tanto de Altitud/Azimuth como R.A.Dec. y hora sideral. Adem\'as, se debe investigar sobre la relaci\'on de ambas coordenadas de manera de aprender c\'omo se realiza la transformaci\'on entre ellas y para poder asegurar que los c\'alculos que se har\'an, se hagan de forma correcta.
+
+\subsection{Contratos derivados de los casos de uso de la transformaci\'on de las coordenadas.}
+
+Al utilizar los contratos asociados a los casos de uso, podemos ver en m\'as detalle lo que sucede en cada uno de ellos, qu\'e es lo que necesitan para funcionar, las precondiciones y datos de entrada, y lo que tiene que entregar cada uno, la salida y las postcondiciones. Al tener esta informaci\'on podemos desglosar de mejor manera los problemas, para revisar cada posible error de manera minuciosa.
 
 
 \end{document}
