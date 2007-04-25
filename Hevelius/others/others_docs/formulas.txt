@@ -33,7 +33,7 @@ LON es la longitud en la que nos encontramos(el telescopio!)
 
 Luego se debe obtener el "Hour Angle":
 
-HA = LMST - HA
+HA = LMST - RA
 
 Para finalmente obtener la altitud(ALT) y azimuth(AZ):
 
