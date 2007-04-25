@@ -1,0 +1,75 @@
+Las formulas a usar van a ser las vistas en el link que esta en links.txt, mas una
+otras que busque en otra parte, puesto que en el link no la explicaban, f(UT).
+
+Lo primero que hay que calcular es el "Mean Sidereal Time" (MST), para esto,
+calculamos valores de ayuda que son dwhole y dfrac:
+
+dwhole = 367*y-(int)(7*(y+(int)((m+9)/12))/4)+(int)(275*m/9)+day-730531.5
+dfrac = (h + mins/60 + seconds/3600)/24
+d = dwhole + dfrac
+d = UT days since J2000.0 (incluyendo fracciones de dias)
+
+dwhole es la suma de todos los dias anteriores al entregado desde el 2000, esto es porque
+usamos J200 como el "epoch" de referencia.
+dfrac es la fraccion del dia actual.
+
+Ahora calculamos MST:
+
+MST = f(UT) = 280.46061837 + 360.98564736629 * d
+
+Sacado de la formula de Meeus 11.4, despreciando los terminos del tiempo que estan al
+cuadrado y al cubo(voy a averiguar que onda eso!).
+
+while(MST > 360)
+  MST -= 360;
+
+Ahora que tenemos el "Mean Sidereal Time" tenemos que transformarlo al
+adecuado a nuestra ubicacion, ya que el calculo se hizo para el meridiano de
+Greenwich, ahora obtenemos el "Local Mean Sidereal Time":
+
+LMST = MST + LON
+
+LON es la longitud en la que nos encontramos(el telescopio!)
+
+Luego se debe obtener el "Hour Angle":
+
+HA = LMST - HA
+
+Para finalmente obtener la altitud(ALT) y azimuth(AZ):
+
+ALT = ArcSin(Sin(DEC)*Sin(LAT) + Cos(DEC)*Cos(Lat)*Cos(HA))
+A = ArcCos((Sin(DEC) - Sin(ALT)*Sin(LAT))/(Cos(ALT)*Cos(LAT)))
+
+Si A es negativo, AZ = A, pero si A es positivo, entonces AZ = 360 - A
+
+
+
+Formula alternativa para calcular MST:
+
+Si mes 1 o 2, entonces anio = anio - 1 y mes = mes + 12
+
+a = (int)(anio/100)
+b = 2 - a + (int)(a/4)
+c = (int)(365.25*anio)
+d = (int)(30.6001*(mes+1))
+
+jd = b + c + d - 730550.5 + dia + (hora + minuto/60 + segundo/3600)/24
+jt = jd/36525
+
+jd dias desde J2000.0
+jt siglos desde j2000.0
+
+MST = 280.46061837 + 360.98564736629*jd + 0.000387933*jt*jt - jt*jt*jt/38710000
+
+Aqui estan esos terminos cuadraticos y cubicos! seguramente da mayor precision.
+
+while(MST > 360)
+  MST -= 360;
+
+
+Luego de probar ambas formulas de forma exhaustiva(1 intento que dieron
+exactamente = sin ninguna cifra distinta!), llegue a la conclusion que en
+ambos casos se obtiene lo mismo, la unica diferencia vendria siendo en el
+punto de MST =.... en el cual puede haber sido usado cualquiera de los 2
+metodos anteriores. Yo recomiendo el segundo porque es mas ordenado, pero lo
+podemos ver...
