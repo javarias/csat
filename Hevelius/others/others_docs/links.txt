@@ -1,0 +1,25 @@
+Links:
+
+Links utiles para aprender sobre el sistema de coordenadas:
+
+Explicacion de los sistemas Azimuth/Altitud y R.A.Dec. y
+conversion entre ellos:
+http://home.att.net/~srschmitt/celestial2horizon.html
+
+Catalogos y fotos:
+
+Lista de Catalogos de estrellas, varios Online.
+http://en.wikipedia.org/wiki/List_of_Star_catalogues
+
+Fotos a partir de coordenadas R.A.Dec.
+http://archive.eso.org/dss/dss
+
+OpenGL:
+
+Manual oficial estilo tutorial:
+http://www.glprogramming.com/red/
+
+Lista oficial de funciones:
+http://www.glprogramming.com/blue/
+
+Los 2 estan en ingles pero son buenos.
