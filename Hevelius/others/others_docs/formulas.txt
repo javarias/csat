@@ -22,6 +22,8 @@ cuadrado y al cubo(voy a averiguar que onda eso!).
 
 while(MST > 360)
   MST -= 360;
+while(MST < 0)
+  MST += 360;
 
 Ahora que tenemos el "Mean Sidereal Time" tenemos que transformarlo al
 adecuado a nuestra ubicacion, ya que el calculo se hizo para el meridiano de
@@ -33,6 +35,10 @@ LON es la longitud en la que nos encontramos(el telescopio!)
 
 Luego se debe obtener el "Hour Angle":
 
+Antes de este paso es necesario cambiar RA a reales!
+
+RA = 15*RA
+
 HA = LMST - RA
 
 Para finalmente obtener la altitud(ALT) y azimuth(AZ):
@@ -40,7 +46,7 @@ Para finalmente obtener la altitud(ALT) y azimuth(AZ):
 ALT = ArcSin(Sin(DEC)*Sin(LAT) + Cos(DEC)*Cos(Lat)*Cos(HA))
 A = ArcCos((Sin(DEC) - Sin(ALT)*Sin(LAT))/(Cos(ALT)*Cos(LAT)))
 
-Si A es negativo, AZ = A, pero si A es positivo, entonces AZ = 360 - A
+Si Sin(HA) es negativo, AZ = A, pero si A es positivo, entonces AZ = 360 - A
 
 
 
