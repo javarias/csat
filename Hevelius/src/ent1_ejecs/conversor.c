@@ -3,8 +3,9 @@
 #include <math.h>
 #include <time.h>
 #include "conversor.h"
+#include "verificador.h"
 
-void convertir(double RA, double DEC)
+void convertir(double *RA, double *DEC)
 {
     struct tm *datetime;
     time_t t;
@@ -31,14 +32,9 @@ void convertir(double RA, double DEC)
     LON = -71.5; //Longitud +Este -Oeste
     LAT = -33; //Latitud +Norte -sur
     //--------------------------------------------------//
-    
-    //Direccion de donde se quiere ver.
-    RA = 8.17;//6.752472;
-    DEC = 19.8;//-16.7161;
-    //--------------------------------------------------//
 
     //Conversion de grados a reales.    
-    RA =15*RA;
+    *RA =15*(*RA);
     
     //Por formula si es el primer o segundo mes hay que hacer como que fuera
     //el año anterior con mas meses. Seguramente por años bisiestos...
@@ -67,24 +63,33 @@ void convertir(double RA, double DEC)
     //MST se deja entre 0 y 360
         
     LMST = MST + LON; //Se centra el MST en el punto de observacion.
-    HA = LMST - RA; //Se obtiene Hour Angle.
+    HA = LMST - (*RA); //Se obtiene Hour Angle.
     if(HA < 0)
         HA += 360;//Tiene que ser positivo.
     
     //Se obtiene la altitud en grados.
-    ALT = sin(DEC*PI/180)*sin(LAT*PI/180);
-    ALT += cos(DEC*PI/180)*cos(LAT*PI/180)*cos(HA*PI/180);
+    ALT = sin((*DEC)*PI/180)*sin(LAT*PI/180);
+    ALT += cos((*DEC)*PI/180)*cos(LAT*PI/180)*cos(HA*PI/180);
     ALT = asin(ALT)*180/PI;
-//    ALT = asin(sin(DEC*PI/180)*sin(LAT*PI/180)+cos(DEC*PI/180)*cos(LAT*PI/180)*cos(HA*PI/180))*180/PI;
 
     //Se obtiene el Azimuth en grados
-    AZ = sin(DEC*PI/180) - sin(ALT*PI/180)*sin(LAT*PI/180);
+    AZ = sin((*DEC)*PI/180) - sin(ALT*PI/180)*sin(LAT*PI/180);
     AZ /= cos(ALT*PI/180)*cos(LAT*PI/180);
     AZ = acos(AZ)*180/PI;
-//    AZ = acos((sin(DEC*PI/180) - sin(ALT*PI/180)*sin(LAT*PI/180))/(cos(ALT*PI/180)*cos(LAT*PI/180)))*180/PI;
     //Si es que el Sin de Hour Angle es mayor que 0, entonces Azimuth cambia.
     if (sin(HA*PI/180) > 0)
-        AZ = 360 - AZ;    
+        AZ = 360 - AZ;
+    *RA = ALT;
+    *DEC = AZ;
+    printf("ALT = %lf \t\t AZ = %lf \n", ALT, AZ);
+}
 
-    printf("ALT = %2f \t\t AZ = %2f \n", ALT, AZ);
+int verificar(double RA, double DEC)
+{
+    return 1;
+}
+
+int validar(double RA, double DEC)
+{
+    return 1;
 }
