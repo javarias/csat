@@ -1,6 +1,6 @@
 #!/bin/bash
 
-STRING=`cat smc_sc1.map | grep " $1  [0-9]:"`;
+STRING=`cat ejec_p1/smc_sc1.map | grep " $1  [0-9]:"`;
 
 RA=`echo $STRING | cut -d " " -f2`;
 DE=`echo $STRING | cut -d " " -f3`;
@@ -41,6 +41,7 @@ if [ $DEh -lt 0 ]; then
 	Dec=`echo -1*$Dec|bc -l`;
 fi
 
+echo "R";
 echo $RA_;
 echo $Dec;
 
