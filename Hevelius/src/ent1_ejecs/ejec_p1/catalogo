@@ -1,49 +1,60 @@
 #!/bin/bash
 
-STRING=`cat ejec_p1/smc_sc1.map | grep " $1  [0-9]:"`;
-
-RA=`echo $STRING | cut -d " " -f2`;
-DE=`echo $STRING | cut -d " " -f3`;
-
-
-RAh=`echo $RA | cut -d ":" -f1`;
-RAm=`echo $RA | cut -d ":" -f2`;
-RAs=`echo $RA | cut -d ":" -f3`;
-
-
-DEs=`echo $DE | cut -d ":" -f3`;
-DEm=`echo $DE | cut -d ":" -f2`;
-DEh=`echo $DE | cut -d ":" -f1`;
-
-RA_1=`echo $RAh*15|bc -l`;
-RA_2=`echo $RAm/4|bc -l`;
-RA_3=`echo $RAs/240|bc -l`;
-
-
-RA_=`echo $RA_1+$RA_2+$RA_3|bc -l`;
-
-
-if [ $DEh -lt 0 ]; then
-	DE_=`echo -1*$DEh|bc -l`;
+if [ $1 -gt 0 ] && [ $1 -lt 11 ]; then
+	
+	
+	STRING=`cat ejec_p1/smc_sc1.map | grep " $1  [0-9]:"`;
+	
+	RA=`echo $STRING | cut -d " " -f2`;
+	DE=`echo $STRING | cut -d " " -f3`;
+	
+	
+	RAh=`echo $RA | cut -d ":" -f1`;
+	RAm=`echo $RA | cut -d ":" -f2`;
+	RAs=`echo $RA | cut -d ":" -f3`;
+	
+	
+	DEs=`echo $DE | cut -d ":" -f3`;
+	DEm=`echo $DE | cut -d ":" -f2`;
+	DEh=`echo $DE | cut -d ":" -f1`;
+	
+	RA_1=`echo $RAh*15|bc -l`;
+	RA_2=`echo $RAm/4|bc -l`;
+	RA_3=`echo $RAs/240|bc -l`;
+	
+	
+	RA_=`echo $RA_1+$RA_2+$RA_3|bc -l`;
+	
+	
+	if [ $DEh -lt 0 ]; then
+		DE_=`echo -1*$DEh|bc -l`;
+	else
+		DE_=`echo $DEh+0|bc -l`;
+	fi
+	
+	DE_1=`echo $DEm/60|bc -l`;
+	DE_2=`echo $DEs/3600|bc -l`;
+	
+	
+	Dec=`echo $DE_+$DE_1+$DE_2|bc -l`;
+	
+	
+	
+	if [ $DEh -lt 0 ]; then
+		Dec=`echo -1*$Dec|bc -l`;
+	fi
+	
+	echo "R";
+	echo $RA_;
+	echo $Dec;
+	
 else
-	DE_=`echo $DEh+0|bc -l`;
+	echo "R";
+	echo 0;
+	echo -1;
+
 fi
 
-DE_1=`echo $DEm/60|bc -l`;
-DE_2=`echo $DEs/3600|bc -l`;
-
-
-Dec=`echo $DE_+$DE_1+$DE_2|bc -l`;
-
-
-
-if [ $DEh -lt 0 ]; then
-	Dec=`echo -1*$Dec|bc -l`;
-fi
-
-echo "R";
-echo $RA_;
-echo $Dec;
 
 #RA_ = RAh
 #if(RAh .GE. 0) RA_=RAh*15.
