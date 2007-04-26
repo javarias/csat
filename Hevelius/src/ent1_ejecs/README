@@ -1,0 +1,10 @@
+Averiguando por ahi, me di cuenta que cada catalogo esta organizado de manera diferente:
+
+- Algunos se pueden usar mediante base de datos
+- Otros solo texto
+- Algunos solo con numeros que identifican a la estrella
+- Otros con la sigla que corresponde a la estrella.
+
+
+Para este ejecutable, hice un script que leyera un archivo no mas, 
+despues se pueden basedatear o usar algun otro metodo.

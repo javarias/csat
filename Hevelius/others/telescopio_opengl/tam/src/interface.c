@@ -81,37 +81,37 @@ create_main_window (void)
   gtk_container_add (GTK_CONTAINER (main_window), vbox1);
 
   menubar1 = gtk_menu_bar_new ();
-  gtk_widget_show (menubar1);
-  gtk_box_pack_start (GTK_BOX (vbox1), menubar1, FALSE, FALSE, 0);
+  //gtk_widget_show (menubar1);
+  //gtk_box_pack_start (GTK_BOX (vbox1), menubar1, FALSE, FALSE, 0);
 
   menuitem4 = gtk_menu_item_new_with_mnemonic ("_File");
-  gtk_widget_show (menuitem4);
-  gtk_container_add (GTK_CONTAINER (menubar1), menuitem4);
+  //gtk_widget_show (menuitem4);
+  //gtk_container_add (GTK_CONTAINER (menubar1), menuitem4);
 
   menuitem4_menu = gtk_menu_new ();
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem4), menuitem4_menu);
+  //gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem4), menuitem4_menu);
 
   menu_quit = gtk_image_menu_item_new_from_stock ("gtk-quit", accel_group);
-  gtk_widget_show (menu_quit);
-  gtk_container_add (GTK_CONTAINER (menuitem4_menu), menu_quit);
+  //gtk_widget_show (menu_quit);
+  //gtk_container_add (GTK_CONTAINER (menuitem4_menu), menu_quit);
 
   menuitem7 = gtk_image_menu_item_new_from_stock ("gtk-help", accel_group);
-  gtk_widget_show (menuitem7);
-  gtk_container_add (GTK_CONTAINER (menubar1), menuitem7);
+  //gtk_widget_show (menuitem7);
+  //gtk_container_add (GTK_CONTAINER (menubar1), menuitem7);
 
   menuitem7_menu = gtk_menu_new ();
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem7), menuitem7_menu);
+  //gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem7), menuitem7_menu);
 
   contents = gtk_menu_item_new_with_mnemonic ("_Contents");
-  gtk_widget_show (contents);
-  gtk_container_add (GTK_CONTAINER (menuitem7_menu), contents);
+  //gtk_widget_show (contents);
+  //gtk_container_add (GTK_CONTAINER (menuitem7_menu), contents);
   gtk_widget_add_accelerator (contents, "activate", accel_group,
                               GDK_F1, 0,
                               GTK_ACCEL_VISIBLE);
 
   menu_about = gtk_menu_item_new_with_mnemonic ("_About");
-  gtk_widget_show (menu_about);
-  gtk_container_add (GTK_CONTAINER (menuitem7_menu), menu_about);
+  //gtk_widget_show (menu_about);
+  //gtk_container_add (GTK_CONTAINER (menuitem7_menu), menu_about);
 
   mainhbox = gtk_hbox_new (FALSE, 12);
   gtk_widget_show (mainhbox);
@@ -119,20 +119,20 @@ create_main_window (void)
   gtk_container_set_border_width (GTK_CONTAINER (mainhbox), 6);
 
   table2 = gtk_table_new (16, 2, FALSE);
-  gtk_widget_show (table2);
+  //gtk_widget_show (table2);
   gtk_box_pack_start (GTK_BOX (mainhbox), table2, TRUE, TRUE, 0);
 
   hseparator1 = gtk_hseparator_new ();
-  gtk_widget_show (hseparator1);
-  gtk_table_attach (GTK_TABLE (table2), hseparator1, 0, 2, 2, 3,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+  //gtk_widget_show (hseparator1);
+  //gtk_table_attach (GTK_TABLE (table2), hseparator1, 0, 2, 2, 3,
+  //                  (GtkAttachOptions) (GTK_FILL),
+  //                  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
 
   hseparator2 = gtk_hseparator_new ();
   gtk_widget_show (hseparator2);
-  gtk_table_attach (GTK_TABLE (table2), hseparator2, 0, 2, 5, 6,
-                    (GtkAttachOptions) (GTK_FILL),
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+  //gtk_table_attach (GTK_TABLE (table2), hseparator2, 0, 2, 5, 6,
+  //                  (GtkAttachOptions) (GTK_FILL),
+  //                  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
 
   hseparator3 = gtk_hseparator_new ();
   gtk_widget_show (hseparator3);
@@ -255,49 +255,49 @@ create_main_window (void)
   gtk_misc_set_alignment (GTK_MISC (label7), 0, 0.5);
 
   label8 = gtk_label_new ("a2");
-  gtk_widget_show (label8);
+  //gtk_widget_show (label8);
   gtk_table_attach (GTK_TABLE (table2), label8, 0, 1, 9, 10,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 12, 0);
   gtk_misc_set_alignment (GTK_MISC (label8), 0, 0.5);
 
   label9 = gtk_label_new ("a3");
-  gtk_widget_show (label9);
+  //gtk_widget_show (label9);
   gtk_table_attach (GTK_TABLE (table2), label9, 0, 1, 10, 11,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 12, 0);
   gtk_misc_set_alignment (GTK_MISC (label9), 0, 0.5);
 
   label10 = gtk_label_new ("Latitude");
-  gtk_widget_show (label10);
+  //gtk_widget_show (label10);
   gtk_table_attach (GTK_TABLE (table2), label10, 0, 1, 12, 13,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 12, 0);
   gtk_misc_set_alignment (GTK_MISC (label10), 0, 0.5);
 
   label11 = gtk_label_new ("Camera Alt");
-  gtk_widget_show (label11);
+  //gtk_widget_show (label11);
   gtk_table_attach (GTK_TABLE (table2), label11, 0, 1, 14, 15,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 12, 0);
   gtk_misc_set_alignment (GTK_MISC (label11), 0, 0.5);
 
   label12 = gtk_label_new ("Camera Az");
-  gtk_widget_show (label12);
+  //gtk_widget_show (label12);
   gtk_table_attach (GTK_TABLE (table2), label12, 0, 1, 15, 16,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 12, 0);
   gtk_misc_set_alignment (GTK_MISC (label12), 0, 0.5);
 
   label6 = gtk_label_new ("Field Rotation");
-  gtk_widget_show (label6);
+  //gtk_widget_show (label6);
   gtk_table_attach (GTK_TABLE (table2), label6, 0, 1, 6, 7,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 12, 0);
   gtk_misc_set_alignment (GTK_MISC (label6), 0, 0.5);
 
   statusbar1 = gtk_statusbar_new ();
-  gtk_widget_show (statusbar1);
+  //gtk_widget_show (statusbar1);
   gtk_box_pack_start (GTK_BOX (vbox1), statusbar1, FALSE, FALSE, 0);
 
   g_signal_connect ((gpointer) menu_quit, "activate",

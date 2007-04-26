@@ -72,19 +72,19 @@ DIST_SOURCES = $(threeaxis_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /tmp/threeaxis-1.0.1/missing --run aclocal-1.8
+ACLOCAL = ${SHELL} /home/cguajard/DevNull/others/telescopio_opengl/tam/missing --run aclocal-1.8
 AMDEP_FALSE = #
 AMDEP_TRUE = 
-AMTAR = ${SHELL} /tmp/threeaxis-1.0.1/missing --run tar
-AUTOCONF = ${SHELL} /tmp/threeaxis-1.0.1/missing --run autoconf
-AUTOHEADER = ${SHELL} /tmp/threeaxis-1.0.1/missing --run autoheader
-AUTOMAKE = ${SHELL} /tmp/threeaxis-1.0.1/missing --run automake-1.8
+AMTAR = ${SHELL} /home/cguajard/DevNull/others/telescopio_opengl/tam/missing --run tar
+AUTOCONF = ${SHELL} /home/cguajard/DevNull/others/telescopio_opengl/tam/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/cguajard/DevNull/others/telescopio_opengl/tam/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/cguajard/DevNull/others/telescopio_opengl/tam/missing --run automake-1.8
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CPP = gcc -E
-CPPFLAGS =  -DXTHREADS -D_REENTRANT -DXUSE_MTSAFE_API -I/usr/include/gtkglext-1.0 -I/usr/lib/gtkglext-1.0/include -I/usr/X11R6/include -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/pango-1.0 -I/usr/include/freetype2 -I/usr/include/freetype2/config -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/include/atk-1.0  
+CPPFLAGS =  -I/usr/include/gtkglext-1.0 -I/usr/lib/gtkglext-1.0/include -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/include/cairo -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/atk-1.0  
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -95,25 +95,25 @@ EGREP = grep -E
 ENABLE_GLUT_FALSE = #
 ENABLE_GLUT_TRUE = 
 EXEEXT = 
-GTKGL_CFLAGS = -DXTHREADS -D_REENTRANT -DXUSE_MTSAFE_API -I/usr/include/gtkglext-1.0 -I/usr/lib/gtkglext-1.0/include -I/usr/X11R6/include -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/pango-1.0 -I/usr/include/freetype2 -I/usr/include/freetype2/config -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/include/atk-1.0  
-GTKGL_LIBS = -Wl,--export-dynamic -L/usr/X11R6/lib -lgtkglext-x11-1.0 -lgdkglext-x11-1.0 -lGLU -lGL -lXmu -lXt -lSM -lICE -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
+GTKGL_CFLAGS = -I/usr/include/gtkglext-1.0 -I/usr/lib/gtkglext-1.0/include -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/include/cairo -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/atk-1.0  
+GTKGL_LIBS = -Wl,--export-dynamic -L/lib -lgtkglext-x11-1.0 -lgdkglext-x11-1.0 -lGLU -lGL -lXmu -lXt -lSM -lICE -lgtk-x11-2.0 -lpangox-1.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = ${SHELL} $(install_sh) -c -s
 LDFLAGS = 
 LIBOBJS = 
-LIBS = -lglut -lGLU -lGL  -lm -lGL -Wl,--export-dynamic -L/usr/X11R6/lib -lgtkglext-x11-1.0 -lgdkglext-x11-1.0 -lGLU -lGL -lXmu -lXt -lSM -lICE -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
+LIBS = -lglut -lGLU -lGL  -lm -lGL -Wl,--export-dynamic -L/lib -lgtkglext-x11-1.0 -lgdkglext-x11-1.0 -lGLU -lGL -lXmu -lXt -lSM -lICE -lgtk-x11-2.0 -lpangox-1.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
 LTLIBOBJS = 
 MAINT = #
 MAINTAINER_MODE_FALSE = 
 MAINTAINER_MODE_TRUE = #
-MAKEINFO = ${SHELL} /tmp/threeaxis-1.0.1/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/cguajard/DevNull/others/telescopio_opengl/tam/missing --run makeinfo
 OBJEXT = o
 PACKAGE = threeaxis
 PACKAGE_BUGREPORT = 
-PACKAGE_CFLAGS = -DXTHREADS -D_REENTRANT -DXUSE_MTSAFE_API -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/X11R6/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/freetype2 -I/usr/include/freetype2/config -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include  
-PACKAGE_LIBS = -Wl,--export-dynamic -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
+PACKAGE_CFLAGS = -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/include/freetype2 -I/usr/include/libpng12  
+PACKAGE_LIBS = -L/lib -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
 PACKAGE_NAME = 
 PACKAGE_STRING = 
 PACKAGE_TARNAME = 
@@ -138,7 +138,7 @@ exec_prefix = ${prefix}
 host_alias = 
 includedir = ${prefix}/include
 infodir = ${prefix}/info
-install_sh = /tmp/threeaxis-1.0.1/install-sh
+install_sh = /home/cguajard/DevNull/others/telescopio_opengl/tam/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localstatedir = ${prefix}/var
@@ -154,7 +154,7 @@ target_alias =
 INCLUDES = \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
-	-DXTHREADS -D_REENTRANT -DXUSE_MTSAFE_API -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/X11R6/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/freetype2 -I/usr/include/freetype2/config -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include  
+	-I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/include/freetype2 -I/usr/include/libpng12  
 
 threeaxis_SOURCES = \
 	app.h \
@@ -168,7 +168,7 @@ threeaxis_SOURCES = \
 	model.c model.h \
 	support.c support.h 
 
-threeaxis_LDADD = -Wl,--export-dynamic -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
+threeaxis_LDADD = -L/lib -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
 all: all-am
 
 .SUFFIXES:
