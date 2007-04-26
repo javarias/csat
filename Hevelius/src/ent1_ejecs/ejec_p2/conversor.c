@@ -7,8 +7,6 @@
 
 void convertir(double *RA, double *DEC)
 {
-    FILE *realAzDevIO, *realAltDevIO;
-
     struct tm *datetime;
     time_t t;
     int an_o, mes, dia, hora, min, sec;
@@ -36,7 +34,7 @@ void convertir(double *RA, double *DEC)
     //--------------------------------------------------//
 
     //Conversion de grados a reales.    
-    *RA =15*(*RA);
+    //*RA =15*(*RA);
     
     //Por formula si es el primer o segundo mes hay que hacer como que fuera
     //el año anterior con mas meses. Seguramente por años bisiestos...
@@ -83,25 +81,33 @@ void convertir(double *RA, double *DEC)
         AZ = 360 - AZ;
     *RA = ALT;
     *DEC = AZ;
-
-    
-    //FILE *realAzDevIO, *realAltDevIO;
-    realAzDevIO=fopen("/tmp/realAzDevIO","w+");
-    realAltDevIO=fopen("/tmp/realAltDevIO","w+");
-    
-    fprintf(realAzDevIO,"%lf",AZ);
-    fprintf(realAltDevIO,"%lf",ALT);
-    fclose(realAzDevIO);
-    fclose(realAltDevIO);
-    //printf("ALT = %lf \t\t AZ = %lf \n", ALT, AZ);
 }
 
 int verificar(double RA, double DEC)
 {
-    return 1;
+    if((0<= RA && RA<= 24*15) &&(-90 <= DEC && DEC <= 90))
+        return 1;
+    return 0;
 }
 
-int validar(double RA, double DEC)
+int validar(double *ALT, double *AZ)
 {
-    return 1;
+    while(*ALT > 360)
+        *ALT -= 360;
+    while(*AZ > 360)
+        *AZ -= 360;
+    while(*ALT < 0)
+        *ALT += 360;
+    while(*AZ < 0)
+        *AZ += 360;
+    if(1<= *ALT && *ALT <= 179)
+{
+        if (*ALT > 90)
+        {
+            *AZ = 180 + *AZ;
+            *ALT = 180 - *ALT;
+        } 
+        return 1;
+}
+    return 0;
 }
