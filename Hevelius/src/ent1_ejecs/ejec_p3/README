@@ -1,0 +1,14 @@
+Threeaxis is a program that simulates the motion of the three axis
+telescope mount designed by Tracy Wilson.  The pointing equations were
+derived by Steve Joiner.
+
+The following libraries must be installed in order to build the
+project:  gtk, opengl, glut, and gtkglext.
+
+To compile the project for Linux, use the standard configure and make
+steps.
+
+To compile the projet for Windows, you can use configure and make
+under MinGW or Cygwin, although I was never able to get get my
+environment configured so that it would work.  I used Dev-C++ instead,
+and have provided the project file as threeaxis.dev.
