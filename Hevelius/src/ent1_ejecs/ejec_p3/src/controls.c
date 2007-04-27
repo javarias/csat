@@ -1,22 +1,5 @@
 /*
 ** controls.c
-**
-** Control handlers for the three axis telescope simulation.
-** (c) 2004 Steve Joiner (steve@daisyhill.net)
-**
-** This program is free software; you can redistribute it and/or modify
-** it under the terms of the GNU General Public License as published by
-** the Free Software Foundation; either version 2 of the License, or
-** (at your option) any later version.
-**
-** This program is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-** GNU Library General Public License for more details.
-**
-** You should have received a copy of the GNU General Public License
-** along with this program; if not, write to the Free Software
-** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
 /* system headers */
@@ -117,19 +100,6 @@ static void ctrl_init_scale(AppData *app_data, gchar *name,
 
 static void ctrl_on_alt_adj_value_changed(GtkAdjustment *adjustment, gpointer data)
 {
-/*	FILE *refAzF,*refAltF;
-        double refAz,refAlt;
-        refAzF=fopen("/tmp/refAzDevIO","w");
-        refAltF=fopen("/tmp/refAltDevIO","w");
-	refAz=(double)gtk_range_get_value(GTK_RANGE(((AppData*)data)->az_scale));
-	refAlt=(double)gtk_range_get_value(GTK_RANGE(((AppData*)data)->alt_scale));
-        fprintf(refAzF,"%lf",refAz);
-        fprintf(refAltF,"%lf",refAlt);
-	
-
-        fclose(refAzF);
-        fclose(refAltF);
-*/	
 	ctrl_on_altaz_coords_changed((AppData*) data);
 }
 
@@ -514,8 +484,6 @@ static void ctrl_on_camera_coords_changed(AppData *app_data)
 gboolean poll_file(AppData *app_data){
 	FILE *refAzF,*refAltF,*realAzF,*realAltF;
 	double realAz,realAlt,azStep=0,altStep=0;
-	//refAzF=fopen("/tmp/refAzDevIO","rw");
-	//refAltF=fopen("/tmp/refAltDevIO","rw");
 	realAzF=fopen("/tmp/realAzDevIO","r");
 	realAltF=fopen("/tmp/realAltDevIO","r");
 	fscanf(realAzF,"%lf",&realAz);
@@ -537,11 +505,7 @@ gboolean poll_file(AppData *app_data){
                 gtk_range_set_value(GTK_RANGE(app_data->alt_scale), (double)gtk_range_get_value(GTK_RANGE(app_data->alt_scale))+altStep);
                 ctrl_on_altaz_coords_changed(app_data);
         }
-	//fprintf(realAzF,"%lf",(double)gtk_range_get_value(GTK_RANGE(app_data->az_scale))+azStep);
-	//fprintf(realAltF,"%lf",(double)gtk_range_get_value(GTK_RANGE(app_data->alt_scale))+altStep);
 	
-	//fclose(refAzF);
-	//fclose(refAltF);
 	fclose(realAzF);
 	fclose(realAltF);
 	return TRUE;

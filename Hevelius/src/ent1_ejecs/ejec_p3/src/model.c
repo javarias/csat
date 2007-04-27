@@ -1,22 +1,5 @@
 /*
 ** model.h
-**
-** OpenGL model for three axis telescope.
-** (c) 2004 Steve Joiner (steve@daisyhill.net)
-**
-** This program is free software; you can redistribute it and/or modify
-** it under the terms of the GNU General Public License as published by
-** the Free Software Foundation; either version 2 of the License, or
-** (at your option) any later version.
-**
-** This program is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-** GNU Library General Public License for more details.
-**
-** You should have received a copy of the GNU General Public License
-** along with this program; if not, write to the Free Software
-** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
 #include <math.h>
@@ -108,23 +91,24 @@ void model_draw(Model *model, GLfloat a1, GLfloat a2, GLfloat a3)
 
 static void model_set_default_parameters(Model *model)
 {
-	static GLfloat light_gray[] = {234.0/256.0, 232.0/256.0, 227.0/256.0};
-	static GLfloat green[] = {62.0/256.0, 148.0/256.0, 0.0/256.0};
-	static GLfloat blue[] = {0.0/256.0, 62.0/256.0, 148.0/256.0};
-	static GLfloat purple[] = {85.0/256.0, 0.0/256.0, 148.0/256.0};
+	static GLfloat gris[] = {120.0/256.0, 120.0/256.0, 120.0/256.0};
+	static GLfloat plateado[] = {110.0/256.0, 110.0/256.0, 110.0/256.0};
+	static GLfloat blue[] = {0.0/256.0, 0.0/256.0, 0.0/256.0};
+	static GLfloat negro[] = {30.0/256.0, 30.0/256.0, 30.0/256.0};
 	static GLfloat brown[] = {148.0/256.0, 85.0/256.0, 0.0/256.0};
+	static GLfloat grisoscuro[] = {59.0/256.0,59.0/256.0,59.0/256.0};
 
 	model->eps = 0.01;
 
-	static GLfloat *vane_and_spider_color = blue;
+	static GLfloat *vane_and_spider_color = grisoscuro;
 	static GLfloat *focuser_color = blue;
-	static GLfloat *tube_color = green;
-	static GLfloat *mirror_color = light_gray;
+	static GLfloat *tube_color = plateado;
+	static GLfloat *mirror_color = gris;
 	static GLfloat *holder_color = blue;
-	static GLfloat *horseshoe_color = brown;
-	static GLfloat *rocker_color = purple;
-	static GLfloat *base_color = blue;
-	static GLfloat *pad_color = brown;
+	static GLfloat *horseshoe_color = gris;
+	static GLfloat *rocker_color = negro;
+	static GLfloat *base_color = gris;
+	static GLfloat *pad_color = negro;
 	
 	/*
 	** Tube.

@@ -7,15 +7,15 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
   /usr/include/glib-2.0/glib/gtypes.h \
   /usr/lib/glib-2.0/include/glibconfig.h \
   /usr/include/glib-2.0/glib/gmacros.h \
-  /usr/lib/gcc/i686-pc-linux-gnu/4.1.2/include/stddef.h \
-  /usr/lib/gcc/i686-pc-linux-gnu/4.1.2/include/limits.h \
-  /usr/lib/gcc/i686-pc-linux-gnu/4.1.2/include/syslimits.h \
+  /usr/lib/gcc/i386-redhat-linux/4.1.1/include/stddef.h \
+  /usr/lib/gcc/i386-redhat-linux/4.1.1/include/limits.h \
+  /usr/lib/gcc/i386-redhat-linux/4.1.1/include/syslimits.h \
   /usr/include/limits.h /usr/include/features.h /usr/include/sys/cdefs.h \
   /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
   /usr/include/gnu/stubs-32.h /usr/include/bits/posix1_lim.h \
   /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
   /usr/include/bits/posix2_lim.h \
-  /usr/lib/gcc/i686-pc-linux-gnu/4.1.2/include/float.h \
+  /usr/lib/gcc/i386-redhat-linux/4.1.1/include/float.h \
   /usr/include/glib-2.0/glib/garray.h \
   /usr/include/glib-2.0/glib/gasyncqueue.h \
   /usr/include/glib-2.0/glib/gthread.h \
@@ -39,7 +39,7 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
   /usr/include/glib-2.0/glib/gstring.h \
   /usr/include/glib-2.0/glib/gunicode.h \
   /usr/include/glib-2.0/glib/gutils.h \
-  /usr/lib/gcc/i686-pc-linux-gnu/4.1.2/include/stdarg.h \
+  /usr/lib/gcc/i386-redhat-linux/4.1.1/include/stdarg.h \
   /usr/include/glib-2.0/glib/gkeyfile.h \
   /usr/include/glib-2.0/glib/gmappedfile.h \
   /usr/include/glib-2.0/glib/gmarkup.h \
@@ -79,9 +79,6 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
   /usr/include/glib-2.0/gobject/gtypeplugin.h \
   /usr/include/glib-2.0/gobject/gvaluearray.h \
   /usr/include/glib-2.0/gobject/gvaluetypes.h \
-  /usr/include/pango-1.0/pango/pango-matrix.h \
-  /usr/include/pango-1.0/pango/pango-script.h \
-  /usr/include/pango-1.0/pango/pango-gravity.h \
   /usr/include/pango-1.0/pango/pango-break.h \
   /usr/include/pango-1.0/pango/pango-item.h \
   /usr/include/pango-1.0/pango/pango-context.h \
@@ -89,17 +86,13 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
   /usr/include/pango-1.0/pango/pango-fontset.h \
   /usr/include/pango-1.0/pango/pango-engine.h \
   /usr/include/pango-1.0/pango/pango-glyph.h \
+  /usr/include/pango-1.0/pango/pango-script.h \
   /usr/include/pango-1.0/pango/pango-enum-types.h \
-  /usr/include/pango-1.0/pango/pango-features.h \
-  /usr/include/pango-1.0/pango/pango-glyph-item.h \
   /usr/include/pango-1.0/pango/pango-layout.h \
+  /usr/include/pango-1.0/pango/pango-glyph-item.h \
   /usr/include/pango-1.0/pango/pango-tabs.h \
   /usr/include/pango-1.0/pango/pango-renderer.h \
-  /usr/include/pango-1.0/pango/pango-utils.h /usr/include/stdio.h \
-  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
-  /usr/include/bits/wchar.h /usr/include/gconv.h \
-  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
-  /usr/include/bits/stdio.h /usr/lib/gtk-2.0/include/gdkconfig.h \
+  /usr/lib/gtk-2.0/include/gdkconfig.h \
   /usr/include/gtkglext-1.0/gdk/gdkglenumtypes.h \
   /usr/include/gtkglext-1.0/gdk/gdkglinit.h \
   /usr/include/gtkglext-1.0/gdk/gdkglquery.h \
@@ -107,16 +100,18 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
   /usr/include/gtk-2.0/gdk/gdkwindow.h \
   /usr/include/gtk-2.0/gdk/gdkdrawable.h /usr/include/gtk-2.0/gdk/gdkgc.h \
   /usr/include/gtk-2.0/gdk/gdkcolor.h /usr/include/cairo/cairo.h \
-  /usr/include/cairo/cairo-features.h \
-  /usr/include/cairo/cairo-deprecated.h /usr/include/gtk-2.0/gdk/gdkrgb.h \
+  /usr/include/cairo/cairo-features.h /usr/include/gtk-2.0/gdk/gdkrgb.h \
   /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf.h \
   /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf-features.h \
   /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf-core.h \
   /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf-transform.h \
   /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf-animation.h \
   /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf-simple-anim.h \
-  /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf-io.h \
-  /usr/include/glib-2.0/gmodule.h \
+  /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf-io.h /usr/include/stdio.h \
+  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+  /usr/include/bits/wchar.h /usr/include/gconv.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+  /usr/include/bits/stdio.h /usr/include/glib-2.0/gmodule.h \
   /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf-loader.h \
   /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf-enum-types.h \
   /usr/include/gtk-2.0/gdk/gdkevents.h /usr/include/gtk-2.0/gdk/gdkdnd.h \
@@ -194,8 +189,7 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
   /usr/include/atk-1.0/atk/atkselection.h \
   /usr/include/atk-1.0/atk/atkstateset.h \
   /usr/include/atk-1.0/atk/atkstreamablecontent.h \
-  /usr/include/atk-1.0/atk/atktable.h /usr/include/atk-1.0/atk/atkmisc.h \
-  /usr/include/atk-1.0/atk/atkvalue.h \
+  /usr/include/atk-1.0/atk/atktable.h /usr/include/atk-1.0/atk/atkvalue.h \
   /usr/include/gtk-2.0/gtk/gtkaction.h \
   /usr/include/gtk-2.0/gtk/gtkactiongroup.h \
   /usr/include/gtk-2.0/gtk/gtkitemfactory.h \
@@ -389,11 +383,11 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
 
 /usr/include/glib-2.0/glib/gmacros.h:
 
-/usr/lib/gcc/i686-pc-linux-gnu/4.1.2/include/stddef.h:
+/usr/lib/gcc/i386-redhat-linux/4.1.1/include/stddef.h:
 
-/usr/lib/gcc/i686-pc-linux-gnu/4.1.2/include/limits.h:
+/usr/lib/gcc/i386-redhat-linux/4.1.1/include/limits.h:
 
-/usr/lib/gcc/i686-pc-linux-gnu/4.1.2/include/syslimits.h:
+/usr/lib/gcc/i386-redhat-linux/4.1.1/include/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -415,7 +409,7 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
 
 /usr/include/bits/posix2_lim.h:
 
-/usr/lib/gcc/i686-pc-linux-gnu/4.1.2/include/float.h:
+/usr/lib/gcc/i386-redhat-linux/4.1.1/include/float.h:
 
 /usr/include/glib-2.0/glib/garray.h:
 
@@ -479,7 +473,7 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
 
 /usr/include/glib-2.0/glib/gutils.h:
 
-/usr/lib/gcc/i686-pc-linux-gnu/4.1.2/include/stdarg.h:
+/usr/lib/gcc/i386-redhat-linux/4.1.1/include/stdarg.h:
 
 /usr/include/glib-2.0/glib/gkeyfile.h:
 
@@ -569,12 +563,6 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
 
 /usr/include/glib-2.0/gobject/gvaluetypes.h:
 
-/usr/include/pango-1.0/pango/pango-matrix.h:
-
-/usr/include/pango-1.0/pango/pango-script.h:
-
-/usr/include/pango-1.0/pango/pango-gravity.h:
-
 /usr/include/pango-1.0/pango/pango-break.h:
 
 /usr/include/pango-1.0/pango/pango-item.h:
@@ -589,37 +577,17 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
 
 /usr/include/pango-1.0/pango/pango-glyph.h:
 
+/usr/include/pango-1.0/pango/pango-script.h:
+
 /usr/include/pango-1.0/pango/pango-enum-types.h:
 
-/usr/include/pango-1.0/pango/pango-features.h:
+/usr/include/pango-1.0/pango/pango-layout.h:
 
 /usr/include/pango-1.0/pango/pango-glyph-item.h:
-
-/usr/include/pango-1.0/pango/pango-layout.h:
 
 /usr/include/pango-1.0/pango/pango-tabs.h:
 
 /usr/include/pango-1.0/pango/pango-renderer.h:
-
-/usr/include/pango-1.0/pango/pango-utils.h:
-
-/usr/include/stdio.h:
-
-/usr/include/libio.h:
-
-/usr/include/_G_config.h:
-
-/usr/include/wchar.h:
-
-/usr/include/bits/wchar.h:
-
-/usr/include/gconv.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/bits/sys_errlist.h:
-
-/usr/include/bits/stdio.h:
 
 /usr/lib/gtk-2.0/include/gdkconfig.h:
 
@@ -643,8 +611,6 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
 
 /usr/include/cairo/cairo-features.h:
 
-/usr/include/cairo/cairo-deprecated.h:
-
 /usr/include/gtk-2.0/gdk/gdkrgb.h:
 
 /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf.h:
@@ -660,6 +626,24 @@ glcallbacks.o glcallbacks.o: glcallbacks.c ../config.h \
 /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf-simple-anim.h:
 
 /usr/include/gtk-2.0/gdk-pixbuf/gdk-pixbuf-io.h:
+
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/include/gconv.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
 
 /usr/include/glib-2.0/gmodule.h:
 
@@ -842,8 +826,6 @@ callbacks.h:
 /usr/include/atk-1.0/atk/atkstreamablecontent.h:
 
 /usr/include/atk-1.0/atk/atktable.h:
-
-/usr/include/atk-1.0/atk/atkmisc.h:
 
 /usr/include/atk-1.0/atk/atkvalue.h:
 
