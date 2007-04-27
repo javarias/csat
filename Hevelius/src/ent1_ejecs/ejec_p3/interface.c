@@ -74,7 +74,7 @@ create_main_window (void)
   accel_group = gtk_accel_group_new ();
 
   main_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (main_window), "Three Axis Mount Simulation");
+  gtk_window_set_title (GTK_WINDOW (main_window), "Prototipo Telescopio");
 
   vbox1 = gtk_vbox_new (FALSE, 12);
   gtk_widget_show (vbox1);
