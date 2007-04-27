@@ -22,7 +22,7 @@ int main()
         if(!verificar(coord[0],coord[1]))
         {
             fprintf(stderr,"Las coordenadas ingresadas son incorrectas\n");
-            exit(0);
+            return 1;
         }
         convertir(&coord[0],&coord[1]);
     }
@@ -30,12 +30,12 @@ int main()
       if (tipo_c != 'H')
       {
           fprintf(stderr,"La letra ingresada no corresponde a sistemas de coordenadas\n");
-          exit(0);
+          return 1;
       }
     if(!validar(&coord[0], &coord[1]))
     {
         fprintf(stderr,"Las coordenadas son inaccesibles en este momento\n");
-        exit(0);
+        return 1;;
     }
     ps_OpenGL(coord[0],coord[1]);
 
