@@ -1,9 +1,12 @@
 #!/bin/bash
 
+rm /tmp/realAltDevIO 2> /dev/null
+rm /tmp/realAzDevIO 2> /dev/null
+
 if [ $# -eq 1 ]; then
-	./ejec_p1/catalogo $1|./ejec_p2/telescopio && ./ejec_p3/threeaxis 2> /dev/null
+	./ejec_p1/catalogo $1|./ejec_p2/telescopio && ./ejec_p3/src/threeaxis 2> /dev/null
 elif [ $# -eq 3 ]; then
-	echo -e "$1\n$2\n$3" |./ejec_p2/telescopio && ./ejec_p3/threeaxis 2> /dev/null
+	echo -e "$1\n$2\n$3" |./ejec_p2/telescopio && ./ejec_p3/src/threeaxis 2> /dev/null
 else
 	echo "ERROR: Numero de Argumentos Invalidos!!!" > /dev/stderr
 	echo " "
@@ -12,6 +15,3 @@ else
 	echo -e "\t ./main <tipo coordenada R|H> <coor1> <coor2>"
 	echo " "
 fi
-
-rm /tmp/realAzDevIO 2> /dev/null
-rm /tmp/realAltDevIO 2> /dev/null

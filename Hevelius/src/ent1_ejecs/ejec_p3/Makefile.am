@@ -1,23 +1,32 @@
 ## Process this file with automake to produce Makefile.in
 
-INCLUDES = \
-	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
-	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
-	@PACKAGE_CFLAGS@
+SUBDIRS = src
 
-bin_PROGRAMS = threeaxis
+EXTRA_DIST = \
+	autogen.sh \
+	threeaxis.glade \
+	threeaxis.gladep \
+	threeaxis.dev \
+	win32/config.h
 
-threeaxis_SOURCES = \
-	app.h \
-	callbacks.c callbacks.h \
-	controls.c controls.h \
-	coord.c coord.h \
-	glcallbacks.c glcallbacks.h \
-	globject.c globject.h \
-	interface.c interface.h \
-	main.c \
-	model.c model.h \
-	support.c support.h 
+install-data-local:
+	@$(NORMAL_INSTALL)
+	if test -d $(srcdir)/pixmaps; then \
+	  $(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/pixmaps; \
+	  for pixmap in $(srcdir)/pixmaps/*; do \
+	    if test -f $$pixmap; then \
+	      $(INSTALL_DATA) $$pixmap $(DESTDIR)$(pkgdatadir)/pixmaps; \
+	    fi \
+	  done \
+	fi
 
-threeaxis_LDADD = @PACKAGE_LIBS@
+dist-hook:
+	if test -d pixmaps; then \
+	  mkdir $(distdir)/pixmaps; \
+	  for pixmap in pixmaps/*; do \
+	    if test -f $$pixmap; then \
+	      cp -p $$pixmap $(distdir)/pixmaps; \
+	    fi \
+	  done \
+	fi
 
