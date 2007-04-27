@@ -21,7 +21,7 @@
 %\renewcommand{\baselinestretch}{1.5}
 \parskip=7mm
 \pagestyle{myheadings}
-\geometry{tmargin=2.5cm, bmargin=2.5cm, lmargin=2.5cm, rmargin=2.5cm}
+\geometry{tmargin=4.5cm, bmargin=2.5cm, lmargin=2.5cm, rmargin=2.5cm}
 \markright{\hrulefill Proyecto Hevelius $\; \;$}
 
 
@@ -68,9 +68,9 @@
 \subsection{Descripci\'on Caso de Uso}
 
 \begin{itemize}
-\item \textbf{Nombre:} Validar Datos.
-\item \textbf{Actores:} Catalogo de Estrellas y usuarios.
-\item \textbf{Descripci\'on:} Consiste en la verificaci\'on de datos, para que sean caracteres validos para le sistema.
+\item \textbf{Nombre:} Verificar Datos.
+\item \textbf{Actores:} Cat\'alogo de Estrellas y usuarios.
+\item \textbf{Descripci\'on:} Consiste en la verificaci\'on de datos, para que sean caracteres v\'alidos para el sistema.
 \item \textbf{Funci\'on:} Verificar coherencia de datos.
 \end{itemize}
 
@@ -78,31 +78,31 @@
 
 \begin{itemize}
 \item \textbf{Nombre:} Transformaci\'on.
-\item \textbf{Actores:} Catalogo de Estrellas y usuarios.
+\item \textbf{Actores:} Cat\'alogo de Estrellas y usuarios.
 \item \textbf{Funcion:} Conversi\'on de datos a coordenadas horizontales.
-\item \textbf{Descripci\'on:} Cuando se ingresan coordenadas R.A.Dec, ya sea de usuario o catalogo, se convierte en coordenadas horizontales.
+\item \textbf{Descripci\'on:} Cuando se ingresan coordenadas R.A.Dec, ya sea de usuario o cat\'alogo, se convierte en coordenadas horizontales.
 \end{itemize}
 
 \begin{itemize}
-\item \textbf{Nombre:} Verificaci\'on de Salida.
-\item \textbf{Actores:} Catalogo de Estrellas y usuarios.
-\item \textbf{Funci\'on:} Verifica que no se entregen coordenadas invalidas.
-\item \textbf{Descripci\'on:} Luego de comprobar que solo se ingresaron valores coherentes, se verifica que estas coordenadas sean validas, por ejemplo que estas no apunten a objetos celestes que esten al otro lado de la ubicaci\'on actual.
+\item \textbf{Nombre:} Validaci\'on de Salida.
+\item \textbf{Actores:} Cat\'alogo de Estrellas y usuarios.
+\item \textbf{Funci\'on:} Verifica que no se entregen coordenadas inv\'alidas.
+\item \textbf{Descripci\'on:} Luego de comprobar que s\'olo se ingresaron valores coherentes, se verifica que estas coordenadas sean v\'alidas, por ejemplo, que estas no apunten a objetos celestes que est\'en al otro lado de la ubicaci\'on actual.
 \end{itemize}
 
 
 \subsection{Contratos}
 
 \begin{itemize}
-\item \textbf{Nombre:} \url{public boolean validar\_datos(double coord1, double coord2)}
-\item \textbf{Responsabilidad:} Verific\'ar que los valores ingresados sean coherentes. Discriminar si los datos de entrada corresponden a R.A.Dec u Horizontal.
-\item \textbf{Salida:} Valor boolean que retorna exito o fracaso seg\'un sean datos coherentes.
-\item \textbf{Postcondici\'on:} En caso de \'exito entrga un dato dependiendo del tipo de coordenadas a ``Transformaci\'on'' o a ``Verificar Sal\'ida''.
+\item \textbf{Nombre:} \texttt{public int verificar(double coord1, double coord2)}
+\item \textbf{Responsabilidad:} Verificar que los valores ingresados sean coherentes.
+\item \textbf{Salida:} Valor boolean que retorna \'exito o fracaso seg\'un sean datos coherentes.
+\item \textbf{Postcondici\'on:} En caso de \'exito entrega un dato dependiendo del tipo de coordenadas a ``Transformaci\'on'' o a ``Verificar Sal\'ida''.
 \item \textbf{Precondicion:} Que los datos ingresados sean n\'umeros double, no nulos.
 \end{itemize}
 
 \begin{itemize}
-\item \textbf{Nombre:} \url{public void transformar(double cood1, double coord2)}
+\item \textbf{Nombre:} \texttt{public void transformar(double cood1, double coord2)}
 \item \textbf{Responsabilidad:} Convertir las coordenadas R.A.Dec a Horizontales.
 \item \textbf{Salida:} No retorna nada.
 \item \textbf{Postcondici\'on:} Entrega los datos a ``verificaci\'on''.
@@ -110,27 +110,30 @@
 \end{itemize}
 
 \begin{itemize}
-\item \textbf{Nombre:} \url{public boolean verificar(double coord1, double coord2)}
+\item \textbf{Nombre:} \texttt{public int validar(double coord1, double coord2)}
 \item \textbf{Responsabilidad:} Verificar que las coordenadas no apunten a una ubicaci\'on inalcanzable como en una direci\'on al otro lado de la tierra.
-\item \textbf{Salida:} Valor boolean que indica si es accsesible o no la ubicaci\'on.
-\item \textbf{Postcondici\'on:} Entrga los datos al sistema de telescopio OpenGL y ACS para la manipulaci\'on del telescopio (en caso de exito, si no avisa para volver a intentar).
+\item \textbf{Salida:} Valor entero que indica si es accsesible o no la ubicaci\'on.
+\item \textbf{Postcondici\'on:} En caso de \'exito entrega los datos al sistema de telescopio OpenGL y ACS para la manipulaci\'on del telescopio, sino avisa para volver a intentar.
 \item \textbf{Precondici\'on:} Coordenadas en formato Horizontal.
 \end{itemize}
 
 
 \section{Investigaci\'on de las Coordenadas}
 
-Esta investigaci\'on queda demostrada en el ejecutable que se realiz\'o, donde coordenadas R.A.Dec
-son convertidas en Horizontales y verificadas para una buena utilizaci\'on.
+La investigaci\'on consisti\'o en:
 
+\begin{itemize}
+	\item B\'usqueda de algoritmos de tranformaci\'on de coordenadas.
+	\item Entendimiento te\'orico de los sistemas de coordenadas.
+	\item B\'usqueda de cat\'alogos de estrellas y algoritmos de lectura de ellos.
+\end{itemize}
 
+Para lograr lo anterior se visitaron sitios, de los cuales destacan:
 
-
-
-
-
-
-
+\begin{itemize}
+	\item \url{http://cdsweb.u-strasbg.fr/}
+	\item \url{http://spiff.rit.edu/classes/phys445/lectures/radec/radec.html}
+\end{itemize}
 
 
 \end{document}
