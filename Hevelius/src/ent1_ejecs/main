@@ -12,3 +12,6 @@ else
 	echo -e "\t ./main <tipo coordenada R|H> <coor1> <coor2>"
 	echo " "
 fi
+
+rm /tmp/realAzDevIO 2> /dev/null
+rm /tmp/realAltDevIO 2> /dev/null
