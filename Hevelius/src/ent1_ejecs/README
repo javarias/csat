@@ -1,10 +1,20 @@
-Averiguando por ahi, me di cuenta que cada catalogo esta organizado de manera diferente:
-
-- Algunos se pueden usar mediante base de datos
-- Otros solo texto
-- Algunos solo con numeros que identifican a la estrella
-- Otros con la sigla que corresponde a la estrella.
+Uso del Prototipo:
+         ./main <star number>
+         ./main <tipo coordenada R|H> <coor1> <coor2>
 
 
-Para este ejecutable, hice un script que leyera un archivo no mas, 
-despues se pueden basedatear o usar algun otro metodo.
+Donde:
+
+<star number>:		Nuestro Catalogo de estrellas cuenta con 10 objetos a 
+			observar, por lo que se puede escoger un numero entre 1 
+			y 10, incluyendolos.
+
+<tipo coordenada R|H>:	R reresenta coordenadas del tipo Right Ascention and 
+			Declination. Mientras que H, coordenadas del tipo
+			Horizontal.
+
+<coor1>:		Numero que representa la primera coordenada
+
+<coor2>:		Numero que representa la segunda coordenada
+
+
