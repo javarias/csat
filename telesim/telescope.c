@@ -31,7 +31,10 @@ char* goto_azm_alt(char *args){
 }
 
 char* get_version(char *args){
-	return NULL;
+	char *version;
+	version=(char *)malloc(3*sizeof(char));
+	sprintf(version,"%c%c#",nexstar->version.major, nexstar->version.minor);
+	return version;
 }
 
 char* echo(char *args){

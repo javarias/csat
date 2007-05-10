@@ -12,7 +12,7 @@
 #define MAX_REVOLUTION 65536
 
 typedef struct version{
-	int mayor;
+	int major;
 	int minor;
 } version_t;
 
