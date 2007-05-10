@@ -5,10 +5,11 @@
 #include <termios.h>
 
 #include "telescope.h"
+#include "listener.h"
 
 #define BAUDRATE B9600
 
-void listen(char *device) {
+void listen_serial(char *device) {
 	char* (*commands[256])(char*);
 	char cmd, *args, *out, in[256];
 	int fd,res;
@@ -48,7 +49,6 @@ void listen(char *device) {
 		strncpy(args,in+1,strlen(in)-1);
 		out=commands[cmd](args);
 		
-		//escribir a puerto
 		write(fd,out,strlen(out));
 	
 		free(out);

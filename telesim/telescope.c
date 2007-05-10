@@ -57,5 +57,6 @@ char* goto_in_progress(char *args){
 }
 
 char* cancel_goto(char *args){
-	return NULL;
+	nexstar->gotoStatus = GOTO_STOPED;
+	return "#";
 }
