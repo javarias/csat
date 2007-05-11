@@ -3,16 +3,20 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <termios.h>
+#include <signal.h>
 
 #include "telescope.h"
 #include "listener.h"
 
 #define BAUDRATE B9600
 
+static int fd;
+static struct termios *oldtio_global;
+
 void listen_serial(char *device) {
 	char* (*commands[256])(char*);
 	char cmd, *args, *out, in[256];
-	int fd,res;
+	int res;
 	struct termios *oldtio, *newtio;
 
 	commands['E']=get_ra_dec;
@@ -32,7 +36,10 @@ void listen_serial(char *device) {
 		exit(-1);
 	}
 
+	/* Catch SIGINT signal for restoring the serial port and close the fd */
+	signal(SIGINT,leave);
 	tcgetattr(fd,oldtio);
+	oldtio_global = oldtio;
 	bzero(newtio,sizeof(newtio));
 
 	newtio->c_cflag  = BAUDRATE | CREAD | CS8 | CLOCAL;
@@ -46,7 +53,7 @@ void listen_serial(char *device) {
 		fsync(fd);
 		res = read(fd,in,256);
 		cmd=in[0];
-		printf("DEBUG: Received: %s\n",in);
+		//printf("DEBUG: Received: %s\n",in);
 		args=(char *)malloc(strlen(in)-1);
 		strncpy(args,in+1,strlen(in)-1);
 		out=commands[cmd](args);
@@ -57,8 +64,12 @@ void listen_serial(char *device) {
 		free(args);
 	}
 
-	tcsetattr(fd,TCSANOW,oldtio);
-	close(fd);
 	return;
 }
 
+void leave(int sig){
+	printf("Receiving SIGINT signal, closing port...\n");
+	tcsetattr(fd,TCSANOW,oldtio_global);
+	close(fd);
+	exit(EXIT_SUCCESS);
+}
