@@ -12,9 +12,9 @@ int main(int args, char *argv[]) {
 	/* Create the nexStar telescope */
 	telescope_t nexstar_telescope = {
 		.message = "",
-		.version.major = 4,
-		.version.minor = 1,
-		.alignmentStatus = ALIGNED
+		.version = { .major = 4, .minor = 1 },
+		.alignmentStatus = ALIGNED,
+		.gotoStatus = GOTO_STOPED
 	};
 	nexstar = &nexstar_telescope;
 

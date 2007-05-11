@@ -13,6 +13,8 @@
 static int fd;
 static struct termios *oldtio_global;
 
+extern telescope_t *nexstar;
+
 void listen_serial(char *device) {
 	char* (*commands[256])(char*);
 	char cmd, *args, *out, in[256];
@@ -38,7 +40,10 @@ void listen_serial(char *device) {
 
 	/* Catch SIGINT signal for restoring the serial port and close the fd */
 	signal(SIGINT,leave);
+
+	/* TODO: nexstar->version changes after this instruction :S */
 	tcgetattr(fd,oldtio);
+
 	oldtio_global = oldtio;
 	bzero(newtio,sizeof(newtio));
 
@@ -53,13 +58,15 @@ void listen_serial(char *device) {
 		fsync(fd);
 		res = read(fd,in,256);
 		cmd=in[0];
-		//printf("DEBUG: Received: %s\n",in);
-		args=(char *)malloc(strlen(in)-1);
-		strncpy(args,in+1,strlen(in)-1);
-		out=commands[cmd](args);
-		
+		if( strlen(in)-1 != 0) {
+			args=(char *)malloc(strlen(in)-1);
+			strncpy(args,in+1,strlen(in)-1);
+		}
+		else
+			args = NULL;
+
+		out=commands[cmd](args);		
 		write(fd,out,strlen(out));
-	
 		free(out);
 		free(args);
 	}
