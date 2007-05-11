@@ -1,4 +1,4 @@
-OPTS=-Wall -O2 -ggdb
+OPTS=-Wall -O2 -g
 EXE=sim_nex4
 OBJ=telescope.o main.o listener.o
 
@@ -8,7 +8,7 @@ sim_nex4: $(OBJ)
 	gcc $(OPTS) -o $(EXE) $(OBJ)
 
 .c.o:
-	gcc -c $<
+	gcc -g -c $<
 
 clean:
 	rm -f $(EXE) $(OBJ)

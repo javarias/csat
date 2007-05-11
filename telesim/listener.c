@@ -28,7 +28,7 @@ void listen_serial(char *device) {
 	/* We open the serial port and get its attributes */
 	fd = open(device, O_RDWR | O_NOCTTY);
 	if( fd < 0 ){
-		fprintf(stderr,"Fatal: Can't open %s for read/write\n",device);
+		fprintf(stderr,"Fatal: Can't open '%s' for read/write\n",device);
 		exit(-1);
 	}
 
@@ -43,8 +43,10 @@ void listen_serial(char *device) {
 	tcsetattr(fd,TCSANOW,newtio);
 
 	while(1){
+		fsync(fd);
 		res = read(fd,in,256);
 		cmd=in[0];
+		printf("DEBUG: Received: %s\n",in);
 		args=(char *)malloc(strlen(in)-1);
 		strncpy(args,in+1,strlen(in)-1);
 		out=commands[cmd](args);
