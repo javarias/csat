@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <termios.h>
 #include <signal.h>
 

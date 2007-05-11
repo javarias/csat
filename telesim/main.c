@@ -1,20 +1,22 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include "telescope.h"
 #include "listener.h"
 
 #define DEFAULT_PORT "/dev/ttyS0"
 
 telescope_t *nexstar;
+
 int main(int args, char *argv[]) {
 	char serialPort[256];
 
 	/* Create the nexStar telescope */
 	telescope_t nexstar_telescope = {
-		.message = "",
-		.version = { .major = 4, .minor = 1 },
-		.alignmentStatus = ALIGNED,
-		.gotoStatus = GOTO_STOPED
+		"",
+		{ 4, 1 },
+		ALIGNED,
+		GOTO_STOPED
 	};
 	nexstar = &nexstar_telescope;
 
