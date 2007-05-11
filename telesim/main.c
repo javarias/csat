@@ -6,19 +6,15 @@
 
 #define DEFAULT_PORT "/dev/ttyS0"
 
-telescope_t *nexstar;
+/* Create the nexStar telescope */
+telescope_t nexstar = {
+	{ 4, 1 },
+	ALIGNED,
+	GOTO_STOPED
+};
 
 int main(int args, char *argv[]) {
 	char serialPort[256];
-
-	/* Create the nexStar telescope */
-	telescope_t nexstar_telescope = {
-		"",
-		{ 4, 1 },
-		ALIGNED,
-		GOTO_STOPED
-	};
-	nexstar = &nexstar_telescope;
 
 	/* Set the serial port to use */
 	if( args < 2 ){

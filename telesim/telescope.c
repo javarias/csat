@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include "telescope.h"
 
-extern telescope_t *nexstar;
+extern telescope_t nexstar;
 
 char* get_ra_dec(char *args) {
 	return NULL;
@@ -21,8 +22,8 @@ char* goto_azm_alt(char *args){
 
 	/* This should be implemented as a new thread */
 	/* Set the telescope to moving status */
-	nexstar->gotoStatus = GOTO_MOVING;
-	while( nexstar->gotoStatus != GOTO_STOPED ){
+	nexstar.gotoStatus = GOTO_MOVING;
+	while( nexstar.gotoStatus != GOTO_STOPED ){
 		usleep(50000);
 	}
 
@@ -33,8 +34,8 @@ char* goto_azm_alt(char *args){
 char* get_version(char *args){
 	char *versionRes;
 	versionRes=(char *)malloc(3*sizeof(char));
-	printf("version: %d.%d\n", nexstar->version.major, nexstar->version.minor);
-	sprintf(versionRes,"%c%c#",nexstar->version.major, nexstar->version.minor);
+	verbosity("version: %d.%d\n", nexstar.version.major, nexstar.version.minor);
+	sprintf(versionRes,"%c%c#",nexstar.version.major, nexstar.version.minor);
 	return versionRes;
 }
 
@@ -44,23 +45,41 @@ char* echo(char *args){
 	returnString[0]=args[0];
 	returnString[1]='#';
 
-	printf("echo: %c\n",args[0]);
+	verbosity("echo: %c\n",args[0]);
 
 	return returnString;
 }
 
 char* alignment_complete(char *args){
-	return NULL;
+	char *res;
+	res = (char *)malloc(sizeof(char)*2);
+	res[0] = nexstar.alignmentStatus;
+	res[1] = '#';
+	verbosity("aligmentComplete: %d\n",nexstar.alignmentStatus);
+	return res;
 }
 
 char* goto_in_progress(char *args){
 	char *response;
-	response = (char *)malloc(sizeof(char));
-	sprintf(response,"%d",nexstar->gotoStatus);
+	response = (char *)malloc(sizeof(char)*2);
+	verbosity("gotoStatus: %d\n",nexstar.gotoStatus);
+	sprintf(response,"%d#",nexstar.gotoStatus);
 	return response;
 }
 
 char* cancel_goto(char *args){
-	nexstar->gotoStatus = GOTO_STOPED;
+	nexstar.gotoStatus = GOTO_STOPED;
 	return "#";
+}
+
+void verbosity(const char *message, ...) {
+	va_list args;
+	int verbose = 1;
+
+	va_start(args,message);
+	if(verbose){
+		vprintf(message,args);
+	}
+	va_end(args);
+	return;
 }

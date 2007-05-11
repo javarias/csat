@@ -11,6 +11,7 @@
 
 #define MAX_REVOLUTION 65536
 
+/* Version structure definition */
 typedef struct version{
 	int major;
 	int minor;
@@ -18,12 +19,12 @@ typedef struct version{
 
 /* Definition of the telescope structure */
 typedef struct telescope{
-	char *message;
 	version_t version;
 	int alignmentStatus;
 	int gotoStatus;
 } telescope_t;
 
+/* Telescope functions */
 char* get_ra_dec(char*);
 char* get_azm_alt(char*);
 char* goto_ra_dec(char*);
@@ -34,4 +35,6 @@ char* alignment_complete(char*);
 char* goto_in_progress(char*);
 char* cancel_goto(char*);
 
+/* Verbosity function */
+void verbosity(const char*,...);
 #endif

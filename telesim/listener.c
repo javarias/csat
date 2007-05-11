@@ -14,7 +14,7 @@
 static int fd;
 static struct termios *oldtio_global;
 
-extern telescope_t *nexstar;
+extern telescope_t nexstar;
 
 void listen_serial(char *device) {
 	char* (*commands[256])(char*);
@@ -36,15 +36,13 @@ void listen_serial(char *device) {
 	fd = open(device, O_RDWR | O_NOCTTY);
 	if( fd < 0 ){
 		fprintf(stderr,"Fatal: Can't open '%s' for read/write\n",device);
-		exit(-1);
+		exit(EXIT_FAILURE);
 	}
+	fsync(fd);
 
 	/* Catch SIGINT signal for restoring the serial port and close the fd */
 	signal(SIGINT,leave);
-
-	/* TODO: nexstar->version changes after this instruction :S */
 	tcgetattr(fd,oldtio);
-
 	oldtio_global = oldtio;
 	bzero(newtio,sizeof(newtio));
 
