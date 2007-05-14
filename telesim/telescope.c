@@ -11,11 +11,15 @@ char* get_ra_dec(char *args) {
 }
 
 char* get_azm_alt(char *args){
-	return NULL;
+	char *res;
+	res = (char *)malloc(sizeof(char)*10);
+	sprintf(res,"%04X,%04X#",nexstar.azimuthRevolutions, nexstar.altitudeRevolutions);
+	verbosity("Get AZM/ALT: %04X, %04X\n",nexstar.azimuthRevolutions, nexstar.altitudeRevolutions);
+	return res;
 }
 
 char* goto_ra_dec(char *args){
-	return NULL;
+	return "#";
 }
 
 char* goto_azm_alt(char *args){
@@ -53,8 +57,7 @@ char* echo(char *args){
 char* alignment_complete(char *args){
 	char *res;
 	res = (char *)malloc(sizeof(char)*2);
-	res[0] = nexstar.alignmentStatus;
-	res[1] = '#';
+	sprintf(res,"%c#",nexstar.alignmentStatus);
 	verbosity("aligmentComplete: %d\n",nexstar.alignmentStatus);
 	return res;
 }

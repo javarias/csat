@@ -62,11 +62,15 @@ void listen_serial(char *device) {
 			strncpy(args,in+1,strlen(in)-1);
 		}
 		else
-			args = NULL;
+			args = "";
 
-		out=commands[cmd](args);		
-		write(fd,out,strlen(out));
-		free(out);
+		if(commands[cmd] != NULL) {
+			out=commands[cmd](args);
+			write(fd,out,strlen(out));
+			free(out);
+		} else {
+			verbosity("Error: Command '%c' not suported, ignoring it...\n",cmd);
+		}
 		free(args);
 	}
 

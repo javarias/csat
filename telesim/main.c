@@ -8,9 +8,11 @@
 
 /* Create the nexStar telescope */
 telescope_t nexstar = {
-	{ 4, 1 },
+	{ 1, 2 }, /* Version */
 	ALIGNED,
-	GOTO_STOPED
+	GOTO_STOPED,
+	1000, /* Initial azmiuth  */
+	10000  /* Initial altitude */
 };
 
 int main(int args, char *argv[]) {

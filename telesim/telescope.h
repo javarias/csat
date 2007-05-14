@@ -12,16 +12,18 @@
 #define MAX_REVOLUTION 65536
 
 /* Version structure definition */
-typedef struct version{
+typedef struct version {
 	int major;
 	int minor;
 } version_t;
 
 /* Definition of the telescope structure */
-typedef struct telescope{
+typedef struct telescope {
 	version_t version;
 	int alignmentStatus;
 	int gotoStatus;
+	unsigned int azimuthRevolutions;
+	unsigned int altitudeRevolutions;
 } telescope_t;
 
 /* Telescope functions */
