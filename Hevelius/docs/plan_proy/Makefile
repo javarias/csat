@@ -28,11 +28,13 @@ $(TARGET).pdf: $(TARGET).dvi
 	@dvipdf $<
 	@rm *.log
 	@rm *.aux
-	@rm *.dvi
+	@rm $(TARGET).dvi
+#	@rm $(TARGET).toc
 
 clean:
 	@echo ***Cleaning...
 	@rm -f *.aux *.log *.tex~ *.bak
+	@rm -f $(TARGET).toc
 	@rm -f $(TARGET).pdf $(TARGET).dvi
 	@rm -f img/*~ img/*.bak img/*.eps
 	@echo ***Done cleaning

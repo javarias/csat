@@ -2,7 +2,7 @@
 \usepackage[latin1]{inputenc}    % Agregar y acentos
 \usepackage{babel}               % Soporte multilenguajes
 \usepackage{avant}               % Tipo de fuente
-%\usepackage{fancyheadings}       %% Topes y pies de p'agina
+%\usepackage{fancyheadings}      % Topes y pies de p'agina
 \usepackage[dvips]{graphicx}     % Inclusion de imagenes .eps
 \usepackage{url}                 % Agregar Links soporte de ~
 \usepackage{verbatim}
@@ -21,7 +21,7 @@
 %\renewcommand{\baselinestretch}{1.5}
 \parskip=7mm
 \pagestyle{myheadings}
-\geometry{tmargin=2.5cm, bmargin=2.5cm, lmargin=2.5cm, rmargin=2.5cm}
+\geometry{tmargin=4cm, bmargin=4cm, lmargin=2.5cm, rmargin=2.5cm}
 \markright{\hrulefill Proyecto Hevelius $\; \;$}
 
 
@@ -44,18 +44,22 @@
 
 \begin{document}
 
+% Portada
 \maketitle
-%\tableofcontents
-
-
-%\input{parte1}
-%\input{parte2}
 \newpage
+
+% Indices
+\tableofcontents{}
+\newpage
+
+
+
 
 \section{Introducci\'on} %%% TODOS
 
 
 
+\newpage
 \section{Soluci\'on Conceptual} %%% TOMAS
 \subsection{Diagn\'ostico de la situaci\'on actual}
 \subsubsection{Situaci\'on Actual}
@@ -88,6 +92,7 @@
 
 
 
+\newpage
 \section{T\'ecnicas y Herramientas de desarrollo} %%% CARLOS
 \subsection{Modelo de desarrollo}
 
@@ -101,6 +106,7 @@
 
 
 
+\newpage
 \section{Gesti\'on de Riesgos} %%% ESTEBAN
 \subsection{An\'alisis de riesgos}
 
@@ -110,6 +116,7 @@
 
 
 
+\newpage
 \section{Implementaci\'on (Entrega y Operaci\'on)} %%% MARINA
 \subsection{Plan de operaci\'on del sistema}
 
@@ -123,9 +130,9 @@
 
 
 
+\newpage
 \section{Planificaci\'on de Actividades} %%% TODOS
-\subsection{Work Breakdown Structure (WBS) ­ Estructura de descomposici\'on de trabajo
-con estimación de esfuerzo}
+\subsection{Work Breakdown Structure (WBS)}
 
 
 
@@ -137,7 +144,8 @@ con estimación de esfuerzo}
 
 
 
-\section{Seguimiento del Plan}
+\newpage
+\section{Seguimiento del Plan} %%% TODOS
 
 
 
