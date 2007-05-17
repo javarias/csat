@@ -21,6 +21,7 @@ void listen_serial(char *device) {
 	char cmd, *args, *out, in[256];
 	int res;
 	struct termios *oldtio, *newtio;
+	struct termios tmpio;
 
 	commands['E']=get_ra_dec;
 	commands['Z']=get_azm_alt;
@@ -44,8 +45,8 @@ void listen_serial(char *device) {
 	signal(SIGINT,leave);
 	tcgetattr(fd,oldtio);
 	oldtio_global = oldtio;
-	bzero(newtio,sizeof(newtio));
-
+	newtio = &tmpio;
+	
 	newtio->c_cflag  = BAUDRATE | CREAD | CS8 | CLOCAL;
 	newtio->c_iflag = IGNPAR | ICRNL;
 	newtio->c_oflag = 0;
