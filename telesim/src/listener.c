@@ -20,7 +20,7 @@ void listen_serial(char *device) {
 	char* (*commands[256])(char*);
 	char cmd, *args, *out, in[256];
 	int res;
-	struct termios *oldtio, *newtio;
+	struct termios *oldtio=NULL, *newtio=NULL;
 
 	commands['E']=get_ra_dec;
 	commands['Z']=get_azm_alt;
@@ -64,8 +64,8 @@ void listen_serial(char *device) {
 		else
 			args = "";
 
-		if(commands[cmd] != NULL) {
-			out=commands[cmd](args);
+		if(commands[(int)cmd] != NULL) {
+			out=commands[(int)cmd](args);
 			write(fd,out,strlen(out));
 			free(out);
 		} else {
