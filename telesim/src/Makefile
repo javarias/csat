@@ -1,15 +1,13 @@
 CC=gcc
-CFLAGS=-Wall -O2 -g -I../include
+CFLAGS=-Wall -O2 -g
 
 OBJ=telescope.o main.o listener.o
 EXE=sim_nex4
 OBJDIR=../object
 BINDIR=../bin
+INCDIR=../include
 
-vpath %.o $(OBJDIR)
-vpath % $(OBJDIR):$(BINDIR)
-
-GPATH=$(OBJDIR)
+VPATH=$(OBJDIR):$(BINDIR):$(INCDIR)
 
 all: dirs $(EXE)
 
@@ -18,10 +16,10 @@ dirs:
 	if ! test -d $(OBJDIR) ; then mkdir $(OBJDIR) ; fi
 
 ../bin/sim_nex4: $(OBJ)
-	$(CC) $(CFLAGS) -o $(BINDIR)/$(EXE) $^
+	$(CC) $(CFLAGS) -o $(BINDIR)/$(EXE) $(addprefix $(OBJDIR)/,$(OBJ))
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $(OBJDIR)/$@
+	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $(OBJDIR)/$@
 
 clean:
 	cd $(BINDIR) && rm -f $(EXE)
