@@ -63,28 +63,110 @@
 \section{Soluci\'on Conceptual} %%% TOMAS
 \subsection{Diagn\'ostico de la situaci\'on actual}
 \subsubsection{Situaci\'on Actual}
+En la actualidad cada telescopio 
 
 
 
 \subsubsection{Identificaci\'on de problemas y deficiencias}
 
+Unicidad de Software: En la actualidad existen diversos tipos de telescopios, los cuales est\'an implementados de manera diferente dependiendo de su diseñador o de d\'onde fueron creados. Junto con esto, aparece el problema de que cada telescopio posee una aplicaci\'on diferente para su control, lo que obliga a los astr\'onomos, operadores de telescopios y aficionados a utilizar gran parte de su tiempo aprendiendo a ocupar los distintos softwares para cada uno de los equipos con los que van a trabajar.
 
+Control: Actualmnte el control de los telescopios se debe hacer de forma local, es decir, los operadores de telescopios y astr\'onomos deben estar en el observatorio para realizar sus investigaciones, pudiendo hacerse \'estos de forma remota, mejorando la situaci\'on para los astr\'onomos, especialmente para los que se encuentran lejos de los sitios de observaci\'on.
+
+Dificultad de Uso: Muchos de los programas utilizados actualmente para control de telescopios son bastante complicados de usar, obligando a gastar una considerable cantidad de tiempo aprendiendo a usarlos y, tambi\'en, a usarlos frecuentemente para no olvidar c\'omo es que se hace.
+
+Seguridad del telescopio: Es importante que el telescopio tenga medios para protegerse de las distintas cosas que puedan pasar. Luminosidad alta, clima inadecuado, entre otros. 
+
+\newpage
 
 \subsection{Caracterizaci\'on del cambio}
 \subsubsection{Caracter\'icticas y Potencialidades deseadas}
 
+\begin{itemize}
 
+\item Aspectos funcionales, tecnol\'ogicos, sociales, organizacionales y otros relevantes, formulados en forma que permita trazarlos posteriormente a requerimientos espec\'ificos (funcionales y no funcionales).
+
+\begin{itemize}
+
+\item Control por internet de telescopios: Se quiere que el sistema pueda funcionar situado en cualquier parte del mundo permitiendo controlar alg\'un telescopio que se encuentre en otro lado.
+
+\item Interfaz Gr\'afica: El software de control de telescopios debe tener una interfaz agradable a los usuarios y permitir el acceso eficiente a las funcionalidades que se requieran, adem\'as, debe mostrar siempre en pantalla la informaci\'on de mayor importancia.
+
+\item Reproducci\'on de lo que ve la c\'amara: El sistema debe mostrar a donde apunta el telescopio en todo momento de observaci\'on, por medio de la c\'amara CCD.
+
+\item Interacci\'on con ACS: Es necesario que el sistema interact\'ue con los telescopios por medio de ACS, de manera que \'este sea el que se conecte directamente con los observatorios y telescopios.
+
+\item Ajustar posici\'on del telescopio bajo sistema de coordenadas ecuatoriales: El sistema debe poder recibir las coordenadas que se quiere observar y convertirlas a las coordenadas que utiliza el telescopio para poder moverlo a esa direcci\'on.
+
+\item Mover el telescopio a la hora sideral: El sistema debe tener la funcionalidad de seguir la posici\'on que se est\'a observando, ya que si no se hace, pareciera que lo observado se ve desplazando.
+
+\item Impedir observaciones a lugares con luminosidad lunar: El sistema debe evitar que el telescopio apunte a direcciones con notoria luminosidad lunar, debido a que esta luminosidad puede dañar severamente los lentes del telescopio.
+
+\item Mostrar modelo visual del telescopio: Debido a que el telescopio se quiere manipular de forma remota, es necesario otorgar alguna forma que permita ver a la persona que lo est\'e operando, en qu\'e estado se encuentra. Para esto, el sistema debe tener un modelo visual que se comporte de la misma forma que lo hace el telescopio real.
+
+\item Ajuste manual del telescopio: El sistema debe permitir controlar el telescopio manualmente para permitir ajustes menores, que ayuden a corregir errores en la direcci\'on que se observa, que pudieran ocurrir por factores externos, como es la deflexi\'on por el peso propio del telescopio en algunas posiciones.
+
+\item Detener de forma inmediata el telescopio en caso de emergencia: El sistema tiene que tener una opci\'on de emergencia para detener el telescopio de forma inmediata para evitar cualquier daño que se crea que pueda ocurrir. Por ejemplo, daño por alguna variaci\'on en las condiciones clim\'aticas.
+
+\item Controlar acceso a la aplicaci\'on(Sesiones): El sistema debe tener acceso para los distintos usuarios, de manera que cada uno tenga su propia estad\'istica de lo observado.
+
+\item Guardar coordenadas de observaci\'on realizadas: El sistema debe guardar registro de las coordenadas observadas por cada usuario del sistema. De esta forma ayuda a que se puedan repetir observaciones y a realizar estudios sobre \'estas.
+
+\end{itemize}
+
+\newpage
+
+\item Explicar c\'omo tales cambios dar\'ian respuesta a los problemas y deficiencias identificados(o a algunos de ellos).
+
+\begin{itemize}
+
+\item El control por internet va a ayudar a solucionar el problema de tener que estar en el lugar de observaci\'on al momento de controlar al telescopio. 
+
+\item La interfaz gr\'afica va a ayudar a disminuir la dificultad de uso, ocultando informaci\'on que no sea requerida en todo momento, pero permitiendo verla de manera sencilla e intuitiva.
+
+\item La reproducci\'on de lo que est\'a viendo el telescopio es de gran utilidad para la experiencia remota, debido a que sino hiciera esto, no se podr\'ia ver lo que est\'a viendo el telescopio, hasta que se enviara alg\'un informe a quien controlaba el telescopio.
+
+\item La interacci\'on con ACS es una de las caracter\'isticas principales para el control gen\'erico de telescopios y el control de telescopios por medio de internet, pues es esta plataforma la que permite la comunicaci\'on con los telescopios en los diferentes observatorios del mundo.
+
+\item Mover el telescopio a la hora sideral reduce la dificultad de uso para el seguimiento de la observaci\'on de alg\'un objeto, puesto que nos permite ver en todo momento al objeto deseado, sin necesidad de realizar tareas adicionales.
+
+\item Al impedir que el telescopio apunte a lugares con luminosidad lunar se reduce la dificultad de uso, puesto que no es necesario estar preguntandose todo el tiempo si el telescopio va a apuntar a lugares potencialmente dañinos para el mismo. Adem\'as, aumenta la seguridad del telescopio puesto que lo proteje de la luz lunar, uno de los factores m\'as comunes que dañan al telescopio.
+
+\item El modelo visual soluciona un aspecto muy importante de la dificultad de uso para el control a trav\'es de internet, ya que con este se puede saber en todo momento hacia d\'onde est\'a apuntando f\'isicamente el telescopio, d\'andonos un apoyo gr\'afico de lo que estamos haciendo. De la misma forma, tambi\'en ayuda a los que operan el telescopio de forma local, aunqiue ellos podr\'ian verlo directamente, puede ser m\'as c\'omodo verlo en la misma pantalla que est\'an trabajando.
+
+\item El ajuste manual ayuda a disminuir la dificultad de uso del sistema, puesto que con este, no es necesario intuir una direcci\'on parecida a la que estamos observando de manera que se vea lo que debiera, sino que simplemente lo movemos manualmente hasta donde debiera estar.
+
+\item Al dar la posibilidad de detener manualmente al telescopio, aumentamos en gran medida su seguridad, puesto que mediante esta opci\'on, podemos protegerlo de factores que no esperabamos, como son las variaciones inesperadas en el clima. 
+
+\item El guardar coordenadas de observaci\'on realizadas por sesi\'on facilita la dificultad de uso del sistema, ya que para gente no muy experimentada en el tema, permite repetir las observaciones hechas otros d\'ias.
+
+\end{itemize}
+\end{itemize}
 
 \subsubsection{Restricciones}
 
+\begin{itemize}
 
+\item Econ\'omicas: El software no presenta restricciones econ\'omicas, puesto que tanto el sistema operativo, como las herramientas de desarrollo que se van a utilizar, son gratuitas. Por otro lado, los componentes de hardware como son el telescopio para pruebas y la c\'amara CCD si tienen un costo, pero en este caso ser\'an facilitados por el cliente. Es por esto, que no vemos restricciones econ\'omicas peligrosas.
+
+\item Sociales y Culturales: Los usuarios actuales de los programas que controlan telescopios han tenido que usar diferentes aplicaciones para distintos telescopios a lo largo del tiempo que han dedicado a esto, prefiriendo quiz\'as, el que usan actualmente, ya sea por costumbre o por gusto personal. Esto puede dificultar que se acostumbren a usar el sistema propuesto, pero se espera que el sistema final sea intuitivo y amigable, de manera que esto no debiera suceder.
+
+\item Tecnol\'ogicas: En el aspecto tecnol\'ogico es importante destacar que las pruebas iniciales no necesariamente se har\'an con un telescopio de observatorio, en estos casos se utilizar\'a para las pruebas telescopios para aficionados, puesto que los costos de observaci\'on son elevados.
+
+\item Institucionales:
+
+\item Pol\'iticas:
+
+\item Legales:
+
+\end{itemize}
 
 \subsection{An\'alisis de las alternativas de soluci\'on}
-\subsubsection{Alternativa X: YYY}
+\subsubsection{Alternativa 1: YYY}
 
 
 
-\subsubsection{Alternativa X+1: YYY+1}
+\subsubsection{Alternativa 2: YYY+1}
 
 
 
@@ -119,26 +201,26 @@
 \newpage
 \section{Implementaci\'on (Entrega y Operaci\'on)} %%% MARINA
 \subsection{Plan de operaci\'on del sistema}
-Los componentes computacionales m\'inimos requeridos por Hevelius para su operaci\'on consisten en Sistema operativo Linux y Software ACS 6.0, no se restringe a solo la utilizaci\'on de esa versi\'on, puede utilizar otras, pero con las actualizaciones puede ser que existan peque\~nas variaciones que impliquen unas peque\~nas modificaciones, pero se deja establecido que en la versi\'on 6.0 queda totalmente habilitado, de acuerdo a uno de los requerimientos del cliente.
-El equipo en el cual se implemente Hevelius tambi\'en debe poseer acceso a Internet y sin olvidar el telescopio que se desea operar. Sobre los requerimientos m\'inimos de hardware a\'un no est\'an definidos.
+Los componentes computacionales m\'inimos requeridos por Hevelius para su operaci\'on consisten en un computador con Sistema operativo Linux y Software ACS 6.0, no se restringe s\'olo a la utilizaci\'on de esa versi\'on, puede utilizar otras, pero con las actualizaciones puede ser que existan peque\~nas variaciones que impliquen unas peque\~nas modificaciones, pero se deja establecido que en la versi\'on 6.0 queda totalmente habilitado, de acuerdo a uno de los requerimientos del cliente.
+El equipo en el cual se implemente Hevelius tambi\'en debe poseer acceso a Internet y sin olvidar el acceso al telescopio que se desea operar. Sobre los requerimientos m\'inimos de hardware a\'un no est\'an definidos.
 
-Hevelius se desarrollar\'a sobre la plataforma Linux y Software ACS 6.0 como ya se hab\'ia especificado y con el telescopio NEXSTAR 4 SE y a\~nadido a \'este un CCS para la obtenci\'on de im\'agenes. 
+Hevelius se desarrollar\'a sobre la plataforma Linux y Software ACS 6.0 como ya se hab\'ia especificado y con el telescopio NEXSTAR 4 SE y a\~nadido a \'este una c\'amara CCD para la obtenci\'on de im\'agenes.
 
-Como Hevelius es solo el primer paso para el desarrollo completo de un software  de control gen\'erico para telescopios, es muy importante la comprensi\'on del c\'odigo entregado, debidamente comentado, como requerimiento del cliente en ingles, igual que informar los avances en  el twiki de ACS UTFSM Group, para que posteriormente pueda ser modificado de acuerdo a requerimientos futuros.
+Como Hevelius es s\'olo el primer paso para el desarrollo completo de un software de control gen\'erico para telescopios, es muy importante la comprensi\'on del c\'odigo entregado, debidamente comentado, como requerimiento del cliente en ingl\'es y, de la misma forma, informar los avances en twiki de ACS UTFSM Group, para que posteriormente pueda ser modificado de acuerdo a requerimientos futuros.
 
 \subsection{Plan de implementaci\'on (entrega)}
 Una vez finalizado el desarrollo del software, el proceso de entrega debe consistir de dos fases.
 \begin{enumerate}
 	\item {\bf{Entrega del programa y c\'odigo.}}\\
-         Como ya se ha mencionado anteriormente Hevelius es un paso a la construcci\'on de un software gen\'erico, es por ello la importancia del c\'odigo, puesto que es la base para que posteriormente se siga desarrollando en este tema, por estas razones se entrega el c\'odigo debidamente ordenado, organizado y comentado en ingl\'es, por  ser nuestro cliente de car\'acter internacional.
-    En lo que se refiere al programa en s\'i, no se puede hacer una capacitaci\'on a quienes usar\'an este software, ya que no son personas especificas. Pero al finalizar el desarrollo de Hevelius se tratar\'a que vengan algunos astr\'onomos a probar el funcionamiento del software. Es por esto, que para aquellos que deben tratar con Hevelius, existe una documentaci\'on en la cual se detalla los componentes y la utilizaci\'on de ellos, la cual ser\'a especificada en la siguiente fase.\\
+         Como ya se ha mencionado anteriormente Hevelius es un paso a la construcci\'on de un software gen\'erico, es por ello la importancia del c\'odigo, puesto que es la base para que posteriormente se siga desarrollando en este tema, por estas razones se entrega el c\'odigo debidamente ordenado, organizado y comentado en ingl\'es, por ser nuestro cliente de car\'acter internacional.
+    En lo que se refiere al programa en s\'i, no se puede hacer una capacitaci\'on a quienes usar\'an este software, ya que no son personas espec\'ificas. Pero al finalizar el desarrollo de Hevelius se tratar\'a que vengan algunos astr\'onomos a probar el funcionamiento del software. Es por esto, que para aquellos que deban tratar con Hevelius, existe una documentaci\'on en la cual se detalla los componentes y la utilizaci\'on de ellos, esta documentaci\'on ser\'a especificados en la siguiente fase.\\
 
 	\item{\bf{Documentaci\'on.}}\\
-         Como Hevelius esta creado para personas especializadas en el tema de la astronom\'ia, se les entrega una documentaci\'on detallada del software, ya que no existe una instancia directa en donde se pueda preguntar acerca de su funcionamiento, donde el \'unico contacto podr\'ia ser mediante correo electr\'onico, puesto que el campo que abarca Hevelius son observatorio y el trato directo es m\'as complicado.
+         Como Hevelius est\'a siendo creado para personas especializadas en el tema de la astronom\'ia, se les entrega documentaci\'on detallada del software, ya que no existe una instancia directa en donde se pueda preguntar acerca de su funcionamiento, donde el \'unico contacto podr\'ia ser mediante correo electr\'onico, puesto que el ambiente en que trabaja Hevelius es el de los observatorios y, por lo tanto, el trato directo se hace m\'as complicado.
 La especificaci\'on de la documentaci\'on consiste en las siguientes partes:
 \begin{itemize}
-	\item {\bf{Explicaci\'on de la interfaz:}} Esta consiste en la explicaci\'on de donde se encuentra ubicado cada uno de los componentes que tiene implementado Hevelius.
-	\item{ \bf{Componentes Implementados:}} En una secci\'on de especifica que es lo que hace cada uno de sus componentes y como es el funcionamientos, que par\'ametros recibe, etc.
+	\item {\bf{Explicaci\'on de la interfaz:}} Esta consiste en la explicaci\'on de d\'onde se encuentra ubicado cada uno de los componentes que tiene implementado Hevelius.
+	\item{ \bf{Componentes Implementados:}} En una secci\'on se especifica qu\'e hace cada uno de sus componentes y c\'omo es el funcionamiento de ellos, qu\'e par\'ametros recibe, etc.
 
 Toda la documentaci\'on debe ser desarrollada en ingl\'es.
 \end{itemize}
