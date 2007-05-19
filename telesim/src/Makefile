@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -O2 -g
+CFLAGS=-Wall -O2 -ggdb
 
 OBJ=telescope.o main.o listener.o
 EXE=sim_nex4

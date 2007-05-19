@@ -12,15 +12,18 @@
 #define BAUDRATE B9600
 
 static int fd;
-static struct termios *oldtio_global;
+static struct termios oldtio;
 
 extern telescope_t nexstar;
 
 void listen_serial(char *device) {
 	char* (*commands[256])(char*);
 	char cmd, *args, *out, in[256];
-	int res;
-	struct termios *oldtio=NULL, *newtio=NULL;
+	int i,res;
+	struct termios newtio;
+
+	for (i=0; i<255; i++)
+		commands[i]=NULL;
 
 	commands['E']=get_ra_dec;
 	commands['Z']=get_azm_alt;
@@ -34,7 +37,7 @@ void listen_serial(char *device) {
 
 	/* We open the serial port and get its attributes */
 	fd = open(device, O_RDWR | O_NOCTTY);
-	if( fd < 0 ){
+	if( fd <= 0 ){
 		fprintf(stderr,"Fatal: Can't open '%s' for read/write\n",device);
 		exit(EXIT_FAILURE);
 	}
@@ -42,16 +45,15 @@ void listen_serial(char *device) {
 
 	/* Catch SIGINT signal for restoring the serial port and close the fd */
 	signal(SIGINT,leave);
-	tcgetattr(fd,oldtio);
-	oldtio_global = oldtio;
-	bzero(newtio,sizeof(newtio));
+	tcgetattr(fd,&oldtio);
+	bzero(&newtio,sizeof(newtio));
 	
-	newtio->c_cflag  = BAUDRATE | CREAD | CS8 | CLOCAL;
-	newtio->c_iflag = IGNPAR | ICRNL;
-	newtio->c_oflag = 0;
-	newtio->c_lflag = ICANON;
+	newtio.c_cflag  = BAUDRATE | CREAD | CS8 | CLOCAL;
+	newtio.c_iflag = IGNPAR | ICRNL;
+	newtio.c_oflag = 0;
+	newtio.c_lflag = ICANON;
 
-	tcsetattr(fd,TCSANOW,newtio);
+	tcsetattr(fd,TCSANOW,&newtio);
 
 	while(1){
 		fsync(fd);
@@ -60,9 +62,8 @@ void listen_serial(char *device) {
 		if( strlen(in)-1 != 0) {
 			args=(char *)malloc(strlen(in)-1);
 			strncpy(args,in+1,strlen(in)-1);
-		}
-		else
-			args = "";
+		} else
+			args = NULL;
 
 		if(commands[(int)cmd] != NULL) {
 			out=commands[(int)cmd](args);
@@ -71,7 +72,7 @@ void listen_serial(char *device) {
 		} else {
 			verbosity("Error: Command '%c' not suported, ignoring it...\n",cmd);
 		}
-		free(args);
+		if (args!=NULL) free(args);
 	}
 
 	return;
@@ -79,7 +80,8 @@ void listen_serial(char *device) {
 
 void leave(int sig){
 	printf("Receiving SIGINT signal, closing port...\n");
-	tcsetattr(fd,TCSANOW,oldtio_global);
+	tcsetattr(fd,TCSANOW,&oldtio);
 	close(fd);
 	exit(EXIT_SUCCESS);
 }
+
