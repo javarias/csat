@@ -119,14 +119,35 @@
 \newpage
 \section{Implementaci\'on (Entrega y Operaci\'on)} %%% MARINA
 \subsection{Plan de operaci\'on del sistema}
+Los componentes computacionales m\'inimos requeridos por Hevelius para su operaci\'on consisten en Sistema operativo Linux y Software ACS 6.0, no se restringe a solo la utilizaci\'on de esa versi\'on, puede utilizar otras, pero con las actualizaciones puede ser que existan peque\~nas variaciones que impliquen unas peque\~nas modificaciones, pero se deja establecido que en la versi\'on 6.0 queda totalmente habilitado, de acuerdo a uno de los requerimientos del cliente.
+El equipo en el cual se implemente Hevelius tambi\'en debe poseer acceso a Internet y sin olvidar el telescopio que se desea operar. Sobre los requerimientos m\'inimos de hardware a\'un no est\'an definidos.
 
+Hevelius se desarrollar\'a sobre la plataforma Linux y Software ACS 6.0 como ya se hab\'ia especificado y con el telescopio NEXSTAR 4 SE y a\~nadido a \'este un CCS para la obtenci\'on de im\'agenes. 
 
+Como Hevelius es solo el primer paso para el desarrollo completo de un software  de control gen\'erico para telescopios, es muy importante la comprensi\'on del c\'odigo entregado, debidamente comentado, como requerimiento del cliente en ingles, igual que informar los avances en  el twiki de ACS UTFSM Group, para que posteriormente pueda ser modificado de acuerdo a requerimientos futuros.
 
 \subsection{Plan de implementaci\'on (entrega)}
+Una vez finalizado el desarrollo del software, el proceso de entrega debe consistir de dos fases.
+\begin{enumerate}
+	\item {\bf{Entrega del programa y c\'odigo.}}\\
+         Como ya se ha mencionado anteriormente Hevelius es un paso a la construcci\'on de un software gen\'erico, es por ello la importancia del c\'odigo, puesto que es la base para que posteriormente se siga desarrollando en este tema, por estas razones se entrega el c\'odigo debidamente ordenado, organizado y comentado en ingl\'es, por  ser nuestro cliente de car\'acter internacional.
+    En lo que se refiere al programa en s\'i, no se puede hacer una capacitaci\'on a quienes usar\'an este software, ya que no son personas especificas. Pero al finalizar el desarrollo de Hevelius se tratar\'a que vengan algunos astr\'onomos a probar el funcionamiento del software. Es por esto, que para aquellos que deben tratar con Hevelius, existe una documentaci\'on en la cual se detalla los componentes y la utilizaci\'on de ellos, la cual ser\'a especificada en la siguiente fase.\\
 
+	\item{\bf{Documentaci\'on.}}\\
+         Como Hevelius esta creado para personas especializadas en el tema de la astronom\'ia, se les entrega una documentaci\'on detallada del software, ya que no existe una instancia directa en donde se pueda preguntar acerca de su funcionamiento, donde el \'unico contacto podr\'ia ser mediante correo electr\'onico, puesto que el campo que abarca Hevelius son observatorio y el trato directo es m\'as complicado.
+La especificaci\'on de la documentaci\'on consiste en las siguientes partes:
+\begin{itemize}
+	\item {\bf{Explicaci\'on de la interfaz:}} Esta consiste en la explicaci\'on de donde se encuentra ubicado cada uno de los componentes que tiene implementado Hevelius.
+	\item{ \bf{Componentes Implementados:}} En una secci\'on de especifica que es lo que hace cada uno de sus componentes y como es el funcionamientos, que par\'ametros recibe, etc.
 
+Toda la documentaci\'on debe ser desarrollada en ingl\'es.
+\end{itemize}
+\end{enumerate}
 
 \subsection{Plan de mantenci\'on}
+Como ya se ha mencionado anteriormente Hevelius esta implementado mayormente para observatorios, los cuales se encuentran en distintas partes del mundo y los usuarios del programa pueden acceder desde donde prefieran para manipular los telescopios, por lo que nos es imposible dar mantenimiento presencial a todos los usuarios.\\
+ Puede existir una asistencia remota, principalmente a trav\'es de correo electr\'onico para tratar de resolver cualquier tipo de problema que pueda existir.
+
 
 
 
