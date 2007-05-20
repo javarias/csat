@@ -177,14 +177,428 @@ Seguridad del telescopio: Es importante que el telescopio tenga medios para prot
 \newpage
 \section{T\'ecnicas y Herramientas de desarrollo} %%% CARLOS
 \subsection{Modelo de desarrollo}
+Las caracter\'isticas m\'as importantes del proyecto Hevelius con
+respecto a la elecci\'on de un modelo de desarrollo se expone en lo
+siguiente. Primero se consideran las propiedades del producto:
+
+\begin{itemize}
+\item \textbf{Complejidad del Proyecto:} una estimaci\'on informal del proyecto
+  muestra una complejidad media, la cual permite la finalizaci\'on del
+  proyecto dentro del plazo predeterminado;
+\item \textbf{Solidez de los Requerimientos:} c\'omo el producto a
+  desarrollar est\'a inserto en un proyecto de investiaci\'on, es posible que
+  los requerimientos capturados durante el an\'alisis sean completos en su generalidad,
+  sujetos a pocos cambios.
+\item \textbf{Innovaci\'on del Producto:} en vista de que la principal caracter\'istica
+  del proyecto es la b\'usqueda de la generalidad en el control de telescopios, existen 
+  errores que durante el desarrollo se descubrir\'an, lo que nesecitar\'a cambios en el
+  c\'odigo implementados o en el dise\~no del software.
+\end{itemize}
+
+Adem\'as, el ambiente del desarrollo tiene las siguientes caracter\'isticas:
+
+\begin{itemize}
+\item \textbf{Tama\~no del Equipo:} cuatro personas durante la planificaci\'on y el 
+  desarrollo del proyecto.
+\item \textbf{Recursos Disponibles:} c\'omo estamos trabajando en un proyecto
+  estudiantil, no disponemos de grandes recursos monetarios para
+  gastar en gesti\'on formal.
+\item \textbf{Tratamiento de los miembros del equipo entre s\'i:} informal, ya
+  que existen lazos de amistad anteriores a la formaci\'on del grupo de trabajo.
+\item \textbf{Proyecci\'on en el tiempo:} se cuenta con un plazo determinado,
+  debido a que el proyecto pretende ser parte de la Feria de Software
+  2006, de no m\'as de cinco meses a partir de la entrega de este
+  informe.
+\item \textbf{Comprensi\'on de la estructura interior del producto por el cliente:}
+  el cliente debe ser capaz de adaptar el programa a futuros cambios en
+  el medio ambiente, para permitir manejar a otro tipo de robot, por
+  ejemplo, o para manejar un nuevo dispositivo (como un nuevo sensor) en
+  un robot ya existente. Por esto, se necesitar\'a documentaci\'on del
+  dise\~no del programa tanto como del c\'odigo y su utilizaci\'on.
+\end{itemize}
+
+Teniendo en cuenta el conjunto de caracter\'isticas del proyecto, se
+decide usar un m\'etodo \'agil de desarrollo \cite{Cockburn02} para la
+mayor\'ia de las tareas; espec\'ificamente se prevee el uso del \emph{Modelo
+Evolutivo} (tambi\'en llamado \emph{dise\~no continuo} o \emph{dise\~no
+incremental}) \cite{Gilb88,Shore04} en el trabajo. Sin embargo, no es posible
+usar un m\'etodo \'agil de forma exclusiva, porque es necesario cumplir con
+las fechas de entregas intermedias predeterminadas por los ramos
+``Ingenier\'ia de Software'' y ``Taller de desarrollo de Software''.
+Tambi\'en ser\'a necesario contar al final del desarrollo con una
+documentaci\'on comprensible por el cliente\footnote{que en el caso del
+  proyecto presente est\'a compuesto de ingenieros inform\'aticos y
+  electr\'onicos} del dise\~no y del c\'odigo del software, cosa que se
+considera m\'as f\'acil usando algunos elementos de un proceso planificado.
+Por
+tanto, el uso parcial de un proceso planificado ser\'a inevitable.
+
+Habiendo elegido este m\'etodo de desarrollo, es necesario realizar las
+siguientes actividades durante el desarrollo para el modelo evolutivo:
+
+\begin{enumerate}
+\item \textbf{Pruebas:} los requerimientos (funcionales o no-funcionales) deben
+  ser transformados en pruebas automatizables.
+\item \textbf{Construir:} el c\'odigo producido debe ser siempre en un
+  estado que permite su compilaci\'on.
+\item \label{escuchar} \textbf{Escuchar:} La comunicaci\'on a lo largo del desarrollo del proyecto
+con el cliente, debe ser fluida, esto para atender a las 
+  verdaderas necesidades y para solicitar sus comentarios sobre el
+  estado del desarrollo, y posibles cambios en los requerimientos.
+\item \textbf{Dise\~nar:} para facilitar el proceso de codificaci\'on y permitir el
+  trabajo paralelo de grupos independientes, hay que contar con un
+  dise\~no del sistema.
+  Esta actividad hay que hacerla durante todo el tiempo del desarrollo,
+  adapt\'andose a funcionalidad agregada.
+\item \label{comunicar} \textbf{Comunicaci\'on dentro del equipo:} es importante
+  para el uso de un m\'etodo \'agil que la comunicaci\'on entre los integrantes funcione
+  muy bien, es decir, todos deben saber la mayor\'ia del tiempo en qu\'e
+  est\'an trabajando los dem\'as y cu\'ales son los cambios realizados por
+  ellos.
+\end{enumerate}
+
+Para los puntos \ref{escuchar} y \ref{comunicar} se necesitan adem\'as
+muchas versiones intermedias.
+
+Para el componente planificado, hay que hacer un plan inicial de
+recursos y tiempo necesitado, para lo que sirve este documento, y
+controlar el progreso actual del proyecto, para lo que sirven los
+\emph{fichas de estado}.
+Adem\'as es necesario documentar el dise\~no actual del programa.
 
 
 
 \subsection{Herramientas y t\'ecnicas de soporte para el desarrollo}
+\subsubsection{T\'ecnicas a utilizar en el desarrollo del proyecto}
+
+Durante el desarrollo del proyecto se utilizar\'a el m\'etodo evolutivo ya que es necesario contar con una planificaci\'on a seguir en los meses de desarrollo. Adem\'as, es necesario una documentaci\'on del desarrollo del proyecto para futuras modificaciones.\\
+
+Se opt\'o por este m\'etodo debido a la seguridad que da su planificaci\'on al cliente, ya que \'el puede \textit{ver} en que se est\'a trabajando y cuales ser\'an los pr\'oximos pasos a seguir.\\
+
+Dentro de los lenguajes evaluados, se opt\'o por la programaci\'on en C++ al ser este un potente lenguaje con una orientaci\'on a objetos que facilita el dise\~no gracias a las herramientas de planificaci\'on y modelamiento de UML. Todos los integrantes del grupo, cuentan con conocimientos en C y otros en C++. Para quienes no cuenta con los conocimientos en C, el paso a C++ es diminuto en comparaci\'on con otros lenguajes de programaci\'on.\\
+
+Dentro de los lenguajes descartados, se encuentra Java. Esto se debe principalmente a que los requerimientos de hardware de su m\'aquina virtual, en muchos cosas sobrepasa las caracter\'isticas de los equipos en los que podremos desarrollar el proyecto. Esta situaci\'on a provocado que no exista una empat\'ia por parte del grupo hacia Java, debido a la ralentizaci\'on que produce en los equipos personales la realizaci\'on de otras operaciones.\\
+
+Es posible que se utilice alguna herramienta de dise\~no vectorial para la creaci\'on de las gr\'aficas a utilizar en el software, pero a\'un no se ha descartado ni confirmado ninguna de ellas.\\
+
+Para asegurar la calidad de software, se realizar\'an constantes revisiones del producto con el cliente, de forma que esto permita obtener una retroalimentaci\'on y as\'i mejorar o cambiar peque\~nos defectos en corto tiempo.\\
+
+Dentro de este mismo marco, utilizaremos la herramienta de control de versiones SVN para mantener un desarrollo ordenado, una coordinaci\'on entre los desarrolladores, saber cual de los desarrolladores realiz\'o que cambio, etc. 
+Adem\'as, se planea la utilizaci\'on la herramienta bugtracker\footnote{Sistema dise\~nado especialmente para manejar reportes de errores} Trac\footnote{\url{http://www.edgewall.com/trac/}}.
+
+
+\subsubsection{Herramientas o plataformas espec\'ificas a utilizar}
+
+La plataforma operacional del proyecto est\'a constituida por los Sistemas Operativos Microsoft Windows y Linux Ubuntu\footnote{o alguna otra distribuci\'on}, debido a que ambos son utilizados en Austec.
+De esta misma forma, el desarrollo ser\'a llevado en mayor parte en alguna distribuci\'on de Linux por su bajo costo monetario asociado.\\
+
+Tal como se mencionaba antes, se utilizar\'a UML como plataforma de modelamiento. De esta forma, se est\'a evaluando que herramienta CASE nos ser\'a de mayor utilidad. Entre estas est\'an Umbrello\footnote{\url{http://uml.sourceforge.net/}}, Rational Rose\footnote{\url{http://www-306.ibm.com/software/rational/}} y DBDesigner 4\footnote{\url{http://fabforce.net/dbdesigner4/}}
 
 
 
 \subsection{Personal y capacitaci\'on del grupo de desarrollo}
+\begin{itemize}
+
+    \item Personal del equipo del proyecto.
+		
+La empresa Taranis cuenta actualmente con cinco miembros, de los cuales se har\'a una breve descripci\'on de sus perfiles personales, paso primordial para conocer al equipo de trabajo:
+
+	\begin{description}
+		
+	\item[Arturo Alejandro Hoffstadt Urrutia].
+
+Persona con gran capacidad de liderazgo, que gusta del trabajo en equipo y por sobre todo con gran sentido de responsabilidad. 
+``Echando a perder se aprende'' ayuda mucho a entender su personalidad, ya que se caracteriza por su curiosidad, la cual siempre le ha ense\~nado algo nuevo. Adem\'as posee facilidad para el aprendizaje. 
+
+Dentro de sus \'areas de inter\'es, se encuentra todo el amplio abanico de la inform\'atica, la rob\'otica, y la biotecnolog\'ia, demostrando este inter\'es, en su activa participaci\'on en el equipo de Promoci\'on del Departamento de Inform\'atica de la UTFSM, y coordinar las Charlas T\'ecnicas del Laboratorio de Computaci\'on del mismo departamento (Labcomp).
+
+Posee facilidad en la comunicaci\'on, adem\'as de una gran empat\'ia a la hora de comunicarse con la gente.
+
+En el 2005, logr\'o la beca Bicentenario, y la beca Municipal de La Calera, para apoyar sus estudios por excelencia acad\'emica, dejando en manifiesto las ganas de progresar gracias a sus propios m\'eritos y esfuerzo.
+
+Gusta de la m\'usica y el cine, tocar clarinete, jugar rol, y adem\'as, practica Nataci\'on.
+
+Posee un dominio del Ingl\'es Avanzado (oral y escrito, t\'ecnico) y Alem\'an B\'asico (oral y escrito).
+
+	\item[Renato Mart\'in Covarrubias Romero].
+
+Persona capaz de liderar proyectos y ser part\'icipe de estos, de analizar y dise\~nar una soluci\'on para implementarla con las herramientas que el problema requiera.
+
+Su inter\'es por el \'area de Sistemas Computacionales lo lleva a ingresar al Laboratorio de Computaci\'on (Labcomp) y ganar experiencia en la Administraci\'on de Sistemas. Esta experiencia no es s\'olo t\'ecnica, si no que humana. Trabajar con ese grupo de personas, le ha ense\~nado a aprender y escuchar las ideas del otro, y a aceptar el error cuando ha estado equivocado.
+
+Adem\'as participa en el equipo de Promoci\'on del Departamento de Inform\'atica, donde realizan Charlas a colegios y actividades para Puertas Abiertas UTFSM. Esto lo llev\'o a ser reconocido como Alumno Destacado UTFSM los a\~nos 2004 y 2005.
+
+La preocupaci\'on por el correcto manejo y uso del idioma espa\~nol en forma oral y escrita le ha facilitado, en muchas oportunidades, ganarse la confianza de superiores y personas de mayor rango jer\'arquico. Adem\'as del Espa\~nol, tiene la capacidad de comunicarse en Ingl\'es Coloquial y T\'ecnico Inform\'atico, oral y escrito, a nivel medio.
+
+Sus hobbies son la lectura, el tenis, juegos de rol y por supuesto tarrear\footnote{tambi\'en conocido como ``LAN Party''. Una LAN party es un evento que reune a un grupo de personas con sus computadoras para jugar y compartir} con amigos.
+
+	\item[Jorge David R\'ios Miranda].
+
+Persona met\'odica y anal\'itica. Actualmente se encuentra finalizando su formaci\'on acad\'emica, de la cual valora sobre todo, los conocimientos t\'ecnicos que le ha entregado su estudio.  
+
+Destaca en \'el su alto grado de responsabilidad y su facilidad de aprendizaje. Es capaz de aceptar desaf\'ios y concretarlos en el tiempo acordado, demostrando su capacidad y compromiso al trabajar en equipo e individualmente.
+
+Se identifica con el \'area de Desarrollo de Software, aunque su inter\'es es la amplia \'area de la Computaci\'on e Inform\'atica.
+
+Es fuertemente valorable sus conocimientos sobre variados lenguajes de programaci\'on y su habilidad para programar sobre estos, con los cuales ha llevado a la pr\'actica algunos proyectos de desarrollo personal.
+
+Tambi\'en destacan sus habilidades deportivas en atletismo y f\'utbol. Sus hobbies son tocar arm\'onica, jugar rol y entretenerse con juegos de PC. 
+
+Posee dominio del idioma Ingl\'es a nivel intermedio (t\'ecnico y escrito).
+
+
+\item[Alexander Becher].
+
+Es un alumno proveniente de la RWTH Aachen, Alemania, que este a\~no ha llegado a la UTFSM a trav\'es de una beca de intercambio obtenida en el pa\'is del cual es originario, el cual, en sus ganas de trabajar e interactuar con sus nuevos compa\~neros chilenos, eligi\'o la asignatura de Ingenier\'ia de Software, en donde se integra a la empresa Taranis, equipo el cual lo acoge desde el primer momento.
+
+Se acaracteriza por ser una persona que siempre trata de entender las cosas a trav\'es de la comunicaci\'on con otras personas, especialmente potenciado por su necesidad de adaptaci\'on con la cultura y el idioma de Chile, y su deseo de transmitir su forma de vida en su pa\'is de procedencia. 
+
+Es capaz de identificar problemas con rapidez y proponer soluciones, ya sean soluciones propias o buscando a la gente que m\'as adecuada para resolverlos; adem\'as, suele hacer planes factibles y realizarlos, de mostrando efectividad en el trabajo. Por lo mismo es que tambi\'en cumple con el trabajo prometido, por su consecuencia a la hora de adquirir compromisis, y conocer sus l\'imites de trabajo.
+
+Estas caracter\'isticas personales, as\'i como su desempe\~no acad\'emico le permitieron lograr una beca del servicio alem\'an de intercambio acad\'emico (DAAD) para sustentar su estad\'ia de intercambio en la UTFSM. Sus \'areas de inter\'es en el campo inform\'atico son la fiabilidad y seguridad de sistemas, comunicaci\'on de datos, y el modelamiento matem\'atico. 
+
+Fuera del campo inform\'atico, ha sido tenismesista por los \'ultimos 17 a\~nos de su vida. Posee dominio de los idiomas Alem\'an, el cual es su lengua materna, Ingl\'es a nivel avanzado y posee buen manejo del idioma Espa\~nol.
+
+
+	\item[Pablo Andr\'es Pe\~nailillo Arancibia].
+
+Persona con gran capacidad de liderazgo, con ganas de escuchar y ser escuchado y desarrollarse como persona tanto en lo acad\'emico como en lo social. 
+
+Siempre convencido de sus ganas de trabajar en equipo ha buscado distintas instancias para poder desarrollar este don, marc\'andolo fuertemente las actividades pastorales y musicales en su etapa como estudiante de ense\~nanza b\'asica y media. 
+
+Actualmente est\'a enfrentando un nuevo desaf\'io, el cual es ser parte de la mesa ejecutiva del Centro de Alumnos del Departamento de Inform\'atica de la Universidad T\'ecnica Federico Santa Mar\'ia, en donde ha aprendido fuertemente el sentido de compromiso y sacrificio, de donde ha hecho el di\'alogo y el debate fuertes herramientas para relacionarse con la gente, y ha potenciado la relaci\'on con sus compa\~neros a nivel de carrera y Universidad, en especial de aquellos a quienes pueda ayudar o retribuirles la ayuda otorgada. 
+
+Enfoca su inter\'es en las \'areas de Sistemas de Gesti\'on y Desarrollo de Software, las cuales busca unirlas a su vibraci\'on con los problemas de nuestra sociedad. 
+
+Dentro de sus aficiones y hobbies est\'a la m\'usica, la cual disfruta m\'as a\'un cuando brota de sus manos y voz, la literatura latinoamericana, la cocina, el rol, entre otros.
+
+Posee dominio del Ingl\'es escrito a nivel Intermedio, oral a nivel b\'asico.
+
+	\end{description}
+
+A partir de lo descrito anteriormente, se pueden destacar las siguientes caracter\'isticas en cada uno de los integrantes del grupo:
+
+	\begin{description}
+		
+	\item[Arturo Alejandro Hoffstadt Urrutia].
+
+		\begin{itemize}
+		
+		\item{Liderazgo:} Es capaz de tomar protagonismo y tomar resoluciones dentro de un grupo. Capaz de repartir tareas y dar plazos. Existe una exigencia tanto personal como hacia el grupo que dirige.
+		\item{Trabajo en equipo:} Es capaz de asumir tareas dentro de un conjunto de trabajo. Gusta del hecho de retroalimentarse con el aprendizaje dentro del equipo humano que conforma y compartir con este. Facilidad de comunicarse con la gente que trabaja.
+		\item{Responsabilidad:} Cumple los plazos asignados y reuniones de equipo. Da informe de aquellas cosas que logra o no. Es capaz de expresar cuales son sus l\'imites, lo cual ayuda a la hora de asignar tareas y saber cuales son sus especialidades.  Es capaz de esforzarse en el logro de las metas propuestas.
+		\item{Curiosidad:} Gusta experimentar frente a lo que le es desconocido. Busca aprender emp\'iricamente las cosas.
+		\item{Facilidad para el aprendizaje:} Posee facilidad para aprender cosas nuevas. Existe apertura ante aquellas que le son desconocidas y las percibe con facilidad.
+		\item{\'areas de inter\'es:} Inform\'atica, en su amplia gama de posibilidades, la rob\'otica, y la biotecnolog\'ia.
+		\item{Empat\'ia:} Facilidad en la comunicaci\'on con la gente y entender las cosas que quiere expresar. 
+		\item{Versatilidad:} Posee la capacidad de adaptarse con facilidad y rapidez a diversas funciones.
+		\item{Dominio de idiomas:} Es capaz de manejar informaci\'on m\'as all\'a de nuestra habla hispana, como es el ingl\'es y el alem\'an.
+		\item{Conocimientos T\'ecnicos:}
+
+			\begin{itemize}
+			\item{Administrador de Sistemas:} Cuentas, Mail, Web, SVN, Bases de Datos.
+			\item{Sistemas Operativos:} Microsoft Windows, Linux (Fedora, Ubuntu, CentOS, Gentoo).
+			\item{Lenguajes de Programaci\'on:} C, C++, Basic, Visual Basic, Java, PHP, ASP, Javascript, Scheme, Prolog, Bash, Perl.
+			\item{Librer\'ias:} SDL, GTK, QT, CUPS, STL.
+			\end{itemize}
+		\end{itemize}
+
+	\item[Renato Mart\'in Covarrubias Romero].
+
+		\begin{itemize}
+		
+		\item{Liderazgo:} Es capaz de tomar roles protag\'onicos y resolutivos dentro de los proyectos grupales, siendo su especialidad los proyectos de car\'acter t\'ecnico.
+		\item{Trabajo en equipo:} Se caracteriza por su visi\'on estrat\'egica a la hora de trabajar, en donde resalta su capacidad de ver con acierto las posibles soluciones a un problema dado, y as\'i lograr proponer una buena distribuci\'on del trabajo.
+		\item{Analista:} Es capaz de proponer y dise\~nar a priori soluciones avaladas por su tecnisismo, con aquellas herramientas que ayudar\'ian a un buen desarrollo de estas, en este caso por su especial conocimiento de variados lenguajes de programaci\'on. Por lo mismo es su entusiasmo por el \'area de Sistemas Computacionales.
+		\item{Tolerancia:} En su af\'an de aprendizaje suele aceptar opiniones distintas a las otras que trabajan con \'el, aceptado nuevas alternativas que lo ayuden a seguir avanzando en su trabajo.
+		\item{Proactividad:} Participa en actividades fuera de lo meramente acad\'emico, aportando activa y positivamente de \'estas.
+		\item{Dicci\'on:} Es preocupado por el correcto manejo y uso del idioma espa\~nol en forma oral y escrita, lo que ha favorecido fuertemente la comunicaci\'on a la hora de ser formal con otras personas.
+		\item{\'areas de inter\'es:} Sistemas de Computaci\'on.
+		\item{Dominio de idiomas:} Ingl\'es coloquial y t\'ecnico a nivel medio, tanto oral como escrito.
+		\item{Conocimientos T\'ecnicos:}
+
+			\begin{itemize}
+			\item{Administraci\'on de Sistemas:} Correo Electr\'onico, Servicios Web, Cuentas de Usuarios, Bases de Datos, DHCP, Firewall, LDAP.
+			\item{Sistemas Operativos:} Linux (Fedora Core, CentOS, Debian, Ubuntu, ArchLinux), Microsoft Windows 98/2000/Me/XP
+			\item{Lenguajes de Programaci\'on:} C, Java, Visual Basic, HTML, Javascript, ASP, PHP, SQL, Bash, Latex, Perl, Scheme, Prolog, Tck, Tk.
+			\item{Librer\'ias:} GTK, QT.
+			\end{itemize}
+
+		\end{itemize}
+
+	\item[Jorge David R\'ios Miranda].
+
+		\begin{itemize}
+		
+		\item{Metodicismo:} Es ordenado con su trabajo. Es planificado y cumple con los plazos que se propone.
+		\item{Analista:} Es capaz de identificar aquellos factores favorables o no para el desarrollo de un trabajo, sobre todo los trabajos t\'ecnicos.
+		\item{Responsabilidad:} Cumple con los plazos que propone, y tambi\'en aquellos que le proponen. De la mano va su fuerte compromiso con los equipos de trabajo en los cuales participa.
+		\item{Facilidad para el aprendizaje:} Es capaz de aprender nuevas herramientas en poco tiempo. 
+		\item{\'areas de inter\'es:} Desarrollo de Software, aunque su inter\'es es la amplia \'area de la Computaci\'on e Inform\'atica.
+		\item{Dominio de lenguajes:} Posee fuertes conocimientos sobre variados lenguajes de programaci\'on.
+		\item{Dominio de idiomas:} Posee dominio del idioma Ingl\'es a nivel intermedio, tanto t\'ecnico como escrito.
+		\item{Conocimientos T\'ecnicos:}
+
+			\begin{itemize}
+			\item{Software:} MS Office, OpenOffice, Rational Rose, SQL Server, Visual Studio 6.0, PostgreSQL, Eclipse, Klogic.
+			\item{Sistemas Operativos:} MS Windows 95, 98, XP (Nivel avanzado), RedHat Linux, Fedora Core (Nivel Medio). 
+			\item{Lenguajes de Programacion:} C, C++, Pascal, Visual Basic, ASP, PHP, SQL, JavaScript, Cobol, Dbase, Clipper, Java, Perl, Scheme, Prolog.
+			\end{itemize}
+		\end{itemize}
+
+	\item[Alexander Becher].
+		
+\begin{itemize}
+		
+		\item{Trabajo en equipo:} Gusta de las instancias que le ofrescan este tipo de trabajo, ya que con ellas aprende a tratar con personas diferentes, inclusive de culturas y h\'abitos diferentes a las suyas.
+		\item{Versatibilidad:} Es capaz de realizar desaf\'ios por lograr cosas nuevas, emprendiendo nuevos rumbos y nuevas metas, como lo es su viaje de intercambio a la UTFSM. Adem\'as tiene una f\'acil adaptaci\'on con respecto a la gente que lo rodea en su nuevo destino.
+		\item{Responsabilidad:} Es met\'odico con su trabajo y cumple con los plazos requeridos, demostrando un alto nivel de compromiso con sus labores.
+		\item{Analista:} Es capaz de detectar problemas y llevar a cabo investigaciones que lo ayuden a medir la factibilidad de solucionarlo o no, como tambi\'en lo yuden a encontrar el mejor camino de soluci\'on a seguir.
+		\item{Proactivo:} Es capaz de proponer soluciones ante los problemas y llevarlos a cabo.
+		\item{Esfuerzo:} Siempre busca lograr las metas propuestas en el trabajo, a trav\'es de la investigaci\'on y el trabajo.
+		\item{Areas de inter\'es:} Dentro del campo inform\'atico, son la fiabilidad y seguridad de sistemas, comunicaci\'on de datos, y el modelamiento matem\'atico
+		\item{Dominio de idiomas:} Posee dominio de los idiomas Alem\'an, el cual es su lengua materna, Ingl\'es a nivel avanzado y posee buen manejo del idioma Espa\~nol.
+		\item{Conocimientos T\'ecnicos:}	
+			\begin{itemize}
+			\item{Sistemas Operativos:} MS Windows 95, 98, XP (Nivel Medio), RedHat Linux, Fedora Core, Ubuntu (Nivel Medio).
+			\item{Lenguajes de Programacion:} C, C++, Pascal, Visual Basic, ASP, PHP, SQL, JavaScript, Java,  Prolog, entre otros.
+			\end{itemize}
+
+
+\end{itemize}
+
+	\item[Pablo Andr\'es Pe\~nailillo Arancibia].
+
+		\begin{itemize}
+
+		\item{Liderazgo:} Posee capacidad de tomar roles protag\'onicos en sus grupos de trabajo. Incentiva a la gente a generar nuevas ideas y propuestas para mejorar el trabajo en equipo. Esta constantemente en b\'usqueda de nuevas maneras de incentivar a sus compa\~neros de trabajo, para lograr un trabajo m\'as productivo y ameno, siendo su principal herramienta la comunicaci\'on.
+		\item{Empat\'ia:} Gusta de conocer a aquellas personas con que trabaja, lo cual ayuda a mejorar el ambiente de trabajo y potenciar aquellos roles en que la persona puede desenvolverse mejor, para un mejor trabajo en equipo, como tambi\'en ayudar en aquellos roles en que la persona necesite potenciarse.
+		\item{Responsabilidad:} Busca lograr las metas propuestas, a trav\'es de la b\'usqueda de soluciones o siendo exigente en aquello que sabe hacer bien, intentando hacerlo mejor a\'un. Se compromete con el trabajo que debe realizar.
+		\item{\'areas de inter\'es:} Dentro de las \'areas de Inform\'atica sus \'areas de inter\'es son las de Sistemas de Gesti\'on y Desarrollos de Software.
+		\item{Versatilidad:} Tiene facilidad para adaptarse a diversos problemas, y propone soluciones a estas inc\'ognitas, especialmente cuando se trata de problemas comunicacionales.
+		\item{Dominio de idiomas:} Posee dominio del Ingl\'es escrito a nivel intermedio, oral a nivel b\'asico.
+		\item{Conocimientos T\'ecnicos:}
+
+			\begin{itemize}
+			\item{Software:} Rational Rose, SQL Server, Visual Studio 6.0, Umbrello, Poseidon, Dia, Eclipse, Open Office, PostgreSQL, Klogic.
+			\item{Sistemas Operativos:} MS Windows (Nivel Medio). Linux Fedora Core, Debian, Ubuntu (Nivel Medio).
+			\item{Lenguajes de Programaci\'on:} C, C++, Pascal, Visual Basic, ASP, PHP, SQL, JavaScript, Assembly, Java, Perl, Scheme, Prolog, LaTeX. 
+			\end{itemize}
+		\end{itemize}
+
+	\end{description}
+
+
+	\item Perfil del equipo ideal para el proyecto.
+
+Para la empresa Taranis, el equipo ideal requerido para este proyecto requiere que cumpla con las siguientes caracter\'isticas:
+
+		\begin{itemize}
+
+		\item{Conocimientos de Rob\'otica:} Esencial es el conocimiento del funcionamiento de robots, como tambi\'en conocer la l\'ogica de su funcionamiento interno de las piezas electr\'onicas y/o Hardware que posee y conocer en espec\'ifico con qu\'e tipo de robot el equipo se encuentra trabajando para el desarrollo del software.
+		\item{Conocimientos de Mec\'anica:} Se requiere conocer el funcionamiento de las piezas mec\'anicas m\'oviles que compone el robot, para poder potenciar el uso del software seg\'un la din\'amica y cinem\'atica de \'estas.
+		\item{Conocimientos F\'isicos:} Se requiere conocimientos sobre din\'amica y cinem\'atica, para analizar las piezas mec\'anicas moviles del robot, como velocidad o distancia recorrida, como tambi\'en se requiere conocer de electromagnetismo, para el an\'alisis de aquellos sensores que sean agregados al robot.
+		\item{Conocimientos sobre Sistemas:} Se requiere conocer tanto el sistema desde el dise\~no interno del robot, como su funcionamiento aut\'onomo. Conocer de su arquitectura tambi\'en es fundamental para lograr entender su funcionamiento o nuevas funcionalidades que pueda ser agregadas en el robot.
+		\item{Conocimientos de Lenguajes de Programaci\'on:} 
+			
+			\begin{itemize}
+			\item{C++:} En este lenguaje de programaci\'on orientado a objetos se basar\'a la funcionalidad de nuestro software.
+			\item{\LaTeX:} Este lenguaje ser\'a usado para generar la documentaci\'on que surge a trav\'es de los entregables o a partir de la propia investigaci\'on que surge durante el avance del trabajo.
+			\end{itemize}
+		\item{Conocimientos de Software:}
+		\item{Conocimientos de Sistemas Operativos:} Se requiere un conocimiento en espec\'ifico del sistema operativo Ubuntu, el cual se encuentra actualmente en la version 5.10 y pr\'oximo a cambiar a la versi\'on 6.06, debido a que es el sistema sobre el cual funciona el robot. 
+
+		\end{itemize}
+
+
+	\item Capacidad, experiencia y disponibilidad de cada miembro del equipo (disponible o buscado).
+
+		\begin{description}
+
+		\item[Arturo Hoffstadt]
+			\begin{itemize}
+                        \item{Administrador de Sistemas:} Cuentas, Mail, Web, SVN, Bases de Datos.
+                        \item{Sistemas Operativos:} Microsoft Windows, Linux (Fedora, Ubuntu, CentOS, Gentoo).
+                        \item{Lenguajes de Programaci\'on:} C, C++, Basic, Visual Basic, Java, PHP, ASP, Javascript, Scheme, Prolog, Bash, Perl.
+                        \item{Librer\'ias:} SDL, GTK, QT, CUPS, STL.
+			\item{Otros conocimientos relacionados:} Arquitectura de computadores, Redes de computadores, F\'isica (Din\'amica y Electromagnetismo), Rob\'otica a nivel b\'asico.
+                        \end{itemize}
+		
+		\item[Renato Covarrubias]
+						
+			\begin{itemize}
+                        \item{Administraci\'on de Sistemas:} Correo Electr\'onico, Servicios Web, Cuentas de Usuarios, Bases de Datos, DHCP, Firewall, LDAP.
+                        \item{Sistemas Operativos:} Linux (Fedora Core, CentOS, Debian, Ubuntu, ArchLinux), Microsoft Windows 98/2000/Me/XP
+                        \item{Lenguajes de Programaci\'on:} C, Java, Visual Basic, HTML, Javascript, ASP, PHP, SQL, Bash, Latex, Perl, Scheme, Prolog, Tck, Tk.
+                        \item{Librer\'ias:} GTK, QT.
+			\item{Otros conocimientos relacionados:} Arquitectura de computadores, Redes de computadores, F\'isica (Din\'amica), Rob\'otica a nivel b\'asico.
+                        \end{itemize}
+
+
+		\item[Jorge R\'ios]
+
+			\begin{itemize}
+                        \item{Software:} MS Office, OpenOffice, Rational Rose, SQL Server, Visual Studio 6.0, PostgreSQL, Eclipse, Klogic.
+                        \item{Sistemas Operativos:} MS Windows 95, 98, XP (Nivel avanzado), RedHat Linux, Fedora Core (Nivel Medio). 
+                        \item{Lenguajes de Programacion:} C, C++, Pascal, Visual Basic, ASP, PHP, SQL, JavaScript, Cobol, Dbase, Clipper, Java, Perl, Scheme, Prolog.
+			\item{Otros conocimientos relacionados:} Arquitectura de computadores, Redes de computadores, F\'isica (Din\'amica y Electromagnetismo), Rob\'otica a nivel b\'asico.
+                        \end{itemize}
+
+
+		\item[Alexander Becher]
+
+			\begin{itemize}
+			\item{Sistemas Operativos:} MS Windows 95, 98, XP (Nivel Medio), RedHat Linux, Fedora Core, Ubuntu (Nivel Medio).
+			\item{Lenguajes de Programacion:} C, C++, Pascal, Visual Basic, ASP, PHP, SQL, JavaScript, Java,  Prolog, entre otros.
+			\item{Otros conocimientos relacionados:} Arquitectura de computadores, Redes de computadores, F\'isica (Din\'amica y Electromagnetismo), Rob\'otica a nivel b\'asico.
+			\end{itemize}
+
+		\item[Pablo Pe\~nailillo]
+
+			\begin{itemize}
+                        \item{Software:} Rational Rose, SQL Server, Visual Studio 6.0, Umbrello, Poseidon, Dia, Eclipse, Open Office, PostgreSQL, Klogic.
+                        \item{Sistemas Operativos:} MS Windows (Nivel Medio). Linux Fedora Core, Debian, Ubuntu (Nivel Medio).
+                        \item{Lenguajes de Programaci\'on:} C, C++, Pascal, Visual Basic, ASP, PHP, SQL, JavaScript, Assembly, Java, Perl, Scheme, Prolog, LaTeX. 
+			\item{Otros conocimientos relacionados:} Arquitectura de computadores, F\'isica (Din\'amica y Electromagnetismo), Rob\'otica a nivel b\'asico.
+                        \end{itemize}
+
+		\end{description}
+
+A partir de los datos tabulados, se puede decir que la mayor\'ia de los recursos t\'ecnicos requeridos por el equipo son cubiertos. 
+
+        %\end{itemize}
+
+        \item An\'alisis de insuficiencias de los miembros del equipo, si las hubiere.
+
+A partir de lo anterior, las insufiencias que se deber\'ian cubrir son los siguientes:
+
+		\begin{itemize}
+		\item{Falta de capacitaciòn en rob\'otica:} En conjunto los miembros del equipo s\'olo mantienen nociones b\'asicas del funcionamiento de un robot, por lo que limita el trabajo por el poco entendimiento t\'ecnico de \'este, lo que tambi\'en trae problemas de comunicaci\'on con el cliente.
+		\end{itemize}
+
+Adem\'as, existe un detalle de recursos humanos que puede limitar el trabajo al enfrentar el Taller, el cual es el siguiente:
+
+		\begin{itemize}
+		\item{Retiro de un miembro del equipo:} Para el segundo semestre, en el curso de Taller de Ingenier\'ia de Software, Alexander Becher, uno de los miembros del equipo, no cursar\'a el ramo, por razones de prioridad a la hora de elegir sus asignaturas durante su estad\'ia en Chile como alumno de intercambio.
+		\end{itemize}
+
+        \item Programa de mejoramiento (capacitaci\'on, mentor\'ia, incorporaci\'on de nuevos miembros...), indicando espec\'ificamente acciones a realizar y plazos.
+
+Para el mejoramiento de las insuficiencias detectadas, el equipo recurrir\'a al siguiente plan de accion:
+
+		\begin{itemize}
+		\item{Falta de capacitaci\'on en rob\'otica:} Para mejorar esta insuficiencia, el equipo ya tom\'o su primer plan de acci\'on, que fue la asistencia a un Seminario de Rob\'otica dictado por la empresa Austral technologies (Austec), con la cual trabajan en el proyecto de Software, para conocer m\'as de cerca el mundo de la rob\'otica, con un punto a favor que al tratarse de los mismos clientes con que el equipo trabaja, el enfoque del Seminario se bas\'o en gran parte al tipo de trabajo que ellos realizan. El siguiente plan de acci\'on es asistir con el cliente en un plazo regular de una vez a la semana para recibir mayores instrucciones respecto a rob\'otica, para poder as\'i cada vez m\'as entender las propias necesidades que requieren.
+		\item{Retiro de un miembro del equipo.} Para la mejora de esta insuficiencia, se proponen dos planes de acci\'on:
+			\begin{itemize}
+			\item{Redistribuci\'on del trabajo inicial de cinco personas en cuatro partes}
+			\item{Buscar una persona externa que cumpla con el rol del integrante}
+			\end{itemize}
+
+		Para llevar a cabo alguno de estos planes, dependemos del trabajo que se prosiga con el tiempo, ya que a partir de este veremos en que temas aquel integrante a resultado especialista e imprescindible, para la b\'usqueda de un nuevo integrante durante el per\'iodo de vacaciones, luego de un an\'alisis de trabajo del integrante retirado, como tambi\'en puede darse el caso de que su trabajo sea perfectamente repartible entre los integrantes que se quedan. Como la segunda opci\'on resulta ser, a vista del equipo, la que menos compromete factores externos o que escapen de su alcance, la l\'ogica de trabajo ser\'a repartir tareas de distinto tipo a distintos integrantes del grupo, para que as\'i se especialice en varias \'areas de trabajo y as\'i evitar problemas de desconocimiento de los temas por falta de uno de los integrantes faltantes.
+		\end{itemize}
+
+
+\end{itemize}
 
 
 
