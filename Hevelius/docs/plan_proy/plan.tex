@@ -56,6 +56,54 @@
 
 
 \section{Introducci\'on} %%% TODOS
+En el presente documento se da a conocer el plan del Proyecto Hevelius, el cual 
+tiene por objetivo mostrar el estudio realizado por la Empresa DevNull. 
+En este estudio se contemplan las soluciones al desaf\'io planteado por el grupo
+ACS-UTFSM, as\'i como la concretitud de los requerimientos de \'estos.
+
+Se advierte que el car\'acter t\'ecnico, desarrollado en algunos items del documentos,
+est\'a dirigido a discusiones concretas y son comprensibles por el grupo ACS-UTFSM 
+y por personas vinculadas con el tema.
+
+El documento se estructura de la siguiente forma:
+\begin{itemize}
+        \item \textbf{Soluci\'on conceptual:} En la cual se describe el problema 
+actual, se bosquejan posibles soluciones y, finalmente, se escoge la mejor alternativa.
+        \item \textbf{T\'ecnicas y herramientas de desarrollo:} Esto es, definir 
+los elementos t\'ecnicos con que se construir\'a la soluci\'on y la plantilla de trabajo.
+        \item \textbf{Gesti\'on de riesgos:} En esta secci\'on se identificar\'an, 
+clasificar\'an y se propondr\'an estrategias de mitigaci\'on y contingencia para los 
+peligros ocurrentes del proyecto.
+        \item \textbf{Implementaci\'on:} En la cual se explica la incorporaci\'on del 
+nuevo sistema en las instalaciones del cliente.
+        \item \textbf{Planificaci\'on de actividades:} Esto significa describir el 
+proceso que se seguir\'a para llevar a cabo la soluci\'on propuesta.
+\end{itemize}
+
+En el contexto m\'as general, el desaf\'io planteado por el grupo ACS-UTFSM, es 
+crear un sistema de control de telescipios capaz de poder manejar cualquier telescopio 
+que se le conecte a trav\'es de las diferentes coordenadas utilizadas en el mundo 
+astron\'omico.\\
+
+Los que se esperan crear consisten en una interfaz gr\'afica que permita operar al 
+alg\'un telescopio de manera remota, lograr un control en tiempo real y generar 
+registros para posteriores an\'alisis de los datos recibidos por el telescopio.\\
+
+La mejor soluci\'on ideada, es el dise\~no y construcci\'on de un producto de software dise\~nado 
+para solventar los problemas actuales y cumplir con los requerimientos del cliente.\\
+
+Los riesgos, que se detallan en el cap\'itulo 4, corresponden a los peligros identificados 
+que pueden aparecer durante el desarrollo del proyecto, entre ellos se destaca: 
+
+%%%%%%%% REVISAR %%%%%%%
+la 
+imposibilidad de lograr la escalabilidad requerida, problemas en la plantilla de trabajo, 
+la incertidumbre sobre la correcta elecci\'on de las herramientas a utilizar, la err\'onea 
+visualizaci\'on del tama\~no del proyecto y la no disponibilidad de Yeti para las pruebas y 
+presentaciones.\\
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 
@@ -69,7 +117,7 @@ En la actualidad cada telescopio
 
 \subsubsection{Identificaci\'on de problemas y deficiencias}
 
-Unicidad de Software: En la actualidad existen diversos tipos de telescopios, los cuales est\'an implementados de manera diferente dependiendo de su diseñador o de d\'onde fueron creados. Junto con esto, aparece el problema de que cada telescopio posee una aplicaci\'on diferente para su control, lo que obliga a los astr\'onomos, operadores de telescopios y aficionados a utilizar gran parte de su tiempo aprendiendo a ocupar los distintos softwares para cada uno de los equipos con los que van a trabajar.
+Unicidad de Software: En la actualidad existen diversos tipos de telescopios, los cuales est\'an implementados de manera diferente dependiendo de su dise\~nador o de d\'onde fueron creados. Junto con esto, aparece el problema de que cada telescopio posee una aplicaci\'on diferente para su control, lo que obliga a los astr\'onomos, operadores de telescopios y aficionados a utilizar gran parte de su tiempo aprendiendo a ocupar los distintos softwares para cada uno de los equipos con los que van a trabajar.
 
 Control: Actualmnte el control de los telescopios se debe hacer de forma local, es decir, los operadores de telescopios y astr\'onomos deben estar en el observatorio para realizar sus investigaciones, pudiendo hacerse \'estos de forma remota, mejorando la situaci\'on para los astr\'onomos, especialmente para los que se encuentran lejos de los sitios de observaci\'on.
 
@@ -100,13 +148,13 @@ Seguridad del telescopio: Es importante que el telescopio tenga medios para prot
 
 \item Mover el telescopio a la hora sideral: El sistema debe tener la funcionalidad de seguir la posici\'on que se est\'a observando, ya que si no se hace, pareciera que lo observado se ve desplazando.
 
-\item Impedir observaciones a lugares con luminosidad lunar: El sistema debe evitar que el telescopio apunte a direcciones con notoria luminosidad lunar, debido a que esta luminosidad puede dañar severamente los lentes del telescopio.
+\item Impedir observaciones a lugares con luminosidad lunar: El sistema debe evitar que el telescopio apunte a direcciones con notoria luminosidad lunar, debido a que esta luminosidad puede da\~nar severamente los lentes del telescopio.
 
 \item Mostrar modelo visual del telescopio: Debido a que el telescopio se quiere manipular de forma remota, es necesario otorgar alguna forma que permita ver a la persona que lo est\'e operando, en qu\'e estado se encuentra. Para esto, el sistema debe tener un modelo visual que se comporte de la misma forma que lo hace el telescopio real.
 
 \item Ajuste manual del telescopio: El sistema debe permitir controlar el telescopio manualmente para permitir ajustes menores, que ayuden a corregir errores en la direcci\'on que se observa, que pudieran ocurrir por factores externos, como es la deflexi\'on por el peso propio del telescopio en algunas posiciones.
 
-\item Detener de forma inmediata el telescopio en caso de emergencia: El sistema tiene que tener una opci\'on de emergencia para detener el telescopio de forma inmediata para evitar cualquier daño que se crea que pueda ocurrir. Por ejemplo, daño por alguna variaci\'on en las condiciones clim\'aticas.
+\item Detener de forma inmediata el telescopio en caso de emergencia: El sistema tiene que tener una opci\'on de emergencia para detener el telescopio de forma inmediata para evitar cualquier da\~no que se crea que pueda ocurrir. Por ejemplo, da\~no por alguna variaci\'on en las condiciones clim\'aticas.
 
 \item Controlar acceso a la aplicaci\'on(Sesiones): El sistema debe tener acceso para los distintos usuarios, de manera que cada uno tenga su propia estad\'istica de lo observado.
 
@@ -130,7 +178,7 @@ Seguridad del telescopio: Es importante que el telescopio tenga medios para prot
 
 \item Mover el telescopio a la hora sideral reduce la dificultad de uso para el seguimiento de la observaci\'on de alg\'un objeto, puesto que nos permite ver en todo momento al objeto deseado, sin necesidad de realizar tareas adicionales.
 
-\item Al impedir que el telescopio apunte a lugares con luminosidad lunar se reduce la dificultad de uso, puesto que no es necesario estar preguntandose todo el tiempo si el telescopio va a apuntar a lugares potencialmente dañinos para el mismo. Adem\'as, aumenta la seguridad del telescopio puesto que lo proteje de la luz lunar, uno de los factores m\'as comunes que dañan al telescopio.
+\item Al impedir que el telescopio apunte a lugares con luminosidad lunar se reduce la dificultad de uso, puesto que no es necesario estar preguntandose todo el tiempo si el telescopio va a apuntar a lugares potencialmente da\~ninos para el mismo. Adem\'as, aumenta la seguridad del telescopio puesto que lo proteje de la luz lunar, uno de los factores m\'as comunes que da\~nan al telescopio.
 
 \item El modelo visual soluciona un aspecto muy importante de la dificultad de uso para el control a trav\'es de internet, ya que con este se puede saber en todo momento hacia d\'onde est\'a apuntando f\'isicamente el telescopio, d\'andonos un apoyo gr\'afico de lo que estamos haciendo. De la misma forma, tambi\'en ayuda a los que operan el telescopio de forma local, aunqiue ellos podr\'ian verlo directamente, puede ser m\'as c\'omodo verlo en la misma pantalla que est\'an trabajando.
 
