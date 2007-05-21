@@ -1,3 +1,13 @@
+/**
+ * \file listener.c
+ * Conatins code for listening on the serial port. This file implements 
+ * the polling mechanism to read data from the serial port. It consists
+ * of a reading procedure and a closing procedure for correctly closing
+ * the serial port when a SIGINT signal is detected (e.g. a CTRL+C).
+ * \author Rodrigo Tobar <rtobar@alumnos.inf.utfsm.cl>
+ * \author Jorge Valencia <jorjazo@labsd.inf.utfsm.cl>
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -9,14 +19,31 @@
 #include "telescope.h"
 #include "listener.h"
 
+/**
+ * Operating baud rate (as said on Nexstar4's documentation).
+ */
 #define BAUDRATE B9600
 
 static int fd;
 static struct termios oldtio;
 
+/**
+ * Holds the simulated telescope's status.
+ */
 extern telescope_t nexstar;
 
-void listen_serial(char *device) {
+/**
+ * Implements the serial port polling thread. This function basically initializes
+ * the serial port, registers the SIGINT handler function and starts polling the
+ * serial port for commands. For each received command invokes the corresponding
+ * handling function. As for version 0.1 a telescope.c file is included for
+ * implementing those handler functions, but it also should work with any other
+ * code implemmenting the functions listed in telescope.h.
+ *
+ * @param device a string with the full path to the serial port's device file.
+ * @returns Nothing.
+ */
+void listen_serial(const char *device) {
 	char* (*commands[256])(char*);
 	char cmd, *args, *out, in[256];
 	int i,res;
@@ -78,6 +105,13 @@ void listen_serial(char *device) {
 	return;
 }
 
+/**
+ * SIGINT handler function. This function is used to properly close the serial
+ * port and exiting when catching a SIGINT signal.
+ * @param sig the signal's integer value.
+ * @returns Nothing. However, it causes the simulator to exit with a return value
+ * of zero (0).
+ */
 void leave(int sig){
 	printf("Receiving SIGINT signal, closing port...\n");
 	tcsetattr(fd,TCSANOW,&oldtio);

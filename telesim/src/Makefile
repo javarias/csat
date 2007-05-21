@@ -6,10 +6,11 @@ EXE=sim_nex4
 OBJDIR=../object
 BINDIR=../bin
 INCDIR=../include
+DOCDIR=../doc
 
 VPATH=$(OBJDIR):$(BINDIR):$(INCDIR)
 
-all: dirs $(EXE)
+all: dirs $(EXE) doc
 
 dirs:
 	if ! test -d $(BINDIR) ; then mkdir $(BINDIR) ; fi
@@ -20,6 +21,9 @@ dirs:
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $(OBJDIR)/$@
+
+doc: $(wildcard *.c) $(wildcard *.h)
+	cd $(DOCDIR) && doxygen Doxyfile
 
 clean:
 	cd $(BINDIR) && rm -f $(EXE)
