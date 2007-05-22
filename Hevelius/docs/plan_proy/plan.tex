@@ -56,6 +56,55 @@
 
 
 \section{Introducci\'on} %%% TODOS
+En el presente documento se da a conocer el plan del Proyecto Hevelius, el cual 
+tiene por objetivo mostrar el estudio realizado por la Empresa DevNull. 
+En este estudio se contemplan las soluciones al desaf\'io planteado por el grupo
+ACS-UTFSM, as\'i como la concretitud de los requerimientos de \'estos.
+
+Se advierte que el car\'acter t\'ecnico, desarrollado en algunos items del documentos,
+est\'a dirigido a discusiones concretas y son comprensibles por el grupo ACS-UTFSM 
+y por personas vinculadas con el tema.
+
+El documento se estructura de la siguiente forma:
+\begin{itemize}
+        \item \textbf{Soluci\'on conceptual:} En la cual se describe el problema 
+actual, se bosquejan posibles soluciones y, finalmente, se escoge la mejor alternativa.
+        \item \textbf{T\'ecnicas y herramientas de desarrollo:} Esto es, definir 
+los elementos t\'ecnicos con que se construir\'a la soluci\'on y la plantilla de trabajo.
+        \item \textbf{Gesti\'on de riesgos:} En esta secci\'on se identificar\'an, 
+clasificar\'an y se propondr\'an estrategias de mitigaci\'on y contingencia para los 
+peligros ocurrentes del proyecto.
+        \item \textbf{Implementaci\'on:} En la cual se explica la incorporaci\'on del 
+nuevo sistema en las instalaciones del cliente.
+        \item \textbf{Planificaci\'on de actividades:} Esto significa describir el 
+proceso que se seguir\'a para llevar a cabo la soluci\'on propuesta.
+\end{itemize}
+
+En el contexto m\'as general, el desaf\'io planteado por el grupo ACS-UTFSM, es 
+crear un sistema de control de telescipios capaz de poder manejar cualquier telescopio 
+que se le conecte a trav\'es de las diferentes coordenadas utilizadas en el mundo 
+astron\'omico.\\
+
+Los que se esperan crear consisten en una interfaz gr\'afica que permita operar al 
+alg\'un telescopio de manera remota, lograr un control en tiempo real y generar 
+registros para posteriores an\'alisis de los datos recibidos por el telescopio.\\
+
+La mejor soluci\'on ideada, es el dise\~no y construcci\'on de un producto de software dise\~nado 
+para solventar los problemas actuales y cumplir con los requerimientos del cliente.\\
+
+Los riesgos, que se detallan en el cap\'itulo 4, corresponden a los peligros identificados 
+que pueden aparecer durante el desarrollo del proyecto, entre ellos se destaca: 
+
+%%%%%%%% REVISAR %%%%%%%
+la 
+imposibilidad de lograr la escalabilidad requerida, problemas en la plantilla de trabajo, 
+la incertidumbre sobre la correcta elecci\'on de las herramientas a utilizar, la err\'onea 
+visualizaci\'on del tama\~no del proyecto y la no disponibilidad de Yeti para las pruebas y 
+presentaciones.\\
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 
 
@@ -569,7 +618,7 @@ A partir de los datos tabulados, se puede decir que la mayor\'ia de los recursos
 A partir de lo anterior, las insufiencias que se deber\'ian cubrir son los siguientes:
 
 		\begin{itemize}
-		\item{Falta de capacitaciòn en rob\'otica:} En conjunto los miembros del equipo s\'olo mantienen nociones b\'asicas del funcionamiento de un robot, por lo que limita el trabajo por el poco entendimiento t\'ecnico de \'este, lo que tambi\'en trae problemas de comunicaci\'on con el cliente.
+		\item{Falta de capacitaci\'on en rob\'otica:} En conjunto los miembros del equipo s\'olo mantienen nociones b\'asicas del funcionamiento de un robot, por lo que limita el trabajo por el poco entendimiento t\'ecnico de \'este, lo que tambi\'en trae problemas de comunicaci\'on con el cliente.
 		\end{itemize}
 
 Adem\'as, existe un detalle de recursos humanos que puede limitar el trabajo al enfrentar el Taller, el cual es el siguiente:
@@ -683,25 +732,18 @@ Pocas pruebas realizadas al proyecto & Media & Alto\\
 Para priorizar los riesgos es necesario evaluar tanto su ocurrencia como el impacto que provocar\'ia en el proyecto.
 Se debe crear un consenso en el equipo de trabajo para poder tomar la decisi\'on correcta.
 
-1.- Poca escalabilidad de Hevelius con respecto a telescopios profesionales.
-
-2.- Compleja interfaz grafica para el usuario.
-
-3.- Estimaci\'on del proyecto err\'onea.
-
-4.- Falta de conocimiento en cuanto al \'area de desarrollo.
-
-5.- Pocas pruebas realizadas al proyecto.
-
-6.- No cumplimiento con los est\.andares del proyecto ALMA-CONICYT
-
-7.- Mala elecci\'on en cuanto a lenguajes de programaci\'on.
-
-8.- Telescopio amateur no disponible.
-
-9.- Ausencia de alg\'un integrante del proyecto
-
-10.- No cumplimiento con los est\'andares del proyecto ALMA-CONICYT
+\begin{enumerate}
+	\item Poca escalabilidad de Hevelius con respecto a telescopios profesionales.
+	\item Compleja interfaz grafica para el usuario.
+	\item Estimaci\'on del proyecto err\'onea.
+	\item Falta de conocimiento en cuanto al \'area de desarrollo.
+	\item Pocas pruebas realizadas al proyecto.
+	\item No cumplimiento con los est\'andares del proyecto ALMA-CONICYT
+	\item Mala elecci\'on en cuanto a lenguajes de programaci\'on.
+	\item Telescopio amateur no disponible.
+	\item Ausencia de alg\'un integrante del proyecto
+	\item No cumplimiento con los est\'andares del proyecto ALMA-CONICYT
+\end{enumerate}
 
 
 \subsection{Preparaci\'on para control de riesgos}
