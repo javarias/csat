@@ -1,31 +1,31 @@
 \select@language {spanish}
 \contentsline {section}{\numberline {1}Introducci\'on}{4}
-\contentsline {section}{\numberline {2}Soluci\'on Conceptual}{5}
-\contentsline {subsection}{\numberline {2.1}Diagn\'ostico de la situaci\'on actual}{5}
-\contentsline {subsubsection}{\numberline {2.1.1}Situaci\'on Actual}{5}
-\contentsline {subsubsection}{\numberline {2.1.2}Identificaci\'on de problemas y deficiencias}{5}
-\contentsline {subsection}{\numberline {2.2}Caracterizaci\'on del cambio}{6}
-\contentsline {subsubsection}{\numberline {2.2.1}Caracter\'icticas y Potencialidades deseadas}{6}
-\contentsline {subsubsection}{\numberline {2.2.2}Restricciones}{7}
-\contentsline {subsection}{\numberline {2.3}An\'alisis de las alternativas de soluci\'on}{8}
-\contentsline {subsubsection}{\numberline {2.3.1}Alternativa 1: YYY}{8}
-\contentsline {subsubsection}{\numberline {2.3.2}Alternativa 2: YYY+1}{8}
-\contentsline {subsection}{\numberline {2.4}Soluci\'on recomendada}{8}
-\contentsline {section}{\numberline {3}T\'ecnicas y Herramientas de desarrollo}{9}
-\contentsline {subsection}{\numberline {3.1}Modelo de desarrollo}{9}
-\contentsline {subsection}{\numberline {3.2}Herramientas y t\'ecnicas de soporte para el desarrollo}{10}
-\contentsline {subsubsection}{\numberline {3.2.1}T\'ecnicas a utilizar en el desarrollo del proyecto}{10}
-\contentsline {subsubsection}{\numberline {3.2.2}Herramientas o plataformas espec\'ificas a utilizar}{11}
-\contentsline {subsection}{\numberline {3.3}Personal y capacitaci\'on del grupo de desarrollo}{12}
-\contentsline {section}{\numberline {4}Gesti\'on de Riesgos}{20}
-\contentsline {subsection}{\numberline {4.1}An\'alisis de riesgos}{20}
-\contentsline {subsection}{\numberline {4.2}Preparaci\'on para control de riesgos}{22}
-\contentsline {section}{\numberline {5}Implementaci\'on (Entrega y Operaci\'on)}{23}
-\contentsline {subsection}{\numberline {5.1}Plan de operaci\'on del sistema}{23}
-\contentsline {subsection}{\numberline {5.2}Plan de implementaci\'on (entrega)}{23}
-\contentsline {subsection}{\numberline {5.3}Plan de mantenci\'on}{24}
-\contentsline {section}{\numberline {6}Planificaci\'on de Actividades}{25}
-\contentsline {subsection}{\numberline {6.1}Work Breakdown Structure (WBS)}{25}
-\contentsline {subsection}{\numberline {6.2}Carta Gantt}{25}
-\contentsline {subsection}{\numberline {6.3}Resumen de Compromisos}{25}
-\contentsline {section}{\numberline {7}Seguimiento del Plan}{26}
+\contentsline {section}{\numberline {2}Soluci\'on Conceptual}{6}
+\contentsline {subsection}{\numberline {2.1}Diagn\'ostico de la situaci\'on actual}{6}
+\contentsline {subsubsection}{\numberline {2.1.1}Situaci\'on Actual}{6}
+\contentsline {subsubsection}{\numberline {2.1.2}Identificaci\'on de problemas y deficiencias}{6}
+\contentsline {subsection}{\numberline {2.2}Caracterizaci\'on del cambio}{7}
+\contentsline {subsubsection}{\numberline {2.2.1}Caracter\'icticas y Potencialidades deseadas}{7}
+\contentsline {subsubsection}{\numberline {2.2.2}Restricciones}{8}
+\contentsline {subsection}{\numberline {2.3}An\'alisis de las alternativas de soluci\'on}{9}
+\contentsline {subsubsection}{\numberline {2.3.1}Alternativa 1: YYY}{9}
+\contentsline {subsubsection}{\numberline {2.3.2}Alternativa 2: YYY+1}{9}
+\contentsline {subsection}{\numberline {2.4}Soluci\'on recomendada}{9}
+\contentsline {section}{\numberline {3}T\'ecnicas y Herramientas de desarrollo}{10}
+\contentsline {subsection}{\numberline {3.1}Modelo de desarrollo}{10}
+\contentsline {subsection}{\numberline {3.2}Herramientas y t\'ecnicas de soporte para el desarrollo}{11}
+\contentsline {subsubsection}{\numberline {3.2.1}T\'ecnicas a utilizar en el desarrollo del proyecto}{11}
+\contentsline {subsubsection}{\numberline {3.2.2}Herramientas o plataformas espec\'ificas a utilizar}{12}
+\contentsline {subsection}{\numberline {3.3}Personal y capacitaci\'on del grupo de desarrollo}{13}
+\contentsline {section}{\numberline {4}Gesti\'on de Riesgos}{18}
+\contentsline {subsection}{\numberline {4.1}An\'alisis de riesgos}{18}
+\contentsline {subsection}{\numberline {4.2}Preparaci\'on para control de riesgos}{20}
+\contentsline {section}{\numberline {5}Implementaci\'on (Entrega y Operaci\'on)}{21}
+\contentsline {subsection}{\numberline {5.1}Plan de operaci\'on del sistema}{21}
+\contentsline {subsection}{\numberline {5.2}Plan de implementaci\'on (entrega)}{21}
+\contentsline {subsection}{\numberline {5.3}Plan de mantenci\'on}{22}
+\contentsline {section}{\numberline {6}Planificaci\'on de Actividades}{23}
+\contentsline {subsection}{\numberline {6.1}Work Breakdown Structure (WBS)}{23}
+\contentsline {subsection}{\numberline {6.2}Carta Gantt}{23}
+\contentsline {subsection}{\numberline {6.3}Resumen de Compromisos}{23}
+\contentsline {section}{\numberline {7}Seguimiento del Plan}{24}
