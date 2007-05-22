@@ -6,6 +6,8 @@
 \contentsline {subsubsection}{\numberline {2.1.2}Identificaci\'on de problemas y deficiencias}{6}
 \contentsline {subsection}{\numberline {2.2}Caracterizaci\'on del cambio}{7}
 \contentsline {subsubsection}{\numberline {2.2.1}Caracter\'icticas y Potencialidades deseadas}{7}
+\contentsline {paragraph}{Caracter\'isticas espec\'ificas deseadas para el producto.}{7}
+\contentsline {paragraph}{Relaci\'on de las caracter\'isticas con los problemas identificados.}{8}
 \contentsline {subsubsection}{\numberline {2.2.2}Restricciones}{8}
 \contentsline {subsection}{\numberline {2.3}An\'alisis de las alternativas de soluci\'on}{9}
 \contentsline {subsubsection}{\numberline {2.3.1}Alternativa 1: YYY}{9}
@@ -28,4 +30,3 @@
 \contentsline {subsection}{\numberline {6.1}Work Breakdown Structure (WBS)}{23}
 \contentsline {subsection}{\numberline {6.2}Carta Gantt}{23}
 \contentsline {subsection}{\numberline {6.3}Resumen de Compromisos}{23}
-\contentsline {section}{\numberline {7}Seguimiento del Plan}{24}
