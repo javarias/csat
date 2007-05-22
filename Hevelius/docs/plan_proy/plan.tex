@@ -61,7 +61,7 @@ tiene por objetivo mostrar el estudio realizado por la Empresa DevNull.
 En este estudio se contemplan las soluciones al desaf\'io planteado por el grupo
 ACS-UTFSM, as\'i como la concretitud de los requerimientos de \'estos.
 
-Se advierte que el car\'acter t\'ecnico, desarrollado en algunos items del documentos,
+Se advierte que el car\'acter t\'ecnico, desarrollado en algunos items del documento,
 est\'a dirigido a discusiones concretas y son comprensibles por el grupo ACS-UTFSM 
 y por personas vinculadas con el tema.
 
@@ -82,10 +82,10 @@ proceso que se seguir\'a para llevar a cabo la soluci\'on propuesta.
 
 En el contexto m\'as general, el desaf\'io planteado por el grupo ACS-UTFSM, es 
 crear un sistema de control de telescipios capaz de poder manejar cualquier telescopio 
-que se le conecte a trav\'es de las diferentes coordenadas utilizadas en el mundo 
+que se conecte a trav\'es de las diferentes coordenadas utilizadas en el mundo 
 astron\'omico.\\
 
-Los que se esperan crear consisten en una interfaz gr\'afica que permita operar al 
+Lo que se espera crear consiste en una interfaz gr\'afica que permita operar al 
 alg\'un telescopio de manera remota, lograr un control en tiempo real y generar 
 registros para posteriores an\'alisis de los datos recibidos por el telescopio.\\
 
@@ -93,16 +93,8 @@ La mejor soluci\'on ideada, es el dise\~no y construcci\'on de un producto de so
 para solventar los problemas actuales y cumplir con los requerimientos del cliente.\\
 
 Los riesgos, que se detallan en el cap\'itulo 4, corresponden a los peligros identificados 
-que pueden aparecer durante el desarrollo del proyecto, entre ellos se destaca: 
-
-%%%%%%%% REVISAR %%%%%%%
-la 
-imposibilidad de lograr la escalabilidad requerida, problemas en la plantilla de trabajo, 
-la incertidumbre sobre la correcta elecci\'on de las herramientas a utilizar, la err\'onea 
-visualizaci\'on del tama\~no del proyecto y la no disponibilidad de Yeti para las pruebas y 
-presentaciones.\\
-
-%%%%%%%%%%%%%%%%%%%%%%%
+que pueden aparecer durante el desarrollo del proyecto, entre ellos se destaca: la poca 
+escalabilidad del sistema de control y el no cumplimiento de los est\'andares ALMA.
 
 
 
@@ -116,14 +108,27 @@ En la actualidad cada telescopio
 
 
 \subsubsection{Identificaci\'on de problemas y deficiencias}
+\textbf{Unicidad de Software:} En la actualidad existen diversos tipos de telescopios, 
+los cuales est\'an implementados de manera diferente dependiendo de su dise\~nador o 
+de d\'onde fueron creados. Junto con esto, aparece el problema de que cada telescopio 
+posee una aplicaci\'on diferente para su control, lo que obliga a los astr\'onomos, 
+operadores de telescopios y aficionados a utilizar gran parte de su tiempo aprendiendo 
+a ocupar los distintos softwares para cada uno de los equipos con los que van a trabajar.
 
-Unicidad de Software: En la actualidad existen diversos tipos de telescopios, los cuales est\'an implementados de manera diferente dependiendo de su dise\~nador o de d\'onde fueron creados. Junto con esto, aparece el problema de que cada telescopio posee una aplicaci\'on diferente para su control, lo que obliga a los astr\'onomos, operadores de telescopios y aficionados a utilizar gran parte de su tiempo aprendiendo a ocupar los distintos softwares para cada uno de los equipos con los que van a trabajar.
+\textbf{Control:} Actualmente el control de los telescopios se debe hacer de forma local, 
+es decir, los operadores de telescopios y astr\'onomos deben estar en el observatorio 
+para realizar sus investigaciones, pudiendo hacerse \'este de forma remota, mejorando 
+la situaci\'on para los astr\'onomos, especialmente para los que se encuentran lejos 
+de los sitios de observaci\'on.
 
-Control: Actualmnte el control de los telescopios se debe hacer de forma local, es decir, los operadores de telescopios y astr\'onomos deben estar en el observatorio para realizar sus investigaciones, pudiendo hacerse \'estos de forma remota, mejorando la situaci\'on para los astr\'onomos, especialmente para los que se encuentran lejos de los sitios de observaci\'on.
+\textbf{Dificultad de Uso:} Muchos de los programas utilizados actualmente para control 
+de telescopios son bastante complicados de usar, obligando a gastar una considerable 
+cantidad de tiempo aprendiendo a usarlos y, tambi\'en, a usarlos frecuentemente para no 
+olvidar c\'omo es que se hace.
 
-Dificultad de Uso: Muchos de los programas utilizados actualmente para control de telescopios son bastante complicados de usar, obligando a gastar una considerable cantidad de tiempo aprendiendo a usarlos y, tambi\'en, a usarlos frecuentemente para no olvidar c\'omo es que se hace.
-
-Seguridad del telescopio: Es importante que el telescopio tenga medios para protegerse de las distintas cosas que puedan pasar. Luminosidad alta, clima inadecuado, entre otros. 
+\textbf{Seguridad del telescopio:} Es importante que el telescopio tenga medios para 
+protegerse de los distintos eventos que puedan ocurrir: luminosidad alta, clima inadecuado, 
+entre otros. 
 
 \newpage
 
@@ -132,80 +137,146 @@ Seguridad del telescopio: Es importante que el telescopio tenga medios para prot
 
 \begin{itemize}
 
-\item Aspectos funcionales, tecnol\'ogicos, sociales, organizacionales y otros relevantes, formulados en forma que permita trazarlos posteriormente a requerimientos espec\'ificos (funcionales y no funcionales).
+\paragraph{Caracter\'isticas espec\'ificas deseadas para el producto.}
 
-\begin{itemize}
+	\begin{itemize}
+	\item \textbf{Control por internet de telescopios:} Se quiere que el sistema 
+pueda funcionar situado en cualquier parte del mundo permitiendo controlar alg\'un 
+telescopio que se encuentre en otro lugar geogr\'afico.
 
-\item Control por internet de telescopios: Se quiere que el sistema pueda funcionar situado en cualquier parte del mundo permitiendo controlar alg\'un telescopio que se encuentre en otro lado.
+	\item \textbf{Interfaz Gr\'afica:} El software de control de telescopios debe 
+tener una interfaz agradable a los usuarios y permitir el acceso eficiente a las 
+funcionalidades que se requieran, adem\'as, debe mostrar siempre en pantalla la 
+informaci\'on de mayor importancia.
 
-\item Interfaz Gr\'afica: El software de control de telescopios debe tener una interfaz agradable a los usuarios y permitir el acceso eficiente a las funcionalidades que se requieran, adem\'as, debe mostrar siempre en pantalla la informaci\'on de mayor importancia.
+	\item \textbf{Reproducci\'on de lo que ve la c\'amara:} El sistema debe 
+mostrar a donde apunta el telescopio en todo momento de observaci\'on, por medio de 
+la c\'amara CCD.
 
-\item Reproducci\'on de lo que ve la c\'amara: El sistema debe mostrar a donde apunta el telescopio en todo momento de observaci\'on, por medio de la c\'amara CCD.
+	\item \textbf{Interacci\'on con ACS:} Es necesario que el sistema interact\'ue con 
+los telescopios por medio de ACS, de manera que \'este sea el que se conecte 
+directamente con los observatorios y telescopios.
 
-\item Interacci\'on con ACS: Es necesario que el sistema interact\'ue con los telescopios por medio de ACS, de manera que \'este sea el que se conecte directamente con los observatorios y telescopios.
+	\item \textbf{Ajustar posici\'on del telescopio bajo sistema de coordenadas 
+ecuatoriales:} El sistema debe poder recibir las coordenadas que se quiere observar 
+y convertirlas a las coordenadas que utiliza el telescopio para poder moverlo a esa 
+direcci\'on.
 
-\item Ajustar posici\'on del telescopio bajo sistema de coordenadas ecuatoriales: El sistema debe poder recibir las coordenadas que se quiere observar y convertirlas a las coordenadas que utiliza el telescopio para poder moverlo a esa direcci\'on.
+	\item \textbf{Mover el telescopio a la hora sideral:} El sistema debe tener la 
+funcionalidad de seguir la posici\'on que se est\'a observando, ya que si no se 
+hace, parecer\'ia que lo observado se ve desplazando.
 
-\item Mover el telescopio a la hora sideral: El sistema debe tener la funcionalidad de seguir la posici\'on que se est\'a observando, ya que si no se hace, pareciera que lo observado se ve desplazando.
+	\item \textbf{Impedir observaciones a lugares con luminosidad lunar:} El sistema 
+debe evitar que el telescopio apunte a direcciones con notoria luminosidad lunar, 
+debido a que esta luminosidad puede da\~nar severamente los lentes del telescopio.
 
-\item Impedir observaciones a lugares con luminosidad lunar: El sistema debe evitar que el telescopio apunte a direcciones con notoria luminosidad lunar, debido a que esta luminosidad puede da\~nar severamente los lentes del telescopio.
+	\item \textbf{Mostrar modelo visual del telescopio:} Debido a que el telescopio se 
+quiere manipular de forma remota, es necesario otorgar alguna forma que permita 
+ver a la persona que lo est\'e operando, en qu\'e estado se encuentra. Para esto, 
+el sistema debe tener un modelo visual que se comporte de la misma forma que lo 
+hace el telescopio real.
 
-\item Mostrar modelo visual del telescopio: Debido a que el telescopio se quiere manipular de forma remota, es necesario otorgar alguna forma que permita ver a la persona que lo est\'e operando, en qu\'e estado se encuentra. Para esto, el sistema debe tener un modelo visual que se comporte de la misma forma que lo hace el telescopio real.
+	\item \textbf{Ajuste manual del telescopio:} El sistema debe permitir controlar el 
+telescopio manualmente para permitir ajustes menores, que ayuden a corregir errores 
+en la direcci\'on que se observa, que pudieran ocurrir por factores externos, como 
+es la deflexi\'on por el peso propio del telescopio en algunas posiciones.
 
-\item Ajuste manual del telescopio: El sistema debe permitir controlar el telescopio manualmente para permitir ajustes menores, que ayuden a corregir errores en la direcci\'on que se observa, que pudieran ocurrir por factores externos, como es la deflexi\'on por el peso propio del telescopio en algunas posiciones.
+	\item \textbf{Detener de forma inmediata el telescopio en caso de emergencia:} El 
+sistema tiene que tener una opci\'on de emergencia para detener el telescopio de 
+forma inmediata para evitar cualquier da\~no que se crea que pueda ocurrir. Por 
+ejemplo, da\~no por alguna variaci\'on en las condiciones clim\'aticas.
 
-\item Detener de forma inmediata el telescopio en caso de emergencia: El sistema tiene que tener una opci\'on de emergencia para detener el telescopio de forma inmediata para evitar cualquier da\~no que se crea que pueda ocurrir. Por ejemplo, da\~no por alguna variaci\'on en las condiciones clim\'aticas.
+	\item \textbf{Controlar acceso a la aplicaci\'on (Sesiones):} El sistema debe tener 
+acceso para los distintos usuarios, de manera que cada uno tenga su propia 
+estad\'istica de lo observado.
 
-\item Controlar acceso a la aplicaci\'on(Sesiones): El sistema debe tener acceso para los distintos usuarios, de manera que cada uno tenga su propia estad\'istica de lo observado.
+	\item \textbf{Guardar coordenadas de observaci\'on realizadas:} El sistema debe 
+guardar registro de las coordenadas observadas por cada usuario del sistema. De 
+esta forma ayuda a que se puedan repetir observaciones y a realizar estudios sobre 
+\'estas.
 
-\item Guardar coordenadas de observaci\'on realizadas: El sistema debe guardar registro de las coordenadas observadas por cada usuario del sistema. De esta forma ayuda a que se puedan repetir observaciones y a realizar estudios sobre \'estas.
+	\end{itemize}
 
-\end{itemize}
 
 \newpage
 
-\item Explicar c\'omo tales cambios dar\'ian respuesta a los problemas y deficiencias identificados(o a algunos de ellos).
+\paragraph{Relaci\'on de las caracter\'isticas con los problemas identificados.}
 
-\begin{itemize}
+	\begin{itemize}
+	\item El control por internet va a ayudar a solucionar el problema de tener 
+que estar en el lugar de observaci\'on al momento de controlar al telescopio.
 
-\item El control por internet va a ayudar a solucionar el problema de tener que estar en el lugar de observaci\'on al momento de controlar al telescopio. 
+	\item La interfaz gr\'afica va a ayudar a disminuir la dificultad de uso, 
+ocultando informaci\'on que no sea requerida en todo momento, pero permitiendo 
+verla de manera sencilla e intuitiva.
 
-\item La interfaz gr\'afica va a ayudar a disminuir la dificultad de uso, ocultando informaci\'on que no sea requerida en todo momento, pero permitiendo verla de manera sencilla e intuitiva.
+	\item La reproducci\'on de lo que est\'a viendo el telescopio es de gran 
+utilidad para la experiencia remota, debido a que sino hiciera esto, no se podr\'ia 
+ver lo que est\'a viendo el telescopio, hasta que se enviara alg\'un informe a 
+quien controlaba el telescopio.
 
-\item La reproducci\'on de lo que est\'a viendo el telescopio es de gran utilidad para la experiencia remota, debido a que sino hiciera esto, no se podr\'ia ver lo que est\'a viendo el telescopio, hasta que se enviara alg\'un informe a quien controlaba el telescopio.
+	\item La interacci\'on con ACS es una de las caracter\'isticas principales 
+para el control gen\'erico de telescopios y el control de telescopios por medio 
+de internet, pues es esta plataforma la que permite la comunicaci\'on con los 
+telescopios en los diferentes observatorios del mundo.
 
-\item La interacci\'on con ACS es una de las caracter\'isticas principales para el control gen\'erico de telescopios y el control de telescopios por medio de internet, pues es esta plataforma la que permite la comunicaci\'on con los telescopios en los diferentes observatorios del mundo.
+	\item Mover el telescopio a la hora sideral reduce la dificultad de uso 
+para el seguimiento de la observaci\'on de alg\'un objeto, puesto que nos permite 
+ver en todo momento al objeto deseado, sin necesidad de realizar tareas adicionales.
 
-\item Mover el telescopio a la hora sideral reduce la dificultad de uso para el seguimiento de la observaci\'on de alg\'un objeto, puesto que nos permite ver en todo momento al objeto deseado, sin necesidad de realizar tareas adicionales.
+	\item Al impedir que el telescopio apunte a lugares con luminosidad lunar 
+se reduce la dificultad de uso, puesto que no es necesario estar preguntandose 
+todo el tiempo si el telescopio va a apuntar a lugares potencialmente da\~ninos 
+para el mismo. Adem\'as, aumenta la seguridad del telescopio puesto que lo proteje 
+de la luz lunar, uno de los factores m\'as comunes que da\~nan al telescopio.
 
-\item Al impedir que el telescopio apunte a lugares con luminosidad lunar se reduce la dificultad de uso, puesto que no es necesario estar preguntandose todo el tiempo si el telescopio va a apuntar a lugares potencialmente da\~ninos para el mismo. Adem\'as, aumenta la seguridad del telescopio puesto que lo proteje de la luz lunar, uno de los factores m\'as comunes que da\~nan al telescopio.
+	\item El modelo visual soluciona un aspecto muy importante de la dificultad 
+de uso para el control a trav\'es de internet, ya que con este se puede saber en 
+todo momento hacia d\'onde est\'a apuntando f\'isicamente el telescopio, d\'andonos 
+un apoyo gr\'afico de lo que estamos haciendo. De la misma forma, tambi\'en ayuda 
+a los que operan el telescopio de forma local, aunqiue ellos podr\'ian verlo 
+directamente, puede ser m\'as c\'omodo verlo en la misma pantalla que est\'an trabajando.
 
-\item El modelo visual soluciona un aspecto muy importante de la dificultad de uso para el control a trav\'es de internet, ya que con este se puede saber en todo momento hacia d\'onde est\'a apuntando f\'isicamente el telescopio, d\'andonos un apoyo gr\'afico de lo que estamos haciendo. De la misma forma, tambi\'en ayuda a los que operan el telescopio de forma local, aunqiue ellos podr\'ian verlo directamente, puede ser m\'as c\'omodo verlo en la misma pantalla que est\'an trabajando.
+	\item El ajuste manual ayuda a disminuir la dificultad de uso del sistema, 
+puesto que con este, no es necesario intuir una direcci\'on parecida a la que 
+estamos observando de manera que se vea lo que debiera, sino que simplemente 
+lo movemos manualmente hasta donde debiera estar.
 
-\item El ajuste manual ayuda a disminuir la dificultad de uso del sistema, puesto que con este, no es necesario intuir una direcci\'on parecida a la que estamos observando de manera que se vea lo que debiera, sino que simplemente lo movemos manualmente hasta donde debiera estar.
+	\item Al dar la posibilidad de detener manualmente al telescopio, aumentamos 
+en gran medida su seguridad, puesto que mediante esta opci\'on, podemos protegerlo 
+de factores que no esperabamos, como son las variaciones inesperadas en el clima. 
 
-\item Al dar la posibilidad de detener manualmente al telescopio, aumentamos en gran medida su seguridad, puesto que mediante esta opci\'on, podemos protegerlo de factores que no esperabamos, como son las variaciones inesperadas en el clima. 
+	\item El guardar coordenadas de observaci\'on realizadas por sesi\'on facilita 
+la dificultad de uso del sistema, ya que para gente no muy experimentada en el tema, 
+permite repetir las observaciones hechas otros d\'ias.
 
-\item El guardar coordenadas de observaci\'on realizadas por sesi\'on facilita la dificultad de uso del sistema, ya que para gente no muy experimentada en el tema, permite repetir las observaciones hechas otros d\'ias.
-
-\end{itemize}
-\end{itemize}
+	\end{itemize}
 
 \subsubsection{Restricciones}
 
 \begin{itemize}
 
-\item Econ\'omicas: El software no presenta restricciones econ\'omicas, puesto que tanto el sistema operativo, como las herramientas de desarrollo que se van a utilizar, son gratuitas. Por otro lado, los componentes de hardware como son el telescopio para pruebas y la c\'amara CCD si tienen un costo, pero en este caso ser\'an facilitados por el cliente. Es por esto, que no vemos restricciones econ\'omicas peligrosas.
+\item \textbf{Econ\'omicas:} El software no presenta restricciones econ\'omicas, 
+puesto que tanto el sistema operativo, como las herramientas de desarrollo que se 
+van a utilizar, son gratuitas. Por otro lado, los componentes de hardware como son 
+el telescopio para pruebas y la c\'amara CCD si tienen un costo, pero en este caso 
+ser\'an facilitados por el cliente. Es por esto, que no vemos restricciones 
+econ\'omicas peligrosas.
 
-\item Sociales y Culturales: Los usuarios actuales de los programas que controlan telescopios han tenido que usar diferentes aplicaciones para distintos telescopios a lo largo del tiempo que han dedicado a esto, prefiriendo quiz\'as, el que usan actualmente, ya sea por costumbre o por gusto personal. Esto puede dificultar que se acostumbren a usar el sistema propuesto, pero se espera que el sistema final sea intuitivo y amigable, de manera que esto no debiera suceder.
+\item \textbf{Sociales y Culturales:} Los usuarios actuales de los programas que 
+controlan telescopios han tenido que usar diferentes aplicaciones para distintos 
+telescopios a lo largo del tiempo que han dedicado a esto, prefiriendo quiz\'as, 
+el que usan actualmente, ya sea por costumbre o por gusto personal. Esto puede 
+dificultar que se acostumbren a usar el sistema propuesto, pero se espera que el 
+sistema final sea intuitivo y amigable, de manera que esto no debiera suceder.
 
-\item Tecnol\'ogicas: En el aspecto tecnol\'ogico es importante destacar que las pruebas iniciales no necesariamente se har\'an con un telescopio de observatorio, en estos casos se utilizar\'a para las pruebas telescopios para aficionados, puesto que los costos de observaci\'on son elevados.
+\item \textbf{Tecnol\'ogicas:} En el aspecto tecnol\'ogico es importante destacar 
+que las pruebas iniciales no necesariamente se har\'an con un telescopio de 
+observatorio, en estos casos se utilizar\'a para las pruebas telescopios para 
+aficionados, puesto que los costos de observaci\'on son elevados.
 
-\item Institucionales:
+%%%%\item \textbf{Institucionales:}
 
-\item Pol\'iticas:
-
-\item Legales:
 
 \end{itemize}
 
