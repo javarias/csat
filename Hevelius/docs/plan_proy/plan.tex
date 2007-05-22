@@ -56,54 +56,6 @@
 
 
 \section{Introducci\'on} %%% TODOS
-En el presente documento se da a conocer el plan del Proyecto Hevelius, el cual 
-tiene por objetivo mostrar el estudio realizado por la Empresa DevNull. 
-En este estudio se contemplan las soluciones al desaf\'io planteado por el grupo
-ACS-UTFSM, as\'i como la concretitud de los requerimientos de \'estos.
-
-Se advierte que el car\'acter t\'ecnico, desarrollado en algunos items del documentos,
-est\'a dirigido a discusiones concretas y son comprensibles por el grupo ACS-UTFSM 
-y por personas vinculadas con el tema.
-
-El documento se estructura de la siguiente forma:
-\begin{itemize}
-        \item \textbf{Soluci\'on conceptual:} En la cual se describe el problema 
-actual, se bosquejan posibles soluciones y, finalmente, se escoge la mejor alternativa.
-        \item \textbf{T\'ecnicas y herramientas de desarrollo:} Esto es, definir 
-los elementos t\'ecnicos con que se construir\'a la soluci\'on y la plantilla de trabajo.
-        \item \textbf{Gesti\'on de riesgos:} En esta secci\'on se identificar\'an, 
-clasificar\'an y se propondr\'an estrategias de mitigaci\'on y contingencia para los 
-peligros ocurrentes del proyecto.
-        \item \textbf{Implementaci\'on:} En la cual se explica la incorporaci\'on del 
-nuevo sistema en las instalaciones del cliente.
-        \item \textbf{Planificaci\'on de actividades:} Esto significa describir el 
-proceso que se seguir\'a para llevar a cabo la soluci\'on propuesta.
-\end{itemize}
-
-En el contexto m\'as general, el desaf\'io planteado por el grupo ACS-UTFSM, es 
-crear un sistema de control de telescipios capaz de poder manejar cualquier telescopio 
-que se le conecte a trav\'es de las diferentes coordenadas utilizadas en el mundo 
-astron\'omico.\\
-
-Los que se esperan crear consisten en una interfaz gr\'afica que permita operar al 
-alg\'un telescopio de manera remota, lograr un control en tiempo real y generar 
-registros para posteriores an\'alisis de los datos recibidos por el telescopio.\\
-
-La mejor soluci\'on ideada, es el dise\~no y construcci\'on de un producto de software dise\~nado 
-para solventar los problemas actuales y cumplir con los requerimientos del cliente.\\
-
-Los riesgos, que se detallan en el cap\'itulo 4, corresponden a los peligros identificados 
-que pueden aparecer durante el desarrollo del proyecto, entre ellos se destaca: 
-
-%%%%%%%% REVISAR %%%%%%%
-la 
-imposibilidad de lograr la escalabilidad requerida, problemas en la plantilla de trabajo, 
-la incertidumbre sobre la correcta elecci\'on de las herramientas a utilizar, la err\'onea 
-visualizaci\'on del tama\~no del proyecto y la no disponibilidad de Yeti para las pruebas y 
-presentaciones.\\
-
-%%%%%%%%%%%%%%%%%%%%%%%
-
 
 
 
@@ -117,7 +69,7 @@ En la actualidad cada telescopio
 
 \subsubsection{Identificaci\'on de problemas y deficiencias}
 
-Unicidad de Software: En la actualidad existen diversos tipos de telescopios, los cuales est\'an implementados de manera diferente dependiendo de su dise\~nador o de d\'onde fueron creados. Junto con esto, aparece el problema de que cada telescopio posee una aplicaci\'on diferente para su control, lo que obliga a los astr\'onomos, operadores de telescopios y aficionados a utilizar gran parte de su tiempo aprendiendo a ocupar los distintos softwares para cada uno de los equipos con los que van a trabajar.
+Unicidad de Software: En la actualidad existen diversos tipos de telescopios, los cuales est\'an implementados de manera diferente dependiendo de su diseñador o de d\'onde fueron creados. Junto con esto, aparece el problema de que cada telescopio posee una aplicaci\'on diferente para su control, lo que obliga a los astr\'onomos, operadores de telescopios y aficionados a utilizar gran parte de su tiempo aprendiendo a ocupar los distintos softwares para cada uno de los equipos con los que van a trabajar.
 
 Control: Actualmnte el control de los telescopios se debe hacer de forma local, es decir, los operadores de telescopios y astr\'onomos deben estar en el observatorio para realizar sus investigaciones, pudiendo hacerse \'estos de forma remota, mejorando la situaci\'on para los astr\'onomos, especialmente para los que se encuentran lejos de los sitios de observaci\'on.
 
@@ -148,13 +100,13 @@ Seguridad del telescopio: Es importante que el telescopio tenga medios para prot
 
 \item Mover el telescopio a la hora sideral: El sistema debe tener la funcionalidad de seguir la posici\'on que se est\'a observando, ya que si no se hace, pareciera que lo observado se ve desplazando.
 
-\item Impedir observaciones a lugares con luminosidad lunar: El sistema debe evitar que el telescopio apunte a direcciones con notoria luminosidad lunar, debido a que esta luminosidad puede da\~nar severamente los lentes del telescopio.
+\item Impedir observaciones a lugares con luminosidad lunar: El sistema debe evitar que el telescopio apunte a direcciones con notoria luminosidad lunar, debido a que esta luminosidad puede dañar severamente los lentes del telescopio.
 
 \item Mostrar modelo visual del telescopio: Debido a que el telescopio se quiere manipular de forma remota, es necesario otorgar alguna forma que permita ver a la persona que lo est\'e operando, en qu\'e estado se encuentra. Para esto, el sistema debe tener un modelo visual que se comporte de la misma forma que lo hace el telescopio real.
 
 \item Ajuste manual del telescopio: El sistema debe permitir controlar el telescopio manualmente para permitir ajustes menores, que ayuden a corregir errores en la direcci\'on que se observa, que pudieran ocurrir por factores externos, como es la deflexi\'on por el peso propio del telescopio en algunas posiciones.
 
-\item Detener de forma inmediata el telescopio en caso de emergencia: El sistema tiene que tener una opci\'on de emergencia para detener el telescopio de forma inmediata para evitar cualquier da\~no que se crea que pueda ocurrir. Por ejemplo, da\~no por alguna variaci\'on en las condiciones clim\'aticas.
+\item Detener de forma inmediata el telescopio en caso de emergencia: El sistema tiene que tener una opci\'on de emergencia para detener el telescopio de forma inmediata para evitar cualquier daño que se crea que pueda ocurrir. Por ejemplo, daño por alguna variaci\'on en las condiciones clim\'aticas.
 
 \item Controlar acceso a la aplicaci\'on(Sesiones): El sistema debe tener acceso para los distintos usuarios, de manera que cada uno tenga su propia estad\'istica de lo observado.
 
@@ -178,7 +130,7 @@ Seguridad del telescopio: Es importante que el telescopio tenga medios para prot
 
 \item Mover el telescopio a la hora sideral reduce la dificultad de uso para el seguimiento de la observaci\'on de alg\'un objeto, puesto que nos permite ver en todo momento al objeto deseado, sin necesidad de realizar tareas adicionales.
 
-\item Al impedir que el telescopio apunte a lugares con luminosidad lunar se reduce la dificultad de uso, puesto que no es necesario estar preguntandose todo el tiempo si el telescopio va a apuntar a lugares potencialmente da\~ninos para el mismo. Adem\'as, aumenta la seguridad del telescopio puesto que lo proteje de la luz lunar, uno de los factores m\'as comunes que da\~nan al telescopio.
+\item Al impedir que el telescopio apunte a lugares con luminosidad lunar se reduce la dificultad de uso, puesto que no es necesario estar preguntandose todo el tiempo si el telescopio va a apuntar a lugares potencialmente dañinos para el mismo. Adem\'as, aumenta la seguridad del telescopio puesto que lo proteje de la luz lunar, uno de los factores m\'as comunes que dañan al telescopio.
 
 \item El modelo visual soluciona un aspecto muy importante de la dificultad de uso para el control a trav\'es de internet, ya que con este se puede saber en todo momento hacia d\'onde est\'a apuntando f\'isicamente el telescopio, d\'andonos un apoyo gr\'afico de lo que estamos haciendo. De la misma forma, tambi\'en ayuda a los que operan el telescopio de forma local, aunqiue ellos podr\'ian verlo directamente, puede ser m\'as c\'omodo verlo en la misma pantalla que est\'an trabajando.
 
@@ -330,30 +282,26 @@ Para asegurar la calidad de software, se realizar\'an constantes revisiones del 
 Dentro de este mismo marco, utilizaremos la herramienta de control de versiones SVN para mantener un desarrollo ordenado, una coordinaci\'on entre los desarrolladores, saber cual de los desarrolladores realiz\'o que cambio, etc. 
 Adem\'as, se planea la utilizaci\'on la herramienta bugtracker\footnote{Sistema dise\~nado especialmente para manejar reportes de errores} Trac\footnote{\url{http://www.edgewall.com/trac/}}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 \subsubsection{Herramientas o plataformas espec\'ificas a utilizar}
 
-La plataforma operacional de Hevelius est\'a constituida por el Sistema Operativo Linux Fedora Core, debido a que es esta la distribuci\'on utilizada por nuestro cliente para desarrollar software.\\
-
-
-%%%%%%%%%  REVISAR   %%%%%%%%%%%%%%%%%%%%
+La plataforma operacional del proyecto est\'a constituida por los Sistemas Operativos Microsoft Windows y Linux Ubuntu\footnote{o alguna otra distribuci\'on}, debido a que ambos son utilizados en Austec.
+De esta misma forma, el desarrollo ser\'a llevado en mayor parte en alguna distribuci\'on de Linux por su bajo costo monetario asociado.\\
 
 Tal como se mencionaba antes, se utilizar\'a UML como plataforma de modelamiento. De esta forma, se est\'a evaluando que herramienta CASE nos ser\'a de mayor utilidad. Entre estas est\'an Umbrello\footnote{\url{http://uml.sourceforge.net/}}, Rational Rose\footnote{\url{http://www-306.ibm.com/software/rational/}} y DBDesigner 4\footnote{\url{http://fabforce.net/dbdesigner4/}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \subsection{Personal y capacitaci\'on del grupo de desarrollo}
 \begin{itemize}
 
     \item Personal del equipo del proyecto.
 		
-La empresa DevNull cuenta actualmente con cuatro miembros, de los cuales se har\'a una breve descripci\'on de sus perfiles personales, paso primordial para conocer al equipo de trabajo:
+La empresa Taranis cuenta actualmente con cinco miembros, de los cuales se har\'a una breve descripci\'on de sus perfiles personales, paso primordial para conocer al equipo de trabajo:
 
 	\begin{description}
 		
-	\item[Marina Alejandra Pilar Daza].
+	\item[Arturo Alejandro Hoffstadt Urrutia].
 
 Persona con gran capacidad de liderazgo, que gusta del trabajo en equipo y por sobre todo con gran sentido de responsabilidad. 
 ``Echando a perder se aprende'' ayuda mucho a entender su personalidad, ya que se caracteriza por su curiosidad, la cual siempre le ha ense\~nado algo nuevo. Adem\'as posee facilidad para el aprendizaje. 
@@ -368,19 +316,7 @@ Gusta de la m\'usica y el cine, tocar clarinete, jugar rol, y adem\'as, practica
 
 Posee un dominio del Ingl\'es Avanzado (oral y escrito, t\'ecnico) y Alem\'an B\'asico (oral y escrito).
 
-                \begin{itemize}
-                \item{Conocimientos T\'ecnicos:}
-                        \begin{itemize}
-                        \item{Administrador de Sistemas:} Cuentas, Mail, Web, SVN, Bases de Datos.
-                        \item{Sistemas Operativos:} Microsoft Windows, Linux (Fedora, Ubuntu, CentOS, Gentoo).
-                        \item{Lenguajes de Programaci\'on:} C, C++, Basic, Visual Basic, Java, PHP, ASP, Javascript, Scheme, Prolog, Bash, Perl.
-                        \item{Librer\'ias:} SDL, GTK, QT, CUPS, STL.
-                        \end{itemize}
-                \end{itemize}
-
-
-
-	\item[Tom\'as Ignacio Staig Fern\'andez].
+	\item[Renato Mart\'in Covarrubias Romero].
 
 Persona capaz de liderar proyectos y ser part\'icipe de estos, de analizar y dise\~nar una soluci\'on para implementarla con las herramientas que el problema requiera.
 
@@ -392,20 +328,7 @@ La preocupaci\'on por el correcto manejo y uso del idioma espa\~nol en forma ora
 
 Sus hobbies son la lectura, el tenis, juegos de rol y por supuesto tarrear\footnote{tambi\'en conocido como ``LAN Party''. Una LAN party es un evento que reune a un grupo de personas con sus computadoras para jugar y compartir} con amigos.
 
-                \begin{itemize}
-                \item{Conocimientos T\'ecnicos:}
-                        \begin{itemize}
-                        \item{Administrador de Sistemas:} Cuentas, Mail, Web, SVN, Bases de Datos.
-                        \item{Sistemas Operativos:} Microsoft Windows, Linux (Fedora, Ubuntu, CentOS, Gentoo).
-                        \item{Lenguajes de Programaci\'on:} C, C++, Basic, Visual Basic, Java, PHP, ASP, Javascript, Scheme, Prolog, Bash, Perl.
-                        \item{Librer\'ias:} SDL, GTK, QT, CUPS, STL.
-                        \end{itemize}
-                \end{itemize}
-
-
-
-
-	\item[Esteban Ignacio Espinoza Mart\'inez].
+	\item[Jorge David R\'ios Miranda].
 
 Persona met\'odica y anal\'itica. Actualmente se encuentra finalizando su formaci\'on acad\'emica, de la cual valora sobre todo, los conocimientos t\'ecnicos que le ha entregado su estudio.  
 
@@ -419,20 +342,8 @@ Tambi\'en destacan sus habilidades deportivas en atletismo y f\'utbol. Sus hobbi
 
 Posee dominio del idioma Ingl\'es a nivel intermedio (t\'ecnico y escrito).
 
-                \begin{itemize}
-                \item{Conocimientos T\'ecnicos:}
-                        \begin{itemize}
-                        \item{Administrador de Sistemas:} Cuentas, Mail, Web, SVN, Bases de Datos.
-                        \item{Sistemas Operativos:} Microsoft Windows, Linux (Fedora, Ubuntu, CentOS, Gentoo).
-                        \item{Lenguajes de Programaci\'on:} C, C++, Basic, Visual Basic, Java, PHP, ASP, Javascript, Scheme, Prolog, Bash, Perl.
-                        \item{Librer\'ias:} SDL, GTK, QT, CUPS, STL.
-                        \end{itemize}
-                \end{itemize}
 
-
-
-
-	\item[Carlos Alberto Guajardo Miranda].
+\item[Alexander Becher].
 
 Es un alumno proveniente de la RWTH Aachen, Alemania, que este a\~no ha llegado a la UTFSM a trav\'es de una beca de intercambio obtenida en el pa\'is del cual es originario, el cual, en sus ganas de trabajar e interactuar con sus nuevos compa\~neros chilenos, eligi\'o la asignatura de Ingenier\'ia de Software, en donde se integra a la empresa Taranis, equipo el cual lo acoge desde el primer momento.
 
@@ -444,27 +355,139 @@ Estas caracter\'isticas personales, as\'i como su desempe\~no acad\'emico le per
 
 Fuera del campo inform\'atico, ha sido tenismesista por los \'ultimos 17 a\~nos de su vida. Posee dominio de los idiomas Alem\'an, el cual es su lengua materna, Ingl\'es a nivel avanzado y posee buen manejo del idioma Espa\~nol.
 
-                \begin{itemize}
-                \item{Conocimientos T\'ecnicos:}
-                        \begin{itemize}
-                        \item{Administrador de Sistemas:} Cuentas, Mail, Web, SVN, Bases de Datos.
-                        \item{Sistemas Operativos:} Microsoft Windows, Linux (Fedora, Ubuntu, CentOS, Gentoo).
-                        \item{Lenguajes de Programaci\'on:} C, C++, Basic, Visual Basic, Java, PHP, ASP, Javascript, Scheme, Prolog, Bash, Perl.
-                        \item{Librer\'ias:} SDL, GTK, QT, CUPS, STL.
-                        \end{itemize}
-                \end{itemize}
+
+	\item[Pablo Andr\'es Pe\~nailillo Arancibia].
+
+Persona con gran capacidad de liderazgo, con ganas de escuchar y ser escuchado y desarrollarse como persona tanto en lo acad\'emico como en lo social. 
+
+Siempre convencido de sus ganas de trabajar en equipo ha buscado distintas instancias para poder desarrollar este don, marc\'andolo fuertemente las actividades pastorales y musicales en su etapa como estudiante de ense\~nanza b\'asica y media. 
+
+Actualmente est\'a enfrentando un nuevo desaf\'io, el cual es ser parte de la mesa ejecutiva del Centro de Alumnos del Departamento de Inform\'atica de la Universidad T\'ecnica Federico Santa Mar\'ia, en donde ha aprendido fuertemente el sentido de compromiso y sacrificio, de donde ha hecho el di\'alogo y el debate fuertes herramientas para relacionarse con la gente, y ha potenciado la relaci\'on con sus compa\~neros a nivel de carrera y Universidad, en especial de aquellos a quienes pueda ayudar o retribuirles la ayuda otorgada. 
+
+Enfoca su inter\'es en las \'areas de Sistemas de Gesti\'on y Desarrollo de Software, las cuales busca unirlas a su vibraci\'on con los problemas de nuestra sociedad. 
+
+Dentro de sus aficiones y hobbies est\'a la m\'usica, la cual disfruta m\'as a\'un cuando brota de sus manos y voz, la literatura latinoamericana, la cocina, el rol, entre otros.
+
+Posee dominio del Ingl\'es escrito a nivel Intermedio, oral a nivel b\'asico.
+
+	\end{description}
+
+A partir de lo descrito anteriormente, se pueden destacar las siguientes caracter\'isticas en cada uno de los integrantes del grupo:
+
+	\begin{description}
+		
+	\item[Arturo Alejandro Hoffstadt Urrutia].
+
+		\begin{itemize}
+		
+		\item{Liderazgo:} Es capaz de tomar protagonismo y tomar resoluciones dentro de un grupo. Capaz de repartir tareas y dar plazos. Existe una exigencia tanto personal como hacia el grupo que dirige.
+		\item{Trabajo en equipo:} Es capaz de asumir tareas dentro de un conjunto de trabajo. Gusta del hecho de retroalimentarse con el aprendizaje dentro del equipo humano que conforma y compartir con este. Facilidad de comunicarse con la gente que trabaja.
+		\item{Responsabilidad:} Cumple los plazos asignados y reuniones de equipo. Da informe de aquellas cosas que logra o no. Es capaz de expresar cuales son sus l\'imites, lo cual ayuda a la hora de asignar tareas y saber cuales son sus especialidades.  Es capaz de esforzarse en el logro de las metas propuestas.
+		\item{Curiosidad:} Gusta experimentar frente a lo que le es desconocido. Busca aprender emp\'iricamente las cosas.
+		\item{Facilidad para el aprendizaje:} Posee facilidad para aprender cosas nuevas. Existe apertura ante aquellas que le son desconocidas y las percibe con facilidad.
+		\item{\'areas de inter\'es:} Inform\'atica, en su amplia gama de posibilidades, la rob\'otica, y la biotecnolog\'ia.
+		\item{Empat\'ia:} Facilidad en la comunicaci\'on con la gente y entender las cosas que quiere expresar. 
+		\item{Versatilidad:} Posee la capacidad de adaptarse con facilidad y rapidez a diversas funciones.
+		\item{Dominio de idiomas:} Es capaz de manejar informaci\'on m\'as all\'a de nuestra habla hispana, como es el ingl\'es y el alem\'an.
+		\item{Conocimientos T\'ecnicos:}
+
+			\begin{itemize}
+			\item{Administrador de Sistemas:} Cuentas, Mail, Web, SVN, Bases de Datos.
+			\item{Sistemas Operativos:} Microsoft Windows, Linux (Fedora, Ubuntu, CentOS, Gentoo).
+			\item{Lenguajes de Programaci\'on:} C, C++, Basic, Visual Basic, Java, PHP, ASP, Javascript, Scheme, Prolog, Bash, Perl.
+			\item{Librer\'ias:} SDL, GTK, QT, CUPS, STL.
+			\end{itemize}
+		\end{itemize}
+
+	\item[Renato Mart\'in Covarrubias Romero].
+
+		\begin{itemize}
+		
+		\item{Liderazgo:} Es capaz de tomar roles protag\'onicos y resolutivos dentro de los proyectos grupales, siendo su especialidad los proyectos de car\'acter t\'ecnico.
+		\item{Trabajo en equipo:} Se caracteriza por su visi\'on estrat\'egica a la hora de trabajar, en donde resalta su capacidad de ver con acierto las posibles soluciones a un problema dado, y as\'i lograr proponer una buena distribuci\'on del trabajo.
+		\item{Analista:} Es capaz de proponer y dise\~nar a priori soluciones avaladas por su tecnisismo, con aquellas herramientas que ayudar\'ian a un buen desarrollo de estas, en este caso por su especial conocimiento de variados lenguajes de programaci\'on. Por lo mismo es su entusiasmo por el \'area de Sistemas Computacionales.
+		\item{Tolerancia:} En su af\'an de aprendizaje suele aceptar opiniones distintas a las otras que trabajan con \'el, aceptado nuevas alternativas que lo ayuden a seguir avanzando en su trabajo.
+		\item{Proactividad:} Participa en actividades fuera de lo meramente acad\'emico, aportando activa y positivamente de \'estas.
+		\item{Dicci\'on:} Es preocupado por el correcto manejo y uso del idioma espa\~nol en forma oral y escrita, lo que ha favorecido fuertemente la comunicaci\'on a la hora de ser formal con otras personas.
+		\item{\'areas de inter\'es:} Sistemas de Computaci\'on.
+		\item{Dominio de idiomas:} Ingl\'es coloquial y t\'ecnico a nivel medio, tanto oral como escrito.
+		\item{Conocimientos T\'ecnicos:}
+
+			\begin{itemize}
+			\item{Administraci\'on de Sistemas:} Correo Electr\'onico, Servicios Web, Cuentas de Usuarios, Bases de Datos, DHCP, Firewall, LDAP.
+			\item{Sistemas Operativos:} Linux (Fedora Core, CentOS, Debian, Ubuntu, ArchLinux), Microsoft Windows 98/2000/Me/XP
+			\item{Lenguajes de Programaci\'on:} C, Java, Visual Basic, HTML, Javascript, ASP, PHP, SQL, Bash, Latex, Perl, Scheme, Prolog, Tck, Tk.
+			\item{Librer\'ias:} GTK, QT.
+			\end{itemize}
+
+		\end{itemize}
+
+	\item[Jorge David R\'ios Miranda].
+
+		\begin{itemize}
+		
+		\item{Metodicismo:} Es ordenado con su trabajo. Es planificado y cumple con los plazos que se propone.
+		\item{Analista:} Es capaz de identificar aquellos factores favorables o no para el desarrollo de un trabajo, sobre todo los trabajos t\'ecnicos.
+		\item{Responsabilidad:} Cumple con los plazos que propone, y tambi\'en aquellos que le proponen. De la mano va su fuerte compromiso con los equipos de trabajo en los cuales participa.
+		\item{Facilidad para el aprendizaje:} Es capaz de aprender nuevas herramientas en poco tiempo. 
+		\item{\'areas de inter\'es:} Desarrollo de Software, aunque su inter\'es es la amplia \'area de la Computaci\'on e Inform\'atica.
+		\item{Dominio de lenguajes:} Posee fuertes conocimientos sobre variados lenguajes de programaci\'on.
+		\item{Dominio de idiomas:} Posee dominio del idioma Ingl\'es a nivel intermedio, tanto t\'ecnico como escrito.
+		\item{Conocimientos T\'ecnicos:}
+
+			\begin{itemize}
+			\item{Software:} MS Office, OpenOffice, Rational Rose, SQL Server, Visual Studio 6.0, PostgreSQL, Eclipse, Klogic.
+			\item{Sistemas Operativos:} MS Windows 95, 98, XP (Nivel avanzado), RedHat Linux, Fedora Core (Nivel Medio). 
+			\item{Lenguajes de Programacion:} C, C++, Pascal, Visual Basic, ASP, PHP, SQL, JavaScript, Cobol, Dbase, Clipper, Java, Perl, Scheme, Prolog.
+			\end{itemize}
+		\end{itemize}
+
+	\item[Alexander Becher].
+		
+\begin{itemize}
+		
+		\item{Trabajo en equipo:} Gusta de las instancias que le ofrescan este tipo de trabajo, ya que con ellas aprende a tratar con personas diferentes, inclusive de culturas y h\'abitos diferentes a las suyas.
+		\item{Versatibilidad:} Es capaz de realizar desaf\'ios por lograr cosas nuevas, emprendiendo nuevos rumbos y nuevas metas, como lo es su viaje de intercambio a la UTFSM. Adem\'as tiene una f\'acil adaptaci\'on con respecto a la gente que lo rodea en su nuevo destino.
+		\item{Responsabilidad:} Es met\'odico con su trabajo y cumple con los plazos requeridos, demostrando un alto nivel de compromiso con sus labores.
+		\item{Analista:} Es capaz de detectar problemas y llevar a cabo investigaciones que lo ayuden a medir la factibilidad de solucionarlo o no, como tambi\'en lo yuden a encontrar el mejor camino de soluci\'on a seguir.
+		\item{Proactivo:} Es capaz de proponer soluciones ante los problemas y llevarlos a cabo.
+		\item{Esfuerzo:} Siempre busca lograr las metas propuestas en el trabajo, a trav\'es de la investigaci\'on y el trabajo.
+		\item{Areas de inter\'es:} Dentro del campo inform\'atico, son la fiabilidad y seguridad de sistemas, comunicaci\'on de datos, y el modelamiento matem\'atico
+		\item{Dominio de idiomas:} Posee dominio de los idiomas Alem\'an, el cual es su lengua materna, Ingl\'es a nivel avanzado y posee buen manejo del idioma Espa\~nol.
+		\item{Conocimientos T\'ecnicos:}	
+			\begin{itemize}
+			\item{Sistemas Operativos:} MS Windows 95, 98, XP (Nivel Medio), RedHat Linux, Fedora Core, Ubuntu (Nivel Medio).
+			\item{Lenguajes de Programacion:} C, C++, Pascal, Visual Basic, ASP, PHP, SQL, JavaScript, Java,  Prolog, entre otros.
+			\end{itemize}
 
 
+\end{itemize}
 
+	\item[Pablo Andr\'es Pe\~nailillo Arancibia].
+
+		\begin{itemize}
+
+		\item{Liderazgo:} Posee capacidad de tomar roles protag\'onicos en sus grupos de trabajo. Incentiva a la gente a generar nuevas ideas y propuestas para mejorar el trabajo en equipo. Esta constantemente en b\'usqueda de nuevas maneras de incentivar a sus compa\~neros de trabajo, para lograr un trabajo m\'as productivo y ameno, siendo su principal herramienta la comunicaci\'on.
+		\item{Empat\'ia:} Gusta de conocer a aquellas personas con que trabaja, lo cual ayuda a mejorar el ambiente de trabajo y potenciar aquellos roles en que la persona puede desenvolverse mejor, para un mejor trabajo en equipo, como tambi\'en ayudar en aquellos roles en que la persona necesite potenciarse.
+		\item{Responsabilidad:} Busca lograr las metas propuestas, a trav\'es de la b\'usqueda de soluciones o siendo exigente en aquello que sabe hacer bien, intentando hacerlo mejor a\'un. Se compromete con el trabajo que debe realizar.
+		\item{\'areas de inter\'es:} Dentro de las \'areas de Inform\'atica sus \'areas de inter\'es son las de Sistemas de Gesti\'on y Desarrollos de Software.
+		\item{Versatilidad:} Tiene facilidad para adaptarse a diversos problemas, y propone soluciones a estas inc\'ognitas, especialmente cuando se trata de problemas comunicacionales.
+		\item{Dominio de idiomas:} Posee dominio del Ingl\'es escrito a nivel intermedio, oral a nivel b\'asico.
+		\item{Conocimientos T\'ecnicos:}
+
+			\begin{itemize}
+			\item{Software:} Rational Rose, SQL Server, Visual Studio 6.0, Umbrello, Poseidon, Dia, Eclipse, Open Office, PostgreSQL, Klogic.
+			\item{Sistemas Operativos:} MS Windows (Nivel Medio). Linux Fedora Core, Debian, Ubuntu (Nivel Medio).
+			\item{Lenguajes de Programaci\'on:} C, C++, Pascal, Visual Basic, ASP, PHP, SQL, JavaScript, Assembly, Java, Perl, Scheme, Prolog, LaTeX. 
+			\end{itemize}
+		\end{itemize}
 
 	\end{description}
 
 
 	\item Perfil del equipo ideal para el proyecto.
 
-Para la empresa DevNull, el equipo ideal requerido para este proyecto requiere que cumpla con las siguientes caracter\'isticas:
-
-%%%%%%%%%%%%%%%%%%%% REVISAR %%%%%%%%%%%%%%%%%%%%
+Para la empresa Taranis, el equipo ideal requerido para este proyecto requiere que cumpla con las siguientes caracter\'isticas:
 
 		\begin{itemize}
 
@@ -483,12 +506,12 @@ Para la empresa DevNull, el equipo ideal requerido para este proyecto requiere q
 
 		\end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 	\item Capacidad, experiencia y disponibilidad de cada miembro del equipo (disponible o buscado).
 
 		\begin{description}
 
-		\item[Marina Pilar]
+		\item[Arturo Hoffstadt]
 			\begin{itemize}
                         \item{Administrador de Sistemas:} Cuentas, Mail, Web, SVN, Bases de Datos.
                         \item{Sistemas Operativos:} Microsoft Windows, Linux (Fedora, Ubuntu, CentOS, Gentoo).
@@ -497,7 +520,7 @@ Para la empresa DevNull, el equipo ideal requerido para este proyecto requiere q
 			\item{Otros conocimientos relacionados:} Arquitectura de computadores, Redes de computadores, F\'isica (Din\'amica y Electromagnetismo), Rob\'otica a nivel b\'asico.
                         \end{itemize}
 		
-		\item[Tom\'as Staig]
+		\item[Renato Covarrubias]
 						
 			\begin{itemize}
                         \item{Administraci\'on de Sistemas:} Correo Electr\'onico, Servicios Web, Cuentas de Usuarios, Bases de Datos, DHCP, Firewall, LDAP.
@@ -508,7 +531,7 @@ Para la empresa DevNull, el equipo ideal requerido para este proyecto requiere q
                         \end{itemize}
 
 
-		\item[Esteban Espinoza]
+		\item[Jorge R\'ios]
 
 			\begin{itemize}
                         \item{Software:} MS Office, OpenOffice, Rational Rose, SQL Server, Visual Studio 6.0, PostgreSQL, Eclipse, Klogic.
@@ -518,13 +541,22 @@ Para la empresa DevNull, el equipo ideal requerido para este proyecto requiere q
                         \end{itemize}
 
 
-		\item[Carlos Guajardo]
+		\item[Alexander Becher]
 
 			\begin{itemize}
 			\item{Sistemas Operativos:} MS Windows 95, 98, XP (Nivel Medio), RedHat Linux, Fedora Core, Ubuntu (Nivel Medio).
 			\item{Lenguajes de Programacion:} C, C++, Pascal, Visual Basic, ASP, PHP, SQL, JavaScript, Java,  Prolog, entre otros.
 			\item{Otros conocimientos relacionados:} Arquitectura de computadores, Redes de computadores, F\'isica (Din\'amica y Electromagnetismo), Rob\'otica a nivel b\'asico.
 			\end{itemize}
+
+		\item[Pablo Pe\~nailillo]
+
+			\begin{itemize}
+                        \item{Software:} Rational Rose, SQL Server, Visual Studio 6.0, Umbrello, Poseidon, Dia, Eclipse, Open Office, PostgreSQL, Klogic.
+                        \item{Sistemas Operativos:} MS Windows (Nivel Medio). Linux Fedora Core, Debian, Ubuntu (Nivel Medio).
+                        \item{Lenguajes de Programaci\'on:} C, C++, Pascal, Visual Basic, ASP, PHP, SQL, JavaScript, Assembly, Java, Perl, Scheme, Prolog, LaTeX. 
+			\item{Otros conocimientos relacionados:} Arquitectura de computadores, F\'isica (Din\'amica y Electromagnetismo), Rob\'otica a nivel b\'asico.
+                        \end{itemize}
 
 		\end{description}
 
@@ -534,14 +566,10 @@ A partir de los datos tabulados, se puede decir que la mayor\'ia de los recursos
 
         \item An\'alisis de insuficiencias de los miembros del equipo, si las hubiere.
 
-%%%%%%%%%%%%%%%%%%%% REVISAR %%%%%%%%%%%%%%%%%%%%%%
-
-
-
 A partir de lo anterior, las insufiencias que se deber\'ian cubrir son los siguientes:
 
 		\begin{itemize}
-		\item{Falta de capacitaci\'on en rob\'otica:} En conjunto los miembros del equipo s\'olo mantienen nociones b\'asicas del funcionamiento de un robot, por lo que limita el trabajo por el poco entendimiento t\'ecnico de \'este, lo que tambi\'en trae problemas de comunicaci\'on con el cliente.
+		\item{Falta de capacitaciÃ²n en rob\'otica:} En conjunto los miembros del equipo s\'olo mantienen nociones b\'asicas del funcionamiento de un robot, por lo que limita el trabajo por el poco entendimiento t\'ecnico de \'este, lo que tambi\'en trae problemas de comunicaci\'on con el cliente.
 		\end{itemize}
 
 Adem\'as, existe un detalle de recursos humanos que puede limitar el trabajo al enfrentar el Taller, el cual es el siguiente:
@@ -566,8 +594,6 @@ Para el mejoramiento de las insuficiencias detectadas, el equipo recurrir\'a al 
 		\end{itemize}
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{itemize}
 
 
@@ -575,12 +601,112 @@ Para el mejoramiento de las insuficiencias detectadas, el equipo recurrir\'a al 
 \newpage
 \section{Gesti\'on de Riesgos} %%% ESTEBAN
 \subsection{An\'alisis de riesgos}
+\begin{itemize}
+%%REVISAR DE AQUI HASTA ABAJO %%
+\item{Riesgos de Negocio:} 
+\begin{itemize}
+\item{Poca escalabilidad de Hevelius con respecto a telescopios profesionales.}
 
+Un gran riesgo es que una vez terminado el proyecto, este al intentar ser probado en un telescopio profesional no sea lo suficientemente escalable y termine por no realizar un funcionamiento adecuado.
+\end{itemize}
+
+\item{Riesgos del Proyecto:}
+\begin{itemize}
+\item{Ausencia de alg\'un integrante del proyecto}
+
+La ausencia de alg\'un integrante del equipo de trabajo implicar\'ia un  mayos esfuerzo por parte del resto del equipo a dem\'as de incrementar el tiempo de desarrollo del proyecto, lo cual podr\'ia traer serios problemas.
+
+\item{Incumplimiento con fechas.}
+
+Todos los proyectos tienen una fecha limite para cada etapa y sus respectivas entregas. Un riesgo importante es el incumplimiento de las fechas finales, las cuales corresponden a la presentaci\'on del proyecto en La Feria de Software.	
+
+\item{Telescopio Amateur no disponible}
+
+Para la presentaci\'on de la feria, Hevelius ser\'a probado en un telescopio amateur el cual es propiedad de NO SE QUIEN ES EL DUEÑO.TOBAR?? =P, por lo que la disponibilidad de este se puede ver afectada para dicha presentaci\'on.
+
+\item{Estimaci\'on del proyecto err\'onea}
+
+Una mala estimaci\'on del proyecto, en cuanto a complejidad y desarrollo implicar\'ia un gran riesgo, puesto que podr\'ia darse el caso en que no se logre finalizar el proyecto dentro de la fecha estimada.
+
+\item{Falta de conocimiento en cuanto al \'area de desarrollo}
+
+Hevelius al tratarse de un proyecto que esta en el \'area de la astronom\'ia, obliga necesariamente al equipo de trabajo familiarizarse con t\'erminos e informaci\'on propia de dicha \'area, lo cual implica una capacitaci\'on para el equipo de manera de poder visualizar de mejor manera el problema y poder desarrollar una mejor soluci\'on, a dem\'as de permitir una mejor obtenci\'on de informaci\'on de parte del cliente. 
+
+\item{No cumplimiento con los est\'andares del proyecto ALMA-CONICYT}
+
+Hevelius al formar parte del proyecto ALMA-CONICYT debe cumplir ciertos est\'andares, por lo que alg\'un tipo de incumplimiento producir\'ia conflictos en cuanto a utilizaci\'on y una mala evaluaci\'on del proyecto por parte de nuestro cliente.
+
+\end{itemize}
+
+
+\item{Riesgos T\'ecnicos:}
+\begin{itemize}
+\item{Mala elecci\'on en cuanto a lenguajes de programaci\'on.}
+
+Una mala elecci\'on del lenguaje de programaci\'on implicar\'ia un gran riesgo, puesto que producir\.ia un mayor esfuerzo en la creaci\'on de funciones propias del proyecto, lo cual puede retrasar el desarrollo de manera exponencial si no se hace adecuadamente.
+
+\item{Compleja interfaz grafica para el usuario.}
+
+Hevelius entre otros objetivos busca ser una herramienta amistosa para los operadores de telescopio, por lo tanto el tener una interfaz muy engorrosa volver\'ia la utilizaci\'on del proyecto muy compleja y poco entendible, para esto se deben utilizar herramientas y t\'ecnicas que permitan un desarrollo de interfaz amigable.
+
+\item{Pocas pruebas realizadas al proyecto.}
+
+Una herramienta importante en el desarrollo de software es la fase de pruebas, una vaga fase de pruebas al proyecto puede significar errores que no son identificados en la etapa correcta y que conlleva a errores en futuras etapas lo que implica un cambio en la estructura del proyecto, los cuales son mas costosos a medida de que el proyecto avanza.
+\end{itemize}
+\end{itemize}
+\begin{tabular}{||l | c | r||}
+\hline
+Nombre del Riesgo & Ocurrencia & Impacto \\ 
+\hline
+Poca escalabilidad de Hevelius con respecto a telescopios profesionales. & Muy Alto & Muy Alto\\
+\hline
+Ausencia de alg\'un integrante del proyecto & Baja & Muy Alto\\
+\hline
+Incumplimiento con fechas & Media & Alto\\
+\hline
+Telescopio amateur no disponible & Baja & Muy Alto\\
+\hline
+Estimaci\'on err\'onea del proyecto & Media & Muy Alto\\
+\hline
+Falta de conocimiento en cuanto al \'area de desarrollo & Media & Alto\\
+\hline
+No cumplimiento con los est\'andares del proyecto ALMA-CONICYT & Baja & Alto\\
+\hline
+Mala elecci\'on en cuanto a lenguajes de programaci\'on & Baja & Alto\\
+\hline
+Compleja interfaz grafica para el usuario & Alta & Muy Alto\\
+\hline
+Pocas pruebas realizadas al proyecto & Media & Alto\\
+\hline
+\end{tabular}
+
+Para priorizar los riesgos es necesario evaluar tanto su ocurrencia como el impacto que provocar\'ia en el proyecto.
+Se debe crear un consenso en el equipo de trabajo para poder tomar la decisi\'on correcta.
+
+1.- Poca escalabilidad de Hevelius con respecto a telescopios profesionales.
+
+2.- Compleja interfaz grafica para el usuario.
+
+3.- Estimaci\'on del proyecto err\'onea.
+
+4.- Falta de conocimiento en cuanto al \'area de desarrollo.
+
+5.- Pocas pruebas realizadas al proyecto.
+
+6.- No cumplimiento con los est\.andares del proyecto ALMA-CONICYT
+
+7.- Mala elecci\'on en cuanto a lenguajes de programaci\'on.
+
+8.- Telescopio amateur no disponible.
+
+9.- Ausencia de alg\'un integrante del proyecto
+
+10.- No cumplimiento con los est\'andares del proyecto ALMA-CONICYT
 
 
 \subsection{Preparaci\'on para control de riesgos}
 
-
+%%%FALTAN LAS CARTAS PERO SON DEMACIADA GESTION PARA UNA SOLA PERSONA X_X %%%
 
 \newpage
 \section{Implementaci\'on (Entrega y Operaci\'on)} %%% MARINA
