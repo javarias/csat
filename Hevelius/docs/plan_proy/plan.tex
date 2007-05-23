@@ -202,6 +202,7 @@ esta forma ayuda a que se puedan repetir observaciones y a realizar estudios sob
 \paragraph{Relaci\'on de las caracter\'isticas con los problemas identificados.}
 
 	\begin{itemize}
+
 	\item El control por internet va a ayudar a solucionar el problema de tener 
 que estar en el lugar de observaci\'on al momento de controlar al telescopio.
 
@@ -280,16 +281,45 @@ aficionados, puesto que los costos de observaci\'on son elevados.
 \end{itemize}
 
 \subsection{An\'alisis de las alternativas de soluci\'on}
-\subsubsection{Alternativa 1: YYY} %%%% TOMAS
+\subsubsection{Alternativa 1: Desarrollo de Software basado en ACS} %%%% TOMAS
+Desarrollo de un producto de software basado en la plataforma ACS que sea gen\'erico,
+es decir, que nos permita controlar cualquier telescopio por medio del mismo
+programa, sin la necesidad de tener un programa diferente para cada telescopio.
 
+Se utiliza un computador como estaci\'on de trabajo de quien opere el telescopio, 
+en donde todo el control se realizar\'a por medio de una interfaz gr\'afica. Este
+computador requerir\'a tener acceso a internet para poder obtener componentes desde
+ACS y para comunicarse con el telescopio que se quiera controlar.
 
+La interfaz gr\'afica mostrar\'a a quien opere el telescopio el estado actual del
+mismo, pudiendo verse lo que est\'a observando el telescopio por medio de la
+c\'amara CCD y la disposici\'on f\'isica en que se encuentra el telescopio, por medio
+del modelo hecho en OpenGL del mismo.
+
+Es importante notar que al utilizar la plataforma ACS para la distribuci\'on de 
+componentes de software, se podr\'ian usar componentes realizados por otras personas, 
+asi como realizar cambios en componentes que utiliza nuestro software, obteniendo un
+producto de alta modularidad, enfocado al trabajo por componentes.
 
 \subsubsection{Alternativa 2: YYY+1} %%%% TODOS
 
 
 
 \subsection{Soluci\'on recomendada} %%%% TOMAS
+La mejor soluci\'on que encontramos es la alternativa 1, en la cual se piensa construir
+un producto de software gen\'erico basado en ACS, el cual se acopla bastante bien 
+con los requerimientos del cliente.
 
+Este producto deber\'a ser modular basado en componentes con el estilo que ACS nos
+impone, por lo que se tendr\'an algunos componentes sobre esta plataforma, mientras que
+otros ir\'an junto con el software principal. Es importante hacer la separaci\'on
+de las capas de comunicaci\'on, interfaz gr\'afica y software, para simplificar la
+mantenci\'on del producto al tener las funcionalidades separadas.
+
+Se eligi\'o esta alternativa, porque en la actualidad no hay productos que controlen
+telescopios de forma gen\'erica, y esto es algo muy importante para enfocar los esfuerzos
+de observaci\'on en las observaciones mismas y no en aprender a utilizar los programas
+asociados al control de telescopios.
 
 
 \newpage
