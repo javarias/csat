@@ -26,7 +26,7 @@
 \contentsline {subsection}{\numberline {5.1}Plan de operaci\'on del sistema}{22}
 \contentsline {subsection}{\numberline {5.2}Plan de implementaci\'on (entrega)}{23}
 \contentsline {subsection}{\numberline {5.3}Plan de mantenci\'on}{24}
-\contentsline {section}{\numberline {6}Planificaci\'on de Actividades}{25}
-\contentsline {subsection}{\numberline {6.1}Work Breakdown Structure (WBS)}{25}
-\contentsline {subsection}{\numberline {6.2}Carta Gantt}{25}
-\contentsline {subsection}{\numberline {6.3}Resumen de Compromisos}{25}
+\contentsline {section}{\numberline {6}Planificaci\'on de Actividades}{26}
+\contentsline {subsection}{\numberline {6.1}Work Breakdown Structure (WBS)}{26}
+\contentsline {subsection}{\numberline {6.2}Carta Gantt}{26}
+\contentsline {subsection}{\numberline {6.3}Resumen de Compromisos}{26}
