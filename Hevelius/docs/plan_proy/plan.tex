@@ -110,7 +110,7 @@ Existen varios tipos de telescopio, notablemente refractores, que utilizan
 lentes, reflectores, que tienen un espejo c\'oncavo en lugar de la lente del
  objetivo, y catadi\'optricos, que poseen un espejo c\'oncavo y una lente correctora.
 
-El par\'ametro máimportante de un telescopio es el di\'ametro de su objetivo. 
+El par\'ametro m\'aimportante de un telescopio es el di\'ametro de su objetivo. 
 Un telescopio de aficionado generalmente tiene entre 76 y 150 mm de di\'ametro y 
 permite observar algunos detalles planetarios y much\'isimos objetos del cielo 
 profundo (c\'umulos, nebulosas y algunas galaxias) que es con el que nosotros
@@ -853,6 +853,162 @@ Se debe crear un consenso en el equipo de trabajo para poder tomar la decisi\'on
 
 %%%%MARINAAA 5 INMUNDOS RIESGOS
 
+
+
+%%%% RIESGO 1 %%%%
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
+\hline
+ID 1 & \multicolumn{3}{|p{105mm}|}{Poca escalabilidad de Hevelius con respecto a telescopios profesionales.}\\ \hline
+Prioridad: 1 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgo de Negocio}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Probabilidad: Muy Alta} & \multicolumn{2}{|p{70mm}|}{Impacto: Muy Alto}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Descripci\'on: La capacidad del proyecto de adaptarse a los cambios a futuro y de adem\'as poder adaptarse a otros tipos de telescopios y principalmente a un telescopio profesional.}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Per\'iodo: Todo el proyecto} & \multicolumn{2}{|p{70mm}|}{Estado: Latente}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Contexto: 
+La escalabilidad que se requiere en Hevelius debe ser capaz de poder conectarse principalmente a un telescopio profesional y posteriormente ser lo mas gen\'erico posible.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Plan de Mitigaci\'on: 
+Los primero tres artefactos a considerar para mitigar este riesgo se
+Aplicar\'an en la etapa de an\'alisis, los cuales permiten bosquejar los elementos del sistema,
+captar aquellos elementos sustituibles u omitibles, adem\´as se podr\´an visualizar los
+futuros componentes, con esto adaptar el modelo y ver, a grandes rasgos, el modo de implementaci\´on de ellos.
+Un artefacto utilizado para mitigar este riesgo en la etapa de construcci\´on, ser\´a probar el funcionamiento a 
+trav\´es de prototipos funcionales de prueba, con lo
+cual se generar\´a una retroalimentaci\´on y se 
+podr\´a interpretar de manera mas fidedigna el sistema en construcci\´on. Por \´ultimo, se considera como alternativa 
+de soluci\´on a este riesgo el car\'acter modular que presentara Hevelius a travez de los componentes de ACS, de manera que se puedan a\~nadir nuevas funcionalidades sin afectar a las ya existentes y permitir un software lo m\´as generico posible por intermedio de estos modulos. Por lo tanto, una investigaci\´on acerca de este 
+tema podr\´a medir la factibilidad de uso y aplicaci\´on.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Plan de contingencia: 
+Replantear la modularidad del
+sistema, esto significa, volver a analizar los m\´odulos para encontrar posibles subsecciones
+y reformularlas. Luego de esto, a.nadir nuevos
+m\´odulos que permitan adaptar nuevos componentes de hardware en el sistema, junto con la vinculaci\´on a la interfaz de usuario.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Resoluci\'on:
+La resoluci\'on de este riesgo consiste en asignar \'areas y tareas espec\'ificas a cada integrante del equipo de trabajo, para lograr la profundidad en los temas que se necesitan al desarrollar la soluci\'on.}\\ \hline
+\end{tabular}
+\caption{Hoja Control de Riesgo: ID1}
+\label{table:control_riegos_1}
+\end{table}
+
+%% RIESGO 2 %%%
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
+\hline
+ID 2 & \multicolumn{3}{|p{105mm}|}{Compleja interfaz grafica para el usuario.}\\ \hline
+Prioridad: 2 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgo T\'ecnico}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Probabilidad: Alta} & \multicolumn{2}{|p{70mm}|}{Impacto: Muy Alto}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Descripci\'on: La complicaci\´on que puede generar la construcci\´on de cada uno de los elementos
+que componen la interfaz de usuario es un factor que puede retrasar el proyecto.}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Per\'iodo: Todo el proyecto} & \multicolumn{2}{|p{70mm}|}{Estado: Latente}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Contexto:
+La interfaz de usuario corresponde al nexo de interacci\'on entre el usuario y
+el sistema, adem\'as en \'el se encuentran expl\'icitos la mayor\'ia de los requerimientos del
+proyecto. El problema que puede generar la construcci\'on de esta interfaz, es la demora
+en el desarrollo de algunos de los elementos que la componen, as\'i como la correcta
+elecci\'on de las herramientas para desarrollarla. A dem\'as cabe destacar que de por si la interfaz para un proyecto como Hevelius es muy compleja, por lo que una mayor complicaci\`on significar\'ia un retraso importante.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Plan de Mitigaci\'on:
+Como la interfaz es lo que finalmente el usuario vera del proyecto es necesario que sea el mismo quien nos provea de la informaci\'on necesaria para el correcto desarrollo de esta. Tambi\'en es factible la investigaci\'on en manuales y t\'ecnicas de desarrollo de interfaces para tener una mayor gama de  ideas y herramientas que permitan mitigar este riesgo.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Plan de contingencia:
+El plan de contingencia implica la reformulaci\'on de las interfaces realizadas hasta el momento y de buscar una retroalimentaci\'on proveniente de los mismo usuarios del proyecto, as\'i como de asesoramiento por parte de profesionales o gente experimentada en el tema de desarrollo de interfaces graficas.
+Tambi\'en es factible el dedicar una mayor cantidad de tiempo al desarrollo de la interfaz, de manera de enfatizar el car\'acter de simplicidad de este.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Resoluci\'on:
+Asignar de manera equitativa el tiempo para las tareas referentes al desarrollo del proyecto y del desarrollo de la interfaz grafica, de manera de darle alg\'un tiempo relevante en cuanto a investigaci\'on para obtener retroalimentaci\'on con respecto a la interfaz.}\\ \hline
+\end{tabular}
+\caption{Hoja Control de Riesgo: ID2}
+\label{table:control_riegos_2}
+\end{table}
+
+%%RIESGO 3 %%%
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
+\hline
+ID 3 & \multicolumn{3}{|p{105mm}|}{Estimaci\'on del proyecto err\'onea.}\\ \hline
+Prioridad: 3 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgo del Proyecto}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Probabilidad: Media} & \multicolumn{2}{|p{70mm}|}{Impacto: Muy Alto}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Descripci\'on: Estimar la complejidad y tamaño de un proyecto es importante y una mala estimaci\'on significa un gran retraso y costo en el sentido de 
+fechas limites y gasto de tiempo en la creaci\'on de funcionalidades.}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Per\'iodo: Todo el proyecto} & \multicolumn{2}{|p{70mm}|}{Estado: Latente}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Contexto:
+Hevelius busca no solo ser un sistema de control de telescopios con interfaz profesional, si no que tambi\'en busca ser lo mas gen\'erico posible, por lo tanto el tamaño del proyecto es grande, ya que se juega con una gran cantidad de funciones y operaciones que muchos telescopios tienen de forma especifica.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Plan de Mitigaci\'on:
+Debido a la complejidad y tamaño de Hevelius, un excelente plan de mitigaci\'on corresponde a la modularidad que se le pueda dar a Hevelius, lo cual permite separar el proyecto en sectores y as\'i avanzar de forma paralela en diversas funcionalidades.
+Tambi\'en permite reducir el tamaño del problema, puesto que se pueden crear diversos componentes para distintos problemas y funciones especificas, a dem\'as de permitir realizar nuevos m\'odulos y mejoras a travez del tiempo sin afectar el resto de funcionalidades.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Plan de contingencia:
+En caso de haberse realizado una mala estimaci\'on del proyecto, el car\'acter de modularidad nos permitir\'a poder conectar componentes ACS ya desarrollados que reducir\'ian en gran parte la complejidad de desarrollo de funciones y evitar\'ia el duplicamiento de funciones ya hechas, lo cual nos permite utilizar el tiempo restante en los componentes faltantes para as\'i tener las funciones b\'asicas de Hevelius en el resto de tiempo que quede.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Resoluci\'on:
+todas las funcionalidades de Hevelius est\'an completas.}\\ \hline
+\end{tabular}
+\caption{Hoja Control de Riesgo: ID3}
+\label{table:control_riegos_3}
+\end{table}
+
+%%% RIESGO 4 %%%
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
+\hline
+ID 4 & \multicolumn{3}{|p{105mm}|}{Falta de conocimiento en cuanto al \'area de desarrollo.}\\ \hline
+Prioridad: 4 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgo del Proyecto}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Probabilidad: Medio} & \multicolumn{2}{|p{70mm}|}{Impacto: Alto}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Descripci\'on: La carencia de conocimientos y pr\'actica sobre las \'areas que engloba el problema
+puede generar demora o incluso la imposibilidad de encontrar un soluci´on viable
+por el desconocimiento y la desrelaci\'on que se advierte.}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Per\'iodo: Todo el proyecto} & \multicolumn{2}{|p{70mm}|}{Estado: Evidente}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Contexto:
+Trabajar en \'areas que no son propias de un Inform\'atico implica, en este proyecto,
+la carencia de conceptos y pr\'actica para, en un principio comprender el problema,
+luego buscar una soluci´on y finalmente desarrollarla.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Plan de Mitigaci\'on:
+Todo lo que implique adquirir conocimientos propios del \'area de desarrollo del proyecto apoyan a la mitigaci\'on del proyecto, ya sea a trav\'es de foros, charlas, manuales, entrevistas, etc.
+Investigaci\'on y separaci\'on de las tareas permite de mejor manera abarcar dichas \'areas y optimizar tiempo de desarrollo.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Plan de contingencia:
+El plan de contingencia corresponde a lo mencionado en el plan de mitigaci\'on, puesto que el capacitar a cada integrante del proyecto en el \'area de astronom\'ia y conceptos que esta \'area abarca servir\'an como contingencia ante posible riesgo de toparse con lenguajes propios del \'area.
+Tambi\'en la separaci\'on de tareas para cada integrante permite la especializaci\'on y as\'i la mejor optimizaci\'on del tiempo.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Resoluci\'on:
+La resoluci\'on de este riesgo consiste en asignar \'areas y tareas espec\'ificas a
+cada integrante del equipo de trabajo, para lograr la profundidad en los temas que se
+necesitan al desarrollar la soluci\'on.}\\ \hline
+\end{tabular}
+\caption{Hoja Control de Riesgo: ID4}
+\label{table:control_riegos_4}
+\end{table}
+
+
+
+%% RIESGO 5 %%%
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
+\hline
+ID 5 & \multicolumn{3}{|p{105mm}|}{Pocas pruebas realizadas al proyecto.}\\ \hline
+Prioridad: 5 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgos T\'ecnicos}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Probabilidad: Media} & \multicolumn{2}{|p{70mm}|}{Impacto: Alto}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Descripci\'on: La fase de pruebas del proyecto permite encontrar errores de manera oportuna antes de que la reparaci\'on de estos se torne demasiado costosa y compleja.}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Per\'iodo: Etapa de Construci\'on} & \multicolumn{2}{|p{70mm}|}{Estado: Latente}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Contexto:
+Debido a la envergadura del proyecto, el realizar pruebas peri\'odicamente permite detectar una serie de errores y fallas en funciones o m\'odulos que deben ser revisados y reestructurados de ser necesario. Una pobre cantidad de pruebas realizadas implicar\'ia la no detecci\'on de fallas y errores que costar\'ian caro a la hora de la presentaci\'on y entrega final.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Plan de Mitigaci\'on:
+Un excelente plan de mitigaci\'on es el testeo continuo de los diferentes m\'odulos que se vayan desarrollando en el tiempo, con la finalidad de detectar a tiempo todos los tipos de error a tiempo.
+Tambi\'en se incluye la asesoria de gente especializada en testing, con la finalidad de hacer las pruebas siguiendo alg\'un tipo de t\'ecnica y as\'i no perder demasiado tiempo en pruebas demasiadas recurrentes que tan solo retrasar\'ian el desarrollo del proyecto.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Plan de contingencia:
+En caso de determinarse una baja cantidad de pruebas es necesario buscar apoyo externo con el fin de poder corregir los errores detectados y poder estimar soluciones y recalendarizar las fechas de las pr\'oximas pruebas con la finalidad de realizar la cantidad adecuadas de pruebas al proyecto.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Resoluci\'on:
+Cuando el producto final pasa todas las pruebas de manera adecuada y sin falla alguna.}\\ \hline
+\end{tabular}
+\caption{Hoja Control de Riesgo: ID5}
+\label{table:control_riegos_5}
+\end{table}
+
+
 %%%%%%%6%%%%%
 \begin{table}[ht]
 \centering
@@ -1007,6 +1163,19 @@ entre secciones de c\'odigo, y lo separemos acorde a ello.
 \caption{Hoja Control de Riesgo: ID10}
 \label{table:control_riegos_1}
 \end{table}
+
+\subsection{Plan de Monitoreo}
+En vista de que todos los riesgos consisten en una amenaza permanente al proyecto es necesario 
+realizar un monitoreo constante al proyecto, as\'i en caso de detectar alg\'un riesgo, 
+aplicar los planes de contingencia y as\'i evitar perdidas y retraso al proyecto final.
+
+Por lo tanto el plan consistir\'a en:
+\begin{itemize}
+	\item{Reuni\'on antes de cada fase de desarrollo del proyecto para evaluar la existencia de nuevos riesgos en caso de existir y poder determinar nuevos planes de mitigaci\'on y contingencia.}
+	\item{Finalizada cada fase, se realizara el mismo an\'alisis para determinar si fueron encontrados errores y reparados y guardar esa informaci\'on para las nuevas fases de desarrollo.}
+	\item{Realizar constantemente retroalimentaci\'on en base al usuario, con la finalidad de tener la apreciaci\'on de alg\'un experto en el tema para visualizar riesgos que no se hayan detectado con alguno de los dos m\'etodos anteriores.}
+
+
 
 
 
