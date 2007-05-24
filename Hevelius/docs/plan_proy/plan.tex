@@ -103,9 +103,72 @@ escalabilidad del sistema de control y el no cumplimiento de los est\'andares AL
 \subsection{Diagn\'ostico de la situaci\'on actual}
 \subsubsection{Situaci\'on Actual}
 
-En la actualidad cada telescopio se controla con un software diferente desde el lugar en
-que se encuentra el mismo y, en general, estos programas de control son bastante complejos 
-de usar, una \'imagen que ejemplifica esta situaci\'on es la siguiente:
+Los telescopios son una herramienta fundamental para la astronomia, cada
+perfeccionamiento del telescopio ha sido seguido de avances en la compresi\'on 
+del universo.
+Existen varios tipos de telescopio, notablemente refractores, que utilizan 
+lentes, reflectores, que tienen un espejo c\'oncavo en lugar de la lente del
+ objetivo, y catadi\'optricos, que poseen un espejo c\'oncavo y una lente correctora.
+
+El par\'ametro máimportante de un telescopio es el di\'ametro de su objetivo. 
+Un telescopio de aficionado generalmente tiene entre 76 y 150 mm de di\'ametro y 
+permite observar algunos detalles planetarios y much\'isimos objetos del cielo 
+profundo (c\'umulos, nebulosas y algunas galaxias) que es con el que nosotros
+trabajaremos. Los telescopios que superan  los 0,20 m de di\'ametro permiten 
+ver detalles lunares finos, detalles planetarios importantes y una gran cantidad 
+de c\'umulos, nebulosas y galaxias brillantes y que se encuentran implementados en
+los observatorios, y es a los que trata de abarcar nuestro software.
+
+Para caracterizar un telescopio y utilizarlo se emplean una serie de par\'ametros y accesorios:
+\begin{itemize}
+    \item Distancia Focal: es la longitud focal del telescopio, pero se define como la distancia del espejo principal hasta el final del tubo.
+    \item Di\'ametro del objetivo: Di\'ametro del espejo o lente primaria del telescopio.
+    \item Ocular: Accesorio peque\~no que colocado en el foco del telescopio permite magnificar la imagen de los objetos.
+    \item Lente de Barlow: Lente que generalmente duplica o triplica los aumentos del ocular cuando se observan los astros.
+    \item Filtro: peque\~no accesorio que generalmente opaca la imagen del astro pero que dependiendo de su color y material suele ser beneficioso y se ubica delante del ocular.
+    \item Raz\'on Focal: es el cociente entre la distancia focal (mm) y el di\'ametro (mm). (f/ratio)
+    \item Magnitud l\'imite: es la magnitud m\'axima que se puede ver en un lugar dado, es decir, el brillo de la estrella m\'as d\'ebil visible.
+    \item Tr\'ipode: Conjunto de tres patas generalmente de aluminio que le dan soporte y estabilidad al telescopio.
+    \item Portaocular: Orificio d\'onde se colocan el ocular y la lente de Barlow.
+\end{itemize}
+
+Como ya se puede apreciar es bastante complejo los componentes de los telescopio, pero m\'as a\'un cuando se quiere 
+obtener la ubicaci\'on de alguna estrella u objeto celeste, ya que no es s\'olo dar coordenadas, ya que tanto el objeto a
+observar como nuestro punto base(la tierra) se mueven en distintas formas, ya que durante el transcurso de un d\'ia, 
+la Tierra se habr\'a movido un poco a lo largo de su \'orbita alrededor del Sol, por lo que debe girar una peque\~na 
+distancia angular extra antes de que el Sol alcance su punto m\'as alto. En cambio las estrellas est\'an tan alejadas 
+que el movimiento de la Tierra a lo largo de su \'orbita genera una diferencia apenas apreciable con respecto a su 
+direcci\'on aparente, por lo que vuelven a su punto m\'as alto en algo menos de 24 horas o d\'ia solar. Una idea de esta
+situaci\'on es la siguiente:
+\begin{figure}[h!]
+ \centering
+ \includegraphics[scale=0.7]{tmp.eps}
+ \caption{Situaci\'on estrella-tierra}
+ %\label{fig:yeti}
+\end{figure} 
+
+Por lo que existen coordenadas especiales como son Sistema de coordenadas horizontales, Ecuatorianas, Ecl\'ipticas, 
+entre otras, para poder controlan esta situaci\'on, las cuales usan como referencia la hora actual, 
+ubicaci\'on entre otras.
+ Adem\'as de estas condiciones existe una gran cantidad de cosas que afectan el poder
+realizar este tipos de observaciones, como son la luz solar, que da\~na los telescopio, algunas condiciones
+climaticas, la luminocidad de la luna entre otras cosas, lo que hace que los operadores de telescopios esten
+sumamente atento a estos importante acontecimientos que pueden da\~nar gravemente el telescopio, actualmente existe
+c\'upulas donde su funci\'on consiste en proteger el telescopio y la instrumentaci\'on cient\'ifica, al tiempo que sigue sus
+ movimientos y le permite explorar la b\'oveda celeste.
+\newpage
+\begin{figure}[h!]
+ \centering
+ \includegraphics[scale=1.5]{cup.eps}
+ \caption{C\'upula que protege el telescopio}
+ %\label{fig:yeti}
+\end{figure}
+
+Despu\'es de esta peque\~na descripci\'on podemos apreciar que para poder manejar un telescopio se necesitan d\'ias de preparaci\'on
+antes de poder trabajar con el telescopio, ya que sus interfaces son complicadas y muy detalladas
+y para cada telescopio existe una interfaz distinta, implementada de distinta manera, dependiendo del lugar
+en donde se creo, puede estar en diversos idiomas, un ejemplo de una interfaz es la que se muestra acontinuaci\'on:
+
 \begin{figure}[h!]
  \centering
  \includegraphics[scale=0.5]{tele.eps}
@@ -113,14 +176,11 @@ de usar, una \'imagen que ejemplifica esta situaci\'on es la siguiente:
  %\label{fig:yeti}
 \end{figure}
 
-Esto genera un aumento en los costos de observaci\'on, puesto que es necesario 
-utilizar buena parte del tiempo en aprender y no olvidar c\'omo se usan estos programas. 
-Y si se cambia el telescopio, es necesario aprender c\'omo se utiliza, perdiendo gran 
-parte de lo aprendido con el programa anterior. Otro factor que aumenta los costos 
-de observaci\'on es que los programas actuales de control de telescopios carecen de 
-funcionalidad de control a distancia, lo que obliga a traer astr\'onomos de todo el
-mundo para que realicen sus investigaciones.
-
+Podemos observar la confuci\'on que puede lograr y lo poco amigable que son estas interfaces actualmente, y en en la mayoria
+tienen toda la informaci\'on necesaria para un astronomo de una forma desordenada y poco estandar.
+ Como la mayoria del tiempo el astronomo esta en busca de nuevos descubrimientos que ayuden al entendimiento del universo
+no se centran mucho en observar estrellas ya existentes, m\'as que para referencias para observar algo que podr\'ia estar 
+cerca, y para ello deben consultar catalogos de estrellas, siendo un atraso la busqueda de ella en el tiempo de observaci\'on.
 
 \subsubsection{Identificaci\'on de problemas y deficiencias}
 \textbf{Unicidad de Software:} En la actualidad existen diversos tipos de telescopios, 
