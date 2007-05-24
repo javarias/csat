@@ -365,39 +365,23 @@ Adem\'as, el ambiente del desarrollo tiene las siguientes caracter\'isticas:
   de aproximadamente cinco meses a partir de la fecha de entrega de este informe.
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% revizar de aqui hacia abajo %%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%% (ITERATIVO)
-
-
 
 Teniendo en cuenta el conjunto de caracter\'isticas del proyecto, se
-decide usar un m\'etodo \'agil de desarrollo para la
+decide usar un modelo de desarrollo en fases para la
 mayor\'ia de las tareas; espec\'ificamente se prevee el uso del \emph{Modelo
-Evolutivo} (tambi\'en llamado \emph{dise\~no continuo} o \emph{dise\~no
-incremental}) en el trabajo. Sin embargo, no es posible
-usar un m\'etodo \'agil de forma exclusiva, porque es necesario cumplir con
-las fechas de entregas intermedias predeterminadas por los ramos
-``Ingenier\'ia de Software'' y ``Taller de desarrollo de Software''.
-Tambi\'en ser\'a necesario contar al final del desarrollo con una
-documentaci\'on comprensible por el cliente\footnote{que en el caso del
-  proyecto presente est\'a compuesto de ingenieros inform\'aticos y
-  electr\'onicos} del dise\~no y del c\'odigo del software, cosa que se
-considera m\'as f\'acil usando algunos elementos de un proceso planificado.
-Por
-tanto, el uso parcial de un proceso planificado ser\'a inevitable.
+Iterativo} en el trabajo. Sin embargo, no podemos desechar el \emph{Modelo
+Incremental}, debido a la posible implementaci\'on de m\'odulos no considerados en un
+principio en el software.
 
 Habiendo elegido este m\'etodo de desarrollo, es necesario realizar las
-siguientes actividades durante el desarrollo para el modelo evolutivo:
+siguientes actividades durante el desarrollo para el modelo iterativo:
 
 \begin{enumerate}
 \item \textbf{Pruebas:} los requerimientos (funcionales o no-funcionales) deben
   ser transformados en pruebas automatizables.
-\item \textbf{Construir:} el c\'odigo producido debe ser siempre en un
+\item \textbf{Construir:} el c\'odigo producido debe estar siempre en un
   estado que permite su compilaci\'on.
-\item \label{escuchar} \textbf{Escuchar:} La comunicaci\'on a lo largo del desarrollo del proyecto
+\item \textbf{Escuchar:} La comunicaci\'on a lo largo del desarrollo del proyecto
 con el cliente, debe ser fluida, esto para atender a las 
   verdaderas necesidades y para solicitar sus comentarios sobre el
   estado del desarrollo, y posibles cambios en los requerimientos.
@@ -406,20 +390,18 @@ con el cliente, debe ser fluida, esto para atender a las
   dise\~no del sistema.
   Esta actividad hay que hacerla durante todo el tiempo del desarrollo,
   adapt\'andose a funcionalidad agregada.
-\item \label{comunicar} \textbf{Comunicaci\'on dentro del equipo:} es importante
-  para el uso de un m\'etodo \'agil que la comunicaci\'on entre los integrantes funcione
+\item \textbf{Comunicaci\'on dentro del equipo:} es importante
+  que la comunicaci\'on entre los integrantes funcione
   muy bien, es decir, todos deben saber la mayor\'ia del tiempo en qu\'e
   est\'an trabajando los dem\'as y cu\'ales son los cambios realizados por
   ellos.
 \end{enumerate}
 
-Para los puntos \ref{escuchar} y \ref{comunicar} se necesitan adem\'as
-muchas versiones intermedias.
-
 Para el componente planificado, hay que hacer un plan inicial de
 recursos y tiempo necesitado, para lo que sirve este documento, y
 controlar el progreso actual del proyecto, para lo que sirven los
 \emph{fichas de estado}.
+
 Adem\'as es necesario documentar el dise\~no actual del programa.
 
 
@@ -427,28 +409,29 @@ Adem\'as es necesario documentar el dise\~no actual del programa.
 \subsection{Herramientas y t\'ecnicas de soporte para el desarrollo}
 \subsubsection{T\'ecnicas a utilizar en el desarrollo del proyecto}
 
-Durante el desarrollo del proyecto se utilizar\'a el m\'etodo evolutivo ya que es necesario contar con una planificaci\'on a seguir en los meses de desarrollo. Adem\'as, es necesario una documentaci\'on del desarrollo del proyecto para futuras modificaciones.\\
+Durante el desarrollo del proyecto se utilizar\'a el m\'etodo de desarrollo en fases iterativo, 
+ya que como hay ejecutables desde el mismo comienzo del proyecto, nuestro cliente puede examinarlos 
+y proponer los cambios necesario (si los hubiera). Tambi\'en la empresa tiene una r\'apida 
+retroalimentaci\'on de lo que funciona y lo que no, ya que las pruebas se realizan desde el 
+comienzo mismo del proyecto y no se debe esperar al final para hacer las modificaciones necesarias.\\
 
-Se opt\'o por este m\'etodo debido a la seguridad que da su planificaci\'on al cliente, ya que \'el puede \textit{ver} en que se est\'a trabajando y cuales ser\'an los pr\'oximos pasos a seguir.\\
+Se opt\'o por este m\'etodo debido a la seguridad que da su planificaci\'on al cliente, ya que \'el 
+puede \textit{ver} en que se est\'a trabajando y cuales ser\'an los pr\'oximos pasos a seguir.\\
 
-Dentro de los lenguajes evaluados, se opt\'o por la programaci\'on en C++ al ser este un potente lenguaje con una orientaci\'on a objetos que facilita el dise\~no gracias a las herramientas de planificaci\'on y modelamiento de UML. Todos los integrantes del grupo, cuentan con conocimientos en C y otros en C++. Para quienes no cuenta con los conocimientos en C, el paso a C++ es diminuto en comparaci\'on con otros lenguajes de programaci\'on.\\
+Dentro de los lenguajes de programaci\'on, nuestro cliente nos requiri\'o el uso de ciertos lenguajes 
+de programaci\'on, debido a est\'andares interncionales. Estos lenguajes son: C, C++, Java y Phyton. 
+Todos los integrantes del grupo, cuentan con conocimientos en C, Java y otros en C++.\\
 
-Dentro de los lenguajes descartados, se encuentra Java. Esto se debe principalmente a que los requerimientos de hardware de su m\'aquina virtual, en muchos cosas sobrepasa las caracter\'isticas de los equipos en los que podremos desarrollar el proyecto. Esta situaci\'on a provocado que no exista una empat\'ia por parte del grupo hacia Java, debido a la ralentizaci\'on que produce en los equipos personales la realizaci\'on de otras operaciones.\\
-
-Es posible que se utilice alguna herramienta de dise\~no vectorial para la creaci\'on de las gr\'aficas a utilizar en el software, pero a\'un no se ha descartado ni confirmado ninguna de ellas.\\
-
-Para asegurar la calidad de software, se realizar\'an constantes revisiones del producto con el cliente, de forma que esto permita obtener una retroalimentaci\'on y as\'i mejorar o cambiar peque\~nos defectos en corto tiempo.\\
-
-Dentro de este mismo marco, utilizaremos la herramienta de control de versiones SVN para mantener un desarrollo ordenado, una coordinaci\'on entre los desarrolladores, saber cual de los desarrolladores realiz\'o que cambio, etc. 
-Adem\'as, se planea la utilizaci\'on la herramienta bugtracker\footnote{Sistema dise\~nado especialmente para manejar reportes de errores} Trac\footnote{\url{http://www.edgewall.com/trac/}}.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Es posible que se utilice alguna herramienta de dise\~no vectorial para la creaci\'on de las gr\'aficas 
+a utilizar en el software, pero a\'un no se ha descartado ni confirmado ninguna de ellas.\\
 
 
 \subsubsection{Herramientas o plataformas espec\'ificas a utilizar}
 
-La plataforma operacional de Hevelius est\'a constituida por el Sistema Operativo Linux Fedora Core, debido a que es esta la distribuci\'on utilizada por nuestro cliente para desarrollar software.\\
-%% AGREGAR ACS
+La plataforma operacional de Hevelius est\'a constituida por el Sistema Operativo Linux Fedora Core, 
+debido a que es esta la distribuci\'on utilizada por nuestro cliente para desarrollar software. Esta 
+distribuci\'on a su vez debe contar con el framework ACS en su versi\'on 6.0 o superior.\\
+
 
 %%%%%%%%%  REVISAR   %%%%%%%%%%%%%%%%%%%%
 
@@ -512,7 +495,7 @@ Posee un buen uso del lenguaje español oral y escrito, pero destaca por tener
 buen manejo del idioma ingl\'es, tanto oral como escrito, estando certificado
 por la evaluaci\'on First Certificate in English de la Universidad de Cambridge.
 
-Sus hobbies son el volleyball, tennis y juegos de computador. Dentro de \'estos
+Sus hobbies son el volleyball, tenis y juegos de computador. Dentro de \'estos
 destaca que se encuentra en la rama de Volleyball de la Universidad T\'ecnica
 Federico Santa Mar\'ia.
 
@@ -557,15 +540,25 @@ Posee dominio del idioma Ingl\'es a nivel intermedio (t\'ecnico y escrito).
 
 	\item[Carlos Alberto Guajardo Miranda].
 
-Es un alumno proveniente de la RWTH Aachen, Alemania, que este a\~no ha llegado a la UTFSM a trav\'es de una beca de intercambio obtenida en el pa\'is del cual es originario, el cual, en sus ganas de trabajar e interactuar con sus nuevos compa\~neros chilenos, eligi\'o la asignatura de Ingenier\'ia de Software, en donde se integra a la empresa Taranis, equipo el cual lo acoge desde el primer momento.
+Persona resposable y met\'odica. Es una persona que se esfuerza por lograr que
+las cosas funcionen bien, para lo cual utiliza tanto los conocimientos que ha
+obtenido como soluciones que el mismo pueda ingeniar.
 
-Se acaracteriza por ser una persona que siempre trata de entender las cosas a trav\'es de la comunicaci\'on con otras personas, especialmente potenciado por su necesidad de adaptaci\'on con la cultura y el idioma de Chile, y su deseo de transmitir su forma de vida en su pa\'is de procedencia. 
+Muestra inter\'es principalmente por las \'areas de Modelos y M\'etodos
+cuantitativos y por la de Sistemas Computacionales. Esto no quita que
+le guste desarrollar software, sino que remarca el hecho de que le gusta
+desarrollar para solucionar problemas.
 
-Es capaz de identificar problemas con rapidez y proponer soluciones, ya sean soluciones propias o buscando a la gente que m\'as adecuada para resolverlos; adem\'as, suele hacer planes factibles y realizarlos, de mostrando efectividad en el trabajo. Por lo mismo es que tambi\'en cumple con el trabajo prometido, por su consecuencia a la hora de adquirir compromisis, y conocer sus l\'imites de trabajo.
+Posee un buen uso del lenguaje español oral y escrito, pero destaca por tener
+buen manejo del idioma ingl\'es, tanto oral como escrito, estando certificado
+por la evaluaci\'on First Certificate in English de la Universidad de Cambridge.
 
-Estas caracter\'isticas personales, as\'i como su desempe\~no acad\'emico le permitieron lograr una beca del servicio alem\'an de intercambio acad\'emico (DAAD) para sustentar su estad\'ia de intercambio en la UTFSM. Sus \'areas de inter\'es en el campo inform\'atico son la fiabilidad y seguridad de sistemas, comunicaci\'on de datos, y el modelamiento matem\'atico. 
+Sus hobbies son el volleyball, tenis y juegos de computador. Dentro de \'estos
+destaca que se encuentra en la rama de Volleyball de la Universidad T\'ecnica
+Federico Santa Mar\'ia.
 
-Fuera del campo inform\'atico, ha sido tenismesista por los \'ultimos 17 a\~nos de su vida. Posee dominio de los idiomas Alem\'an, el cual es su lengua materna, Ingl\'es a nivel avanzado y posee buen manejo del idioma Espa\~nol.
+
+detallista, perfeccionista, perseverante, comprometido, responsable, 
 
                 \begin{itemize}
                 \item{Conocimientos T\'ecnicos:}
@@ -656,9 +649,9 @@ A partir de los datos tabulados, se puede decir que la mayor\'ia de los recursos
 
         \item An\'alisis de insuficiencias de los miembros del equipo, si las hubiere.
 
+
+
 %%%%%%%%%%%%%%%%%%%% REVISAR %%%%%%%%%%%%%%%%%%%%%%
-
-
 
 A partir de lo anterior, las insufiencias que se deber\'ian cubrir son los siguientes:
 
@@ -681,9 +674,9 @@ Para el mejoramiento de las insuficiencias detectadas, el equipo recurrir\'a al 
 		Para llevar a cabo alguno de estos planes, dependemos del trabajo que se prosiga con el tiempo, ya que a partir de este veremos en que temas aquel integrante a resultado especialista e imprescindible, para la b\'usqueda de un nuevo integrante durante el per\'iodo de vacaciones, luego de un an\'alisis de trabajo del integrante retirado, como tambi\'en puede darse el caso de que su trabajo sea perfectamente repartible entre los integrantes que se quedan. Como la segunda opci\'on resulta ser, a vista del equipo, la que menos compromete factores externos o que escapen de su alcance, la l\'ogica de trabajo ser\'a repartir tareas de distinto tipo a distintos integrantes del grupo, para que as\'i se especialice en varias \'areas de trabajo y as\'i evitar problemas de desconocimiento de los temas por falta de uno de los integrantes faltantes.
 		\end{itemize}
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \end{itemize}
 
 
