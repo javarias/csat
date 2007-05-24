@@ -376,9 +376,34 @@ componentes de software, se podr\'ian usar componentes realizados por otras pers
 asi como realizar cambios en componentes que utiliza nuestro software, obteniendo un
 producto de alta modularidad, enfocado al trabajo por componentes.
 
-\subsubsection{Alternativa 2: YYY+1} %%%% TODOS
+\subsubsection{Alternativa 2: Reutilizaci\'on de software de control de telescopios} %%%% TODOS
+Realizar un programa que reutilice las aplicaciones existentes detectando el telescopio
+que se quiere controlar y luego llamando a la aplicaci\'on correspondiente.
 
+En m\'as detalle, consiste en realizar una base de datos que contedr\'ia una 
+asociaci\'on entre los telescopios y el programa que los controla. Para reducir
+el tama\~no de las distribuciones se utilizar\'ia un sistema distribuido de los
+distintos programas, de manera que cuando se detecte el telescopio que se quiera
+controlar, se haga una petici\'on de descarga el software requerido para su control.
 
+En esta soluci\'on aparecen muchos problemas, destacando los problemas legales en 
+cuanto a tema de patentes y derechos de autor, los problemas de diferencia de 
+interfaz gr\'afica, recursos necesarios del equipo poco claros y variables seg\'un 
+el telescopio que se controle.
+
+De los derechos legales lo principal ser\'ia el tema de las patentes y los derechos
+de autor, ya que utilizar\'iamos programas hechos por otras personas que muchas 
+veces tienen patentes y est\'a restringido su uso por decisi\'on de sus autores. 
+Por la gran cantidad de programas existentes, nos ser\'ia imposible hacer peticiones 
+a cada uno para usar su programa.
+
+Debido a que en esta soluci\'on llamamos a programas hechos por otras personas, para
+cada telescopio tendr\'iamos una interfaz gr\'afica diferente, lo cual deja uno de 
+los principales problemas sin mejorar.
+
+Ya que se utilizan distintos programas dependiendo del telescopio que se quiera 
+controlar, no podr\'ia asegurarse los requerimientos del equipo para el control del
+telescopio. Se podr\'ia poner el mayor de los casos, pero no es lo m\'as adecuado.
 
 \subsection{Soluci\'on recomendada} %%%% TOMAS
 La mejor soluci\'on que encontramos es la alternativa 1, en la cual se piensa construir
