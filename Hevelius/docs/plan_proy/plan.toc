@@ -19,15 +19,15 @@
 \contentsline {subsubsection}{\numberline {3.2.1}T\'ecnicas a utilizar en el desarrollo del proyecto}{14}
 \contentsline {subsubsection}{\numberline {3.2.2}Herramientas o plataformas espec\'ificas a utilizar}{15}
 \contentsline {subsection}{\numberline {3.3}Personal y capacitaci\'on del grupo de desarrollo}{15}
-\contentsline {section}{\numberline {4}Gesti\'on de Riesgos}{20}
-\contentsline {subsection}{\numberline {4.1}An\'alisis de riesgos}{20}
-\contentsline {subsection}{\numberline {4.2}Preparaci\'on para control de riesgos}{22}
-\contentsline {subsection}{\numberline {4.3}Plan de Monitoreo}{31}
-\contentsline {section}{\numberline {5}Implementaci\'on (Entrega y Operaci\'on)}{32}
-\contentsline {subsection}{\numberline {5.1}Plan de operaci\'on del sistema}{32}
-\contentsline {subsection}{\numberline {5.2}Plan de implementaci\'on (entrega)}{32}
-\contentsline {subsection}{\numberline {5.3}Plan de mantenci\'on}{33}
-\contentsline {section}{\numberline {6}Planificaci\'on de Actividades}{34}
-\contentsline {subsection}{\numberline {6.1}Work Breakdown Structure (WBS)}{34}
-\contentsline {subsection}{\numberline {6.2}Carta Gantt}{34}
-\contentsline {subsection}{\numberline {6.3}Resumen de Compromisos}{34}
+\contentsline {section}{\numberline {4}Gesti\'on de Riesgos}{19}
+\contentsline {subsection}{\numberline {4.1}An\'alisis de riesgos}{19}
+\contentsline {subsection}{\numberline {4.2}Preparaci\'on para control de riesgos}{21}
+\contentsline {subsection}{\numberline {4.3}Plan de Monitoreo}{30}
+\contentsline {section}{\numberline {5}Implementaci\'on (Entrega y Operaci\'on)}{31}
+\contentsline {subsection}{\numberline {5.1}Plan de operaci\'on del sistema}{31}
+\contentsline {subsection}{\numberline {5.2}Plan de implementaci\'on (entrega)}{31}
+\contentsline {subsection}{\numberline {5.3}Plan de mantenci\'on}{32}
+\contentsline {section}{\numberline {6}Planificaci\'on de Actividades}{33}
+\contentsline {subsection}{\numberline {6.1}Work Breakdown Structure (WBS)}{33}
+\contentsline {subsection}{\numberline {6.2}Carta Gantt}{33}
+\contentsline {subsection}{\numberline {6.3}Resumen de Compromisos}{33}
