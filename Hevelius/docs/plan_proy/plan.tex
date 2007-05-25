@@ -81,7 +81,7 @@ proceso que se seguir\'a para llevar a cabo la soluci\'on propuesta.
 \end{itemize}
 
 En el contexto m\'as general, el desaf\'io planteado por el grupo ACS-UTFSM, es 
-crear un sistema de control de telescipios capaz de poder manejar cualquier telescopio 
+crear un sistema de control de telescopios capaz de poder manejar cualquier telescopio 
 que se conecte a trav\'es de las diferentes coordenadas utilizadas en el mundo 
 astron\'omico.\\
 
@@ -127,7 +127,7 @@ Para caracterizar un telescopio y utilizarlo se emplean una serie de par\'ametro
     \item Lente de Barlow: Lente que generalmente duplica o triplica los aumentos del ocular cuando se observan los astros.
     \item Filtro: peque\~no accesorio que generalmente opaca la imagen del astro pero que dependiendo de su color y material suele ser beneficioso y se ubica delante del ocular.
     \item Raz\'on Focal: es el cociente entre la distancia focal (mm) y el di\'ametro (mm). (f/ratio)
-    \item Magnitud l\'imite: es la magnitud m\'axima que se puede ver en un lugar dado, es decir, el brillo de la estrella m\'as d\'ebil visible.
+    \item Magnitud l\'imite: es la magnitud m\'inima que se puede ver en un lugar dado, es decir, el brillo de la estrella m\'as d\'ebil visible.
     \item Tr\'ipode: Conjunto de tres patas generalmente de aluminio que le dan soporte y estabilidad al telescopio.
     \item Portaocular: Orificio d\'onde se colocan el ocular y la lente de Barlow.
 \end{itemize}
@@ -174,7 +174,7 @@ un telescopio se necesitan d\'ias de preparaci\'on antes de poder trabajar con
 \'el, ya que sus interfaces son complicadas y muy detalladas y para cada telescopio 
 existe una interfaz distinta, implementada de diferente forma, dependiendo del lugar
 en donde se cre\'o, por esto mismo, puede estar en diversos idiomas. Un ejemplo de 
-una interfaz es la que se muestra a continuaci\'on:
+una interfaz es la que se muestra en la figura 3.
 
 \begin{figure}[h!]
  \centering
@@ -185,7 +185,7 @@ una interfaz es la que se muestra a continuaci\'on:
 
 Podemos observar la confusi\'on que puede lograr y lo poco amigable que son estas 
 interfaces actualmente y, en en la mayoria de los casos, tienen la informaci\'on 
-necesaria para un astr\'onomo pero de forma desordenada y poco est\'andar.
+necesaria para un operador de telescopio pero de forma desordenada y poco est\'andar.
  Como la mayor\'ia del tiempo el astr\'onomo est\'a en busca de nuevos descubrimientos 
 que ayuden al entendimiento del universo, no se centran mucho en observar estrellas 
 ya existentes, m\'as que para referencias para observar algo que podr\'ia estar 
@@ -315,7 +315,7 @@ todo el tiempo si el telescopio va a apuntar a lugares potencialmente da\~ninos
 para el mismo. Adem\'as, aumenta la seguridad del telescopio puesto que lo proteje 
 de la luz lunar, uno de los factores m\'as comunes que da\~nan al telescopio.
 
-	\item El modelo visual soluciona un aspecto muy importante de la dificultad 
+	\item El modelo visual soluciona un aspecto muy importante de la facilidad 
 de uso para el control a trav\'es de internet, ya que con este se puede saber en 
 todo momento hacia d\'onde est\'a apuntando f\'isicamente el telescopio, d\'andonos 
 un apoyo gr\'afico de lo que estamos haciendo. De la misma forma, tambi\'en ayuda 
@@ -343,7 +343,7 @@ permite repetir las observaciones hechas otros d\'ias.
 
 \item \textbf{Econ\'omicas:} El software no presenta restricciones econ\'omicas, 
 puesto que tanto el sistema operativo, como las herramientas de desarrollo que se 
-van a utilizar, son gratuitas. Por otro lado, los componentes de hardware como son 
+van a utilizar, son libres. Por otro lado, los componentes de hardware como son 
 el telescopio para pruebas y la c\'amara CCD si tienen un costo, pero en este caso 
 ser\'an facilitados por el cliente. Es por esto, que no vemos restricciones 
 econ\'omicas peligrosas.
@@ -353,7 +353,7 @@ controlan telescopios han tenido que usar diferentes aplicaciones para distintos
 telescopios a lo largo del tiempo que han dedicado a esto, prefiriendo quiz\'as, 
 el que usan actualmente, ya sea por costumbre o por gusto personal. Esto puede 
 dificultar que se acostumbren a usar el sistema propuesto, pero se espera que el 
-sistema final sea intuitivo y amigable, de manera que esto no debiera suceder.
+sistema final sea intuitivo y amistoso, de manera que esto no debiera suceder.
 
 \item \textbf{Tecnol\'ogicas:} En el aspecto tecnol\'ogico es importante destacar 
 que las pruebas iniciales no necesariamente se har\'an con un telescopio de 
@@ -813,10 +813,10 @@ Se debe crear un consenso en el equipo de trabajo para poder tomar la decisi\'on
 	\item Falta de conocimiento en cuanto al \'area de desarrollo.
 	\item Pocas pruebas realizadas al proyecto.
 	\item No cumplimiento con las fechas.
-	\item Mala elecci\'on en cuanto a lenguajes de programaci\'on.
 	\item Telescopio amateur no disponible.
 	\item Ausencia de alg\'un integrante del proyecto.
 	\item No cumplimiento con los est\'andares del proyecto ALMA-CONICYT.
+	\item Mala elecci\'on en cuanto a lenguajes de programaci\'on.
 \end{enumerate}
 
 \newpage
@@ -847,7 +847,7 @@ tema podr\'a medir la factibilidad de uso y aplicaci\'on.}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Plan de contingencia: 
 Replantear la modularidad del
 sistema, esto significa, volver a analizar los m\'odulos para encontrar posibles subsecciones
-y reformularlas. Luego de esto, a.nadir nuevos
+y reformularlas. Luego de esto, a\~nadir nuevos
 m\'odulos que permitan adaptar nuevos componentes de hardware en el sistema, junto con la vinculaci\'on a la interfaz de usuario.}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Resoluci\'on:
 La resoluci\'on de este riesgo consiste en asignar \'areas y tareas espec\'ificas a cada integrante del equipo de trabajo, para lograr la profundidad en los temas que se necesitan al desarrollar la soluci\'on.}\\ \hline
@@ -905,7 +905,9 @@ Hevelius busca no solo ser un sistema de control de telescopios con interfaz pro
 Debido a la complejidad y tama\~no de Hevelius, un excelente plan de mitigaci\'on corresponde a la modularidad que se le pueda dar a Hevelius, lo cual permite separar el proyecto en sectores y as\'i avanzar de forma paralela en diversas funcionalidades.
 Tambi\'en permite reducir el tama\~no del problema, puesto que se pueden crear diversos componentes para distintos problemas y funciones especificas, a dem\'as de permitir realizar nuevos m\'odulos y mejoras a travez del tiempo sin afectar el resto de funcionalidades.}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Plan de contingencia:
-En caso de haberse realizado una mala estimaci\'on del proyecto, el car\'acter de modularidad nos permitir\'a poder conectar componentes ACS ya desarrollados que reducir\'ian en gran parte la complejidad de desarrollo de funciones y evitar\'ia el duplicamiento de funciones ya hechas, lo cual nos permite utilizar el tiempo restante en los componentes faltantes para as\'i tener las funciones b\'asicas de Hevelius en el resto de tiempo que quede.}\\ \hline
+En caso de haberse realizado una mala estimaci\'on del proyecto, el car\'acter de modularidad nos permitir\'a 
+poder eliminar funcionalidades que a nuestro cliente no le interese, con lo cual podemos reducir el tama\~no del
+proyecto, permitiendo el termino de este.}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Resoluci\'on:
 todas las funcionalidades de Hevelius est\'an completas.}\\ \hline
 \end{tabular}
@@ -961,7 +963,7 @@ Prioridad: 5 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgos T\'ecnicos}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Contexto:
 Debido a la envergadura del proyecto, el realizar pruebas peri\'odicamente permite detectar una serie de errores y fallas en funciones o m\'odulos que deben ser revisados y reestructurados de ser necesario. Una pobre cantidad de pruebas realizadas implicar\'ia la no detecci\'on de fallas y errores que costar\'ian caro a la hora de la presentaci\'on y entrega final.}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Plan de Mitigaci\'on:
-Un excelente plan de mitigaci\'on es el testeo continuo de los diferentes m\'odulos que se vayan desarrollando en el tiempo, con la finalidad de detectar a tiempo todos los tipos de error a tiempo.
+Un excelente plan de mitigaci\'on es la realizaci\'on de pruebas unitarias para los diferentes m\'odulos que se vayan desarrollando en el tiempo, con la finalidad de detectar de manera oportuna diversos errores que se puedan presentar.
 Tambi\'en se incluye la asesoria de gente especializada en testing, con la finalidad de hacer las pruebas siguiendo alg\'un tipo de t\'ecnica y as\'i no perder demasiado tiempo en pruebas demasiadas recurrentes que tan solo retrasar\'ian el desarrollo del proyecto.}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Plan de contingencia:
 En caso de determinarse una baja cantidad de pruebas es necesario buscar apoyo externo con el fin de poder corregir los errores detectados y poder estimar soluciones y recalendarizar las fechas de las pr\'oximas pruebas con la finalidad de realizar la cantidad adecuadas de pruebas al proyecto.}\\ \hline
@@ -1009,21 +1011,21 @@ Cuando la tarea es terminada en el plazo establecido.}\\ \hline
 \centering
 \begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
 \hline
-ID 7 & \multicolumn{3}{|p{105mm}|}{Mala elecci\'on en cuanto a lenguajes de programaci\'on}\\ \hline
-Prioridad: 7 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgos T\'ecnicos}\\ \hline
-\multicolumn{2}{|p{70mm}|}{Probabilidad: Bajo} & \multicolumn{2}{|p{70mm}|}{Impacto: Alto}\\ \hline
+ID 7 & \multicolumn{3}{|p{105mm}|}{Telescopio amateur no disponible}\\ \hline
+Prioridad: 7 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgos del Proyecto}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Probabilidad: Bajo} & \multicolumn{2}{|p{70mm}|}{Impacto:Muy Alto}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Descripci\'on:
-El problema de escoger un lenguaje de programaci\'on que provea las caracter\'isticas necesarias para abordar el proyecto en su cabalidad, que sea del agrado de la plantilla de trabajo, que exista una documentaci\'on y plataforma asequible para su
-desarrollo es un aspecto crucial para concretar la soluci\'on.}\\ \hline
-\multicolumn{2}{|p{70mm}|}{Per\'iodo: Etapa de construcci\'ion} & \multicolumn{2}{|p{70mm}|}{Estado: Latente}\\ \hline
+El telescopio amateur es una pieza fundamental dentro de nuestro proyecto, ya que trabajamos en base a \'el, por lo que la ausencia de \'este retrasar\'ia y detendria el proyecto totalmente.}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Per\'iodo: Todo el Proyecto} & \multicolumn{2}{|p{70mm}|}{Estado: Latente}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Contexto:
-La amplia gama de lenguajes de programaci\'on que existen, para distintas plataformas y modelamientos, con distintos paradigmas y caracter\'isticas, proveen muchas alternativas tentadoras en el momento de concretar una soluci\'on. Ahora bien, escoger el o los lenguajes que provean todas las caracter\'isticas y funcionalidades que se requieren para desarrollar el proyecto es un tema que requiere un estudio detallado.}\\ \hline
+Actualmente el telescopio se encuentra en camino, puesto que ya fue comprado, lo que puede influir es s\'olo el tiempo de espera, el cual puede alargarse en gran cantidad, provocando retraso en el desarrollo del software.}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Plan de Mitigaci\'on:
-Para poder mitigar este riesgo se realizar\'a una previa investigaci\'on que permita definir el o los lenguajes adecuados para la construcci\'on. Dentro de los requerimientos de nuestro cliente, los lenguajes que podemos utilizar para desarrollar nuestro  software son C++, Java y Phyton. Lo que significa evaluar las caracter\'istica de ellos contrastandos con la funcionalidad requerida por desarrollar, la que sea de mayor manejo para los integrantes del proyecto y exista mayor documentaci\'on. }\\ \hline
+No es algo que dependa directamente de nosotros, si no de los proveedores.}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Plan de contingencia:
-El plan de contingencia corresponde a la utilizaci\'on de librer\'ias y/o otros lenguajes, dentro de los establecidos por el cliente, que pueda suplir y complementar las carencias de el o los lenguajes escogidos anteriormente. Una soluci\'on muy extrema, en la construcci\'on, ser\'a la regeneraci\'on de c\'odigo en otro lenguaje de los mencionados.}\\ \hline
+La primera alternativa ser\'a de tratar de conseguirse otro telescopio para poder desarrollar nuestro software. Una segunda alternativa, par\'alela a la ya mencionada ser\'ia tratar de continuar con el desarrollo por v\'ias que no impliquen, por el momento, pruebas f\'isicas con el telescopio.
+Finalmente tambien disponemos de un simulador de telescopios desarrollado por nuestro cliente el cual puede ser facilitado para futuras presentaci\'ones y pruebas en caso de no disponer del telescopio original.}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Resoluci\'on:
-Elegir el lenguaje que provea todas las funcionalidades necesarias para  el cumplimiento de los requerimientos, independiente de que exista menos documentaci\'on y no sea del total agrado de los integrantes del proyecto.}\\ \hline
+Consiste en tener un telescopio de remplazo.}\\ \hline
 \end{tabular}
 \caption{Hoja Control de Riesgo: ID7}
 \label{table:control_riegos_1}
@@ -1034,32 +1036,8 @@ Elegir el lenguaje que provea todas las funcionalidades necesarias para  el cump
 \centering
 \begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
 \hline
-ID 8 & \multicolumn{3}{|p{105mm}|}{Telescopio amateur no disponible}\\ \hline
-Prioridad: 8 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgos del Proyecto}\\ \hline
-\multicolumn{2}{|p{70mm}|}{Probabilidad: Bajo} & \multicolumn{2}{|p{70mm}|}{Impacto:Muy Alto}\\ \hline
-\multicolumn{4}{|p{148mm}|}{Descripci\'on:
-El telescopio amateur es una pieza fundamental dentro de nuestro proyecto, ya que trabajamos en base a \'el, por lo que la ausencia de \'este retrasar\'ia y detendria el proyecto totalmente.}\\ \hline
-\multicolumn{2}{|p{70mm}|}{Per\'iodo: Todo el Proyecto} & \multicolumn{2}{|p{70mm}|}{Estado: Latente}\\ \hline
-\multicolumn{4}{|p{148mm}|}{Contexto:
-Actualmente el telescopio se encuentra en camino, puesto que ya fue comprado, lo que puede influir es s\'olo el tiempo de espera, el cual puede alargarse en gran cantidad, provocando retraso en el desarrollo del software.}\\ \hline
-\multicolumn{4}{|p{148mm}|}{Plan de Mitigaci\'on:
-No es algo que dependa directamente de nosotros, si no de los proveedores.}\\ \hline
-\multicolumn{4}{|p{148mm}|}{Plan de contingencia:
-La primera alternativa ser\'a de tratar de conseguirse otro telescopio para poder desarrollar nuestro software. UNa segunda alternativa, par\'alela a la ya mencionada ser\'ia tratar de continuar con el desarrollo por v\'ias que no impliquen, por el momento, pruebas f\'isicas con el telescopio.}\\ \hline
-\multicolumn{4}{|p{148mm}|}{Resoluci\'on:
-Consiste en tener un telescopio de remplazo.}\\ \hline
-\end{tabular}
-\caption{Hoja Control de Riesgo: ID8}
-\label{table:control_riegos_1}
-\end{table}
-\newpage
-%%%%%%%%%%%%%%%%%%%9}%%%%%%%%%%%%%%%%%%%%%%%%%5
-\begin{table}[h!]
-\centering
-\begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
-\hline
-ID 9 & \multicolumn{3}{|p{105mm}|}{Ausencia de alg\'un integrante del proyecto.}\\ \hline
-Prioridad: 9 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgos del Proyecyo}\\ \hline
+ID 8 & \multicolumn{3}{|p{105mm}|}{Ausencia de alg\'un integrante del proyecto.}\\ \hline
+Prioridad: 8 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgos del Proyecyo}\\ \hline
 \multicolumn{2}{|p{70mm}|}{Probabilidad: Bajo} & \multicolumn{2}{|p{70mm}|}{Impacto:Muy Alto}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Descripci\'on: Que alg\'un integrante del grupo
 decida salirse de \'el por alguna raz\'on.
@@ -1084,17 +1062,17 @@ del proyecto, ya que a pesar de que podr\'ia quedar un poco por hacer, a esa alt
 no debiera ser mucho, por lo que el impacto ya no ser\'ia mayor.
 }\\ \hline
 \end{tabular}
-\caption{Hoja Control de Riesgo: ID9}
+\caption{Hoja Control de Riesgo: ID8}
 \label{table:control_riegos_1}
 \end{table}
 \newpage
-%%%%%%%%%%%%%%%%%%%%%%%%10%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%9}%%%%%%%%%%%%%%%%%%%%%%%%%5
 \begin{table}[h!]
 \centering
 \begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
 \hline
-ID 10 & \multicolumn{3}{|p{105mm}|}{No cumplimiento con los est\'andares del proyecto ALMA-CONICYT}\\ \hline
-Prioridad: 10 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgos del Proyecyo}\\ \hline
+ID 9 & \multicolumn{3}{|p{105mm}|}{No cumplimiento con los est\'andares del proyecto ALMA-CONICYT}\\ \hline
+Prioridad: 9 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgos del Proyecyo}\\ \hline
 \multicolumn{2}{|p{70mm}|}{Probabilidad: Bajo} & \multicolumn{2}{|p{70mm}|}{Impacto:Alto}\\ \hline
 \multicolumn{4}{|p{148mm}|}{Descripci\'on: El proyecto debe cumplir con los est\'andares que 
 proponer ALMA.
@@ -1124,9 +1102,38 @@ por componentes, dejar\'a de ser un riesgo, en cuanto tengamos en cuenta las dif
 entre secciones de c\'odigo, y lo separemos acorde a ello.
 }\\ \hline
 \end{tabular}
+\caption{Hoja Control de Riesgo: ID9}
+\label{table:control_riegos_1}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%10%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
+\hline
+ID 10 & \multicolumn{3}{|p{105mm}|}{Mala elecci\'on en cuanto a lenguajes de programaci\'on}\\ \hline
+Prioridad: 10 & \multicolumn{3}{|p{105mm}|}{Clase: Riesgos T\'ecnicos}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Probabilidad: Bajo} & \multicolumn{2}{|p{70mm}|}{Impacto: Alto}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Descripci\'on:
+El problema de escoger un lenguaje de programaci\'on que provea las caracter\'isticas necesarias para abordar el proyecto en su cabalidad, que sea del agrado de la plantilla de trabajo, que exista una documentaci\'on y plataforma asequible para su
+desarrollo es un aspecto crucial para concretar la soluci\'on.}\\ \hline
+\multicolumn{2}{|p{70mm}|}{Per\'iodo: Etapa de construcci\'ion} & \multicolumn{2}{|p{70mm}|}{Estado: Latente}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Contexto:
+La amplia gama de lenguajes de programaci\'on que existen, para distintas plataformas y modelamientos, con distintos paradigmas y caracter\'isticas, proveen muchas alternativas tentadoras en el momento de concretar una soluci\'on. Ahora bien, escoger el o los lenguajes que provean todas las caracter\'isticas y funcionalidades que se requieren para desarrollar el proyecto es un tema que requiere un estudio detallado.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Plan de Mitigaci\'on:
+Para poder mitigar este riesgo se realizar\'a una previa investigaci\'on que permita definir el o los lenguajes adecuados para la construcci\'on. Dentro de los requerimientos de nuestro cliente, los lenguajes que podemos utilizar para desarrollar nuestro  software son C++, Java y Phyton. Lo que significa evaluar las caracter\'istica de ellos contrastandos con la funcionalidad requerida por desarrollar, la que sea de mayor manejo para los integrantes del proyecto y exista mayor documentaci\'on. }\\ \hline
+\multicolumn{4}{|p{148mm}|}{Plan de contingencia:
+El plan de contingencia corresponde a la utilizaci\'on de librer\'ias y/o otros lenguajes, dentro de los establecidos por el cliente, que pueda suplir y complementar las carencias de el o los lenguajes escogidos anteriormente. Una soluci\'on muy extrema, en la construcci\'on, ser\'a la regeneraci\'on de c\'odigo en otro lenguaje de los mencionados.}\\ \hline
+\multicolumn{4}{|p{148mm}|}{Resoluci\'on:
+Elegir el lenguaje que provea todas las funcionalidades necesarias para  el cumplimiento de los requerimientos, independiente de que exista menos documentaci\'on y no sea del total agrado de los integrantes del proyecto.}\\ \hline
+\end{tabular}
 \caption{Hoja Control de Riesgo: ID10}
 \label{table:control_riegos_1}
 \end{table}
+\newpage
+
+
 
 \subsection{Plan de Monitoreo}
 En vista de que todos los riesgos consisten en una amenaza permanente al proyecto es necesario 
@@ -1221,7 +1228,9 @@ todos los usuarios.\\
 Puede existir una asistencia remota, principalmente a trav\'es de correo 
 electr\'onico para tratar de resolver cualquier tipo de problema que pueda 
 existir.
-
+A dem\'as contamos con la asistencia de ACS-UTFSM Group, quienes se encargar\'ian 
+de la manteci\'on de Hevelius, as\'i como el soporte en caso de detectarce 
+BUGS dentro del software.
 
 
 \newpage
@@ -1373,7 +1382,7 @@ del espacio y almacenarlas en el PC que se utiliza. \newline
 \textbf{\textit{Entregable:}} Aplicaci\'on que captura y guarda imagen.} \\ \hline
 
 \textit{1.4} & \multicolumn{4}{|p{120mm}|}{\textit{Primer Entregable}} \\ \hline
-\multicolumn{5}{|p{150mm}|}{\textbf{\textit{Entregable:}} Corresponde a la interfaz con la captura de im\'agenes incluida.} \\ \hline
+\multicolumn{5}{|p{150mm}|}{\textbf{\textit{Entregable:}} Corresponde a la interfaz y la captura de im\'agenes.} \\ \hline
 
 \textit{2.1} & \multicolumn{4}{|p{120mm}|}{\textit{Conexi\'on GPS}} \\ \hline
 \multicolumn{5}{|p{150mm}|}{\textbf{\textit{Entregable:}} Aplicaci\'on que retorne la ubicaci\'on del 
