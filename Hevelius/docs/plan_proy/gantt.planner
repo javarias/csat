@@ -24,8 +24,8 @@
     </calendar>
   </calendars>
   <tasks>
-    <task id="1" name="Interfaz" note="" work="259200" start="20070525T000000Z" end="20070622T200000Z" work-start="20070525T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="2" name="Creaci&#xF3;n Interfaz" note="&#10;" work="108000" duration="410400" start="20070525T000000Z" end="20070620T200000Z" work-start="20070525T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+    <task id="1" name="Primera Etapa" note="" work="388800" start="20070525T000000Z" end="20070622T200000Z" work-start="20070525T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="2" name="Creaci&#xF3;n Interfaz" note="&#10;" work="259200" duration="410400" start="20070525T000000Z" end="20070620T200000Z" work-start="20070525T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
         <constraint type="must-start-on" time="20070525T000000Z"/>
       </task>
       <task id="3" name="Captura de Im&#xE1;genes" note="" work="108000" duration="410400" start="20070525T000000Z" end="20070620T200000Z" work-start="20070525T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
@@ -34,65 +34,71 @@
       <task id="4" name="Testeo y Uni&#xF3;n" note="" work="21600" duration="43200" start="20070621T000000Z" end="20070622T200000Z" work-start="20070621T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
         <constraint type="must-start-on" time="20070621T000000Z"/>
       </task>
-      <task id="5" name="Primer Entregable" note="" work="21600" start="20070622T000000Z" end="20070622T200000Z" work-start="20070622T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="5" name="Primer Entregable" note="" work="0" start="20070622T000000Z" end="20070622T140000Z" work-start="20070622T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20070622T000000Z"/>
       </task>
     </task>
-    <task id="6" name="Seguimiento de Estrellas" note="" work="518400" start="20070622T000000Z" end="20070815T200000Z" work-start="20070622T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="7" name="Tracking" note="" work="216000" duration="475200" start="20070622T000000Z" end="20070723T200000Z" work-start="20070622T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+    <task id="6" name="Segunda Etapa" note="" work="820800" start="20070622T000000Z" end="20070815T200000Z" work-start="20070622T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="7" name="Conexi&#xF3;n GPS" note="" work="64800" duration="129600" start="20070622T000000Z" end="20070629T200000Z" work-start="20070622T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
         <constraint type="must-start-on" time="20070622T000000Z"/>
       </task>
-      <task id="8" name="Pointing Manual" note="" work="151200" duration="302400" start="20070724T000000Z" end="20070810T200000Z" work-start="20070724T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+      <task id="8" name="Tracking" note="" work="259200" duration="388800" start="20070629T000000Z" end="20070724T200000Z" work-start="20070629T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+        <constraint type="must-start-on" time="20070629T000000Z"/>
+      </task>
+      <task id="9" name="Presenting" note="" work="259200" duration="388800" start="20070629T000000Z" end="20070724T200000Z" work-start="20070629T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+        <constraint type="must-start-on" time="20070629T000000Z"/>
+      </task>
+      <task id="10" name="Pointing Manual" note="" work="216000" duration="302400" start="20070724T000000Z" end="20070810T200000Z" work-start="20070724T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
         <constraint type="must-start-on" time="20070724T000000Z"/>
       </task>
-      <task id="9" name="Presenting" note="" work="108000" duration="475200" start="20070622T000000Z" end="20070723T200000Z" work-start="20070622T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
-        <constraint type="must-start-on" time="20070622T000000Z"/>
-      </task>
-      <task id="10" name="Testeo y Uni&#xF3;n" note="" work="21600" duration="64800" start="20070811T000000Z" end="20070815T200000Z" work-start="20070813T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+      <task id="11" name="Testeo y Uni&#xF3;n" note="" work="21600" duration="64800" start="20070811T000000Z" end="20070815T200000Z" work-start="20070813T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
         <constraint type="must-start-on" time="20070811T000000Z"/>
       </task>
-      <task id="11" name="Segundo Entregable" note="" work="21600" start="20070815T000000Z" end="20070815T200000Z" work-start="20070815T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="12" name="Segundo Entregable" note="" work="0" start="20070815T000000Z" end="20070815T140000Z" work-start="20070815T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20070815T000000Z"/>
       </task>
     </task>
-    <task id="12" name="Restricciones" note="" work="432000" start="20070815T000000Z" end="20070914T200000Z" work-start="20070815T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="13" name="Tercera Etapa" note="" work="345600" start="20070815T000000Z" end="20070914T200000Z" work-start="20070815T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="6" type="FS"/>
       </predecessors>
-      <task id="13" name="Restricciones de Observaci&#xF3;n" note="" work="129600" duration="432000" start="20070815T000000Z" end="20070911T200000Z" work-start="20070815T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+      <task id="14" name="Modelo OpenGL" note="" work="108000" duration="259200" start="20070815T000000Z" end="20070830T200000Z" work-start="20070815T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
         <constraint type="must-start-on" time="20070815T000000Z"/>
       </task>
-      <task id="14" name="Modelo OpenGL" note="" work="151200" duration="432000" start="20070815T000000Z" end="20070911T200000Z" work-start="20070815T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
-        <constraint type="must-start-on" time="20070815T000000Z"/>
+      <task id="15" name="Restricciones de Observaci&#xF3;n" note="" work="108000" duration="194400" start="20070830T000000Z" end="20070911T200000Z" work-start="20070830T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+        <constraint type="must-start-on" time="20070830T000000Z"/>
       </task>
-      <task id="15" name="Bot&#xF3;n de Emergencia" note="" work="108000" duration="432000" start="20070815T000000Z" end="20070911T200000Z" work-start="20070815T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
-        <constraint type="must-start-on" time="20070815T000000Z"/>
+      <task id="16" name="Bot&#xF3;n de Emergencia" note="" work="108000" duration="194400" start="20070830T000000Z" end="20070911T200000Z" work-start="20070830T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+        <constraint type="must-start-on" time="20070830T000000Z"/>
       </task>
-      <task id="16" name="Testeo y Uni&#xF3;n" note="" work="21600" duration="64800" start="20070912T000000Z" end="20070914T200000Z" work-start="20070912T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+      <task id="17" name="Testeo y Uni&#xF3;n" note="" work="21600" duration="64800" start="20070912T000000Z" end="20070914T200000Z" work-start="20070912T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
         <constraint type="must-start-on" time="20070912T000000Z"/>
       </task>
-      <task id="17" name="Tercer Entregable" note="" work="21600" start="20070914T000000Z" end="20070914T200000Z" work-start="20070914T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="18" name="Tercer Entregable" note="" work="0" start="20070914T000000Z" end="20070914T140000Z" work-start="20070914T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20070914T000000Z"/>
       </task>
     </task>
-    <task id="18" name="Accesorios" note="" work="280800" start="20070915T000000Z" end="20071011T200000Z" work-start="20070917T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="19" name="Acceso Remoto" note="" work="108000" duration="237600" start="20070915T000000Z" end="20071001T200000Z" work-start="20070917T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+    <task id="19" name="Cuarta Etapa" note="" work="280800" start="20070915T000000Z" end="20071011T200000Z" work-start="20070917T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="20" name="Acceso Remoto" note="" work="108000" duration="237600" start="20070915T000000Z" end="20071001T200000Z" work-start="20070917T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
         <constraint type="must-start-on" time="20070915T000000Z"/>
       </task>
-      <task id="20" name="Login" note="" work="108000" duration="237600" start="20070915T000000Z" end="20071001T200000Z" work-start="20070917T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
-        <constraint type="must-start-on" time="20070915T000000Z"/>
+      <task id="21" name="Telemetr&#xED;a" note="" work="64800" duration="237600" start="20070917T000000Z" end="20071001T200000Z" work-start="20070917T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+        <constraint type="must-start-on" time="20070917T000000Z"/>
       </task>
-      <task id="21" name="Historial" note="" work="43200" duration="108000" start="20071002T000000Z" end="20071008T200000Z" work-start="20071002T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+      <task id="22" name="Login" note="" work="43200" duration="108000" start="20071002T000000Z" end="20071008T200000Z" work-start="20071002T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
         <constraint type="must-start-on" time="20071002T000000Z"/>
       </task>
-      <task id="22" name="Testeo y Uni&#xF3;n" note="" work="21600" duration="64800" start="20071009T000000Z" end="20071011T200000Z" work-start="20071009T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+      <task id="23" name="Historial" note="" work="43200" duration="108000" start="20071002T000000Z" end="20071008T200000Z" work-start="20071002T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+        <constraint type="must-start-on" time="20071002T000000Z"/>
+      </task>
+      <task id="24" name="Testeo y Uni&#xF3;n" note="" work="21600" duration="64800" start="20071009T000000Z" end="20071011T200000Z" work-start="20071009T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
         <constraint type="must-start-on" time="20071009T000000Z"/>
       </task>
     </task>
-    <task id="23" name="Testeo Final" note="" work="43200" duration="64800" start="20071011T000000Z" end="20071015T200000Z" work-start="20071011T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+    <task id="25" name="Testeo Final" note="" work="36000" duration="64800" start="20071011T000000Z" end="20071015T200000Z" work-start="20071011T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
       <constraint type="must-start-on" time="20071011T000000Z"/>
     </task>
-    <task id="24" name="Entregable Final" note="" work="21600" start="20071015T000000Z" end="20071015T200000Z" work-start="20071015T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="26" name="Entregable Final" note="" work="0" start="20071015T000000Z" end="20071015T140000Z" work-start="20071015T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="must-start-on" time="20071015T000000Z"/>
     </task>
   </tasks>
@@ -100,55 +106,49 @@
     <group id="1" name="" admin-name="" admin-phone="" admin-email=""/>
   </resource-groups>
   <resources>
-    <resource id="1" name="Esteban Espinoza M." short-name="E" type="1" units="0" email="eespinoz@alumnos.inf.utfsm.cl" note="" std-rate="1000"/>
-    <resource id="2" name="Marina Pilar D." short-name="M" type="1" units="0" email="mpilar@alumnos.inf.utfsm.cl" note="" std-rate="1000"/>
-    <resource id="3" name="Tom&#xE1;s Staig F." short-name="T" type="1" units="0" email="tstaig@alumnos.inf.utfsm.cl" note="" std-rate="1000"/>
-    <resource id="4" name="Carlos Guajardo M." short-name="C" type="1" units="0" email="cguajard@alumnos.inf.utfsm.cl" note="" std-rate="1000"/>
+    <resource id="1" name="Carlos Guajardo M." short-name="C" type="1" units="0" email="cguajard@alumnos.inf.utfsm.cl" note="" std-rate="1000"/>
+    <resource id="2" name="Tom&#xE1;s Staig F." short-name="T" type="1" units="0" email="tstaig@alumnos.inf.utfsm.cl" note="" std-rate="1000"/>
+    <resource id="3" name="Marina Pilar D." short-name="M" type="1" units="0" email="mpilar@alumnos.inf.utfsm.cl" note="" std-rate="1000"/>
+    <resource id="4" name="Esteban Espinoza M." short-name="E" type="1" units="0" email="eespinoz@alumnos.inf.utfsm.cl" note="" std-rate="1000"/>
   </resources>
   <allocations>
-    <allocation task-id="23" resource-id="1" units="17"/>
-    <allocation task-id="22" resource-id="1" units="8"/>
-    <allocation task-id="16" resource-id="1" units="8"/>
-    <allocation task-id="10" resource-id="1" units="8"/>
-    <allocation task-id="4" resource-id="1" units="13"/>
+    <allocation task-id="7" resource-id="1" units="25"/>
+    <allocation task-id="25" resource-id="1" units="14"/>
+    <allocation task-id="24" resource-id="1" units="17"/>
+    <allocation task-id="17" resource-id="1" units="17"/>
+    <allocation task-id="11" resource-id="1" units="17"/>
+    <allocation task-id="4" resource-id="1" units="25"/>
+    <allocation task-id="23" resource-id="1" units="20"/>
     <allocation task-id="20" resource-id="1" units="23"/>
-    <allocation task-id="15" resource-id="1" units="13"/>
-    <allocation task-id="14" resource-id="1" units="18"/>
-    <allocation task-id="8" resource-id="1" units="13"/>
-    <allocation task-id="7" resource-id="1" units="23"/>
-    <allocation task-id="3" resource-id="1" units="13"/>
-    <allocation task-id="23" resource-id="2" units="17"/>
-    <allocation task-id="22" resource-id="2" units="8"/>
-    <allocation task-id="16" resource-id="2" units="8"/>
-    <allocation task-id="10" resource-id="2" units="8"/>
-    <allocation task-id="4" resource-id="2" units="13"/>
+    <allocation task-id="15" resource-id="1" units="28"/>
+    <allocation task-id="9" resource-id="1" units="33"/>
+    <allocation task-id="2" resource-id="1" units="32"/>
+    <allocation task-id="7" resource-id="2" units="25"/>
+    <allocation task-id="25" resource-id="2" units="14"/>
+    <allocation task-id="24" resource-id="2" units="17"/>
+    <allocation task-id="17" resource-id="2" units="17"/>
+    <allocation task-id="11" resource-id="2" units="17"/>
+    <allocation task-id="4" resource-id="2" units="25"/>
+    <allocation task-id="23" resource-id="2" units="20"/>
     <allocation task-id="20" resource-id="2" units="23"/>
-    <allocation task-id="13" resource-id="2" units="15"/>
-    <allocation task-id="14" resource-id="2" units="18"/>
-    <allocation task-id="8" resource-id="2" units="13"/>
-    <allocation task-id="9" resource-id="2" units="11"/>
-    <allocation task-id="3" resource-id="2" units="13"/>
-    <allocation task-id="23" resource-id="3" units="17"/>
-    <allocation task-id="22" resource-id="3" units="8"/>
-    <allocation task-id="16" resource-id="3" units="8"/>
-    <allocation task-id="10" resource-id="3" units="8"/>
-    <allocation task-id="4" resource-id="3" units="13"/>
-    <allocation task-id="21" resource-id="3" units="20"/>
-    <allocation task-id="19" resource-id="3" units="23"/>
-    <allocation task-id="15" resource-id="3" units="13"/>
-    <allocation task-id="8" resource-id="3" units="13"/>
-    <allocation task-id="7" resource-id="3" units="23"/>
-    <allocation task-id="2" resource-id="3" units="13"/>
-    <allocation task-id="23" resource-id="4" units="17"/>
-    <allocation task-id="22" resource-id="4" units="8"/>
-    <allocation task-id="16" resource-id="4" units="8"/>
-    <allocation task-id="10" resource-id="4" units="8"/>
-    <allocation task-id="4" resource-id="4" units="13"/>
-    <allocation task-id="21" resource-id="4" units="20"/>
-    <allocation task-id="19" resource-id="4" units="23"/>
-    <allocation task-id="13" resource-id="4" units="15"/>
-    <allocation task-id="8" resource-id="4" units="13"/>
-    <allocation task-id="9" resource-id="4" units="11"/>
-    <allocation task-id="2" resource-id="4" units="13"/>
+    <allocation task-id="16" resource-id="2" units="28"/>
+    <allocation task-id="8" resource-id="2" units="33"/>
+    <allocation task-id="2" resource-id="2" units="32"/>
+    <allocation task-id="21" resource-id="3" units="14"/>
+    <allocation task-id="25" resource-id="3" units="14"/>
+    <allocation task-id="22" resource-id="3" units="20"/>
+    <allocation task-id="15" resource-id="3" units="28"/>
+    <allocation task-id="14" resource-id="3" units="21"/>
+    <allocation task-id="10" resource-id="3" units="36"/>
+    <allocation task-id="9" resource-id="3" units="33"/>
+    <allocation task-id="3" resource-id="3" units="13"/>
+    <allocation task-id="21" resource-id="4" units="14"/>
+    <allocation task-id="25" resource-id="4" units="14"/>
+    <allocation task-id="22" resource-id="4" units="20"/>
+    <allocation task-id="16" resource-id="4" units="28"/>
+    <allocation task-id="14" resource-id="4" units="21"/>
+    <allocation task-id="10" resource-id="4" units="36"/>
+    <allocation task-id="8" resource-id="4" units="33"/>
+    <allocation task-id="3" resource-id="4" units="13"/>
   </allocations>
 </project>
