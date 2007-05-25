@@ -103,21 +103,20 @@ escalabilidad del sistema de control y el no cumplimiento de los est\'andares AL
 \subsection{Diagn\'ostico de la situaci\'on actual}
 \subsubsection{Situaci\'on Actual}
 
-Los telescopios son una herramienta fundamental para la astronomia, cada
-perfeccionamiento del telescopio ha sido seguido de avances en la compresi\'on 
+Los telescopios son una herramienta fundamental para la astronom\'ia, cada
+perfeccionamiento del telescopio ha sido seguido de avances en la comprensi\'on 
 del universo.
 Existen varios tipos de telescopio, notablemente refractores, que utilizan 
 lentes, reflectores, que tienen un espejo c\'oncavo en lugar de la lente del
  objetivo, y catadi\'optricos, que poseen un espejo c\'oncavo y una lente correctora.
 
-El par\'ametro m\'aimportante de un telescopio es el di\'ametro de su objetivo. 
+El par\'ametro m\'as importante de un telescopio es el di\'ametro de su objetivo. 
 Un telescopio de aficionado generalmente tiene entre 76 y 150 mm de di\'ametro y 
 permite observar algunos detalles planetarios y much\'isimos objetos del cielo 
-profundo (c\'umulos, nebulosas y algunas galaxias) que es con el que nosotros
-trabajaremos. Los telescopios que superan  los 0,20 m de di\'ametro permiten 
-ver detalles lunares finos, detalles planetarios importantes y una gran cantidad 
-de c\'umulos, nebulosas y galaxias brillantes y que se encuentran implementados en
-los observatorios, y es a los que trata de abarcar nuestro software.
+profundo (c\'umulos, nebulosas y algunas galaxias). Los telescopios que superan  
+los 0,20 m de di\'ametro permiten ver detalles lunares finos, detalles planetarios 
+importantes y una gran cantidad de c\'umulos, nebulosas y galaxias brillantes 
+y que se encuentran implementados en los observatorios.
 
 Para caracterizar un telescopio y utilizarlo se emplean una serie de par\'ametros y accesorios:
 \begin{itemize}
@@ -132,14 +131,16 @@ Para caracterizar un telescopio y utilizarlo se emplean una serie de par\'ametro
     \item Portaocular: Orificio d\'onde se colocan el ocular y la lente de Barlow.
 \end{itemize}
 
-Como ya se puede apreciar es bastante complejo los componentes de los telescopio, pero m\'as a\'un cuando se quiere 
-obtener la ubicaci\'on de alguna estrella u objeto celeste, ya que no es s\'olo dar coordenadas, ya que tanto el objeto a
-observar como nuestro punto base(la tierra) se mueven en distintas formas, ya que durante el transcurso de un d\'ia, 
-la Tierra se habr\'a movido un poco a lo largo de su \'orbita alrededor del Sol, por lo que debe girar una peque\~na 
-distancia angular extra antes de que el Sol alcance su punto m\'as alto. En cambio las estrellas est\'an tan alejadas 
-que el movimiento de la Tierra a lo largo de su \'orbita genera una diferencia apenas apreciable con respecto a su 
-direcci\'on aparente, por lo que vuelven a su punto m\'as alto en algo menos de 24 horas o d\'ia solar. Una idea de esta
-situaci\'on es la siguiente:
+Como se puede apreciar los componentes de los telescopios son bastante complejos, 
+pero m\'as a\'un cuando se quiere obtener la ubicaci\'on de alguna estrella u objeto 
+celeste, ya que no es s\'olo dar coordenadas, porque tanto el objeto a observar como 
+nuestro punto base(la tierra) se mueven de distintas formas, debido a que durante el 
+transcurso de un d\'ia, la Tierra se habr\'a movido un poco a lo largo de su \'orbita 
+alrededor del Sol, por lo que debe girar una peque\~na distancia angular extra antes 
+de que el Sol alcance su punto m\'as alto. En cambio las estrellas est\'an tan alejadas 
+que el movimiento de la Tierra a lo largo de su \'orbita genera una diferencia apenas 
+apreciable con respecto a su direcci\'on aparente, por lo que vuelven a su punto m\'as 
+alto en algo menos de 24 horas o d\'ia solar. Una idea de esta situaci\'on es la siguiente:
 \begin{figure}[h!]
  \centering
  \includegraphics[scale=0.7]{tmp.eps}
@@ -147,15 +148,18 @@ situaci\'on es la siguiente:
  %\label{fig:yeti}
 \end{figure} 
 
-Por lo que existen coordenadas especiales como son Sistema de coordenadas horizontales, Ecuatorianas, Ecl\'ipticas, 
-entre otras, para poder controlan esta situaci\'on, las cuales usan como referencia la hora actual, 
-ubicaci\'on entre otras.
+Por lo que existen sistemas de coordenadas especiales como son Sistema de coordenadas 
+Horizontales, Ecuatoriales, Ecl\'ipticas, entre otras, para poder simplificar 
+esta situaci\'on. Estos sistemas de coordenadas usan como referencia la hora actual, 
+ubicaci\'on geogr\'afica y otros factores para realizar las conversiones entre ellas.
  Adem\'as de estas condiciones existe una gran cantidad de cosas que afectan el poder
-realizar este tipos de observaciones, como son la luz solar, que da\~na los telescopio, algunas condiciones
-climaticas, la luminocidad de la luna entre otras cosas, lo que hace que los operadores de telescopios esten
-sumamente atento a estos importante acontecimientos que pueden da\~nar gravemente el telescopio, actualmente existe
-c\'upulas donde su funci\'on consiste en proteger el telescopio y la instrumentaci\'on cient\'ifica, al tiempo que sigue sus
- movimientos y le permite explorar la b\'oveda celeste.
+realizar este tipos de observaciones, como son la luz solar, que da\~na los telescopios, 
+algunas condiciones clim\'aticas, la luminosidad de la luna, entre otras cosas, lo que 
+hace que los operadores de telescopios est\'en sumamente atentos a estos importantes 
+acontecimientos que pueden da\~nar gravemente el telescopio. Actualmente existen
+c\'upulas para los telescopios que tienen la funci\'on de proteger el telescopio y 
+la instrumentaci\'on cient\'ifica, al tiempo que sigue sus movimientos y le permite 
+explorar la b\'oveda celeste.
 \newpage
 \begin{figure}[h!]
  \centering
@@ -164,10 +168,12 @@ c\'upulas donde su funci\'on consiste en proteger el telescopio y la instrumenta
  %\label{fig:yeti}
 \end{figure}
 
-Despu\'es de esta peque\~na descripci\'on podemos apreciar que para poder manejar un telescopio se necesitan d\'ias de preparaci\'on
-antes de poder trabajar con el telescopio, ya que sus interfaces son complicadas y muy detalladas
-y para cada telescopio existe una interfaz distinta, implementada de distinta manera, dependiendo del lugar
-en donde se creo, puede estar en diversos idiomas, un ejemplo de una interfaz es la que se muestra acontinuaci\'on:
+Despu\'es de esta peque\~na descripci\'on podemos apreciar que para poder manejar 
+un telescopio se necesitan d\'ias de preparaci\'on antes de poder trabajar con 
+\'el, ya que sus interfaces son complicadas y muy detalladas y para cada telescopio 
+existe una interfaz distinta, implementada de diferente forma, dependiendo del lugar
+en donde se cre\'o, por esto mismo, puede estar en diversos idiomas. Un ejemplo de 
+una interfaz es la que se muestra a continuaci\'on:
 
 \begin{figure}[h!]
  \centering
@@ -176,11 +182,14 @@ en donde se creo, puede estar en diversos idiomas, un ejemplo de una interfaz es
  %\label{fig:yeti}
 \end{figure}
 
-Podemos observar la confuci\'on que puede lograr y lo poco amigable que son estas interfaces actualmente, y en en la mayoria
-tienen toda la informaci\'on necesaria para un astronomo de una forma desordenada y poco estandar.
- Como la mayoria del tiempo el astronomo esta en busca de nuevos descubrimientos que ayuden al entendimiento del universo
-no se centran mucho en observar estrellas ya existentes, m\'as que para referencias para observar algo que podr\'ia estar 
-cerca, y para ello deben consultar catalogos de estrellas, siendo un atraso la busqueda de ella en el tiempo de observaci\'on.
+Podemos observar la confusi\'on que puede lograr y lo poco amigable que son estas 
+interfaces actualmente y, en en la mayoria de los casos, tienen la informaci\'on 
+necesaria para un astr\'onomo pero de forma desordenada y poco est\'andar.
+ Como la mayor\'ia del tiempo el astr\'onomo est\'a en busca de nuevos descubrimientos 
+que ayuden al entendimiento del universo, no se centran mucho en observar estrellas 
+ya existentes, m\'as que para referencias para observar algo que podr\'ia estar 
+cerca de ellas y, para ello, deben consultar cat\'alogos de estrellas, siendo un 
+retraso la b\'usqueda de ella en el tiempo de observaci\'on.
 
 \subsubsection{Identificaci\'on de problemas y deficiencias}
 \textbf{Unicidad de Software:} En la actualidad existen diversos tipos de telescopios, 
