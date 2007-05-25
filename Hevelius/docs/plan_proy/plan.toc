@@ -11,23 +11,23 @@
 \contentsline {subsubsection}{\numberline {2.2.2}Restricciones}{10}
 \contentsline {subsection}{\numberline {2.3}An\'alisis de las alternativas de soluci\'on}{11}
 \contentsline {subsubsection}{\numberline {2.3.1}Alternativa 1: Desarrollo de Software basado en ACS}{11}
-\contentsline {subsubsection}{\numberline {2.3.2}Alternativa 2: YYY+1}{11}
-\contentsline {subsection}{\numberline {2.4}Soluci\'on recomendada}{11}
+\contentsline {subsubsection}{\numberline {2.3.2}Alternativa 2: Reutilizaci\'on de software de control de telescopios}{11}
+\contentsline {subsection}{\numberline {2.4}Soluci\'on recomendada}{12}
 \contentsline {section}{\numberline {3}T\'ecnicas y Herramientas de desarrollo}{13}
 \contentsline {subsection}{\numberline {3.1}Modelo de desarrollo}{13}
 \contentsline {subsection}{\numberline {3.2}Herramientas y t\'ecnicas de soporte para el desarrollo}{14}
 \contentsline {subsubsection}{\numberline {3.2.1}T\'ecnicas a utilizar en el desarrollo del proyecto}{14}
 \contentsline {subsubsection}{\numberline {3.2.2}Herramientas o plataformas espec\'ificas a utilizar}{15}
 \contentsline {subsection}{\numberline {3.3}Personal y capacitaci\'on del grupo de desarrollo}{15}
-\contentsline {section}{\numberline {4}Gesti\'on de Riesgos}{19}
-\contentsline {subsection}{\numberline {4.1}An\'alisis de riesgos}{19}
-\contentsline {subsection}{\numberline {4.2}Preparaci\'on para control de riesgos}{21}
-\contentsline {subsection}{\numberline {4.3}Plan de Monitoreo}{30}
-\contentsline {section}{\numberline {5}Implementaci\'on (Entrega y Operaci\'on)}{31}
-\contentsline {subsection}{\numberline {5.1}Plan de operaci\'on del sistema}{31}
-\contentsline {subsection}{\numberline {5.2}Plan de implementaci\'on (entrega)}{31}
-\contentsline {subsection}{\numberline {5.3}Plan de mantenci\'on}{32}
-\contentsline {section}{\numberline {6}Planificaci\'on de Actividades}{33}
-\contentsline {subsection}{\numberline {6.1}Work Breakdown Structure (WBS)}{33}
-\contentsline {subsection}{\numberline {6.2}Carta Gantt}{33}
-\contentsline {subsection}{\numberline {6.3}Resumen de Compromisos}{33}
+\contentsline {section}{\numberline {4}Gesti\'on de Riesgos}{18}
+\contentsline {subsection}{\numberline {4.1}An\'alisis de riesgos}{18}
+\contentsline {subsection}{\numberline {4.2}Preparaci\'on para control de riesgos}{20}
+\contentsline {subsection}{\numberline {4.3}Plan de Monitoreo}{29}
+\contentsline {section}{\numberline {5}Implementaci\'on (Entrega y Operaci\'on)}{30}
+\contentsline {subsection}{\numberline {5.1}Plan de operaci\'on del sistema}{30}
+\contentsline {subsection}{\numberline {5.2}Plan de implementaci\'on (entrega)}{30}
+\contentsline {subsection}{\numberline {5.3}Plan de mantenci\'on}{31}
+\contentsline {section}{\numberline {6}Planificaci\'on de Actividades}{32}
+\contentsline {subsection}{\numberline {6.1}Work Breakdown Structure (WBS)}{32}
+\contentsline {paragraph}{Nota.}{32}
+\contentsline {subsection}{\numberline {6.2}Carta Gantt}{34}
