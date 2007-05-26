@@ -29,6 +29,7 @@ $(TARGET).pdf: $(TARGET).dvi
 	@rm *.log
 	@rm *.aux
 	@rm $(TARGET).dvi
+#	@pdftk plan.pdf gantt.pdf cat output plan_de_proyecto.pdf
 #	@rm $(TARGET).toc
 
 clean:
