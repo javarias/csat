@@ -1,0 +1,19 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class interfaz {
+	public static void main(String[] args){
+		JFrame frame = new JFrame("Hevelius v0.1");
+		frame.setSize(300,300);
+		frame.addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				System.exit(0);
+			}
+		});
+		frame.pack();
+		frame.setVisible(true);
+	}
+}

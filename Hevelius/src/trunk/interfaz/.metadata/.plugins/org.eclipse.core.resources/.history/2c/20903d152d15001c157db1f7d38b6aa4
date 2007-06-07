@@ -1,0 +1,23 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class main {
+	JFrame frame = new JFrame("Hevelius v0.0.0.0.0.1");
+	frame.setSize(300,300);
+	frame.addWindowListener(new WindowAdapter()
+	{
+		public void windowClosing(WindowEvent e)
+		{
+			new Thread(new Runnable()
+			{
+				public void run()
+				{
+					System.exit(0);
+				}
+			}).start();
+		}
+	});
+	frame.show();
+	
+}

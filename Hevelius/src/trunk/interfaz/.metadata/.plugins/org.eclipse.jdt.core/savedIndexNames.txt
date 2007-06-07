@@ -1,0 +1,9 @@
+/home/cguajard/DevNull/src/trunk/interfaz/.metadata/.plugins/org.eclipse.jdt.core/2970932092.index
+/home/cguajard/DevNull/src/trunk/interfaz/.metadata/.plugins/org.eclipse.jdt.core/688275090.index
+/home/cguajard/DevNull/src/trunk/interfaz/.metadata/.plugins/org.eclipse.jdt.core/638511991.index
+/home/cguajard/DevNull/src/trunk/interfaz/.metadata/.plugins/org.eclipse.jdt.core/794263391.index
+/home/cguajard/DevNull/src/trunk/interfaz/.metadata/.plugins/org.eclipse.jdt.core/3780747148.index
+/home/cguajard/DevNull/src/trunk/interfaz/.metadata/.plugins/org.eclipse.jdt.core/2377700467.index
+/home/cguajard/DevNull/src/trunk/interfaz/.metadata/.plugins/org.eclipse.jdt.core/4292394402.index
+/home/cguajard/DevNull/src/trunk/interfaz/.metadata/.plugins/org.eclipse.jdt.core/3415422207.index
+/home/cguajard/DevNull/src/trunk/interfaz/.metadata/.plugins/org.eclipse.jdt.core/2527035074.index
