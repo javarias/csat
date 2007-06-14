@@ -30,6 +30,5 @@ public class interfaz {
 		} catch (Exception e) { }
 
 		createAndShowGUI();
-		frame.getContentPane().setBackground(Color.BLUE);
 	}
 }
