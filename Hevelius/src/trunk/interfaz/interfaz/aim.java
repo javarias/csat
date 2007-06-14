@@ -68,7 +68,7 @@ public class aim extends JComponent {
 			g.setColor(getBackground());
 			g.fillRect(0, 0, getWidth(), getHeight());
 		}
-		ImageIcon circle = createImageIcon("circle.gif");
+		ImageIcon circle = createImageIcon("circle.jpg");
 		Icon icon = circle;
 
 		if (icon != null) {
