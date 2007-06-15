@@ -1271,7 +1271,7 @@ Para identificar a los desarrolladores, se usar\'a la siguiente notaci\'on:
 \hline
 1.1 & Creaci\'on Interfaz & May 25 & Jun 20 & C, T \\
 \hline
-1.2 & Captura de Im\'agenes & May 25 & Jun 20 & E, M \\
+1.2 & Telemetr\'ia & May 25 & Jun 20 & E, M \\
 \hline
 1.3 & Testeo & Jun 21 & Jun 22 & C, T \\
 \hline
@@ -1307,7 +1307,7 @@ Para identificar a los desarrolladores, se usar\'a la siguiente notaci\'on:
 \hline
 4.1 & Acceso Remoto & Sep 17 & Oct 1 & C, T \\
 \hline
-4.2 & Telemetr\'ia & Sep 17 & Oct 1 & E, M \\
+4.2 & Captura de Im\'agenes & Sep 17 & Oct 1 & E, M \\
 \hline
 4.3 & Login & Oct 2 & Oct 8 & E, M \\
 \hline
@@ -1362,6 +1362,28 @@ por persona.
 
 (Ver Anexo 2)
 
+
+\subsection{Resumen de Compromisos}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|l|p{70mm}|}
+\hline
+\textbf{Fecha} & \textbf{Hitos} & \textbf{Entregables} \\
+\hline
+ Jun 22 & Primera Entrega & Interfaz B\'asica. Aplicaci\'on que retorna informaci\'on meteorol\'ogica del lugar se\~nalado.\\
+\hline
+ Aug 15 & Segunda Entrega & Algoritmos de tracking, presenting y pointing manual.\\
+\hline
+ Sep 14 & Tercera Entrega & Incorporaci\'on de modelo OpenGL a la interfaz y Bot\'on de Emergencia. Algoritmos de Restricciones de Observaci\'on.\\
+\hline
+ Oct 15 & Entrega Final & Interfaz con captura de im\'agenes y accesorios finales.\\
+\hline
+\end{tabular}
+\end{table}
+
+
+
 \newpage
 \section{Anexo 1}
 \newpage
@@ -1376,13 +1398,14 @@ por persona.
 En ella se ver\'an reflejadas las implementaciones que se realizar\'an en las tareas siguientes. \newline
 \textbf{\textit{Entregable:}} Una aplicaci\'on que solo poseer\'a las opciones sin funcionalidad.} \\ \hline
 
-\textit{1.2} & \multicolumn{4}{|p{120mm}|}{\textit{Captura de Im\'agenes}} \\ \hline
-\multicolumn{5}{|p{150mm}|}{Mediante el dispositivo CCD, es posible capturar im\'agenes 
-del espacio y almacenarlas en el PC que se utiliza. \newline
-\textbf{\textit{Entregable:}} Aplicaci\'on que captura y guarda imagen.} \\ \hline
+\textit{1.2} & \multicolumn{4}{|p{120mm}|}{\textit{Telemetr\'ia}} \\ \hline
+\multicolumn{5}{|p{150mm}|}{Corresponde a la visualizaci\'on de datos meteorol\'ogicos en el panel de
+control, como por ejemplo: temperatura, humedad, nubosidad. \newline
+\textbf{\textit{Entregable:}} M\'odulo que a trav\'es de la interfaz muestre los datos metereol\'ogicos
+del lugar en donde se ubica el telescopio.} \\ \hline
 
 \textit{1.4} & \multicolumn{4}{|p{120mm}|}{\textit{Primer Entregable}} \\ \hline
-\multicolumn{5}{|p{150mm}|}{\textbf{\textit{Entregable:}} Corresponde a la interfaz y la captura de im\'agenes.} \\ \hline
+\multicolumn{5}{|p{150mm}|}{\textbf{\textit{Entregable:}} Corresponde a la interfaz en su forma b\'asica y la telemetr\'ia.} \\ \hline
 
 \textit{2.1} & \multicolumn{4}{|p{120mm}|}{\textit{Conexi\'on GPS}} \\ \hline
 \multicolumn{5}{|p{150mm}|}{\textbf{\textit{Entregable:}} Aplicaci\'on que retorne la ubicaci\'on del 
@@ -1438,11 +1461,10 @@ las restricciones de observaci\'on, el modelo OpenGL y el bot\'on de emergencia.
 al conectado a él. \newline
 \textbf{\textit{Entregable:}} Acceso desde ``el exterior'' al panel de control.} \\ \hline
 
-\textit{4.2} & \multicolumn{4}{|p{120mm}|}{\textit{Telemetr\'ia}} \\ \hline
-\multicolumn{5}{|p{150mm}|}{Corresponde a la visualizaci\'on de datos meteorol\'ogicos en el panel de 
-control, como por ejemplo: temperatura, humedad, nubosidad. \newline
-\textbf{\textit{Entregable:}} M\'odulo que a trav\'es de la interfaz muestre los datos metereol\'ogicos 
-del lugar en donde se ubica el telescopio.} \\ \hline
+\textit{4.2} & \multicolumn{4}{|p{120mm}|}{\textit{Captura de Im\'agenes}} \\ \hline
+\multicolumn{5}{|p{150mm}|}{Mediante el dispositivo CCD, es posible capturar im\'agenes
+del espacio y almacenarlas en el PC que se utiliza. \newline
+\textbf{\textit{Entregable:}} Aplicaci\'on que captura y guarda imagen.} \\ \hline
 
 \textit{4.3} & \multicolumn{4}{|p{120mm}|}{\textit{Login}} \\ \hline
 \multicolumn{5}{|p{150mm}|}{\textbf{\textit{Entregable:}} Sistema de acceso controlado al panel de control.} \\ \hline

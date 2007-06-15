@@ -31,5 +31,6 @@
 \contentsline {subsection}{\numberline {6.1}Work Breakdown Structure (WBS)}{34}
 \contentsline {paragraph}{Nota.}{34}
 \contentsline {subsection}{\numberline {6.2}Carta Gantt}{37}
+\contentsline {subsection}{\numberline {6.3}Resumen de Compromisos}{37}
 \contentsline {section}{\numberline {7}Anexo 1}{38}
 \contentsline {section}{\numberline {8}Anexo 2}{41}
