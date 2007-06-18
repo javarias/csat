@@ -6,7 +6,7 @@
  * of a real Nexstar4 telescope.
  * @sa <a href="http://www.celestron.com/c2/images/files/downloads/1154108406_nexstarcommprot.pdf">
  *     NexStar Communication Protocol v 1.2</a>
- * \author Rodrigo Tobar <rtobar@alumnos.inf.utfsm.cl>
+ * \author Rodrigo Tobar <rtobar@csrg.inf.utfsm.cl>
  * \author Jorge Valencia <jorjazo@labsd.inf.utfsm.cl>
  * \warning All the functions implemented here responds to the <tt>char *funct(char *args)</tt>
  * prototype. For specific information about the received or returned string you are strongly

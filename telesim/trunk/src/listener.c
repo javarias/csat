@@ -4,7 +4,7 @@
  * the polling mechanism to read data from the serial port. It consists
  * of a reading procedure and a closing procedure for correctly closing
  * the serial port when a SIGINT signal is detected (e.g. a CTRL+C).
- * \author Rodrigo Tobar <rtobar@alumnos.inf.utfsm.cl>
+ * \author Rodrigo Tobar <rtobar@csrg.inf.utfsm.cl>
  * \author Jorge Valencia <jorjazo@labsd.inf.utfsm.cl>
  */
 

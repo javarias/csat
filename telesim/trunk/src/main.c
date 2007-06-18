@@ -32,7 +32,7 @@
  * \file main.c
  * Main routine implementation. This procedure proccess command-line arguments (if any) and
  * calls the listener routine with the correct device filename string.
- * \author Rodrigo Tobar <rtobar@alumnos.inf.utfsm.cl>
+ * \author Rodrigo Tobar <rtobar@csrg.inf.utfsm.cl>
  * \author Jorge Valencia <jorjazo@labsd.inf.utfsm.cl>
  */
 

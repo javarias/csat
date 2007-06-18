@@ -3,10 +3,11 @@ CFLAGS=-Wall -O2 -ggdb
 
 OBJ=telescope.o main.o listener.o
 EXE=sim_nex4
-OBJDIR=../object
-BINDIR=../bin
-INCDIR=../include
-DOCDIR=../doc
+ROOTDIR=..
+OBJDIR=$(ROOTDIR)/object
+BINDIR=$(ROOTDIR)/bin
+INCDIR=$(ROOTDIR)/include
+DOCDIR=$(ROOTDIR)/doc
 
 VPATH=$(OBJDIR):$(BINDIR):$(INCDIR)
 
@@ -29,5 +30,8 @@ clean:
 	cd $(BINDIR) && rm -f $(EXE)
 	cd $(OBJDIR) && rm -f $(OBJ)
 
+distclean: clean
+	rm -rf $(DOCDIR)/html
+	
 .PHONY: dirs clean
 

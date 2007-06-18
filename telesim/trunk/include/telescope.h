@@ -2,7 +2,7 @@
  * \file telescope.h
  * Constant and data types definitions and function prototypes
  * declaration for telescope.c.
- * \author Rodrigo Tobar <rtobar@alumnos.inf.utfsm.cl>
+ * \author Rodrigo Tobar <rtobar@csrg.inf.utfsm.cl>
  * \author Jorge Valencia <jorjazo@alumnos.inf.utfsm.cl>
  */
 

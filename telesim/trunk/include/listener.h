@@ -1,7 +1,7 @@
 /**
  * \file listener.h
  * Function prototype declarations for listener.c.
- * \author Rodrigo Tobar <rtobar@alumnos.inf.utfsm.cl>
+ * \author Rodrigo Tobar <rtobar@csrg.inf.utfsm.cl>
  * \author Jorge Valencia <jorjazo@alumnos.inf.utfsm.cl>
  */
 
