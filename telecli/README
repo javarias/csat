@@ -1,0 +1,28 @@
+Readme file for Telescope Client v0.1
+Computer Systems Research Group
+Universidad Tecnica Federico Santa Maria
+Valparaiso, Chile
+
+This program communicates with the NexStar 4 SE telescope through the
+serial port and give it commands, and some action is triggered.
+
+The program may not be much usefull for general purpouse, but it can be
+very usefull at the time to probe the telescope<->PC communication. The
+client has been construced following the NexStar Serial Port Communication
+Protocol that can be obtained from www.nexstar.com . So, may be other
+telescopes that supports most of the commands that this client sends trough
+the serial line.
+
+To use it just go to the 'src' directory and run "make". This should
+build the telescope clien into the 'bin' directory. You can run it with
+default options running "./cli_nex4" into that directory. For a list
+of supported options run "./cli_nex4 --help".
+
+We would really appreciate if can send an email telling us how are
+using this software, so we can improve it. Any questions or suggestions
+are welcome, too.
+
+-- 
+UTFSM-ACS team
+http://acs.inf.utfsm.cl/
+rtobar@csrg.inf.utfsm.cl
