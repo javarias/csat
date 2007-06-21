@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class aim extends JComponent {
+public class aim extends JComponent{
 	private Icon icon;
 	int pad;
 	int preferredNumImages = 1;
@@ -73,11 +73,10 @@ public class aim extends JComponent {
 
 		if (icon != null) {
 			//Draw the icon over and over, right aligned.
-			Insets insets = getInsets();
-			int iconWidth = icon.getIconWidth();
-			int iconX = 0;//getWidth() - insets.right - iconWidth+100;
-			int iconY = insets.top;
-			boolean faded = false;
+			//Insets insets = getInsets();
+			int iconX = (getWidth() - icon.getIconWidth())/2;
+			int iconY = (getHeight() - icon.getIconHeight())/2;
+			//boolean faded = false;
 			//We won't bother painting icons that are clipped.
 			Graphics2D g2d = (Graphics2D)g.create();
 			g.getClipBounds(clipRect);
