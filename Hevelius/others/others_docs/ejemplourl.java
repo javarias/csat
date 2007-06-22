@@ -7,7 +7,7 @@ class java2003 {
 
     try {
       // Creamos un objeto de tipo URL
-      URL url = new URL("http://xoap.weather.com/search/search?where=atlanta" );
+      URL url = new URL("http://xoap.weather.com/search/search?where=vina+del+mar" );
           
       // Abrimos una conexióacia esa URL, que devolverán canal de
       // entrada por el cual se podráeer todo lo que llegue
