@@ -440,9 +440,9 @@ public class interfaz {
 		//Label Coordinates
 		JLabel coor;
 		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: coor = new JLabel("Coordinates RaDec");
-			case 1: coor = new JLabel("Coordinates Horizonta");
-			default: coor = new JLabel("Coordinates RaDec");
+			case 0: coor = new JLabel("Coordinates RaDec"); break;
+			case 1: coor = new JLabel("Coordinates Horizonta"); break;
+			default: coor = new JLabel("Coordinates RaDec"); break;
 		}
 		//coor.setLocation((dx+rectx)/2 + 20+dist/2-50,210);
 		coor.setLocation(dist,240);
