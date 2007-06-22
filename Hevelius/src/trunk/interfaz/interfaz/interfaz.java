@@ -3,11 +3,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class interfaz {
-	private static JFrame frame;
+	public static JFrame frame;
+	public static DrawingPanel pane;
 	private static void createAndShowGUI()
 	{
 		frame = new JFrame("Hevelius v0.0.1");
-		DrawingPanel pane = new DrawingPanel(null);
+		pane = new DrawingPanel(null);
 		Dimension ScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.addWindowListener(new WindowAdapter()
 		{
@@ -26,12 +27,18 @@ public class interfaz {
 		Dimension PanelSize = frame.getContentPane().getSize();
 		frame.setContentPane(pane);
 		pane.setSize(PanelSize);
-		System.out.println(pane.getSize());
 		int dx = PanelSize.width;
 		int dy = PanelSize.height;
 		int rectx = dx/2;
 		int recty = dy/2;
 		int dist = (3*dx + rectx)/4 -40;
+		int cx = 30+(dy-recty)/4;
+		int cy = (dy-dy/3)+(dy-recty)/4-20;
+		int r = (dy-recty)/4;
+
+		pane.setImage("image.jpg",new Dimension(rectx-20,recty-20));
+		pane.setArrows(new Dimension(40,40));
+		pane.setCompassPoints(0.0d);
 
 		//Label Coordinates
 		JLabel coor = new JLabel("Coordinates Z");
@@ -118,11 +125,12 @@ public class interfaz {
 
 		//Emergency Stop Button
 		JButton stop = new JButton("STOP!");
-		stop.setLocation(PanelSize.width/2-25,PanelSize.height - 150);
+		stop.setLocation(PanelSize.width/2-25,PanelSize.height - 110);
 		stop.setSize(50,50);
 		stop.setMargin(new Insets(0,0,0,0));
 		pane.add(stop);
 
+		/*
 		//South Manual Pointing Button 
 		JButton smp = new JButton("v");
 		smp.setLocation((dx-rectx)/2+1,(dy+recty)/2+1);
@@ -150,6 +158,7 @@ public class interfaz {
 		emp.setSize(20,recty+2);
 		emp.setMargin(new Insets(0,0,0,0));
 		pane.add(emp);
+		*/
 
 		//Temperature Label
 		JLabel tempL = new JLabel("Temperature:");
@@ -206,6 +215,40 @@ public class interfaz {
 		humB.setSize(100,20);
 		humB.setForeground(Color.WHITE);
 		pane.add(humB);
+
+		//North Label
+		JLabel northL = new JLabel("N");
+		northL.setLocation(cx-2,cy-r-30);
+		northL.setSize(20,20);
+		northL.setForeground(Color.WHITE);
+		pane.add(northL);
+
+		//South Label
+		JLabel southL = new JLabel("S");
+		southL.setLocation(cx-2,cy+r+10);
+		southL.setSize(20,20);
+		southL.setForeground(Color.WHITE);
+		pane.add(southL);
+
+
+		//East Label
+		JLabel eastL = new JLabel("E");
+		eastL.setLocation(cx+r+10,cy-10);
+		eastL.setSize(20,20);
+		eastL.setForeground(Color.WHITE);
+		pane.add(eastL);
+
+
+		//West Label
+		JLabel westL = new JLabel("W");
+		//Font currentFont = westL.getFont();
+		//float newSize = 14.f;
+		//Font newFont = currentFont.deriveFont(newSize);
+		//westL.setFont(newFont);
+		westL.setLocation(10,cy-10);
+		westL.setSize(20,20);
+		westL.setForeground(Color.WHITE);
+		pane.add(westL);
 	}
 	public static void main(String[] args){
 		try {
