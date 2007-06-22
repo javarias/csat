@@ -445,8 +445,8 @@ public class interfaz {
 			default: coor = new JLabel("Coordinates RaDec"); break;
 		}
 		//coor.setLocation((dx+rectx)/2 + 20+dist/2-50,210);
-		coor.setLocation(dist,240);
-		coor.setSize(200,20);
+		coor.setLocation(dist-15,240);
+		coor.setSize(250,20);
 		coor.setForeground(Color.WHITE);
 		pane.add(coor);
 
