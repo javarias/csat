@@ -15,12 +15,14 @@ public class WeatherCityCondition
 	private String flik;
 	private String wt;
 	private String pres;
+	private String stapress;
 	private String vwind;
 	private String gust;
 	private String direc;
 	private String humil;
 	private String dpoint;
 	private String moon;
+	private String visi;
 	Matcher mat;
 	public void setTime(Matcher mat)
 	{
@@ -38,7 +40,7 @@ public class WeatherCityCondition
 	{
 		sunrice=mat.group(1);
 	}
-	public void sunset(Matcher mat)
+	public void setSunset(Matcher mat)
 	{
 		sunset=mat.group(1);
 	}
@@ -62,6 +64,11 @@ public class WeatherCityCondition
 	{
 		pres=mat.group(1);
 	}
+	public void setStapres(Matcher mat)
+	{
+		stapress = mat.group(1);
+	}
+		
 	public void setVwind(Matcher mat)
 	{
 		vwind=mat.group(1);
@@ -78,6 +85,10 @@ public class WeatherCityCondition
 	{
 		humil=mat.group(1);
 	}
+	public void setVisi(Matcher mat)
+	{
+		visi = mat.group(1);
+	}
 	public void setDpoint(Matcher mat)
 	{
 		dpoint=mat.group(1);
@@ -86,6 +97,7 @@ public class WeatherCityCondition
 	{
 		moon=mat.group(1);
 	}
+	/*Agregar los 2 metodos que faltan*/
 	public String getTime()
 	{
 		return time;

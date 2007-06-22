@@ -5,6 +5,7 @@ import java.util.*;
 public class Weather {
 
 	public static Vector<WeatherCityId> vector_city;
+	public static Vector<WeatherCondition> vector_condition;
 	public static void main(String[] args) {
 		BufferedReader lugar;
 		BufferedReader id;
@@ -27,25 +28,25 @@ public class Weather {
 			{
 			System.out.println(vector_city.get(i).getNameCity()+" "+vector_city.get(i).getId());
 			}
-			//String var=tmp.trim();
-			//pat = Pattern.compile("s// //\\+//");
-			//mat = pat.matcher(var);
-			//String finaly = var.replace(' ','+');
-			//URL url = new URL("http://xoap.weather.com/search/search?where="+finaly );
-			//BufferedReader paginaHtml =new BufferedReader( new InputStreamReader( url.openStream() ) );
-			//while( (cadena = paginaHtml.readLine()) != null ) 
-			//{
-			//	cadena=cadena.trim();
-			//	pat = Pattern.compile("^<loc.*?=\"(.*?)\".*?>(.*?)<.*?>");
-			//	mat = pat.matcher(cadena);
-			//	if(mat.find())
-			//		System.out.println("ID= "+mat.group(1)+"     City= "+ mat.group(2));
-			//}
 			System.out.println("Ingrese el ID de la ciudad que desea");
 			id=new BufferedReader(new InputStreamReader(System.in));
 			tmp=id.readLine();
 			tmp=tmp.trim();
-			URL url2 = new URL("http://xoap.weather.com/weather/local/"+tmp+"?cc=*&prod=xoap&unit=m&par=wx_module_7075&key=wx_module_7075");
+			WeatherCondition conditon = new WeatherCondition(tmp);
+			vector_condition = new Vector<WeatherCityCondition>();
+			vector_condition = weather.ListCityCondition();
+			n = vector_condition.size();
+			for(i=1;i<n;i++)
+			{
+				//System.out.println(vect
+			}
+
+
+
+
+
+			
+			/*URL url2 = new URL("http://xoap.weather.com/weather/local/"+tmp+"?cc=*&prod=xoap&unit=m&par=wx_module_7075&key=wx_module_7075");
 			BufferedReader searchhtml =new BufferedReader( new InputStreamReader( url2.openStream() ) );
 			while( (cadena = searchhtml.readLine()) != null )
 			{
@@ -220,14 +221,7 @@ public class Weather {
 
 			}
 
-			/*BufferedReader reader= new BufferedReader(new FileReader(args[0])); 
-			  String linea= reader.readLine(); 
-			  while(linea!=null) 
-			  { 
-			  System.out.println(linea); 
-			  linea= reader.readLine();
-			  pat = Pattern.compile("^<loc.*?>(.*?)<.*?>");
-			  mat = pat.matcher(linea);*/
+			*/
 
 
 
