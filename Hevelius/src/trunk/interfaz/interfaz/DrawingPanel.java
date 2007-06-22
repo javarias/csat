@@ -20,6 +20,41 @@ public class DrawingPanel extends JPanel
 	private JPanel tp;
 	private GLCanvas canvas;
 	private Listener list;
+
+	private JLabel coor1L;
+	private JTextField coor1;
+	private JLabel coor2L;
+	private JTextField coor2;
+	private JButton go;
+	private JButton change;
+	private JLabel ccoor;
+	private JLabel ccoor1L;
+	private JLabel ccoor1C;
+	private JLabel ccoor2L;
+	private JButton stop;
+	private JLabel ccoor2C;
+	private JLabel tempL;
+	private JLabel wStatL;
+	private JLabel windL;
+	private JLabel humL;
+	private JLabel tempB;
+	private JLabel wStatB;
+	private JLabel windB;
+	private JLabel humB;
+	private JLabel northL;
+	private JLabel southL;
+	private JLabel eastL;
+	private JLabel westL;
+
+	private int cx;
+	private int cy;
+	private int dist;
+	private int dy;
+	private int dx;
+	private int rect_x;
+	private int rect_y;
+	private int r;
+
 	public DrawingPanel(LayoutManager l)
 	{
 		super(l);
@@ -79,6 +114,7 @@ public class DrawingPanel extends JPanel
 		interfaz.frame.addWindowListener(windowListener);
 		animator.start();
 		//animator2.start();
+		init();
 	}
 	public void setImage(String img, Dimension dim)
 	{
@@ -102,8 +138,6 @@ public class DrawingPanel extends JPanel
 	}
 	public void setCompassPoints(double dec)
 	{
-		int dy = getSize().height;
-		int dx = getSize().width;
 		int rect_x = dx/2;
 		int rect_y = dy/2;
 		int cx = 30+(dy-rect_y)/4;
@@ -115,14 +149,185 @@ public class DrawingPanel extends JPanel
 		Rectangle re = new Rectangle(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
 		paintImmediately(re);
 	}
+	private void init()
+	{
+		dy = getSize().height;
+		dx = getSize().width;
+		rect_x = dx/2;
+		rect_y = dy/2;
+		dist = (3*dx + rect_x)/4 -40;
+		cx = 30+(dy-rect_y)/4;
+		cy = (dy-dy/3)+(dy-rect_y)/4-20;
+		r = (dy-rect_y)/4;
+
+		//Interface Initialization
+
+	/*	//coor.setLocation((dx+rectx)/2 + 20+dist/2-50,210);
+		coor.setLocation(dist-15,240);
+		coor.setSize(250,20);
+		coor.setForeground(Color.WHITE);
+		pane.add(coor);*/
+
+		//RA or ALT Label
+		coor1L = new JLabel("X");
+		coor1L.setSize(20,20);
+		coor1L.setForeground(Color.WHITE);
+		add(coor1L);
+
+		//RA or ALT Coordinate
+		coor1 = new JTextField("0");
+		coor1.setSize(80,20);
+		add(coor1);
+
+		//DEC or AZ Label
+		coor2L = new JLabel("Y");
+		coor2L.setSize(20,20);
+		coor2L.setForeground(Color.WHITE);
+		add(coor2L);
+
+		//DEC or AZ Coordinate
+		coor2 = new JTextField("0");
+		coor2.setSize(80,20);
+		add(coor2);
+
+		//Goto
+		go = new JButton("Go");
+		go.setSize(40,20);
+		go.setMargin(new Insets(0,0,0,0));
+		add(go);
+
+		//Change RA-DEC <-> ALT-AZ
+		change = new JButton("x");
+		change.setSize(20,20);
+		change.setMargin(new Insets(0,0,0,0));
+		add(change);
+
+		//Current coordinates
+		ccoor = new JLabel("Coordinates");
+		ccoor.setSize(80,20);
+		ccoor.setForeground(Color.WHITE);
+		add(ccoor);
+
+		//Current RA or ALT Label
+		ccoor1L = new JLabel("X");
+		ccoor1L.setSize(20,20);
+		ccoor1L.setForeground(Color.WHITE);
+		add(ccoor1L);
+
+		//Current RA or ALT Coordinate
+		ccoor1C = new JLabel("0.00000");
+		ccoor1C.setSize(80,20);
+		ccoor1C.setForeground(Color.WHITE);
+		add(ccoor1C);
+
+		//Current DEC or AZ Label
+		ccoor2L = new JLabel("Y");
+		ccoor2L.setSize(20,20);
+		ccoor2L.setForeground(Color.WHITE);
+		add(ccoor2L);
+
+		//Current DEC or AZ Coordinate
+		ccoor2C = new JLabel("0.00000");
+		ccoor2C.setSize(80,20);
+		ccoor2C.setForeground(Color.WHITE);
+		add(ccoor2C);
+
+		//Emergency Stop Button
+		stop = new JButton("STOP!");
+		stop.setSize(50,50);
+		stop.setMargin(new Insets(0,0,0,0));
+		add(stop);
+
+		//Temperature Label
+		tempL = new JLabel("Temperature:");
+		tempL.setSize(100,20);
+		tempL.setForeground(Color.WHITE);
+		add(tempL);
+
+		//Weather Status Label
+		wStatL = new JLabel("Weather:");
+		wStatL.setSize(100,20);
+		wStatL.setForeground(Color.WHITE);
+		add(wStatL);
+
+		//Wind Label
+		windL = new JLabel("Wind:");
+		windL.setSize(100,20);
+		windL.setForeground(Color.WHITE);
+		add(windL);
+
+		//Humdity Label
+		humL = new JLabel("Humidity:");
+		humL.setSize(100,20);
+		humL.setForeground(Color.WHITE);
+		add(humL);
+
+		//Temperature Bar
+		tempB = new JLabel("0");
+		tempB.setSize(100,20);
+		tempB.setForeground(Color.WHITE);
+		add(tempB);
+
+		//Weather Status
+		wStatB = new JLabel("Sunny");
+		wStatB.setSize(100,20);
+		wStatB.setForeground(Color.WHITE);
+		add(wStatB);
+
+		//Wind Bar
+		windB = new JLabel("0");
+		windB.setSize(100,20);
+		windB.setForeground(Color.WHITE);
+		add(windB);
+
+		//Humdity Bar
+		humB = new JLabel("0");
+		humB.setSize(100,20);
+		humB.setForeground(Color.WHITE);
+		add(humB);
+
+		//North Label
+		northL = new JLabel("N");
+		northL.setSize(20,20);
+		northL.setForeground(Color.WHITE);
+		add(northL);
+
+		//South Label
+		southL = new JLabel("S");
+		southL.setSize(20,20);
+		southL.setForeground(Color.WHITE);
+		add(southL);
+
+
+		//East Label
+		eastL = new JLabel("E");
+		eastL.setSize(20,20);
+		eastL.setForeground(Color.WHITE);
+		add(eastL);
+
+
+		//West Label
+		westL = new JLabel("W");
+		westL.setSize(20,20);
+		westL.setForeground(Color.WHITE);
+		add(westL);
+	}
 	public void paintComponent(Graphics g)
 	{
+		System.out.println("A");
+		//setImage("image.jpg",new Dimension(rect_x-20,rect_y-20));
+		//setArrows(new Dimension(40,40));
 		super.paintComponent(g);
 
-		int dy = getSize().height;
-		int dx = getSize().width;
-		int rect_x = dx/2;
-		int rect_y = dy/2;
+		dy = getSize().height;
+		dx = getSize().width;
+		rect_x = dx/2;
+		rect_y = dy/2;
+		cx = 30+(dy-rect_y)/4;
+		cy = (dy-dy/3)+(dy-rect_y)/4-20;
+		dist = (3*dx + rect_x)/4 -40;
+		r = (dy-rect_y)/4;
+
 		g.setColor(Color.GRAY);
 
 		int oGLx = (dx-rect_x)/2+rect_x+20;
@@ -148,8 +353,6 @@ public class DrawingPanel extends JPanel
 		g.drawImage(img,(dx-rect_x)/2+10,(dy-rect_y)/2+10,this);
 
 		g.setColor(Color.RED);
-		int cx = 30+(dy-rect_y)/4;
-		int cy = (dy-dy/3)+(dy-rect_y)/4-20;
 		g.drawLine(cx,cy,pointx,pointy);
 		g.drawLine(cx+1,cy+1,pointx+1,pointy+1);
 
@@ -160,6 +363,56 @@ public class DrawingPanel extends JPanel
 		tp.setLocation(oGLx+25,15);
 		tp.setSize(dx-oGLx-50,dx-oGLx-50);
 		canvas.setSize(dx-oGLx-50,dx-oGLx-50);
+
+		//Interface Objects Positioning
+
+		coor1L.setLocation(dist,260);
+
+		coor1.setLocation(dist+15,260);
+
+		coor2L.setLocation(dist,280);
+
+		coor2.setLocation(dist + 15,280);
+
+		go.setLocation(dist + 55,302);
+
+		change.setLocation(dist-5,302);
+
+		ccoor.setLocation(dist,420);
+
+		ccoor1L.setLocation(dist,450);
+
+		ccoor1C.setLocation(dist + 15,450);
+
+		ccoor2L.setLocation(dist, 470);
+
+		ccoor2C.setLocation(dist + 15,470);
+
+		stop.setLocation(rect_x-25,dy - 110);
+
+		tempL.setLocation(10,10);
+
+		wStatL.setLocation(10,40);
+
+		windL.setLocation(10,70);
+
+		humL.setLocation(10,100);
+
+		tempB.setLocation(140,10);
+
+		wStatB.setLocation(140,40);
+
+		windB.setLocation(140,70);
+
+		humB.setLocation(140,100);
+
+		northL.setLocation(cx-2,cy-r-30);
+
+		southL.setLocation(cx-2,cy+r+10);
+
+		eastL.setLocation(cx+r+10,cy-10);
+
+		westL.setLocation(10,cy-10);
 	}
 	public Dimension getDim()
 	{

@@ -378,17 +378,11 @@ public class interfaz {
 				});
 	}
 
-
-
-
-
-
-
-
 	private static void createAndShowGUI()
 	{
 		frame = new JFrame("Hevelius v0.0.1");
 		pane = new DrawingPanel(null);
+		frame.setContentPane(pane);
 		Dimension ScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.addWindowListener(new WindowAdapter()
 				{
@@ -415,13 +409,13 @@ public class interfaz {
 			default: pane.setBackground(Color.BLACK); break;
 		}
 		
-		frame.setResizable(false);
+		//frame.setResizable(false);
 		frame.pack();
 		frame.setSize(ScreenSize);
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
 		Dimension PanelSize = frame.getContentPane().getSize();
-		frame.setContentPane(pane);
+		//frame.setContentPane(pane);
 		pane.setSize(PanelSize);
 		frame.setJMenuBar(createMenuBar());
 		int dx = PanelSize.width;
@@ -433,8 +427,6 @@ public class interfaz {
 		int cy = (dy-dy/3)+(dy-recty)/4-20;
 		int r = (dy-recty)/4;
 
-		pane.setImage("image.jpg",new Dimension(rectx-20,recty-20));
-		pane.setArrows(new Dimension(40,40));
 		//pane.setCompassPoints(0.0d);
 
 		//Label Coordinates
@@ -444,12 +436,13 @@ public class interfaz {
 			case 1: coor = new JLabel("Coordinates Horizontal"); break;
 			default: coor = new JLabel("Coordinates RaDec"); break;
 		}
+
 		//coor.setLocation((dx+rectx)/2 + 20+dist/2-50,210);
 		coor.setLocation(dist-15,240);
 		coor.setSize(250,20);
 		coor.setForeground(Color.WHITE);
 		pane.add(coor);
-
+/*
 		//RA or ALT Label
 		JLabel coor1L = new JLabel("X");
 		coor1L.setLocation(dist,260);
@@ -489,7 +482,7 @@ public class interfaz {
 		change.setSize(20,20);
 		change.setMargin(new Insets(0,0,0,0));
 		pane.add(change);
-
+*//*
 		//Current coordinates
 		JLabel ccoor = new JLabel("Coordinates");
 		ccoor.setLocation(dist,420);
@@ -561,7 +554,7 @@ public class interfaz {
 		emp.setMargin(new Insets(0,0,0,0));
 		pane.add(emp);
 		 */
-
+/*
 		//Temperature Label
 		JLabel tempL = new JLabel("Temperature:");
 		tempL.setLocation(10,10);
@@ -643,14 +636,11 @@ public class interfaz {
 
 		//West Label
 		JLabel westL = new JLabel("W");
-		//Font currentFont = westL.getFont();
-		//float newSize = 14.f;
-		//Font newFont = currentFont.deriveFont(newSize);
-		//westL.setFont(newFont);
 		westL.setLocation(10,cy-10);
 		westL.setSize(20,20);
 		westL.setForeground(Color.WHITE);
 		pane.add(westL);
+*/
 	}
 
 	public static void main(String[] args){

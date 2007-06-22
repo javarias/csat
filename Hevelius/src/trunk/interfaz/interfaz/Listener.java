@@ -48,7 +48,7 @@ public class Listener implements GLEventListener, MouseListener {
 	}
 
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-		//System.out.println("Listener.reshape()");
+		System.out.println("Listener.reshape()");
 		GL gl = drawable.getGL();
 
 		float h = (float)height / (float)width;
