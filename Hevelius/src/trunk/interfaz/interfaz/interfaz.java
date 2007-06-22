@@ -400,6 +400,7 @@ public class interfaz {
 		frame.setSize(ScreenSize);
 		frame.setVisible(true);
 		frame.setJMenuBar(createMenuBar());
+		frame.setLocationRelativeTo(null);
 		Dimension PanelSize = frame.getContentPane().getSize();
 		frame.setContentPane(pane);
 		pane.setSize(PanelSize);
