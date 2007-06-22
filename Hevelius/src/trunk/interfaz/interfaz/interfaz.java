@@ -419,11 +419,11 @@ public class interfaz {
 		frame.pack();
 		frame.setSize(ScreenSize);
 		frame.setVisible(true);
-		frame.setJMenuBar(createMenuBar());
 		frame.setLocationRelativeTo(null);
 		Dimension PanelSize = frame.getContentPane().getSize();
 		frame.setContentPane(pane);
 		pane.setSize(PanelSize);
+		frame.setJMenuBar(createMenuBar());
 		int dx = PanelSize.width;
 		int dy = PanelSize.height;
 		int rectx = dx/2;
@@ -438,7 +438,12 @@ public class interfaz {
 		//pane.setCompassPoints(0.0d);
 
 		//Label Coordinates
-		JLabel coor = new JLabel("Coordinates Z");
+		JLabel coor;
+		switch(Integer.parseInt(test.getOption("coordinate"))){
+			case 0: coor = new JLabel("Coordinates RaDec");
+			case 1: coor = new JLabel("Coordinates Horizonta");
+			default: coor = new JLabel("Coordinates RaDec");
+		}
 		//coor.setLocation((dx+rectx)/2 + 20+dist/2-50,210);
 		coor.setLocation(dist,240);
 		coor.setSize(100,20);
