@@ -26,6 +26,7 @@ public class interfaz {
 	private static JLabel modules;
 	private static JCheckBox weather;
 	private static JCheckBox opengl;
+	private static JCheckBox compass;
 	private static JLabel background;
 	private static JComboBox color;
 
@@ -54,7 +55,7 @@ public class interfaz {
 				else{
 					if(event.getActionCommand().compareTo("Configuration")==0){
 						//frame.setVisible(false);
-						config.setVisible(true); 
+						config.setVisible(true);
 					}
 					else{
 						if(event.getActionCommand().compareTo("About Hevelius")==0){
@@ -149,10 +150,12 @@ public class interfaz {
 		config.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
 				config.setVisible(false);
+				setConfigWindow();
 				}
 
 				public void windowClosed(WindowEvent e) {
 				config.setVisible(false);
+				setConfigWindow();
 				}
 				});
 
@@ -238,9 +241,15 @@ public class interfaz {
 			opengl.setSelected(true);
 		panel2.add(opengl);
 
+		compass = new JCheckBox("Compass");
+		compass.setLocation(150,50);
+		compass.setSize(150,20);
+		if(Integer.parseInt(test.getOption("compass"))==1)
+			compass.setSelected(true);
+		panel2.add(compass);
 
 		background = new JLabel("Background Color:");
-		background.setLocation(10,70);
+		background.setLocation(10,90);
 		background.setSize(150,20);
 		panel2.add(background);
 
@@ -259,11 +268,10 @@ public class interfaz {
 					"Red",
 					"White",
 					"Yellow"}));
-		color.setLocation(150,70);
+		color.setLocation(150,90);
 		color.setSize(200,20);
 		color.setSelectedIndex(Integer.parseInt(test.getOption("background")));
-		panel2.add(color);		
-
+		panel2.add(color);	
 
 
 
@@ -290,6 +298,7 @@ public class interfaz {
 		close.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent event) {
 				config.setVisible(false);
+				setConfigWindow();
 				}
 				});
 
@@ -311,7 +320,10 @@ public class interfaz {
 				else
 				test.setOption("opengl","0");
 
-
+				if(compass.isSelected())
+				test.setOption("compass","1");
+				else
+					test.setOption("compass","0");
 
 				test.setOption("background", String.valueOf(color.getSelectedIndex()));
 
@@ -325,6 +337,35 @@ public class interfaz {
 
 
 	}
+
+	public static void setConfigWindow(){
+		if(Integer.parseInt(test.getOption("coordinate"))==0)
+			radec.setSelected(true);
+		if(Integer.parseInt(test.getOption("coordinate"))==1)
+			altaz.setSelected(true);
+
+		location.setSelectedIndex(1);
+
+
+
+		if(Integer.parseInt(test.getOption("weather"))==1)
+			weather.setSelected(true);
+		else
+			weather.setSelected(false);
+		
+		if(Integer.parseInt(test.getOption("opengl"))==1)
+			opengl.setSelected(true);
+		else
+			opengl.setSelected(false);
+		
+		if(Integer.parseInt(test.getOption("compass"))==1)
+			compass.setSelected(true);
+		else
+			compass.setSelected(false);
+
+		color.setSelectedIndex(Integer.parseInt(test.getOption("background")));
+	}	
+
 
 
 	public static void aboutWindow() {
@@ -391,7 +432,7 @@ public class interfaz {
 				System.exit(0);
 				}
 				});
-		
+
 		switch(Integer.parseInt(test.getOption("background"))){
 			case 0: pane.setBackground(Color.BLACK); break;
 			case 1: pane.setBackground(Color.BLUE); break;
@@ -408,7 +449,7 @@ public class interfaz {
 			case 12: pane.setBackground(Color.YELLOW); break;
 			default: pane.setBackground(Color.BLACK); break;
 		}
-		
+
 		//frame.setResizable(false);
 		frame.pack();
 		frame.setSize(ScreenSize);
@@ -442,7 +483,7 @@ public class interfaz {
 		coor.setSize(250,20);
 		coor.setForeground(Color.WHITE);
 		pane.add(coor);
-/*
+		/*
 		//RA or ALT Label
 		JLabel coor1L = new JLabel("X");
 		coor1L.setLocation(dist,260);
@@ -482,7 +523,7 @@ public class interfaz {
 		change.setSize(20,20);
 		change.setMargin(new Insets(0,0,0,0));
 		pane.add(change);
-*//*
+		 *//*
 		//Current coordinates
 		JLabel ccoor = new JLabel("Coordinates");
 		ccoor.setLocation(dist,420);
@@ -554,7 +595,7 @@ public class interfaz {
 		emp.setMargin(new Insets(0,0,0,0));
 		pane.add(emp);
 		 */
-/*
+		/*
 		//Temperature Label
 		JLabel tempL = new JLabel("Temperature:");
 		tempL.setLocation(10,10);
@@ -640,7 +681,7 @@ public class interfaz {
 		westL.setSize(20,20);
 		westL.setForeground(Color.WHITE);
 		pane.add(westL);
-*/
+		*/
 	}
 
 	public static void main(String[] args){

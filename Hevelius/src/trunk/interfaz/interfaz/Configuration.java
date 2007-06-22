@@ -31,6 +31,7 @@ public class Configuration extends Properties{
 				archivo.println("#Modules");
 				archivo.println("weather = 1");
 				archivo.println("opengl = 1");
+				archivo.println("compass = 1");
 				archivo.println("background = 0");
 				archivo.println("");
 				
