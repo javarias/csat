@@ -399,20 +399,20 @@ public class interfaz {
 				});
 		
 		switch(Integer.parseInt(test.getOption("background"))){
-		case 0: pane.setBackground(Color.black);
-		case 1: pane.setBackground(Color.blue);
-		case 2: pane.setBackground(Color.cyan);
-		case 3: pane.setBackground(Color.darkGray);
-		case 4: pane.setBackground(Color.gray);
-		case 5: pane.setBackground(Color.green);
-		case 6: pane.setBackground(Color.lightGray);
-		case 7: pane.setBackground(Color.magenta);
-		case 8: pane.setBackground(Color.orange);
-		case 9: pane.setBackground(Color.pink);
-		case 10: pane.setBackground(Color.red);
-		case 11: pane.setBackground(Color.white);
-		case 12: pane.setBackground(Color.yellow);
-		default: pane.setBackground(Color.black);
+			case 0: pane.setBackground(Color.black);
+			case 1: pane.setBackground(Color.blue);
+			case 2: pane.setBackground(Color.cyan);
+			case 3: pane.setBackground(Color.darkGray);
+			case 4: pane.setBackground(Color.gray);
+			case 5: pane.setBackground(Color.green);
+			case 6: pane.setBackground(Color.lightGray);
+			case 7: pane.setBackground(Color.magenta);
+			case 8: pane.setBackground(Color.orange);
+			case 9: pane.setBackground(Color.pink);
+			case 10: pane.setBackground(Color.red);
+			case 11: pane.setBackground(Color.white);
+			case 12: pane.setBackground(Color.yellow);
+			default: pane.setBackground(Color.black);
 		}
 		
 		frame.setResizable(false);
