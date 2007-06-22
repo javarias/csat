@@ -5,14 +5,16 @@ import java.util.regex.*;
 
 public class WeatherCityId
 {
-	Mather mat;
-	public void setNameCity(Mather mat)
+	public String id;
+	public String name;
+	Matcher mat;
+	public void setNameCity(Matcher mat)
 	{
-		String name=mat.group(2);
+		name=mat.group(2);
 	}
-	public void setId(Mather mat)
+	public void setId(Matcher mat)
 	{
-		String id=mat.group(1);
+		id=mat.group(1);
 	}
 	public String getNameCity()
         {

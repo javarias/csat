@@ -22,10 +22,10 @@ public class Weather {
 			WeatherCity weather=  new WeatherCity(tmp);
 			vector_city = new Vector<WeatherCityId>();
 			vector_city=weather.ListCity();
-			int n= vector_city.length;
+			int n= vector_city.size();
 			for(i=1;i<n;i++)
 			{
-			System.out.println(vector_city.getNameCity()+" "+vector_city.getId());
+			System.out.println(vector_city.get(i).getNameCity()+" "+vector_city.get(i).getId());
 			}
 			//String var=tmp.trim();
 			//pat = Pattern.compile("s// //\\+//");

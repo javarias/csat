@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.regex.*;
 import java.net.*;
+import java.util.*;
 public class WeatherCity
 {
 	//BufferedReader lugar;
@@ -19,7 +20,7 @@ public class WeatherCity
 	{
 		try
 		{
-			WeatherCityId weather=  new WeatherCityId();
+			WeatherCityId weather;
 			vector_city = new Vector<WeatherCityId>();
 			city=city.trim();
 			city= city.replace(' ','+');
@@ -33,10 +34,12 @@ public class WeatherCity
 				if(mat.find())
 				{
 					//System.out.println("ID= "+mat.group(1)+"     City= "+ mat.group(2));
-					weather.setNameCity=mat.group(2);
-					weather.setId=mat.group(1);
+					weather=  new WeatherCityId();
+					weather.setNameCity(mat);
+					weather.setId(mat);
 					vector_city.add(weather);
 				}
+			
 
 			}
 			return vector_city;
@@ -46,5 +49,6 @@ public class WeatherCity
 			e.printStackTrace();
 
 		}
+		return null;
 	}
 }
