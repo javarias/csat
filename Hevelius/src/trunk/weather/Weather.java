@@ -1,15 +1,10 @@
 import java.io.*;
 import java.util.regex.*;
 import java.net.*;
-public class Main {
+import java.util.*;
+public class Weather {
 
-	/** Creates a new instance of Main */
-	public Main() {
-	}
-
-	/**
-	 * @param args the command line arguments
-	 */
+	public static Vector<WeatherCityId> vector_city;
 	public static void main(String[] args) {
 		BufferedReader lugar;
 		BufferedReader id;
@@ -17,26 +12,35 @@ public class Main {
 		String tmp;
 		Pattern pat;  
 		Matcher mat;
+		int i;
 		//public static FileOutputStream file;
 		try
 		{
 			System.out.println("Ingrese la ciudad que desea revisar");
 			lugar=new BufferedReader(new InputStreamReader(System.in));
 			tmp=lugar.readLine();
-			String var=tmp.trim();
+			WeatherCity weather=  new WeatherCity(tmp);
+			vector_city = new Vector<WeatherCityId>();
+			vector_city=weather.ListCity();
+			int n= vector_city.length;
+			for(i=1;i<n;i++)
+			{
+			System.out.println(vector_city.getNameCity()+" "+vector_city.getId());
+			}
+			//String var=tmp.trim();
 			//pat = Pattern.compile("s// //\\+//");
 			//mat = pat.matcher(var);
-			String finaly = var.replace(' ','+');
-			URL url = new URL("http://xoap.weather.com/search/search?where="+finaly );
-			BufferedReader paginaHtml =new BufferedReader( new InputStreamReader( url.openStream() ) );
-			while( (cadena = paginaHtml.readLine()) != null ) 
-			{
-				cadena=cadena.trim();
-				pat = Pattern.compile("^<loc.*?=\"(.*?)\".*?>(.*?)<.*?>");
-				mat = pat.matcher(cadena);
-				if(mat.find())
-					System.out.println("ID= "+mat.group(1)+"     City= "+ mat.group(2));
-			}
+			//String finaly = var.replace(' ','+');
+			//URL url = new URL("http://xoap.weather.com/search/search?where="+finaly );
+			//BufferedReader paginaHtml =new BufferedReader( new InputStreamReader( url.openStream() ) );
+			//while( (cadena = paginaHtml.readLine()) != null ) 
+			//{
+			//	cadena=cadena.trim();
+			//	pat = Pattern.compile("^<loc.*?=\"(.*?)\".*?>(.*?)<.*?>");
+			//	mat = pat.matcher(cadena);
+			//	if(mat.find())
+			//		System.out.println("ID= "+mat.group(1)+"     City= "+ mat.group(2));
+			//}
 			System.out.println("Ingrese el ID de la ciudad que desea");
 			id=new BufferedReader(new InputStreamReader(System.in));
 			tmp=id.readLine();
