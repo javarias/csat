@@ -415,7 +415,7 @@ public class interfaz {
 
 		pane.setImage("image.jpg",new Dimension(rectx-20,recty-20));
 		pane.setArrows(new Dimension(40,40));
-		pane.setCompassPoints(0.0d);
+		//pane.setCompassPoints(0.0d);
 
 		//Label Coordinates
 		JLabel coor = new JLabel("Coordinates Z");

@@ -32,7 +32,7 @@ public class DrawingPanel extends JPanel
 		canvas.addGLEventListener(list);
 		canvas.setLocation(0,0);
 		canvas.setSize(100,100);
-		tp.add(canvas);
+		//tp.add(canvas);
 
 		JDialog dialog = new JDialog(interfaz.frame,"Telescopio");
 		dialog.getContentPane().setLayout(null);
@@ -44,7 +44,7 @@ public class DrawingPanel extends JPanel
 		dialog.pack();
 		dialog.setSize(600,600);
 		dialog.setLocation(100,100);
-		//dialog.setResizable(false);
+		dialog.setResizable(false);
 		final Animator animator = new Animator(canvas);
 		final Animator animator2 = new Animator(canvas2);
 		list.setDialog(dialog,animator2);
