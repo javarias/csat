@@ -20,6 +20,8 @@ public class interfaz {
 	private static JRadioButton altaz;
 	private static ButtonGroup coord;
 	private static JLabel city;
+	private static JTextField city2find;
+	private static JButton find;
 	private static JComboBox location;
 
 	private static JPanel panel2;
@@ -202,15 +204,22 @@ public class interfaz {
 		city.setSize(150,20);
 		panel1.add(city);
 
+		city2find = new JTextField(50);
+		city2find.setLocation(150,70);
+		city2find.setSize(100,20);
+		panel1.add(city2find);
+		
+		find = new JButton("Find");
+		find.setLocation(260,70);
+		find.setSize(70,20);
+		panel1.add(find);
+
 		location = new JComboBox();
 		location.setModel(new DefaultComboBoxModel(new String[]{
-					"Valparaíso/Viña del Mar",
-					"Santiago",
-					"La Serena",
-					"Tierra"}));
-		location.setLocation(150,70);
+					"(none)"}));
+		location.setLocation(150,90);
 		location.setSize(200,20);
-		location.setSelectedIndex(1);
+		location.setSelectedIndex(0);
 		panel1.add(location);
 
 
@@ -343,8 +352,10 @@ public class interfaz {
 			radec.setSelected(true);
 		if(Integer.parseInt(test.getOption("coordinate"))==1)
 			altaz.setSelected(true);
-
-		location.setSelectedIndex(1);
+		
+		city2find.setText("");
+		
+		location.setSelectedIndex(0);
 
 
 
