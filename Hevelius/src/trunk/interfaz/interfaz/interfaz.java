@@ -465,7 +465,7 @@ public class interfaz {
 		long time1 = System.currentTimeMillis();
 		long time2 = System.currentTimeMillis();
 
-		//Presentación
+		//Presentacion
 		JFrame intro = new JFrame();
 		intro.setUndecorated(true);
 		intro.pack();
