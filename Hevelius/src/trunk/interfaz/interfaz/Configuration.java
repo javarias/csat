@@ -56,7 +56,7 @@ public class Configuration extends Properties{
 	
 	
 	public String getOption(String a){
-		return propiedades.getProperty(a).trim();	
+		return propiedades.getProperty(a).trim();
 	}
 
 	public void setOption(String a, String b){

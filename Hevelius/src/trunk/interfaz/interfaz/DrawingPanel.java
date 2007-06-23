@@ -10,6 +10,7 @@ public class DrawingPanel extends JPanel
 {
 	public static int gearDisplayList;
 	private Dimension dim;
+	private Dimension tam;
 	private Image img = null;
 	private Image rArrow = null;
 	private Image lArrow = null;
@@ -67,7 +68,7 @@ public class DrawingPanel extends JPanel
 		canvas.addGLEventListener(list);
 		canvas.setLocation(0,0);
 		canvas.setSize(100,100);
-		//tp.add(canvas);
+		tp.add(canvas);
 
 		JDialog dialog = new JDialog(interfaz.frame,"Telescopio");
 		dialog.getContentPane().setLayout(null);
@@ -113,7 +114,6 @@ public class DrawingPanel extends JPanel
 		dialog.addWindowListener(windowListener2);
 		interfaz.frame.addWindowListener(windowListener);
 		animator.start();
-		//animator2.start();
 		init();
 	}
 	public void setImage(String img, Dimension dim)
@@ -138,11 +138,6 @@ public class DrawingPanel extends JPanel
 	}
 	public void setCompassPoints(double dec)
 	{
-		int rect_x = dx/2;
-		int rect_y = dy/2;
-		int cx = 30+(dy-rect_y)/4;
-		int cy = (dy-dy/3)+(dy-rect_y)/4-20;
-		int r = (dy-rect_y)/4;
 		double theta = dec*Math.PI/180;
 		pointx = (int)(((double)r)*Math.cos(theta)+(double)cx);
 		pointy = (int)(-((double)r)*Math.sin(theta)+(double)cy);
@@ -151,6 +146,7 @@ public class DrawingPanel extends JPanel
 	}
 	private void init()
 	{
+		tam = new Dimension(0,0);
 		dy = getSize().height;
 		dx = getSize().width;
 		rect_x = dx/2;
@@ -161,6 +157,9 @@ public class DrawingPanel extends JPanel
 		r = (dy-rect_y)/4;
 
 		//Interface Initialization
+		setArrows(new Dimension(40,40));
+		//setImage("image.jpg",new Dimension(rect_x-20,rect_y-20));
+		setImage("image.jpg",new Dimension(200,200));
 
 	/*	//coor.setLocation((dx+rectx)/2 + 20+dist/2-50,210);
 		coor.setLocation(dist-15,240);
@@ -314,9 +313,11 @@ public class DrawingPanel extends JPanel
 	}
 	public void paintComponent(Graphics g)
 	{
-		System.out.println("A");
-		//setImage("image.jpg",new Dimension(rect_x-20,rect_y-20));
-		//setArrows(new Dimension(40,40));
+		if(pointx==0 && pointy==0)
+		{
+			pointx = cx+r;
+			pointy = cy;
+		}
 		super.paintComponent(g);
 
 		dy = getSize().height;
@@ -350,6 +351,11 @@ public class DrawingPanel extends JPanel
 		g.drawImage(rArrow, (dx+rect_x)/2+10, dy/2-20,this);
 		g.drawImage(tArrow, dx/2-20, (dy-rect_y)/2-50,this);
 		g.drawImage(bArrow, dx/2-20, (dy+rect_y)/2+10,this);
+		if(tam.width != dx || tam.height != dy)
+		{
+			setImage("image.jpg",new Dimension(rect_x-20,rect_y-20));
+			tam = new Dimension(dx,dy);
+		}
 		g.drawImage(img,(dx-rect_x)/2+10,(dy-rect_y)/2+10,this);
 
 		g.setColor(Color.RED);
