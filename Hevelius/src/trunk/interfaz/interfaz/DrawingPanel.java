@@ -58,6 +58,10 @@ public class DrawingPanel extends JPanel
 	private int rect_y;
 	private int r;
 
+	private boolean VTelescope;
+	private boolean VCompass;
+	private boolean VWeather;
+
 	public DrawingPanel(LayoutManager l)
 	{
 		super(l);
@@ -366,20 +370,28 @@ public class DrawingPanel extends JPanel
 		g.setColor(Color.GRAY);
 
 		int oGLx = (dx-rect_x)/2+rect_x+20;
-		g.drawRect(oGLx+20,10,dx-oGLx-40,dx-oGLx-40);
-		g.fillRect(oGLx+20,10,dx-oGLx-40,dx-oGLx-40);
+		if(VTelescope)
+		{
+			g.drawRect(oGLx+20,10,dx-oGLx-40,dx-oGLx-40);
+			g.fillRect(oGLx+20,10,dx-oGLx-40,dx-oGLx-40);
+		}
 
 		g.drawRect((dx-rect_x)/2,(dy-rect_y)/2,rect_x,rect_y);
 		g.fillRect((dx-rect_x)/2,(dy-rect_y)/2,rect_x,rect_y);
 
-		g.drawOval(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
-		g.fillOval(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
+		if(VCompass)
+		{
+			g.drawOval(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
+			g.fillOval(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
+		}
 
 		g.setColor(Color.BLACK);
 
 		g.fillRect((dx-rect_x)/2+10,(dy-rect_y)/2+10,rect_x-20,rect_y-20);
-		g.fillOval(30+5,dy-dy/3+5-20,(dy-rect_y)/2-10,(dy-rect_y)/2-10);
-		g.fillRect(oGLx+25,15,dx-oGLx-50,dx-oGLx-50);
+		if(VCompass)
+			g.fillOval(30+5,dy-dy/3+5-20,(dy-rect_y)/2-10,(dy-rect_y)/2-10);
+		if(VTelescope)
+			g.fillRect(oGLx+25,15,dx-oGLx-50,dx-oGLx-50);
 
 		g.drawImage(lArrow, (dx-rect_x)/2-50, dy/2-20,this);
 		g.drawImage(rArrow, (dx+rect_x)/2+10, dy/2-20,this);
@@ -392,42 +404,44 @@ public class DrawingPanel extends JPanel
 		}
 		g.drawImage(img,(dx-rect_x)/2+10,(dy-rect_y)/2+10,this);
 
-		g.setColor(Color.RED);
-		g.drawLine(cx,cy,pointx,pointy);
-		g.drawLine(cx+1,cy+1,pointx+1,pointy+1);
-
-		g.setColor(Color.BLUE);
-		g.drawOval(cx-5,cy-5,10,10);
-		g.fillOval(cx-5,cy-5,10,10);
+		if(VCompass)
+		{
+			g.setColor(Color.RED);
+			g.drawLine(cx,cy,pointx,pointy);
+			g.drawLine(cx+1,cy+1,pointx+1,pointy+1);
+			g.setColor(Color.BLUE);
+			g.drawOval(cx-5,cy-5,10,10);
+			g.fillOval(cx-5,cy-5,10,10);
+		}
 		
 		tp.setLocation(oGLx+25,15);
 		tp.setSize(dx-oGLx-50,dx-oGLx-50);
 		canvas.setSize(dx-oGLx-50,dx-oGLx-50);
 
 		//Interface Objects Positioning
-		coor.setLocation(dist-30,240);
+		coor.setLocation(dist-30,420);//240
 
-		coor1L.setLocation(dist-10,260);
+		coor1L.setLocation(dist-10,450);//260
 
-		coor1.setLocation(dist+20,260);
+		coor1.setLocation(dist+20,450);//260
 
-		coor2L.setLocation(dist-10,280);
+		coor2L.setLocation(dist-10,470);//280
 
-		coor2.setLocation(dist + 20,280);
+		coor2.setLocation(dist + 20,470);//280
 
-		go.setLocation(dist + 55,302);
+		go.setLocation(dist + 55,492);//302
 
-		change.setLocation(dist-5,302);
+		change.setLocation(dist-5,492);//302
 
-		ccoor.setLocation(dist-30,420);
+		ccoor.setLocation(dist-30,240);//420
 
-		ccoor1L.setLocation(dist-10,450);
+		ccoor1L.setLocation(dist-10,270);//450
 
-		ccoor1C.setLocation(dist + 20,450);
+		ccoor1C.setLocation(dist + 20,270);//450
 
-		ccoor2L.setLocation(dist-10, 470);
+		ccoor2L.setLocation(dist-10, 290);//470
 
-		ccoor2C.setLocation(dist + 20,470);
+		ccoor2C.setLocation(dist + 20,290);//470
 
 		stop.setLocation(rect_x-25,dy - 110);
 
@@ -505,7 +519,8 @@ public class DrawingPanel extends JPanel
 
 		//Weather
 		switch(Integer.parseInt(test.getOption("weather"))){
-			case 0: tempL.setVisible(false);
+			case 0: VWeather = false;
+				tempL.setVisible(false);
 				wStatL.setVisible(false);
 				windL.setVisible(false);
 				humL.setVisible(false);
@@ -514,7 +529,8 @@ public class DrawingPanel extends JPanel
 				windB.setVisible(false);
 				humB.setVisible(false);
 				break;
-			case 1: tempL.setVisible(true);
+			case 1: VWeather = true;
+				tempL.setVisible(true);
 				wStatL.setVisible(true);
 				windL.setVisible(true);
 				humL.setVisible(true);
@@ -523,7 +539,8 @@ public class DrawingPanel extends JPanel
 				windB.setVisible(true);
 				humB.setVisible(true);
 				break;
-			default: tempL.setVisible(true);
+			default:VWeather = true;
+				tempL.setVisible(true);
 				wStatL.setVisible(true);
 				windL.setVisible(true);
 				humL.setVisible(true);
@@ -536,19 +553,22 @@ public class DrawingPanel extends JPanel
 
 		//Compass
 		switch(Integer.parseInt(test.getOption("compass"))){
-			case 0: northL.setVisible(false);
+			case 0: VCompass = false;
+				northL.setVisible(false);
 				southL.setVisible(false);
 				eastL.setVisible(false);
 				westL.setVisible(false);
 				//canvas.setVisible(false);
 				break;
-			case 1: northL.setVisible(true);
+			case 1: VCompass = true;
+				northL.setVisible(true);
 				southL.setVisible(true);
 				eastL.setVisible(true);
 				westL.setVisible(true);
 				//canvas.setVisible(true);
 				break;
-			default: northL.setVisible(true);
+			default:VCompass = true;
+				northL.setVisible(true);
 				southL.setVisible(true);
 				eastL.setVisible(true);
 				westL.setVisible(true);
@@ -558,14 +578,18 @@ public class DrawingPanel extends JPanel
 
 		//OpenGL
 		switch(Integer.parseInt(test.getOption("opengl"))){
-			case 0: canvas.setVisible(false);
+			case 0: VTelescope = false;
+				tp.setVisible(false);
 				break;
-			case 1: canvas.setVisible(true);
+			case 1: //canvas.setVisible(true);
+				VTelescope = true;
+				tp.setVisible(true);
 				break;
-			default: canvas.setVisible(true);
+			default:VTelescope = true; 
+				tp.setVisible(true);
 				break;
 		}		
-
+		paintImmediately(0,0,getSize().width,getSize().height);
 	}
 
 	public static synchronized void initializeDisplayList(GL gl) {
