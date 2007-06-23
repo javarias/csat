@@ -100,30 +100,8 @@ public class interfaz {
 			editMenu.add(item);
 		}
 
-		// Insert a separator in the Edit menu in Position 1 after "Undo".
-		//editMenu.insertSeparator(1);
-
-		// Assemble the submenus of the Other menu.
 		JMenuItem item;
-		/*   subMenu2.add(item = new JMenuItem("Extra 2"));
-		     item.addActionListener(printListener);
-		     subMenu.add(item = new JMenuItem("Extra 1"));
-		     item.addActionListener(printListener);
-		     subMenu.add(subMenu2);
-
-		// Assemble the Other menu itself.
-		aboutMenu.add(subMenu);
-		aboutMenu.add(item = new JCheckBoxMenuItem("Check Me"));
-		item.addActionListener(printListener);
-		aboutMenu.addSeparconfigator(  );
-		ButtonGroup buttonGroup = new ButtonGroup(  );
-		aboutMenu.add(item = new JRadioButtonMenuItem("Radio 1"));
-		item.addActionListener(printListener);
-		buttonGroup.add(item);
-		aboutMenu.add(item = new JRadioButtonMenuItem("Radio 2"));
-		item.addActionListener(printListener);
-		buttonGroup.add(item);
-		aboutMenu.addSeparator(  );*/
+		
 		aboutMenu.add(item = new JMenuItem("About Hevelius"));
 		item.addActionListener(printListener);
 
@@ -133,7 +111,6 @@ public class interfaz {
 		menu.add(aboutMenu);
 
 
-		//   PropertiesConfiguration config = new PropertiesConfiguration("app.windows.properties");
 
 
 
@@ -275,7 +252,6 @@ public class interfaz {
 					"Orange",
 					"Pink",
 					"Red",
-					"White",
 					"Yellow"}));
 		color.setLocation(150,90);
 		color.setSize(200,20);
@@ -338,6 +314,7 @@ public class interfaz {
 
 				test.store();
 
+				pane.updateWindow();
 
 				}
 		});
@@ -434,6 +411,7 @@ public class interfaz {
 	{
 		frame = new JFrame("Hevelius v0.0.1");
 		pane = new DrawingPanel(null);
+		pane.updateWindow();
 		frame.setContentPane(pane);
 		Dimension ScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.addWindowListener(new WindowAdapter()
@@ -456,8 +434,7 @@ public class interfaz {
 			case 8: pane.setBackground(Color.ORANGE); break;
 			case 9: pane.setBackground(Color.PINK); break;
 			case 10: pane.setBackground(Color.RED); break;
-			case 11: pane.setBackground(Color.WHITE); break;
-			case 12: pane.setBackground(Color.YELLOW); break;
+			case 11: pane.setBackground(Color.YELLOW); break;
 			default: pane.setBackground(Color.BLACK); break;
 		}
 
@@ -489,18 +466,6 @@ public class interfaz {
 			time2 = System.currentTimeMillis();
 		//frame.setJMenuBar(createMenuBar());
 
-		//Label Coordinates
-		JLabel coor;
-		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: coor = new JLabel("Coordinates RaDec"); break;
-			case 1: coor = new JLabel("Coordinates Horizontal"); break;
-			default: coor = new JLabel("Coordinates RaDec"); break;
-		}
-
-		coor.setLocation(/*dist-*/15,240);
-		coor.setSize(250,20);
-		coor.setForeground(Color.WHITE);
-		pane.add(coor);
 	}
 
 	public static void main(String[] args){

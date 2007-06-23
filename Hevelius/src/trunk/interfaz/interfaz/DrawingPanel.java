@@ -22,6 +22,8 @@ public class DrawingPanel extends JPanel
 	private GLCanvas canvas;
 	private Listener list;
 
+	private static Configuration test = new Configuration();
+	private JLabel coor;
 	private JLabel coor1L;
 	private JTextField coor1;
 	private JLabel coor2L;
@@ -166,10 +168,25 @@ public class DrawingPanel extends JPanel
 		coor.setSize(250,20);
 		coor.setForeground(Color.WHITE);
 		pane.add(coor);*/
+		
+		//Coordinate Label
+		switch(Integer.parseInt(test.getOption("coordinate"))){
+			case 0: coor = new JLabel("RaDec Coordinates"); break;
+			case 1: coor = new JLabel("Horizontal Coordinates"); break;
+			default: coor = new JLabel("RaDec Coordinates"); break;
+		}
+		coor.setSize(150,20);
+		coor.setForeground(Color.WHITE);
+		coor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		add(coor);
 
 		//RA or ALT Label
-		coor1L = new JLabel("X");
-		coor1L.setSize(20,20);
+		switch(Integer.parseInt(test.getOption("coordinate"))){
+			case 0: coor1L = new JLabel("RA"); break;
+			case 1: coor1L = new JLabel("Alt"); break;
+			default: coor1L = new JLabel("RA"); break;
+		}
+		coor1L.setSize(30,20);
 		coor1L.setForeground(Color.WHITE);
 		add(coor1L);
 
@@ -179,8 +196,12 @@ public class DrawingPanel extends JPanel
 		add(coor1);
 
 		//DEC or AZ Label
-		coor2L = new JLabel("Y");
-		coor2L.setSize(20,20);
+		switch(Integer.parseInt(test.getOption("coordinate"))){
+			case 0: coor2L = new JLabel("Dec"); break;
+			case 1: coor2L = new JLabel("Az"); break;
+			default: coor2L = new JLabel("Dec"); break;
+		}
+		coor2L.setSize(30,20);
 		coor2L.setForeground(Color.WHITE);
 		add(coor2L);
 
@@ -202,14 +223,23 @@ public class DrawingPanel extends JPanel
 		add(change);
 
 		//Current coordinates
-		ccoor = new JLabel("Coordinates");
-		ccoor.setSize(80,20);
+		switch(Integer.parseInt(test.getOption("coordinate"))){
+			case 0: ccoor = new JLabel("RaDec Coordinates"); break;
+			case 1: ccoor = new JLabel("Horizontal Coordinates"); break;
+			default: ccoor = new JLabel("RaDec Coordinates"); break;
+		}
+		ccoor.setSize(150,20);
 		ccoor.setForeground(Color.WHITE);
+		ccoor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		add(ccoor);
 
 		//Current RA or ALT Label
-		ccoor1L = new JLabel("X");
-		ccoor1L.setSize(20,20);
+		switch(Integer.parseInt(test.getOption("coordinate"))){
+			case 0: ccoor1L = new JLabel("RA"); break;
+			case 1: ccoor1L = new JLabel("Alt"); break;
+			default: ccoor1L = new JLabel("RA"); break;
+		}
+		ccoor1L.setSize(30,20);
 		ccoor1L.setForeground(Color.WHITE);
 		add(ccoor1L);
 
@@ -220,8 +250,12 @@ public class DrawingPanel extends JPanel
 		add(ccoor1C);
 
 		//Current DEC or AZ Label
-		ccoor2L = new JLabel("Y");
-		ccoor2L.setSize(20,20);
+		switch(Integer.parseInt(test.getOption("coordinate"))){
+			case 0: ccoor2L = new JLabel("Dec"); break;
+			case 1: ccoor2L = new JLabel("Az"); break;
+			default: ccoor2L = new JLabel("Dec"); break;
+		}
+		ccoor2L.setSize(30,20);
 		ccoor2L.setForeground(Color.WHITE);
 		add(ccoor2L);
 
@@ -371,28 +405,29 @@ public class DrawingPanel extends JPanel
 		canvas.setSize(dx-oGLx-50,dx-oGLx-50);
 
 		//Interface Objects Positioning
+		coor.setLocation(dist-30,240);
 
-		coor1L.setLocation(dist,260);
+		coor1L.setLocation(dist-10,260);
 
-		coor1.setLocation(dist+15,260);
+		coor1.setLocation(dist+20,260);
 
-		coor2L.setLocation(dist,280);
+		coor2L.setLocation(dist-10,280);
 
-		coor2.setLocation(dist + 15,280);
+		coor2.setLocation(dist + 20,280);
 
 		go.setLocation(dist + 55,302);
 
 		change.setLocation(dist-5,302);
 
-		ccoor.setLocation(dist,420);
+		ccoor.setLocation(dist-30,420);
 
-		ccoor1L.setLocation(dist,450);
+		ccoor1L.setLocation(dist-10,450);
 
-		ccoor1C.setLocation(dist + 15,450);
+		ccoor1C.setLocation(dist + 20,450);
 
-		ccoor2L.setLocation(dist, 470);
+		ccoor2L.setLocation(dist-10, 470);
 
-		ccoor2C.setLocation(dist + 15,470);
+		ccoor2C.setLocation(dist + 20,470);
 
 		stop.setLocation(rect_x-25,dy - 110);
 
@@ -424,6 +459,115 @@ public class DrawingPanel extends JPanel
 	{
 		return getSize();
 	}
+
+	public void updateWindow(){
+		//Cambiar Background
+		switch(Integer.parseInt(test.getOption("background"))){
+			case 0: setBackground(Color.BLACK); break;
+			case 1: setBackground(Color.BLUE); break;
+			case 2: setBackground(Color.CYAN); break;
+			case 3: setBackground(Color.DARK_GRAY); break;
+			case 4: setBackground(Color.GRAY); break;
+			case 5: setBackground(Color.GREEN); break;
+			case 6: setBackground(Color.LIGHT_GRAY); break;
+			case 7: setBackground(Color.MAGENTA); break;
+			case 8: setBackground(Color.ORANGE); break;
+			case 9: setBackground(Color.PINK); break;
+			case 10: setBackground(Color.RED); break;
+			case 11: setBackground(Color.YELLOW); break;
+			default: setBackground(Color.BLACK); break;
+		}
+
+		//Modificar Tipos de Coordenadas
+		switch(Integer.parseInt(test.getOption("coordinate"))){
+			case 0: coor.setText("RaDec Coordinates"); 
+				coor1L.setText("Ra");
+				coor2L.setText("Dec");
+				ccoor.setText("RaDec Coordinates");
+				ccoor1L.setText("Ra");
+				ccoor2L.setText("Dec");
+				break;
+			case 1: coor.setText("Horizontal Coordinates");  
+				coor1L.setText("Alt");
+				coor2L.setText("Az");
+				ccoor.setText("Horizontal Coordinates");
+				ccoor1L.setText("Alt");
+				ccoor2L.setText("Az");
+				break;
+			default: coor.setText("RaDec Coordinates");  
+				coor1L.setText("Ra");
+				coor2L.setText("Dec");
+				ccoor.setText("RaDec Coordinates");
+				ccoor1L.setText("Ra");
+				ccoor2L.setText("Dec");
+				break;
+		}
+
+		//Weather
+		switch(Integer.parseInt(test.getOption("weather"))){
+			case 0: tempL.setVisible(false);
+				wStatL.setVisible(false);
+				windL.setVisible(false);
+				humL.setVisible(false);
+				tempB.setVisible(false);
+				wStatB.setVisible(false);
+				windB.setVisible(false);
+				humB.setVisible(false);
+				break;
+			case 1: tempL.setVisible(true);
+				wStatL.setVisible(true);
+				windL.setVisible(true);
+				humL.setVisible(true);
+				tempB.setVisible(true);
+				wStatB.setVisible(true);
+				windB.setVisible(true);
+				humB.setVisible(true);
+				break;
+			default: tempL.setVisible(true);
+				wStatL.setVisible(true);
+				windL.setVisible(true);
+				humL.setVisible(true);
+				tempB.setVisible(true);
+				wStatB.setVisible(true);
+				windB.setVisible(true);
+				humB.setVisible(true);
+				break;
+		}
+
+		//Compass
+		switch(Integer.parseInt(test.getOption("compass"))){
+			case 0: northL.setVisible(false);
+				southL.setVisible(false);
+				eastL.setVisible(false);
+				westL.setVisible(false);
+				//canvas.setVisible(false);
+				break;
+			case 1: northL.setVisible(true);
+				southL.setVisible(true);
+				eastL.setVisible(true);
+				westL.setVisible(true);
+				//canvas.setVisible(true);
+				break;
+			default: northL.setVisible(true);
+				southL.setVisible(true);
+				eastL.setVisible(true);
+				westL.setVisible(true);
+				//canvas.setVisible(true);
+				break;
+		}
+
+		//OpenGL
+		switch(Integer.parseInt(test.getOption("opengl"))){
+			case 0: canvas.setVisible(false);
+				break;
+			case 1: canvas.setVisible(true);
+				break;
+			default: canvas.setVisible(true);
+				break;
+		}		
+
+	}
+
 	public static synchronized void initializeDisplayList(GL gl) {
 		gearDisplayList = gl.glGenLists(1);
 		gl.glNewList(gearDisplayList, GL.GL_COMPILE);
