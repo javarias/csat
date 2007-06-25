@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-import weather.*;
+import trunk.weather.*;
 
 public class interfaz {
 	public static JFrame frame;
@@ -325,12 +325,12 @@ public class interfaz {
 
 		find.addActionListener(new ActionListener(  ) {
                                 public void actionPerformed(ActionEvent event) {
-					if(city2find.trim().compareTo(null) != 0){
-						WeatherCity weather=  new WeatherCity(city2find.trim());
+					if(city2find.getText().trim().compareTo(null) != 0){
+						WeatherCity weather=  new WeatherCity(city2find.getText().trim());
 						Vector<WeatherCityId> vector_city = new Vector<WeatherCityId>();
 						vector_city = weather.ListCity();
 						
-						for(int i = 0; i < vector_city.size; i++)
+						for(int i = 0; i < vector_city.size(); i++)
 							location.addItem(vector_city.get(i).getNameCity());
 					}
                                 }
