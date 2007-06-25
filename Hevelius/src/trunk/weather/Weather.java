@@ -1,7 +1,9 @@
-//import java.io.*;
+package weather;
+
+import java.io.*;
 import java.util.regex.*;
-//import java.net.*;
-//import java.util.*;
+import java.net.*;
+import java.util.*;
 public class Weather {
 
 	public static Vector<WeatherCityId> vector_city;

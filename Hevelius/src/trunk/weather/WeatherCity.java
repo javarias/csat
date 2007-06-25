@@ -1,3 +1,5 @@
+package weather;
+
 import java.io.*;
 import java.util.regex.*;
 import java.net.*;

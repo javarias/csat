@@ -1,6 +1,8 @@
-//import java.net.*;
-//import java.io.*;
-//import java.util.*;
+package weather;
+
+import java.net.*;
+import java.io.*;
+import java.util.*;
 import java.util.regex.*;
 
 public class WeatherCityCondition
