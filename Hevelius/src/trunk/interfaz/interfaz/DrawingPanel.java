@@ -1,3 +1,6 @@
+package trunk.interfaz.interfaz;
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -376,8 +379,8 @@ public class DrawingPanel extends JPanel
 			g.fillRect(oGLx+20,10,dx-oGLx-40,dx-oGLx-40);
 		}
 
-		g.drawRect((dx-rect_x)/2,(dy-rect_y)/2,rect_x,rect_y);
-		g.fillRect((dx-rect_x)/2,(dy-rect_y)/2,rect_x,rect_y);
+		g.drawRect((dx-rect_x*3/4)/2,(dy-rect_y*3/4)/2,rect_x*3/4,rect_y*3/4);
+		g.fillRect((dx-rect_x*3/4)/2,(dy-rect_y*3/4)/2,rect_x*3/4,rect_y*3/4);
 
 //		if(VCompass)
 //		{
@@ -387,22 +390,22 @@ public class DrawingPanel extends JPanel
 
 		g.setColor(Color.BLACK);
 
-		g.fillRect((dx-rect_x)/2+10,(dy-rect_y)/2+10,rect_x-20,rect_y-20);
+		g.fillRect((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,rect_x*3/4-10,rect_y*3/4-10);
 //		if(VCompass)
 //			g.fillOval(30+5,dy-dy/3+5-20,(dy-rect_y)/2-10,(dy-rect_y)/2-10);
 		if(VTelescope)
 			g.fillRect(oGLx+25,15,dx-oGLx-50,dx-oGLx-50);
 
-		g.drawImage(lArrow, (dx-rect_x)/2-50, dy/2-20,this);
-		g.drawImage(rArrow, (dx+rect_x)/2+10, dy/2-20,this);
-		g.drawImage(tArrow, dx/2-20, (dy-rect_y)/2-50,this);
-		g.drawImage(bArrow, dx/2-20, (dy+rect_y)/2+10,this);
+		g.drawImage(lArrow, (dx-rect_x*3/4)/2-50, dy/2-20,this);
+		g.drawImage(rArrow, (dx+rect_x*3/4)/2+10, dy/2-20,this);
+		g.drawImage(tArrow, dx/2-20, (dy-rect_y*3/4)/2-50,this);
+		g.drawImage(bArrow, dx/2-20, (dy+rect_y*3/4)/2+10,this);
 		if(tam.width != dx || tam.height != dy)
 		{
-			setImage("image.jpg",new Dimension(rect_x-20,rect_y-20));
+			setImage("image.jpg",new Dimension((rect_x-10)*3/4,(rect_y-10)*3/4));
 			tam = new Dimension(dx,dy);
 		}
-		g.drawImage(img,(dx-rect_x)/2+10,(dy-rect_y)/2+10,this);
+		g.drawImage(img,(dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,this);
 
 //		if(VCompass)
 //		{
@@ -417,8 +420,8 @@ public class DrawingPanel extends JPanel
 		tp.setLocation(oGLx+25,15);
 		tp.setSize(dx-oGLx-50,dx-oGLx-50);
 		canvas.setSize(dx-oGLx-50,dx-oGLx-50);
-		cp.setSize((dy-rect_y)/2+50,(dy-rect_y)/2+50);
-		cp.setLocation(0,dy-cp.getSize().height-50);
+		cp.setSize(((dy-rect_y)/2+50)*3/4,((dy-rect_y)/2+50)*3/4);
+		cp.setLocation(5,dy-cp.getSize().height-50);
 
 		//Interface Objects Positioning
 		coor.setLocation(dist-30,420);//240

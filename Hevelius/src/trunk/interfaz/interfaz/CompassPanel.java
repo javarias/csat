@@ -1,3 +1,5 @@
+package trunk.interfaz.interfaz;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -58,12 +60,12 @@ public class CompassPanel extends JPanel
 		g.drawOval(dx/12,dy/12,2*r,2*r);
 		g.fillOval(dx/12,dy/12,2*r,2*r);
 
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.fillOval(dx/12+5,dy/12+5,2*r-10,2*r-10);
 
 		northL.setLocation(dx/2-2,dy/2-r-20);
-		southL.setLocation(dx/2-2,dy/2+r+2);
-		eastL.setLocation(dx/2+r+10,dy/2-10);
+		southL.setLocation(dx/2-8,dy/2+r+2);
+		eastL.setLocation(dx/2+r+8,dy/2-10);
 		westL.setLocation(dx/2-r-15,dy/2-10);
 
 		g.setColor(Color.RED);

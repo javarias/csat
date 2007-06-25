@@ -1,3 +1,5 @@
+package trunk.interfaz.interfaz;
+
 import java.awt.*;
 import java.awt.image.*;
 
