@@ -1,4 +1,4 @@
-package weather;
+package trunk.weather;
 
 import java.io.*;
 import java.util.regex.*;
@@ -7,7 +7,7 @@ import java.util.*;
 public class Weather {
 
 	public static Vector<WeatherCityId> vector_city;
-	public static Vector<WeatherCondition> vector_condition;
+	public static Vector<WeatherCityCondition> vector_condition;
 	public static void main(String[] args) {
 		BufferedReader lugar;
 		BufferedReader id;
@@ -34,13 +34,15 @@ public class Weather {
 			id=new BufferedReader(new InputStreamReader(System.in));
 			tmp=id.readLine();
 			tmp=tmp.trim();
-			WeatherCondition conditon = new WeatherCondition(tmp);
+			WeatherCondition condition = new WeatherCondition(tmp);
 			vector_condition = new Vector<WeatherCityCondition>();
-			vector_condition = weather.ListCityCondition();
-			n = vector_condition.size();
-			for(i=1;i<n;i++)
+			vector_condition = condition.ListCityCondition();
+			int k= vector_condition.size();
+			System.out.println(k);
+			for(i=1;i<k;i++)
 			{
-				//System.out.println(vect
+				System.out.println("lalaalal");
+				System.out.println(vector_condition.get(i).getLat()+" "+vector_condition.get(i).getLon());
 			}
 
 

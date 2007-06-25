@@ -37,7 +37,7 @@ public class WeatherCondition
 				mat = pat.matcher(cadena);
 				if(mat.find())
 				{
-					
+
 					//String time = new WeatherCityCondition();
 					//weather = new WeatherCityCondition();
 					weather.setTime(mat);
@@ -143,7 +143,7 @@ public class WeatherCondition
 				mat = pat.matcher(cadena);
 				if(mat.find())
 				{
-				 	//String vwind = new WeatherCityCondition();
+					//String vwind = new WeatherCityCondition();
 					weather.setVwind(mat);
 				}
 				pat = Pattern.compile("^<gust.*?>(.*?)<.*?>"); 
@@ -204,46 +204,12 @@ public class WeatherCondition
 				}
 
 			}
-
-			
-		
-				
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			/*	while( (cadena = paginaHtml.readLine()) != null )
-			{
-				cadena=cadena.trim();
-				pat = Pattern.compile("^<loc.*?=\"(.*?)\".*?>(.*?)<.*?>");
-				mat = pat.matcher(cadena);
-				if(mat.find())
-				{
-					//System.out.println("ID= "+mat.group(1)+"     City= "+ mat.group(2));
-					weather.setNameCity=mat.group(2);
-					weather.setId=mat.group(1);
-					vector_city.add(weather);
-				}
-
-			}*/
-			return vector_condition;
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-
 		}
-		return null;
+		return vector_condition;	
 	}
+
 }

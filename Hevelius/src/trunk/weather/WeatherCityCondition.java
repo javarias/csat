@@ -116,7 +116,7 @@ public class WeatherCityCondition
 	{
 		return sunrice;
 	}
-	public String getSunset(Matcher mat)
+	public String getSunset()
 	{
 		return sunset;
 	}
