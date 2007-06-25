@@ -16,8 +16,8 @@ public class DrawingPanel extends JPanel
 	private Image lArrow = null;
 	private Image tArrow = null;
 	private Image bArrow = null;
-	private int pointx=0;
-	private int pointy=0;
+//	private int pointx=0;
+//	private int pointy=0;
 	private JPanel tp;
 	private GLCanvas canvas;
 	private Listener list;
@@ -44,10 +44,10 @@ public class DrawingPanel extends JPanel
 	private JLabel wStatB;
 	private JLabel windB;
 	private JLabel humB;
-	private JLabel northL;
-	private JLabel southL;
-	private JLabel eastL;
-	private JLabel westL;
+	//private JLabel northL;
+	//private JLabel southL;
+	//private JLabel eastL;
+	//private JLabel westL;
 
 	private int cx;
 	private int cy;
@@ -62,6 +62,7 @@ public class DrawingPanel extends JPanel
 	private boolean VCompass;
 	private boolean VWeather;
 
+	private CompassPanel cp = null;
 	public DrawingPanel(LayoutManager l)
 	{
 		super(l);
@@ -142,7 +143,7 @@ public class DrawingPanel extends JPanel
 		bArrow = Transparency.makeColorTransparent(bArrow, Color.BLACK);
 		bArrow = bArrow.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
 	}
-	public void setCompassPoints(double dec)
+/*	public void setCompassPoints(double dec)
 	{
 		double theta = dec*Math.PI/180;
 		pointx = (int)(((double)r)*Math.cos(theta)+(double)cx);
@@ -150,7 +151,7 @@ public class DrawingPanel extends JPanel
 		Rectangle re = new Rectangle(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
 		paintImmediately(re);
 	}
-	private void init()
+*/	private void init()
 	{
 		tam = new Dimension(0,0);
 		dy = getSize().height;
@@ -322,7 +323,7 @@ public class DrawingPanel extends JPanel
 		humB.setSize(100,20);
 		humB.setForeground(Color.WHITE);
 		add(humB);
-
+/*
 		//North Label
 		northL = new JLabel("N");
 		northL.setSize(20,20);
@@ -348,14 +349,13 @@ public class DrawingPanel extends JPanel
 		westL.setSize(20,20);
 		westL.setForeground(Color.WHITE);
 		add(westL);
+*/
+		cp = new CompassPanel(null);
+		cp.setLocation(0,350);
+		add(cp);
 	}
 	public void paintComponent(Graphics g)
 	{
-		if(pointx==0 && pointy==0)
-		{
-			pointx = cx+r;
-			pointy = cy;
-		}
 		super.paintComponent(g);
 
 		dy = getSize().height;
@@ -379,17 +379,17 @@ public class DrawingPanel extends JPanel
 		g.drawRect((dx-rect_x)/2,(dy-rect_y)/2,rect_x,rect_y);
 		g.fillRect((dx-rect_x)/2,(dy-rect_y)/2,rect_x,rect_y);
 
-		if(VCompass)
-		{
-			g.drawOval(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
-			g.fillOval(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
-		}
+//		if(VCompass)
+//		{
+//			g.drawOval(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
+//			g.fillOval(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
+//		}
 
 		g.setColor(Color.BLACK);
 
 		g.fillRect((dx-rect_x)/2+10,(dy-rect_y)/2+10,rect_x-20,rect_y-20);
-		if(VCompass)
-			g.fillOval(30+5,dy-dy/3+5-20,(dy-rect_y)/2-10,(dy-rect_y)/2-10);
+//		if(VCompass)
+//			g.fillOval(30+5,dy-dy/3+5-20,(dy-rect_y)/2-10,(dy-rect_y)/2-10);
 		if(VTelescope)
 			g.fillRect(oGLx+25,15,dx-oGLx-50,dx-oGLx-50);
 
@@ -404,19 +404,21 @@ public class DrawingPanel extends JPanel
 		}
 		g.drawImage(img,(dx-rect_x)/2+10,(dy-rect_y)/2+10,this);
 
-		if(VCompass)
-		{
-			g.setColor(Color.RED);
-			g.drawLine(cx,cy,pointx,pointy);
-			g.drawLine(cx+1,cy+1,pointx+1,pointy+1);
-			g.setColor(Color.BLUE);
-			g.drawOval(cx-5,cy-5,10,10);
-			g.fillOval(cx-5,cy-5,10,10);
-		}
+//		if(VCompass)
+//		{
+//			g.setColor(Color.RED);
+//			g.drawLine(cx,cy,pointx,pointy);
+//			g.drawLine(cx+1,cy+1,pointx+1,pointy+1);
+//			g.setColor(Color.BLUE);
+//			g.drawOval(cx-5,cy-5,10,10);
+//			g.fillOval(cx-5,cy-5,10,10);
+//		}
 		
 		tp.setLocation(oGLx+25,15);
 		tp.setSize(dx-oGLx-50,dx-oGLx-50);
 		canvas.setSize(dx-oGLx-50,dx-oGLx-50);
+		cp.setSize((dy-rect_y)/2+50,(dy-rect_y)/2+50);
+		cp.setLocation(0,dy-cp.getSize().height-50);
 
 		//Interface Objects Positioning
 		coor.setLocation(dist-30,420);//240
@@ -460,7 +462,7 @@ public class DrawingPanel extends JPanel
 		windB.setLocation(140,70);
 
 		humB.setLocation(140,100);
-
+/*
 		northL.setLocation(cx-2,cy-r-30);
 
 		southL.setLocation(cx-2,cy+r+10);
@@ -468,12 +470,18 @@ public class DrawingPanel extends JPanel
 		eastL.setLocation(cx+r+10,cy-10);
 
 		westL.setLocation(10,cy-10);
+*/
 	}
 	public Dimension getDim()
 	{
 		return getSize();
 	}
-
+	public void setBackground(Color c)
+	{
+		super.setBackground(c);
+		if(cp!=null)
+			cp.setBackground(c);
+	}
 	public void updateWindow(){
 		//Cambiar Background
 		switch(Integer.parseInt(test.getOption("background"))){
@@ -554,25 +562,25 @@ public class DrawingPanel extends JPanel
 		//Compass
 		switch(Integer.parseInt(test.getOption("compass"))){
 			case 0: VCompass = false;
-				northL.setVisible(false);
-				southL.setVisible(false);
-				eastL.setVisible(false);
-				westL.setVisible(false);
-				//canvas.setVisible(false);
+				//northL.setVisible(false);
+				//southL.setVisible(false);
+				//eastL.setVisible(false);
+				//westL.setVisible(false);
+				cp.setVisible(false);
 				break;
 			case 1: VCompass = true;
-				northL.setVisible(true);
-				southL.setVisible(true);
-				eastL.setVisible(true);
-				westL.setVisible(true);
-				//canvas.setVisible(true);
+				//northL.setVisible(true);
+				//southL.setVisible(true);
+				//eastL.setVisible(true);
+				//westL.setVisible(true);
+				cp.setVisible(true);
 				break;
 			default:VCompass = true;
-				northL.setVisible(true);
-				southL.setVisible(true);
-				eastL.setVisible(true);
-				westL.setVisible(true);
-				//canvas.setVisible(true);
+				//northL.setVisible(true);
+				//southL.setVisible(true);
+				//eastL.setVisible(true);
+				//westL.setVisible(true);
+				cp.setVisible(true);
 				break;
 		}
 
@@ -590,6 +598,10 @@ public class DrawingPanel extends JPanel
 				break;
 		}		
 		paintImmediately(0,0,getSize().width,getSize().height);
+	}
+	public CompassPanel getPanel()
+	{
+		return cp;
 	}
 
 	public static synchronized void initializeDisplayList(GL gl) {
