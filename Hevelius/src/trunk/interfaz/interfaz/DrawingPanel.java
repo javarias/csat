@@ -1,4 +1,4 @@
-package interfaz.interfaz;
+package trunk.interfaz.interfaz;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +36,7 @@ public class DrawingPanel extends JPanel
 	private JLabel ccoor1L;
 	private JLabel ccoor1C;
 	private JLabel ccoor2L;
-	private JButton stop;
+	//private JButton stop;
 	private JLabel ccoor2C;
 	private JLabel tempL;
 	private JLabel wStatL;
@@ -46,6 +46,7 @@ public class DrawingPanel extends JPanel
 	private JLabel wStatB;
 	private JLabel windB;
 	private JLabel humB;
+	private Image stop;
 	//private JLabel northL;
 	//private JLabel southL;
 	//private JLabel eastL;
@@ -125,10 +126,13 @@ public class DrawingPanel extends JPanel
 		animator.start();
 		init();
 	}
-	public void setImage(String img, Dimension dim)
+	public Image setImage(String img, Dimension dim)
 	{
-		this.img = Toolkit.getDefaultToolkit().getImage(img);
-		this.img = this.img.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
+		Image imag;
+		imag = Toolkit.getDefaultToolkit().getImage(img);
+		imag = Transparency.makeColorTransparent(imag, Color.BLACK);
+		imag = imag.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
+		return imag;
 	}
 	public void setArrows(Dimension dim)
 	{
@@ -168,7 +172,7 @@ public class DrawingPanel extends JPanel
 		//Interface Initialization
 		setArrows(new Dimension(40,40));
 		//setImage("image.jpg",new Dimension(rect_x-20,rect_y-20));
-		setImage("images/image.jpg",new Dimension(200,200));
+		img = setImage("images/image.jpg",new Dimension(200,200));
 
 	/*	//coor.setLocation((dx+rectx)/2 + 20+dist/2-50,210);
 		coor.setLocation(dist-15,240);
@@ -273,10 +277,10 @@ public class DrawingPanel extends JPanel
 		add(ccoor2C);
 
 		//Emergency Stop Button
-		stop = new JButton("STOP!");
-		stop.setSize(50,50);
-		stop.setMargin(new Insets(0,0,0,0));
-		add(stop);
+		//stop = new JButton("STOP!");
+		//stop.setSize(50,50);
+		//stop.setMargin(new Insets(0,0,0,0));
+		//add(stop);
 
 		//Temperature Label
 		tempL = new JLabel("Temperature:");
@@ -325,6 +329,10 @@ public class DrawingPanel extends JPanel
 		humB.setSize(100,20);
 		humB.setForeground(Color.WHITE);
 		add(humB);
+
+//		stop = Toolkit.getDefaultToolkit().getImage("images/stop.gif");
+		//stop.setSize(50,50);
+		//add(stop);
 /*
 		//North Label
 		northL = new JLabel("N");
@@ -395,15 +403,17 @@ public class DrawingPanel extends JPanel
 		if(VTelescope)
 			g.fillRect(oGLx+25,15,dx-oGLx-50,dx-oGLx-50);
 
-		g.drawImage(lArrow, (dx-rect_x*3/4)/2-50, dy/2-20,this);
-		g.drawImage(rArrow, (dx+rect_x*3/4)/2+10, dy/2-20,this);
-		g.drawImage(tArrow, dx/2-20, (dy-rect_y*3/4)/2-50,this);
-		g.drawImage(bArrow, dx/2-20, (dy+rect_y*3/4)/2+10,this);
+		g.drawImage(lArrow, (dx-rect_x*3/4)/2-40, dy/2-20,this);
+		g.drawImage(rArrow, (dx+rect_x*3/4)/2+0, dy/2-20,this);
+		g.drawImage(tArrow, dx/2-20, (dy-rect_y*3/4)/2-40,this);
+		g.drawImage(bArrow, dx/2-20, (dy+rect_y*3/4)/2+0,this);
 		if(tam.width != dx || tam.height != dy)
 		{
-			setImage("images/image.jpg",new Dimension((rect_x-10)*3/4,(rect_y-10)*3/4));
+			img = setImage("images/image.jpg",new Dimension((rect_x-10)*3/4,(rect_y-10)*3/4));
+			stop = setImage("images/stop.png",new Dimension(80,80));
 			tam = new Dimension(dx,dy);
 		}
+		g.drawImage(stop, rect_x-40,dy - 140, this);
 		g.drawImage(img,(dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,this);
 
 //		if(VCompass)
@@ -447,7 +457,7 @@ public class DrawingPanel extends JPanel
 
 		ccoor2C.setLocation(dist + 20,290);//470
 
-		stop.setLocation(rect_x-25,dy - 110);
+		//stop.setLocation(rect_x-25,dy - 110);
 
 		tempL.setLocation(10,10);
 

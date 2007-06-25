@@ -1,4 +1,4 @@
-package interfaz.interfaz;
+package trunk.interfaz.interfaz;
 
 import javax.swing.*;
 import java.awt.*;
