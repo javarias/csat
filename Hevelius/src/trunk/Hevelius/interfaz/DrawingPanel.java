@@ -35,15 +35,17 @@ public class DrawingPanel extends JPanel
 	private JLabel ccoor1C;
 	private JLabel ccoor2L;
 	private JLabel ccoor2C;
-	private JLabel tempL;
+/*	private JLabel tempL;
 	private JLabel wStatL;
 	private JLabel windL;
 	private JLabel humL;
 	private JLabel tempB;
 	private JLabel wStatB;
 	private JLabel windB;
-	private JLabel humB;
+	private JLabel humB; */
 	private Image stop;
+	private JButton zenith;
+	private JButton park;
 
 	private int cx;
 	private int cy;
@@ -55,11 +57,11 @@ public class DrawingPanel extends JPanel
 	private int r;
 
 	private boolean VTelescope;
-	private boolean VCompass;
 	private boolean VWeather;
 
 	private CompassPanel cpane = null;
 	private SystemPanel spane = null;
+	private WeatherPanel wpane = null;
 
 	public DrawingPanel(LayoutManager l)
 	{
@@ -255,13 +257,7 @@ public class DrawingPanel extends JPanel
 		ccoor2C.setSize(80,20);
 		ccoor2C.setForeground(Color.WHITE);
 		add(ccoor2C);
-
-		//Emergency Stop Button
-		//stop = new JButton("STOP!");
-		//stop.setSize(50,50);
-		//stop.setMargin(new Insets(0,0,0,0));
-		//add(stop);
-
+/*
 		//Temperature Label
 		tempL = new JLabel("Temperature:");
 		tempL.setSize(100,20);
@@ -309,42 +305,28 @@ public class DrawingPanel extends JPanel
 		humB.setSize(100,20);
 		humB.setForeground(Color.WHITE);
 		add(humB);
-
-//		stop = Toolkit.getDefaultToolkit().getImage("images/stop.gif");
-		//stop.setSize(50,50);
-		//add(stop);
-/*
-		//North Label
-		northL = new JLabel("N");
-		northL.setSize(20,20);
-		northL.setForeground(Color.WHITE);
-		add(northL);
-
-		//South Label
-		southL = new JLabel("S");
-		southL.setSize(20,20);
-		southL.setForeground(Color.WHITE);
-		add(southL);
-
-
-		//East Label
-		eastL = new JLabel("E");
-		eastL.setSize(20,20);
-		eastL.setForeground(Color.WHITE);
-		add(eastL);
-
-
-		//West Label
-		westL = new JLabel("W");
-		westL.setSize(20,20);
-		westL.setForeground(Color.WHITE);
-		add(westL);
 */
+		//Go to Zenith Button
+		zenith = new JButton("Zenith");
+		zenith.setSize(100,20);
+		add(zenith);
+
+		//Go to Park Button
+		park = new JButton("Park");
+		park.setSize(100,20);
+		add(park);
+
+		//CompassPanel
 		cpane = new CompassPanel(null);
 		add(cpane);
 
+		//SystemPanel
 		spane = new SystemPanel(null);
 		add(spane);
+
+		//WeatherPanel
+		wpane = new WeatherPanel(null);
+		add(wpane);
 	}
 	public void paintComponent(Graphics g)
 	{
@@ -371,17 +353,9 @@ public class DrawingPanel extends JPanel
 		g.drawRect((dx-rect_x*3/4)/2,(dy-rect_y*3/4)/2,rect_x*3/4,rect_y*3/4);
 		g.fillRect((dx-rect_x*3/4)/2,(dy-rect_y*3/4)/2,rect_x*3/4,rect_y*3/4);
 
-//		if(VCompass)
-//		{
-//			g.drawOval(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
-//			g.fillOval(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
-//		}
-
 		g.setColor(Color.BLACK);
 
 		g.fillRect((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,rect_x*3/4-10,rect_y*3/4-10);
-//		if(VCompass)
-//			g.fillOval(30+5,dy-dy/3+5-20,(dy-rect_y)/2-10,(dy-rect_y)/2-10);
 		if(VTelescope)
 			g.fillRect(oGLx+25,15,dx-oGLx-50,dx-oGLx-50);
 
@@ -398,16 +372,6 @@ public class DrawingPanel extends JPanel
 		g.drawImage(stop, rect_x-40,dy - 140, this);
 		g.drawImage(img,(dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,this);
 
-//		if(VCompass)
-//		{
-//			g.setColor(Color.RED);
-//			g.drawLine(cx,cy,pointx,pointy);
-//			g.drawLine(cx+1,cy+1,pointx+1,pointy+1);
-//			g.setColor(Color.BLUE);
-//			g.drawOval(cx-5,cy-5,10,10);
-//			g.fillOval(cx-5,cy-5,10,10);
-//		}
-		
 		tp.setLocation(oGLx+25,15);
 		tp.setSize(dx-oGLx-50,dx-oGLx-50);
 		canvas.setSize(dx-oGLx-50,dx-oGLx-50);
@@ -417,33 +381,34 @@ public class DrawingPanel extends JPanel
 		spane.setSize(120,120);
 		spane.setLocation(dx-120,dy-160);
 
+		wpane.setSize(200,150);
+		wpane.setLocation(0,0);
+
 		//Interface Objects Positioning
-		coor.setLocation(dist-30,420);//240
+		coor.setLocation(dist-30,420);
 
-		coor1L.setLocation(dist-10,450);//260
+		coor1L.setLocation(dist-10,450);
 
-		coor1.setLocation(dist+20,450);//260
+		coor1.setLocation(dist+20,450);
 
-		coor2L.setLocation(dist-10,470);//280
+		coor2L.setLocation(dist-10,470);
 
-		coor2.setLocation(dist + 20,470);//280
+		coor2.setLocation(dist + 20,470);
 
-		go.setLocation(dist + 55,492);//302
+		go.setLocation(dist + 55,492);
 
-		change.setLocation(dist-5,492);//302
+		change.setLocation(dist-5,492);
 
-		ccoor.setLocation(dist-30,240);//420
+		ccoor.setLocation(dist-30,240);
 
-		ccoor1L.setLocation(dist-10,270);//450
+		ccoor1L.setLocation(dist-10,270);
 
-		ccoor1C.setLocation(dist + 20,270);//450
+		ccoor1C.setLocation(dist + 20,270);
 
-		ccoor2L.setLocation(dist-10, 290);//470
+		ccoor2L.setLocation(dist-10, 290);
 
-		ccoor2C.setLocation(dist + 20,290);//470
-
-		//stop.setLocation(rect_x-25,dy - 110);
-
+		ccoor2C.setLocation(dist + 20,290);
+/*
 		tempL.setLocation(10,10);
 
 		wStatL.setLocation(10,40);
@@ -459,15 +424,10 @@ public class DrawingPanel extends JPanel
 		windB.setLocation(140,70);
 
 		humB.setLocation(140,100);
-/*
-		northL.setLocation(cx-2,cy-r-30);
-
-		southL.setLocation(cx-2,cy+r+10);
-
-		eastL.setLocation(cx+r+10,cy-10);
-
-		westL.setLocation(10,cy-10);
 */
+		zenith.setLocation(rect_x*3/4-50,3*dy/4-20);
+
+		park.setLocation(rect_x*5/4-50,3*dy/4-20);
 	}
 	public Dimension getDim()
 	{
@@ -480,6 +440,8 @@ public class DrawingPanel extends JPanel
 			cpane.setBackground(c);
 		if(spane!=null)
 			spane.setBackground(c);
+		if(wpane!=null)
+			wpane.setBackground(c);
 	}
 	public void updateWindow(){
 		//Cambiar Background
@@ -526,17 +488,17 @@ public class DrawingPanel extends JPanel
 
 		//Weather
 		switch(Integer.parseInt(test.getOption("weather"))){
-			case 0: VWeather = false;
-				tempL.setVisible(false);
-				wStatL.setVisible(false);
+			case 0: /*VWeather = false;
+				//tempL.setVisible(false);
+				//wStatL.setVisible(false);
 				windL.setVisible(false);
 				humL.setVisible(false);
 				tempB.setVisible(false);
 				wStatB.setVisible(false);
 				windB.setVisible(false);
-				humB.setVisible(false);
+				humB.setVisible(false);*/
 				break;
-			case 1: VWeather = true;
+			case 1: /*VWeather = true;
 				tempL.setVisible(true);
 				wStatL.setVisible(true);
 				windL.setVisible(true);
@@ -544,9 +506,9 @@ public class DrawingPanel extends JPanel
 				tempB.setVisible(true);
 				wStatB.setVisible(true);
 				windB.setVisible(true);
-				humB.setVisible(true);
+				humB.setVisible(true);*/
 				break;
-			default:VWeather = true;
+			default:/*VWeather = true;
 				tempL.setVisible(true);
 				wStatL.setVisible(true);
 				windL.setVisible(true);
@@ -554,32 +516,17 @@ public class DrawingPanel extends JPanel
 				tempB.setVisible(true);
 				wStatB.setVisible(true);
 				windB.setVisible(true);
-				humB.setVisible(true);
+				humB.setVisible(true);*/
 				break;
 		}
 
 		//Compass
 		switch(Integer.parseInt(test.getOption("compass"))){
-			case 0: VCompass = false;
-				//northL.setVisible(false);
-				//southL.setVisible(false);
-				//eastL.setVisible(false);
-				//westL.setVisible(false);
-				cpane.setVisible(false);
+			case 0: cpane.setVisible(false);
 				break;
-			case 1: VCompass = true;
-				//northL.setVisible(true);
-				//southL.setVisible(true);
-				//eastL.setVisible(true);
-				//westL.setVisible(true);
-				cpane.setVisible(true);
+			case 1: cpane.setVisible(true);
 				break;
-			default:VCompass = true;
-				//northL.setVisible(true);
-				//southL.setVisible(true);
-				//eastL.setVisible(true);
-				//westL.setVisible(true);
-				cpane.setVisible(true);
+			default:cpane.setVisible(true);
 				break;
 		}
 
