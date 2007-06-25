@@ -1,5 +1,9 @@
 #Makefile
 
 all:	
-	make --directory=weather
-	make --directory=interfaz/interfaz
+	javac Hevelius/weather/*.java
+	javac Hevelius/interfaz/*.java
+
+clean:
+	rm Hevelius/weather/*.class Hevelius/weather/*~ -f
+	rm Hevelius/interfaz/*.class Hevelius/interfaz/*~ -f
