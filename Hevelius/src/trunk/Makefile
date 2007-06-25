@@ -1,6 +1,7 @@
 #Makefile
 
 all:	
+	make clean
 	javac Hevelius/weather/*.java
 	javac Hevelius/interfaz/*.java
 

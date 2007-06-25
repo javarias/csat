@@ -18,8 +18,6 @@ public class DrawingPanel extends JPanel
 	private Image lArrow = null;
 	private Image tArrow = null;
 	private Image bArrow = null;
-//	private int pointx=0;
-//	private int pointy=0;
 	private JPanel tp;
 	private GLCanvas canvas;
 	private Listener list;
@@ -36,7 +34,6 @@ public class DrawingPanel extends JPanel
 	private JLabel ccoor1L;
 	private JLabel ccoor1C;
 	private JLabel ccoor2L;
-	//private JButton stop;
 	private JLabel ccoor2C;
 	private JLabel tempL;
 	private JLabel wStatL;
@@ -47,10 +44,6 @@ public class DrawingPanel extends JPanel
 	private JLabel windB;
 	private JLabel humB;
 	private Image stop;
-	//private JLabel northL;
-	//private JLabel southL;
-	//private JLabel eastL;
-	//private JLabel westL;
 
 	private int cx;
 	private int cy;
@@ -65,7 +58,9 @@ public class DrawingPanel extends JPanel
 	private boolean VCompass;
 	private boolean VWeather;
 
-	private CompassPanel cp = null;
+	private CompassPanel cpane = null;
+	private SystemPanel spane = null;
+
 	public DrawingPanel(LayoutManager l)
 	{
 		super(l);
@@ -149,15 +144,7 @@ public class DrawingPanel extends JPanel
 		bArrow = Transparency.makeColorTransparent(bArrow, Color.BLACK);
 		bArrow = bArrow.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
 	}
-/*	public void setCompassPoints(double dec)
-	{
-		double theta = dec*Math.PI/180;
-		pointx = (int)(((double)r)*Math.cos(theta)+(double)cx);
-		pointy = (int)(-((double)r)*Math.sin(theta)+(double)cy);
-		Rectangle re = new Rectangle(30,dy-dy/3-20,(dy-rect_y)/2,(dy-rect_y)/2);
-		paintImmediately(re);
-	}
-*/	private void init()
+	private void init()
 	{
 		tam = new Dimension(0,0);
 		dy = getSize().height;
@@ -171,15 +158,8 @@ public class DrawingPanel extends JPanel
 
 		//Interface Initialization
 		setArrows(new Dimension(40,40));
-		//setImage("image.jpg",new Dimension(rect_x-20,rect_y-20));
 		img = setImage("Hevelius/images/image.jpg",new Dimension(200,200));
 
-	/*	//coor.setLocation((dx+rectx)/2 + 20+dist/2-50,210);
-		coor.setLocation(dist-15,240);
-		coor.setSize(250,20);
-		coor.setForeground(Color.WHITE);
-		pane.add(coor);*/
-		
 		//Coordinate Label
 		switch(Integer.parseInt(test.getOption("coordinate"))){
 			case 0: coor = new JLabel("RaDec Coordinates"); break;
@@ -360,9 +340,11 @@ public class DrawingPanel extends JPanel
 		westL.setForeground(Color.WHITE);
 		add(westL);
 */
-		cp = new CompassPanel(null);
-		cp.setLocation(0,350);
-		add(cp);
+		cpane = new CompassPanel(null);
+		add(cpane);
+
+		spane = new SystemPanel(null);
+		add(spane);
 	}
 	public void paintComponent(Graphics g)
 	{
@@ -429,8 +411,11 @@ public class DrawingPanel extends JPanel
 		tp.setLocation(oGLx+25,15);
 		tp.setSize(dx-oGLx-50,dx-oGLx-50);
 		canvas.setSize(dx-oGLx-50,dx-oGLx-50);
-		cp.setSize(((dy-rect_y)/2+50)*3/4,((dy-rect_y)/2+50)*3/4);
-		cp.setLocation(5,dy-cp.getSize().height-50);
+		cpane.setSize(((dy-rect_y)/2+50)*3/4,((dy-rect_y)/2+50)*3/4);
+		cpane.setLocation(5,dy-cpane.getSize().height-50);
+
+		spane.setSize(120,120);
+		spane.setLocation(dx-120,dy-160);
 
 		//Interface Objects Positioning
 		coor.setLocation(dist-30,420);//240
@@ -491,8 +476,10 @@ public class DrawingPanel extends JPanel
 	public void setBackground(Color c)
 	{
 		super.setBackground(c);
-		if(cp!=null)
-			cp.setBackground(c);
+		if(cpane!=null)
+			cpane.setBackground(c);
+		if(spane!=null)
+			spane.setBackground(c);
 	}
 	public void updateWindow(){
 		//Cambiar Background
@@ -578,21 +565,21 @@ public class DrawingPanel extends JPanel
 				//southL.setVisible(false);
 				//eastL.setVisible(false);
 				//westL.setVisible(false);
-				cp.setVisible(false);
+				cpane.setVisible(false);
 				break;
 			case 1: VCompass = true;
 				//northL.setVisible(true);
 				//southL.setVisible(true);
 				//eastL.setVisible(true);
 				//westL.setVisible(true);
-				cp.setVisible(true);
+				cpane.setVisible(true);
 				break;
 			default:VCompass = true;
 				//northL.setVisible(true);
 				//southL.setVisible(true);
 				//eastL.setVisible(true);
 				//westL.setVisible(true);
-				cp.setVisible(true);
+				cpane.setVisible(true);
 				break;
 		}
 
@@ -613,7 +600,7 @@ public class DrawingPanel extends JPanel
 	}
 	public CompassPanel getPanel()
 	{
-		return cp;
+		return cpane;
 	}
 
 	public static synchronized void initializeDisplayList(GL gl) {
