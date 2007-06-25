@@ -1,4 +1,4 @@
-package weather;
+package trunk.weather;
 
 import java.io.*;
 import java.util.regex.*;

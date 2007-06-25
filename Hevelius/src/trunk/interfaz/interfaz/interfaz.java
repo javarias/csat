@@ -1,11 +1,11 @@
-package interfaz.interfaz;
+package trunk.interfaz.interfaz;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-import weather;
+import weather.*;
 
 public class interfaz {
 	public static JFrame frame;
@@ -330,7 +330,8 @@ public class interfaz {
 						Vector<WeatherCityId> vector_city = new Vector<WeatherCityId>();
 						vector_city = weather.ListCity();
 						
-						for(int i = 0; i < vector_city.size
+						for(int i = 0; i < vector_city.size; i++)
+							location.addItem(vector_city.get(i).getNameCity());
 					}
                                 }
                 });
