@@ -316,6 +316,9 @@ public class interfaz {
 
 				test.setOption("background", String.valueOf(color.getSelectedIndex()));
 
+				test.setOption("location",String.valueOf(
+					location.getItemAt(location.getSelectedIndex())));
+
 				test.store();
 
 				pane.updateWindow();
@@ -325,13 +328,18 @@ public class interfaz {
 
 		find.addActionListener(new ActionListener(  ) {
                                 public void actionPerformed(ActionEvent event) {
-					if(city2find.getText().trim().compareTo(null) != 0){
+					if(city2find.getText().trim().compareTo("") != 0){
+						location.removeAllItems();						
 						WeatherCity weather=  new WeatherCity(city2find.getText().trim());
 						Vector<WeatherCityId> vector_city = new Vector<WeatherCityId>();
 						vector_city = weather.ListCity();
 						
-						for(int i = 0; i < vector_city.size(); i++)
-							location.addItem(vector_city.get(i).getNameCity());
+						if(vector_city.size() > 0)
+							for(int i = 0; i < vector_city.size(); i++)
+								location.addItem(vector_city.get(i).getNameCity());
+							//System.out.println(vector_city.get(i).getNameCity());
+						else
+							location.addItem("(none)");
 					}
                                 }
                 });
