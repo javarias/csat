@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
+import weather;
+
 public class interfaz {
 	public static JFrame frame;
 	public static DrawingPanel pane;
@@ -321,7 +323,17 @@ public class interfaz {
 				}
 		});
 
-
+		find.addActionListener(new ActionListener(  ) {
+                                public void actionPerformed(ActionEvent event) {
+					if(city2find.trim().compareTo(null) != 0){
+						WeatherCity weather=  new WeatherCity(city2find.trim());
+						Vector<WeatherCityId> vector_city = new Vector<WeatherCityId>();
+						vector_city = weather.ListCity();
+						
+						for(int i = 0; i < vector_city.size
+					}
+                                }
+                });
 
 
 	}
