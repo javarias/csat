@@ -204,6 +204,7 @@ public class WeatherCondition
 				}
 
 			}
+			vector_condition.add(weather);
 		}
 		catch(Exception e)
 		{

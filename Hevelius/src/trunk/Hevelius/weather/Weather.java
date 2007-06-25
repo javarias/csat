@@ -39,11 +39,11 @@ public class Weather {
 			vector_condition = condition.ListCityCondition();
 			int k= vector_condition.size();
 			System.out.println(k);
-			for(i=1;i<k;i++)
-			{
+			//for(i=1;i<k;i++)
+			//{
 				System.out.println("lalaalal");
-				System.out.println(vector_condition.get(i).getLat()+" "+vector_condition.get(i).getLon());
-			}
+				System.out.println(vector_condition.get(0).getLat()+" "+vector_condition.get(0).getLon());
+			//}
 
 
 
