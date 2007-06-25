@@ -1,4 +1,4 @@
-package trunk.interfaz.interfaz;
+package interfaz.interfaz;
 
 import java.util.Properties;
 import java.io.*;

@@ -1,5 +1,4 @@
-package trunk.interfaz.interfaz;
-
+package interfaz.interfaz;
 
 import javax.swing.*;
 import java.awt.*;
@@ -133,16 +132,16 @@ public class DrawingPanel extends JPanel
 	}
 	public void setArrows(Dimension dim)
 	{
-		rArrow = Toolkit.getDefaultToolkit().getImage("rArrow.jpg");
+		rArrow = Toolkit.getDefaultToolkit().getImage("images/rArrow.jpg");
 		rArrow = Transparency.makeColorTransparent(rArrow, Color.BLACK);
 		rArrow = rArrow.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
-		lArrow = Toolkit.getDefaultToolkit().getImage("lArrow.jpg");
+		lArrow = Toolkit.getDefaultToolkit().getImage("images/lArrow.jpg");
 		lArrow = Transparency.makeColorTransparent(lArrow, Color.BLACK);
 		lArrow = lArrow.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
-		tArrow = Toolkit.getDefaultToolkit().getImage("tArrow.jpg");
+		tArrow = Toolkit.getDefaultToolkit().getImage("images/tArrow.jpg");
 		tArrow = Transparency.makeColorTransparent(tArrow, Color.BLACK);
 		tArrow = tArrow.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
-		bArrow = Toolkit.getDefaultToolkit().getImage("bArrow.jpg");
+		bArrow = Toolkit.getDefaultToolkit().getImage("images/bArrow.jpg");
 		bArrow = Transparency.makeColorTransparent(bArrow, Color.BLACK);
 		bArrow = bArrow.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
 	}
@@ -169,7 +168,7 @@ public class DrawingPanel extends JPanel
 		//Interface Initialization
 		setArrows(new Dimension(40,40));
 		//setImage("image.jpg",new Dimension(rect_x-20,rect_y-20));
-		setImage("image.jpg",new Dimension(200,200));
+		setImage("images/image.jpg",new Dimension(200,200));
 
 	/*	//coor.setLocation((dx+rectx)/2 + 20+dist/2-50,210);
 		coor.setLocation(dist-15,240);
@@ -402,7 +401,7 @@ public class DrawingPanel extends JPanel
 		g.drawImage(bArrow, dx/2-20, (dy+rect_y*3/4)/2+10,this);
 		if(tam.width != dx || tam.height != dy)
 		{
-			setImage("image.jpg",new Dimension((rect_x-10)*3/4,(rect_y-10)*3/4));
+			setImage("images/image.jpg",new Dimension((rect_x-10)*3/4,(rect_y-10)*3/4));
 			tam = new Dimension(dx,dy);
 		}
 		g.drawImage(img,(dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,this);
