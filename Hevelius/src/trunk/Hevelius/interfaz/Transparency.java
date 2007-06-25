@@ -1,4 +1,4 @@
-package trunk.interfaz.interfaz;
+package Hevelius.interfaz;
 
 import java.awt.*;
 import java.awt.image.*;

@@ -1,4 +1,4 @@
-package trunk.interfaz.interfaz;
+package Hevelius.interfaz;
 
 import javax.swing.*;
 import java.awt.*;

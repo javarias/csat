@@ -1,4 +1,4 @@
-package trunk.weather;
+package Hevelius.weather;
 
 import java.io.*;
 import java.util.regex.*;

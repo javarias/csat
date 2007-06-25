@@ -1,11 +1,11 @@
-package trunk.interfaz.interfaz;
+package Hevelius.interfaz;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-import trunk.weather.*;
+import Hevelius.weather.*;
 
 public class interfaz {
 	public static JFrame frame;
