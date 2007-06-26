@@ -267,12 +267,6 @@ public class interfaz {
 
 
 
-		/*	JPanel panel3 = new JPanel();
-			tabbedPane.addTab("Tab 3",panel3);
-		//tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
-		panel3.setLayout(null);
-		 */
-
 		config.add(tabbedPane);
 
 		JButton close = new JButton("Close");
@@ -399,41 +393,41 @@ public class interfaz {
 				}
 				});
 
-		about.setSize(400,400);
+		about.setSize(340,300);
 		about.setLocationRelativeTo(null);
 		about.setLayout(null);
 		about.setResizable(false);
+		about.getContentPane().setBackground(Color.WHITE);
 
 
 		JLabel about1 = new JLabel("Hevelius v. ALFA rc1");
 		JLabel about2 = new JLabel("DevNull Enterprise");
 		JLabel about3 = new JLabel("2007");
+		
+		Icon logoImagen = new ImageIcon("Hevelius/images/logo.png");
+		JLabel logo = new JLabel(logoImagen);
 
-
-		about1.setLocation(100,15);
+		about1.setLocation(50,15);
 		about1.setFont(new Font("DejaVu Sans",1,18));
 		about1.setSize(250,20);
+		about1.setHorizontalAlignment(SwingConstants.CENTER);
 		about.add(about1);
 
-		about2.setLocation(150,30);
+		about2.setLocation(95,30);
 		about2.setSize(150,20);
+		about2.setHorizontalAlignment(SwingConstants.CENTER);
 		about.add(about2);
 
-		about3.setLocation(185,70);
+		about3.setLocation(95,50);
 		about3.setSize(150,20);
+		about3.setHorizontalAlignment(SwingConstants.CENTER);
 		about.add(about3);
 
-		JButton close = new JButton("Close");
+		logo.setLocation(10,70);
+		logo.setSize(300,250);
+		logo.setHorizontalAlignment(SwingConstants.CENTER);
+		about.add(logo);
 
-		close.setLocation(160,300);
-		close.setSize(70,25);
-		about.add(close);
-
-		close.addActionListener(new ActionListener(  ) {
-				public void actionPerformed(ActionEvent event) {
-				about.setVisible(false);
-				}
-				});
 	}
 
 	private static void createAndShowGUI()
