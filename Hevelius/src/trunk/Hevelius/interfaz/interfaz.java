@@ -436,7 +436,7 @@ public class interfaz {
 		long time2 = System.currentTimeMillis();
 
 		//Intro
-		JFrame intro = new JFrame();
+		JFrame intro = new JFrame("Hevelius v. ALFA rc1");
 		IntroPanel in = new IntroPanel(null);
 		intro.setContentPane(in);
 		intro.setUndecorated(true);
@@ -446,9 +446,6 @@ public class interfaz {
 		intro.setSize(400,200);
 		intro.setLocationRelativeTo(null);
 		intro.setVisible(true);
-		while(time2-time1<5000)
-			time2 = System.currentTimeMillis();
-		//intro.setVisible(false);
 
 		frame = new JFrame("Hevelius v. ALFA rc1");
 		pane = new DrawingPanel(null);
@@ -485,7 +482,7 @@ public class interfaz {
 		frame.pack();
 		frame.setSize(ScreenSize);
 		while(time2-time1<5000)
-			                        time2 = System.currentTimeMillis();
+			time2 = System.currentTimeMillis();
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
 		time1 = System.currentTimeMillis();
