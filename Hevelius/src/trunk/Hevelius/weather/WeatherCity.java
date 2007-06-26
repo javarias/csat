@@ -55,7 +55,9 @@ public class WeatherCity
 	} 
 	catch (UnknownHostException e )
 	{
-		System.out.println("false");
+		vector_city = new Vector<WeatherCityId>();
+		return vector_city;
+		//System.out.println("false");
 	}
 
 	catch (Exception e)
