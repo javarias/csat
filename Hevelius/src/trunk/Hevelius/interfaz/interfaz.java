@@ -36,6 +36,8 @@ public class interfaz {
 	private static JLabel background;
 	private static JComboBox color;
 
+	private static Vector<WeatherCityId> vector_city = new Vector<WeatherCityId>();
+
 
 
 	static String[ ] fileItems = new String[ ] { "Exit" };
@@ -188,6 +190,7 @@ public class interfaz {
 		city2find = new JTextField(50);
 		city2find.setLocation(150,70);
 		city2find.setSize(100,20);
+		city2find.setText(test.getOption("location"));
 		panel1.add(city2find);
 		
 		find = new JButton("Find");
@@ -316,8 +319,9 @@ public class interfaz {
 
 				test.setOption("background", String.valueOf(color.getSelectedIndex()));
 
-				test.setOption("location",String.valueOf(
-					location.getItemAt(location.getSelectedIndex())));
+				if(String.valueOf(location.getSelectedItem()).compareTo("(none)") != 0)				
+					test.setOption("location",String.valueOf(vector_city.get(
+						location.getSelectedIndex()).getId()));
 
 				test.store();
 
@@ -331,15 +335,15 @@ public class interfaz {
 					if(city2find.getText().trim().compareTo("") != 0){
 						location.removeAllItems();						
 						WeatherCity weather=  new WeatherCity(city2find.getText().trim());
-						Vector<WeatherCityId> vector_city = new Vector<WeatherCityId>();
+						vector_city.clear();
 						vector_city = weather.ListCity();
 						
 						if(vector_city.size() > 0)
 							for(int i = 0; i < vector_city.size(); i++)
 								location.addItem(vector_city.get(i).getNameCity());
 							//System.out.println(vector_city.get(i).getNameCity());
-						else
-							location.addItem("(none)");
+						
+						location.addItem("(none)");
 					}
                                 }
                 });
@@ -353,8 +357,10 @@ public class interfaz {
 		if(Integer.parseInt(test.getOption("coordinate"))==1)
 			altaz.setSelected(true);
 		
-		city2find.setText("");
+		city2find.setText(test.getOption("location"));
 		
+		location.removeAllItems();
+		location.addItem("(none)");
 		location.setSelectedIndex(0);
 
 
@@ -432,7 +438,7 @@ public class interfaz {
 
 	private static void createAndShowGUI()
 	{
-		frame = new JFrame("Hevelius v0.0.1");
+		frame = new JFrame("Hevelius v. ALFA rc1");
 		pane = new DrawingPanel(null);
 		pane.updateWindow();
 		frame.setContentPane(pane);

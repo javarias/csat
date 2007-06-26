@@ -4,17 +4,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import java.util.*;
+import Hevelius.weather.*;
+
 public class WeatherPanel extends JPanel
 {
+	private static Configuration test = new Configuration();	
 	private JLabel wLabel;
 	private JLabel tempL;
 	private JLabel wStatL;
 	private JLabel windL;
+	private JLabel moonL;
 	private JLabel humL;
 	private JLabel tempB;
 	private JLabel wStatB;
 	private JLabel windB;
+	private JLabel moonB;
 	private JLabel humB;
+
+	private WeatherCondition clima = new WeatherCondition(test.getOption("location"));
+	private Vector<WeatherCityCondition> vector = clima.ListCityCondition();
+
 	public WeatherPanel(LayoutManager l)
 	{
 		super(l);
@@ -23,9 +33,10 @@ public class WeatherPanel extends JPanel
 	public void init()
 	{
 		//Weather Status Label
-		wLabel = new JLabel("Weather Conditions");
+		wLabel = new JLabel("Weather Conditions "+vector.get(0).getTime());
 		wLabel.setSize(200,20);
 		wLabel.setForeground(Color.WHITE);
+		wLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		add(wLabel);
 
 		//Temperature Label
@@ -40,6 +51,12 @@ public class WeatherPanel extends JPanel
 		wStatL.setForeground(Color.WHITE);
 		add(wStatL);
 
+		//Moon Label
+		moonL = new JLabel("Moon Phase:");
+		moonL.setSize(100,20);
+		moonL.setForeground(Color.WHITE);
+		add(moonL);
+
 		//Wind Label
 		windL = new JLabel("Wind:");
 		windL.setSize(100,20);
@@ -53,25 +70,40 @@ public class WeatherPanel extends JPanel
 		add(humL);
 
 		//Temperature Bar
-		tempB = new JLabel("0");
+		tempB = new JLabel(vector.get(0).getTm()+"°C");
 		tempB.setSize(100,20);
 		tempB.setForeground(Color.WHITE);
 		add(tempB);
 
 		//Weather Status
-		wStatB = new JLabel("Sunny");
-		wStatB.setSize(100,20);
+
+		Icon image = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
+
+		wStatB = new JLabel(vector.get(0).getWt(),image,JLabel.LEFT);
+		wStatB.setSize(200,32);
 		wStatB.setForeground(Color.WHITE);
 		add(wStatB);
 
 		//Wind Bar
-		windB = new JLabel("0");
-		windB.setSize(100,20);
+		try{
+			Integer.parseInt(vector.get(0).getVwind());
+			windB = new JLabel(vector.get(0).getVwind()+" Km/Hr "+vector.get(0).getDirec());
+		}catch(NumberFormatException e){
+			windB = new JLabel(vector.get(0).getDirec());
+		}
+		//System.out.println(vector.get(0).getAll());
+		windB.setSize(150,20);
 		windB.setForeground(Color.WHITE);
 		add(windB);
 
+		//Moon Bar
+		moonB = new JLabel(vector.get(0).getMoon());
+		moonB.setSize(150,20);
+		moonB.setForeground(Color.WHITE);
+		add(moonB);
+
 		//Humdity Bar
-		humB = new JLabel("0");
+		humB = new JLabel(vector.get(0).getHumil()+"%");
 		humB.setSize(100,20);
 		humB.setForeground(Color.WHITE);
 		add(humB);
@@ -86,16 +118,58 @@ public class WeatherPanel extends JPanel
 
 		wStatL.setLocation(10,60);
 
-		windL.setLocation(10,85);
+		moonL.setLocation(10,85);
 
-		humL.setLocation(10,110);
+		windL.setLocation(10,110);
+
+		humL.setLocation(10,135);
 
 		tempB.setLocation(140,35);
 
-		wStatB.setLocation(140,60);
+		wStatB.setLocation(140,54);
 
-		windB.setLocation(140,85);
+		moonB.setLocation(140,85);
 
-		humB.setLocation(140,110);
+		windB.setLocation(140,110);
+
+		humB.setLocation(140,135);
 	}
+
+/*	public void autoReloadWeather(){
+		long time1 = System.currentTimeMillis();
+		long time2 = System.currentTimeMillis();
+		while(true){
+			while(time2-time1<30000)
+				time2 = System.currentTimeMillis();
+
+			reloadWeather();
+		}
+	} */
+
+	public void reloadWeather(){
+		vector.removeAllElements();		
+		clima = new WeatherCondition(test.getOption("location"));
+		vector = clima.ListCityCondition();
+
+		wLabel.setText("Weather Conditions "+vector.get(0).getTime());
+
+		tempB.setText(vector.get(0).getTm()+"°C");
+
+		Icon image = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
+		wStatB.setIcon(image);
+		wStatB.setText(vector.get(0).getWt());
+
+		try{
+			Integer.parseInt(vector.get(0).getVwind());
+			windB.setText(vector.get(0).getVwind()+" Km/Hr "+vector.get(0).getDirec());
+		}catch(NumberFormatException e){
+			windB.setText(vector.get(0).getDirec());
+		}
+
+		moonB.setText(vector.get(0).getMoon());
+
+		humB.setText(vector.get(0).getHumil()+"%");
+
+	}
+
 }

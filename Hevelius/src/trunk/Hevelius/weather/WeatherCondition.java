@@ -112,6 +112,13 @@ public class WeatherCondition
 					//String wt = new WeatherCityCondition();
 					weather.setWt(mat);
 				}
+				pat = Pattern.compile("^<icon>(.*?)<.*?>"); //icon wheather status
+				mat = pat.matcher(cadena);
+				if(mat.find())
+				{
+					//String wt = new WeatherCityCondition();
+					weather.setIconWt(mat);
+				}
 				pat = Pattern.compile("^<bar>"); //STOP
 				mat = pat.matcher(cadena);
 				if(mat.find())
@@ -132,8 +139,9 @@ public class WeatherCondition
 					//String press= new WeatherCityCondition();
 					weather.setPres(mat);
 				}
-				pat = Pattern.compile("^<d>(.*?)<.*?>"); //status pressure
-				mat = pat.matcher(cadena);                                                                                                                                   if(mat.find())
+				pat = Pattern.compile("^<d>(.*?)<.*?>"); //status pressure				
+				mat = pat.matcher(cadena);      
+				if(mat.find())
 				{
 					//String stapres = new WeatherCityCondition();
 					weather.setStapres(mat);
@@ -155,6 +163,7 @@ public class WeatherCondition
 				}
 				pat = Pattern.compile("^<t>(.*?)<.*?>"); //direction
 				mat = pat.matcher(cadena);
+				//System.out.println(mat.group());
 				if(mat.find())
 				{              
 					//String direc = new WeatherCityCondition();
@@ -169,10 +178,32 @@ public class WeatherCondition
 				}
 				pat = Pattern.compile("^<vis>(.*?)<.*?>"); //visibility
 				mat = pat.matcher(cadena);
+
 				if(mat.find())
 				{
 					//String vis = new WeatherCityCondition();
 					weather.setVisi(mat);
+				}
+				pat = Pattern.compile("^<uv>"); //STOP
+				mat = pat.matcher(cadena);
+				if(mat.find())
+				{
+					break;
+					//System.out.println("wt= "+mat.group(1));
+					//String wt=mat.group(1);
+				}
+			}
+			while((cadena = searchhtml.readLine()) != null )
+			{
+
+				cadena=cadena.trim();
+				pat = Pattern.compile("^<t>(.*?)<.*?>"); //direction
+				mat = pat.matcher(cadena);
+				//System.out.println(mat.group());
+				if(mat.find())
+				{              
+					//String direc = new WeatherCityCondition();
+					weather.setUv(mat);
 				}
 				pat = Pattern.compile("^<dewp.*?>(.*?)<.*?>"); //dew point
 				mat = pat.matcher(cadena);

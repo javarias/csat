@@ -8,6 +8,8 @@ import java.util.*;
 import javax.media.opengl.*;
 import com.sun.opengl.util.*;
 
+import Hevelius.weather.*;
+
 public class DrawingPanel extends JPanel
 {
 	public static int gearDisplayList;
@@ -259,6 +261,9 @@ public class DrawingPanel extends JPanel
 		add(ccoor2C);
 /*
 		//Temperature Label
+		Vector<WeatherCityCondition> vector;
+		WeatherCondition clima = new WeatherCondition(test.getOption("location"));
+		vector = clima.ListCityCondition();
 		tempL = new JLabel("Temperature:");
 		tempL.setSize(100,20);
 		tempL.setForeground(Color.WHITE);
@@ -283,7 +288,8 @@ public class DrawingPanel extends JPanel
 		add(humL);
 
 		//Temperature Bar
-		tempB = new JLabel("0");
+		System.out.println(vector.size());
+		tempB = new JLabel(vector.get(0).getTm());
 		tempB.setSize(100,20);
 		tempB.setForeground(Color.WHITE);
 		add(tempB);
@@ -327,6 +333,9 @@ public class DrawingPanel extends JPanel
 		//WeatherPanel
 		wpane = new WeatherPanel(null);
 		add(wpane);
+
+	//	wpane.autoReloadWeather().start();
+
 	}
 	public void paintComponent(Graphics g)
 	{
@@ -381,7 +390,7 @@ public class DrawingPanel extends JPanel
 		spane.setSize(120,120);
 		spane.setLocation(dx-120,dy-160);
 
-		wpane.setSize(200,150);
+		wpane.setSize(300,150);
 		wpane.setLocation(0,0);
 
 		//Interface Objects Positioning
@@ -487,36 +496,15 @@ public class DrawingPanel extends JPanel
 		}
 
 		//Weather
+		
+		wpane.reloadWeather();
+
 		switch(Integer.parseInt(test.getOption("weather"))){
-			case 0: /*VWeather = false;
-				//tempL.setVisible(false);
-				//wStatL.setVisible(false);
-				windL.setVisible(false);
-				humL.setVisible(false);
-				tempB.setVisible(false);
-				wStatB.setVisible(false);
-				windB.setVisible(false);
-				humB.setVisible(false);*/
+			case 0: wpane.setVisible(false);
 				break;
-			case 1: /*VWeather = true;
-				tempL.setVisible(true);
-				wStatL.setVisible(true);
-				windL.setVisible(true);
-				humL.setVisible(true);
-				tempB.setVisible(true);
-				wStatB.setVisible(true);
-				windB.setVisible(true);
-				humB.setVisible(true);*/
+			case 1: wpane.setVisible(true);
 				break;
-			default:/*VWeather = true;
-				tempL.setVisible(true);
-				wStatL.setVisible(true);
-				windL.setVisible(true);
-				humL.setVisible(true);
-				tempB.setVisible(true);
-				wStatB.setVisible(true);
-				windB.setVisible(true);
-				humB.setVisible(true);*/
+			default:wpane.setVisible(true);
 				break;
 		}
 

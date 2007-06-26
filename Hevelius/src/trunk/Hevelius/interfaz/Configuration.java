@@ -27,7 +27,7 @@ public class Configuration extends Properties{
 				archivo.println("");
 				archivo.println("#SYSTEM");
 				archivo.println("coordinate = 0");
-				archivo.println("location = null");
+				archivo.println("location = (none)");
 				archivo.println("");
 				archivo.println("#INTERFACE");
 				archivo.println("#Modules");

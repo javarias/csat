@@ -16,12 +16,14 @@ public class WeatherCityCondition
 	private String tmp;
 	private String flik;
 	private String wt;
+	private String icon_wt;
 	private String pres;
 	private String stapress;
 	private String vwind;
 	private String gust;
 	private String direc;
 	private String humil;
+	private String uv;
 	private String dpoint;
 	private String moon;
 	private String visi;
@@ -62,6 +64,10 @@ public class WeatherCityCondition
 	{
 		wt=mat.group(1);
 	}
+	public void setIconWt(Matcher mat)
+	{
+		icon_wt=mat.group(1);
+	}
 	public void setPres(Matcher mat)
 	{
 		pres=mat.group(1);
@@ -86,6 +92,10 @@ public class WeatherCityCondition
 	public void setHumil(Matcher mat)
 	{
 		humil=mat.group(1);
+	}
+	public void setUv(Matcher mat)
+	{
+		uv = mat.group(1);
 	}
 	public void setVisi(Matcher mat)
 	{
@@ -136,6 +146,10 @@ public class WeatherCityCondition
 	{
 		return wt;
 	}
+	public String getIconWt()
+	{
+		return icon_wt;
+	}
 	public String getPres()
 	{
 		return pres;
@@ -151,5 +165,18 @@ public class WeatherCityCondition
 	public String getDirec()
 	{
 		return direc;
+	}
+	public String getHumil()
+	{
+		return humil;
+	}
+	public String getMoon()
+	{
+		return moon;
+	}
+	public String getAll()
+	{
+		String retorno = time+" "+lat+" "+lon+" "+sunrice+" "+sunset+" "+tzone+" "+tmp+" "+flik+" "+wt+" "+pres+" "+stapress+" "+vwind+" "+gust+" "+direc+" "+humil+" "+dpoint+" "+moon+" "+visi;
+		return retorno;
 	}
 }
