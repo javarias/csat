@@ -37,17 +37,11 @@ public class DrawingPanel extends JPanel
 	private JLabel ccoor1C;
 	private JLabel ccoor2L;
 	private JLabel ccoor2C;
-/*	private JLabel tempL;
-	private JLabel wStatL;
-	private JLabel windL;
-	private JLabel humL;
-	private JLabel tempB;
-	private JLabel wStatB;
-	private JLabel windB;
-	private JLabel humB; */
 	private Image stop;
 	private JButton zenith;
 	private JButton park;
+	private JLabel stimeL;
+	private JLabel stime;
 
 	private int cx;
 	private int cy;
@@ -64,6 +58,7 @@ public class DrawingPanel extends JPanel
 	private CompassPanel cpane = null;
 	private SystemPanel spane = null;
 	private WeatherPanel wpane = null;
+	private TelStatusPanel tspane = null;
 
 	public DrawingPanel(LayoutManager l)
 	{
@@ -259,59 +254,7 @@ public class DrawingPanel extends JPanel
 		ccoor2C.setSize(80,20);
 		ccoor2C.setForeground(Color.WHITE);
 		add(ccoor2C);
-/*
-		//Temperature Label
-		Vector<WeatherCityCondition> vector;
-		WeatherCondition clima = new WeatherCondition(test.getOption("location"));
-		vector = clima.ListCityCondition();
-		tempL = new JLabel("Temperature:");
-		tempL.setSize(100,20);
-		tempL.setForeground(Color.WHITE);
-		add(tempL);
-
-		//Weather Status Label
-		wStatL = new JLabel("Weather:");
-		wStatL.setSize(100,20);
-		wStatL.setForeground(Color.WHITE);
-		add(wStatL);
-
-		//Wind Label
-		windL = new JLabel("Wind:");
-		windL.setSize(100,20);
-		windL.setForeground(Color.WHITE);
-		add(windL);
-
-		//Humdity Label
-		humL = new JLabel("Humidity:");
-		humL.setSize(100,20);
-		humL.setForeground(Color.WHITE);
-		add(humL);
-
-		//Temperature Bar
-		System.out.println(vector.size());
-		tempB = new JLabel(vector.get(0).getTm());
-		tempB.setSize(100,20);
-		tempB.setForeground(Color.WHITE);
-		add(tempB);
-
-		//Weather Status
-		wStatB = new JLabel("Sunny");
-		wStatB.setSize(100,20);
-		wStatB.setForeground(Color.WHITE);
-		add(wStatB);
-
-		//Wind Bar
-		windB = new JLabel("0");
-		windB.setSize(100,20);
-		windB.setForeground(Color.WHITE);
-		add(windB);
-
-		//Humdity Bar
-		humB = new JLabel("0");
-		humB.setSize(100,20);
-		humB.setForeground(Color.WHITE);
-		add(humB);
-*/
+		
 		//Go to Zenith Button
 		zenith = new JButton("Zenith");
 		zenith.setSize(100,20);
@@ -321,6 +264,18 @@ public class DrawingPanel extends JPanel
 		park = new JButton("Park");
 		park.setSize(100,20);
 		add(park);
+
+		//Sidereal Time Label
+		stimeL = new JLabel("Sidereal Time");
+		stimeL.setSize(120,20);
+		stimeL.setForeground(Color.WHITE);
+		add(stimeL);
+
+		//Sidereal Time
+		stime = new JLabel("00:00");
+		stime.setSize(100,20);
+		stime.setForeground(Color.WHITE);
+		add(stime);
 
 		//CompassPanel
 		cpane = new CompassPanel(null);
@@ -333,6 +288,10 @@ public class DrawingPanel extends JPanel
 		//WeatherPanel
 		wpane = new WeatherPanel(null);
 		add(wpane);
+
+		//Telescope Status Panel
+		tspane = new TelStatusPanel(null);
+		add(tspane);
 
 	//	wpane.autoReloadWeather().start();
 
@@ -393,6 +352,12 @@ public class DrawingPanel extends JPanel
 		wpane.setSize(300,150);
 		wpane.setLocation(0,0);
 
+		tspane.setSize(300,200);
+		tspane.setLocation(20,230);
+
+		stimeL.setLocation(60,400);
+		stime.setLocation(80,420);
+
 		//Interface Objects Positioning
 		coor.setLocation(dist-30,420);
 
@@ -417,23 +382,7 @@ public class DrawingPanel extends JPanel
 		ccoor2L.setLocation(dist-10, 290);
 
 		ccoor2C.setLocation(dist + 20,290);
-/*
-		tempL.setLocation(10,10);
-
-		wStatL.setLocation(10,40);
-
-		windL.setLocation(10,70);
-
-		humL.setLocation(10,100);
-
-		tempB.setLocation(140,10);
-
-		wStatB.setLocation(140,40);
-
-		windB.setLocation(140,70);
-
-		humB.setLocation(140,100);
-*/
+		
 		zenith.setLocation(rect_x*3/4-50,3*dy/4-20);
 
 		park.setLocation(rect_x*5/4-50,3*dy/4-20);
@@ -523,8 +472,7 @@ public class DrawingPanel extends JPanel
 			case 0: VTelescope = false;
 				tp.setVisible(false);
 				break;
-			case 1: //canvas.setVisible(true);
-				VTelescope = true;
+			case 1: VTelescope = true;
 				tp.setVisible(true);
 				break;
 			default:VTelescope = true; 
