@@ -1,0 +1,17 @@
+		HEVELIUS TCS
+
+Requerimientos:
+	- java version "1.6.0_01"
+	- Java(TM) SE Runtime Environment (build 1.6.0_01-b06)
+	- Java HotSpot(TM) Client VM (build 1.6.0_01-b06, mixed mode, sharing)
+	- jogl version "1.0.0"
+
+	- Tener dentro de $CLASSPATH la ruta del archivo "jogl.jar"
+	- Tener dentro de $LD_LIBRARY_PATH la ruta del directorio "jogl-1_0_0-linux-i586/lib/"
+
+Uso:
+	- Para compilar ejecutar: make
+	- Para ejecutar usar: ./Hevelius-ALFA-rc1
+
+
+		Enjoy Hevelius!!!
