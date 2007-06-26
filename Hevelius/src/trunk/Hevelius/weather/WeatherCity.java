@@ -55,7 +55,7 @@ public class WeatherCity
 	} 
 	catch (MalformedURLException e)
 	{
-		System.out.println( e );
+		System.out.println("false");
 	}
 
 	catch (Exception e)

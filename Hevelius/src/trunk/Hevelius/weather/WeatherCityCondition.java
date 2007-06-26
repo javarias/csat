@@ -109,6 +109,29 @@ public class WeatherCityCondition
 	{
 		moon=mat.group(1);
 	}
+	public void setAll()
+	{
+		time="N/A";
+        	lat="N/A";
+        	lon="N/A";
+        	sunrice="N/A";
+        	sunset="N/A";
+        	tzone="N/A";
+        	tmp="N/A";
+        	flik="N/A";
+        	wt="N/A";
+        	icon_wt="N/A";
+        	pres="N/A";
+        	stapress="N/A";
+        	vwind="N/A";
+        	gust="N/A";
+        	direc="N/A";
+        	humil="N/A";
+        	uv="N/A";
+         	dpoint="N/A";
+         	moon="N/A";
+         	visi="N/A";	
+	}
 	/*Agregar los 2 metodos que faltan*/
 	public String getTime()
 	{
