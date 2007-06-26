@@ -448,6 +448,8 @@ public class interfaz {
 		intro.setVisible(true);
 
 		frame = new JFrame("Hevelius v. ALFA rc1");
+		Image icono = Toolkit.getDefaultToolkit().getImage("Hevelius/images/hevelius.png");
+		frame.setIconImage(icono);
 		pane = new DrawingPanel(null);
 		pane.updateWindow();
 		frame.setContentPane(pane);
