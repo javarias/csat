@@ -483,14 +483,13 @@ public class interfaz {
 		frame.setSize(ScreenSize);
 		while(time2-time1<5000)
 			time2 = System.currentTimeMillis();
+		intro.setVisible(false);
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
 		time1 = System.currentTimeMillis();
 		time2 = System.currentTimeMillis();
 		while(time2-time1<500)
 			time2 = System.currentTimeMillis();
-		intro.setVisible(false);
-
 	}
 
 	public static void main(String[] args){
