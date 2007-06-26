@@ -10,6 +10,8 @@ public class CompassPanel extends JPanel
 	private JLabel southL;
 	private JLabel eastL;
 	private JLabel westL;
+	
+	private Image compassRose;	
 
 	private int dx;
 	private int dy;
@@ -46,6 +48,10 @@ public class CompassPanel extends JPanel
 		westL.setSize(20,20);
 		westL.setForeground(Color.WHITE);
 		add(westL);
+		
+		compassRose = Toolkit.getDefaultToolkit().getImage("Hevelius/images/compass_rose2.jpg");
+		compassRose = Transparency.makeColorTransparent(compassRose, Color.WHITE);
+		compassRose = compassRose.getScaledInstance(140,140,Image.SCALE_FAST);
 
 		setBackground(Color.BLACK);
 	}
@@ -68,19 +74,24 @@ public class CompassPanel extends JPanel
 		eastL.setLocation(dx/2+r+8,dy/2-10);
 		westL.setLocation(dx/2-r-15,dy/2-10);
 
-		g.setColor(Color.RED);
+		g.drawImage(compassRose,dx/2-70,dy/2-70,this);
+		
+		g.setColor(Color.DARK_GRAY);
 
 		g.drawLine(dx/2,dy/2,pointx,pointy);
 		g.drawLine(dx/2+1,dy/2+1,pointx+1,pointy+1);
-		g.setColor(Color.BLUE);
+		g.drawLine(dx/2-1,dy/2-1,pointx-1,pointy-1);
+		g.setColor(Color.BLACK);
 		g.drawOval(dx/2-5,dy/2-5,10,10);
 		g.fillOval(dx/2-5,dy/2-5,10,10);
+
+
 	}
 	public void setCompassPoints(double dec)
 	{
 		double theta = dec*Math.PI/180;
-		pointx = (int)(((double)r)*Math.cos(theta)+(double)dx/2);
-		pointy = (int)(-((double)r)*Math.sin(theta)+(double)dy/2);
+		pointx = (int)(((double)r-10)*Math.cos(theta)+(double)dx/2);
+		pointy = (int)(-((double)r-10)*Math.sin(theta)+(double)dy/2);
 		Rectangle re = new Rectangle(0,0,dx,dy);
 		paintImmediately(re);
 	}
