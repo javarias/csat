@@ -69,8 +69,8 @@ public class CompassPanel extends JPanel
 		g.setColor(Color.WHITE);
 		g.fillOval(dx/12+5,dy/12+5,2*r-10,2*r-10);
 
-		northL.setLocation(dx/2-2,dy/2-r-20);
-		southL.setLocation(dx/2-8,dy/2+r+2);
+		northL.setLocation(dx/2-3,dy/2-r-20);
+		southL.setLocation(dx/2-3,dy/2+r);
 		eastL.setLocation(dx/2+r+8,dy/2-10);
 		westL.setLocation(dx/2-r-15,dy/2-10);
 
