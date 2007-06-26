@@ -7,6 +7,7 @@ import java.util.regex.*;
 
 public class WeatherCityCondition
 {
+	private String city;	
 	private String time;
 	private String lat;
 	private String lon;
@@ -28,6 +29,10 @@ public class WeatherCityCondition
 	private String moon;
 	private String visi;
 	Matcher mat;
+	public void setCity(Matcher mat)
+	{
+		city=mat.group(1);
+	}
 	public void setTime(Matcher mat)
 	{
 		time=mat.group(1);
@@ -111,6 +116,7 @@ public class WeatherCityCondition
 	}
 	public void setAll()
 	{
+		city="N/A";
 		time="N/A";
         	lat="N/A";
         	lon="N/A";
@@ -133,6 +139,10 @@ public class WeatherCityCondition
          	visi="N/A";	
 	}
 	/*Agregar los 2 metodos que faltan*/
+	public String getCity()
+	{
+		return city;
+	}
 	public String getTime()
 	{
 		return time;
@@ -196,6 +206,14 @@ public class WeatherCityCondition
 	public String getMoon()
 	{
 		return moon;
+	}
+	public String getVisi()
+	{
+		return visi;
+	}
+	public String getUv()
+	{
+		return uv;
 	}
 	public String getAll()
 	{

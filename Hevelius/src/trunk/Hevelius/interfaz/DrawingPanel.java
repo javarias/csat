@@ -290,12 +290,13 @@ public class DrawingPanel extends JPanel
 		wpane = new WeatherPanel(null);
 		add(wpane);
 
+		new Thread(wpane).start();
+
 		//Telescope Status Panel
 		tspane = new TelStatusPanel(null);
 		add(tspane);
 
-	//	wpane.autoReloadWeather().start();
-
+		//wpane.autoReloadWeather().start();
 	}
 	public void paintComponent(Graphics g)
 	{
@@ -352,7 +353,7 @@ public class DrawingPanel extends JPanel
 		spane.setSize(120,120);
 		spane.setLocation(dx-120,dy-160);
 
-		wpane.setSize(300,150);
+		wpane.setSize(300,200);
 		wpane.setLocation(0,0);
 
 		tspane.setSize(300,200);

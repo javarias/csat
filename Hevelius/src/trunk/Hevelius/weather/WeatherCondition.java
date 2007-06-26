@@ -33,6 +33,11 @@ public class WeatherCondition
 			while( (cadena = searchhtml.readLine()) != null )
 			{
 				cadena=cadena.trim();
+				pat = Pattern.compile("^<dnam>(.*?)<.*?>");  //time
+				mat = pat.matcher(cadena);
+				if(mat.find())
+					weather.setCity(mat);
+				cadena=cadena.trim();
 				pat = Pattern.compile("^<tm>(.*?)<.*?>");  //time
 				mat = pat.matcher(cadena);
 				if(mat.find())
