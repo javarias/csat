@@ -46,9 +46,9 @@ public class WeatherCity
 			}
 			return vector_city;
 		}
-		catch(Exception e)
+		catch( MalformedURLException e ) 
 		{
-			e.printStackTrace();
+    			  System.out.println( e );
 
 		}
 		return null;
