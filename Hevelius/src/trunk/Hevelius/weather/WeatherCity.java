@@ -28,6 +28,13 @@ public class WeatherCity
 			city= city.replace(' ','+');
 			URL url = new URL("http://xoap.weather.com/search/search?where="+city );
 			BufferedReader paginaHtml =new BufferedReader( new InputStreamReader( url.openStream() ) );
+			//}
+			//catch (MalformedURLException e)
+			//{
+			//	System.out.println( e );
+			//}
+
+			//BufferedReader paginaHtml =new BufferedReader( new InputStreamReader( url.openStream() ) );
 			while( (cadena = paginaHtml.readLine()) != null )
 			{
 				cadena=cadena.trim();
@@ -41,16 +48,20 @@ public class WeatherCity
 					weather.setId(mat);
 					vector_city.add(weather);
 				}
-			
+
 
 			}
 			return vector_city;
-		}
-		catch( MalformedURLException e ) 
-		{
-    			  System.out.println( e );
-
-		}
-		return null;
+	} 
+	catch (MalformedURLException e)
+	{
+		System.out.println( e );
 	}
+
+	catch (Exception e)
+	{
+		e.printStackTrace();
+	}
+	return null;
+}
 }
