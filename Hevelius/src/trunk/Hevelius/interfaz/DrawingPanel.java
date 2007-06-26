@@ -34,15 +34,28 @@ public class DrawingPanel extends JPanel
 	private JButton go;
 	private JButton change;
 	private JLabel ccoor;
+	private JLabel radec;
+	private JLabel horizontal;
+	private JLabel ccoorR;
+	private JLabel ccoorRL;
+	private JLabel ccoorD;
+	private JLabel ccoorDL;
+	private JLabel ccoorAl;
+	private JLabel ccoorAlL;
+	private JLabel ccoorAz;
+	private JLabel ccoorAzL;
+/*
 	private JLabel ccoor1L;
 	private JLabel ccoor1C;
 	private JLabel ccoor2L;
 	private JLabel ccoor2C;
+*/
 	private Image stop=null;
 	private JButton zenith;
 	private JButton park;
 	private JLabel stimeL;
 	private JLabel stime;
+	private JButton catalogue;
 
 	private int cx;
 	private int cy;
@@ -203,59 +216,77 @@ public class DrawingPanel extends JPanel
 
 		//Goto
 		go = new JButton("Go");
-		go.setSize(40,20);
+		go.setSize(45,45);
 		go.setMargin(new Insets(0,0,0,0));
 		add(go);
 
-		//Change RA-DEC <-> ALT-AZ
-		change = new JButton("x");
-		change.setSize(20,20);
-		change.setMargin(new Insets(0,0,0,0));
-		add(change);
-
 		//Current coordinates
-		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: ccoor = new JLabel("RaDec Coordinates"); break;
-			case 1: ccoor = new JLabel("Horizontal Coordinates"); break;
-			default: ccoor = new JLabel("RaDec Coordinates"); break;
-		}
+		ccoor = new JLabel("Current Coordinates");
 		ccoor.setSize(150,20);
 		ccoor.setForeground(Color.WHITE);
 		ccoor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		add(ccoor);
 
-		//Current RA or ALT Label
-		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: ccoor1L = new JLabel("RA"); break;
-			case 1: ccoor1L = new JLabel("Alt"); break;
-			default: ccoor1L = new JLabel("RA"); break;
-		}
-		ccoor1L.setSize(30,20);
-		ccoor1L.setForeground(Color.WHITE);
-		add(ccoor1L);
+		//Horizontal Label
+		horizontal = new JLabel("Horizontal");
+		horizontal.setSize(80,20);
+		horizontal.setForeground(Color.WHITE);
+		add(horizontal);
 
-		//Current RA or ALT Coordinate
-		ccoor1C = new JLabel("0.00000");
-		ccoor1C.setSize(80,20);
-		ccoor1C.setForeground(Color.WHITE);
-		add(ccoor1C);
+		//RaDec Label
+		radec = new JLabel("RaDec");
+		radec.setSize(80,20);
+		radec.setForeground(Color.WHITE);
+		add(radec);
 
-		//Current DEC or AZ Label
-		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: ccoor2L = new JLabel("Dec"); break;
-			case 1: ccoor2L = new JLabel("Az"); break;
-			default: ccoor2L = new JLabel("Dec"); break;
-		}
-		ccoor2L.setSize(30,20);
-		ccoor2L.setForeground(Color.WHITE);
-		add(ccoor2L);
+		//Current RA Label
+		ccoorRL = new JLabel("Ra");
+		ccoorRL.setSize(30,20);
+		ccoorRL.setForeground(Color.WHITE);
+		add(ccoorRL);
 
-		//Current DEC or AZ Coordinate
-		ccoor2C = new JLabel("0.00000");
-		ccoor2C.setSize(80,20);
-		ccoor2C.setForeground(Color.WHITE);
-		add(ccoor2C);
-		
+		//Current RA Coordinate
+		ccoorR = new JLabel("0.00000");
+		ccoorR.setSize(80,20);
+		ccoorR.setForeground(Color.WHITE);
+		add(ccoorR);
+
+		//Current DEC Label
+		ccoorDL = new JLabel("Dec");
+		ccoorDL.setSize(30,20);
+		ccoorDL.setForeground(Color.WHITE);
+		add(ccoorDL);
+
+		//Current DEC Coordinate
+		ccoorD = new JLabel("0.00000");
+		ccoorD.setSize(80,20);
+		ccoorD.setForeground(Color.WHITE);
+		add(ccoorD);
+
+		//Current Altitude Label
+		ccoorAlL = new JLabel("Alt");
+		ccoorAlL.setSize(30,20);
+		ccoorAlL.setForeground(Color.WHITE);
+		add(ccoorAlL);
+
+		//Current Altitude Coordinate
+		ccoorAl = new JLabel("0.00000");
+		ccoorAl.setSize(80,20);
+		ccoorAl.setForeground(Color.WHITE);
+		add(ccoorAl);
+
+		//Current Azimuth Label
+		ccoorAzL = new JLabel("Az");
+		ccoorAzL.setSize(30,20);
+		ccoorAzL.setForeground(Color.WHITE);
+		add(ccoorAzL);
+
+		//Current Azimuth Coordinate
+		ccoorAz = new JLabel("0.00000");
+		ccoorAz.setSize(80,20);
+		ccoorAz.setForeground(Color.WHITE);
+		add(ccoorAz);
+
 		//Go to Zenith Button
 		zenith = new JButton("Zenith");
 		zenith.setSize(100,20);
@@ -277,6 +308,12 @@ public class DrawingPanel extends JPanel
 		stime.setSize(100,20);
 		stime.setForeground(Color.WHITE);
 		add(stime);
+
+		//Catalogue Button
+		catalogue = new JButton("Sel. from Catalogue");
+		catalogue.setSize(130,20);
+		catalogue.setMargin(new Insets(0,0,0,0));
+		add(catalogue);
 
 		//CompassPanel
 		cpane = new CompassPanel(null);
@@ -363,33 +400,45 @@ public class DrawingPanel extends JPanel
 		stime.setLocation(80,420);
 
 		//Interface Objects Positioning
-		coor.setLocation(dist-30,420);
+		coor.setLocation(dist-40,420);
 
-		coor1L.setLocation(dist-10,450);
+		coor1L.setLocation(dist-50,450);
 
-		coor1.setLocation(dist+20,450);
+		coor1.setLocation(dist-20,450);
 
-		coor2L.setLocation(dist-10,470);
+		coor2L.setLocation(dist-50,475);
 
-		coor2.setLocation(dist + 20,470);
+		coor2.setLocation(dist-20,475);
 
-		go.setLocation(dist + 55,492);
+		go.setLocation(dist + 65,450);
 
-		change.setLocation(dist-5,492);
+		ccoor.setLocation(dist-40,240);
 
-		ccoor.setLocation(dist-30,240);
+		radec.setLocation(dist-50,280);
+		
+		horizontal.setLocation(dist+60, 280);
 
-		ccoor1L.setLocation(dist-10,270);
+		ccoorRL.setLocation(dist-70,310);
 
-		ccoor1C.setLocation(dist + 20,270);
+		ccoorR.setLocation(dist-30,310);
 
-		ccoor2L.setLocation(dist-10, 290);
+		ccoorDL.setLocation(dist-70, 330);
 
-		ccoor2C.setLocation(dist + 20,290);
+		ccoorD.setLocation(dist-30,330);
+
+		ccoorAlL.setLocation(dist+50,310);
+
+		ccoorAl.setLocation(dist+80,310);
+
+		ccoorAzL.setLocation(dist+50,330);
+
+		ccoorAz.setLocation(dist+80,330);
 		
 		zenith.setLocation(rect_x*3/4-50,3*dy/4-20);
 
 		park.setLocation(rect_x*5/4-50,3*dy/4-20);
+
+		catalogue.setLocation(dist-20,500);
 	}
 	public Dimension getDim()
 	{
@@ -428,23 +477,14 @@ public class DrawingPanel extends JPanel
 			case 0: coor.setText("RaDec Coordinates"); 
 				coor1L.setText("Ra");
 				coor2L.setText("Dec");
-				ccoor.setText("RaDec Coordinates");
-				ccoor1L.setText("Ra");
-				ccoor2L.setText("Dec");
 				break;
 			case 1: coor.setText("Horizontal Coordinates");  
 				coor1L.setText("Alt");
 				coor2L.setText("Az");
-				ccoor.setText("Horizontal Coordinates");
-				ccoor1L.setText("Alt");
-				ccoor2L.setText("Az");
 				break;
 			default: coor.setText("RaDec Coordinates");  
 				coor1L.setText("Ra");
 				coor2L.setText("Dec");
-				ccoor.setText("RaDec Coordinates");
-				ccoor1L.setText("Ra");
-				ccoor2L.setText("Dec");
 				break;
 		}
 
