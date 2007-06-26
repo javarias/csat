@@ -400,17 +400,17 @@ public class DrawingPanel extends JPanel
 		stime.setLocation(80,420);
 
 		//Interface Objects Positioning
-		coor.setLocation(dist-40,420);
+		coor.setLocation(dist-40,380);
 
-		coor1L.setLocation(dist-50,450);
+		coor1L.setLocation(dist-50,410);
 
-		coor1.setLocation(dist-20,450);
+		coor1.setLocation(dist-20,410);
 
-		coor2L.setLocation(dist-50,475);
+		coor2L.setLocation(dist-50,435);
 
-		coor2.setLocation(dist-20,475);
+		coor2.setLocation(dist-20,435);
 
-		go.setLocation(dist + 65,450);
+		go.setLocation(dist + 65,410);
 
 		ccoor.setLocation(dist-40,240);
 
@@ -438,7 +438,7 @@ public class DrawingPanel extends JPanel
 
 		park.setLocation(rect_x*5/4-50,3*dy/4-20);
 
-		catalogue.setLocation(dist-20,500);
+		catalogue.setLocation(dist-20,460);
 	}
 	public Dimension getDim()
 	{
