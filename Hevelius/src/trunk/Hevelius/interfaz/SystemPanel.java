@@ -37,6 +37,12 @@ public class SystemPanel extends JPanel
 		shutdown = new JButton("Shutdown");
 		shutdown.setSize(100,20);
 		add(shutdown);
+
+		shutdown.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);
+			}
+		});
 	}
 	public void paintComponent(Graphics g)
 	{
