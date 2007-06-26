@@ -438,6 +438,24 @@ public class interfaz {
 
 	private static void createAndShowGUI()
 	{
+		long time1 = System.currentTimeMillis();
+		long time2 = System.currentTimeMillis();
+
+		//Intro
+		JFrame intro = new JFrame();
+		IntroPanel in = new IntroPanel(null);
+		intro.setContentPane(in);
+		intro.setUndecorated(true);
+		intro.pack();
+		in.setBackground(Color.WHITE);
+		intro.setResizable(false);
+		intro.setSize(400,200);
+		intro.setLocationRelativeTo(null);
+		intro.setVisible(true);
+		while(time2-time1<5000)
+			time2 = System.currentTimeMillis();
+		//intro.setVisible(false);
+
 		frame = new JFrame("Hevelius v. ALFA rc1");
 		pane = new DrawingPanel(null);
 		pane.updateWindow();
@@ -445,11 +463,11 @@ public class interfaz {
 		Dimension ScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.addWindowListener(new WindowAdapter()
 				{
-				public void windowClosing(WindowEvent e)
-				{
-				System.exit(0);
-				}
-				});
+					public void windowClosing(WindowEvent e)
+		{
+			System.exit(0);
+		}
+		});
 
 		switch(Integer.parseInt(test.getOption("background"))){
 			case 0: pane.setBackground(Color.BLACK); break;
@@ -468,32 +486,19 @@ public class interfaz {
 		}
 
 		frame.setResizable(false);
-		long time1 = System.currentTimeMillis();
-		long time2 = System.currentTimeMillis();
-
-		//Intro
-		JFrame intro = new JFrame();
-		intro.setUndecorated(true);
-		intro.pack();
-		intro.setResizable(false);
-		intro.setSize(400,200);
-		intro.setLocationRelativeTo(null);
-		intro.setVisible(true);
-		while(time2-time1<500)
-			time2 = System.currentTimeMillis();
-		intro.setVisible(false);
-
 
 		frame.setJMenuBar(createMenuBar());
 		frame.pack();
 		frame.setSize(ScreenSize);
+		while(time2-time1<5000)
+			                        time2 = System.currentTimeMillis();
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
 		time1 = System.currentTimeMillis();
 		time2 = System.currentTimeMillis();
 		while(time2-time1<500)
 			time2 = System.currentTimeMillis();
-		//frame.setJMenuBar(createMenuBar());
+		intro.setVisible(false);
 
 	}
 
@@ -502,7 +507,7 @@ public class interfaz {
 			UIManager.setLookAndFeel(
 					UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) { }
-		
+
 		configWindow();
 		createAndShowGUI();
 		aboutWindow();

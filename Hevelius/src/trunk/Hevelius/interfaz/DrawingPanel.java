@@ -20,6 +20,7 @@ public class DrawingPanel extends JPanel
 	private Image lArrow = null;
 	private Image tArrow = null;
 	private Image bArrow = null;
+	private Image hevelius = null;
 	private JPanel tp;
 	private GLCanvas canvas;
 	private Listener list;
@@ -37,7 +38,7 @@ public class DrawingPanel extends JPanel
 	private JLabel ccoor1C;
 	private JLabel ccoor2L;
 	private JLabel ccoor2C;
-	private Image stop;
+	private Image stop=null;
 	private JButton zenith;
 	private JButton park;
 	private JLabel stimeL;
@@ -272,7 +273,7 @@ public class DrawingPanel extends JPanel
 		add(stimeL);
 
 		//Sidereal Time
-		stime = new JLabel("00:00");
+		stime = new JLabel("0.000");
 		stime.setSize(100,20);
 		stime.setForeground(Color.WHITE);
 		add(stime);
@@ -335,10 +336,12 @@ public class DrawingPanel extends JPanel
 		{
 			img = setImage("Hevelius/images/image.jpg",new Dimension((rect_x-10)*3/4,(rect_y-10)*3/4));
 			stop = setImage("Hevelius/images/stop.png",new Dimension(80,80));
+			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(200,100));
 			tam = new Dimension(dx,dy);
 		}
 		g.drawImage(stop, rect_x-40,dy - 140, this);
 		g.drawImage(img,(dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,this);
+		g.drawImage(hevelius,dx/2-100,40,this);
 
 		tp.setLocation(oGLx+25,15);
 		tp.setSize(dx-oGLx-50,dx-oGLx-50);
