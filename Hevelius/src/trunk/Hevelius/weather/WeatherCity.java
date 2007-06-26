@@ -6,10 +6,7 @@ import java.net.*;
 import java.util.*;
 public class WeatherCity
 {
-	//BufferedReader lugar;
-	//BufferedReader id;
 	String cadena;
-	//String tmp;
 	Pattern pat;
 	Matcher mat;
 	public static Vector<WeatherCityId> vector_city;
@@ -28,13 +25,6 @@ public class WeatherCity
 			city= city.replace(' ','+');
 			URL url = new URL("http://xoap.weather.com/search/search?where="+city );
 			BufferedReader paginaHtml =new BufferedReader( new InputStreamReader( url.openStream() ) );
-			//}
-			//catch (MalformedURLException e)
-			//{
-			//	System.out.println( e );
-			//}
-
-			//BufferedReader paginaHtml =new BufferedReader( new InputStreamReader( url.openStream() ) );
 			while( (cadena = paginaHtml.readLine()) != null )
 			{
 				cadena=cadena.trim();
@@ -42,7 +32,6 @@ public class WeatherCity
 				mat = pat.matcher(cadena);
 				if(mat.find())
 				{
-					//System.out.println("ID= "+mat.group(1)+"     City= "+ mat.group(2));
 					weather=  new WeatherCityId();
 					weather.setNameCity(mat);
 					weather.setId(mat);
@@ -57,7 +46,6 @@ public class WeatherCity
 	{
 		vector_city = new Vector<WeatherCityId>();
 		return vector_city;
-		//System.out.println("false");
 	}
 
 	catch (Exception e)

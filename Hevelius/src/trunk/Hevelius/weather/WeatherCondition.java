@@ -6,14 +6,9 @@ import java.util.*;
 import java.net.*;
 public class WeatherCondition
 {
-	//BufferedReader lugar;
-	//BufferedReader id;
 	String cadena;
-	//String id;
-	//String tmp;
 	Pattern pat;
 	Matcher mat;
-	//WeatherCityCondition weather;
 	public static Vector<WeatherCityCondition> vector_condition;
 	private String id;
 	public WeatherCondition(String id)
