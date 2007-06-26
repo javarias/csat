@@ -53,7 +53,7 @@ public class WeatherCity
 			}
 			return vector_city;
 	} 
-	catch (MalformedURLException e)
+	catch (UnknownHostException e )
 	{
 		System.out.println("false");
 	}

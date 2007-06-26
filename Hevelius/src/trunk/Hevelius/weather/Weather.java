@@ -230,6 +230,10 @@ public class Weather {
 
 
 		}
+		 catch (UnknownHostException e )
+	        {
+        	        System.out.println("false");
+        	}
 		catch (Exception e) 
 		{
 			e.printStackTrace(); 

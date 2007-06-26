@@ -152,7 +152,7 @@ public class WeatherCondition
 			}
 			vector_condition.add(weather);
 		}
-		catch (MalformedURLException e)
+		catch (UnknownHostException e )
 	        {
         	 	WeatherCityCondition weather = new WeatherCityCondition();
 			weather.setAll();
