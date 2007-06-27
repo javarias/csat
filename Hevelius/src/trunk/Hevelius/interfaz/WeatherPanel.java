@@ -78,7 +78,11 @@ public class WeatherPanel extends JPanel implements Runnable
 
 		//Weather Status
 
-		Icon image = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
+		Icon image;
+		if(vector.get(0).getIconWt().compareTo("N/A")==0)
+			image = new ImageIcon("Hevelius/images/weather_images/na.png");
+		else
+			image = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
 
 		wStatB = new JLabel(vector.get(0).getWt(),image,JLabel.LEFT);
 		wStatB.setSize(200,32);
@@ -175,7 +179,12 @@ public class WeatherPanel extends JPanel implements Runnable
 
 		tempB.setText(vector.get(0).getTm()+"°C");
 
-		Icon image = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
+		Icon image;
+		if(vector.get(0).getIconWt().compareTo("N/A")==0)
+			image = new ImageIcon("Hevelius/images/weather_images/na.png");
+		else
+			image = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
+
 		wStatB.setIcon(image);
 		wStatB.setText(vector.get(0).getWt());
 
@@ -311,7 +320,12 @@ public class WeatherPanel extends JPanel implements Runnable
 		window.add(tempB2);
 
 		//Weather Status
-		final Icon image2 = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
+		final Icon image2;
+		if(vector.get(0).getIconWt().compareTo("N/A")==0)
+			image2 = new ImageIcon("Hevelius/images/weather_images/na.png");
+		else
+			image2 = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
+
 		final JLabel wStatB2 = new JLabel(vector.get(0).getWt(),image2,JLabel.LEFT);
 		wStatB2.setSize(200,32);
 		wStatB2.setForeground(Color.WHITE);
@@ -409,7 +423,12 @@ public class WeatherPanel extends JPanel implements Runnable
 
 
 		//Weather Pictures Label
-		final Icon image3 = new ImageIcon("Hevelius/images/big_weather_images/"+vector.get(0).getIconWt()+".png");
+		final Icon image3;
+		if(vector.get(0).getIconWt().compareTo("N/A")==0)
+			image3 = new ImageIcon("Hevelius/images/big_weather_images/na.png");
+		else
+			image3 = new ImageIcon("Hevelius/images/big_weather_images/"+vector.get(0).getIconWt()+".png");
+
 		final JLabel bigWt = new JLabel(image3);
 		bigWt.setSize(100,100);
 		bigWt.setLocation(330,150);
@@ -436,7 +455,11 @@ public class WeatherPanel extends JPanel implements Runnable
 
 					tempB2.setText(vector.get(0).getTm()+"°C");
 
-					Icon image2 = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
+					Icon image2;
+					if(vector.get(0).getIconWt().compareTo("N/A")==0)
+						image2 = new ImageIcon("Hevelius/images/weather_images/na.png");
+					else
+						image2 = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
 					wStatB2.setIcon(image2);
 					wStatB2.setText(vector.get(0).getWt());
 
@@ -455,7 +478,11 @@ public class WeatherPanel extends JPanel implements Runnable
 
 					uvB2.setText(vector.get(0).getUv());
 
-					Icon image3 = new ImageIcon("Hevelius/images/big_weather_images/"+vector.get(0).getIconWt()+".png");
+					Icon image3;
+					if(vector.get(0).getIconWt().compareTo("N/A")==0)
+						image3 = new ImageIcon("Hevelius/images/big_weather_images/na.png");
+					else
+						image3 = new ImageIcon("Hevelius/images/big_weather_images/"+vector.get(0).getIconWt()+".png");
 					bigWt.setIcon(image3);
 
 
