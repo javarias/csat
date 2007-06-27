@@ -24,16 +24,19 @@ public class WeatherCondition
 			vector_condition = new Vector<WeatherCityCondition>();
 			id = id.trim();
 
-			if(id.compareTo("(none)")==0){
-				weather.setAll();
-        	 		vector_condition.add(weather);
-				return vector_condition;
-			}
-
 			URL url2 = new URL("http://xoap.weather.com/weather/local/"+id+"?cc=*&prod=xoap&unit=m&par=wx_module_7075&key=wx_module_7075");	
 			BufferedReader searchhtml =new BufferedReader( new InputStreamReader( url2.openStream() ) );
+
 			while( (cadena = searchhtml.readLine()) != null )
 			{
+				cadena=cadena.trim();
+				pat = Pattern.compile("<error>");  //ID error
+				mat = pat.matcher(cadena);
+				if(mat.find()){
+					weather.setAll();
+		        	 	vector_condition.add(weather);
+				}
+
 				cadena=cadena.trim();
 				pat = Pattern.compile("^<dnam>(.*?)<.*?>");  //time
 				mat = pat.matcher(cadena);
@@ -162,6 +165,12 @@ public class WeatherCondition
 		catch (UnknownHostException e )
 	        {
         	 	WeatherCityCondition weather = new WeatherCityCondition();
+			weather.setAll();
+        	 	vector_condition.add(weather);
+		}
+		catch(SocketException e)
+		{
+			WeatherCityCondition weather = new WeatherCityCondition();
 			weather.setAll();
         	 	vector_condition.add(weather);
 		}
