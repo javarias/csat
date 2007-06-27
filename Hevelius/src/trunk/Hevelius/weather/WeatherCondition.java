@@ -168,6 +168,12 @@ public class WeatherCondition
 			weather.setAll();
         	 	vector_condition.add(weather);
 		}
+		catch(SocketException e)
+		{
+			WeatherCityCondition weather = new WeatherCityCondition();
+			weather.setAll();
+        	 	vector_condition.add(weather);
+		}
 		catch(Exception e)
 		{
 			e.printStackTrace();

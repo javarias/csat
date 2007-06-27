@@ -171,33 +171,40 @@ public class WeatherPanel extends JPanel implements Runnable
 	}
 
 	public void reloadWeather(){
-		vector.removeAllElements();		
-		clima = new WeatherCondition(test.getOption("location"));
-		vector = clima.ListCityCondition();
-
-		wLabel.setText("Weather Conditions at "+vector.get(0).getTime());
-
-		tempB.setText(vector.get(0).getTm()+"°C");
-
-		Icon image;
-		if(vector.get(0).getIconWt().compareTo("N/A")==0)
-			image = new ImageIcon("Hevelius/images/weather_images/na.png");
-		else
-			image = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
-
-		wStatB.setIcon(image);
-		wStatB.setText(vector.get(0).getWt());
-
 		try{
-			Integer.parseInt(vector.get(0).getVwind());
-			windB.setText(vector.get(0).getVwind()+" Km/Hr "+vector.get(0).getDirec());
-		}catch(NumberFormatException e){
-			windB.setText(vector.get(0).getDirec());
+			vector.removeAllElements();		
+			clima = new WeatherCondition(test.getOption("location"));
+			vector = clima.ListCityCondition();
+
+			wLabel.setText("Weather Conditions at "+vector.get(0).getTime());
+			tempB.setText(vector.get(0).getTm()+"°C");
+			Icon image;
+			if(vector.get(0).getIconWt().compareTo("N/A")==0)
+				image = new ImageIcon("Hevelius/images/weather_images/na.png");
+			else
+				image = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
+
+			wStatB.setIcon(image);
+			wStatB.setText(vector.get(0).getWt());
+
+			try{
+				Integer.parseInt(vector.get(0).getVwind());
+				windB.setText(vector.get(0).getVwind()+" Km/Hr "+vector.get(0).getDirec());
+			}catch(NumberFormatException e){
+				windB.setText(vector.get(0).getDirec());
+			}
+
+			moonB.setText(vector.get(0).getMoon());
+
+			humB.setText(vector.get(0).getHumil()+"%");
+		}catch(ArrayIndexOutOfBoundsException e){
+			wLabel.setText("Weather Conditions at N/A");
+			tempB.setText("N/A°C");
+			Icon image = new ImageIcon("Hevelius/images/weather_images/na.png");
+			wStatB.setIcon(image);
+			wStatB.setText("N/A");
+			windB.setText("N/A");
 		}
-
-		moonB.setText(vector.get(0).getMoon());
-
-		humB.setText(vector.get(0).getHumil()+"%");
 
 	}
 	

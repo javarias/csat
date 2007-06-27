@@ -70,10 +70,10 @@ public class interfaz {
 							//frame.setVisible(false);
 							about.setVisible(true);
 						}
-						else{
+					/*	else{
 							System.out.println("Menu item [" + 
 									event.getActionCommand(  ) + "] was pressed.");
-						}
+						}*/
 					}
 				}
 			}
@@ -132,6 +132,9 @@ public class interfaz {
 		config.setLayout(null);
 		config.pack();	
 
+		Image icono = Toolkit.getDefaultToolkit().getImage("Hevelius/images/hevelius.png");
+		config.setIconImage(icono);
+
 		config.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
 				config.setVisible(false);
@@ -167,11 +170,15 @@ public class interfaz {
 		radec = new JRadioButton("RaDec");
 		altaz = new JRadioButton("Horizontal");
 		coord = new ButtonGroup();
-
-		if(Integer.parseInt(test.getOption("coordinate"))==0)
+		
+		try{
+			if(Integer.parseInt(test.getOption("coordinate"))==0)
+				radec.setSelected(true);
+			if(Integer.parseInt(test.getOption("coordinate"))==1)
+				altaz.setSelected(true);
+		}catch(NumberFormatException e){
 			radec.setSelected(true);
-		if(Integer.parseInt(test.getOption("coordinate"))==1)
-			altaz.setSelected(true);
+		}
 		coord.add(radec);
 		coord.add(altaz);
 
@@ -223,22 +230,34 @@ public class interfaz {
 		weather = new JCheckBox("Weather");
 		weather.setLocation(150,10);
 		weather.setSize(150,20);
-		if(Integer.parseInt(test.getOption("weather"))==1)
+		try{
+			if(Integer.parseInt(test.getOption("weather"))==1)
+				weather.setSelected(true);
+		}catch(NumberFormatException e){
 			weather.setSelected(true);
+		}
 		panel2.add(weather);
 
 		opengl = new JCheckBox("OpenGL Model");
 		opengl.setLocation(150,30);
 		opengl.setSize(150,20);
-		if(Integer.parseInt(test.getOption("opengl"))==1)
+		try{
+			if(Integer.parseInt(test.getOption("opengl"))==1)
+				opengl.setSelected(true);
+		}catch(NumberFormatException e){
 			opengl.setSelected(true);
+		}
 		panel2.add(opengl);
 
 		compass = new JCheckBox("Compass");
 		compass.setLocation(150,50);
 		compass.setSize(150,20);
-		if(Integer.parseInt(test.getOption("compass"))==1)
+		try{
+			if(Integer.parseInt(test.getOption("compass"))==1)
+				compass.setSelected(true);
+		}catch(NumberFormatException e){
 			compass.setSelected(true);
+		}
 		panel2.add(compass);
 
 		background = new JLabel("Background Color:");
@@ -262,7 +281,11 @@ public class interfaz {
 					"Yellow"}));
 		color.setLocation(150,90);
 		color.setSize(200,20);
-		color.setSelectedIndex(Integer.parseInt(test.getOption("background")));
+		try{
+			color.setSelectedIndex(Integer.parseInt(test.getOption("background")));
+		}catch(NumberFormatException e){
+			color.setSelectedIndex(0);
+		}
 		panel2.add(color);	
 
 
@@ -280,6 +303,7 @@ public class interfaz {
 		save.setSize(70,25);
 		config.add(save);
 
+		saveConfig();
 
 		close.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent event) {
@@ -344,6 +368,41 @@ public class interfaz {
 
 
 	}
+
+
+	public static void saveConfig(){
+		//System.out.println(radec.isSelected() + " " + altaz.isSelected());
+		if(radec.isSelected())
+			test.setOption("coordinate","0");
+		if(altaz.isSelected())
+			test.setOption("coordinate","1");
+
+		if(weather.isSelected())
+			test.setOption("weather","1");
+		else
+			test.setOption("weather","0");
+
+		if(opengl.isSelected())
+			test.setOption("opengl","1");
+		else
+			test.setOption("opengl","0");
+
+		if(compass.isSelected())
+			test.setOption("compass","1");
+		else
+			test.setOption("compass","0");
+
+		test.setOption("background", String.valueOf(color.getSelectedIndex()));
+
+		if(String.valueOf(location.getSelectedItem()).compareTo("(none)") != 0)				
+			test.setOption("location",String.valueOf(vector_city.get(
+				location.getSelectedIndex()).getId()));
+
+		test.store();
+
+	}
+
+
 
 	public static void setConfigWindow(){
 		if(Integer.parseInt(test.getOption("coordinate"))==0)
