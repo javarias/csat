@@ -35,7 +35,7 @@ public class WeatherPanel extends JPanel implements Runnable
 	{
 		//Weather Status Label
 		wLabel = new JLabel("Weather Conditions at "+vector.get(0).getTime());
-		wLabel.setSize(200,20);
+		wLabel.setSize(250,20);
 		wLabel.setForeground(Color.WHITE);
 		wLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		add(wLabel);
@@ -119,7 +119,11 @@ public class WeatherPanel extends JPanel implements Runnable
 		more.setMargin(new Insets(0,0,0,0));
 		more.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent event) {
-				fullWeatherWindow();
+					try{
+						fullWeatherWindow();
+					}catch(ArrayIndexOutOfBoundsException e){
+						
+					}
 				}
 				});
 		add(more);
@@ -437,8 +441,10 @@ public class WeatherPanel extends JPanel implements Runnable
 			image3 = new ImageIcon("Hevelius/images/big_weather_images/"+vector.get(0).getIconWt()+".png");
 
 		final JLabel bigWt = new JLabel(image3);
-		bigWt.setSize(100,100);
-		bigWt.setLocation(330,150);
+		bigWt.setSize(150,150);
+		bigWt.setLocation(305,125);
+		bigWt.setHorizontalAlignment(SwingConstants.CENTER);
+		bigWt.setVerticalAlignment(SwingConstants.CENTER);
 		window.add(bigWt);
 
 
@@ -449,49 +455,51 @@ public class WeatherPanel extends JPanel implements Runnable
 		reload.setLocation(150,290);
 		reload.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent event) {
-							
-					wLabel2.setText(vector.get(0).getCity()+" Weather Conditions at "+vector.get(0).getTime());
+					try{		
+						wLabel2.setText(vector.get(0).getCity()+" Weather Conditions at "+vector.get(0).getTime());
 
-					latB2.setText(vector.get(0).getLat()+"°");
+						latB2.setText(vector.get(0).getLat()+"°");
 
-					lonB2.setText(vector.get(0).getLon()+"°");
+						lonB2.setText(vector.get(0).getLon()+"°");
 
-					sunrB2.setText(vector.get(0).getSunrice());
+						sunrB2.setText(vector.get(0).getSunrice());
 
-					sunsB2.setText(vector.get(0).getSunset());
+						sunsB2.setText(vector.get(0).getSunset());
 
-					tempB2.setText(vector.get(0).getTm()+"°C");
+						tempB2.setText(vector.get(0).getTm()+"°C");
 
-					Icon image2;
-					if(vector.get(0).getIconWt().compareTo("N/A")==0)
-						image2 = new ImageIcon("Hevelius/images/weather_images/na.png");
-					else
-						image2 = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
-					wStatB2.setIcon(image2);
-					wStatB2.setText(vector.get(0).getWt());
+						Icon image2;
+						if(vector.get(0).getIconWt().compareTo("N/A")==0)
+							image2 = new ImageIcon("Hevelius/images/weather_images/na.png");
+						else
+							image2 = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
+						wStatB2.setIcon(image2);
+						wStatB2.setText(vector.get(0).getWt());
 
-					try{
-						Integer.parseInt(vector.get(0).getVwind());
-						windB2.setText(vector.get(0).getVwind()+" Km/Hr "+vector.get(0).getDirec());
-					}catch(NumberFormatException e){
-						windB2.setText(vector.get(0).getDirec());
+						try{
+							Integer.parseInt(vector.get(0).getVwind());
+							windB2.setText(vector.get(0).getVwind()+" Km/Hr "+vector.get(0).getDirec());
+						}catch(NumberFormatException e){
+							windB2.setText(vector.get(0).getDirec());
+						}
+
+						moonB2.setText(vector.get(0).getMoon());
+
+						humB2.setText(vector.get(0).getHumil()+"%");
+
+						visiB2.setText(vector.get(0).getVisi()+" Kilometers");
+
+						uvB2.setText(vector.get(0).getUv());
+
+						Icon image3;
+						if(vector.get(0).getIconWt().compareTo("N/A")==0)
+							image3 = new ImageIcon("Hevelius/images/big_weather_images/na.png");
+						else
+							image3 = new ImageIcon("Hevelius/images/big_weather_images/"+vector.get(0).getIconWt()+".png");
+						bigWt.setIcon(image3);
+					}catch(ArrayIndexOutOfBoundsException e){
+						
 					}
-
-					moonB2.setText(vector.get(0).getMoon());
-
-					humB2.setText(vector.get(0).getHumil()+"%");
-
-					visiB2.setText(vector.get(0).getVisi()+" Kilometers");
-
-					uvB2.setText(vector.get(0).getUv());
-
-					Icon image3;
-					if(vector.get(0).getIconWt().compareTo("N/A")==0)
-						image3 = new ImageIcon("Hevelius/images/big_weather_images/na.png");
-					else
-						image3 = new ImageIcon("Hevelius/images/big_weather_images/"+vector.get(0).getIconWt()+".png");
-					bigWt.setIcon(image3);
-
 
 				}
 				});

@@ -559,8 +559,8 @@ public class interfaz {
 					UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) { }
 
+		aboutWindow();
 		configWindow();
 		createAndShowGUI();
-		aboutWindow();
 	}
 }
