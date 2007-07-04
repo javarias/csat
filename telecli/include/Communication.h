@@ -14,6 +14,12 @@ using namespace std;
 /** Movement in the Azimuth axis in negative direction */
 #define AZM_NEG   0x8
 
+/** Max value for axis rotation in non-precise commands */
+#define MAX_ROTATION   4294967296.0
+
+/** Max value for axis rotation in precise commands */
+#define MAX_PRECISE_ROTATION   4294967296.0
+
 class Communication{
 
 	private:
@@ -25,4 +31,7 @@ class Communication{
 	char *echo(char c);
 	bool alignmentComplete();
 	bool Slew(int rate, int direction);
+	bool goToAltAzm(double alt, double azm);
+	double getAlt();
+	double getAzm();
 };

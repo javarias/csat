@@ -77,6 +77,10 @@ int main(int args, char *argv[]) {
 	/* Set the serial port to use */
 	if( args < 3 ){
 		printf("\nUsage: %s [device] var value\n\n",argv[0]);
+		printf("Variables supported are:\n");
+		printf("      slal, slaz  (slew in altitud and azimuth direction)\n");
+		printf("      echo        (to test connection to telescope)\n");
+		printf("      gtal, gtaz  (go to altitud and azimuth coordinates)\n\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -110,6 +114,8 @@ int main(int args, char *argv[]) {
 	}
 
 	else if( !strcmp("echo",argv[1])) printf("echo: %s\n",com->echo(argv[2][0]));
+	else if( !strcmp("gtal",argv[1])) com->goToAltAzm(atof(argv[2]),com->getAzm());
+	else if( !strcmp("gtaz",argv[1])) com->goToAltAzm(com->getAlt(),atof(argv[2]));
 
 	else{
 		printf("Variable not supported: %s\n",argv[1]);

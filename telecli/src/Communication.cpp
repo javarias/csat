@@ -88,3 +88,58 @@ bool Communication::Slew(int rate, int direction){
 
 	return true;
 }
+
+bool Communication::goToAltAzm(double alt, double azm){
+	if ( alt > 90 || alt < 0 ){
+		printf("Error: Altitud can't be > 90!");
+		return false;
+	}
+	/* If azm is < 0, convert it into positive coordinates */
+	while ( azm < 0 ){
+		azm += 360.0;
+	}
+
+	azm /= 360;
+	alt /= 360;
+
+	char command[18];
+	char *msg;
+	sprintf(command,"b%08x,%08x",(unsigned int)(azm*MAX_PRECISE_ROTATION), (unsigned int)(alt*MAX_PRECISE_ROTATION));
+
+	this->sp->write_RS232(command);
+	this->sp->flush_RS232();
+	msg = this->sp->read_RS232();
+
+	return true;
+}
+
+double Communication::getAlt(){
+	double alt,azm;
+	char *msg;
+
+	this->sp->write_RS232("z");
+	msg = this->sp->read_RS232();
+	sscanf(msg,"%08X,%08X#",&alt,&azm);
+
+	printf("Alt: %lf Azm: %lf\n",alt,azm);
+	alt /= MAX_PRECISE_ROTATION;
+	alt *= 360.0;
+
+	return alt;
+}
+
+double Communication::getAzm(){
+	double alt,azm;
+	char *msg;
+
+	this->sp->write_RS232("z");
+	msg = this->sp->read_RS232();
+	sscanf(msg,"%08X,%08X#",&alt,&azm);
+
+	printf("msg: %s\n",msg);
+	printf("Alt: %lf Azm: %lf\n",alt,azm);
+	azm /= MAX_PRECISE_ROTATION;
+	azm *= 360.0;
+
+	return azm;
+}
