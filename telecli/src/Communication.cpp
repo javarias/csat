@@ -114,31 +114,33 @@ bool Communication::goToAltAzm(double alt, double azm){
 }
 
 double Communication::getAlt(){
-	double alt,azm;
+	double alt;
+	unsigned long read_alt, read_azm;
 	char *msg;
 
 	this->sp->write_RS232("z");
 	msg = this->sp->read_RS232();
-	sscanf(msg,"%08X,%08X#",&alt,&azm);
+	sscanf(msg,"%08lX,%08lX#",&read_alt,&read_azm);
 
-	printf("Alt: %lf Azm: %lf\n",alt,azm);
-	alt /= MAX_PRECISE_ROTATION;
+	printf("Alt: %ld Azm: %ld\n",read_alt,read_azm);
+	alt = read_alt / MAX_PRECISE_ROTATION;
 	alt *= 360.0;
 
 	return alt;
 }
 
 double Communication::getAzm(){
-	double alt,azm;
+	double azm;
+	unsigned long read_alt, read_azm;
 	char *msg;
 
 	this->sp->write_RS232("z");
 	msg = this->sp->read_RS232();
-	sscanf(msg,"%08X,%08X#",&alt,&azm);
+	sscanf(msg,"%08lX,%08lX#",&read_alt,&read_azm);
 
 	printf("msg: %s\n",msg);
-	printf("Alt: %lf Azm: %lf\n",alt,azm);
-	azm /= MAX_PRECISE_ROTATION;
+	printf("Alt: %ld Azm: %ld\n",read_alt,read_azm);
+	azm = (double)read_azm / MAX_PRECISE_ROTATION;
 	azm *= 360.0;
 
 	return azm;
