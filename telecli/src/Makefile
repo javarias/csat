@@ -1,8 +1,7 @@
 CC=g++
 CFLAGS=-Wall -O2 -ggdb
 
-#SERIAL=serialport_rs232
-OBJ=main.o serialport_rs232.o
+OBJ=main.o SerialRS232.o Communication.o
 EXE=cli_nex4
 ROOTDIR=..
 OBJDIR=$(ROOTDIR)/object
@@ -19,19 +18,15 @@ dirs:
 	if ! test -d $(BINDIR) ; then mkdir $(BINDIR) ; fi
 	if ! test -d $(OBJDIR) ; then mkdir $(OBJDIR) ; fi
 
-#$(BINDIR)/$(EXE): $(OBJ) $(SERIAL).o
 $(BINDIR)/$(EXE): $(OBJ)
 	$(CC) $(CFLAGS) -o $(BINDIR)/$(EXE) $(addprefix $(OBJDIR)/,$(OBJ))
-
-#$(SERIAL).o: $(LIBDIR)/$(SERIAL).cpp
-#	$(CC) $(CFLAGS) -I$(INCDIR) -c $(LIBDIR)/$<  -o $(OBJDIR)/$(SERIAL).o
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $(OBJDIR)/$@
 
 doc: $(wildcard *.cpp) $(wildcard *.h)
 	@echo Making doc...
-	@cd $(DOCDIR) && doxygen Doxyfile > /dev/null
+	@cd $(DOCDIR) && doxygen Doxyfile &> /dev/null
 
 clean:
 	cd $(BINDIR) && rm -f $(EXE)

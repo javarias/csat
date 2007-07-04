@@ -15,6 +15,7 @@
 #define _SERIALPORT_RS232_H_
 
 #include <exception>
+#include <sys/ioctl.h>
 using namespace std;
 
 class SerialRS232
@@ -85,10 +86,10 @@ public:
 	SerialRS232(const char * dev, const baudrates & baudrate = b9600,
 			const parities & parity = noparity,
 			const databits & databitsnum = data8,
-			const stopbits & stopbitsnum = stop1,
-			const int & termc = 10,
+			const stopbits & stopbitsnum = stop2,
+			const int & termc = '#',
 			const unsigned int & buflen = 1024,
-			const int & timeout = 300)
+			const int & timeout = 3000)
 			throw (SerialRS232Exception &);
 
 	/**
@@ -124,6 +125,7 @@ private:
 	char * m_dev;
 	char * m_buf;
 	int m_timeout;
+	struct termio oldterm;
 };
 
 #endif
