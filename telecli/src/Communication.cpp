@@ -91,7 +91,7 @@ bool Communication::Slew(int rate, int direction){
 
 bool Communication::goToAltAzm(double alt, double azm){
 	if ( alt > 90 || alt < 0 ){
-		printf("Error: Altitud can't be > 90!");
+		printf("Error: Altitud can't be > 90!\n");
 		return false;
 	}
 	/* If azm is < 0, convert it into positive coordinates */
@@ -122,7 +122,7 @@ double Communication::getAlt(){
 	msg = this->sp->read_RS232();
 	sscanf(msg,"%08lX,%08lX#",&read_alt,&read_azm);
 
-	printf("Alt: %ld Azm: %ld\n",read_alt,read_azm);
+	printf("Alt: %lu Azm: %lu\n",read_alt,read_azm);
 	alt = read_alt / MAX_PRECISE_ROTATION;
 	alt *= 360.0;
 
@@ -138,8 +138,7 @@ double Communication::getAzm(){
 	msg = this->sp->read_RS232();
 	sscanf(msg,"%08lX,%08lX#",&read_alt,&read_azm);
 
-	printf("msg: %s\n",msg);
-	printf("Alt: %ld Azm: %ld\n",read_alt,read_azm);
+	printf("Alt: %lu Azm: %lu\n",read_alt,read_azm);
 	azm = (double)read_azm / MAX_PRECISE_ROTATION;
 	azm *= 360.0;
 

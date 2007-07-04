@@ -75,22 +75,23 @@ int main(int args, char *argv[]) {
 	int rate = 0;
 
 	/* Set the serial port to use */
-	if( args < 3 ){
-		printf("\nUsage: %s [device] var value\n\n",argv[0]);
+	if( args < 2 ){
+		printf("\nUsage: %s var [value]\n\n",argv[0]);
 		printf("Variables supported are:\n");
-		printf("      slal, slaz  (slew in altitud and azimuth direction)\n");
-		printf("      echo        (to test connection to telescope)\n");
-		printf("      gtal, gtaz  (go to altitud and azimuth coordinates)\n\n");
+		printf("      [slal | slaz] rate    (slew in altitud and azimuth direction)\n");
+		printf("      echo character        (to test connection to telescope)\n");
+		printf("      [gtal | gtaz] degrees (go to altitud and azimuth coordinates)\n");
+		printf("      [getalt | getazm]     (gets the actuals altitud/azimuth coords)\n\n");
 		exit(EXIT_FAILURE);
 	}
 
-	if( args < 4 ){
-		printf("Using default port %s.\n", DEFAULT_PORT);
-		strcpy(serialPort,DEFAULT_PORT);
-	} else {
-		strcpy(serialPort,argv[1]);
-		argv++;
-	}
+//	if( args < 4 ){
+	printf("Using default port %s.\n", DEFAULT_PORT);
+	strcpy(serialPort,DEFAULT_PORT);
+//	} else {
+//		strcpy(serialPort,argv[1]);
+//		argv++;
+//	}
 
 	com = new Communication(serialPort);
 
@@ -113,9 +114,20 @@ int main(int args, char *argv[]) {
 			com->Slew(-rate,ALT_NEG);
 	}
 
-	else if( !strcmp("echo",argv[1])) printf("echo: %s\n",com->echo(argv[2][0]));
-	else if( !strcmp("gtal",argv[1])) com->goToAltAzm(atof(argv[2]),com->getAzm());
-	else if( !strcmp("gtaz",argv[1])) com->goToAltAzm(com->getAlt(),atof(argv[2]));
+	else if( !strcmp("echo",argv[1]))
+		printf("echo: %s\n",com->echo(argv[2][0]));
+
+	else if( !strcmp("gtal",argv[1]))
+		com->goToAltAzm(atof(argv[2]),com->getAzm());
+
+	else if( !strcmp("gtaz",argv[1]))
+		com->goToAltAzm(com->getAlt(),atof(argv[2]));
+
+	else if( !strcmp("getal",argv[1]))
+		printf("Actual Alt: %lf\n",com->getAlt());
+
+	else if( !strcmp("getaz",argv[1]))
+		printf("Actual Azm: %lf\n",com->getAzm());
 
 	else{
 		printf("Variable not supported: %s\n",argv[1]);
