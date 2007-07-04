@@ -1,34 +1,6 @@
 /**
- * \mainpage NexStar 4 SE client v0.1
- * \section intro_sec Introduction
- *
- * This project intends to comunicate with a Celestron's NexStar4 SE telescope.
- * When run on a host machine, it opens a serial port to communicate with the
- * the telescope and pass it some commands.
- *
- * This application was developed for testing the telescope RS232 serial 
- * communication protocol. This is part of the Telescope Control System (TCS)
- * being developed at Universidad T&eacute;cnica Federico Santa Mar&iacute;a,
- * in Valparaiso, Chile, which is part of the CSAT project.
- *
- * \section usage-sec Usage
- *
- * To use the client just go to the \c src directory and run \c make.
- * The \c cli_nex4 executable file should be created at the \c bin
- * directory. By default it uses the first serial port \c /dev/ttyS0. You
- * can change this behavior by passing the desired device file as a command-line argument:
- *
- * <center>\c ./cli_nex4 &lt;device_file&gt;</center>
- *
- * Be aware that you will need R/W permission on any device file to be used.
- *
- * \sa <a href="http://www.celestron.com/c2/images/files/downloads/1154108406_nexstarcommprot.pdf">
- * NexStar Communication Protocol v 1.2</a>.
- */
-
-/**
- * \file main.cpp
- * Main routine implementation. This procedure proccess command-line arguments (if any) and
+ * \file test.cpp
+ * Telescope test implementation. This procedure proccess command-line arguments (if any) and
  * calls the serial routine with the correct device filename string.
  * \author Rodrigo Tobar <rtobar@csrg.inf.utfsm.cl>
  */

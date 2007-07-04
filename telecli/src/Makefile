@@ -1,8 +1,10 @@
 CC=g++
 CFLAGS=-Wall -O2 -ggdb
 
-OBJ=main.o SerialRS232.o Communication.o
-EXE=cli_nex4
+OBJ=SerialRS232.o Communication.o
+TEST_EXE=test_nex4
+CLI_EXE=cli_nex4
+
 ROOTDIR=..
 OBJDIR=$(ROOTDIR)/object
 BINDIR=$(ROOTDIR)/bin
@@ -12,14 +14,18 @@ LIBDIR=$(ROOTDIR)/lib
 
 VPATH=$(OBJDIR):$(BINDIR):$(INCDIR)
 
-all: dirs $(EXE) doc
+all: dirs $(TEST_EXE) $(CLI_EXE) doc
 
 dirs:
 	if ! test -d $(BINDIR) ; then mkdir $(BINDIR) ; fi
 	if ! test -d $(OBJDIR) ; then mkdir $(OBJDIR) ; fi
 
-$(BINDIR)/$(EXE): $(OBJ)
-	$(CC) $(CFLAGS) -o $(BINDIR)/$(EXE) $(addprefix $(OBJDIR)/,$(OBJ))
+$(TEST_EXE): $(OBJ) test.o
+	$(CC) $(CFLAGS) -o $(BINDIR)/$(TEST_EXE) $(addprefix $(OBJDIR)/,$^)
+
+
+$(CLI_EXE): $(OBJ) client.o
+	$(CC) $(CFLAGS) -o $(BINDIR)/$(CLI_EXE) $(addprefix $(OBJDIR)/,$^)
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $(OBJDIR)/$@
@@ -29,7 +35,7 @@ doc: $(wildcard *.cpp) $(wildcard *.h)
 	@cd $(DOCDIR) && doxygen Doxyfile &> /dev/null
 
 clean:
-	cd $(BINDIR) && rm -f $(EXE)
+	cd $(BINDIR) && rm -f $(TEST_EXE) $(CLI_EXE)
 	cd $(OBJDIR) && rm -f $(OBJ)
 
 distclean: clean

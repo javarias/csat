@@ -79,7 +79,9 @@ bool Communication::Slew(int rate, int direction){
 	char command[8];
 	sprintf(command,"P%c%c%c%c%c%c%c",2,axis,movement,rate,0,0,0);
 
+	this->sp->flush_RS232();
 	this->sp->write_RS232(command);
+	this->sp->flush_RS232();
 	this->sp->write_RS232(command);
 	this->sp->flush_RS232();
 	this->sp->read_RS232();
