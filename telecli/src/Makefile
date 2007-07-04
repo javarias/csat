@@ -31,7 +31,6 @@ doc: $(wildcard *.cpp) $(wildcard *.h)
 clean:
 	cd $(BINDIR) && rm -f $(EXE)
 	cd $(OBJDIR) && rm -f $(OBJ)
-#	cd $(LIBDIR) && rm -f $(SERIAL).o
 
 distclean: clean
 	rm -rf $(DOCDIR)/html
