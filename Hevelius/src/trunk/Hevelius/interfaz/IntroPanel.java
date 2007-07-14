@@ -1,17 +1,26 @@
 package Hevelius.interfaz;
 
+import java.io.*;
+import javax.imageio.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class IntroPanel extends JPanel
 {
-	Image imag;
+	Image imag = null;
 	JProgressBar bar;
 	public IntroPanel(LayoutManager l)
 	{
 		super(l);
-		imag = Toolkit.getDefaultToolkit().getImage("Hevelius/images/hevelius.png");
+		try
+		{
+			imag = ImageIO.read(new File("Hevelius/images/hevelius.png"));
+		}
+		catch(IOException e)
+		{
+		}
 		imag = Transparency.makeColorTransparent(imag, Color.WHITE);
 		imag = imag.getScaledInstance(200,100,Image.SCALE_FAST);
 		bar = new JProgressBar();
