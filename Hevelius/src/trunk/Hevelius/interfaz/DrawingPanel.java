@@ -9,6 +9,7 @@ import javax.media.opengl.*;
 import com.sun.opengl.util.*;
 
 import Hevelius.weather.*;
+import Hevelius.virtualview.*;
 
 public class DrawingPanel extends JPanel
 {
@@ -21,6 +22,7 @@ public class DrawingPanel extends JPanel
 	private Image tArrow = null;
 	private Image bArrow = null;
 	private Image hevelius = null;
+	private Image screen = null;
 	private JPanel tp;
 	private GLCanvas canvas;
 	private Listener list;
@@ -73,6 +75,7 @@ public class DrawingPanel extends JPanel
 	private SystemPanel spane = null;
 	private WeatherPanel wpane = null;
 	private TelStatusPanel tspane = null;
+	private ScreenPanel scpane = null;
 
 	public DrawingPanel(LayoutManager l)
 	{
@@ -326,14 +329,17 @@ public class DrawingPanel extends JPanel
 		//WeatherPanel
 		wpane = new WeatherPanel(null);
 		add(wpane);
-
 		new Thread(wpane).start();
 
 		//Telescope Status Panel
 		tspane = new TelStatusPanel(null);
 		add(tspane);
 
-		//wpane.autoReloadWeather().start();
+		//ScreenPanel
+		scpane = new ScreenPanel(null);
+		scpane.setBackground(Color.BLACK);
+		add(scpane);
+		new Thread(scpane).start();
 	}
 	public void paintComponent(Graphics g)
 	{
@@ -372,13 +378,13 @@ public class DrawingPanel extends JPanel
 		g.drawImage(bArrow, dx/2-20, (dy+rect_y*3/4)/2+0,this);
 		if(tam.width != dx || tam.height != dy)
 		{
-			img = setImage("Hevelius/images/image.jpg",new Dimension((rect_x-10)*3/4,(rect_y-10)*3/4));
+			//img = setImage("Hevelius/images/image.jpg",new Dimension((rect_x-10)*3/4,(rect_y-10)*3/4));
 			stop = setImage("Hevelius/images/stop.png",new Dimension(80,80));
 			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(200,100));
 			tam = new Dimension(dx,dy);
 		}
 		g.drawImage(stop, rect_x-40,dy - 140, this);
-		g.drawImage(img,(dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,this);
+		//g.drawImage(img,(dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,this);
 		g.drawImage(hevelius,dx/2-100,40,this);
 
 		tp.setLocation(oGLx+25,15);
@@ -395,6 +401,9 @@ public class DrawingPanel extends JPanel
 
 		tspane.setSize(300,200);
 		tspane.setLocation(20,230);
+
+		scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
+		scpane.setLocation((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5);
 
 		stimeL.setLocation(60,400);
 		stime.setLocation(80,420);
