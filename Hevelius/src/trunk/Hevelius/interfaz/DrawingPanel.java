@@ -8,6 +8,9 @@ import java.util.*;
 import javax.media.opengl.*;
 import com.sun.opengl.util.*;
 
+import java.io.*;
+import javax.imageio.*;
+
 import Hevelius.weather.*;
 import Hevelius.virtualview.*;
 
@@ -46,12 +49,7 @@ public class DrawingPanel extends JPanel
 	private JLabel ccoorAlL;
 	private JLabel ccoorAz;
 	private JLabel ccoorAzL;
-/*
-	private JLabel ccoor1L;
-	private JLabel ccoor1C;
-	private JLabel ccoor2L;
-	private JLabel ccoor2C;
-*/
+	
 	private Image stop=null;
 	private JButton zenith;
 	private JButton park;
@@ -139,26 +137,24 @@ public class DrawingPanel extends JPanel
 	}
 	public Image setImage(String img, Dimension dim)
 	{
-		Image imag;
-		imag = Toolkit.getDefaultToolkit().getImage(img);
+		Image imag = null;
+		try
+		{
+			imag = ImageIO.read(new File(img));
+		}
+		catch(IOException e)
+		{
+		}
 		imag = Transparency.makeColorTransparent(imag, Color.BLACK);
 		imag = imag.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
 		return imag;
 	}
 	public void setArrows(Dimension dim)
 	{
-		rArrow = Toolkit.getDefaultToolkit().getImage("Hevelius/images/rArrow.jpg");
-		rArrow = Transparency.makeColorTransparent(rArrow, Color.BLACK);
-		rArrow = rArrow.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
-		lArrow = Toolkit.getDefaultToolkit().getImage("Hevelius/images/lArrow.jpg");
-		lArrow = Transparency.makeColorTransparent(lArrow, Color.BLACK);
-		lArrow = lArrow.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
-		tArrow = Toolkit.getDefaultToolkit().getImage("Hevelius/images/tArrow.jpg");
-		tArrow = Transparency.makeColorTransparent(tArrow, Color.BLACK);
-		tArrow = tArrow.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
-		bArrow = Toolkit.getDefaultToolkit().getImage("Hevelius/images/bArrow.jpg");
-		bArrow = Transparency.makeColorTransparent(bArrow, Color.BLACK);
-		bArrow = bArrow.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
+		rArrow = setImage("Hevelius/images/rArrow.jpg",dim);
+		lArrow = setImage("Hevelius/images/lArrow.jpg",dim);
+		tArrow = setImage("Hevelius/images/tArrow.jpg",dim);
+		bArrow = setImage("Hevelius/images/bArrow.jpg",dim);
 	}
 	private void init()
 	{

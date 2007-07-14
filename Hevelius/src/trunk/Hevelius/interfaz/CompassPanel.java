@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import java.io.*;
+import javax.imageio.*;
+
 public class CompassPanel extends JPanel
 {
 	private JLabel northL;
@@ -48,8 +51,13 @@ public class CompassPanel extends JPanel
 		westL.setSize(20,20);
 		westL.setForeground(Color.WHITE);
 		add(westL);
-		
-		compassRose = Toolkit.getDefaultToolkit().getImage("Hevelius/images/compass_rose2.jpg");
+		try
+		{
+			compassRose = ImageIO.read(new File("Hevelius/images/compass_rose2.jpg"));
+		}
+		catch(IOException e)
+		{
+		}
 		compassRose = Transparency.makeColorTransparent(compassRose, Color.WHITE);
 		compassRose = compassRose.getScaledInstance(140,140,Image.SCALE_FAST);
 

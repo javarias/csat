@@ -1,17 +1,18 @@
 package Hevelius.interfaz;
 
+import java.io.*;
+import javax.imageio.*;
+import java.util.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 
 import Hevelius.weather.*;
 
 public class interfaz {
 	public static JFrame frame;
 	public static DrawingPanel pane;
-
-
 
 	private static JDialog config;
 	private static JDialog about;
@@ -116,17 +117,12 @@ public class interfaz {
 		menu.add(editMenu);
 		menu.add(aboutMenu);
 
-
-
-
-
 		return menu;
 	}
 
 
 
 	public static void configWindow() {
-
 
 		config = new JDialog(frame,"Hevelius - Configuration");
 		config.setLayout(null);
@@ -212,8 +208,6 @@ public class interfaz {
 		location.setSize(200,20);
 		location.setSelectedIndex(0);
 		panel1.add(location);
-
-
 
 
 
@@ -507,7 +501,14 @@ public class interfaz {
 		intro.setVisible(true);
 
 		frame = new JFrame("Hevelius v. ALFA rc1");
-		Image icono = Toolkit.getDefaultToolkit().getImage("Hevelius/images/hevelius.png");
+		Image icono = null;
+		try
+		{
+			icono = ImageIO.read(new File("Hevelius/images/hevelius.png"));
+		}
+		catch(IOException e)
+		{
+		}
 		frame.setIconImage(icono);
 		pane = new DrawingPanel(null);
 		pane.updateWindow();
