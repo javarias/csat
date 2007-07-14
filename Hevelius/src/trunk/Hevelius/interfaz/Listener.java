@@ -14,7 +14,7 @@ public class Listener implements GLEventListener, MouseListener {
 	public float angle;
 	private int gearDisplayList;
 	public void init(GLAutoDrawable drawable) {
-		gearDisplayList = DrawingPanel.gearDisplayList;
+		gearDisplayList = VirtualTelescopePanel.gearDisplayList;
 		//System.out.println("Listener.init()");
 		drawable.setGL(new DebugGL(drawable.getGL()));
 
@@ -27,7 +27,7 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glEnable(GL.GL_LIGHT0);
 		gl.glEnable(GL.GL_DEPTH_TEST);
 		
-		DrawingPanel.initializeDisplayList(gl);
+		VirtualTelescopePanel.initializeDisplayList(gl);
 
 		gl.glEnable(GL.GL_NORMALIZE);
 
@@ -44,7 +44,7 @@ public class Listener implements GLEventListener, MouseListener {
 
 		gl.glPushMatrix();
 		gl.glRotatef(angle, 0.0f, 0.0f, 1.0f);
-		gearDisplayList = DrawingPanel.gearDisplayList;
+		gearDisplayList = VirtualTelescopePanel.gearDisplayList;
 		gl.glCallList(gearDisplayList);
 		gl.glPopMatrix();
 	}
@@ -66,7 +66,7 @@ public class Listener implements GLEventListener, MouseListener {
 	public void destroy(GLAutoDrawable drawable) {
 		System.out.println("Listener.destroy()");
 		GL gl = drawable.getGL();
-		gearDisplayList = DrawingPanel.gearDisplayList;
+		gearDisplayList = VirtualTelescopePanel.gearDisplayList;
 		gl.glDeleteLists(gearDisplayList, 1);
 		gearDisplayList = 0;
 	}
