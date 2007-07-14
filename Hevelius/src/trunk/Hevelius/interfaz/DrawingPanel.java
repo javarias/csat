@@ -31,31 +31,12 @@ public class DrawingPanel extends JPanel
 	private Listener list;
 
 	private static Configuration test = new Configuration();
-	private JLabel coor;
-	private JLabel coor1L;
-	private JTextField coor1;
-	private JLabel coor2L;
-	private JTextField coor2;
-	private JButton go;
-	private JButton change;
-	private JLabel ccoor;
-	private JLabel radec;
-	private JLabel horizontal;
-	private JLabel ccoorR;
-	private JLabel ccoorRL;
-	private JLabel ccoorD;
-	private JLabel ccoorDL;
-	private JLabel ccoorAl;
-	private JLabel ccoorAlL;
-	private JLabel ccoorAz;
-	private JLabel ccoorAzL;
 	
 	private Image stop=null;
 	private JButton zenith;
 	private JButton park;
 	private JLabel stimeL;
 	private JLabel stime;
-	private JButton catalogue;
 
 	private int cx;
 	private int cy;
@@ -67,13 +48,13 @@ public class DrawingPanel extends JPanel
 	private int r;
 
 	private boolean VTelescope;
-	private boolean VWeather;
 
 	private CompassPanel cpane = null;
 	private SystemPanel spane = null;
 	private WeatherPanel wpane = null;
 	private TelStatusPanel tspane = null;
 	private ScreenPanel scpane = null;
+	private CoordinatesPanel coorpane = null;
 
 	public DrawingPanel(LayoutManager l)
 	{
@@ -172,120 +153,6 @@ public class DrawingPanel extends JPanel
 		setArrows(new Dimension(40,40));
 		img = setImage("Hevelius/images/image.jpg",new Dimension(200,200));
 
-		//Coordinate Label
-		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: coor = new JLabel("RaDec Coordinates"); break;
-			case 1: coor = new JLabel("Horizontal Coordinates"); break;
-			default: coor = new JLabel("RaDec Coordinates"); break;
-		}
-		coor.setSize(150,20);
-		coor.setForeground(Color.WHITE);
-		coor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		add(coor);
-
-		//RA or ALT Label
-		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: coor1L = new JLabel("RA"); break;
-			case 1: coor1L = new JLabel("Alt"); break;
-			default: coor1L = new JLabel("RA"); break;
-		}
-		coor1L.setSize(30,20);
-		coor1L.setForeground(Color.WHITE);
-		add(coor1L);
-
-		//RA or ALT Coordinate
-		coor1 = new JTextField("0");
-		coor1.setSize(80,20);
-		add(coor1);
-
-		//DEC or AZ Label
-		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: coor2L = new JLabel("Dec"); break;
-			case 1: coor2L = new JLabel("Az"); break;
-			default: coor2L = new JLabel("Dec"); break;
-		}
-		coor2L.setSize(30,20);
-		coor2L.setForeground(Color.WHITE);
-		add(coor2L);
-
-		//DEC or AZ Coordinate
-		coor2 = new JTextField("0");
-		coor2.setSize(80,20);
-		add(coor2);
-
-		//Goto
-		go = new JButton("Go");
-		go.setSize(45,45);
-		go.setMargin(new Insets(0,0,0,0));
-		add(go);
-
-		//Current coordinates
-		ccoor = new JLabel("Current Coordinates");
-		ccoor.setSize(150,20);
-		ccoor.setForeground(Color.WHITE);
-		ccoor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		add(ccoor);
-
-		//Horizontal Label
-		horizontal = new JLabel("Horizontal");
-		horizontal.setSize(80,20);
-		horizontal.setForeground(Color.WHITE);
-		add(horizontal);
-
-		//RaDec Label
-		radec = new JLabel("RaDec");
-		radec.setSize(80,20);
-		radec.setForeground(Color.WHITE);
-		add(radec);
-
-		//Current RA Label
-		ccoorRL = new JLabel("Ra");
-		ccoorRL.setSize(30,20);
-		ccoorRL.setForeground(Color.WHITE);
-		add(ccoorRL);
-
-		//Current RA Coordinate
-		ccoorR = new JLabel("0.00000");
-		ccoorR.setSize(80,20);
-		ccoorR.setForeground(Color.WHITE);
-		add(ccoorR);
-
-		//Current DEC Label
-		ccoorDL = new JLabel("Dec");
-		ccoorDL.setSize(30,20);
-		ccoorDL.setForeground(Color.WHITE);
-		add(ccoorDL);
-
-		//Current DEC Coordinate
-		ccoorD = new JLabel("0.00000");
-		ccoorD.setSize(80,20);
-		ccoorD.setForeground(Color.WHITE);
-		add(ccoorD);
-
-		//Current Altitude Label
-		ccoorAlL = new JLabel("Alt");
-		ccoorAlL.setSize(30,20);
-		ccoorAlL.setForeground(Color.WHITE);
-		add(ccoorAlL);
-
-		//Current Altitude Coordinate
-		ccoorAl = new JLabel("0.00000");
-		ccoorAl.setSize(80,20);
-		ccoorAl.setForeground(Color.WHITE);
-		add(ccoorAl);
-
-		//Current Azimuth Label
-		ccoorAzL = new JLabel("Az");
-		ccoorAzL.setSize(30,20);
-		ccoorAzL.setForeground(Color.WHITE);
-		add(ccoorAzL);
-
-		//Current Azimuth Coordinate
-		ccoorAz = new JLabel("0.00000");
-		ccoorAz.setSize(80,20);
-		ccoorAz.setForeground(Color.WHITE);
-		add(ccoorAz);
-
 		//Go to Zenith Button
 		zenith = new JButton("Zenith");
 		zenith.setSize(100,20);
@@ -308,12 +175,6 @@ public class DrawingPanel extends JPanel
 		stime.setForeground(Color.WHITE);
 		add(stime);
 
-		//Catalogue Button
-		catalogue = new JButton("Sel. from Catalogue");
-		catalogue.setSize(130,20);
-		catalogue.setMargin(new Insets(0,0,0,0));
-		add(catalogue);
-
 		//CompassPanel
 		cpane = new CompassPanel(null);
 		add(cpane);
@@ -333,9 +194,17 @@ public class DrawingPanel extends JPanel
 
 		//ScreenPanel
 		scpane = new ScreenPanel(null);
-		scpane.setBackground(Color.BLACK);
 		add(scpane);
 		new Thread(scpane).start();
+
+		//CoordinatesPanel
+		coorpane = new CoordinatesPanel(null);
+		switch(Integer.parseInt(test.getOption("coordinate"))){
+			case 0:	coorpane.setCoorType(1==0); break;
+			case 1: coorpane.setCoorType(1==1); break;
+			default:coorpane.setCoorType(1==0); break;
+		}
+		add(coorpane);
 	}
 	public void paintComponent(Graphics g)
 	{
@@ -396,54 +265,20 @@ public class DrawingPanel extends JPanel
 		wpane.setLocation(0,0);
 
 		tspane.setSize(300,200);
-		tspane.setLocation(20,230);
+		tspane.setLocation(0,230);
 
 		scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
 		scpane.setLocation((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5);
 
+		coorpane.setSize(200,250);
+		coorpane.setLocation(oGLx+10,dx-oGLx);
+
 		stimeL.setLocation(60,400);
 		stime.setLocation(80,420);
 
-		//Interface Objects Positioning
-		coor.setLocation(dist-40,380);
-
-		coor1L.setLocation(dist-50,410);
-
-		coor1.setLocation(dist-20,410);
-
-		coor2L.setLocation(dist-50,435);
-
-		coor2.setLocation(dist-20,435);
-
-		go.setLocation(dist + 65,410);
-
-		ccoor.setLocation(dist-40,240);
-
-		radec.setLocation(dist-50,280);
-		
-		horizontal.setLocation(dist+60, 280);
-
-		ccoorRL.setLocation(dist-70,310);
-
-		ccoorR.setLocation(dist-30,310);
-
-		ccoorDL.setLocation(dist-70, 330);
-
-		ccoorD.setLocation(dist-30,330);
-
-		ccoorAlL.setLocation(dist+50,310);
-
-		ccoorAl.setLocation(dist+80,310);
-
-		ccoorAzL.setLocation(dist+50,330);
-
-		ccoorAz.setLocation(dist+80,330);
-		
 		zenith.setLocation(rect_x*3/4-50,3*dy/4-20);
 
 		park.setLocation(rect_x*5/4-50,3*dy/4-20);
-
-		catalogue.setLocation(dist-20,460);
 	}
 	public Dimension getDim()
 	{
@@ -458,6 +293,12 @@ public class DrawingPanel extends JPanel
 			spane.setBackground(c);
 		if(wpane!=null)
 			wpane.setBackground(c);
+		if(tspane!=null)
+			tspane.setBackground(c);
+		if(scpane!=null)
+			scpane.setBackground(c);
+		if(coorpane!=null)
+			coorpane.setBackground(c);
 	}
 	public void updateWindow(){
 		//Cambiar Background
@@ -479,18 +320,9 @@ public class DrawingPanel extends JPanel
 
 		//Modificar Tipos de Coordenadas
 		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: coor.setText("RaDec Coordinates"); 
-				coor1L.setText("Ra");
-				coor2L.setText("Dec");
-				break;
-			case 1: coor.setText("Horizontal Coordinates");  
-				coor1L.setText("Alt");
-				coor2L.setText("Az");
-				break;
-			default: coor.setText("RaDec Coordinates");  
-				coor1L.setText("Ra");
-				coor2L.setText("Dec");
-				break;
+			case 0: coorpane.setCoorType(1==0); break;
+			case 1: coorpane.setCoorType(1==1); break;
+			default:coorpane.setCoorType(1==0); break;
 		}
 
 		//Weather
@@ -498,41 +330,37 @@ public class DrawingPanel extends JPanel
 		wpane.reloadWeather();
 
 		switch(Integer.parseInt(test.getOption("weather"))){
-			case 0: wpane.setVisible(false);
-				break;
-			case 1: wpane.setVisible(true);
-				break;
-			default:wpane.setVisible(true);
-				break;
+			case 0: wpane.setVisible(false); break;
+			case 1: wpane.setVisible(true); break;
+			default:wpane.setVisible(true); break;
 		}
 
 		//Compass
 		switch(Integer.parseInt(test.getOption("compass"))){
-			case 0: cpane.setVisible(false);
-				break;
-			case 1: cpane.setVisible(true);
-				break;
-			default:cpane.setVisible(true);
-				break;
+			case 0: cpane.setVisible(false); break;
+			case 1: cpane.setVisible(true); break;
+			default:cpane.setVisible(true); break;
 		}
 
 		//OpenGL
 		switch(Integer.parseInt(test.getOption("opengl"))){
 			case 0: VTelescope = false;
-				tp.setVisible(false);
-				break;
+				tp.setVisible(false); break;
 			case 1: VTelescope = true;
-				tp.setVisible(true);
-				break;
+				tp.setVisible(true); break;
 			default:VTelescope = true; 
-				tp.setVisible(true);
-				break;
+				tp.setVisible(true); break;
 		}		
 		paintImmediately(0,0,getSize().width,getSize().height);
 	}
 	public CompassPanel getPanel()
 	{
 		return cpane;
+	}
+
+	public static Configuration getConfig()
+	{
+		return test;
 	}
 
 	public static synchronized void initializeDisplayList(GL gl) {
