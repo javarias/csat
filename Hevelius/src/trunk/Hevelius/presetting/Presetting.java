@@ -1,4 +1,4 @@
-//package Hevelius.weather;
+package Hevelius.weather;
 import java.io.*;
 import java.util.regex.*;
 import java.net.*;
@@ -6,11 +6,15 @@ import java.util.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 public class Presetting {
-
-	public static void main(String[] args) {
-		Calendar calendario = Calendar.getInstance();
-		int hora, min, mes, sec, an_o, dia;
-		double jt, jd, MST, LMST, LON, LAT, HA, ALT, AZ, RA=1 , DEC=1;
+	BufferedReader pos1, pos2;
+	String tmp1, tmp2;
+	Calendar calendario = Calendar.getInstance();
+	int hora, min, mes, sec, an_o, dia;
+	double jt, jd, MST, LMST, LON, LAT, HA, ALT, AZ;
+	private double RA=0, DEC=0;
+	public static Vector<WeatherCityCondition> vector_condition;
+	public double convertir(double RA, double DEC)
+	{
 		//dates of the time
 		hora =calendario.get(Calendar.HOUR_OF_DAY);
 		min = calendario.get(Calendar.MINUTE);
@@ -18,10 +22,14 @@ public class Presetting {
 		dia = calendario.get(Calendar.YEAR);
 		an_o = calendario.get(Calendar.DAY_OF_MONTH);
 		mes = calendario.get(Calendar.MONTH)+ 1;
-		System.out.println(hora + ":" + min + ":" + sec + "_"+ dia + "_" + an_o + "_" + mes) ;
-		//posicion fisicas del telescopio
-		LON =1; //llamar al cuadrado q tiene ese dato
-		LAT =1; //llama1;r posicion que tuene ese dato 
+		//System.out.println(hora + ":" + min + ":" + sec + "_"+ dia + "_" + an_o + "_" + mes) ;
+		
+		//posicion fisicas del telescopio de acuerdo a la ciudad elegida
+		WeatherCondition condition = new WeatherCondition(tmp);
+		vector_condition = new Vector<WeatherCityCondition>();
+		vector_condition = condition.ListCityCondition();
+		LON =vector_condition.get(0).getLon(); //llamar al cuadrado q tiene ese dato
+		LAT =vector_condition.get(0).getLat(); //llama1;r posicion que tuene ese dato 
 		if((mes == 1) || (mes == 2))
 		{
 			mes += 12;
@@ -93,10 +101,8 @@ public class Presetting {
 			}
 			return 1;
 		}
-
 		return 0;
 	}
-
 
 }
 
