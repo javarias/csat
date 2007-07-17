@@ -1,5 +1,6 @@
 package Hevelius.interfaz;
 
+import Hevelius.telescope_functions.presetting.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -84,6 +85,15 @@ public class CoordinatesPanel extends JPanel
 		go.setSize(45,45);
 		go.setMargin(new Insets(0,0,0,0));
 		add(go);
+
+		go.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Double Alt, Az;
+				Alt = Double.parseDouble(coor1.getText());
+				Az = Double.parseDouble(coor2.getText());
+				Presetting.convertir(Alt,Az);
+			}
+		});
 
 		//Current coordinates
 		ccoor = new JLabel("Current Coordinates");
