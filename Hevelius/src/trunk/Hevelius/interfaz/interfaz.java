@@ -11,8 +11,8 @@ import java.awt.event.*;
 import Hevelius.weather.*;
 
 public class interfaz {
-	public static JFrame frame;
-	public static DrawingPanel pane;
+	private static JFrame frame;
+	private static DrawingPanel pane;
 
 	private static JDialog config;
 	private static JDialog about;
@@ -45,6 +45,16 @@ public class interfaz {
 	static String[ ] editItems = new String[ ] { "Configuration" };
 	static char[ ] fileShortcuts = { 'Q' };
 	static char[ ] editShortcuts = { 'P' };	
+
+	public getMainFrame()
+	{
+		return frame;
+	}
+
+	public getDrawingPanel()
+	{
+		return pane;
+	}
 
 	public static JMenuBar createMenuBar() {
 		JMenuBar menu = new JMenuBar();

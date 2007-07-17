@@ -301,13 +301,45 @@ public class DrawingPanel extends JPanel
 		}		
 		paintImmediately(0,0,getSize().width,getSize().height);
 	}
-	public CompassPanel getPanel()
-	{
-		return cpane;
-	}
 
 	public static Configuration getConfig()
 	{
 		return test;
 	}
+
+	public getCompassPanel()
+	{
+		return cpane;
+	}
+
+	public getSystemPanel()
+	{
+		return spane;
+	}
+
+	public getWeatherPanel()
+	{
+		return wpane;
+	}
+
+	public getTelStatusPanel()
+	{
+		return tspane;
+	}
+
+	public getScreenPanel()
+	{
+		return scpane;
+	}
+
+	public getCoordinatesPanel()
+	{
+		return coorpane;
+	}
+
+	public getVirtualTelescopePanel()
+	{
+		return vtpane;
+	}
+
 }

@@ -214,4 +214,45 @@ public class CoordinatesPanel extends JPanel
 			coor2L.setText("Az");
 		}
 	}
+
+	public double getRa()
+	{
+		return Double.parseDouble(ccoorR.getText());
+	}
+
+	public double getDec()
+	{
+		return Double.parseDouble(ccoorD.getText());
+	}
+
+	public double getAlt()
+	{
+		return Double.parseDouble(ccoorAl.getText());
+	}
+
+	public double getAz()
+	{
+		return Double.parseDouble(ccoorAz.getText());
+	}
+
+        public void setRa(double RA)
+        {
+		ccoorR.setText(Double.toString(RA));
+        }
+
+        public void setDec(double DEC)
+        {
+                ccoorD.setText(Double.toString(DEC));
+        }
+
+        public void setAlt(double ALT)
+        {
+                ccoorAl.setText(Double.toString(ALT));
+        }
+
+        public void setAz(double AZ)
+        {
+                ccoorAz.setText(Double.toString(AZ));
+        }
+
 }
