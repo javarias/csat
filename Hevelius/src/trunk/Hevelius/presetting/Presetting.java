@@ -1,4 +1,5 @@
 package Hevelius.weather;
+//package Hevelius.interfaz;
 import java.io.*;
 import java.util.regex.*;
 import java.net.*;
@@ -9,10 +10,25 @@ public class Presetting {
 	BufferedReader pos1, pos2;
 	String tmp1, tmp2;
 	Calendar calendario = Calendar.getInstance();
-	int hora, min, mes, sec, an_o, dia;
-	double jt, jd, MST, LMST, LON, LAT, HA, ALT, AZ;
-	private double RA=0, DEC=0;
-	public static Vector<WeatherCityCondition> vector_condition;
+	private int hora;
+	private int min;
+	private int  mes;
+	private int sec;
+	private int an_o;
+	private int dia;
+	private double jt;
+	private double jd;
+	private double  MST;
+	private double LMST;
+	private double LON;
+	private double LAT;
+	private double HA;
+	private double ALT;
+	private double AZ;
+	private double RA=0;
+	private double DEC=0;
+	private WeatherCondition clima = new WeatherCondition();
+        private Vector<WeatherCityCondition> vector = clima.ListCityCondition();
 	public double convertir(double RA, double DEC)
 	{
 		//dates of the time
@@ -25,11 +41,8 @@ public class Presetting {
 		//System.out.println(hora + ":" + min + ":" + sec + "_"+ dia + "_" + an_o + "_" + mes) ;
 		
 		//posicion fisicas del telescopio de acuerdo a la ciudad elegida
-		WeatherCondition condition = new WeatherCondition(tmp);
-		vector_condition = new Vector<WeatherCityCondition>();
-		vector_condition = condition.ListCityCondition();
-		LON =vector_condition.get(0).getLon(); //llamar al cuadrado q tiene ese dato
-		LAT =vector_condition.get(0).getLat(); //llama1;r posicion que tuene ese dato 
+		LON =vector.get(0).getLon(); //llamar al cuadrado q tiene ese dato
+		LAT =vector.get(0).getLat(); //llama1;r posicion que tuene ese dato 
 		if((mes == 1) || (mes == 2))
 		{
 			mes += 12;
