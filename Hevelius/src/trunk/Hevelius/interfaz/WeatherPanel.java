@@ -213,11 +213,11 @@ public class WeatherPanel extends JPanel implements Runnable
 	}
 	
 	public void fullWeatherWindow(){
-		JDialog window = new JDialog(interfaz.frame,"Hevelius - Weather");
+		JDialog window = new JDialog(interfaz.getMainFrame(),"Hevelius - Weather");
 		window.setLayout(null);
 		window.pack();	
 		
-		window.getContentPane().setBackground(interfaz.frame.getContentPane().getBackground());
+		window.getContentPane().setBackground(interfaz.getDrawingPanel().getBackground());
 
 		window.setSize(500,350);
 		window.setLocationRelativeTo(null);

@@ -307,37 +307,37 @@ public class DrawingPanel extends JPanel
 		return test;
 	}
 
-	public getCompassPanel()
+	public CompassPanel getCompassPanel()
 	{
 		return cpane;
 	}
 
-	public getSystemPanel()
+	public SystemPanel getSystemPanel()
 	{
 		return spane;
 	}
 
-	public getWeatherPanel()
+	public WeatherPanel getWeatherPanel()
 	{
 		return wpane;
 	}
 
-	public getTelStatusPanel()
+	public TelStatusPanel getTelStatusPanel()
 	{
 		return tspane;
 	}
 
-	public getScreenPanel()
+	public ScreenPanel getScreenPanel()
 	{
 		return scpane;
 	}
 
-	public getCoordinatesPanel()
+	public CoordinatesPanel getCoordinatesPanel()
 	{
 		return coorpane;
 	}
 
-	public getVirtualTelescopePanel()
+	public VirtualTelescopePanel getVirtualTelescopePanel()
 	{
 		return vtpane;
 	}

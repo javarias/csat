@@ -28,7 +28,7 @@ public class VirtualTelescopePanel extends JPanel
 		canvas.setSize(100,100);
 		add(canvas);
 
-		JDialog dialog = new JDialog(interfaz.frame,"Telescopio");
+		JDialog dialog = new JDialog(interfaz.getMainFrame(),"Telescopio");
 		dialog.getContentPane().setLayout(null);
 		GLCanvas canvas2 = new GLCanvas(null,null,canvas.getContext(),null);
 		canvas2.setSize(600,600);
@@ -70,7 +70,7 @@ public class VirtualTelescopePanel extends JPanel
 			}
 		};
 		dialog.addWindowListener(windowListener2);
-		interfaz.frame.addWindowListener(windowListener);
+		interfaz.getMainFrame().addWindowListener(windowListener);
 		animator.start();
 	}
 

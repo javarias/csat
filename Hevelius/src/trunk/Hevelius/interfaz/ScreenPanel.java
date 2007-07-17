@@ -22,8 +22,6 @@ public class ScreenPanel extends JPanel implements Runnable
 		screen = null;
 		RAf = 0.0f;
 		DECf = 0.0f;
-		x = 10;
-		y = 6.5f;
 	}
 	public void paintComponent(Graphics g)
 	{

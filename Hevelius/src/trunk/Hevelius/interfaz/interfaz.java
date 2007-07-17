@@ -46,12 +46,12 @@ public class interfaz {
 	static char[ ] fileShortcuts = { 'Q' };
 	static char[ ] editShortcuts = { 'P' };	
 
-	public getMainFrame()
+	public static JFrame getMainFrame()
 	{
 		return frame;
 	}
 
-	public getDrawingPanel()
+	public static DrawingPanel getDrawingPanel()
 	{
 		return pane;
 	}

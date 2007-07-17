@@ -37,7 +37,7 @@ public class Listener implements GLEventListener, MouseListener {
 
 	public void display(GLAutoDrawable drawable) {
 		angle += 0.01f;
-		interfaz.pane.getPanel().setCompassPoints((double)angle);
+		interfaz.getDrawingPanel().getCompassPanel().setCompassPoints((double)angle);
 		GL gl = drawable.getGL();
 
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
