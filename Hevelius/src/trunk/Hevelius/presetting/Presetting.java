@@ -6,6 +6,7 @@ import java.net.*;
 import java.util.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+//package Hevelius.presetting;
 public class Presetting {
 	BufferedReader pos1, pos2;
 	String tmp1, tmp2;
@@ -27,7 +28,8 @@ public class Presetting {
 	private double AZ;
 	private double RA=0;
 	private double DEC=0;
-	private WeatherCondition clima = new WeatherCondition();
+	private static Configuration test = new Configuration();
+	private WeatherCondition clima = new WeatherCondition(test.getOption("location"));
         private Vector<WeatherCityCondition> vector = clima.ListCityCondition();
 	public double convertir(double RA, double DEC)
 	{
@@ -41,8 +43,8 @@ public class Presetting {
 		//System.out.println(hora + ":" + min + ":" + sec + "_"+ dia + "_" + an_o + "_" + mes) ;
 		
 		//posicion fisicas del telescopio de acuerdo a la ciudad elegida
-		LON =vector.get(0).getLon(); //llamar al cuadrado q tiene ese dato
-		LAT =vector.get(0).getLat(); //llama1;r posicion que tuene ese dato 
+		LON =Double.parseDouble(vector.get(0).getLon()); //llamar al cuadrado q tiene ese dato
+		LAT =Double.parseDouble(vector.get(0).getLat()); //llama1;r posicion que tuene ese dato 
 		if((mes == 1) || (mes == 2))
 		{
 			mes += 12;
