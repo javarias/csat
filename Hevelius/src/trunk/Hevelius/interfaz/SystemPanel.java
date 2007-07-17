@@ -15,7 +15,7 @@ public class SystemPanel extends JPanel
 		super(l);
 		init();
 	}
-	public void init()
+	private void init()
 	{
 		//System Label
 		system = new JLabel("System");

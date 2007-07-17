@@ -73,7 +73,7 @@ public class DrawingPanel extends JPanel
 		imag = imag.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
 		return imag;
 	}
-	public void setArrows(Dimension dim)
+	private void setArrows(Dimension dim)
 	{
 		rArrow = setImage("Hevelius/images/rArrow.jpg",dim);
 		lArrow = setImage("Hevelius/images/lArrow.jpg",dim);

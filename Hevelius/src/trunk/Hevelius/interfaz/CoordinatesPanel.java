@@ -33,7 +33,7 @@ public class CoordinatesPanel extends JPanel
 		super(l);
 		init();
 	}
-	public void init()
+	private void init()
 	{
 		//Coordinate Label
 		/*switch(Integer.parseInt(test.getOption("coordinate"))){
