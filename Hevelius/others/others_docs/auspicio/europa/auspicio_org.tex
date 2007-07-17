@@ -75,7 +75,7 @@ los elementos t\'ecnicos con que se construir\'a la soluci\'on y la plantilla de
 clasificar\'an y se propondr\'an estrategias de mitigaci\'on y contingencia para los 
 peligros ocurrentes del proyecto.
         \item \textbf{Implementaci\'on:} En la cual se explica la incorporaci\'on del 
-nuevo sistema en las instalaciones del cliente.
+nuevo sistema.
 \end{itemize}
 
 En el contexto m\'as general, el desaf\'io planteado por el grupo ACS-UTFSM, es 
@@ -88,7 +88,7 @@ alg\'un telescopio de manera remota, lograr un control en tiempo real y generar
 registros para posteriores an\'alisis de los datos recibidos por el telescopio.\\
 
 La mejor soluci\'on ideada, es el dise\~no y construcci\'on de un producto de software dise\~nado 
-para solventar los problemas actuales y cumplir con los requerimientos del cliente.\\
+para solventar los problemas actuales y cumplir con las características requeridas.\\
 
 Los riesgos, que se detallan en el cap\'itulo 4, corresponden a los peligros identificados 
 que pueden aparecer durante el desarrollo del proyecto, entre ellos se destaca: la poca 
@@ -335,33 +335,6 @@ permite repetir las observaciones hechas otros d\'ias.
 
 	\end{itemize}
 
-\subsubsection{Restricciones}
-
-\begin{itemize}
-
-\item \textbf{Econ\'omicas:} El software no presenta restricciones econ\'omicas, 
-puesto que tanto el sistema operativo, como las herramientas de desarrollo que se 
-van a utilizar, son libres. Por otro lado, los componentes de hardware como son 
-el telescopio para pruebas y la c\'amara CCD si tienen un costo, pero en este caso 
-ser\'an facilitados por el cliente. Es por esto, que no vemos restricciones 
-econ\'omicas peligrosas.
-
-\item \textbf{Sociales y Culturales:} Los usuarios actuales de los programas que 
-controlan telescopios han tenido que usar diferentes aplicaciones para distintos 
-telescopios a lo largo del tiempo que han dedicado a esto, prefiriendo quiz\'as, 
-el que usan actualmente, ya sea por costumbre o por gusto personal. Esto puede 
-dificultar que se acostumbren a usar el sistema propuesto, pero se espera que el 
-sistema final sea intuitivo y amistoso, de manera que esto no debiera suceder.
-
-\item \textbf{Tecnol\'ogicas:} En el aspecto tecnol\'ogico es importante destacar 
-que las pruebas iniciales no necesariamente se har\'an con un telescopio de 
-observatorio, en estos casos se utilizar\'a para las pruebas telescopios para 
-aficionados, puesto que los costos de observaci\'on son elevados.
-
-%%%%\item \textbf{Institucionales:}
-
-
-\end{itemize}
 
 \subsection{An\'alisis de las alternativas de soluci\'on}
 \subsubsection{Alternativa 1: Desarrollo de Software basado en ACS} %%%% TOMAS
@@ -416,7 +389,7 @@ telescopio. Se podr\'ia poner el mayor de los casos, pero no es lo m\'as adecuad
 \subsection{Soluci\'on recomendada} %%%% TOMAS
 La mejor soluci\'on que encontramos es la alternativa 1, en la cual se piensa construir
 un producto de software gen\'erico basado en ACS, el cual se acopla bastante bien 
-con los requerimientos del cliente.
+con las características requeridas.
 
 Este producto deber\'a ser modular basado en componentes con el estilo que ACS nos
 impone, por lo que se tendr\'an algunos componentes sobre esta plataforma, mientras que
@@ -456,8 +429,6 @@ Adem\'as, el ambiente del desarrollo tiene las siguientes caracter\'isticas:
 \begin{itemize}
 \item \textbf{Tama\~no del Equipo:} cuatro personas durante la planificaci\'on y el 
   desarrollo del proyecto.
-\item \textbf{Recursos Disponibles:} nuestro cliente nos provee de un lugar f\'isico, 
-  computadores y un telescopio para el desarrollo de nuestro proyecto.
 \item \textbf{Tratamiento de los miembros del equipo entre s\'i:} informal, ya
   que existen lazos de amistad anteriores a la formaci\'on del grupo de trabajo.
 \item \textbf{Proyecci\'on en el tiempo:} se cuenta con un plazo determinado,
@@ -481,10 +452,6 @@ siguientes actividades durante el desarrollo para el modelo iterativo:
   ser transformados en pruebas automatizables.
 \item \textbf{Construir:} el c\'odigo producido debe estar siempre en un
   estado que permite su compilaci\'on.
-\item \textbf{Escuchar:} La comunicaci\'on a lo largo del desarrollo del proyecto
-con el cliente, debe ser fluida, esto para atender a las 
-  verdaderas necesidades y para solicitar sus comentarios sobre el
-  estado del desarrollo, y posibles cambios en los requerimientos.
 \item \textbf{Dise\~nar:} para facilitar el proceso de codificaci\'on y permitir el
   trabajo paralelo de grupos independientes, hay que contar con un
   dise\~no del sistema.
@@ -509,16 +476,16 @@ Adem\'as es necesario documentar el dise\~no actual del programa.
 \subsubsection{T\'ecnicas a utilizar en el desarrollo del proyecto}
 
 Durante el desarrollo del proyecto se utilizar\'a el m\'etodo de desarrollo en fases iterativo, 
-ya que como hay ejecutables desde el mismo comienzo del proyecto, nuestro cliente puede examinarlos 
-y proponer los cambios necesario (si los hubiera). Tambi\'en la empresa tiene una r\'apida 
+ya que como hay ejecutables desde el mismo comienzo del proyecto, pueden ser examinados 
+para proponer cambios si fuera necesario. Tambi\'en la empresa tiene una r\'apida 
 retroalimentaci\'on de lo que funciona y lo que no, ya que las pruebas se realizan desde el 
 comienzo mismo del proyecto y no se debe esperar al final para hacer las modificaciones necesarias.\\
 
-Se opt\'o por este m\'etodo debido a la seguridad que da su planificaci\'on al cliente, ya que \'el 
+Se opt\'o por este m\'etodo debido a la seguridad que da su planificaci\'on, ya que se 
 puede \textit{ver} en que se est\'a trabajando y cuales ser\'an los pr\'oximos pasos a seguir.\\
 
-Dentro de los lenguajes de programaci\'on, nuestro cliente nos requiri\'o el uso de ciertos lenguajes 
-de programaci\'on, debido a est\'andares interncionales. Estos lenguajes son: C, C++, Java y Phyton. 
+Se requiri\'o el uso de ciertos lenguajes 
+de programaci\'on, debido a est\'andares internacionales. Estos lenguajes son: C, C++, Java y Phyton. 
 Todos los integrantes del grupo, cuentan con conocimientos en C, Java y otros en C++.\\
 
 Es posible que se utilice alguna herramienta de dise\~no vectorial para la creaci\'on de las gr\'aficas 
@@ -528,7 +495,7 @@ a utilizar en el software, pero a\'un no se ha descartado ni confirmado ninguna 
 \subsubsection{Herramientas o plataformas espec\'ificas a utilizar}
 
 La plataforma operacional de Hevelius est\'a constituida por el Sistema Operativo Linux Fedora Core, 
-debido a que es esta la distribuci\'on utilizada por nuestro cliente para desarrollar software. Esta 
+debido a que es esta la distribuci\'on utilizada para desarrollar software. Esta 
 distribuci\'on a su vez debe contar con el framework ACS en su versi\'on 6.0 o superior.\\
 
 
@@ -542,7 +509,7 @@ y Software ACS 6.0, no se restringe s\'olo a la utilizaci\'on de esta versi\'on,
 utilizar otras, pero con las distintas versiones puede ser que existan variaciones 
 que impliquen modificaciones al c\'odigo fuente, pero se deja 
 establecido que en la versi\'on 6.0 funcionar\'a correctamente, de acuerdo 
-a los requerimientos del cliente.
+a los requerimientos.
 
 El equipo en el cual se implemente Hevelius tambi\'en debe poseer acceso 
 a Internet y sin olvidar el acceso al telescopio que se desea operar. Sobre 
@@ -554,10 +521,8 @@ a \'este una c\'amara CCD para la obtenci\'on de im\'agenes.
 
 Como Hevelius es s\'olo el primer paso para el desarrollo completo de un 
 software de control gen\'erico para telescopios, es muy importante la 
-comprensi\'on del c\'odigo entregado, debidamente comentado, como requerimiento 
-del cliente en ingl\'es y, de la misma forma, informar los avances en twiki 
-de ACS-UTFSM Group, para que posteriormente pueda ser modificado de acuerdo 
-a requerimientos futuros.
+comprensi\'on del c\'odigo entregado, debidamente comentado y, como requerimiento 
+adicional, en ingl\'es.
 
 \subsection{Plan de implementaci\'on (entrega)}
 Una vez finalizado el desarrollo del software, el proceso de entrega debe 
@@ -569,7 +534,7 @@ Como ya se ha mencionado anteriormente Hevelius es un paso a la construcci\'on
 de un software gen\'erico, es por ello la importancia del c\'odigo, puesto que 
 es la base para que posteriormente se siga desarrollando en este tema, por 
 estas razones se entrega el c\'odigo debidamente ordenado, organizado y 
-comentado en ingl\'es, por ser nuestro cliente de car\'acter internacional.
+comentado en ingl\'es.
 
 En lo que se refiere al programa en s\'i, no se puede hacer una capacitaci\'on 
 a quienes usar\'an este software, ya que no son personas espec\'ificas. Pero al 

@@ -49,6 +49,7 @@ void convertir(double *RA, double *DEC)
     jd += (int)(30.6001*(mes+1)); //Se le suman los dias de los meses que faltan.
     jd += dia - 730550.5; //Se suman los dias y se resta una constante.
     jd += (hora + min/60.0 + sec/3600.0)/24.0; //Se suman fracciones de dia.
+
     //Con esto se obtienen los Julian Days contando desde Epoch J2000.0
     jt = jd/36525; //Se obtienen Julian Centuries.
     
@@ -66,7 +67,7 @@ void convertir(double *RA, double *DEC)
     HA = LMST - (*RA); //Se obtiene Hour Angle.
     if(HA < 0)
         HA += 360;//Tiene que ser positivo.
-    
+
     //Se obtiene la altitud en grados.
     ALT = sin((*DEC)*PI/180)*sin(LAT*PI/180);
     ALT += cos((*DEC)*PI/180)*cos(LAT*PI/180)*cos(HA*PI/180);
@@ -81,6 +82,7 @@ void convertir(double *RA, double *DEC)
         AZ = 360 - AZ;
     *RA = ALT;
     *DEC = AZ;
+
 }
 
 int verificar(double RA, double DEC)
