@@ -28,9 +28,10 @@ public class Tracking implements Runnable
 			{
 				if(state)
 				{
-					//Converter.convert(CoordinatePanel.getRa(),CoordinatePanel.getDec());
-					//CoordinatePanel.setAlt(Converter.getAlt());
-					//CoordinatePanel.setAz(Converter.getAz());
+					Converter.convert(interfaz.getDrawingPanel().getCoordinatesPanel.getRa(),
+							interfaz.getDrawingPanel().getCoordinatesPanel.getDec());
+					interfaz.getDrawingPanel().getCoordinatesPanel.setAlt(Converter.getAlt());
+					interfaz.getDrawingPanel().getCoordinatesPanel.setAz(Converter.getAz());
 					Thread.sleep(20000);
 				}
 				catch(InterruptedException e)
