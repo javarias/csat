@@ -1,4 +1,4 @@
-package Hevelius.presetting;
+package Hevelius.utilities.converter;
 
 import Hevelius.interfaz.*;
 import Hevelius.weather.*;
@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Presetting {
+public class Converter {
 	
 	private static double RA;
 	private static double DEC;
@@ -107,8 +107,8 @@ public class Presetting {
 			AZ = 360 - AZ;
 		RA = ALT;
 		DEC = AZ;
-		Presetting.ALT = ALT;
-		Presetting.AZ = AZ;
+		Converter.ALT = ALT;
+		Converter.AZ = AZ;
 
 	}
 

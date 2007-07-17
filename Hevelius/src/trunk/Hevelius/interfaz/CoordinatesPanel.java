@@ -1,6 +1,6 @@
 package Hevelius.interfaz;
 
-import Hevelius.telescope_functions.presetting.*;
+import Hevelius.utilities.converter.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -91,7 +91,7 @@ public class CoordinatesPanel extends JPanel
 				Double Alt, Az;
 				Alt = Double.parseDouble(coor1.getText());
 				Az = Double.parseDouble(coor2.getText());
-				Presetting.convertir(Alt,Az);
+				Converter.convertir(Alt,Az);
 			}
 		});
 
