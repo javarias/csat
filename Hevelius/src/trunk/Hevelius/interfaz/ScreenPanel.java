@@ -18,6 +18,7 @@ public class ScreenPanel extends JPanel implements Runnable
 	}
 	public void init()
 	{
+		buf = null;
 		screen = null;
 	}
 	public void paintComponent(Graphics g)
@@ -52,7 +53,10 @@ public class ScreenPanel extends JPanel implements Runnable
 		{
 			buf = getScreenFromWeb();
 		}
-		paintComponent(getGraphics());
+		if(getGraphics()!=null)
+			paintComponent(getGraphics());
+		else
+			setScreen();
 	}
 	private Image getScreenFromWeb()
 	{

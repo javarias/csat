@@ -229,29 +229,21 @@ public class CoordinatesPanel extends JPanel
 
 	public double getRa()
 	{
-		if(ccoorR == null)
-			return 0d;
 		return Double.parseDouble(ccoorR.getText());
 	}
 
 	public double getDec()
 	{
-		if(ccoorD == null)
-			return 0d;
 		return Double.parseDouble(ccoorD.getText());
 	}
 
 	public double getAlt()
 	{
-		if(ccoorAl == null)
-			return 0d;
 		return Double.parseDouble(ccoorAl.getText());
 	}
 
 	public double getAz()
 	{
-		if(ccoorAz == null)
-			return 0d;
 		return Double.parseDouble(ccoorAz.getText());
 	}
 
