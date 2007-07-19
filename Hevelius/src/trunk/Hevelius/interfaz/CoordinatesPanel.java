@@ -29,6 +29,8 @@ public class CoordinatesPanel extends JPanel
 	private JLabel ccoorAzL;
 	private JButton catalogue;
 
+	private boolean coortype;
+
 	public CoordinatesPanel(LayoutManager l)
 	{
 		super(l);
@@ -211,6 +213,7 @@ public class CoordinatesPanel extends JPanel
 	}
 	public void setCoorType(boolean type)
 	{
+		coortype = type;
 		if(!type)
 		{
 			coor.setText("RaDec Coordinates");

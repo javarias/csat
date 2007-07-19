@@ -13,6 +13,7 @@ import javax.imageio.*;
 
 import Hevelius.weather.*;
 import Hevelius.virtualview.*;
+import Hevelius.telescopefunctions.*;
 
 public class DrawingPanel extends JPanel
 {
@@ -53,6 +54,8 @@ public class DrawingPanel extends JPanel
 	private ScreenPanel scpane = null;
 	private CoordinatesPanel coorpane = null;
 	private VirtualTelescopePanel vtpane = null;
+
+	private Tracking trck = null;
 
 	public DrawingPanel(LayoutManager l)
 	{
@@ -143,15 +146,19 @@ public class DrawingPanel extends JPanel
 		//CoordinatesPanel
 		coorpane = new CoordinatesPanel(null);
 		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0:	coorpane.setCoorType(1==0); break;
-			case 1: coorpane.setCoorType(1==1); break;
-			default:coorpane.setCoorType(1==0); break;
+			case 0:	coorpane.setCoorType(false); break;
+			case 1: coorpane.setCoorType(true); break;
+			default:coorpane.setCoorType(false); break;
 		}
 		add(coorpane);
 
 		//VirtualTelescopePanel
 		vtpane = new VirtualTelescopePanel(null);
 		add(vtpane);
+
+		//TrackingModule
+		trck = new Tracking();
+		new Thread(trck).start();
 	}
 	public void paintComponent(Graphics g)
 	{
