@@ -2,11 +2,12 @@ package Hevelius.telescopefunctions;
 
 import java.util.*;
 
+import Hevelius.interfaz.*;
+import Hevelius.utilities.converter.*;
 
 public class Tracking implements Runnable
 {
-	private boolean state;
-
+	private boolean state = true;
 
 	public void setState(boolean state)
 	{
@@ -19,7 +20,6 @@ public class Tracking implements Runnable
 		return state;
 	}
 
-
 	public void run()
 	{
 		while (true)
@@ -28,15 +28,15 @@ public class Tracking implements Runnable
 			{
 				if(state)
 				{
-					Converter.convert(interfaz.getDrawingPanel().getCoordinatesPanel.getRa(),
-							interfaz.getDrawingPanel().getCoordinatesPanel.getDec());
-					interfaz.getDrawingPanel().getCoordinatesPanel.setAlt(Converter.getAlt());
-					interfaz.getDrawingPanel().getCoordinatesPanel.setAz(Converter.getAz());
+					Converter.convertir(interfaz.getDrawingPanel().getCoordinatesPanel().getRa(),
+							interfaz.getDrawingPanel().getCoordinatesPanel().getDec());
+					interfaz.getDrawingPanel().getCoordinatesPanel().setAlt(Converter.getAlt());
+					interfaz.getDrawingPanel().getCoordinatesPanel().setAz(Converter.getAz());
 					Thread.sleep(20000);
 				}
-				catch(InterruptedException e)
-				{
-				}
+			}
+			catch(InterruptedException e)
+			{
 			}
 		}
 	}
