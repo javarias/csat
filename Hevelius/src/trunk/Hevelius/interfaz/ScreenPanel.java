@@ -10,18 +10,15 @@ import Hevelius.virtualview.*;
 
 public class ScreenPanel extends JPanel implements Runnable
 {
-	private float x, y, RAf,DECf;
 	private Image screen, buf;
+	private boolean telescopeState = false;
 	public ScreenPanel(LayoutManager l)
 	{
 		super(l);
-		init();
 	}
-	private void init()
+	public void init()
 	{
 		screen = null;
-		RAf = 0.0f;
-		DECf = 0.0f;
 	}
 	public void paintComponent(Graphics g)
 	{
@@ -29,11 +26,6 @@ public class ScreenPanel extends JPanel implements Runnable
 		screen = buf;
 		if(screen != null)
 			g.drawImage(screen,0,0,this);
-	}
-	public void setCoordsRaDec(float RA, float DEC)
-	{
-		RAf = RA;
-		DECf = DEC;
 	}
 	public void run()
 	{
@@ -52,26 +44,36 @@ public class ScreenPanel extends JPanel implements Runnable
 	}
 	private void setScreen()
 	{
-		buf = getScreenFromWeb();
+		if(telescopeState)
+		{
+			//Code for obtaining image from ACS.
+		}
+		else
+		{
+			buf = getScreenFromWeb();
+		}
 		paintComponent(getGraphics());
 	}
 	private Image getScreenFromWeb()
 	{
 		String RA, DEC;
+		double RAd, DECd;
 		Image buffer;
 		int hours, minutes;
-		float seconds;
+		double x, y;
+		double seconds;
+		RAd = interfaz.getDrawingPanel().getCoordinatesPanel().getRa();
+		DECd = interfaz.getDrawingPanel().getCoordinatesPanel().getDec();
 		try
 		{
-			hours = (int)RAf;
-			minutes = (int)((RAf-hours)*60);
-			seconds = ((RAf-hours)*60-minutes)*60;
+			hours = (int)RAd;
+			minutes = (int)((RAd-hours)*60);
+			seconds = ((RAd-hours)*60-minutes)*60;
 			RA = new String(hours+"+"+minutes+"+"+seconds);
-			hours = (int)DECf;
-			minutes = Math.abs((int)((DECf-hours)*60));
-			seconds = Math.abs(((DECf-hours)*60-minutes)*60);
+			hours = (int)DECd;
+			minutes = Math.abs((int)((DECd-hours)*60));
+			seconds = Math.abs(((DECd-hours)*60-minutes)*60);
 			DEC = new String(hours+"+"+minutes+"+"+seconds);
-			RAf = RAf+0.0002f;
 			x = getSize().width/35.31f;
 			y = getSize().height/35.31f;
 			buffer = VirtualTelescope.getScreen(RA,DEC,x,y);

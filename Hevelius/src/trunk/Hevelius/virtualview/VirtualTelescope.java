@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class VirtualTelescope
 {
-	public static Image getScreen(String RA, String DEC, float x, float y)
+	public static Image getScreen(String RA, String DEC, double x, double y)
 	{
 		try
 		{

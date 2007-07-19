@@ -29,9 +29,8 @@ public class WeatherPanel extends JPanel implements Runnable
 	public WeatherPanel(LayoutManager l)
 	{
 		super(l);
-		init();
 	}
-	private void init()
+	public void init()
 	{
 		//Weather Status Label
 		wLabel = new JLabel("Weather Conditions at "+vector.get(0).getTime());

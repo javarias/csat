@@ -18,9 +18,8 @@ public class TelStatusPanel extends JPanel
 	public TelStatusPanel(LayoutManager l)
 	{
 		super(l);
-		init();
 	}
-	private void init()
+	public void init()
 	{
 		telstate = new JLabel("TELESCOPE STATE");
 		telstate.setSize(200, 20);

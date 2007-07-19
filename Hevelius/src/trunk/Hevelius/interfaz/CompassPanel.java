@@ -18,15 +18,14 @@ public class CompassPanel extends JPanel
 
 	private int dx;
 	private int dy;
-	private int r;
+	private int r = 0;
 	private int pointx;
 	private int pointy;
 	public CompassPanel(LayoutManager l)
 	{
 		super(l);
-		init();
 	}
-	private void init()
+	public void init()
 	{
 		//North Label
 		northL = new JLabel("N");
@@ -60,15 +59,17 @@ public class CompassPanel extends JPanel
 		}
 		compassRose = Transparency.makeColorTransparent(compassRose, Color.WHITE);
 		compassRose = compassRose.getScaledInstance(140,140,Image.SCALE_FAST);
-
-		setBackground(Color.BLACK);
 	}
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		int i;
 		dx = getSize().width;
 		dy = getSize().height;
+		if(r==0)
+		{
+			pointx = dx/2;
+			pointy = dy/2;
+		}
 		r = 5*dx/12;
 		g.setColor(Color.GRAY);
 		g.drawOval(dx/12,dy/12,2*r,2*r);
@@ -92,8 +93,6 @@ public class CompassPanel extends JPanel
 		g.setColor(Color.BLACK);
 		g.drawOval(dx/2-5,dy/2-5,10,10);
 		g.fillOval(dx/2-5,dy/2-5,10,10);
-
-
 	}
 	public void setCompassPoints(double dec)
 	{

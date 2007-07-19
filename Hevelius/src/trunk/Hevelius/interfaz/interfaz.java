@@ -521,6 +521,7 @@ public class interfaz {
 		}
 		frame.setIconImage(icono);
 		pane = new DrawingPanel(null);
+		pane.init();
 		pane.updateWindow();
 		frame.setContentPane(pane);
 		Dimension ScreenSize = Toolkit.getDefaultToolkit().getScreenSize();

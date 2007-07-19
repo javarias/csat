@@ -7,33 +7,82 @@ import Hevelius.utilities.converter.*;
 
 public class Tracking implements Runnable
 {
-	private boolean state = true;
-
-	public void setState(boolean state)
-	{
-
-		this.state = state;
-	}
+	private double RA;
+	private double DEC;
 	
-	public boolean getState()
+	private boolean acstrck;
+	private boolean trckState;
+
+	public Tracking()
 	{
-		return state;
+		RA = 0d;
+		DEC = 0d;
+	}
+
+	public void setRaDec()
+	{
+		if(acstrck)
+		{
+			//Obtain Actual Ra && Dec from Telescope
+		}
+		else
+		{
+			RA = interfaz.getDrawingPanel().getCoordinatesPanel().getRa();
+			DEC = interfaz.getDrawingPanel().getCoordinatesPanel().getDec();
+		}
+	}
+
+	public void setTrackingState(boolean state)
+	{
+		if(!trckState && state)
+		{
+			trckState = state;
+			new Thread(this).start();
+		}
+		else
+			trckState = state;
+	}
+
+	public void setACSTracking(boolean state)
+	{
+			acstrck = state;
+	}
+
+	public boolean getTrackingState()
+	{
+		return trckState;
 	}
 
 	public void run()
 	{
-		while (true)
+		double Ra, Dec, Alt, Az;
+		while (trckState)
 		{
 			try
 			{
-				if(state)
+				if(acstrck)
 				{
-					Converter.convertir(interfaz.getDrawingPanel().getCoordinatesPanel().getRa(),
-							interfaz.getDrawingPanel().getCoordinatesPanel().getDec());
-					interfaz.getDrawingPanel().getCoordinatesPanel().setAlt(Converter.getAlt());
-					interfaz.getDrawingPanel().getCoordinatesPanel().setAz(Converter.getAz());
-					Thread.sleep(20000);
+					//ACS Tracking Code
 				}
+				else
+				{
+					Ra = interfaz.getDrawingPanel().getCoordinatesPanel().getRa();
+					Dec = interfaz.getDrawingPanel().getCoordinatesPanel().getDec();
+					if(RA == Ra && DEC== Dec)
+					{
+						Converter.convertir(Ra,Dec);
+						Alt = Converter.getAlt();
+						Az = Converter.getAz();
+						interfaz.getDrawingPanel().getCoordinatesPanel().setAlt(Alt);
+						interfaz.getDrawingPanel().getCoordinatesPanel().setAz(Az);
+					}
+					else
+					{
+						RA = Ra;
+						DEC = Dec;
+					}
+				}
+				Thread.sleep(20000);
 			}
 			catch(InterruptedException e)
 			{

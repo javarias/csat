@@ -34,9 +34,8 @@ public class CoordinatesPanel extends JPanel
 	public CoordinatesPanel(LayoutManager l)
 	{
 		super(l);
-		init();
 	}
-	private void init()
+	public void init()
 	{
 		//Coordinate Label
 		/*switch(Integer.parseInt(test.getOption("coordinate"))){
@@ -230,42 +229,51 @@ public class CoordinatesPanel extends JPanel
 
 	public double getRa()
 	{
+		if(ccoorR == null)
+			return 0d;
 		return Double.parseDouble(ccoorR.getText());
 	}
 
 	public double getDec()
 	{
+		if(ccoorD == null)
+			return 0d;
 		return Double.parseDouble(ccoorD.getText());
 	}
 
 	public double getAlt()
 	{
+		if(ccoorAl == null)
+			return 0d;
 		return Double.parseDouble(ccoorAl.getText());
 	}
 
 	public double getAz()
 	{
+		if(ccoorAz == null)
+			return 0d;
 		return Double.parseDouble(ccoorAz.getText());
 	}
 
-        public void setRa(double RA)
-        {
+	public void setRa(double RA)
+	{
 		ccoorR.setText(Double.toString(RA));
-        }
+	}
 
-        public void setDec(double DEC)
-        {
-                ccoorD.setText(Double.toString(DEC));
-        }
+	public void setDec(double DEC)
+	{
+		ccoorD.setText(Double.toString(DEC));
+	}
 
-        public void setAlt(double ALT)
-        {
-                ccoorAl.setText(Double.toString(ALT));
-        }
+	public void setAlt(double ALT)
+	{
+		ccoorAl.setText(Double.toString(ALT));
+	}
 
-        public void setAz(double AZ)
-        {
-                ccoorAz.setText(Double.toString(AZ));
-        }
+	public void setAz(double AZ)
+	{
+		ccoorAz.setText(Double.toString(AZ));
+		interfaz.getDrawingPanel().getCompassPanel().setCompassPoints(AZ);
+	}
 
 }

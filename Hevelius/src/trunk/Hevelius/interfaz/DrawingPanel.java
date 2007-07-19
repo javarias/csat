@@ -4,15 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import java.util.*;
-import javax.media.opengl.*;
-import com.sun.opengl.util.*;
-
 import java.io.*;
 import javax.imageio.*;
 
-import Hevelius.weather.*;
-import Hevelius.virtualview.*;
 import Hevelius.telescopefunctions.*;
 
 public class DrawingPanel extends JPanel
@@ -60,7 +54,6 @@ public class DrawingPanel extends JPanel
 	public DrawingPanel(LayoutManager l)
 	{
 		super(l);
-		init();
 	}
 	public Image setImage(String img, Dimension dim)
 	{
@@ -83,7 +76,7 @@ public class DrawingPanel extends JPanel
 		tArrow = setImage("Hevelius/images/tArrow.jpg",dim);
 		bArrow = setImage("Hevelius/images/bArrow.jpg",dim);
 	}
-	private void init()
+	public void init()
 	{
 		tam = new Dimension(0,0);
 		dy = getSize().height;
@@ -121,44 +114,52 @@ public class DrawingPanel extends JPanel
 		stime.setForeground(Color.WHITE);
 		add(stime);
 
-		//CompassPanel
-		cpane = new CompassPanel(null);
-		add(cpane);
-
-		//SystemPanel
-		spane = new SystemPanel(null);
-		add(spane);
-
-		//WeatherPanel
-		wpane = new WeatherPanel(null);
-		add(wpane);
-		new Thread(wpane).start();
-
-		//Telescope Status Panel
-		tspane = new TelStatusPanel(null);
-		add(tspane);
-
-		//ScreenPanel
-		scpane = new ScreenPanel(null);
-		add(scpane);
-		new Thread(scpane).start();
-
 		//CoordinatesPanel
 		coorpane = new CoordinatesPanel(null);
+		coorpane.init();
 		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0:	coorpane.setCoorType(false); break;
+			case 0: coorpane.setCoorType(false); break;
 			case 1: coorpane.setCoorType(true); break;
 			default:coorpane.setCoorType(false); break;
 		}
 		add(coorpane);
 
+		//CompassPanel
+		cpane = new CompassPanel(null);
+		cpane.init();
+		add(cpane);
+
+		//SystemPanel
+		spane = new SystemPanel(null);
+		spane.init();
+		add(spane);
+
+		//WeatherPanel
+		wpane = new WeatherPanel(null);
+		wpane.init();
+		add(wpane);
+		new Thread(wpane).start();
+
+		//Telescope Status Panel
+		tspane = new TelStatusPanel(null);
+		tspane.init();
+		add(tspane);
+
+		//ScreenPanel
+		scpane = new ScreenPanel(null);
+		scpane.init();
+		add(scpane);
+		new Thread(scpane).start();
+
 		//VirtualTelescopePanel
 		vtpane = new VirtualTelescopePanel(null);
+		vtpane.init();
 		add(vtpane);
 
 		//TrackingModule
 		trck = new Tracking();
-		new Thread(trck).start();
+		trck.setACSTracking(false);
+		trck.setTrackingState(true);
 	}
 	public void paintComponent(Graphics g)
 	{
@@ -197,13 +198,11 @@ public class DrawingPanel extends JPanel
 		g.drawImage(bArrow, dx/2-20, (dy+rect_y*3/4)/2+0,this);
 		if(tam.width != dx || tam.height != dy)
 		{
-			//img = setImage("Hevelius/images/image.jpg",new Dimension((rect_x-10)*3/4,(rect_y-10)*3/4));
 			stop = setImage("Hevelius/images/stop.png",new Dimension(80,80));
 			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(200,100));
 			tam = new Dimension(dx,dy);
 		}
 		g.drawImage(stop, rect_x-40,dy - 140, this);
-		//g.drawImage(img,(dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,this);
 		g.drawImage(hevelius,dx/2-100,40,this);
 
 		vtpane.setLocation(oGLx+25,15);
@@ -281,7 +280,7 @@ public class DrawingPanel extends JPanel
 		}
 
 		//Weather
-		
+
 		wpane.reloadWeather();
 
 		switch(Integer.parseInt(test.getOption("weather"))){

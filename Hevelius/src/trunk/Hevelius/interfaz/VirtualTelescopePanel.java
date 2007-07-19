@@ -16,9 +16,8 @@ public class VirtualTelescopePanel extends JPanel
 	public VirtualTelescopePanel(LayoutManager l)
 	{
 		super(l);
-		init();
 	}
-	private void init()
+	public void init()
 	{
 		GLCapabilities capabilities = new GLCapabilities();
 		canvas = new GLCanvas(capabilities);
