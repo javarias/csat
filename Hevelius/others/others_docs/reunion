@@ -7,9 +7,9 @@ CONTROL:
 - void gotoAltAz(AltAzPos p, AltAzVel v); A
 - void AltitudeOffSet(double degree); S
 - void AzimuthOffSet(double degree); S
-- void setPreviewImage(Image); A
+- void getPreviewImage(Image); A
 - void StopTelescope(); S
-
+- void getProImage(int id, double exptime); A
 
 
 
@@ -27,6 +27,7 @@ STATUS:
 - RadecVel getTrackingRate(); S
 - int getSafety(RadecPos p); S
 - void EmergencyStop(); S
+- void setMode(int); S
 
 
 
@@ -37,9 +38,12 @@ DATA TYPES:
 
 type: 	RadecPos{
 		double Ra;
-		double Dec;}
+		double Dec;
+	}
 	
 	AltAzPos{
+		double Alt;
+		double Az;
 	}
 	
 	RadecVel{
