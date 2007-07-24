@@ -1,0 +1,54 @@
+CONTROL:
+
+- void preset(type: radecPos p);A
+- void setTrackingStatus(bool s); S
+- void setTrackingRate(RadecVel ); S
+- void gotoRadec(RadecPos p, RadecVel v); A
+- void gotoAltAz(AltAzPos p, AltAzVel v); A
+- void AltitudeOffSet(double degree); S
+- void AzimuthOffSet(double degree); S
+- void setPreviewImage(Image); A
+- void StopTelescope(); S
+
+
+
+
+
+STATUS:
+- void on(); S
+- void stop(); A
+- void off(); S
+- void setUncalibrated(); S
+- void setCalibrated(AltAzPos); S
+- void initialize(); A
+- void getPos(RadecPos r, AltAz a); S
+- int getState(); S
+- bool getTrackingStatus(); S
+- RadecVel getTrackingRate(); S
+- int getSafety(RadecPos p); S
+- void EmergencyStop(); S
+
+
+
+
+
+
+DATA TYPES:
+
+type: 	RadecPos{
+		double Ra;
+		double Dec;}
+	
+	AltAzPos{
+	}
+	
+	RadecVel{
+	}
+	
+	AltAzVel{
+	}
+	Image{
+	}
+	
+	
+
