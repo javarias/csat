@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.io.*;
 import javax.imageio.*;
 
-import Hevelius.telescopefunctions.*;
+import Hevelius.heveliusmodules.*;
 
 public class DrawingPanel extends JPanel
 {

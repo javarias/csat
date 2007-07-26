@@ -1,4 +1,4 @@
-package Hevelius.telescopefunctions;
+package Hevelius.heveliusmodules;
 
 import java.util.*;
 
