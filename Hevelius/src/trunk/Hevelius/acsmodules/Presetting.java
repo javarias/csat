@@ -11,9 +11,16 @@ import alma.UOSErr.*;
 import alma.UOSErr.wrappers.*;
 import alma.acs.exceptions.AcsJException;
 
+
+/******************************
+/ REVISAR LOS TRY Y CATCH
+******************************/
+
+
 public class Presetting {
 
 	org.omg.CORBA.Object obj = null;
+	radecPos pos;
 
 	// SE SUPONE QUE ACA VA LA CONEXION AL COMPONENTE DE TOBAR
 	public void connection(){
@@ -27,27 +34,60 @@ public class Presetting {
 
 	}
 
-	public void move_to(double alt, double az){
+	public void move_to(){
 		
+		capturePos();
+
 		//LLAMADA A METODO DE TOBAR COMPONENT PARA MOVER
 		try{
 			conection();
-			preset(radecPos p);
+			preset(radecPos pos);
 		}catch(ComponentLifecycleException e)
 		{
-			//VENTANA DE DESCONECCION U OTRA WEA POR DISCUTIR	
+			//VENTANA DE DESCONEXION U OTRA WEA POR DISCUTIR	
 		}
 
 
 	}
 
-	public radecPos altaz2radec(radecPos P){
+	public void altaz2radec(radecPos p){
 	
 		//FORMULA PARA CONVERTIR
 
-		return p;
 	}
 	
+	public void capturePos(){
+		
+		radecPos tmp;
+		int type_pos;
+
+		//OBTENER DE PANTALLA LAS COORDENADA Y EL TIPO
+		try{
+			validatePos(tmp, type_pos);
+		}catch(Exception e){
+			//VENTANA DE ERROR EN INGRESO DE COORDENADAS
+		}
+
+		if(type_pos == 'ALTAZ')
+			altaz2radec(tmp);
+
+		pos = tmp;
+		
+	}
+
+	public void validatePos(radecPos tmp, int type_pos){
+		if(type_pos == 'ALTAZ'){
+			//VALIDACION COORDENADAS ALTAZ (TIRAR EXCEPTION SI ESTA MAL)
+		}
+		else{
+			if(type_pos == 'RADEC'){
+				//VALIDACION COORDENADA RADEC (TIRAR EXCEPTION SI ESTA MAL)
+			}
+			else{
+				//TIRAR EXCEPTION DE SOFTWARE
+			}
+		}
+	}
 
 
 }
