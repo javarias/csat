@@ -34,4 +34,5 @@ class Communication{
 	bool goToAltAzm(double alt, double azm);
 	double getAlt();
 	double getAzm();
+	void cancelGoto();
 };

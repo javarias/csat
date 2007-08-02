@@ -144,3 +144,9 @@ double Communication::getAzm(){
 
 	return azm;
 }
+
+void Communication::cancelGoto(){
+	this->sp->write_RS232("M");
+	this->sp->read_RS232();
+	return;
+}

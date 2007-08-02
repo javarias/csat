@@ -79,9 +79,10 @@ int main(int args, char *argv[]) {
 		printf("\nUsage: %s var [value]\n\n",argv[0]);
 		printf("Variables supported are:\n");
 		printf("      [slal | slaz] rate    (slew in altitud and azimuth direction)\n");
-		printf("      echo character        (to test connection to telescope)\n");
+		printf("      echo char             (to test connection to telescope)\n");
 		printf("      [gtal | gtaz] degrees (go to altitud and azimuth coordinates)\n");
-		printf("      [getalt | getazm]     (gets the actuals altitud/azimuth coords)\n\n");
+		printf("      [getalt | getazm]     (gets the actuals altitud/azimuth coords)\n");
+		printf("      cancel                (Cancels a GOTO)\n\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -128,6 +129,9 @@ int main(int args, char *argv[]) {
 
 	else if( !strcmp("getaz",argv[1]))
 		printf("Actual Azm: %lf\n",com->getAzm());
+
+	else if( !strcmp("cancel",argv[1]))
+		com->cancelGoto();
 
 	else{
 		printf("Variable not supported: %s\n",argv[1]);
