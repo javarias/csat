@@ -1,0 +1,818 @@
+<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<class>hptWebCamGUI</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>HPT_WebCam</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>809</width>
+            <height>653</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>HPT WebCam</string>
+    </property>
+    <widget class="QFrame">
+        <property name="name">
+            <cstring>webCamPixMap</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>160</x>
+                <y>70</y>
+                <width>640</width>
+                <height>480</height>
+            </rect>
+        </property>
+        <property name="frameShape">
+            <enum>NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+            <enum>Plain</enum>
+        </property>
+    </widget>
+    <widget class="QComboBox">
+        <item>
+            <property name="text">
+                <string>None</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Low compression</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Medium compression</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>High compression</string>
+            </property>
+        </item>
+        <property name="name">
+            <cstring>Compression</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>370</x>
+                <y>590</y>
+                <width>140</width>
+                <height>30</height>
+            </rect>
+        </property>
+        <property name="currentItem">
+            <number>0</number>
+        </property>
+        <property name="maxCount">
+            <number>3</number>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1_2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>5</x>
+                <y>387</y>
+                <width>75</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Brightness:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1_2_2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>5</x>
+                <y>422</y>
+                <width>75</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Contrast:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1_2_3</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>5</x>
+                <y>456</y>
+                <width>64</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Gamma:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1_2_3_2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>5</x>
+                <y>491</y>
+                <width>64</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Colour:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel4</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>530</y>
+                <width>80</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Wanted FPS:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1_2_3_4</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>370</x>
+                <y>566</y>
+                <width>140</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Compression:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>530</x>
+                <y>566</y>
+                <width>100</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>White balance:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1_3</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>320</y>
+                <width>64</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Palette:</string>
+        </property>
+    </widget>
+    <widget class="QComboBox">
+        <item>
+            <property name="text">
+                <string>YUV420 Planar</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>RAW</string>
+            </property>
+        </item>
+        <property name="name">
+            <cstring>Palette</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>345</y>
+                <width>140</width>
+                <height>27</height>
+            </rect>
+        </property>
+        <property name="currentItem">
+            <number>0</number>
+        </property>
+        <property name="sizeLimit">
+            <number>2</number>
+        </property>
+    </widget>
+    <widget class="QGroupBox">
+        <property name="name">
+            <cstring>groupBox1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>5</x>
+                <y>10</y>
+                <width>145</width>
+                <height>300</height>
+            </rect>
+        </property>
+        <property name="title">
+            <string>Camera control</string>
+        </property>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>onPushButton</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>11</x>
+                    <y>29</y>
+                    <width>124</width>
+                    <height>32</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>On</string>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>takeFramesPushButton</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>11</x>
+                    <y>71</y>
+                    <width>124</width>
+                    <height>32</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Take frames</string>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>takeFramesPushButton_2</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>11</x>
+                    <y>113</y>
+                    <width>124</width>
+                    <height>32</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Stop take frames</string>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>offPushButton</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>11</x>
+                    <y>155</y>
+                    <width>124</width>
+                    <height>32</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Off</string>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>reset</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>200</y>
+                    <width>124</width>
+                    <height>32</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Reset</string>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>quitPushButton</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>255</y>
+                    <width>124</width>
+                    <height>32</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Quit</string>
+            </property>
+        </widget>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel3</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>185</x>
+                <y>30</y>
+                <width>75</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Resolution</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>420</x>
+                <y>30</y>
+                <width>127</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="frameShape">
+            <enum>NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+            <enum>Plain</enum>
+        </property>
+        <property name="text">
+            <string>Frames per second:</string>
+        </property>
+    </widget>
+    <widget class="QComboBox">
+        <item>
+            <property name="text">
+                <string>320*240</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>640*480</string>
+            </property>
+        </item>
+        <property name="name">
+            <cstring>resolutionBox</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>260</x>
+                <y>25</y>
+                <width>115</width>
+                <height>30</height>
+            </rect>
+        </property>
+        <property name="currentItem">
+            <number>1</number>
+        </property>
+        <property name="sizeLimit">
+            <number>2</number>
+        </property>
+    </widget>
+    <widget class="QLCDNumber">
+        <property name="name">
+            <cstring>FramesPerSecond</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>550</x>
+                <y>30</y>
+                <width>64</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="frameShape">
+            <enum>NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+            <enum>Plain</enum>
+        </property>
+        <property name="smallDecimalPoint">
+            <bool>true</bool>
+        </property>
+        <property name="numDigits">
+            <number>5</number>
+        </property>
+        <property name="segmentStyle">
+            <enum>Flat</enum>
+        </property>
+    </widget>
+    <widget class="QComboBox">
+        <item>
+            <property name="text">
+                <string>Indoor</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Outdoor</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>FL</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Manual</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Auto</string>
+            </property>
+        </item>
+        <property name="name">
+            <cstring>WhiteBalance</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>530</x>
+                <y>590</y>
+                <width>100</width>
+                <height>30</height>
+            </rect>
+        </property>
+        <property name="currentItem">
+            <number>4</number>
+        </property>
+        <property name="maxCount">
+            <number>4</number>
+        </property>
+    </widget>
+    <widget class="QCheckBox">
+        <property name="name">
+            <cstring>UseNetworkCompression</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>190</x>
+                <y>580</y>
+                <width>155</width>
+                <height>45</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Use compression
+in network transport</string>
+        </property>
+        <property name="checked">
+            <bool>true</bool>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>Brightness</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>90</x>
+                <y>385</y>
+                <width>60</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="suffix">
+            <string> %</string>
+        </property>
+        <property name="maxValue">
+            <number>100</number>
+        </property>
+        <property name="lineStep">
+            <number>10</number>
+        </property>
+        <property name="value">
+            <number>50</number>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>Contrast</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>90</x>
+                <y>420</y>
+                <width>60</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="suffix">
+            <string> %</string>
+        </property>
+        <property name="maxValue">
+            <number>100</number>
+        </property>
+        <property name="lineStep">
+            <number>10</number>
+        </property>
+        <property name="value">
+            <number>50</number>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>Gamma</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>90</x>
+                <y>455</y>
+                <width>60</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="suffix">
+            <string> %</string>
+        </property>
+        <property name="maxValue">
+            <number>100</number>
+        </property>
+        <property name="lineStep">
+            <number>10</number>
+        </property>
+        <property name="value">
+            <number>50</number>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>Colour</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>90</x>
+                <y>490</y>
+                <width>60</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="suffix">
+            <string> %</string>
+        </property>
+        <property name="maxValue">
+            <number>100</number>
+        </property>
+        <property name="lineStep">
+            <number>10</number>
+        </property>
+        <property name="value">
+            <number>50</number>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>FPS</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>90</x>
+                <y>530</y>
+                <width>55</width>
+                <height>23</height>
+            </rect>
+        </property>
+        <property name="suffix">
+            <string>/s</string>
+        </property>
+        <property name="maxValue">
+            <number>30</number>
+        </property>
+        <property name="minValue">
+            <number>5</number>
+        </property>
+        <property name="lineStep">
+            <number>5</number>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1_2_3_3</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>565</y>
+                <width>75</width>
+                <height>40</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Gain
+(&lt;0%: Auto)</string>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>AGC</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>90</x>
+                <y>570</y>
+                <width>60</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="suffix">
+            <string> %</string>
+        </property>
+        <property name="maxValue">
+            <number>100</number>
+        </property>
+        <property name="minValue">
+            <number>-100</number>
+        </property>
+        <property name="lineStep">
+            <number>10</number>
+        </property>
+        <property name="value">
+            <number>0</number>
+        </property>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>onPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>cameraOn()</slot>
+    </connection>
+    <connection>
+        <sender>offPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>cameraOff()</slot>
+    </connection>
+    <connection>
+        <sender>quitPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>byebye()</slot>
+    </connection>
+    <connection>
+        <sender>takeFramesPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>takeFramesOn()</slot>
+    </connection>
+    <connection>
+        <sender>resolutionBox</sender>
+        <signal>activated(int)</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>newResolution()</slot>
+    </connection>
+    <connection>
+        <sender>takeFramesPushButton_2</sender>
+        <signal>clicked()</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>takeFramesOff()</slot>
+    </connection>
+    <connection>
+        <sender>Compression</sender>
+        <signal>activated(int)</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>newCompression(int)</slot>
+    </connection>
+    <connection>
+        <sender>WhiteBalance</sender>
+        <signal>activated(int)</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>newWhiteBalance(int)</slot>
+    </connection>
+    <connection>
+        <sender>Brightness</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>newBrightness(int)</slot>
+    </connection>
+    <connection>
+        <sender>Colour</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>newColour(int)</slot>
+    </connection>
+    <connection>
+        <sender>Gamma</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>newGamma(int)</slot>
+    </connection>
+    <connection>
+        <sender>Contrast</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>newContrast(int)</slot>
+    </connection>
+    <connection>
+        <sender>AGC</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>newAGC(int)</slot>
+    </connection>
+    <connection>
+        <sender>FPS</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>newFPS(int)</slot>
+    </connection>
+    <connection>
+        <sender>Palette</sender>
+        <signal>activated(int)</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>newPalette(int)</slot>
+    </connection>
+    <connection>
+        <sender>reset</sender>
+        <signal>clicked()</signal>
+        <receiver>HPT_WebCam</receiver>
+        <slot>cameraReset()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>onPushButton</tabstop>
+    <tabstop>takeFramesPushButton</tabstop>
+    <tabstop>takeFramesPushButton_2</tabstop>
+    <tabstop>offPushButton</tabstop>
+    <tabstop>reset</tabstop>
+    <tabstop>quitPushButton</tabstop>
+    <tabstop>resolutionBox</tabstop>
+    <tabstop>Palette</tabstop>
+    <tabstop>Brightness</tabstop>
+    <tabstop>Contrast</tabstop>
+    <tabstop>Gamma</tabstop>
+    <tabstop>Colour</tabstop>
+    <tabstop>FPS</tabstop>
+    <tabstop>AGC</tabstop>
+    <tabstop>Compression</tabstop>
+    <tabstop>WhiteBalance</tabstop>
+    <tabstop>UseNetworkCompression</tabstop>
+</tabstops>
+<includes>
+    <include location="local" impldecl="in implementation">hptWebCamGUI.ui.h</include>
+</includes>
+<slots>
+    <slot>cameraOn()</slot>
+    <slot>cameraOff()</slot>
+    <slot>takeFramesOn()</slot>
+    <slot>takeFramesOff()</slot>
+    <slot>newResolution()</slot>
+    <slot>newCompression( int value )</slot>
+    <slot>newWhiteBalance( int value )</slot>
+    <slot>newBrightness( int value )</slot>
+    <slot>newColour( int value )</slot>
+    <slot>newGamma( int value )</slot>
+    <slot>newContrast( int value )</slot>
+    <slot>newAGC( int value )</slot>
+    <slot>newFPS( int value )</slot>
+    <slot>newPalette( int value )</slot>
+    <slot>cameraReset()</slot>
+    <slot>byebye()</slot>
+</slots>
+<functions>
+    <function access="private" specifier="non virtual">init()</function>
+    <function access="private" specifier="non virtual">destroy()</function>
+</functions>
+<layoutdefaults spacing="2" margin="10"/>
+</UI>

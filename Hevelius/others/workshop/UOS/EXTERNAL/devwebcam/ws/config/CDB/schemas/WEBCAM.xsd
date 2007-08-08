@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--#########################################-->
+<xs:schema targetNamespace="urn:schemas-cosylab-com:WEBCAM:1.0"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema"
+ xmlns="urn:schemas-cosylab-com:WEBCAM:1.0"
+ xmlns:cdb="urn:schemas-cosylab-com:CDB:1.0"
+ xmlns:baci="urn:schemas-cosylab-com:BACI:1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:import namespace="urn:schemas-cosylab-com:CDB:1.0" schemaLocation="CDB.xsd"/>
+    <xs:import namespace="urn:schemas-cosylab-com:BACI:1.0" schemaLocation="BACI.xsd"/>
+    <xs:complexType name="WEBCAM">
+        <xs:sequence>
+               <xs:element name="palette">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:RWlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="palette"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="colour">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:RWlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="colour"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="minWidth">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:ROlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="minWidth"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="videoDevice">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:RWstring">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="videoDevice"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="frame">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:ROlongSeq">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="frame"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="actHeight">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:ROlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="actHeight"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="framesPerSecond">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:RWlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="framesPerSecond"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="automaticGainControl">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:RWlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="automaticGainControl"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="compression">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:RWlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="compression"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="maxWidth">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:ROlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="maxWidth"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="actWidth">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:ROlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="actWidth"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="maxHeight">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:ROlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="maxHeight"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="automaticWhiteBalance">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:RWlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="automaticWhiteBalance"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="minHeight">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:ROlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="minHeight"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="contrast">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:RWlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="contrast"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="gamma">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:RWlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="gamma"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="brightness">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:RWlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="brightness"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+               <xs:element name="fps">
+                       <xs:complexType>
+                               <xs:complexContent>
+                                       <xs:restriction base="baci:RWlong">
+                                       <xs:attribute name="description" type="xs:string" use="optional" default="fps"/>
+                                       </xs:restriction>
+                               </xs:complexContent>
+                       </xs:complexType>
+               </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:int" use="optional" default="0"/>
+</xs:complexType>
+<xs:element name="WEBCAM" type="WEBCAM"/>
+</xs:schema>

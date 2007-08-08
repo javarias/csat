@@ -1,0 +1,84 @@
+#ifndef _SCHEDULER_IDL_
+#define _SCHEDULER_IDL_
+
+/*******************************************************************************
+*    ALMA - Atacama Large Millimiter Array
+*
+*    (c) European Southern Observatory, 2002
+*    Copyright by ESO (in the framework of the ALMA collaboration)
+*    and Cosylab 2002, All rights reserved
+*
+*    This library is free software; you can redistribute it and/or
+*    modify it under the terms of the GNU Lesser General Public
+*    License as published by the Free Software Foundation; either
+*    version 2.1 of the License, or (at your option) any later version.
+*
+*    This library is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*    Lesser General Public License for more details.
+*
+*    You should have received a copy of the GNU Lesser General Public
+*    License along with this library; if not, write to the Free Software
+*    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+*
+*
+* "@(#) $Id: Scheduler.idl,v 1.3 2007/07/10 15:51:54 wg5 Exp $"
+*
+* who       when      what
+* --------  --------  ----------------------------------------------
+*/
+
+#include <acscomponent.idl>
+#include <UOSErr.idl>
+
+#pragma prefix "alma"
+
+
+/** 
+ * @file Scheduler.idl
+ * UOSErr Scheduler IDL file
+ */
+
+module SCHEDULER_MODULE
+{
+    /** @interface Scheduler
+     *  This is a simple scheduler for the UOSErr
+     */
+    interface Scheduler : ACS::ACSComponent
+	{
+	/**
+	 * Start the scheduler.
+         * The scheduler will loop through all available proposals,
+         * either until all proposals are done or until the stop method is called.
+	 * Raises an exception if called twice.
+	 * @return None
+	 */
+	void start ()
+		raises(UOSErr::SchedulerAlreadyRunningEx);
+
+	/**
+	 * Stop the scheduler.
+         * This will stop the scheduler from scheduling more proposals, 
+         * it will not(!) break the ongoing observation.
+	 *
+	 * Raises an exception if called twice.
+	 * @return None
+	 */
+	void stop ()
+		raises(UOSErr::SchedulerAlreadyStoppedEx);
+
+	/**
+	 * Returns the pid of the proposal currently under execution
+	 *
+	 * Raises exception if no proposal is executing.
+	 * @retun Proposal ID
+	 */
+	long proposalUnderExecution()
+		raises(UOSErr::NoProposalExecutingEx);
+	};    
+
+};
+
+#endif
+

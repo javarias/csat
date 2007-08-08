@@ -1,0 +1,116 @@
+#ifndef _DATABASE_IDL_
+#define _DATABASE_IDL_
+
+/*******************************************************************************
+*    ALMA - Atacama Large Millimiter Array
+*
+*    (c) European Southern Observatory, 2002
+*    Copyright by ESO (in the framework of the ALMA collaboration)
+*    and Cosylab 2002, All rights reserved
+*
+*    This library is free software; you can redistribute it and/or
+*    modify it under the terms of the GNU Lesser General Public
+*    License as published by the Free Software Foundation; either
+*    version 2.1 of the License, or (at your option) any later version.
+*
+*    This library is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*    Lesser General Public License for more details.
+*
+*    You should have received a copy of the GNU Lesser General Public
+*    License along with this library; if not, write to the Free Software
+*    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+*
+*
+* "@(#) $Id: DataBase.idl,v 1.2 2007/07/10 15:09:51 wg5 Exp $"
+*
+* who       when      what
+* --------  --------  ----------------------------------------------
+*/
+
+#include <acscomponent.idl>
+#include <Types.idl>
+#include <UOSErr.idl>
+
+#pragma prefix "alma"
+
+/** 
+ * @file Database.idl
+ * UOSErr Database IDL File
+ */
+
+module DATABASE_MODULE
+{
+
+    /** @interface Database
+     *  Interface to get access to the UOSErr database
+     */
+    interface DataBase : ACS::ACSComponent
+	{
+	/**
+	 * Stores a new Proposal.
+	 * 
+	 * @param targets Target list composing this proposal.
+	 * @return Assigned proposal ID (pid).
+	 */
+	long storeProposal (in TYPES::TargetList targets);
+	
+	/** 
+	 * Get the current proposal status for the given
+	 * proposal.
+	 *
+	 * @param pid Proposal ID
+	 * @return status
+	 */
+	long getProposalStatus(in long pid);
+	
+	/**
+	 * Retuns all images for a given proposal. 
+	 * Raises an exception if proposal has not been 
+	 * executed yet.
+	 *
+	 * @param pid Proposal ID
+	 * @return Image list that belongs to this proposal
+	 */
+	TYPES::ImageList getProposalObservations(in long pid)
+		raises(UOSErr::ProposalNotYetReadyEx);
+
+	/**
+	 * Returns stored proposals which have not been executed yet.
+	 *
+	 * @return Proposals with queued status. If there are no 
+	 * pending proposals returns an empty list
+	 */
+	TYPES::ProposalList getProposals();
+	
+	/**
+	 * Set the proposal status. Raises an exception if the change is not from
+	 * queued(0) to running(1) or from running(1) to ready(2).
+	 *
+	 * @param pid Proposal ID
+	 * @param tid target ID
+	 * @return None
+	 */
+	void setProposalStatus(in long pid, in long status)
+		raises(UOSErr::InvalidProposalStatusTransitionEx);
+
+	/**
+	 * Stores an image for a given proposal and target. Raises an exception
+	 * if an image has already been stored for the given 
+	 * tid and pid.
+	 *
+	 * @param pid Proposal ID
+	 * @param tid target ID
+	 * @return None
+	 */
+	void storeImage(in long pid, 
+			in long tid,
+			in TYPES::ImageType image)
+		raises(UOSErr::ImageAlreadyStoredEx);
+	};    
+    
+};
+
+#endif
+

@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+#  "@(#) $Id: make_archive,v 1.1.1.1 2007/07/09 12:47:39 wg8 Exp $"
+#
+
+pushd ..;
+
+if [ -d ../ws ]; then
+	pushd ..;
+	tar --exclude={.svn,CVS,*~,*.bak,libhpt*.o,libhpt*,*.jar,libhpt*.a,#*} -czf hptWebCam.tar.gz ws/{config,idl,include,lib,rtai,src} lcu/{config,doc,idl,include,lib,rtai,src};
+	popd;
+else
+	tar --exclude={.svn,CVS,*~,*.bak,libhpt*.o,libhpt*,*.jar,libhpt*.a,#*} -czf hptWebCam.tar.gz ./{config,doc,idl,include,lib,rtai,src};
+fi;
+
+popd
+exit 0

@@ -1,0 +1,69 @@
+/* Include symbols shared between the RCX and the IOC. */
+#include "../include/SCTdefs.h"
+
+int dest,max;
+
+task main()
+{
+   Float(OUT_A);
+   SetPower(OUT_A,OUT_LOW);
+   
+   SetSensor(SENSOR_1,SENSOR_TOUCH);
+   SetSensor(SENSOR_2,SENSOR_ROTATION);
+
+   SelectDisplay(DISPLAY_USER);
+   SetUserDisplay(SensorValue(1),0);
+
+   OnFwd(OUT_A);
+   while (!SensorValueBool(0));
+   Off(OUT_A);
+   max=-(SensorValue(1)+5)/10;
+   ClearSensor(SENSOR_2);
+   
+   Wait(200);
+
+   SetUserDisplay(dest,0);
+
+   goTo(35);
+   Wait(200);
+   
+   goTo(90);
+   Wait(200);
+   
+   goTo(120);
+   Wait(200);
+   
+   goTo(30);
+   Wait(200);
+   
+   goTo(180);
+   Wait(200);
+   
+   goTo(0);
+   Wait(200);
+   
+   goTo(180);
+   Wait(200);
+
+   Float(OUT_A);
+   while(true);
+   
+}
+
+void goTo(int x) {
+   //Ir a x°
+   dest=((x*max)/18);
+
+   SetPower(OUT_A,OUT_LOW);
+   if (dest > SensorValue(1)) 
+      OnFwd(OUT_A);
+   else
+      OnRev(OUT_A);
+      
+   while (abs(dest-SensorValue(1)) > 7);
+   Off(OUT_A);
+   Wait(50);
+   On(OUT_A);
+   while (abs(dest - SensorValue(1)) > 2);
+   Off(OUT_A);
+}

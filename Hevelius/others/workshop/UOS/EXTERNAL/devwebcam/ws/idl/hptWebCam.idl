@@ -1,0 +1,43 @@
+#ifndef WebCam_IDL
+#define WebCam_IDL
+
+/*
+ * $Id: hptWebCam.idl,v 1.1.1.1 2007/07/09 12:47:39 wg8 Exp $
+ *
+*/
+
+#include <baci.idl>
+
+#pragma prefix "alma"
+
+module hptWebCam
+{  
+	interface WebCam: ACS::CharacteristicComponent
+	{
+		readonly attribute ACS::RWstring videoDevice;
+		readonly attribute ACS::ROlong maxHeight;
+		readonly attribute ACS::ROlong maxWidth;
+		readonly attribute ACS::ROlong minHeight;
+		readonly attribute ACS::ROlong minWidth;
+		readonly attribute ACS::ROlong actHeight;
+		readonly attribute ACS::ROlong actWidth;
+		readonly attribute ACS::RWlong brightness;
+		readonly attribute ACS::RWlong contrast;
+		readonly attribute ACS::RWlong gamma;
+		readonly attribute ACS::RWlong colour;
+		readonly attribute ACS::RWlong fps;
+		readonly attribute ACS::RWlong palette;
+		readonly attribute ACS::RWlong compression;
+		readonly attribute ACS::RWlong automaticWhiteBalance;
+		readonly attribute ACS::RWlong automaticGainControl;
+		readonly attribute ACS::RWlong framesPerSecond;
+		readonly attribute ACS::ROlongSeq frame;
+		
+		ACSErr::Completion on();
+		ACSErr::Completion off();
+		ACSErr::Completion reset();
+		ACSErr::Completion setFrameSize(in long width,in long height);
+		ACS::longSeq getFrame(in boolean use_compression);
+	};
+};
+#endif /* ! WebCam_IDL */

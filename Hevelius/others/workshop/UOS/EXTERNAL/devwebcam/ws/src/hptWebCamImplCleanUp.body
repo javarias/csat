@@ -1,0 +1,128 @@
+/*
+ * "@(#) $Id: hptWebCamImplCleanUp.body,v 1.1.1.1 2007/07/09 12:47:39 wg8 Exp $"
+ *
+ * $Log: hptWebCamImplCleanUp.body,v $
+ * Revision 1.1.1.1  2007/07/09 12:47:39  wg8
+ * Repository Setup
+ *
+ * Revision 1.1  2007/06/25 13:24:22  jibsen
+ * External files.
+ *
+ * Revision 1.1  2004/07/20 15:56:06  tjuerges
+ * - Added latest kernel modules for Philips ToUCam PWC-740K model, including decompressor library (binary only) which allows the camera to take frames of 640*480 at 15 fps.
+ *
+ * Revision 1.1  2004/07/16 15:17:41  tjuerges
+ * - Jetzt mit Sources des Kernel-Modules. Aufgesplittet in lcu/ws.
+ *
+ * Revision 2.3  2004/07/15 11:57:50  tjuerges
+ * - Anstelle ACE-Threads QThreads.
+ * - GUI erweitert.
+ * - Freigeben der Komponente hinzugefügt.
+ * - Von /dev/video1 nach /dev/video2.
+ * - Viel aufgeräumt.
+ *
+ *
+*/
+
+if(vidDev)
+{
+  delete vidDev;
+  vidDev=0;
+}
+
+if(paletteIO_p)
+{
+  delete paletteIO_p;
+  paletteIO_p=0;
+}
+if(minHeightIO_p)
+{
+  delete minHeightIO_p;
+  minHeightIO_p=0;
+}
+
+if(colourIO_p)
+{
+  delete colourIO_p;
+  colourIO_p=0;
+}
+
+if(minWidthIO_p)
+{
+  delete minWidthIO_p;
+  minWidthIO_p=0;
+}
+
+if(contrastIO_p)
+{
+  delete contrastIO_p;
+  contrastIO_p=0;
+}
+
+if(frameIO_p)
+{
+  delete frameIO_p;
+  frameIO_p=0;
+}
+
+if(actHeightIO_p)
+{
+  delete actHeightIO_p;
+  actHeightIO_p=0;
+}
+
+if(compressionIO_p)
+{
+  delete compressionIO_p;
+  compressionIO_p=0;
+}
+
+if(gammaIO_p)
+{
+  delete gammaIO_p;
+  gammaIO_p=0;
+}
+
+if(maxWidthIO_p)
+{
+  delete maxWidthIO_p;
+  maxWidthIO_p=0;
+}
+
+if(brightnessIO_p)
+{
+  delete brightnessIO_p;
+  brightnessIO_p=0;
+}
+
+if(actWidthIO_p)
+{
+  delete actWidthIO_p;
+  actWidthIO_p=0;
+}
+
+if(fpsIO_p)
+{
+  delete fpsIO_p;
+  fpsIO_p=0;
+}
+
+if(agcIO_p)
+{
+  delete agcIO_p;
+  agcIO_p=0;
+}
+
+if(awbIO_p)
+{
+  delete awbIO_p;
+  awbIO_p=0;
+}
+
+if(maxHeightIO_p)
+{
+  delete maxHeightIO_p;
+  maxHeightIO_p=0;
+}
+
+DO_running=false;

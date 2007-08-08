@@ -1,0 +1,170 @@
+/*
+ * LegoMountProg3.nqc
+ * This file contains source code for a Lego program
+ * to control a Lego antenna mount. Instructions for
+ * building and downloading to RCX can be found within
+ * the Makefile bundled.
+ */
+
+/* This file includes aliases motor, sensor and registry associations */
+#include "../include/SCTdefs.h"
+
+/* Altitude, azimuth and status registry.
+ * Be careful to keep this equal to the RCX_XXX aliases at the 
+ * 'SCTdefs.h' header file!
+ */
+#pragma reserve 4 8
+#define REAL_ALTITUDE	@4
+#define REAL_AZIMUTH	@5
+#define COMM_ALTITUDE	@6
+#define COMM_AZIMUTH    @7
+#define STATUS		@8
+
+/* Motor and sensor associations. If at anytime
+ * you change the lego construction, you can specify
+ * here where are the sensors and motors connected
+ */
+#define MOTOR_ALTITUDE		OUT_A
+#define MOTOR_AZIMUTH		OUT_B
+#define TOUCH_ALTITUDE		SENSOR_1
+#define TOUCH_AZIMUTH		SENSOR_1
+#define ROTATION_ALTITUDE	SENSOR_2
+#define ROTATION_AZIMUTH	SENSOR_3
+
+/* Macros */
+#define statusIsSet(bit)	(STATUS & bit)
+
+int maxAltitude=1,maxAzimuth=1;
+
+task main()
+{  
+   /* Initialization */
+   Float(MOTOR_ALTITUDE + MOTOR_AZIMUTH);
+   
+   SetSensor(TOUCH_ALTITUDE, SENSOR_TOUCH);
+   SetSensor(TOUCH_AZIMUTH, SENSOR_TOUCH);
+   SetSensor(ROTATION_ALTITUDE, SENSOR_ROTATION);
+   SetSensor(ROTATION_AZIMUTH, SENSOR_ROTATION);
+   ClearSensor(TOUCH_ALTITUDE);
+   ClearSensor(ROTATION_AZIMUTH);
+   
+   COMM_ALTITUDE=180;
+   COMM_AZIMUTH=360;
+
+   /* You can give any value you would like to watch at the RCX display to
+    * the SetUserDisplay call. */
+   SelectDisplay(DISPLAY_USER);
+   SetUserDisplay(SensorValue(RCX_ROTATION_AZIMUTH),0);
+
+   STATUS=0; /* Uncalibrated */
+   
+   start calibration_monitor; /* This will start the calibration procedure */
+
+   /* Main loop */
+   int diff_altitude, diff_azimuth;
+   while (true) {
+        if (!statusIsSet(STAT_CALIBRATED)) continue; /* Do nothing until encoders are calibrated */
+
+	/* Adjust given coordinates to a [0,360] range */
+   	while (COMM_ALTITUDE >= 360) COMM_ALTITUDE -= 360;
+	while (COMM_ALTITUDE < 0) COMM_ALTITUDE += 360;
+	while (COMM_AZIMUTH > 360) COMM_AZIMUTH -= 360;
+	while (COMM_AZIMUTH < 0) COMM_AZIMUTH += 360;
+
+        REAL_ALTITUDE=(SensorValue(RCX_ROTATION_ALTITUDE)*18)/maxAltitude;
+	REAL_AZIMUTH =(SensorValue(RCX_ROTATION_AZIMUTH )*36)/maxAzimuth;
+
+   	if (COMM_ALTITUDE>180) {
+	   statusSet(STAT_ALTITUDE_ERROR);
+	   continue;
+	}
+	statusUnset(STAT_ALTITUDE_ERROR);
+
+	diff_altitude=COMM_ALTITUDE-REAL_ALTITUDE;
+	diff_azimuth =COMM_AZIMUTH-REAL_AZIMUTH;
+
+        /* Altitude movement control */
+	if (diff_altitude < 0) 
+	   SetDirection(MOTOR_ALTITUDE, OUT_FWD);
+	else
+	   SetDirection(MOTOR_ALTITUDE, OUT_REV);
+
+	SetPower(MOTOR_ALTITUDE, OUT_LOW);
+	if (abs(diff_altitude) < 4)
+           Off(MOTOR_ALTITUDE);
+        else
+           On(MOTOR_ALTITUDE);
+
+        /* Azimuthal movement control */
+   	if (diff_azimuth < 0) 
+	   SetDirection(MOTOR_AZIMUTH, OUT_FWD);
+	else
+	   SetDirection(MOTOR_AZIMUTH, OUT_REV);
+
+	SetPower(MOTOR_AZIMUTH, OUT_LOW);
+	if (abs(diff_azimuth) < 4)
+           Off(MOTOR_AZIMUTH);
+        else
+           On(MOTOR_AZIMUTH);
+   }
+}
+
+/* This tasks monitors the CALIBRATED status bit. When unset,
+ * this task waits for the CALIBRATE status bit to be set and
+ * calls the calibration procedure. After that, it sets the
+ * CALIBRATED status bit again.
+ */
+task calibration_monitor() {
+   calibrate();
+   statusSet(STAT_CALIBRATED);
+   while (true) {
+      while (statusIsSet(STAT_CALIBRATED))
+         Wait(RCX_WAIT_PERIOD);
+      while (!statusIsSet(STAT_CALIBRATE)) {
+         Float(MOTOR_ALTITUDE + MOTOR_AZIMUTH);
+         Wait(RCX_WAIT_PERIOD);
+      }
+      calibrate();
+      statusUnset(STAT_CALIBRATE);
+      statusSet(STAT_CALIBRATED);
+   }
+}
+
+void calibrate() {
+   /* Elevation Calibration */
+   ClearSensor(ROTATION_ALTITUDE);
+   SetPower(MOTOR_ALTITUDE, OUT_LOW);
+   OnFwd(MOTOR_ALTITUDE);
+   until(SensorValueBool(RCX_TOUCH_ALTITUDE));
+   Off(MOTOR_ALTITUDE);
+   maxAltitude=-(SensorValue(RCX_ROTATION_ALTITUDE)+5)/10;
+   ClearSensor(ROTATION_ALTITUDE);
+   OnRev(MOTOR_ALTITUDE);
+   Wait(50);
+   Off(MOTOR_ALTITUDE);
+
+   /* Azimuthal calibration */
+   SetPower(MOTOR_AZIMUTH,OUT_LOW);
+   OnFwd(MOTOR_AZIMUTH);
+   until (SensorValueBool(RCX_TOUCH_AZIMUTH));
+   ClearSensor(ROTATION_AZIMUTH);
+   Wait(50);
+   until (SensorValueBool(RCX_TOUCH_AZIMUTH));
+   Off(MOTOR_AZIMUTH);
+   maxAzimuth=-(SensorValue(RCX_ROTATION_AZIMUTH))/10;
+   ClearSensor(ROTATION_AZIMUTH);   
+}
+
+/* Functions for changing bits inside a bit-pattern */
+void statusSet(const int bit) {
+   if (!(STATUS & bit))
+      STATUS+=bit;
+}
+
+void statusUnset(const int bit) {
+   if (STATUS & bit)
+      STATUS -= bit;
+}
+
+/* ___oOo___ */
+

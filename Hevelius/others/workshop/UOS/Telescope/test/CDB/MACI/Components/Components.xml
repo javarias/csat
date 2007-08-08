@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Components  xmlns="urn:schemas-cosylab-com:Components:1.0"
+       xmlns:cdb="urn:schemas-cosylab-com:CDB:1.0" 
+       xmlns:baci="urn:schemas-cosylab-com:BACI:1.0" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <_ Name="TELESCOPE_01"
+         Code="TelescopeImpl"
+         Type="IDL:alma/TELESCOPE_MODULE/Telescope:1.0"
+         Container="telescopeContainer"/>
+      <_ Name="LegoControl"
+         Code="H3E"
+         Type="IDL:alma/H3E/LegoControl:1.0"
+         Container="telescopeContainer"
+	 Default="true"/> 
+      <_ Name="INSTRUMENT" 
+         Code="Acssim.Servants.Simulator"
+         Type="IDL:alma/INSTRUMENT_MODULE/Instrument:1.0"
+         Container="pyContainer"
+         Default="true"/>
+</Components>
+
+

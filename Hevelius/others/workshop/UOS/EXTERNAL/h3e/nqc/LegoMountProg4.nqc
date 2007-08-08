@@ -1,0 +1,172 @@
+/*
+*Moveordie.nqc
+*This File contanis source code for a program to control
+*a lego antena mount.
+*/
+
+/*This file includes aliases for motors, sensors an registry associations*/
+#include "../include/SCTdefs.h"
+
+/*Altitude, azimuth and status registry.
+*Be careful to keep this equal to aliases at he
+*SCTdefs.h header file!
+*/
+
+#pragma reserve 4 8
+#define REAL_ALTITUDE 	@4
+#define REAL_AZIMUTH 	@5
+#define COMM_ALTITUDE 	@6
+#define COMM_AZIMUTH 	@7
+#define STATUS 		@8
+
+/*Motor and sensor associations. 
+* If the sensors or the lego change 
+* you can specify here where the sensors and motors are connected
+*/
+
+#define MOTOR_AZIMUTH 		OUT_B
+#define MOTOR_ALTITUDE 		OUT_A
+#define TOUCH_ALTITUDE 		SENSOR_2
+#define TOUCH_AZIMUTH 		SENSOR_1
+#define ROTATION_AZIMUTH 	SENSOR_3
+#define ROTATION_ALTITUDE 	SENSOR_2
+
+/*Macros */
+#define statusIsSet(bit) 	(STATUS & bit)
+
+int maxAzimuth=1,maxAltitude=1;
+
+task main(){ 
+	Float(MOTOR_ALTITUDE + MOTOR_AZIMUTH);
+	
+	SetSensor(TOUCH_ALTITUDE, SENSOR_TOUCH);
+	SetSensor(TOUCH_AZIMUTH, SENSOR_TOUCH);
+	SetSensor(ROTATION_ALTITUDE,SENSOR_ROTATION);
+	SetSensor(ROTATION_AZIMUTH,SENSOR_ROTATION);
+	ClearSensor(TOUCH_ALTITUDE);
+	ClearSensor(ROTATION_AZIMUTH);
+
+	COMM_ALTITUDE=180;
+	COMM_AZIMUTH=360;
+
+	STATUS=0;
+
+	start calibration_monitor;
+	/*Main Loop */
+	int diff_altitude, diff_azimuth;
+	while(true){
+		if(!statusIsSet(STAT_CALIBRATED)) continue ;
+		while(COMM_ALTITUDE >= 360) COMM_ALTITUDE -= 360;
+		while(COMM_ALTITUDE < 0) COMM_ALTITUDE += 360;
+		while(COMM_AZIMUTH > 360) COMM_AZIMUTH -= 360;
+		while(COMM_AZIMUTH < 0 ) COMM_AZIMUTH += 360;
+
+		REAL_ALTITUDE=(SensorValue(RCX_ROTATION_ALTITUDE)*18)/maxAltitude;	
+		REAL_AZIMUTH=(SensorValue(RCX_ROTATION_AZIMUTH)*36)/maxAzimuth;
+		SetUserDisplay(REAL_ALTITUDE,0);
+
+		if(COMM_ALTITUDE > 180){
+			statusSet(STAT_ALTITUDE_ERROR);
+			continue;
+		}
+		statusUnset(STAT_ALTITUDE_ERROR);
+
+		diff_altitude= REAL_ALTITUDE - COMM_ALTITUDE;
+		diff_azimuth=  REAL_AZIMUTH - COMM_AZIMUTH;
+
+		/* Altitude movement control */
+		if(diff_altitude < 0)
+			SetDirection(MOTOR_ALTITUDE,OUT_FWD);
+		else
+			SetDirection(MOTOR_ALTITUDE,OUT_REV);
+
+		SetPower(MOTOR_ALTITUDE, OUT_LOW);
+		if (abs(diff_altitude)<4)
+			Off(MOTOR_ALTITUDE);
+		else
+			On(MOTOR_ALTITUDE);
+		
+		/* Azimuthal movement control */
+		if(diff_azimuth < 0 )
+			SetDirection(MOTOR_AZIMUTH, OUT_FWD);
+		else
+			SetDirection(MOTOR_AZIMUTH, OUT_REV);
+
+		SetPower(MOTOR_AZIMUTH, OUT_LOW);	
+		if(abs(diff_azimuth) < 6)
+			Off(MOTOR_AZIMUTH);
+		else
+			On(MOTOR_AZIMUTH);
+	}
+
+}
+
+task calibration_monitor() {
+   calibration();
+   statusSet(STAT_CALIBRATED);
+   while (true) {
+      while (statusIsSet(STAT_CALIBRATED))
+         Wait(RCX_WAIT_PERIOD);
+      while (!statusIsSet(STAT_CALIBRATE)) {
+         Float(MOTOR_ALTITUDE + MOTOR_AZIMUTH);
+         Wait(RCX_WAIT_PERIOD);
+      }
+      calibration();
+      statusUnset(STAT_CALIBRATE);
+      statusSet(STAT_CALIBRATED);
+   }
+}
+
+
+void calibration(){
+	SetPower(MOTOR_AZIMUTH,OUT_HALF);//AZIMUTH CALIBRATION
+	OnRev(MOTOR_AZIMUTH);
+   	until (SensorValueBool(TOUCH_AZIMUTH));
+	Wait(50);
+	Off(MOTOR_AZIMUTH);
+	Wait(50);
+	ClearSensor(ROTATION_AZIMUTH);
+	OnRev(MOTOR_AZIMUTH);
+	until(SensorValueBool(TOUCH_AZIMUTH));
+	Wait(50);
+	Off(MOTOR_AZIMUTH);
+	maxAzimuth=-(ROTATION_AZIMUTH)/10;
+	ClearSensor(ROTATION_AZIMUTH);
+	
+	SetPower(MOTOR_ALTITUDE,OUT_HALF);//ALTITUDE CALIBRATION
+	ClearSensor(ROTATION_ALTITUDE);
+	SetDirection(MOTOR_ALTITUDE,OUT_FWD);
+	while(true){
+	On(MOTOR_ALTITUDE);
+	SetUserDisplay(SensorValueRaw(ROTATION_ALTITUDE),0);
+	Wait(20);
+	if(SensorValueRaw(ROTATION_ALTITUDE)<300)
+		break;
+   	}
+	Off(MOTOR_ALTITUDE);
+	ClearSensor(ROTATION_ALTITUDE);
+	SetDirection(MOTOR_ALTITUDE,OUT_TOGGLE);
+	SetPower(MOTOR_ALTITUDE,OUT_HALF);
+        while(true){
+        On(MOTOR_ALTITUDE);
+        SetUserDisplay(SensorValueRaw(ROTATION_ALTITUDE),0);
+	Wait(30);
+	if(SensorValueRaw(ROTATION_ALTITUDE)<250)	
+        	break;
+        }
+	Off(OUT_A);
+	maxAltitude=-(ROTATION_ALTITUDE)/10;
+	ClearSensor(ROTATION_ALTITUDE);
+}
+
+/* Functions for changing bits inside a bit-pattern */
+void statusSet(const int bit) {
+   if (!(STATUS & bit))
+      STATUS+=bit;
+}
+
+void statusUnset(const int bit) {
+   if (STATUS & bit)
+      STATUS -= bit;
+}
+

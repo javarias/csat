@@ -1,0 +1,130 @@
+/*******************************************************************************
+*
+* This code is under GNU General Public Licence (GPL). 
+*
+* "@(#) $Id: hptPad.idl,v 1.1.1.1 2007/07/09 12:47:39 wg8 Exp $"
+*
+* who       when        what
+* --------  ----------  ----------------------------------------------
+*/
+
+/************************************************************************
+*   NAME
+*     hptPad.idl  
+* 
+*   SYNOPSIS
+* 
+*   DESCRIPTION
+*
+*   FILES
+*
+*   ENVIRONMENT
+*
+*   COMMANDS
+*
+*   RETURN VALUES
+*
+*   CAUTIONS 
+*
+*   EXAMPLES
+*
+*   SEE ALSO
+*
+*   BUGS   
+* 
+*------------------------------------------------------------------------
+*/
+
+#ifndef _Pad_IDL_
+#define _Pad_IDL_
+
+#include <baci.idl>
+#include <acserr.idl>
+
+#pragma prefix "alma"
+
+module hptPad {
+
+    /**
+     * This interface belongs to the abstract Continuum Back End device.
+     * It will be the standard interface for APEX Continuum Back End Units.
+     */
+    interface Pad:ACS::CharacteristicComponent {
+
+
+    // *** Asynchronous actions ***
+
+    /**
+     * Turn on any parts of the instrument for which power is under software
+     * control, and initialise by setting defaults.
+     *
+     * @param cb   callback when completed
+     * @param desc description
+     */
+    void on(in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+    /**
+     * Turn off any parts of the instrument for which power is under software
+     * control.
+     *
+     * @param cb   callback when completed
+     * @param desc description
+     */
+    void off(in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+    /**
+     * Hardware reset (restart system) and set defaults.
+     *
+     * @param cb   callback when completed
+     * @param desc description
+     */
+    void reset(in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+    /**
+     * Hardware reboot.
+     *
+     * @param cb   callback when completed
+     * @param desc description
+     */
+    void reboot(in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+    /**
+     * Status of observation / instrument - what it is currently doing.
+     *
+     * @param cb   callback when completed
+     * @param desc description
+     */
+    void status(in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+    readonly attribute ACS::RWstring deviceName;
+
+    readonly attribute ACS::ROlong btnA;
+    readonly attribute ACS::ROlong btnB;
+    readonly attribute ACS::ROlong btnC;
+
+    readonly attribute ACS::ROlong btnX;
+    readonly attribute ACS::ROlong btnY;
+    readonly attribute ACS::ROlong btnZ;
+
+    readonly attribute ACS::ROlong L1;
+    readonly attribute ACS::ROlong L2;
+
+    readonly attribute ACS::ROlong R1;
+    readonly attribute ACS::ROlong R2;
+
+    readonly attribute ACS::ROlong slider;
+
+    readonly attribute ACS::ROlong axisX1;
+    readonly attribute ACS::ROlong axisY1;
+
+    readonly attribute ACS::ROlong axisX2;
+    readonly attribute ACS::ROlong axisY2;
+
+    readonly attribute ACS::ROlong axisX3;
+    readonly attribute ACS::ROlong axisY3;
+
+    };
+
+};
+
+#endif

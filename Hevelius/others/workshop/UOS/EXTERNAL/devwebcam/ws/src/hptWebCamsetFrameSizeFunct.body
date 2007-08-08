@@ -1,0 +1,63 @@
+/*
+ * "@(#) $Id: hptWebCamsetFrameSizeFunct.body,v 1.1.1.1 2007/07/09 12:47:39 wg8 Exp $"
+ *
+ * $Log: hptWebCamsetFrameSizeFunct.body,v $
+ * Revision 1.1.1.1  2007/07/09 12:47:39  wg8
+ * Repository Setup
+ *
+ * Revision 1.1  2007/06/25 13:24:22  jibsen
+ * External files.
+ *
+ * Revision 1.1  2004/07/20 15:56:06  tjuerges
+ * - Added latest kernel modules for Philips ToUCam PWC-740K model, including decompressor library (binary only) which allows the camera to take frames of 640*480 at 15 fps.
+ *
+ * Revision 1.1  2004/07/16 15:17:41  tjuerges
+ * - Jetzt mit Sources des Kernel-Modules. Aufgesplittet in lcu/ws.
+ *
+ * Revision 2.3  2004/07/15 11:57:50  tjuerges
+ * - Anstelle ACE-Threads QThreads.
+ * - GUI erweitert.
+ * - Freigeben der Komponente hinzugefügt.
+ * - Von /dev/video1 nach /dev/video2.
+ * - Viel aufgeräumt.
+ *
+ *
+*/
+
+ACSErr::Completion_var c=new ACSErr::Completion;
+
+/***************************
+ * FILL IN HERE YOUR CODE! *
+ ***************************
+*/
+webcamVideoWindow vw;
+if(DO_running)
+{
+	vw.width=width;
+	vw.height=height;
+	if(vidDev->setVideoWindow(vw)<0)
+	{
+		c->type=ACSErr::ACSErrTypeCommon;
+		c->code=ACSErrTypeCommon::IOError;
+		ACS_SHORT_LOG((LM_ERROR,"hptWebCam::setFrameSizeFunct: Could not set the wanted frame size %d*%d.",width,height));
+	}
+	else
+	{
+		c->type=ACSErr::ACSErrTypeOK;
+		c->code=ACSErrTypeOK::ACSErrOK;
+		ACS_SHORT_LOG((LM_INFO,"hptWebCam::setFrameSizeFunct: Frame size has been set to%d*%d.",width,height));
+	}
+}
+else
+{
+	c->type=ACSErr::ACSErrTypeCommon;
+	c->code=ACSErrTypeCommon::IOError;
+	ACS_SHORT_LOG((LM_ERROR,"hptWebCam::setFrameSizeFunct: Cannot set frame size. Component was never started."));
+}
+/**************************
+ * UP TO HERE!            *
+ **************************
+*/
+
+c->timeStamp=getTimeStamp();
+return c._retn();
