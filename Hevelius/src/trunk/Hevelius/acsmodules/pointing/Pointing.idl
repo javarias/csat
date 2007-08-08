@@ -1,0 +1,16 @@
+#ifndef _POINTING_IDL_
+#define _POINTING_IDL_
+#include <acscomponent.idl>
+#pragma prefix "alma"
+
+ module demo
+ {
+ // a very simple component
+ interface POINTING : ACS::ACSComponent
+ {
+ //string sayHello();
+
+string PointingManual(in string inString, inout double inoutDouble, out long outInt);
+ };
+ };
+ #endif
