@@ -10,6 +10,7 @@ import alma.acs.component.ComponentLifecycleException;
 import alma.UOSErr.*;
 import alma.UOSErr.wrappers.*;
 import alma.acs.exceptions.AcsJException;
+import Hevelius.utilities.converter.*;
 
 
 /******************************
@@ -34,14 +35,22 @@ public class Presetting {
 
 	}
 
-	public void move_to(){
-		
-		capturePos();
 
+	// HACER ESTO COMO HEBRA
+	public static void move_to(double ra, double dec, int type){
+		
+		//capturePos();
+		if(type == 'ALTAZ')
+			Converter.altaz2radec(ra,dec);
+		else
+			Converter.radecValidate(ra,dec);
+
+		pos = createRadecType(ra,dec);
+		
 		//LLAMADA A METODO DE TOBAR COMPONENT PARA MOVER
 		try{
 			conection();
-			preset(radecPos pos);
+			preset(pos);
 		}catch(ComponentLifecycleException e)
 		{
 			//VENTANA DE DESCONEXION U OTRA WEA POR DISCUTIR	
@@ -50,12 +59,23 @@ public class Presetting {
 
 	}
 
+/*	//EN DUDA POR USO DE CONVERTER.JAVA
 	public void altaz2radec(radecPos p){
 	
-		//FORMULA PARA CONVERTIR
+		//FORMULA PARA CONVERTIR ---NECESITO EL MATHEMATICA!!!!
 
-	}
+	}*/
 	
+	public radecPos createRadecType(double ra, double dec){
+		radecPos tmp;
+
+		tmp.ra = ra;
+		tmp.dec = dec;
+
+		return tmp;
+	}
+
+/*
 	public void capturePos(){
 		
 		radecPos tmp;
@@ -88,6 +108,6 @@ public class Presetting {
 			}
 		}
 	}
-
+*/
 
 }

@@ -19,7 +19,7 @@ public class Converter {
 
 	private static Configuration test = new Configuration();
 
-	public static void convertir(double RA, double DEC) //usarlo como clase
+	public static void radec2altaz(double RA, double DEC) //usarlo como clase
 	{		
 		Calendar calendario = Calendar.getInstance();
 
@@ -112,14 +112,19 @@ public class Converter {
 
 	}
 
-	public static int verificar(double RA, double DEC)
+	public static void altaz2radec(double ALT, double AZ){
+
+	}
+
+
+	public static int radecVerificate(double RA, double DEC)
 	{
 		if((0<= RA && RA<= 24*15) &&(-90 <= DEC && DEC <= 90))
 			return 1;
 		return 0;
 	}
 
-	public static int validar(double ALT, double AZ)
+	public static int radecValidate(double ALT, double AZ)
 	{
 		while(ALT > 360)
 			ALT -= 360;
@@ -141,6 +146,17 @@ public class Converter {
 		return 0;
 	}
 
+	public static int altazVerificate(double RA, double DEC)
+	{
+
+	}
+
+	public static int altazValidate(double ALT, double AZ)
+	{
+
+	}
+
+
 	public static double getAlt()
 	{
 		return ALT;
@@ -149,6 +165,16 @@ public class Converter {
 	public static double getAz()
 	{
 		return AZ;
+	}
+
+	public static double getRa()
+	{
+		return RA;
+	}
+
+	public static double getDec()
+	{
+		return DEC;
 	}
 }
 

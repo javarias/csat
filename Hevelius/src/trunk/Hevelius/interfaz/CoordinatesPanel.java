@@ -1,6 +1,7 @@
 package Hevelius.interfaz;
 
 import Hevelius.utilities.converter.*;
+import Hevelius.acsmodules.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -92,7 +93,11 @@ public class CoordinatesPanel extends JPanel
 				Double Alt, Az;
 				Alt = Double.parseDouble(coor1.getText());
 				Az = Double.parseDouble(coor2.getText());
-				Converter.convertir(Alt,Az);
+				//Converter.radec2altaz(Alt,Az);
+				
+
+				/* AGREGAR CAPTURA DE TIPO DE COORDENADA */
+				Presetting.move_to(Alt,Az,type);				
 			}
 		});
 
