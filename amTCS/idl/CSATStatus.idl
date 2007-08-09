@@ -1,0 +1,121 @@
+/* IDL for CSATStatus component */
+
+#ifndef _CSATSTATUS_IDL
+#define _CSATSTATUS_IDL
+
+#include <baci.idl>
+#include <Types.idl>
+
+#pragma prefix "alma"
+
+/**
+ * @file CSATStatus.idl
+ * IDL specification for the CSATStatus module interface.
+ * This interface is the primary connection for external clients
+ * that want to control the AmTCS itself, by moving it trough its
+ * states, and for getting general information about it.
+ */
+module CSATSTATUS_MODULE {
+
+	/** @interface CSATStatus
+	 * Defines the interface that will be used by external clients to control the
+	 * TCS. This interface allow external software to move the TCS trough its statues
+	 * and to get important information about it.
+	 * Please refer to <a href="https://csrg.inf.utfsm.cl/twiki4/bin/view/ACS/ControlAmateurTelescope">CSAT
+	 * project Twiki site</a> for further information.
+	 */
+	interface CSATStatus : ACS::ACSComponent
+	{
+		/**
+		 * Moves the TCS from the "Stop" state to the "Stand-by" state.  In this
+		 * step all hardware is initialized (set on). No software components are
+		 * initialized yet after on() is called.
+		 */
+		void on();
+
+		/*
+		 * Moves the TCS from the "Stand-by" state to the "Stop" state.  This
+		 * implies shutting off all posible hardware components.
+		 */
+		void off();
+
+		/**
+		 * Moves the TCS from the "Stand-by" state to the "Calibrating" state In
+		 * this step the telescope is set as uncalibrated, and tunning can be
+		 * done in it, until calibration is done.
+		 */
+		void setUncalibrated();
+
+		/**
+		 * Moves the TCS from the "Calibrating" state to the "Stand-by" state In
+		 * this step the telescope is set as calibrated, and we say that is
+		 * pointing to a certain position.
+		 * 
+		 * @param p The position which the telesocope is pointing at
+		 */
+		void setCalibrated(in TYPES::AltazPos p);
+
+		/**
+		 * Moves the TCS from the "Stand-by" state to the "Ready" state.  In this
+		 * step the software components are get and configured (this assumes that
+		 * the hardware is properly configured). After this call is done, the TCS
+		 * is ready to operate.
+		 */
+		void initialize(in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+		/**
+		 * Moves the TCS from the "Ready" state to the "Stand-by" state.  In this
+		 * step the software components are released and the hardware is not
+		 * going to be accessed.
+		 */
+		void stop(in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+		/**
+		 * Moves the TCS from "Ready" to "Automatic" (or viceversa, depending on
+		 * the the value of <i>mode</i>). If the TCS is in Automatic mode, then
+		 * it uses the scheduler to observe. Otherwise, the observations are
+		 * manual.
+		 */
+		void setMode(in long mode);
+
+		/**
+		 * Gets the current position of the telescope, in Ra/Dec and Alt/Az
+		 * coordinates.
+		 * 
+		 * @param p_rd The position ot the telescope in Ra/Dec coordinates
+		 * @param p_aa The position of the telescope in Al/Azm coordinates
+		 */
+		void getPos(out TYPES::RadecPos p_rd, out TYPES::AltazPos p_aa);
+
+		/** 
+		 * Get the current state of the TCS
+		 */
+		long getState();
+
+		/**
+		 * Get the tracking status of the TCS.
+		 */
+		boolean getTrackingStatus();
+
+		/**
+		 * Gets the current tracking rate of the telescope, in Ra/Dec velocity
+		 */
+		TYPES::RadecVel getTrackingRate();
+
+		/**
+		 * Gets the safety of moving the telescope to a specific position. This
+		 * safety includes moon approach, horizon approach, and more.
+		 */
+		long getSafety(in TYPES::RadecPos p);
+
+		/**
+		 * Stops all hardware devices, and stops the whole system, moving finally
+		 * the TCS to the "Stop" state.
+		 */
+		void EmergencyStop();
+
+	};
+
+};
+
+#endif
