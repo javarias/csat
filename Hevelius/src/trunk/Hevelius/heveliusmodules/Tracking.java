@@ -21,15 +21,8 @@ public class Tracking implements Runnable
 
 	public void setRaDec()
 	{
-		if(acstrck)
-		{
-			//Obtain Actual Ra && Dec from Telescope
-		}
-		else
-		{
 			RA = interfaz.getDrawingPanel().getCoordinatesPanel().getRa();
 			DEC = interfaz.getDrawingPanel().getCoordinatesPanel().getDec();
-		}
 	}
 
 	public void setTrackingState(boolean state)
@@ -41,16 +34,27 @@ public class Tracking implements Runnable
 		}
 		else
 			trckState = state;
+		if(!state)
+			setACSTracking(acstrck);
 	}
 
 	public void setACSTracking(boolean state)
 	{
-			acstrck = state;
+		acstrck = state;
+		if(state)
+			interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(trckState);
+		else
+			interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(false);
 	}
 
 	public boolean getTrackingState()
 	{
 		return trckState;
+	}
+
+	public boolean getACSTracking()
+	{
+		return acstrck;
 	}
 
 	public void run()
@@ -60,11 +64,7 @@ public class Tracking implements Runnable
 		{
 			try
 			{
-				if(acstrck)
-				{
-					//ACS Tracking Code
-				}
-				else
+				if(!acstrck)
 				{
 					Ra = interfaz.getDrawingPanel().getCoordinatesPanel().getRa();
 					Dec = interfaz.getDrawingPanel().getCoordinatesPanel().getDec();
