@@ -3,14 +3,12 @@
 #include <acscomponent.idl>
 #pragma prefix "alma"
 
- module demo
- {
- // a very simple component
- interface POINTING : ACS::ACSComponent
- {
- //string sayHello();
-
-string PointingManual(in string inString, inout double inoutDouble, out long outInt);
- };
- };
- #endif
+module POINTING_MODULE
+{
+	interface Pointing : ACS::ACSComponent
+	{
+		void AltitudeOffset(in double degree);
+		void AzimuthOffset(in double degree);
+	};
+};
+#endif
