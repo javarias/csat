@@ -70,7 +70,7 @@ public class Tracking implements Runnable
 					Dec = interfaz.getDrawingPanel().getCoordinatesPanel().getDec();
 					if(RA == Ra && DEC== Dec)
 					{
-						Converter.convertir(Ra,Dec);
+						Converter.radec2altaz(Ra,Dec);
 						Alt = Converter.getAlt();
 						Az = Converter.getAz();
 						interfaz.getDrawingPanel().getCoordinatesPanel().setAlt(Alt);

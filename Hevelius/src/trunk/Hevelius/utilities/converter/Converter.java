@@ -148,12 +148,12 @@ public class Converter {
 
 	public static int altazVerificate(double RA, double DEC)
 	{
-
+		return 0;
 	}
 
 	public static int altazValidate(double ALT, double AZ)
 	{
-
+		return 0;
 	}
 
 

@@ -97,7 +97,7 @@ public class CoordinatesPanel extends JPanel
 				
 
 				/* AGREGAR CAPTURA DE TIPO DE COORDENADA */
-				Presetting.move_to(Alt,Az,type);				
+			/////////////////////	Presetting.move_to(Alt,Az,type);				
 			}
 		});
 
