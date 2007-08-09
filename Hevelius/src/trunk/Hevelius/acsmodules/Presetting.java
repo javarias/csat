@@ -5,10 +5,7 @@ import alma.ACS.ComponentStates;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.container.ContainerServices;
 import alma.acs.component.ComponentImplBase;
-import alma.SCHEDULER_MODULE.SchedulerOperations;
 import alma.acs.component.ComponentLifecycleException;
-import alma.UOSErr.*;
-import alma.UOSErr.wrappers.*;
 import alma.acs.exceptions.AcsJException;
 import Hevelius.utilities.converter.*;
 
@@ -35,7 +32,6 @@ public class Presetting {
 
 	}
 
-
 	// HACER ESTO COMO HEBRA
 	public static void move_to(double ra, double dec, int type){
 		
@@ -50,7 +46,7 @@ public class Presetting {
 		//LLAMADA A METODO DE TOBAR COMPONENT PARA MOVER
 		try{
 			conection();
-			preset(pos);
+			obj.preset(radecPos pos);
 		}catch(ComponentLifecycleException e)
 		{
 			//VENTANA DE DESCONEXION U OTRA WEA POR DISCUTIR	
@@ -59,13 +55,6 @@ public class Presetting {
 
 	}
 
-/*	//EN DUDA POR USO DE CONVERTER.JAVA
-	public void altaz2radec(radecPos p){
-	
-		//FORMULA PARA CONVERTIR ---NECESITO EL MATHEMATICA!!!!
-
-	}*/
-	
 	public radecPos createRadecType(double ra, double dec){
 		radecPos tmp;
 
@@ -75,39 +64,5 @@ public class Presetting {
 		return tmp;
 	}
 
-/*
-	public void capturePos(){
-		
-		radecPos tmp;
-		int type_pos;
-
-		//OBTENER DE PANTALLA LAS COORDENADA Y EL TIPO
-		try{
-			validatePos(tmp, type_pos);
-		}catch(Exception e){
-			//VENTANA DE ERROR EN INGRESO DE COORDENADAS
-		}
-
-		if(type_pos == 'ALTAZ')
-			altaz2radec(tmp);
-
-		pos = tmp;
-		
-	}
-
-	public void validatePos(radecPos tmp, int type_pos){
-		if(type_pos == 'ALTAZ'){
-			//VALIDACION COORDENADAS ALTAZ (TIRAR EXCEPTION SI ESTA MAL)
-		}
-		else{
-			if(type_pos == 'RADEC'){
-				//VALIDACION COORDENADA RADEC (TIRAR EXCEPTION SI ESTA MAL)
-			}
-			else{
-				//TIRAR EXCEPTION DE SOFTWARE
-			}
-		}
-	}
-*/
 
 }

@@ -5,10 +5,7 @@ import alma.ACS.ComponentStates;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.container.ContainerServices;
 import alma.acs.component.ComponentImplBase;
-import alma.SCHEDULER_MODULE.SchedulerOperations;
 import alma.acs.component.ComponentLifecycleException;
-import alma.UOSErr.*;
-import alma.UOSErr.wrappers.*;
 import alma.acs.exceptions.AcsJException;
 import alma.acs.TYPES.*;
 
