@@ -31,6 +31,46 @@ public class CSATStatus
 		}
 	}
 
+	public void on()
+	{
+		csstatus.on();
+	}
+
+	public void stop()
+	{
+		csstatus.stop();
+	}
+
+	public void off()
+	{
+		csstatus.off();
+	}
+
+	public void setUncalibrated()
+	{
+		csstatus.setUncalibrated();
+	}
+
+	public void setCalibrated(AltAzPos p)
+	{
+		csstatus.setCalibrated(p);
+	}
+
+	public void initialize()
+	{
+		csstatus.initialize();
+	}
+
+	public void getPos(RadecPos r, AltAz a)
+	{
+		csstatus.getPos(r, a);
+	}
+
+	public int getState()
+	{
+		return csstatus.getState();
+	}
+
 	public boolean getTrackingStatus()
 	{
 		return csstatus.getTrackingStatus();
@@ -40,4 +80,19 @@ public class CSATStatus
 	{
 		return csstatus.getTrackingRate();
 	}
+
+        public int getSafety(RadecPos p)
+	{
+		return csstatus.getSafety(p);
+	}
+	
+	public void EmergencyStop()
+	{
+		csstatus.emergencyStop();
+	}
+	public void setMode(int s)
+	{
+		csstatus.setMode(s);
+	}
+
 }

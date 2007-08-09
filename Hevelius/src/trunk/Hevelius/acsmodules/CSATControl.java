@@ -31,6 +31,11 @@ public class CSATControl
 		}
 	}
 
+	public void preset(radecPos p)
+	{
+		cscontrol.preset(p);
+	}
+
 	public void setTrackingStatus(boolean s)
 	{
 		cscontrol.setTrackingStatus(s);
@@ -39,5 +44,40 @@ public class CSATControl
 	public void setTrackingRate(RadecVel v)
 	{
 		cscontrol.setTrackingRate(v);
+	}
+
+	public void gotoRadec(RadecPos p, RadecVel v)
+	{
+		cscontrol.gotoRadec(p,v);
+	}
+
+	public void gotoAltAz(AltAzPos p, AltAzVel v)
+	{
+		cscontrol.gotoAltAz(p,v);
+	}
+
+	public void AltitudeOffSet(double degree)
+	{
+		cscontrol.AltitudeOffSet(degree);
+	}
+
+	public void AzimuthOffSet(double degree)
+	{
+		cscontrol.AzimuthOffSet(degree);
+	}
+
+	public void getPreviewImage(Image)
+	{
+		cscontrol.getPreviewImage(Image);
+	}
+
+	public void StopTelescope()
+	{
+		cscontrol.StopTelescope();
+	}
+
+	public void getProImage(int id, double exptime)
+	{
+		cscontrol.getProImage(id, exptime);
 	}
 }
