@@ -118,8 +118,8 @@ USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES= 
-jjj_DIRS=
+JARFILES=CSATControlImpl 
+CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 jjj_EXTRAS= 
 #
 # java sources in Jarfile on/off
@@ -131,7 +131,7 @@ XML_IDL=
 #
 # Java Component Helper Classes generation on/off
 #
-COMPONENT_HELPERS=
+COMPONENT_HELPERS=on
 #
 # Java Entity Classes generation on/off
 #
