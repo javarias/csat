@@ -48,4 +48,4 @@ module TYPES
 	typedef sequence<long> Image;
 };
 
-#endif
+#endif /* _TYPES_IDL_ */

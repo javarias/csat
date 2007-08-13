@@ -118,4 +118,4 @@ module CSATSTATUS_MODULE {
 
 };
 
-#endif
+#endif /* _CSATSTATUS_IDL */
