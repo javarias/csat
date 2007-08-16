@@ -5,8 +5,9 @@ import Hevelius.acsmodules.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import acs.TYPES.*;
 
-public class CoordinatesPanel extends JPanel
+public class CoordinatesPanel extends JPanel implements Runnable
 {
 	//private Configuration test = DrawingPanel.getConfig();
 
@@ -31,6 +32,9 @@ public class CoordinatesPanel extends JPanel
 	private JButton catalogue;
 
 	private boolean coortype;
+	private radecPos rdPos;
+	private altazPos aaPos;
+
 
 	public CoordinatesPanel(LayoutManager l)
 	{
@@ -39,11 +43,6 @@ public class CoordinatesPanel extends JPanel
 	public void init()
 	{
 		//Coordinate Label
-		/*switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: coor = new JLabel("RaDec Coordinates"); break;
-			case 1: coor = new JLabel("Horizontal Coordinates"); break;
-			default: coor = new JLabel("RaDec Coordinates"); break;
-		}*/
 		coor = new JLabel("");
 		coor.setSize(150,20);
 		coor.setForeground(Color.WHITE);
@@ -51,11 +50,6 @@ public class CoordinatesPanel extends JPanel
 		add(coor);
 
 		//RA or ALT Label
-		/*switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: coor1L = new JLabel("RA"); break;
-			case 1: coor1L = new JLabel("Alt"); break;
-			default: coor1L = new JLabel("RA"); break;
-		}*/
 		coor1L = new JLabel("");
 		coor1L.setSize(30,20);
 		coor1L.setForeground(Color.WHITE);
@@ -67,11 +61,6 @@ public class CoordinatesPanel extends JPanel
 		add(coor1);
 
 		//DEC or AZ Label
-		/*switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: coor2L = new JLabel("Dec"); break;
-			case 1: coor2L = new JLabel("Az"); break;
-			default: coor2L = new JLabel("Dec"); break;
-		}*/
 		coor2L = new JLabel("");
 		coor2L.setSize(30,20);
 		coor2L.setForeground(Color.WHITE);
@@ -272,5 +261,24 @@ public class CoordinatesPanel extends JPanel
 		ccoorAz.setText(Double.toString(AZ));
 		interfaz.getDrawingPanel().getCompassPanel().setCompassPoints(AZ);
 	}
-
+	
+	public void run()
+	{
+		while(true)
+		{
+			try
+			{
+				interfaz.getDrawingPanel().getCSATStatus().getPos(rdPos,aaPos);
+				setRa(rdPos.Ra);
+				setDec(rdPos.Dec);
+				setAlt(aaPos.Alt);
+				setAz(aaPos.Az);
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e)
+			{
+				System.out.println("Error en Thread");
+			}
+		}
+	}
 }
