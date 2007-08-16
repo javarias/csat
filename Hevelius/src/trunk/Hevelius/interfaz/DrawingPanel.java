@@ -8,6 +8,7 @@ import java.io.*;
 import javax.imageio.*;
 
 import Hevelius.heveliusmodules.*;
+import Hevelius.acsmodules.*;
 
 public class DrawingPanel extends JPanel
 {
@@ -50,6 +51,9 @@ public class DrawingPanel extends JPanel
 	private VirtualTelescopePanel vtpane = null;
 
 	private Tracking trck = null;
+
+	private CSATControl csatc = null;
+	private CSATStatus csats = null;
 
 	public DrawingPanel(LayoutManager l)
 	{
@@ -348,4 +352,13 @@ public class DrawingPanel extends JPanel
 		return vtpane;
 	}
 
+	public CSATControl getCSATControl()
+	{
+		return csatc;
+	}
+
+	public CSATStatus getCSATStatus()
+	{
+		return csats;
+	}
 }
