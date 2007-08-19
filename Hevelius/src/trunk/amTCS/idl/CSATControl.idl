@@ -1,0 +1,104 @@
+/* IDL for CSATControl component */
+
+#ifndef _CSATCONTROL_IDL
+#define _CSATCONTROL_IDL
+
+#include <baci.idl>
+#include <Types.idl>
+
+#pragma prefix "alma"
+
+/**
+ * @file CSATControl.idl
+ * IDL specification for the CSATControl module interface.
+ * This interface is the primary connection for external clients
+ * that want to control devices by low-level calls.
+ */
+module CSATCONTROL_MODULE {
+
+	/** @interface CSATControl
+	 * Defines the interface for controlling low level devices from external
+	 * clients of the amateur TCS. These functions do not alter the TCS state,
+	 * only make devices work (if the TCS status and state allow them).
+	 * Please refer to <a href="https://csrg.inf.utfsm.cl/twiki4/bin/view/ACS/ControlAmateurTelescope">CSAT
+	 * project Twiki site</a> for further information
+	 */
+	interface CSATControl : ACS::ACSComponent
+	{
+		/**
+		 * Presets asynchronously the telescope to a fixed position, in Ra/Dec coordinates
+		 *
+		 * @param p The position to preset, in Ra/Dec coordinates
+		 */
+		void preset(in TYPES::RadecPos p, in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+		/**
+		 * Sets the tracking status for the telescope.
+		 *
+		 * @param s The tracking status to set.
+		 */
+		void setTrackingStatus(in boolean s);
+
+		/**
+		 * Sets the tracking rate for the telescope.
+		 *
+		 * @param s The tracking status to set.
+		 */
+		void setTrackingRate(in TYPES::RadecVel v);
+
+		/**
+		 * Goes to a RaDec position by specifing a fixed velocity.
+		 *
+		 * @param p The position to preset, in Ra/Dec coordinates
+		 * @param v The velocity that should be used to go to the coordinates.
+		 */
+		void goToRadec(in TYPES::RadecPos p, in TYPES::RadecVel v, in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+		/**
+		 * Goes to a AltAz position by specifing a fixed velocity.
+		 *
+		 * @param p The position to preset, in Alt/Az coordinates
+		 * @param v The velocity that should be used to go to the coordinates.
+		 */
+		void goToAltAz(in TYPES::AltazPos p, in TYPES::AltazVel v, in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+		/**
+		 * Moves the telescope in the altitude direction with a specific offset.
+		 *
+		 * @param degrees The offset for the altitude direction, in degrees
+		 */
+		void AltitudeOffSet(in double degrees);
+
+		/**
+		 * Moves the telescope in the azimuth direction with a specific offset.
+		 *
+		 * @param degrees The offset for the azimuth direction, in degrees
+		 */
+		void AzimuthOffSet(in double degrees);
+
+		/**
+		 * Gets a preview (little) image from the camera.
+		 *
+		 * @param img The image that will be taken
+		 */
+		void getPreviewImage(out TYPES::Image img, in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+		/**
+		 * Stops the telescope.
+		 */
+		void stopTelescope();
+
+		/**
+		 * Gets a pro (better) image from the camera.
+		 *
+		 * @param img The image that will be taken
+		 * @param id  An identificator for the image
+		 * @param exptime Exposure time
+		 */
+		void getProImage(out TYPES::Image img, in long id, in double exptime, in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+	};
+
+};
+
+#endif /* _CSATCONTROL_IDL */
