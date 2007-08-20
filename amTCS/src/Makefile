@@ -118,8 +118,9 @@ USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES=CSATControlImpl 
+JARFILES=CSATControlImpl CSATStatusImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
+CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
 jjj_EXTRAS= 
 #
 # java sources in Jarfile on/off

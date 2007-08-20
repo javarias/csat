@@ -8,6 +8,11 @@
          Code="alma.CSATCONTROL_MODULE.CSATControlImpl.CSATControlHelper"
          Type="IDL:alma/CSATCONTROL_MODULE/CSATControl:1.0"
          Container="amContainer"/>
+
+      <_ Name="CSATSTATUS"
+         Code="alma.CSATSTATUS_MODULE.CSATStatusImpl.CSATStatusHelper"
+         Type="IDL:alma/CSATSTATUS_MODULE/CSATStatus:1.0"
+         Container="amContainer"/>
 </Components>
 
 

@@ -20,7 +20,7 @@
  *    MA 02111-1307  USA
  */
 
-package alma.CSATCONTROL_MODULE.CSATControlImpl;
+package alma.CSATSTATUS_MODULE.CSATStatusImpl;
 
 import java.util.logging.Logger;
 
@@ -28,10 +28,10 @@ import alma.ACS.*;
 import alma.TYPES.*;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.container.ContainerServices;
-import alma.CSATCONTROL_MODULE.CSATControlOperations;
-import alma.CSATCONTROL_MODULE.CSATControlImpl.CSATControlImpl;
+import alma.CSATSTATUS_MODULE.CSATStatusOperations;
+import alma.CSATSTATUS_MODULE.CSATStatusImpl.CSATStatusImpl;
 
-public class CSATControlImpl implements CSATControlOperations, ComponentLifecycle {
+public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle {
 
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
@@ -72,37 +72,49 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 	
 	/////////////////////////////////////////////////////////////
-	// Implementation of DataBaseOperations
+	// Implementation of CSATStatusOperations
 	/////////////////////////////////////////////////////////////
 
-      	public void preset(RadecPos p, CBvoid cb, CBDescIn desc){
+	public void on(){
 	}
 
-	public void setTrackingStatus(boolean s){
+	public void off(){
 	}
 
-	public void setTrackingRate(RadecVel v){
+	public void setUncalibrated(){
 	}
 
-	public void goToRadec(RadecPos p, RadecVel v, CBvoid cb, CBDescIn desc){
+	public void setCalibrated(AltazPos p){
 	}
 
-	public void goToAltAz(AltazPos p, AltazVel v, CBvoid cb, CBDescIn desc){
+	public void initialize(CBvoid cb, CBDescIn desc){
 	}
 
-	public void AltitudeOffSet(double degrees){
+	public void stop(CBvoid cb,CBDescIn desc){
 	}
 
-	public void AzimuthOffSet(double degrees){
+	public void setMode(int mode){
 	}
 
-	public void getPreviewImage(ImageHolder img, CBvoid cb, CBDescIn desc){
+	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa){
 	}
 
-	public void stopTelescope(){
+	public int getState(){
+		return 0;
 	}
 
-	public void getProImage(ImageHolder img, int id, double exptime, CBvoid cb, CBDescIn desc){
+	public boolean getTrackingStatus(){
+		return false;
 	}
 
+	public RadecVel getTrackingRate(){
+		return new RadecVel();
+	}
+
+	public int getSafety(RadecPos p){
+		return 0;
+	}
+
+	public void EmergencyStop(){
+	}
 }

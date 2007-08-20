@@ -22,8 +22,8 @@ module TYPES
 	 * \struct AltazPos
 	 */
 	struct AltazPos{
-		double ra;
-		double dec;
+		double alt;
+		double az;
 	};
 
 	/**
