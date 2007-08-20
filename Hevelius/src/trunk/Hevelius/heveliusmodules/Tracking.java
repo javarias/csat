@@ -41,10 +41,12 @@ public class Tracking implements Runnable
 	public void setACSTracking(boolean state)
 	{
 		acstrck = state;
+		if(interfaz.getDrawingPanel().getCSATControl()!=null){
 		if(state)
 			interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(trckState);
 		else
 			interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(false);
+}
 	}
 
 	public boolean getTrackingState()

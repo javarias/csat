@@ -1,23 +1,26 @@
 package Hevelius.acsmodules;
 
 import java.io.*;
+import java.util.logging.Logger;
 import alma.ACS.ComponentStates;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.container.ContainerServices;
 import alma.acs.component.ComponentImplBase;
 import alma.acs.component.ComponentLifecycleException;
 import alma.acs.exceptions.AcsJException;
-import alma.acs.TYPES.*;
+import alma.TYPES.*;
 
 public class CSATControl
 {
 	org.omg.CORBA.Object obj = null;
 	alma.CSATCONTROL_MODULE.CSATControl cscontrol;
-	public void connection()
+	Logger m_logger;
+	private ContainerServices m_containerServices;
+	public void connection() throws ComponentLifecycleException
 	{
 		try
 		{
-			obj = m_containerServices.getDefaultComponent("IDL:alma/CSAT Control");
+			obj = m_containerServices.getDefaultComponent("IDL:alma/CSATCONTROL_MODULE/CSATControlImpl:1.0");
 			cscontrol = alma.CSATCONTROL_MODULE.CSATControlHelper.narrow(obj);
 
 		}
@@ -28,9 +31,9 @@ public class CSATControl
 		}
 	}
 
-	public void preset(radecPos p)
+	public void preset(RadecPos p)
 	{
-		cscontrol.preset(p);
+//		cscontrol.preset(p);
 	}
 
 	public void setTrackingStatus(boolean s)
@@ -43,14 +46,14 @@ public class CSATControl
 		cscontrol.setTrackingRate(v);
 	}
 
-	public void gotoRadec(RadecPos p, RadecVel v)
+	public void goToRadec(RadecPos p, RadecVel v)
 	{
-		cscontrol.gotoRadec(p,v);
+//		cscontrol.goToRadec(p,v);
 	}
 
-	public void gotoAltAz(AltAzPos p, AltAzVel v)
+	public void goToAltAz(AltazPos p, AltazVel v)
 	{
-		cscontrol.gotoAltAz(p,v);
+//		cscontrol.goToAltAz(p,v);
 	}
 
 	public void AltitudeOffSet(double degree)
@@ -63,18 +66,18 @@ public class CSATControl
 		cscontrol.AzimuthOffSet(degree);
 	}
 
-	public void getPreviewImage(Image)
+	public void getPreviewImage(ImageHolder img)
 	{
-		cscontrol.getPreviewImage(Image);
+//		cscontrol.getPreviewImage(img);
 	}
 
-	public void StopTelescope()
+	public void stopTelescope()
 	{
-		cscontrol.StopTelescope();
+		cscontrol.stopTelescope();
 	}
 
-	public void getProImage(int id, double exptime)
-	{
-		cscontrol.getProImage(id, exptime);
-	}
+//	public void getProImage(int id, double exptime)
+//	{
+//		cscontrol.getProImage(id, exptime);
+//	}
 }

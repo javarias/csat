@@ -5,7 +5,7 @@ import Hevelius.acsmodules.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import acs.TYPES.*;
+import alma.TYPES.*;
 
 public class CoordinatesPanel extends JPanel implements Runnable
 {
@@ -32,9 +32,8 @@ public class CoordinatesPanel extends JPanel implements Runnable
 	private JButton catalogue;
 
 	private boolean coortype;
-	private radecPos rdPos;
-	private altazPos aaPos;
-
+	private RadecPosHolder rdPos;
+	private AltazPosHolder aaPos;
 
 	public CoordinatesPanel(LayoutManager l)
 	{
@@ -269,10 +268,10 @@ public class CoordinatesPanel extends JPanel implements Runnable
 			try
 			{
 				interfaz.getDrawingPanel().getCSATStatus().getPos(rdPos,aaPos);
-				setRa(rdPos.Ra);
-				setDec(rdPos.Dec);
-				setAlt(aaPos.Alt);
-				setAz(aaPos.Az);
+				setRa(rdPos.value.ra);
+				setDec(rdPos.value.dec);
+				setAlt(aaPos.value.ra);
+				setAz(aaPos.value.dec);
 				Thread.sleep(1000);
 			}
 			catch(InterruptedException e)

@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import Hevelius.acsmodules.*;
+
+import alma.acs.component.ComponentLifecycleException;
+
 public class SystemPanel extends JPanel
 {
 	private JLabel system;
@@ -26,6 +30,18 @@ public class SystemPanel extends JPanel
 		start = new JButton("Start TCS");
 		start.setSize(100,20);
 		add(start);
+		start.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+				interfaz.getDrawingPanel().setCSATControl(new CSATControl());
+				try
+				{
+                                	interfaz.getDrawingPanel().getCSATControl().connection();
+				}
+				catch(ComponentLifecycleException err)
+				{
+				}
+                        }
+                });
 
 		//TCS Stop Button
 		stop = new JButton("Stop TCS");

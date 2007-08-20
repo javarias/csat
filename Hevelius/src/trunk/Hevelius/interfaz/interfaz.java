@@ -139,7 +139,7 @@ public class interfaz {
 		config.pack();	
 
 		Image icono = Toolkit.getDefaultToolkit().getImage("Hevelius/images/hevelius.png");
-		config.setIconImage(icono);
+		//config.setIconImage(icono);
 
 		config.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
