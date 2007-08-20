@@ -52,8 +52,8 @@ public class DrawingPanel extends JPanel
 
 	private Tracking trck = null;
 
-	private CSATControl csatc = null;
-	private CSATStatus csats = null;
+	private CSATControlClient csatc = null;
+	private CSATStatusClient csats = null;
 
 	public DrawingPanel(LayoutManager l)
 	{
