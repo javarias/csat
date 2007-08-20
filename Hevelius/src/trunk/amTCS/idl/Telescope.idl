@@ -1,0 +1,15 @@
+#ifndef _POINTING_IDL_
+#define _POINTING_IDL_
+#include <acscomponent.idl>
+#pragma prefix "alma"
+
+module POINTING_MODULE
+{
+	interface Pointing : ACS::ACSComponent
+	{
+		void goToAltAz(in TYPES::AltazPos p, in TYPES::AltazVel v, in ACS::CBvoid cb, in ACS::CBDescIn desc);
+		void getPos(out TYPES::RadecPos p_rd, out TYPES::AltazPos p_aa);
+		
+	};
+};
+#endif
