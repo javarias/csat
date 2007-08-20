@@ -35,18 +35,52 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 
         private ContainerServices m_containerServices;
         private Logger m_logger;
+	private alma.CSATSTATUS_MODULE.CSATStatus csatstatus;
+	private alma.TELESCOPE_MODULE.Telescope tele_comp;
+	private double alt;
+	private double az;
+	public double altoff = 0;
+	public double azoff = 0;
+	private AltazPos altazpos;
+	private AltazPosHolder altazposh;
+		
+	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException{
+		m_containerServices = containerServices;
+		m_logger = m_containerServices.getLogger();
 
-	public void initialize(ContainerServices containerServices) {
-                m_containerServices = containerServices;
-                m_logger = m_containerServices.getLogger();
-                m_logger.info("initialize() called...");
-        }
-	
+		m_logger.finer("Lifecycle initialize() called");
+
+		// Get csatcontrol instances
+		org.omg.CORBA.Object obj = null;
+		try {
+			obj = m_containerServices.getDefaultComponent("IDL:alma/CSATSTATUS_MODULE/CSATStatusImpl:1.0");
+			csatcontrol = alma.CSATCONTROL_MODULE.CSATStatusHelper.narrow(obj);
+		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get CSATStatus component reference " + e);
+			throw new ComponentLifecycleException("Failed to get CSATStatus component reference");
+		}
+		try {
+                        obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
+                        tele_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
+                } catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+                        m_logger.fine("Failed to get TELESCOPE component reference " + e);
+                        throw new ComponentLifecycleException("Failed to get TELESCOPE component reference");
+                }
+
+		
+
+	}
+
 	public void execute() {
 		m_logger.info("execute() called...");
 	}
-	
+
 	public void cleanUp() {
+
+		if (csatstatus != null)
+			m_containerServices.releaseComponent(pointing.name());
+		if (tele_comp != null)
+                        m_containerServices.releaseComponent(tele_comp.name());
 		m_logger.info("cleanUp() called..., nothing to clean up.");
 	}
 
@@ -55,22 +89,30 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 		m_logger.info("managed to abort...");
 	}
 
-	 /////////////////////////////////////////////////////////////
-        // Implementation of ACSComponent
-        /////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////
+	// Implementation of ACSComponent
+	/////////////////////////////////////////////////////////////
 
 
-        public ComponentStates componentState() {
-                return m_containerServices.getComponentStateManager().getCurrentState();
-        }
-        public String name() {
-                return m_containerServices.getName();
-        }
-
+	public ComponentStates componentState() {
+		return m_containerServices.getComponentStateManager().getCurrentState();
+	}
+	public String name() {
+		return m_containerServices.getName();
+	}
 	public void AltitudeOffset(double degree){
+		csatstatus.getPos(null, altazposh);
 
+		altazpos.alt = altazposh.value.alt+degree;
+		aloff = degree;
+		tmp_comp.goToAltAz(altazpos, null, null, null);
 	}
 	public void AzimuthOffset(double degree){
+		csatstatus.getPos(null, altazposh);
+		altazpos.az = altazposh.az+degree;
+		aloff = degree;
+		tmp_comp.goToAltAz(altazpos, null, null, null);
+
 	}
 
 }

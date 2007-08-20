@@ -35,6 +35,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
+	private alma.POINTING_MODULE.Pointing pointing;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -44,38 +45,49 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 		m_containerServices = containerServices;
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
+
+		// Get pointing instances
+		org.omg.CORBA.Object obj = null;
+		try {
+			obj = m_containerServices.getDefaultComponent("IDL:alma/POINTING_MODULE/PointingImpl:1.0");
+			pointing = alma.POINTING_MODULE.PointingHelper.narrow(obj);
+		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Pointing component reference " + e);
+			throw new ComponentLifecycleException("Failed to get Pointing component reference");
+		}
+
 	}
-    
+
 	public void execute() {
 		m_logger.info("execute() called...");
 	}
-    
+
 	public void cleanUp() {
 		m_logger.info("cleanUp() called..., nothing to clean up.");
 	}
-    
+
 	public void aboutToAbort() {
 		cleanUp();
 		m_logger.info("managed to abort...");
 	}
-	
+
 	/////////////////////////////////////////////////////////////
 	// Implementation of ACSComponent
 	/////////////////////////////////////////////////////////////
-	
-	
+
+
 	public ComponentStates componentState() {
 		return m_containerServices.getComponentStateManager().getCurrentState();
 	}
 	public String name() {
 		return m_containerServices.getName();
 	}
-	
+
 	/////////////////////////////////////////////////////////////
 	// Implementation of DataBaseOperations
 	/////////////////////////////////////////////////////////////
 
-      	public void preset(alma.TYPES.RadecPos p, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
+	public void preset(alma.TYPES.RadecPos p, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
 	}
 
 	public void setTrackingStatus(boolean s){
@@ -88,12 +100,15 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 
 	public void goToAltAz(alma.TYPES.AltazPos p, alma.TYPES.AltazVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
+
 	}
 
 	public void AltitudeOffSet(double degrees){
+		pointing.AltitudeOffset(degrees);
 	}
 
 	public void AzimuthOffSet(double degrees){
+		pointing.AzimuthOffset(degrees);
 	}
 
 	public void getPreviewImage(alma.TYPES.ImageHolder img, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
