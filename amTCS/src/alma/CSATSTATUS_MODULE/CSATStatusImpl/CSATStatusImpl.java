@@ -99,6 +99,8 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa){
+		p_rd = new RadecPosHolder();
+		p_aa = new AltazPosHolder();
 	}
 
 	public int getState(){
