@@ -20,7 +20,7 @@
  *    MA 02111-1307  USA
  */
 
-package alma.CSATCONTROL_MODULE.CSATControlImpl;
+package alma.CSATSTATUS_MODULE.CSATStatusImpl;
 
 import java.util.logging.Logger;
 
@@ -93,22 +93,26 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	public void stop(alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
 	}
 
-	public void setMode(long mode){
+	public void setMode(int mode){
 	}
 
 	public void getPos(RadecPosHolder rdp, AltazPosHolder azp){
 	}
 
-	public long getState(){
+	public int getState(){
+		return 0;
 	}
 
 	public boolean getTrackingStatus(){
+		return false;
 	}
 
 	public RadecVel getTrackingRate(){
+		return null;
 	}
 
-	public long getSafety(RadecPos p){
+	public int getSafety(RadecPos p){
+		return 0;
 	}
 
 	public void EmergencyStop(){

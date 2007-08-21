@@ -16,7 +16,7 @@ import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
 import alma.acs.component.client.ComponentClient;
 //import alma.demo.HelloDemo;
 
-public class CSATControlStatus extends ComponentClient
+public class CSATStatusClient extends ComponentClient
 {
 /*
 	private org.omg.CORBA.Object obj = null;
@@ -39,7 +39,7 @@ public class CSATControlStatus extends ComponentClient
 	}
 */
 
-	private CSATStatusClient csstatus;
+	private alma.CSATSTATUS_MODULE.CSATStatus csstatus;
 
 	public CSATStatusClient(Logger logger, String managerLoc, String clientName)
 		throws Exception {

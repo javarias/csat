@@ -38,7 +38,7 @@ public class CSATControlClient extends ComponentClient
 		}
 		*/
 
-	private CSATControlClient cscontrol;
+	private alma.CSATCONTROL_MODULE.CSATControl cscontrol;
 
 	/**
 	 * @param logger
@@ -55,7 +55,7 @@ public class CSATControlClient extends ComponentClient
 		cscontrol = alma.CSATCONTROL_MODULE.CSATControlHelper.narrow(getContainerServices().getDefaultComponent("IDL:alma/CSATCONTROL_MODULE/CSATControlImpl:1.0"));
 	}
 
-	public static void start()
+	public static CSATControlClient start()
 	{
 		String managerLoc = System.getProperty("ACS.manager");
 		if (managerLoc == null) {
@@ -67,6 +67,7 @@ public class CSATControlClient extends ComponentClient
 		try {
 			csatcc = new CSATControlClient(null, managerLoc, clientName);
 			csatcc.loadComponent();
+			return csatcc;
 		}
 		catch (Exception e) {
 			try {
@@ -86,6 +87,7 @@ public class CSATControlClient extends ComponentClient
 					e3.printStackTrace();
 				}
 			}
+			return null;
 		}
 	}
 

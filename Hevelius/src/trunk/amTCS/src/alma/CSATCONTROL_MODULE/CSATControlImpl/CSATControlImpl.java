@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 import alma.ACS.*;
 import alma.TYPES.*;
 import alma.acs.component.ComponentLifecycle;
+import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
 import alma.CSATCONTROL_MODULE.CSATControlOperations;
 import alma.CSATCONTROL_MODULE.CSATControlImpl.CSATControlImpl;
@@ -41,7 +42,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	// Implementation of ComponentLifecycle
 	/////////////////////////////////////////////////////////////
 	
-	public void initialize(ContainerServices containerServices) {
+	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException {
 		m_containerServices = containerServices;
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");

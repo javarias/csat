@@ -352,17 +352,17 @@ public class DrawingPanel extends JPanel
 		return vtpane;
 	}
 
-	public CSATControl getCSATControl()
+	public CSATControlClient getCSATControl()
 	{
 		return csatc;
 	}
 
-	public CSATStatus getCSATStatus()
+	public CSATStatusClient getCSATStatus()
 	{
 		return csats;
 	}
 
-	public void setCSATControl(CSATControl csatc)
+	public void setCSATControl(CSATControlClient csatc)
 	{
 		this.csatc = csatc;
 	}
