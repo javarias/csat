@@ -112,16 +112,17 @@ CDB_SCHEMAS =
 # 
 # IDL Files and flags
 # 
-IDL_FILES = Types CSATControl CSATStatus Pointing
+IDL_FILES = Types CSATControl CSATStatus Pointing Telescope
 IDL_TAO_FLAGS =
 USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES=CSATControlImpl CSATStatusImpl PointingImpl Hevelius
+JARFILES=CSATControlImpl CSATStatusImpl PointingImpl Telescope Hevelius
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS=alma/CSATSTATUS_MODULE/CSATStatusImpl
 PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
+TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
 Hevelius_DIRS=Hevelius/
 
 
