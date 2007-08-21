@@ -99,7 +99,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 			p_aa.value.alt = Alt;
 			p_aa.value.az = Az;
 		}
-		System.out.println(p_aa.value.alt+p_aa.value.az+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		//System.out.println(p_aa.value.alt+p_aa.value.az+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 	}
 
 	private void hor2radec()

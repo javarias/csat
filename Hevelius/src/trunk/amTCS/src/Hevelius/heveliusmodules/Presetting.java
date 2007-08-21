@@ -10,14 +10,15 @@ import java.io.*;
 import alma.acs.exceptions.AcsJException;
 import alma.TYPES.*;
 import alma.ACS.CBDescIn;
-import alma.ACS.Callback;
+//import alma.ACS.Callback;
+import alma.acs.callbacks.ResponseReceiver;
 import Hevelius.utilities.converter.*;
 import Hevelius.acsmodules.*;
 
 
 public class Presetting {
 
-	Callback callback;
+	//callback callback;
 	CBDescIn reference;
 
 
@@ -32,6 +33,16 @@ public class Presetting {
 
 		pos = createRadecType(ra,dec);
 		
+		ResponseReceiver callback  =  new ResponseReceiver() {
+
+			public void incomingResponse(Object x) {
+				System.out.println("Incoming Response: "+x);
+			}
+			public void incomingException(Exception x) {
+				System.out.println("Responding failed: "+x);}
+
+		};
+
 		try{
 			interfaz.getDrawingPanel().getCSATControl().preset(pos, callback, reference);
 		}catch(ComponentLifecycleException e)
