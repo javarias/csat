@@ -31,7 +31,8 @@ import alma.acs.container.ContainerServices;
 import alma.POINTING_MODULE.PointingOperations;
 import alma.POINTING_MODULE.PointingImpl.PointingImpl;
 import alma.acs.component.ComponentLifecycleException;
-
+import alma.TELESCOPE_MODULE.TelescopeImpl.TelescopeImpl;
+import alma.CSATSTATUS_MODULE.CSATStatusImpl.CSATStatusImpl;
 public class PointingImpl implements PointingOperations, ComponentLifecycle {
 
         private ContainerServices m_containerServices;
