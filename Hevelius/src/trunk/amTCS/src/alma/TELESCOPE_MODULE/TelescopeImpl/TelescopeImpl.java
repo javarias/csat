@@ -20,7 +20,7 @@
  *    MA 02111-1307  USA
  */
 
-package alma.CSATCONTROL_MODULE.CSATControlImpl;
+package alma.TELESCOPE_MODULE.TelescopeImpl;
 
 import java.util.logging.Logger;
 
