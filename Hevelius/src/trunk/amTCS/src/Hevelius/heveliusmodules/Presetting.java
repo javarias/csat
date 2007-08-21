@@ -6,29 +6,38 @@ import java.io.*;
 //import alma.acs.container.ContainerServices;
 //import alma.acs.component.ComponentImplBase;
 //import alma.acs.component.ComponentLifecycleException;
+
 import alma.acs.exceptions.AcsJException;
 import alma.TYPES.*;
+import alma.ACS.CBDescIn;
+import alma.ACS.Callback;
 import Hevelius.utilities.converter.*;
 import Hevelius.acsmodules.*;
 
 
 public class Presetting {
 
+	Callback callback;
+	CBDescIn reference;
+
+
 	public static void preset(double ra, double dec, int type){
 		
-		//if(type == 'ALTAZ')
-		//	Converter.altaz2radec(ra,dec);
-		//else
-		//	Converter.radecValidate(ra,dec);
+		RadecPos pos;
 
-		//pos = createRadecType(ra,dec);
+		if(type == 1)
+			Converter.altaz2radec(ra,dec);
+		else
+			Converter.radecValidate(ra,dec);
+
+		pos = createRadecType(ra,dec);
 		
-		//try{
-			//interfaz.getDrawingPanel().getCSATControl().preset(pos, callback, reference);
-		//}catch(ComponentLifecycleException e)
-		//{
+		try{
+			interfaz.getDrawingPanel().getCSATControl().preset(pos, callback, reference);
+		}catch(ComponentLifecycleException e)
+		{
 			//VENTANA DE DESCONEXION U OTRA WEA POR DISCUTIR	
-		//}
+		}
 
 
 	}
@@ -42,9 +51,5 @@ public class Presetting {
 		return tmp;
 	}
 
-	//AVERIGUAR
-	//public callback(){
-//
-//	}
 
 }

@@ -106,7 +106,17 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	{
 	}
 
-	private void radec2hor()
+	private void radec2hor(alma.TYPES.RadecPos p)
 	{
 	}
+
+	public void preset(alma.TYPES.RadecPos p, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
+		
+		Ra = p.ra;
+		Dec = p.dec;
+
+		radec2hor(p);
+
+	}
+			
 }
