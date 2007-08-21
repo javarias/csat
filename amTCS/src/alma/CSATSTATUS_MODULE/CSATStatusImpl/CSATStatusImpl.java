@@ -30,11 +30,13 @@ import alma.acs.component.ComponentLifecycle;
 import alma.acs.container.ContainerServices;
 import alma.CSATSTATUS_MODULE.CSATStatusOperations;
 import alma.CSATSTATUS_MODULE.CSATStatusImpl.CSATStatusImpl;
+import alma.CSATSTATUS_MODULE.*;
 
 public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle {
 
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
+	private RWTCSStatus m_status;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -116,5 +118,9 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public void EmergencyStop(){
+	}
+
+	public RWTCSStatus status(){
+		return m_status;
 	}
 }

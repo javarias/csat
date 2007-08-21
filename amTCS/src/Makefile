@@ -112,7 +112,7 @@ CDB_SCHEMAS =
 # 
 # IDL Files and flags
 # 
-IDL_FILES = Types CSATControl CSATStatus
+IDL_FILES = Types CSATStatus CSATControl 
 IDL_TAO_FLAGS =
 USER_IDL =
 #
