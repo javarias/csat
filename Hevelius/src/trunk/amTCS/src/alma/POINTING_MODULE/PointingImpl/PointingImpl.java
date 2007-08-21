@@ -30,6 +30,7 @@ import alma.acs.component.ComponentLifecycle;
 import alma.acs.container.ContainerServices;
 import alma.POINTING_MODULE.PointingOperations;
 import alma.POINTING_MODULE.PointingImpl.PointingImpl;
+import alma.acs.component.ComponentLifecycleException;
 
 public class PointingImpl implements PointingOperations, ComponentLifecycle {
 
@@ -50,17 +51,17 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 
 		m_logger.finer("Lifecycle initialize() called");
 
-		// Get csatcontrol instances
+		// Get csatstatus instances
 		org.omg.CORBA.Object obj = null;
 		try {
 			obj = m_containerServices.getDefaultComponent("IDL:alma/CSATSTATUS_MODULE/CSATStatusImpl:1.0");
-			csatcontrol = alma.CSATCONTROL_MODULE.CSATStatusHelper.narrow(obj);
+			csatstatus = alma.CSATSTATUS_MODULE.CSATStatusHelper.narrow(obj);
 		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
 			m_logger.fine("Failed to get CSATStatus component reference " + e);
 			throw new ComponentLifecycleException("Failed to get CSATStatus component reference");
 		}
 		try {
-                        obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
+                        obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/TelescopeImpl:1.0");
                         tele_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
                 } catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
                         m_logger.fine("Failed to get TELESCOPE component reference " + e);
@@ -78,7 +79,7 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 	public void cleanUp() {
 
 		if (csatstatus != null)
-			m_containerServices.releaseComponent(pointing.name());
+			m_containerServices.releaseComponent(csatstatus.name());
 		if (tele_comp != null)
                         m_containerServices.releaseComponent(tele_comp.name());
 		m_logger.info("cleanUp() called..., nothing to clean up.");
@@ -103,15 +104,15 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 	public void AltitudeOffset(double degree){
 		csatstatus.getPos(null, altazposh);
 
-		altazpos.alt = altazposh.value.alt+degree;
-		aloff = degree;
-		tmp_comp.goToAltAz(altazpos, null, null, null);
+		altazpos.ra = altazposh.value.ra+degree;
+		altoff = degree;
+		tele_comp.goToAltAz(altazpos, null, null, null);
 	}
 	public void AzimuthOffset(double degree){
 		csatstatus.getPos(null, altazposh);
-		altazpos.az = altazposh.az+degree;
-		aloff = degree;
-		tmp_comp.goToAltAz(altazpos, null, null, null);
+		altazpos.dec = altazposh.value.dec+degree;
+		azoff = degree;
+		tele_comp.goToAltAz(altazpos, null, null, null);
 
 	}
 
