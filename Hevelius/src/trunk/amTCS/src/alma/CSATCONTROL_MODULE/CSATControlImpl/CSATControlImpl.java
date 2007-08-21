@@ -89,6 +89,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	/////////////////////////////////////////////////////////////
 
 	public void preset(alma.TYPES.RadecPos p, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
+		pointing.resetOffset();
 	}
 
 	public void setTrackingStatus(boolean s){

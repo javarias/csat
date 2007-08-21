@@ -9,6 +9,7 @@ module POINTING_MODULE
 	{
 		void AltitudeOffset(in double degree);
 		void AzimuthOffset(in double degree);
+		void resetOffset();
 	};
 };
 #endif

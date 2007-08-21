@@ -272,8 +272,8 @@ public class CoordinatesPanel extends JPanel implements Runnable
 				interfaz.getDrawingPanel().getCSATStatus().getPos(rdPos,aaPos);
 				setRa(rdPos.value.ra);
 				setDec(rdPos.value.dec);
-				setAlt(aaPos.value.ra);
-				setAz(aaPos.value.dec);
+				setAlt(aaPos.value.alt);
+				setAz(aaPos.value.az);
 				Thread.sleep(1000);
 			}
 			catch(InterruptedException e)

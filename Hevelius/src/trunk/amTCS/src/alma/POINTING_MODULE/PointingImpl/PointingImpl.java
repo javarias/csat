@@ -43,8 +43,6 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 	private double az;
 	public double altoff = 0;
 	public double azoff = 0;
-	private AltazPos altazpos;
-	private AltazPosHolder altazposh;
 		
 	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException{
 		m_containerServices = containerServices;
@@ -103,21 +101,27 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 		return m_containerServices.getName();
 	}
 	public void AltitudeOffset(double degree){
-		tele_comp.getPos(null, altazposh);
-
-		altazpos.ra = altazposh.value.ra+degree;
-		altoff = degree;
+		AltazPosHolder altazposh = new AltazPosHolder();	
+		AltazPos altazpos = new AltazPos(); 
+		RadecPosHolder r = null;
+		tele_comp.getPos(r, altazposh);
+		altazpos.alt = altazposh.value.alt+degree;
+		altoff += degree;
 		//tele_comp.goToAltAz(altazpos, null, null, null);
 	}
 	public void AzimuthOffset(double degree){
-		altazposh = new AltazPosHolder();
-		RadecPosHolder r = new RadecPosHolder();
-		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		AltazPosHolder altazposh = new AltazPosHolder();
+		AltazPos altazpos = new AltazPos();
+		RadecPosHolder r = null;
 		tele_comp.getPos(r, altazposh);
-		//altazpos.dec = altazposh.value.dec+degree;
-		//azoff = degree;
+		altazpos.az = altazposh.value.az+degree;
+		azoff += degree;
 		//tele_comp.goToAltAz(altazpos, null, null, null);
 
+	}
+	public void resetOffset(){
+		azoff=0;
+		altoff=0;
 	}
 
 }
