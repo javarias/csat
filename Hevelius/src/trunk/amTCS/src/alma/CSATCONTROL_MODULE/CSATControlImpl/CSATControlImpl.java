@@ -50,7 +50,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 		// Get pointing instances
 		org.omg.CORBA.Object obj = null;
 		try {
-			obj = m_containerServices.getDefaultComponent("IDL:alma/POINTING_MODULE/PointingImpl:1.0");
+			obj = m_containerServices.getDefaultComponent("IDL:alma/POINTING_MODULE/Pointing:1.0");
 			pointing = alma.POINTING_MODULE.PointingHelper.narrow(obj);
 		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
 			m_logger.fine("Failed to get Pointing component reference " + e);
@@ -110,6 +110,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 
 	public void AzimuthOffSet(double degrees){
 		pointing.AzimuthOffset(degrees);
+		//System.out.println("Alo");
 	}
 
 	public void getPreviewImage(alma.TYPES.ImageHolder img, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){

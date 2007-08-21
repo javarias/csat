@@ -54,15 +54,15 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 
 		// Get csatstatus instances
 		org.omg.CORBA.Object obj = null;
+//		try {
+//			obj = m_containerServices.getDefaultComponent("IDL:alma/CSATSTATUS_MODULE/CSATStatus:1.0");
+//			csatstatus = alma.CSATSTATUS_MODULE.CSATStatusHelper.narrow(obj);
+//		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+//			m_logger.fine("Failed to get CSATStatus component reference " + e);
+//			throw new ComponentLifecycleException("Failed to get CSATStatus component reference");
+//		}
 		try {
-			obj = m_containerServices.getDefaultComponent("IDL:alma/CSATSTATUS_MODULE/CSATStatusImpl:1.0");
-			csatstatus = alma.CSATSTATUS_MODULE.CSATStatusHelper.narrow(obj);
-		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
-			m_logger.fine("Failed to get CSATStatus component reference " + e);
-			throw new ComponentLifecycleException("Failed to get CSATStatus component reference");
-		}
-		try {
-                        obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/TelescopeImpl:1.0");
+                        obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
                         tele_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
                 } catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
                         m_logger.fine("Failed to get TELESCOPE component reference " + e);
@@ -79,8 +79,8 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 
 	public void cleanUp() {
 
-		if (csatstatus != null)
-			m_containerServices.releaseComponent(csatstatus.name());
+//		if (csatstatus != null)
+//			m_containerServices.releaseComponent(csatstatus.name());
 		if (tele_comp != null)
                         m_containerServices.releaseComponent(tele_comp.name());
 		m_logger.info("cleanUp() called..., nothing to clean up.");
@@ -103,17 +103,20 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 		return m_containerServices.getName();
 	}
 	public void AltitudeOffset(double degree){
-		csatstatus.getPos(null, altazposh);
+		tele_comp.getPos(null, altazposh);
 
 		altazpos.ra = altazposh.value.ra+degree;
 		altoff = degree;
-		tele_comp.goToAltAz(altazpos, null, null, null);
+		//tele_comp.goToAltAz(altazpos, null, null, null);
 	}
 	public void AzimuthOffset(double degree){
-		csatstatus.getPos(null, altazposh);
-		altazpos.dec = altazposh.value.dec+degree;
-		azoff = degree;
-		tele_comp.goToAltAz(altazpos, null, null, null);
+		altazposh = new AltazPosHolder();
+		RadecPosHolder r = new RadecPosHolder();
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		tele_comp.getPos(r, altazposh);
+		//altazpos.dec = altazposh.value.dec+degree;
+		//azoff = degree;
+		//tele_comp.goToAltAz(altazpos, null, null, null);
 
 	}
 

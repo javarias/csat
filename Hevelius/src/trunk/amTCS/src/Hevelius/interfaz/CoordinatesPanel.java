@@ -82,6 +82,8 @@ public class CoordinatesPanel extends JPanel implements Runnable
 				Alt = Double.parseDouble(coor1.getText());
 				Az = Double.parseDouble(coor2.getText());
 				//Converter.radec2altaz(Alt,Az);
+
+				interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(5d);
 				
 
 				/* AGREGAR CAPTURA DE TIPO DE COORDENADA */

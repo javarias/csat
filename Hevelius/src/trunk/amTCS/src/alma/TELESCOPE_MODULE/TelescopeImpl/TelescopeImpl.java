@@ -74,24 +74,33 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	/////////////////////////////////////////////////////////////
 	// Implementation of TelescopeOperations
 	/////////////////////////////////////////////////////////////
-	
+
 	private double Alt = 0;
 	private double Az = 0;
-	private double Ra, Dec;
+	private double Ra = 0;
+	private double Dec = 0;
 
-	public void goToAltAz(AltazPos p, AltazVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc)
-	{
-		Alt = p.Alt;
-		Az = p.Az;
+	public void goToAltAz(AltazPos p, AltazVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc) {
+		Alt = p.ra;
+		Az = p.dec;
 		hor2radec();
 	}
 
-	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa)
-	{
-		p_rd.value.Ra = Ra;
-		p_rd.value.Dec = Dec;
-		p_aa.value.Alt = Alt;
-		p_aa.value.Az = Az;
+	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa) {
+		if(p_rd!=null)
+		{
+			p_rd = new RadecPosHolder();
+			p_rd.value.ra = Ra;
+			p_rd.value.dec = Dec;
+		}
+		if(p_aa!=null)
+		{
+			p_aa = new AltazPosHolder();
+			p_aa.value.ra = Alt;
+			p_aa.value.dec = Az;
+		}
+		System.out.println(p_aa.value.ra+p_aa.value.dec+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
 	}
 
 	private void hor2radec()

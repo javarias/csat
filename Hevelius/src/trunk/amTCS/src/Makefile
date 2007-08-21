@@ -118,7 +118,7 @@ USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES=CSATControlImpl CSATStatusImpl PointingImpl Telescope Hevelius
+JARFILES=CSATControlImpl CSATStatusImpl PointingImpl TelescopeImpl Hevelius
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS=alma/CSATSTATUS_MODULE/CSATStatusImpl
 PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl

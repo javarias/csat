@@ -1,8 +1,8 @@
 #ifndef _TELESCOPE_IDL_
 #define _TELESCOPE_IDL_
-#include <acscomponent.idl>
-#include <Types.idl>
+
 #include <baci.idl>
+#include <Types.idl>
 #pragma prefix "alma"
 
 module TELESCOPE_MODULE

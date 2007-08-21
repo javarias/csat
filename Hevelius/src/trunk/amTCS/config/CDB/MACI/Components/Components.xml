@@ -7,19 +7,23 @@
       <_ Name="CSATCONTROL"
          Code="alma.CSATCONTROL_MODULE.CSATControlImpl.CSATControlHelper"
          Type="IDL:alma/CSATCONTROL_MODULE/CSATControl:1.0"
-         Container="amContainer"/>
+         Container="amContainer"
+         Default="true"/>
       <_ Name="POINTING"
          Code="alma.POINTING_MODULE.PointingImpl.PointingHelper"
          Type="IDL:alma/POINTING_MODULE/Pointing:1.0"
-         Container="amContainer"/>
+         Container="amContainer"
+         Default="true"/>
       <_ Name="TELESCOPE"
          Code="alma.TELESCOPE_MODULE.TelescopeImpl.TelescopeHelper"
          Type="IDL:alma/TELESCOPE_MODULE/Telescope:1.0"
-         Container="amContainer"/>
+         Container="amContainer"
+         Default="true"/>
       <_ Name="CSATSTATUS"
          Code="alma.CSATSTATUS_MODULE.CSATStatusImpl.CSATStatusHelper"
          Type="IDL:alma/CSATSTATUS_MODULE/CSATStatus:1.0"
-         Container="amContainer"/>
+         Container="amContainer"
+         Default="true"/>
 </Components>
 
 
