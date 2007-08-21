@@ -4,6 +4,7 @@
 #define _CSATSTATUS_IDL
 
 #include <baci.idl>
+#include <enumpropMACRO.idl>
 #include <Types.idl>
 
 #pragma prefix "alma"
@@ -17,6 +18,18 @@
  */
 module CSATSTATUS_MODULE {
 
+	/** Possible states of the amTCS
+	 */
+	enum TCSStatus {
+		STOP,
+		STAND_BY,
+		CALIBRATING,
+		READY,
+		AUTOMATIC
+	};
+
+	ACS_ENUM( TCSStatus );
+
 	/** @interface CSATStatus
 	 * Defines the interface that will be used by external clients to control the
 	 * TCS. This interface allow external software to move the TCS trough its statues
@@ -26,6 +39,10 @@ module CSATSTATUS_MODULE {
 	 */
 	interface CSATStatus : ACS::ACSComponent
 	{
+
+		/** Current TCS status */
+		readonly attribute RWTCSStatus status;
+		
 		/**
 		 * Moves the TCS from the "Stop" state to the "Stand-by" state.  In this
 		 * step all hardware is initialized (set on). No software components are
