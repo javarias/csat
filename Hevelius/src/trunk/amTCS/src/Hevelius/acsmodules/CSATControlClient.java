@@ -18,25 +18,6 @@ import alma.acs.component.client.ComponentClient;
 
 public class CSATControlClient extends ComponentClient
 {
-	/*	org.omg.CORBA.Object obj = null;
-		alma.CSATCONTROL_MODULE.CSATControl cscontrol;
-		Logger m_logger;
-		private ContainerServices m_containerServices;
-		public void connection() throws ComponentLifecycleException
-		{
-		try
-		{
-		obj = m_containerServices.getDefaultComponent("IDL:alma/CSATCONTROL_MODULE/CSATControlImpl:1.0");
-		cscontrol = alma.CSATCONTROL_MODULE.CSATControlHelper.narrow(obj);
-
-		}
-		catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e)
-		{
-		m_logger.fine("Failed to get CONTROL component reference " + e);
-		throw new ComponentLifecycleException("Failed to get CONTROL component reference");
-		}
-		}
-		*/
 
 	private alma.CSATCONTROL_MODULE.CSATControl cscontrol;
 
@@ -53,6 +34,8 @@ public class CSATControlClient extends ComponentClient
 
 	public void loadComponent() throws AcsJContainerServicesEx {
 		cscontrol = alma.CSATCONTROL_MODULE.CSATControlHelper.narrow(getContainerServices().getDefaultComponent("IDL:alma/CSATCONTROL_MODULE/CSATControlImpl:1.0"));
+		//cscontrol = alma.CSATCONTROL_MODULE.CSATControlHelper.narrow(getContainerServices().getComponent("CSATCONTROL1"));
+
 	}
 
 	public static CSATControlClient start()
@@ -62,7 +45,7 @@ public class CSATControlClient extends ComponentClient
 			System.out.println("Java property 'ACS.manager' must be set to the corbaloc of the ACS manager!");
 			System.exit(-1);
 		}
-		String clientName = "CSATControlStatus";
+		String clientName = "CSATControlClient";
 		CSATControlClient csatcc = null;
 		try {
 			csatcc = new CSATControlClient(null, managerLoc, clientName);
@@ -77,23 +60,25 @@ public class CSATControlClient extends ComponentClient
 				e.printStackTrace(System.err);
 			}
 		}
-		finally {
-			if (csatcc != null) {
-				try {
-					csatcc.tearDown();
-				}
-				catch (Exception e3) {
-					// bad luck
-					e3.printStackTrace();
-				}
+		return null;
+	}
+
+	public static void stop(CSATControlClient csatcc)
+	{
+		if (csatcc != null) {
+			try {
+				csatcc.tearDown();
 			}
-			return null;
+			catch (Exception e3) {
+				// bad luck
+				e3.printStackTrace();
+			}
 		}
 	}
 
 	public void preset(RadecPos p)
 	{
-		//		cscontrol.preset(p);
+		cscontrol.preset(p, null, null);
 	}
 
 	public void setTrackingStatus(boolean s)
@@ -108,12 +93,12 @@ public class CSATControlClient extends ComponentClient
 
 	public void goToRadec(RadecPos p, RadecVel v)
 	{
-		//		cscontrol.goToRadec(p,v);
+		cscontrol.goToRadec(p,v, null, null);
 	}
 
 	public void goToAltAz(AltazPos p, AltazVel v)
 	{
-		//		cscontrol.goToAltAz(p,v);
+		cscontrol.goToAltAz(p,v, null, null);
 	}
 
 	public void AltitudeOffSet(double degree)
@@ -128,7 +113,7 @@ public class CSATControlClient extends ComponentClient
 
 	public void getPreviewImage(ImageHolder img)
 	{
-		//		cscontrol.getPreviewImage(img);
+		cscontrol.getPreviewImage(img, null, null);
 	}
 
 	public void stopTelescope()

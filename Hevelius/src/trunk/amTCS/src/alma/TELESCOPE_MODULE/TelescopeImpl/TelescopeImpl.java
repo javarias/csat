@@ -75,17 +75,19 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	// Implementation of TelescopeOperations
 	/////////////////////////////////////////////////////////////
 	
-	private double Alt = 0; 
-	private double Az = 0; 
+	private double Alt = 0;
+	private double Az = 0;
 	private double Ra, Dec;
 
-	public void goToAltAz(AltazPos p, AltazVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
+	public void goToAltAz(AltazPos p, AltazVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc)
+	{
 		Alt = p.Alt;
 		Az = p.Az;
 		hor2radec();
 	}
 
-	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa){
+	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa)
+	{
 		p_rd.value.Ra = Ra;
 		p_rd.value.Dec = Dec;
 		p_aa.value.Alt = Alt;
@@ -93,6 +95,10 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	}
 
 	private void hor2radec()
+	{
+	}
+
+	private void radec2hor()
 	{
 	}
 }

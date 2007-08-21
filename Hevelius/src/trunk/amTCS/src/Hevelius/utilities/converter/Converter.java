@@ -41,7 +41,9 @@ public class Converter {
 
 		WeatherCondition clima = new WeatherCondition(test.getOption("location"));
         	Vector<WeatherCityCondition> vector = clima.ListCityCondition();
-		
+
+		if(!(vector.get(0).getLon()=="N/A" || vector.get(0).getLat()=="N/A"))	
+		{
 		//dates of the time
 		hora =calendario.get(Calendar.HOUR_OF_DAY);
 		min = calendario.get(Calendar.MINUTE);
@@ -109,6 +111,7 @@ public class Converter {
 		DEC = AZ;
 		Converter.ALT = ALT;
 		Converter.AZ = AZ;
+		}
 
 	}
 

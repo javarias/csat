@@ -12,6 +12,14 @@
          Code="alma.POINTING_MODULE.PointingImpl.PointingHelper"
          Type="IDL:alma/POINTING_MODULE/Pointing:1.0"
          Container="amContainer"/>
+      <_ Name="TELESCOPE"
+         Code="alma.TELESCOPE_MODULE.TelescopeImpl.TelescopeHelper"
+         Type="IDL:alma/TELESCOPE_MODULE/Telescope:1.0"
+         Container="amContainer"/>
+      <_ Name="CSATSTATUS"
+         Code="alma.CSATSTATUS_MODULE.CSATStatusImpl.CSATStatusHelper"
+         Type="IDL:alma/CSATSTATUS_MODULE/CSATStatus:1.0"
+         Container="amContainer"/>
 </Components>
 
 

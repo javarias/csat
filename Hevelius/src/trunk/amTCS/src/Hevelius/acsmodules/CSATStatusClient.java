@@ -1,12 +1,6 @@
 package Hevelius.acsmodules;
 
 import java.io.*;
-//import alma.ACS.ComponentStates;
-//import alma.acs.component.ComponentLifecycle;
-//import alma.acs.container.ContainerServices;
-//import alma.acs.component.ComponentImplBase;
-//import alma.acs.component.ComponentLifecycleException;
-//import alma.acs.exceptions.AcsJException;
 import alma.TYPES.*;
 
 import java.util.logging.Level;
@@ -18,27 +12,6 @@ import alma.acs.component.client.ComponentClient;
 
 public class CSATStatusClient extends ComponentClient
 {
-/*
-	private org.omg.CORBA.Object obj = null;
-	private alma.CSATSTATUS_MODULE.CSATStatus csstatus;
-	private Logger m_logger;
-	private ContainerServices m_containerServices;
-	public void connection() throws ComponentLifecycleException
-	{
-		try
-		{
-			obj = m_containerServices.getDefaultComponent("IDL:alma/CSATSTATUS_MODULE/CSATStatusImpl:1.0");
-			csstatus = alma.CSATSTATUS_MODULE.CSATStatusHelper.narrow(obj);
-
-		}
-		catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e)
-		{
-			//m_logger.fine("Failed to get STATUS component reference " + e);
-			throw new ComponentLifecycleException("Failed to get STATUS component reference");
-		}
-	}
-*/
-
 	private alma.CSATSTATUS_MODULE.CSATStatus csstatus;
 
 	public CSATStatusClient(Logger logger, String managerLoc, String clientName)
@@ -91,7 +64,7 @@ public class CSATStatusClient extends ComponentClient
 
 	public void stop()
 	{
-//		csstatus.stop();
+		csstatus.stop(null, null);
 	}
 
 	public void off()
@@ -111,7 +84,7 @@ public class CSATStatusClient extends ComponentClient
 
 	public void initialize()
 	{
-//		csstatus.initialize();
+		csstatus.initialize(null, null);
 	}
 
 	public void getPos(RadecPosHolder r, AltazPosHolder a)

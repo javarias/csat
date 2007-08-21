@@ -47,6 +47,18 @@ public class SystemPanel extends JPanel
 		stop = new JButton("Stop TCS");
 		stop.setSize(100,20);
 		add(stop);
+		stop.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                                //try
+                                //{
+                                        CSATControlClient.stop(interfaz.getDrawingPanel().getCSATControl());
+                                        //interfaz.getDrawingPanel().getCSATControl().connection();
+                                //}
+                                //catch(ComponentLifecycleException err)
+                                //{
+                                //}
+                        }
+                });
 
 		//Shutdown Button
 		shutdown = new JButton("Shutdown");
