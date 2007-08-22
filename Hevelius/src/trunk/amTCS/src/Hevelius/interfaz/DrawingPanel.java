@@ -75,10 +75,10 @@ public class DrawingPanel extends JPanel
 	}
 	private void setArrows(Dimension dim)
 	{
-		rArrow = setImage("Hevelius/images/rArrow.jpg",dim);
+		/*rArrow = setImage("Hevelius/images/rArrow.jpg",dim);
 		lArrow = setImage("Hevelius/images/lArrow.jpg",dim);
 		tArrow = setImage("Hevelius/images/tArrow.jpg",dim);
-		bArrow = setImage("Hevelius/images/bArrow.jpg",dim);
+		bArrow = setImage("Hevelius/images/bArrow.jpg",dim);*/
 	}
 	public void init()
 	{
@@ -95,6 +95,25 @@ public class DrawingPanel extends JPanel
 		//Interface Initialization
 		setArrows(new Dimension(40,40));
 		img = setImage("Hevelius/images/image.jpg",new Dimension(200,200));
+
+		ImageIcon rarrow = new ImageIcon("../images/rArrow.jpg");
+		JButton rbutton = new JButton(rarrow);
+		rbutton.setBackground(Color.BLACK);
+		
+		ImageIcon larrow = new ImageIcon("../images/lArrow.jpg");
+		JButton lbutton = new JButton(larrow);
+		lbutton.setBackground(Color.BLACK);
+		
+		ImageIcon tarrow = new ImageIcon("../images/tArrow.jpg");
+		JButton tbutton = new JButton(tarrow);
+		tbutton.setBackground(Color.BLACK);
+		
+		ImageIcon barrow = new ImageIcon("../images/bArrow.jpg");
+		JButton bbutton = new JButton(barrow);
+		bbutton.setBackground(Color.BLACK);
+
+
+
 
 		//Go to Zenith Button
 		zenith = new JButton("Zenith");
