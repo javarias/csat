@@ -1,7 +1,10 @@
 package Hevelius.interfaz;
 
-import Hevelius.utilities.converter.*;
+//import Hevelius.utilities.converter.*;
 import Hevelius.acsmodules.*;
+import Hevelius.heveliusmodules.*;
+import Hevelius.interfaz.*;
+import Hevelius.utilities.converter.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -78,11 +81,15 @@ public class CoordinatesPanel extends JPanel implements Runnable
 
 		go.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				Double Alt, Az;
-				Alt = Double.parseDouble(coor1.getText());
-				Az = Double.parseDouble(coor2.getText());
-				//Converter.radec2altaz(Alt,Az);
+				Double c1, c2;
+				Configuration test = new Configuration();
 
+				c1 = Double.parseDouble(coor1.getText());
+				c2 = Double.parseDouble(coor2.getText());
+				//Converter.radec2altaz(Alt,Az);
+				
+				Presetting.preset(c1,c2,Integer.parseInt(test.getOption("coordinate")));		
+				
 				interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(5d);
 				
 
@@ -213,12 +220,18 @@ public class CoordinatesPanel extends JPanel implements Runnable
 			coor.setText("RaDec Coordinates");
 			coor1L.setText("Ra");
 			coor2L.setText("Dec");
+			Converter.altaz2radec(Double.parseDouble(coor1.getText()),Double.parseDouble(coor2.getText()));
+			coor1.setText(Converter.getRa());
+			coor2.setText(Converter.getDec());	
 		}
 		else
 		{
 			coor.setText("Horizontal Coordinates");
 			coor1L.setText("Alt");
 			coor2L.setText("Az");
+			Converter.radec2altaz(Double.parseDouble(coor1.getText()),Double.parseDouble(coor2.getText()));
+                        coor1.setText(Converter.getAlt());
+                        coor2.setText(Converter.getAz());
 		}
 	}
 

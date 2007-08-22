@@ -26,30 +26,37 @@ public class Presetting {
 		
 		RadecPos pos;
 
-		if(type == 1)
+		if(type == 1){
 			Converter.altaz2radec(ra,dec);
-		else
-			Converter.radecValidate(ra,dec);
+			ra = Converter.getRa();
+			dec = Converter.getDec();
+		}
+			
+		if(Converter.radecVerificate(ra,dec)){
 
-		pos = createRadecType(ra,dec);
-		
-		ResponseReceiver callback  =  new ResponseReceiver() {
 
-			public void incomingResponse(Object x) {
-				System.out.println("Incoming Response: "+x);
-			}
-			public void incomingException(Exception x) {
-				System.out.println("Responding failed: "+x);}
+			pos = createRadecType(ra,dec);
 
-		};
+			ResponseReceiver callback  =  new ResponseReceiver() {
 
-		//try{
+				public void incomingResponse(Object x) {
+					System.out.println("Incoming Response: "+x);
+				}
+				public void incomingException(Exception x) {
+					System.out.println("Responding failed: "+x);}
+
+			};
+
+			//try{
 			interfaz.getDrawingPanel().getCSATControl().preset(pos);
-		//}catch(ComponentLifecycleException e)
-		//{
+			//}catch(ComponentLifecycleException e)
+			//{
 			//VENTANA DE DESCONEXION U OTRA WEA POR DISCUTIR	
-		//}
-
+			//}
+		}
+		else{
+			System.out.error("RADEC MALO");
+		}
 
 	}
 
