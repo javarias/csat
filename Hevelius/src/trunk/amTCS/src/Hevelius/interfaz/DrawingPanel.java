@@ -141,9 +141,9 @@ public class DrawingPanel extends JPanel
 		coorpane = new CoordinatesPanel(null);
 		coorpane.init();
 		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: coorpane.setCoorType(false); break;
-			case 1: coorpane.setCoorType(true); break;
-			default:coorpane.setCoorType(false); break;
+			case 0: coorpane.initCoorType(false); break;
+			case 1: coorpane.initCoorType(true); break;
+			default:coorpane.initCoorType(false); break;
 		}
 		add(coorpane);
 
@@ -277,7 +277,7 @@ public class DrawingPanel extends JPanel
 		if(vtpane!=null)
 			vtpane.setBackground(c);
 	}
-	public void updateWindow(){
+	public void updateWindow(boolean init){
 		//Cambiar Background
 		switch(Integer.parseInt(test.getOption("background"))){
 			case 0: setBackground(Color.BLACK); break;
@@ -296,10 +296,19 @@ public class DrawingPanel extends JPanel
 		}
 
 		//Modificar Tipos de Coordenadas
-		switch(Integer.parseInt(test.getOption("coordinate"))){
-			case 0: coorpane.setCoorType(1==0); break;
-			case 1: coorpane.setCoorType(1==1); break;
-			default:coorpane.setCoorType(1==0); break;
+		if(!init){
+			switch(Integer.parseInt(test.getOption("coordinate"))){
+				case 0: coorpane.setCoorType(1==0); break;
+				case 1: coorpane.setCoorType(1==1); break;
+				default:coorpane.setCoorType(1==0); break;
+			}
+		}
+		else{
+			switch(Integer.parseInt(test.getOption("coordinate"))){
+                                case 0: coorpane.initCoorType(1==0); break;
+                                case 1: coorpane.initCoorType(1==1); break;
+                                default:coorpane.initCoorType(1==0); break;
+                        }
 		}
 
 		//Weather

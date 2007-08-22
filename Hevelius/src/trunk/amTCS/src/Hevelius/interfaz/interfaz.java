@@ -347,7 +347,7 @@ public class interfaz {
 
 				test.store();
 
-				pane.updateWindow();
+				pane.updateWindow(false);
 
 				}
 		});
@@ -522,7 +522,7 @@ public class interfaz {
 		frame.setIconImage(icono);
 		pane = new DrawingPanel(null);
 		pane.init();
-		pane.updateWindow();
+		pane.updateWindow(true);
 		frame.setContentPane(pane);
 		Dimension ScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.addWindowListener(new WindowAdapter()

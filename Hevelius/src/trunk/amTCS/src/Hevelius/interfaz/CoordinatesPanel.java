@@ -60,6 +60,7 @@ public class CoordinatesPanel extends JPanel implements Runnable
 		//RA or ALT Coordinate
 		coor1 = new JTextField("0");
 		coor1.setSize(80,20);
+		coor1.setText("0");
 		add(coor1);
 
 		//DEC or AZ Label
@@ -71,6 +72,7 @@ public class CoordinatesPanel extends JPanel implements Runnable
 		//DEC or AZ Coordinate
 		coor2 = new JTextField("0");
 		coor2.setSize(80,20);
+		coor2.setText("0");
 		add(coor2);
 
 		//Goto
@@ -221,8 +223,10 @@ public class CoordinatesPanel extends JPanel implements Runnable
 			coor1L.setText("Ra");
 			coor2L.setText("Dec");
 			Converter.altaz2radec(Double.parseDouble(coor1.getText()),Double.parseDouble(coor2.getText()));
+			System.out.println(Double.parseDouble(coor1.getText())+" "+Double.parseDouble(coor2.getText()));
 			coor1.setText(Converter.getRa()+"");
-			coor2.setText(Converter.getDec()+"");	
+			coor2.setText(Converter.getDec()+"");
+			System.out.println(Converter.getRa()+" "+Converter.getDec());	
 		}
 		else
 		{
@@ -230,10 +234,30 @@ public class CoordinatesPanel extends JPanel implements Runnable
 			coor1L.setText("Alt");
 			coor2L.setText("Az");
 			Converter.radec2altaz(Double.parseDouble(coor1.getText()),Double.parseDouble(coor2.getText()));
+			System.out.println(Double.parseDouble(coor1.getText())+" "+Double.parseDouble(coor2.getText()));
                         coor1.setText(Converter.getAlt()+"");
                         coor2.setText(Converter.getAz()+"");
+			System.out.println(Converter.getAlt()+" "+Converter.getAz());
+			System.out.println(Converter.getRa()+" "+Converter.getDec());
 		}
 	}
+
+	public void initCoorType(boolean type)
+        {
+                coortype = type;
+                if(!type)
+                {
+                        coor.setText("RaDec Coordinates");
+                        coor1L.setText("Ra");
+                        coor2L.setText("Dec");
+                }
+                else
+                {
+                        coor.setText("Horizontal Coordinates");
+                        coor1L.setText("Alt");
+                        coor2L.setText("Az");
+                }
+        }
 
 	public double getRa()
 	{

@@ -38,6 +38,9 @@ public class Converter {
 		double HA;
 		double ALT;
 		double AZ;
+		
+		Converter.RA = RA;
+		Converter.DEC = DEC;
 
 		//System.out.println(RA+" "+DEC);
 
@@ -109,8 +112,8 @@ public class Converter {
 		//Si es que el Sin de Hour Angle es mayor que 0, entonces Azimuth cambia.
 		if (Math.sin(HA*Math.PI/180) > 0)
 			AZ = 360 - AZ;
-		RA = ALT;
-		DEC = AZ;
+		//RA = ALT;
+		//DEC = AZ;
 		Converter.ALT = ALT;
 		Converter.AZ = AZ;
 
@@ -141,6 +144,10 @@ public class Converter {
 
 		WeatherCondition clima = new WeatherCondition(test.getOption("location"));
         	Vector<WeatherCityCondition> vector = clima.ListCityCondition();
+
+		
+		Converter.ALT = ALT;
+		Converter.AZ = AZ;		
 
 		if(!(vector.get(0).getLon()=="N/A" || vector.get(0).getLat()=="N/A"))	
 		{
@@ -215,8 +222,8 @@ public class Converter {
 			AZ = 360 - AZ;*/
 		//RA = ALT;
 		//DEC = AZ;
-		ALT = RA;
-		AZ = DEC;
+		//ALT = RA;
+		//AZ = DEC;
 		Converter.RA = RA;
 		Converter.DEC = DEC;
 		}		
