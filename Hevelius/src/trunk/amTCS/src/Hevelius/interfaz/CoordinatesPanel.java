@@ -90,7 +90,7 @@ public class CoordinatesPanel extends JPanel implements Runnable
 				
 				Presetting.preset(c1,c2,Integer.parseInt(test.getOption("coordinate")));		
 				
-				interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(5d);
+				//interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(5d);
 				
 
 				/* AGREGAR CAPTURA DE TIPO DE COORDENADA */
@@ -221,8 +221,8 @@ public class CoordinatesPanel extends JPanel implements Runnable
 			coor1L.setText("Ra");
 			coor2L.setText("Dec");
 			Converter.altaz2radec(Double.parseDouble(coor1.getText()),Double.parseDouble(coor2.getText()));
-			coor1.setText(Converter.getRa());
-			coor2.setText(Converter.getDec());	
+			coor1.setText(Converter.getRa()+"");
+			coor2.setText(Converter.getDec()+"");	
 		}
 		else
 		{
@@ -230,8 +230,8 @@ public class CoordinatesPanel extends JPanel implements Runnable
 			coor1L.setText("Alt");
 			coor2L.setText("Az");
 			Converter.radec2altaz(Double.parseDouble(coor1.getText()),Double.parseDouble(coor2.getText()));
-                        coor1.setText(Converter.getAlt());
-                        coor2.setText(Converter.getAz());
+                        coor1.setText(Converter.getAlt()+"");
+                        coor2.setText(Converter.getAz()+"");
 		}
 	}
 

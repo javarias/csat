@@ -366,4 +366,9 @@ public class DrawingPanel extends JPanel
 	{
 		this.csatc = csatc;
 	}
+
+	public void setCSATStatus(CSATStatusClient csats)
+	{
+		this.csats = csats;
+	}
 }

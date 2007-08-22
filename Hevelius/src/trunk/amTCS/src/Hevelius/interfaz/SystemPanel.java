@@ -32,14 +32,8 @@ public class SystemPanel extends JPanel
 		add(start);
 		start.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
-				//try
-				//{
 					interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
-                                	//interfaz.getDrawingPanel().getCSATControl().connection();
-				//}
-				//catch(ComponentLifecycleException err)
-				//{
-				//}
+					interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
                         }
                 });
 
@@ -49,14 +43,8 @@ public class SystemPanel extends JPanel
 		add(stop);
 		stop.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
-                                //try
-                                //{
                                         CSATControlClient.stop(interfaz.getDrawingPanel().getCSATControl());
-                                        //interfaz.getDrawingPanel().getCSATControl().connection();
-                                //}
-                                //catch(ComponentLifecycleException err)
-                                //{
-                                //}
+					CSATStatusClient.stop(interfaz.getDrawingPanel().getCSATStatus());
                         }
                 });
 

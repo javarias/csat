@@ -32,7 +32,7 @@ public class Presetting {
 			dec = Converter.getDec();
 		}
 			
-		if(Converter.radecVerificate(ra,dec)){
+		if(Converter.radecVerificate(ra,dec) == 1){
 
 
 			pos = createRadecType(ra,dec);
@@ -48,20 +48,21 @@ public class Presetting {
 			};
 
 			//try{
-			interfaz.getDrawingPanel().getCSATControl().preset(pos);
+			//interfaz.getDrawingPanel().getCSATControl().preset(pos);
 			//}catch(ComponentLifecycleException e)
 			//{
 			//VENTANA DE DESCONEXION U OTRA WEA POR DISCUTIR	
 			//}
 		}
 		else{
-			System.out.error("RADEC MALO");
+			System.out.println("RADEC MALO");
 		}
 
 	}
 
 	public static RadecPos createRadecType(double ra, double dec){
-		RadecPos tmp = null;
+		RadecPos tmp = new RadecPos();
+		
 
 		tmp.ra = ra;
 		tmp.dec = dec;

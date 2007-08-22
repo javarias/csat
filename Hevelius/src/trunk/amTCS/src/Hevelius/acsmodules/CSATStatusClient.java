@@ -23,7 +23,7 @@ public class CSATStatusClient extends ComponentClient
 		csstatus = alma.CSATSTATUS_MODULE.CSATStatusHelper.narrow(getContainerServices().getDefaultComponent("IDL:alma/CSATSTATUS_MODULE/CSATStatusImpl:1.0"));
 	}
 
-	public static void start()
+	public static CSATStatusClient start()
 	{
 		String managerLoc = System.getProperty("ACS.manager");
 		if (managerLoc == null) {
@@ -35,6 +35,7 @@ public class CSATStatusClient extends ComponentClient
 		try {
 			csatsc = new CSATStatusClient(null, managerLoc, clientName);
 			csatsc.loadComponent();
+			return csatsc;
 		}
 		catch (Exception e) {
 			try {
@@ -44,18 +45,21 @@ public class CSATStatusClient extends ComponentClient
 				e.printStackTrace(System.err);
 			}
 		}
-		finally {
-			if (csatsc != null) {
-				try {
-					csatsc.tearDown();
-				}
-				catch (Exception e3) {
-					// bad luck
-					e3.printStackTrace();
-				}
-			}
-		}
+		return null;
 	}
+
+        public static void stop(CSATStatusClient csatsc)
+        {
+                if (csatsc != null) {
+                        try {
+                                csatsc.tearDown();
+                        }
+                        catch (Exception e3) {
+                                // bad luck
+                                e3.printStackTrace();
+                        }
+                }
+        }
 
 	public void on()
 	{

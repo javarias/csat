@@ -30,11 +30,20 @@ import alma.acs.component.ComponentLifecycle;
 import alma.acs.container.ContainerServices;
 import alma.TELESCOPE_MODULE.TelescopeOperations;
 import alma.TELESCOPE_MODULE.TelescopeImpl.TelescopeImpl;
+import alma.acs.exceptions.AcsJException;
+import alma.acs.component.ComponentLifecycleException;
 
 public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
+	private boolean working;
+	private boolean stopping;
+
+	private alma.TELESCOPE_MODULE.Telescope tele_comp;
+	private alma.TRACKING_MODULE.Tracking trck_comp;
+	private TelescopeWorker worker;
+
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -43,6 +52,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	public void initialize(ContainerServices containerServices) {
 		m_containerServices = containerServices;
 		m_logger = m_containerServices.getLogger();
+                working = false;
+                stopping = false;
 		m_logger.info("initialize() called...");
 	}
     
@@ -55,6 +66,18 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	}
     
 	public void aboutToAbort() {
+		if(working)
+		{
+			m_logger.fine("Trying to stop");
+	//		try
+	//		{
+				stop();
+	//		}
+	//		catch(SchedulerAlreadyStoppedEx e)
+	//		{
+	//			m_logger.fine("Already Stopped");
+	//		}
+		}
 		cleanUp();
 		m_logger.info("managed to abort...");
 	}
@@ -83,7 +106,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	public void goToAltAz(AltazPos p, AltazVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc) {
 		Alt = p.alt;
 		Az = p.az;
-		hor2radec();
+		hor2radec(p);
 	}
 
 	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa) {
@@ -102,11 +125,11 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 		//System.out.println(p_aa.value.alt+p_aa.value.az+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 	}
 
-	private void hor2radec()
+	public void hor2radec(alma.TYPES.AltazPos p)
 	{
 	}
 
-	private void radec2hor(alma.TYPES.RadecPos p)
+	public void radec2hor(alma.TYPES.RadecPos p)
 	{
 	}
 
@@ -118,5 +141,67 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 		radec2hor(p);
 
 	}
-			
+
+
+
+
+	public boolean isWorking()
+	{	
+		return working;
+	}
+
+	public void setWorking(boolean s)
+	{
+		working = s;
+	}
+
+        public void start() {//throws AcsJException{
+                m_logger.info("Start called");
+
+                if (!working && !stopping) {
+                        working = true;
+                        worker = new TelescopeWorker(m_logger, trck_comp, null);
+                        worker.start();
+                } else {
+                        m_logger.info("Already working");
+			//AcsJException e = new AcsJException();
+                        //throw e;
+                }
+        }
+
+	public void stop() {//throws AcsJException {
+		m_logger.info("Stop called");
+
+		if (!stopping)
+			stopping = true;
+		else {
+			m_logger.info("Already trying to stop");
+
+			//TODO: perhaps throw another exception here...
+			return;
+		}
+
+		if (!working) {
+			m_logger.info("Not yet working");
+			stopping = false;
+			//AcsJException e = new AcsJException();
+			//throw e;
+		}
+		working = false;
+
+		//block until last proposal finished
+		if (worker != null) {
+			try {
+				m_logger.fine("Waiting for thread to die...");
+				worker.join();
+			} catch(Exception e) {
+				m_logger.fine("Waiting for thread to die error");
+			}
+		}
+
+		worker = null;
+		stopping = false;
+
+		m_logger.fine("Thread terminated");
+	}
 }
