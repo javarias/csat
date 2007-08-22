@@ -36,7 +36,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
-	private RWTCSStatus m_status;
+	private TCSStatus status;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -46,6 +46,11 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		m_containerServices = containerServices;
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
+
+		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STOP);
+	//	_RWTCSStatusStub statusPOA = new _RWTCSStatusStub();
+	//	RWTCSStatusPOATie statusTie = new RWTCSStatusPOATie(statusPOA);
+	//	m_status = RWTCSStatusHelper.narrow(this.registerProperty(statusPOA, statusTie));
 	}
     
 	public void execute() {
@@ -122,7 +127,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	public void EmergencyStop(){
 	}
 
-	public RWTCSStatus status(){
-		return m_status;
+	public TCSStatus status(){
+		return status;
 	}
 }

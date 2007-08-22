@@ -28,8 +28,6 @@ module CSATSTATUS_MODULE {
 		AUTOMATIC
 	};
 
-	ACS_ENUM( TCSStatus );
-
 	/** @interface CSATStatus
 	 * Defines the interface that will be used by external clients to control the
 	 * TCS. This interface allow external software to move the TCS trough its statues
@@ -41,7 +39,7 @@ module CSATSTATUS_MODULE {
 	{
 
 		/** Current TCS status */
-		readonly attribute RWTCSStatus status;
+		readonly attribute TCSStatus status;
 		
 		/**
 		 * Moves the TCS from the "Stop" state to the "Stand-by" state.  In this
