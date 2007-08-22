@@ -14,7 +14,7 @@ import alma.ACS.CBDescIn;
 import alma.acs.callbacks.ResponseReceiver;
 import Hevelius.utilities.converter.*;
 import Hevelius.acsmodules.*;
-
+import Hevelius.interfaz.interfaz;
 
 public class Presetting {
 
@@ -43,17 +43,17 @@ public class Presetting {
 
 		};
 
-		try{
-			interfaz.getDrawingPanel().getCSATControl().preset(pos, callback, reference);
-		}catch(ComponentLifecycleException e)
-		{
+		//try{
+			interfaz.getDrawingPanel().getCSATControl().preset(pos);
+		//}catch(ComponentLifecycleException e)
+		//{
 			//VENTANA DE DESCONEXION U OTRA WEA POR DISCUTIR	
-		}
+		//}
 
 
 	}
 
-	public RadecPos createRadecType(double ra, double dec){
+	public static RadecPos createRadecType(double ra, double dec){
 		RadecPos tmp = null;
 
 		tmp.ra = ra;

@@ -1,0 +1,18 @@
+#ifndef _TRACKING_IDL_
+#define _TRACKING_IDL_
+
+#include <baci.idl>
+#include <Types.idl>
+#pragma prefix "alma"
+
+module TRACKING_MODULE
+{
+        interface Tracking : ACS::ACSComponent
+	{
+		void setTrackingStatus(in boolean s);
+		void setTrackingRate(in TYPES::RadecVel v);
+		boolean getTrackingStatus();
+		TYPES::RadecVel getTrackingRate();
+	};
+};
+#endif

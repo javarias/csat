@@ -24,6 +24,11 @@
          Type="IDL:alma/CSATSTATUS_MODULE/CSATStatus:1.0"
          Container="amContainer"
          Default="true"/>
+      <_ Name="TRACKING"
+         Code="alma.TRACKING_MODULE.TrackingImpl.TrackingHelper"
+         Type="IDL:alma/TRACKING_MODULE/Tracking:1.0"
+         Container="amContainer"
+         Default="true"/>
 </Components>
 
 

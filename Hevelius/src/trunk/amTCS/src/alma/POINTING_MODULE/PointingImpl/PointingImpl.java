@@ -103,8 +103,8 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 	public void AltitudeOffset(double degree){
 		AltazPosHolder altazposh = new AltazPosHolder();	
 		AltazPos altazpos = new AltazPos(); 
-		RadecPosHolder r = null;
-		tele_comp.getPos(r, altazposh);
+		//RadecPosHolder r = null;
+		tele_comp.getPos(null, altazposh);
 		altazpos.alt = altazposh.value.alt+degree;
 		altoff += degree;
 		//tele_comp.goToAltAz(altazpos, null, null, null);
@@ -112,8 +112,8 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 	public void AzimuthOffset(double degree){
 		AltazPosHolder altazposh = new AltazPosHolder();
 		AltazPos altazpos = new AltazPos();
-		RadecPosHolder r = null;
-		tele_comp.getPos(r, altazposh);
+		//RadecPosHolder r = null;
+		tele_comp.getPos(null, altazposh);
 		altazpos.az = altazposh.value.az+degree;
 		azoff += degree;
 		//tele_comp.goToAltAz(altazpos, null, null, null);
