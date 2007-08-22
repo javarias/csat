@@ -142,9 +142,6 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 
 	}
 
-
-
-
 	public boolean isWorking()
 	{	
 		return working;

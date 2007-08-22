@@ -29,6 +29,8 @@ import alma.TYPES.*;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
+//import alma.acs.callbacks.ResponseReceiver;
+//import alma.ACS.CBDescIn;
 import alma.CSATCONTROL_MODULE.CSATControlOperations;
 import alma.CSATCONTROL_MODULE.CSATControlImpl.CSATControlImpl;
 
@@ -37,6 +39,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
 	private alma.POINTING_MODULE.Pointing pointing;
+	private alma.TELESCOPE_MODULE.Telescope telescope;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -56,6 +59,14 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 			m_logger.fine("Failed to get Pointing component reference " + e);
 			throw new ComponentLifecycleException("Failed to get Pointing component reference");
 		}
+		
+		try {
+                        obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
+                        telescope = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
+                } catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+                        m_logger.fine("Failed to get Telescope component reference " + e);
+                        throw new ComponentLifecycleException("Failed to get Telescope component reference");
+                }
 
 	}
 
@@ -89,7 +100,19 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	/////////////////////////////////////////////////////////////
 
 	public void preset(alma.TYPES.RadecPos p, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
-		//telescope.preset(p,cb,desc);
+	/*	ResponseReceiver cb  =  new ResponseReceiver() {
+
+			public void incomingResponse(Object x) {
+				System.out.println("Incoming Response: "+x);
+			}
+			public void incomingException(Exception x) {
+				System.out.println("Responding failed: "+x);}
+
+		};	
+		
+		CBDescIn desc = new CBDescIn();	*/
+
+		telescope.preset(p,cb,desc);
 		pointing.resetOffset();
 	}
 

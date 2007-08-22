@@ -10,7 +10,7 @@ import java.io.*;
 import alma.acs.exceptions.AcsJException;
 import alma.TYPES.*;
 import alma.ACS.CBDescIn;
-//import alma.ACS.Callback;
+import alma.ACS.CBvoid;
 import alma.acs.callbacks.ResponseReceiver;
 import Hevelius.utilities.converter.*;
 import Hevelius.acsmodules.*;
@@ -19,12 +19,15 @@ import Hevelius.interfaz.interfaz;
 public class Presetting {
 
 	//callback callback;
-	CBDescIn reference;
+	//CBDescIn reference;
+	//CDvoid callback;
 
 
 	public static void preset(double ra, double dec, int type){
 		
 		RadecPos pos;
+		CBDescIn reference;
+        	CBvoid callback;
 
 		if(type == 1){
 			Converter.altaz2radec(ra,dec);
@@ -37,7 +40,7 @@ public class Presetting {
 
 			pos = createRadecType(ra,dec);
 
-			ResponseReceiver callback  =  new ResponseReceiver() {
+		/*	ResponseReceiver callback  =  new ResponseReceiver() {
 
 				public void incomingResponse(Object x) {
 					System.out.println("Incoming Response: "+x);
@@ -46,9 +49,12 @@ public class Presetting {
 					System.out.println("Responding failed: "+x);}
 
 			};
+		*/
 
+			
+			
 			//try{
-			//interfaz.getDrawingPanel().getCSATControl().preset(pos);
+			interfaz.getDrawingPanel().getCSATControl().preset(pos, callback, reference);
 			//}catch(ComponentLifecycleException e)
 			//{
 			//VENTANA DE DESCONEXION U OTRA WEA POR DISCUTIR	
