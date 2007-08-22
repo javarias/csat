@@ -11,7 +11,9 @@ module TELESCOPE_MODULE
 	{
 		void goToAltAz(in TYPES::AltazPos p, in TYPES::AltazVel v, in ACS::CBvoid cb, in ACS::CBDescIn desc);
 		void getPos(out TYPES::RadecPos p_rd, out TYPES::AltazPos p_aa);
-		
+		void radec2hor(in TYPES::RadecPos p);
+		void hor2radec(in TYPES::AltazPos p);
+		boolean isWorking();
 	};
 };
 #endif
