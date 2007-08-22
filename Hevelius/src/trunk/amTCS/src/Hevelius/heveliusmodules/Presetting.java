@@ -54,7 +54,7 @@ public class Presetting {
 			
 			
 			//try{
-			interfaz.getDrawingPanel().getCSATControl().preset(pos, callback, reference);
+			interfaz.getDrawingPanel().getCSATControl().preset(pos);
 			//}catch(ComponentLifecycleException e)
 			//{
 			//VENTANA DE DESCONEXION U OTRA WEA POR DISCUTIR	
