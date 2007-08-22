@@ -3,12 +3,21 @@ package Hevelius.interfaz;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.Image;
 
 import java.io.*;
 import javax.imageio.*;
 
 import Hevelius.heveliusmodules.*;
 import Hevelius.acsmodules.*;
+
+import alma.acs.exceptions.AcsJException;
+import alma.TYPES.*;
+import alma.ACS.CBDescIn;
+import alma.ACS.CBvoid;
+import alma.acs.callbacks.ResponseReceiver;
+import Hevelius.utilities.converter.*;
+import Hevelius.interfaz.interfaz;
 
 public class DrawingPanel extends JPanel
 {
@@ -24,10 +33,14 @@ public class DrawingPanel extends JPanel
 	private Image screen = null;
 
 	private static Configuration test = new Configuration();
-	
+
 	private Image stop=null;
 	private JButton zenith;
 	private JButton park;
+	private JButton rbutton;
+	private JButton lbutton;
+	private JButton tbutton;
+	private JButton bbutton;
 	private JLabel stimeL;
 	private JLabel stime;
 
@@ -73,13 +86,39 @@ public class DrawingPanel extends JPanel
 		imag = imag.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
 		return imag;
 	}
-	private void setArrows(Dimension dim)
-	{
-		/*rArrow = setImage("Hevelius/images/rArrow.jpg",dim);
-		lArrow = setImage("Hevelius/images/lArrow.jpg",dim);
-		tArrow = setImage("Hevelius/images/tArrow.jpg",dim);
-		bArrow = setImage("Hevelius/images/bArrow.jpg",dim);*/
-	}
+	/*private void setArrows(Dimension dim)
+	  {
+
+	//ImageIcon rArrow = new ImageIcon("../images/rArrow.jpg");
+	//rbutton = new JButton(rArrow);
+	//rbutton.setBackground(Color.WHITE);
+	//rbutton.setSize(200,200);
+	//rbutton.setLocation();
+	//add(rbutton);
+
+	//ImageIcon lArrow = new ImageIcon("../images/lArrow.jpg");
+	//lbutton = new JButton(lArrow);
+	//lbutton.setBackground(Color.WHITE);
+	//lbutton.setSize(50,20);
+	//add(lbutton);
+
+	//ImageIcon tArrow = new ImageIcon("../images/tArrow.jpg");
+	//tbutton = new JButton(tArrow);
+	tbutton.setBackground(Color.WHITE);
+	tbutton.setSize(50,20);
+	add(tbutton);
+
+	ImageIcon bArrow = new ImageIcon("../images/bArrow.jpg");
+	bbutton = new JButton(bArrow);
+	bbutton.setBackground(Color.WHITE);
+	bbutton.setSize(50,20);
+	add(bbutton);
+
+	rArrow = setImage("Hevelius/images/rArrow.jpg",dim);
+	lArrow = setImage("Hevelius/images/lArrow.jpg",dim);
+	tArrow = setImage("Hevelius/images/tArrow.jpg",dim);
+	bArrow = setImage("Hevelius/images/bArrow.jpg",dim);
+	}*/
 	public void init()
 	{
 		tam = new Dimension(0,0);
@@ -93,32 +132,87 @@ public class DrawingPanel extends JPanel
 		r = (dy-rect_y)/4;
 
 		//Interface Initialization
-		setArrows(new Dimension(40,40));
+		//setArrows(new Dimension(40,40));
 		img = setImage("Hevelius/images/image.jpg",new Dimension(200,200));
 
-		ImageIcon rarrow = new ImageIcon("../images/rArrow.jpg");
-		JButton rbutton = new JButton(rarrow);
-		rbutton.setBackground(Color.BLACK);
-		
-		ImageIcon larrow = new ImageIcon("../images/lArrow.jpg");
-		JButton lbutton = new JButton(larrow);
-		lbutton.setBackground(Color.BLACK);
-		
-		ImageIcon tarrow = new ImageIcon("../images/tArrow.jpg");
-		JButton tbutton = new JButton(tarrow);
-		tbutton.setBackground(Color.BLACK);
-		
-		ImageIcon barrow = new ImageIcon("../images/bArrow.jpg");
-		JButton bbutton = new JButton(barrow);
-		bbutton.setBackground(Color.BLACK);
+		/*ImageIcon rarrow = new ImageIcon("../images/rArrow.jpg");
+		  JButton rbutton = new JButton(rarrow);
+		  rbutton.setBackground(Color.BLACK);
+
+		  ImageIcon larrow = new ImageIcon("../images/lArrow.jpg");
+		  JButton lbutton = new JButton(larrow);
+		  lbutton.setBackground(Color.BLACK);
+
+		  ImageIcon tarrow = new ImageIcon("../images/tArrow.jpg");
+		  JButton tbutton = new JButton(tarrow);
+		  tbutton.setBackground(Color.BLACK);
+
+		  ImageIcon barrow = new ImageIcon("../images/bArrow.jpg");
+		  JButton bbutton = new JButton(barrow);
+		  bbutton.setBackground(Color.BLACK);
 
 
 
-
+		 */
 		//Go to Zenith Button
 		zenith = new JButton("Zenith");
 		zenith.setSize(100,20);
 		add(zenith);
+
+		//Go to R Button
+		ImageIcon rArrow = new ImageIcon(new ImageIcon("Hevelius/images/rArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		rbutton = new JButton(rArrow);
+		rbutton.setBackground(Color.WHITE);
+		rbutton.setSize(50,50);
+		//rbutton.setLocation();
+		add(rbutton);
+
+		rbutton.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                                interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(1.0);
+                        }
+                });
+		
+
+		//Go to L Button
+		ImageIcon lArrow = new ImageIcon(new ImageIcon("Hevelius/images/lArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		lbutton = new JButton(lArrow);
+		lbutton.setBackground(Color.WHITE);
+		lbutton.setSize(50,50);
+		add(lbutton);
+
+		lbutton.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                                interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(-1.0);
+                        }
+                });
+
+
+		//Go to T Botton
+		ImageIcon tArrow = new ImageIcon(new ImageIcon("Hevelius/images/tArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		tbutton = new JButton(tArrow);
+		tbutton.setBackground(Color.WHITE);
+		tbutton.setSize(50,50);
+		add(tbutton);
+
+		tbutton.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                                interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(1.0);
+                        }
+                });
+
+		//Go to B Button
+		ImageIcon bArrow = new ImageIcon(new ImageIcon("Hevelius/images/bArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		bbutton = new JButton(bArrow);
+		bbutton.setBackground(Color.WHITE);
+		bbutton.setSize(50,50);
+		add(bbutton);
+
+		bbutton.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                                interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(-1.0);
+                        }
+                });
 
 		//Go to Park Button
 		park = new JButton("Park");
@@ -250,6 +344,17 @@ public class DrawingPanel extends JPanel
 
 		stimeL.setLocation(60,400);
 		stime.setLocation(80,420);
+
+		//rbutton.setSize(200,200);
+
+		// Positions buttons
+		rbutton.setLocation(((dx+rect_x*3/4)/2+0)+12, dy/2-20);
+		lbutton.setLocation(((dx-rect_x*3/4)/2-40)-22, dy/2-20);
+
+		tbutton.setLocation(dx/2-20, ((dy-rect_y*3/4)/2-40)-22);
+		bbutton.setLocation(dx/2-20, ((dy+rect_y*3/4)/2+0)+12);
+
+
 
 		zenith.setLocation(rect_x*3/4-50,3*dy/4-20);
 
