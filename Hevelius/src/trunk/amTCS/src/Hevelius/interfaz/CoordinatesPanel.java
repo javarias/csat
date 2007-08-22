@@ -222,22 +222,31 @@ public class CoordinatesPanel extends JPanel implements Runnable
 			coor.setText("RaDec Coordinates");
 			coor1L.setText("Ra");
 			coor2L.setText("Dec");
-			Converter.altaz2radec(Double.parseDouble(coor1.getText()),Double.parseDouble(coor2.getText()));
-			System.out.println(Double.parseDouble(coor1.getText())+" "+Double.parseDouble(coor2.getText()));
-			coor1.setText(Converter.getRa()+"");
-			coor2.setText(Converter.getDec()+"");
-			System.out.println(Converter.getRa()+" "+Converter.getDec());	
+			double c1 = Double.parseDouble(coor1.getText());
+			double c2 = Double.parseDouble(coor2.getText());
+			Converter.altaz2radec(c1,c2);
+			System.out.println(c1+" "+c2);
+			c1 = Converter.getRa();
+			c2 = Converter.getDec();
+			coor1.setText(c1+"");
+			coor2.setText(c2+"");
+			System.out.println(c1+" "+c2);
+			System.out.println(Converter.getAlt()+" "+Converter.getAz());	
 		}
 		else
 		{
 			coor.setText("Horizontal Coordinates");
 			coor1L.setText("Alt");
 			coor2L.setText("Az");
-			Converter.radec2altaz(Double.parseDouble(coor1.getText()),Double.parseDouble(coor2.getText()));
-			System.out.println(Double.parseDouble(coor1.getText())+" "+Double.parseDouble(coor2.getText()));
-                        coor1.setText(Converter.getAlt()+"");
-                        coor2.setText(Converter.getAz()+"");
-			System.out.println(Converter.getAlt()+" "+Converter.getAz());
+			double c1 = Double.parseDouble(coor1.getText());
+                        double c2 = Double.parseDouble(coor2.getText());
+			Converter.radec2altaz(c1,c2);
+			System.out.println(c1+" "+c2);
+			c1 = Converter.getAlt();
+			c2 = Converter.getAz();
+                        coor1.setText(c1+"");
+                        coor2.setText(c2+"");
+			System.out.println(c1+" "+c2);
 			System.out.println(Converter.getRa()+" "+Converter.getDec());
 		}
 	}
