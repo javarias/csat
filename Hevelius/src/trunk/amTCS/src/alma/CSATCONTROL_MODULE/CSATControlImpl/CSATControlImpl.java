@@ -125,7 +125,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 
 			CBDescIn desc = new CBDescIn();	*/
 
-		//		telescope.preset(p,cb,desc);
+		telescope.preset(p,cb,desc);
 		pointing.resetOffset();
 	}
 

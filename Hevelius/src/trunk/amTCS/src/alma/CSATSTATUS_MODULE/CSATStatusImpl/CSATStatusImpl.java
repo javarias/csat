@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 import alma.ACS.*;
 import alma.TYPES.*;
 import alma.acs.component.ComponentLifecycle;
+import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
 import alma.CSATSTATUS_MODULE.CSATStatusOperations;
 import alma.CSATSTATUS_MODULE.CSATStatusImpl.CSATStatusImpl;
@@ -36,46 +37,57 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
 
+	private alma.TELESCOPE_MODULE.Telescope telescope;
+
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
 	/////////////////////////////////////////////////////////////
 	
-	public void initialize(ContainerServices containerServices) {
+	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException {
 		m_containerServices = containerServices;
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
+		
+		org.omg.CORBA.Object obj = null;
+		try {
+			obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
+			telescope = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
+		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Telescope component reference " + e);
+			throw new ComponentLifecycleException("Failed to get Telescope component reference");
+		}
 	}
-    
+
 	public void execute() {
 		m_logger.info("execute() called...");
 	}
-    
+
 	public void cleanUp() {
 		m_logger.info("cleanUp() called..., nothing to clean up.");
 	}
-    
+
 	public void aboutToAbort() {
 		cleanUp();
 		m_logger.info("managed to abort...");
 	}
-	
+
 	/////////////////////////////////////////////////////////////
 	// Implementation of ACSComponent
 	/////////////////////////////////////////////////////////////
-	
-	
+
+
 	public ComponentStates componentState() {
 		return m_containerServices.getComponentStateManager().getCurrentState();
 	}
 	public String name() {
 		return m_containerServices.getName();
 	}
-	
+
 	/////////////////////////////////////////////////////////////
 	// Implementation of DataBaseOperations
 	/////////////////////////////////////////////////////////////
 
-      	public void on(){
+	public void on(){
 	}
 
 	public void off(){
@@ -97,6 +109,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public void getPos(RadecPosHolder rdp, AltazPosHolder azp){
+		telescope.getPos(rdp, azp);
 	}
 
 	public int getState(){
@@ -104,7 +117,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public boolean getTrackingStatus(){
-		return false;
+		return false; //tracking.getTrackingStatus;
 	}
 
 	public RadecVel getTrackingRate(){

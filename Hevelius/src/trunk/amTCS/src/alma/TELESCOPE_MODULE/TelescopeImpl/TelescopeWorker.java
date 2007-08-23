@@ -5,8 +5,6 @@ import java.util.Random;
 import alma.ACS.ComponentStates;
 import alma.acs.container.ContainerServices;
 import alma.TYPES.*;
-//import alma.DATABASE_MODULE.DataBaseImpl;
-
 
 public class TelescopeWorker extends Thread
 {

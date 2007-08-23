@@ -41,59 +41,68 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	private boolean stopping;
 
 	private alma.TELESCOPE_MODULE.Telescope tele_comp;
-//	private alma.TRACKING_MODULE.Tracking trck_comp;
+	private alma.TRACKING_MODULE.Tracking trck_comp;
 	private TelescopeWorker worker;
 
+	org.omg.CORBA.Object obj = null;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
 	/////////////////////////////////////////////////////////////
 	
-	public void initialize(ContainerServices containerServices) {
+	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException {
 		m_containerServices = containerServices;
 		m_logger = m_containerServices.getLogger();
                 working = false;
                 stopping = false;
 		m_logger.info("initialize() called...");
+		try {
+			obj = m_containerServices.getDefaultComponent("IDL:alma/TRACKING_MODULE/Tracking:1.0");
+			trck_comp = alma.TRACKING_MODULE.TrackingHelper.narrow(obj);
+		}
+		catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Tracking component reference " + e);
+			throw new ComponentLifecycleException("Failed to get Tracking component reference");
+		}
 	}
-    
+
 	public void execute() {
 		m_logger.info("execute() called...");
 	}
-    
+
 	public void cleanUp() {
 		m_logger.info("cleanUp() called..., nothing to clean up.");
 	}
-    
+
 	public void aboutToAbort() {
 		if(working)
 		{
 			m_logger.fine("Trying to stop");
-	//		try
-	//		{
-				//stop();
-	//		}
-	//		catch(SchedulerAlreadyStoppedEx e)
-	//		{
-	//			m_logger.fine("Already Stopped");
-	//		}
+			//		try
+			//		{
+			stop();
+			//		}
+			//		catch(SchedulerAlreadyStoppedEx e)
+			//		{
+			//			m_logger.fine("Already Stopped");
+			//		}
 		}
 		cleanUp();
 		m_logger.info("managed to abort...");
 	}
-	
+
 	/////////////////////////////////////////////////////////////
 	// Implementation of ACSComponent
 	/////////////////////////////////////////////////////////////
-	
-	
+
+
 	public ComponentStates componentState() {
 		return m_containerServices.getComponentStateManager().getCurrentState();
 	}
 	public String name() {
 		return m_containerServices.getName();
 	}
-	
+
 	/////////////////////////////////////////////////////////////
 	// Implementation of TelescopeOperations
 	/////////////////////////////////////////////////////////////
@@ -128,14 +137,18 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 
 	public void hor2radec(alma.TYPES.AltazPos p)
 	{
+		Ra = p.alt;
+		Dec = p.az;
 	}
 
 	public void radec2hor(alma.TYPES.RadecPos p)
 	{
+		Alt = p.ra;
+		Az = p.dec;
 	}
 
 	public void preset(alma.TYPES.RadecPos p, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
-		
+
 		Ra = p.ra;
 		Dec = p.dec;
 
@@ -152,20 +165,29 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	{
 		working = s;
 	}
-/*
-        public void start() {//throws AcsJException{
-                m_logger.info("Start called");
 
-                if (!working && !stopping) {
-                        working = true;
-                        worker = new TelescopeWorker(m_logger, trck_comp, null);
-                        worker.start();
-                } else {
-                        m_logger.info("Already working");
-			//AcsJException e = new AcsJException();
-                        //throw e;
+	public void start() throws ComponentLifecycleException {//throws AcsJException{
+		m_logger.info("Start called");
+
+		if (!working && !stopping) {
+			working = true;
+
+                try {
+                        obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
+                        tele_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
+                } catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+                        m_logger.fine("Failed to get Telescope component reference " + e);
+                        throw new ComponentLifecycleException("Failed to get Telescope component reference");
                 }
-        }
+
+			worker = new TelescopeWorker(m_logger, trck_comp, tele_comp);
+			worker.start();
+		} else {
+			m_logger.info("Already working");
+			//AcsJException e = new AcsJException();
+			//throw e;
+		}
+	}
 
 	public void stop() {//throws AcsJException {
 		m_logger.info("Stop called");
@@ -201,6 +223,18 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 		stopping = false;
 
 		m_logger.fine("Thread terminated");
+	}
+/*
+	protected setRaDec(RadecPos p)
+	{
+		Ra = p.ra;
+		Dec = p.dec;
+	}
+
+	protected setAltAz(AltazPos p)
+	{
+		Alt = p.alt;
+		Az = p.az;
 	}
 */
 }
