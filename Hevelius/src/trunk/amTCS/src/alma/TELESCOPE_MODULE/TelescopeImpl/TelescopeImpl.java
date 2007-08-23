@@ -122,7 +122,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 			p_aa.value.alt = Alt;
 			p_aa.value.az = Az;
 		}
-		//System.out.println(p_aa.value.alt+p_aa.value.az+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		System.out.println("Llegue Tel Asdas by Mex");
+		//System.out.println(p_aa.value.alt+" "+p_aa.value.az+" "+p_rd.value.ra+" "+p_rd.value.dec);
 	}
 
 	public void hor2radec(alma.TYPES.AltazPos p)

@@ -107,6 +107,7 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 		tele_comp.getPos(null, altazposh);
 		altazpos.alt = altazposh.value.alt+degree;
 		altoff += degree;
+		System.out.println("Llegue Alt"+altoff);
 		//tele_comp.goToAltAz(altazpos, null, null, null);
 	}
 	public void AzimuthOffset(double degree){
@@ -116,6 +117,7 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 		tele_comp.getPos(null, altazposh);
 		altazpos.az = altazposh.value.az+degree;
 		azoff += degree;
+		System.out.println("Llegue Az"+azoff);
 		//tele_comp.goToAltAz(altazpos, null, null, null);
 
 	}

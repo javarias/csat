@@ -169,7 +169,7 @@ public class DrawingPanel extends JPanel
 
 		rbutton.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
-                                interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(1.0);
+                                interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(1.0d);
                         }
                 });
 		
@@ -183,7 +183,9 @@ public class DrawingPanel extends JPanel
 
 		lbutton.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
-                                interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(-1.0);
+				if(interfaz.getDrawingPanel().getCSATControl()==null)
+					System.out.println("Alo");
+                                interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(-1.0d);
                         }
                 });
 
@@ -197,7 +199,7 @@ public class DrawingPanel extends JPanel
 
 		tbutton.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
-                                interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(1.0);
+                                interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(1.0d);
                         }
                 });
 
@@ -210,7 +212,7 @@ public class DrawingPanel extends JPanel
 
 		bbutton.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
-                                interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(-1.0);
+                                interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(-1.0d);
                         }
                 });
 
