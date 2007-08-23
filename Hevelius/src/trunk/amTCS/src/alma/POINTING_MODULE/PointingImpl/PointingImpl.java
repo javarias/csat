@@ -44,12 +44,19 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 	public double altoff = 0;
 	public double azoff = 0;
 		
-	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException{
+	public void initialize(ContainerServices containerServices) {
 		m_containerServices = containerServices;
 		m_logger = m_containerServices.getLogger();
 
 		m_logger.finer("Lifecycle initialize() called");
 
+
+		
+
+	}
+
+	public void execute() throws ComponentLifecycleException{
+		m_logger.info("execute() called...");
 		// Get csatstatus instances
 		org.omg.CORBA.Object obj = null;
 //		try {
@@ -66,13 +73,6 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
                         m_logger.fine("Failed to get TELESCOPE component reference " + e);
                         throw new ComponentLifecycleException("Failed to get TELESCOPE component reference");
                 }
-
-		
-
-	}
-
-	public void execute() {
-		m_logger.info("execute() called...");
 	}
 
 	public void cleanUp() {

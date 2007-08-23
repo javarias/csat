@@ -41,7 +41,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	private boolean stopping;
 
 	private alma.TELESCOPE_MODULE.Telescope tele_comp;
-	private alma.TRACKING_MODULE.Tracking trck_comp;
+//	private alma.TRACKING_MODULE.Tracking trck_comp;
 	private TelescopeWorker worker;
 
 
@@ -71,7 +71,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 			m_logger.fine("Trying to stop");
 	//		try
 	//		{
-				stop();
+				//stop();
 	//		}
 	//		catch(SchedulerAlreadyStoppedEx e)
 	//		{
@@ -151,7 +151,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	{
 		working = s;
 	}
-
+/*
         public void start() {//throws AcsJException{
                 m_logger.info("Start called");
 
@@ -201,4 +201,5 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 
 		m_logger.fine("Thread terminated");
 	}
+*/
 }

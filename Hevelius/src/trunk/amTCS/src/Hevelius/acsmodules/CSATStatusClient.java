@@ -20,7 +20,7 @@ public class CSATStatusClient extends ComponentClient
 	}
 
 	public void loadComponent() throws AcsJContainerServicesEx {
-		csstatus = alma.CSATSTATUS_MODULE.CSATStatusHelper.narrow(getContainerServices().getDefaultComponent("IDL:alma/CSATSTATUS_MODULE/CSATStatusImpl:1.0"));
+		csstatus = alma.CSATSTATUS_MODULE.CSATStatusHelper.narrow(getContainerServices().getDefaultComponent("IDL:alma/CSATSTATUS_MODULE/CSATStatus:1.0"));
 	}
 
 	public static CSATStatusClient start()
@@ -30,7 +30,7 @@ public class CSATStatusClient extends ComponentClient
 			System.out.println("Java property 'ACS.manager' must be set to the corbaloc of the ACS manager!");
 			System.exit(-1);
 		}
-		String clientName = "CSATStatusClient";
+		String clientName = "Manager";
 		CSATStatusClient csatsc = null;
 		try {
 			csatsc = new CSATStatusClient(null, managerLoc, clientName);
