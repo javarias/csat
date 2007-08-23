@@ -8,6 +8,7 @@ import Hevelius.utilities.converter.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.DecimalFormat;
 import alma.TYPES.*;
 
 public class CoordinatesPanel extends JPanel //implements Runnable
@@ -295,22 +296,30 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 	public void setRa(double RA)
 	{
-		ccoorR.setText(Double.toString(RA));
+		DecimalFormat df = new DecimalFormat("#.###");
+		//ccoorR.setText(Double.toString(RA));
+		ccoorR.setText(df.format(RA));
 	}
 
 	public void setDec(double DEC)
 	{
-		ccoorD.setText(Double.toString(DEC));
+		DecimalFormat df = new DecimalFormat("#.###");
+		//ccoorD.setText(Double.toString(DEC));
+		ccoorD.setText(df.format(DEC));
 	}
 
 	public void setAlt(double ALT)
 	{
-		ccoorAl.setText(Double.toString(ALT));
+		DecimalFormat df = new DecimalFormat("#.###");
+		//ccoorAl.setText(Double.toString(ALT));
+		ccoorAl.setText(df.format(ALT));
 	}
 
 	public void setAz(double AZ)
 	{
-		ccoorAz.setText(Double.toString(AZ));
+		DecimalFormat df = new DecimalFormat("#.###");
+		//ccoorAz.setText(Double.toString(AZ));
+		ccoorAz.setText(df.format(AZ));
 		interfaz.getDrawingPanel().getCompassPanel().setCompassPoints(AZ);
 	}
 	

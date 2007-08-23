@@ -60,9 +60,9 @@ public class TelescopeConverter {
 		
 		//posicion fisicas del telescopio de acuerdo a la ciudad elegida
 		//LON = Double.parseDouble(vector.get(0).getLon()); //llamar al cuadrado q tiene ese dato
-		LON=1;
+		LON = -71.53;
 		//LAT = Double.parseDouble(vector.get(0).getLat()); //llama1;r posicion que tuene ese dato 
-		LAT=1;
+		LAT = -32.78;
 
 		if((mes == 1) || (mes == 2))
 		{
@@ -164,9 +164,9 @@ public class TelescopeConverter {
 		
 		//posicion fisicas del telescopio de acuerdo a la ciudad elegida
 		//LON = Double.parseDouble(vector.get(0).getLon()); //llamar al cuadrado q tiene ese dato
-		LON=1;
+		LON = -71.53;
 		//LAT = Double.parseDouble(vector.get(0).getLat()); //llama1;r posicion que tuene ese dato 
-		LAT=1;
+		LAT = -32.78;
 	
 		if((mes == 1) || (mes == 2))
 		{

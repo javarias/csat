@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Image;
+import java.text.DecimalFormat;
 
 import java.io.*;
 import javax.imageio.*;
@@ -526,6 +527,8 @@ public class DrawingPanel extends JPanel
 
 	public void setSideralTime(double ST)
 	{
-		stime.setText(Double.toString(ST));
+		DecimalFormat df = new DecimalFormat("#.###");
+		//stime.setText(Double.toString(ST));
+		stime.setText(df.format(ST));
 	}
 }
