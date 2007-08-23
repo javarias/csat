@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import alma.TYPES.*;
 
-public class CoordinatesPanel extends JPanel implements Runnable
+public class CoordinatesPanel extends JPanel //implements Runnable
 {
 	//private Configuration test = DrawingPanel.getConfig();
 

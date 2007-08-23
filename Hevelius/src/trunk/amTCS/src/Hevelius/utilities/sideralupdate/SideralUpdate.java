@@ -21,11 +21,18 @@ public class SideralUpdate implements Runnable
 		{
 			try
 			{
-				interfaz.getDrawingPanel().getCSATStatus().getPos(r,a);
-				interfaz.getDrawingPanel().getCoordinatePanel().setRa(r.value.ra);
-                                interfaz.getDrawingPanel().getCoordinatePanel().setDec(r.value.dec);
-                                interfaz.getDrawingPanel().getCoordinatePanel().setAlt(a.value.alt);
-                                interfaz.getDrawingPanel().getCoordinatePanel().setAz(a.value.az);
+				if(interfaz.getDrawingPanel()==null)
+					System.out.println("ABC");
+				if(interfaz.getDrawingPanel().getCSATStatus()==null)
+					System.out.println("csat");
+				if(interfaz.getDrawingPanel().getCSATStatus()!=null)
+				{
+					interfaz.getDrawingPanel().getCSATStatus().getPos(r,a);
+					interfaz.getDrawingPanel().getCoordinatesPanel().setRa(r.value.ra);
+        	                        interfaz.getDrawingPanel().getCoordinatesPanel().setDec(r.value.dec);
+                	                interfaz.getDrawingPanel().getCoordinatesPanel().setAlt(a.value.alt);
+                        	        interfaz.getDrawingPanel().getCoordinatesPanel().setAz(a.value.az);
+				}
 				Thread.sleep(2000);
 			}
 			catch(InterruptedException e)

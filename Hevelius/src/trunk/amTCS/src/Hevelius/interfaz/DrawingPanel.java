@@ -16,7 +16,8 @@ import alma.TYPES.*;
 import alma.ACS.CBDescIn;
 import alma.ACS.CBvoid;
 import alma.acs.callbacks.ResponseReceiver;
-import Hevelius.utilities.*;
+import Hevelius.utilities.converter.*;
+import Hevelius.utilities.sideralupdate.*;
 import Hevelius.interfaz.interfaz;
 
 public class DrawingPanel extends JPanel
@@ -282,8 +283,8 @@ public class DrawingPanel extends JPanel
 		trck.setTrackingState(true);
 
 		//SideralUpdate
-		sdrl = new SideralUpdate(null);
-                sdrl.init();
+		sdrl = new SideralUpdate();
+                //sdrl.init();
                 new Thread(sdrl).start();
 	}
 	public void paintComponent(Graphics g)
