@@ -314,7 +314,7 @@ public class CoordinatesPanel extends JPanel implements Runnable
 		interfaz.getDrawingPanel().getCompassPanel().setCompassPoints(AZ);
 	}
 	
-	public void run()
+/*	public void run()
 	{
 		while(true)
 		{
@@ -332,5 +332,5 @@ public class CoordinatesPanel extends JPanel implements Runnable
 				System.out.println("Error en Thread");
 			}
 		}
-	}
+	}*/
 }
