@@ -44,7 +44,9 @@ public class SystemPanel extends JPanel
 		stop.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
                                         CSATControlClient.stop(interfaz.getDrawingPanel().getCSATControl());
+			interfaz.getDrawingPanel().setCSATControl(null);
 					CSATStatusClient.stop(interfaz.getDrawingPanel().getCSATStatus());
+			interfaz.getDrawingPanel().setCSATStatus(null);
                         }
                 });
 

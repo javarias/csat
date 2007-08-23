@@ -77,7 +77,7 @@ public class TrackingImpl implements TrackingOperations, ComponentLifecycle {
 
 	private double Ra;
 	private double Dec;
-	private boolean state;
+	private boolean state = true;
 	private RadecVel vel;
 
 	public void setTrackingStatus(boolean s){

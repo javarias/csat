@@ -84,6 +84,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 
 	public void execute() {
+		telescope.start();
 		m_logger.info("execute() called...");
 	}
 

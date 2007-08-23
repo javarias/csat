@@ -15,6 +15,7 @@ module TELESCOPE_MODULE
 		void radec2hor(in TYPES::RadecPos p);
 		void hor2radec(in TYPES::AltazPos p);
 		boolean isWorking();
+		void start();
 	};
 };
 #endif

@@ -32,6 +32,10 @@ import alma.TELESCOPE_MODULE.TelescopeOperations;
 import alma.TELESCOPE_MODULE.TelescopeImpl.TelescopeImpl;
 import alma.acs.exceptions.AcsJException;
 import alma.acs.component.ComponentLifecycleException;
+//import si.ijs.maci.ComponentInfo;
+import alma.acs.component.ComponentDescriptor;
+import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
+
 
 public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 
@@ -66,7 +70,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 		}
 	}
 
-	public void execute() {
+	public void execute() throws ComponentLifecycleException {
 		m_logger.info("execute() called...");
 	}
 
@@ -137,21 +141,22 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 
 	public void hor2radec(alma.TYPES.AltazPos p)
 	{
-		Ra = p.alt;
-		Dec = p.az;
+		TelescopeConverter.altaz2radec(p.alt, p.az);
+		Ra = TelescopeConverter.getRa();
+		Dec = TelescopeConverter.getDec();
 	}
 
 	public void radec2hor(alma.TYPES.RadecPos p)
 	{
-		Alt = p.ra;
-		Az = p.dec;
+		TelescopeConverter.radec2altaz(p.ra, p.dec);
+		Alt = TelescopeConverter.getAlt();
+		Az = TelescopeConverter.getAz();
 	}
 
 	public void preset(alma.TYPES.RadecPos p, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
 
 		Ra = p.ra;
 		Dec = p.dec;
-
 		radec2hor(p);
 
 	}
@@ -166,18 +171,29 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 		working = s;
 	}
 
-	public void start() throws ComponentLifecycleException {//throws AcsJException{
+	public void start() {//throws AcsJException{
 		m_logger.info("Start called");
 
 		if (!working && !stopping) {
 			working = true;
-
+/*
                 try {
                         obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
                         tele_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
                 } catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
                         m_logger.fine("Failed to get Telescope component reference " + e);
                         throw new ComponentLifecycleException("Failed to get Telescope component reference");
+                }
+*/
+                try
+                {
+                        ComponentDescriptor s = m_containerServices.getComponentDescriptor("TELESCOPE");
+                        obj = s.getComponent();
+                        tele_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
+                }
+                catch(AcsJContainerServicesEx e)
+                {
+                        m_logger.fine("da");
                 }
 
 			worker = new TelescopeWorker(m_logger, trck_comp, tele_comp);
