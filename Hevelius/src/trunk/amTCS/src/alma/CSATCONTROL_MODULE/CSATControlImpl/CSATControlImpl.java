@@ -53,7 +53,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 
 		// Get pointing instances
 		org.omg.CORBA.Object obj = null;
-		/*
+		
 		try {
 			obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
 			telescope = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
@@ -61,8 +61,8 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 			m_logger.fine("Failed to get Telescope component reference " + e);
 			throw new ComponentLifecycleException("Failed to get Telescope component reference");
 		}
-		*/
 		
+
 		try {
 			obj = m_containerServices.getDefaultComponent("IDL:alma/POINTING_MODULE/Pointing:1.0");
 			pointing = alma.POINTING_MODULE.PointingHelper.narrow(obj);
@@ -72,7 +72,6 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 			throw new ComponentLifecycleException("Failed to get Pointing component reference");
 		}
 		
-		/*
 		try {
 		 	obj = m_containerServices.getDefaultComponent("IDL:alma/TRACKING_MODULE/Tracking:1.0");
 			tracking = alma.TRACKING_MODULE.TrackingHelper.narrow(obj);
@@ -81,7 +80,6 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 			m_logger.fine("Failed to get Tracking component reference " + e);
 			throw new ComponentLifecycleException("Failed to get Tracking component reference");
 		}
-		*/
 		
 	}
 

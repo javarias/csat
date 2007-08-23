@@ -127,7 +127,6 @@ TrackingImpl_DIRS=alma/TRACKING_MODULE/TrackingImpl
 Hevelius_DIRS=Hevelius/
 
 
-jjj_EXTRAS= 
 #
 # java sources in Jarfile on/off
 DEBUG= 
