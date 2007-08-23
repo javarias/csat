@@ -224,7 +224,7 @@ public class interfaz {
 		panel1.add(location);
 
 		tracking = new JLabel("Tracking: ");
-                tracking.setLocation(10,110);
+                tracking.setLocation(10,120);
                 tracking.setSize(150,20);
                 panel1.add(tracking);
 
@@ -240,11 +240,11 @@ public class interfaz {
                 }catch(NumberFormatException e){
                         activate_track.setSelected(true);
                 }
-                coord.add(activate_track);
-                coord.add(desactivate_track);
+                track.add(activate_track);
+                track.add(desactivate_track);
 
-                activate_track.setLocation(250,13);
-                desactivate_track.setLocation(250,33);
+                activate_track.setLocation(150,123);
+                desactivate_track.setLocation(150,143);
                 activate_track.setSize(150,15);
                 desactivate_track.setSize(150,15);
                 panel1.add(activate_track);

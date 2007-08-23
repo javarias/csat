@@ -454,11 +454,13 @@ public class DrawingPanel extends JPanel
 		paintImmediately(0,0,getSize().width,getSize().height);
 
 		//Tracking
-		switch(Integer.parseInt(test.getOption("tracking"))){
-                        case 0: interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(false); break;
-                        case 1: interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(true); break;
-                        default: interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(true); break;
-                }
+		if(interfaz.getDrawingPanel().getCSATControl() != null ){
+			switch(Integer.parseInt(test.getOption("tracking"))){
+                        	case 0: interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(false); break;
+                        	case 1: interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(true); break;
+                        	default: interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(true); break;
+                	}
+		}
 
 	}
 
