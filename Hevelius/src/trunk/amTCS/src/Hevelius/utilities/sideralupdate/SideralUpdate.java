@@ -9,6 +9,7 @@ public class SideralUpdate implements Runnable
 {
 	private RadecPosHolder r; 
 	private AltazPosHolder a;
+	private double ST;
 
 	public SideralUpdate(){
 		r = new RadecPosHolder();
@@ -21,17 +22,17 @@ public class SideralUpdate implements Runnable
 		{
 			try
 			{
-				if(interfaz.getDrawingPanel()==null)
-					System.out.println("ABC");
-				if(interfaz.getDrawingPanel().getCSATStatus()==null)
-					System.out.println("csat");
 				if(interfaz.getDrawingPanel().getCSATStatus()!=null)
 				{
 					interfaz.getDrawingPanel().getCSATStatus().getPos(r,a);
+
+					ST = interfaz.getDrawingPanel().getCSATStatus().getSideralTime();
 					interfaz.getDrawingPanel().getCoordinatesPanel().setRa(r.value.ra);
         	                        interfaz.getDrawingPanel().getCoordinatesPanel().setDec(r.value.dec);
                 	                interfaz.getDrawingPanel().getCoordinatesPanel().setAlt(a.value.alt);
                         	        interfaz.getDrawingPanel().getCoordinatesPanel().setAz(a.value.az);
+
+					interfaz.getDrawingPanel().setSideralTime(ST);
 				}
 				Thread.sleep(2000);
 			}

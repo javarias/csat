@@ -131,6 +131,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 
 	public void setTrackingStatus(boolean s){
+		tracking.setTrackingStatus(s);
 	}
 
 	public void setTrackingRate(alma.TYPES.RadecVel v){

@@ -115,6 +115,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	private double Az = 0;
 	private double Ra = 0;
 	private double Dec = 0;
+	private double ST = 0;
 
 	public void goToAltAz(AltazPos p, AltazVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc) {
 		Alt = p.alt;
@@ -144,6 +145,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 		TelescopeConverter.altaz2radec(p.alt, p.az);
 		Ra = TelescopeConverter.getRa();
 		Dec = TelescopeConverter.getDec();
+		ST = TelescopeConverter.getST();
 	}
 
 	public void radec2hor(alma.TYPES.RadecPos p)
@@ -151,6 +153,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 		TelescopeConverter.radec2altaz(p.ra, p.dec);
 		Alt = TelescopeConverter.getAlt();
 		Az = TelescopeConverter.getAz();
+		ST = TelescopeConverter.getST();
 	}
 
 	public void preset(alma.TYPES.RadecPos p, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
@@ -159,6 +162,11 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 		Dec = p.dec;
 		radec2hor(p);
 
+	}
+
+	public double getSideralTime()
+	{
+		return ST;
 	}
 
 	public boolean isWorking()

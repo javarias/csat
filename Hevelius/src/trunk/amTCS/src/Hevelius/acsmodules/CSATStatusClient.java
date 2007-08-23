@@ -124,5 +124,9 @@ public class CSATStatusClient extends ComponentClient
 	{
 		csstatus.setMode(s);
 	}
+	public double getSideralTime()
+	{
+		return csstatus.getSideralTime();
+	}
 
 }

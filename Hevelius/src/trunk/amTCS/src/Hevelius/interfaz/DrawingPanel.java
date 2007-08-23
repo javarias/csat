@@ -231,7 +231,7 @@ public class DrawingPanel extends JPanel
 
 		//Sidereal Time
 		stime = new JLabel("0.000");
-		stime.setSize(100,20);
+		stime.setSize(60,20);
 		stime.setForeground(Color.WHITE);
 		add(stime);
 
@@ -522,5 +522,10 @@ public class DrawingPanel extends JPanel
 	public void setCSATStatus(CSATStatusClient csats)
 	{
 		this.csats = csats;
+	}
+
+	public void setSideralTime(double ST)
+	{
+		stime.setText(Double.toString(ST));
 	}
 }

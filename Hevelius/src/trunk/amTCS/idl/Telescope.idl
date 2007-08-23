@@ -16,6 +16,7 @@ module TELESCOPE_MODULE
 		void hor2radec(in TYPES::AltazPos p);
 		boolean isWorking();
 		void start();
+		double getSideralTime();
 	};
 };
 #endif

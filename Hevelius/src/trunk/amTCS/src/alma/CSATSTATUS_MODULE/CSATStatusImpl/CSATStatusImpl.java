@@ -130,4 +130,8 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 
 	public void EmergencyStop(){
 	}
+
+	public double getSideralTime(){
+		return telescope.getSideralTime();
+	}
 }
