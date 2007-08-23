@@ -34,9 +34,6 @@ public class TelescopeWorker extends Thread
 			
 			if(trck_comp.getTrackingStatus())
 			{
-				System.out.println("A");
-				System.out.println("B");
-				System.out.println("C");
 				//Update Horizontal Coords
 				tele_comp.radec2hor(ph_rd.value);
 			}

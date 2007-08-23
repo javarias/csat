@@ -75,6 +75,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	}
 
 	public void cleanUp() {
+		aboutToAbort();
 		m_logger.info("cleanUp() called..., nothing to clean up.");
 	}
 
@@ -91,7 +92,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 			//			m_logger.fine("Already Stopped");
 			//		}
 		}
-		cleanUp();
+		//cleanUp();
 		m_logger.info("managed to abort...");
 	}
 
@@ -136,8 +137,6 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 			p_aa.value.alt = Alt;
 			p_aa.value.az = Az;
 		}
-		System.out.println("Llegue Tel Asdas by Mex");
-		//System.out.println(p_aa.value.alt+" "+p_aa.value.az+" "+p_rd.value.ra+" "+p_rd.value.dec);
 	}
 
 	public void hor2radec(alma.TYPES.AltazPos p)
@@ -184,15 +183,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 
 		if (!working && !stopping) {
 			working = true;
-/*
-                try {
-                        obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
-                        tele_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
-                } catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
-                        m_logger.fine("Failed to get Telescope component reference " + e);
-                        throw new ComponentLifecycleException("Failed to get Telescope component reference");
-                }
-*/
+
                 try
                 {
                         ComponentDescriptor s = m_containerServices.getComponentDescriptor("TELESCOPE");
@@ -224,7 +215,6 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 			//TODO: perhaps throw another exception here...
 			return;
 		}
-
 		if (!working) {
 			m_logger.info("Not yet working");
 			stopping = false;
@@ -232,7 +222,6 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 			//throw e;
 		}
 		working = false;
-
 		//block until last proposal finished
 		if (worker != null) {
 			try {
@@ -248,17 +237,4 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 
 		m_logger.fine("Thread terminated");
 	}
-/*
-	protected setRaDec(RadecPos p)
-	{
-		Ra = p.ra;
-		Dec = p.dec;
-	}
-
-	protected setAltAz(AltazPos p)
-	{
-		Alt = p.alt;
-		Az = p.az;
-	}
-*/
 }

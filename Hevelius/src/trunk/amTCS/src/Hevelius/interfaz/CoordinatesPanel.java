@@ -127,7 +127,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 		//Current RA Coordinate
 		ccoorR = new JLabel("0.00000");
-		ccoorR.setSize(30,20);
+		ccoorR.setSize(80,20);
 		ccoorR.setForeground(Color.WHITE);
 		add(ccoorR);
 
@@ -139,7 +139,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 		//Current DEC Coordinate
 		ccoorD = new JLabel("0.00000");
-		ccoorD.setSize(30,20);
+		ccoorD.setSize(80,20);
 		ccoorD.setForeground(Color.WHITE);
 		add(ccoorD);
 

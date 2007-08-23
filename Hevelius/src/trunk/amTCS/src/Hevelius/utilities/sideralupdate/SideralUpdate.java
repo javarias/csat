@@ -24,6 +24,8 @@ public class SideralUpdate implements Runnable
 			{
 				if(interfaz.getDrawingPanel().getCSATStatus()!=null)
 				{
+				try
+				{
 					interfaz.getDrawingPanel().getCSATStatus().getPos(r,a);
 
 					ST = interfaz.getDrawingPanel().getCSATStatus().getSideralTime();
@@ -33,6 +35,10 @@ public class SideralUpdate implements Runnable
                         	        interfaz.getDrawingPanel().getCoordinatesPanel().setAz(a.value.az);
 
 					interfaz.getDrawingPanel().setSideralTime(ST);
+				}
+				catch(Exception e)
+				{
+				}
 				}
 				Thread.sleep(2000);
 			}
