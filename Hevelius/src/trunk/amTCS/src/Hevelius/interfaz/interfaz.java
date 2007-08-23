@@ -28,6 +28,10 @@ public class interfaz {
 	private static JTextField city2find;
 	private static JButton find;
 	private static JComboBox location;
+	private static JLabel tracking;
+        private static JRadioButton activate_track;
+        private static JRadioButton desactivate_track;
+        private static ButtonGroup track;	
 
 	private static JPanel panel2;
 	private static JLabel modules;
@@ -219,6 +223,32 @@ public class interfaz {
 		location.setSelectedIndex(0);
 		panel1.add(location);
 
+		tracking = new JLabel("Tracking: ");
+                tracking.setLocation(10,110);
+                tracking.setSize(150,20);
+                panel1.add(tracking);
+
+                activate_track = new JRadioButton("Enable");
+                desactivate_track = new JRadioButton("Disable");
+                track = new ButtonGroup();
+
+                try{
+                        if(Integer.parseInt(test.getOption("tracking"))==0)
+                                desactivate_track.setSelected(true);
+                        if(Integer.parseInt(test.getOption("tracking"))==1)
+                                activate_track.setSelected(true);
+                }catch(NumberFormatException e){
+                        activate_track.setSelected(true);
+                }
+                coord.add(activate_track);
+                coord.add(desactivate_track);
+
+                activate_track.setLocation(250,13);
+                desactivate_track.setLocation(250,33);
+                activate_track.setSize(150,15);
+                desactivate_track.setSize(150,15);
+                panel1.add(activate_track);
+                panel1.add(desactivate_track);
 
 
 		panel2 = new JPanel();
@@ -334,6 +364,11 @@ public class interfaz {
 				else
 				test.setOption("opengl","0");
 
+				if(activate_track.isSelected())
+                                test.setOption("tracking","1");
+                                if(desactivate_track.isSelected())
+                                test.setOption("tracking","0");
+
 				if(compass.isSelected())
 				test.setOption("compass","1");
 				else
@@ -391,6 +426,11 @@ public class interfaz {
 		else
 			test.setOption("opengl","0");
 
+		if(activate_track.isSelected())
+                        test.setOption("tracking","1");
+                if(desactivate_track.isSelected())
+                        test.setOption("tracking","0");
+
 		if(compass.isSelected())
 			test.setOption("compass","1");
 		else
@@ -419,8 +459,11 @@ public class interfaz {
 		location.removeAllItems();
 		location.addItem("(none)");
 		location.setSelectedIndex(0);
-
-
+		
+		if(Integer.parseInt(test.getOption("tracking"))==0)
+                        desactivate_track.setSelected(true);
+                if(Integer.parseInt(test.getOption("tracking"))==1)
+                        activate_track.setSelected(true);
 
 		if(Integer.parseInt(test.getOption("weather"))==1)
 			weather.setSelected(true);

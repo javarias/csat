@@ -452,6 +452,14 @@ public class DrawingPanel extends JPanel
 				vtpane.setVisible(true); break;
 		}		
 		paintImmediately(0,0,getSize().width,getSize().height);
+
+		//Tracking
+		switch(Integer.parseInt(test.getOption("tracking"))){
+                        case 0: interfaz.getDrawingPanel().getCSATControl().setTracking(false); break;
+                        case 1: interfaz.getDrawingPanel().getCSATControl().setTracking((true); break;
+                        default: interfaz.getDrawingPanel().getCSATControl().setTracking((true); break;
+                }
+
 	}
 
 	public static Configuration getConfig()
