@@ -278,9 +278,9 @@ public class DrawingPanel extends JPanel
 		add(vtpane);
 
 		//TrackingModule
-		trck = new Tracking();
-		trck.setACSTracking(false);
-		trck.setTrackingState(true);
+		//trck = new Tracking();
+		//trck.setACSTracking(false);
+		//trck.setTrackingState(true);
 
 		//SideralUpdate
 		sdrl = new SideralUpdate();
