@@ -83,24 +83,34 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	/////////////////////////////////////////////////////////////
 
 	public void on(){
+		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STAND_BY);
 	}
 
 	public void off(){
+		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STOP);
 	}
 
 	public void setUncalibrated(){
+		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._CALIBRATING);
 	}
 
 	public void setCalibrated(AltazPos p){
+		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STAND_BY);
 	}
 
 	public void initialize(CBvoid cb, CBDescIn desc){
+		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._READY);
 	}
 
 	public void stop(CBvoid cb,CBDescIn desc){
+		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STAND_BY);
 	}
 
 	public void setMode(int mode){
+		if( status.value() == alma.CSATSTATUS_MODULE.TCSStatus._READY)
+			status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._AUTOMATIC);
+		else if( status.value() == alma.CSATSTATUS_MODULE.TCSStatus._AUTOMATIC)
+			status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._READY);
 	}
 
 	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa){
@@ -109,7 +119,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public int getState(){
-		return 0;
+		return status.value();
 	}
 
 	public boolean getTrackingStatus(){

@@ -4,7 +4,6 @@
 #define _CSATSTATUS_IDL
 
 #include <baci.idl>
-#include <enumpropMACRO.idl>
 #include <Types.idl>
 
 #pragma prefix "alma"
