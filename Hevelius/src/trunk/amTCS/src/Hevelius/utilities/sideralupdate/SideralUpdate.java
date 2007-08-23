@@ -7,8 +7,13 @@ import alma.TYPES.*;
 
 public class SideralUpdate implements Runnable
 {
-	private RadecPosHolder r = new RadecPosHolder(); 
-	private AltazPosHolder a = new AltazPosHolder();
+	private RadecPosHolder r; 
+	private AltazPosHolder a;
+
+	public SideralUpdate(){
+		r = new RadecPosHolder();
+		a = new AltazPosHolder();
+	}
 	
 	public void run()
 	{

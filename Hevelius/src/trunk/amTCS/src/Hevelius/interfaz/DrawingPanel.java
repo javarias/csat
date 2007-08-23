@@ -16,7 +16,7 @@ import alma.TYPES.*;
 import alma.ACS.CBDescIn;
 import alma.ACS.CBvoid;
 import alma.acs.callbacks.ResponseReceiver;
-import Hevelius.utilities.converter.*;
+import Hevelius.utilities.*;
 import Hevelius.interfaz.interfaz;
 
 public class DrawingPanel extends JPanel
@@ -64,6 +64,7 @@ public class DrawingPanel extends JPanel
 	private VirtualTelescopePanel vtpane = null;
 
 	private Tracking trck = null;
+	private SideralUpdate sdrl = null;
 
 	private CSATControlClient csatc = null;
 	private CSATStatusClient csats = null;
@@ -279,6 +280,11 @@ public class DrawingPanel extends JPanel
 		trck = new Tracking();
 		trck.setACSTracking(false);
 		trck.setTrackingState(true);
+
+		//SideralUpdate
+		sdrl = new SideralUpdate(null);
+                sdrl.init();
+                new Thread(sdrl).start();
 	}
 	public void paintComponent(Graphics g)
 	{
