@@ -11,7 +11,8 @@ import alma.TYPES.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import alma.ACS.CBvoid;
+import alma.ACS.CDDescIn;
 import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
 import alma.acs.component.client.ComponentClient;
 //import alma.demo.HelloDemo;
@@ -78,7 +79,7 @@ public class CSATControlClient extends ComponentClient
 
 	public void preset(RadecPos p)
 	{
-		cscontrol.preset(p, null, null);
+		cscontrol.preset(p, new CBvoid(), new CBDescIn);
 	}
 
 	public void setTrackingStatus(boolean s)
