@@ -1,0 +1,38 @@
+/* IDL for DevTelescope component */
+
+#ifndef _DEV_TELESCOPE_IDL_
+#define _DEV_TELESCOPE_IDL_
+
+#include <baci.idl>
+#include <Types.idl>
+
+#pragma prefix "alma"
+
+/**
+ * @file DevTelescope.idl
+ * IDL specification for the DevTelescope module interface.
+ * This interfaces is the telescope device abstraction, and, thus,
+ * it should be a generalization of an amateur telescope.
+ */
+module DEVTELESCOPE_MODULE{
+
+	interface DevTelescope : ACS::CharacteristicComponent {
+
+		/** This property is the position of the azimuth axe in degrees */
+		readonly attribute ACS::ROdouble azimuth;
+
+		/** This property is the position of the altitude axe in degrees */
+		readonly attribute ACS::ROdouble altitude;
+
+		/**
+		 * This method is used to move the telescope to a fixed position, in Alt/Az coordinates
+		 *
+		 * @param p The Alt/Az position
+		 */
+		void goTo(in TYPES::AltazPos p);
+	};
+
+};
+
+
+#endif

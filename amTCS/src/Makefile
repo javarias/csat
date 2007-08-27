@@ -24,7 +24,7 @@
 #
 # additional include and library search paths
 #USER_INC = 
-#USER_LIB = 
+#USER_LIB =
 
 #
 # MODULE CODE DESCRIPTION:
@@ -51,17 +51,18 @@ xxxxx_LIBS      =
 #
 # Includes (.h) files (public only)
 # ---------------------------------
-INCLUDES        =
+INCLUDES        = DevTelescopeImpl.h
 
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       =
+LIBRARIES       = DevTelescopeImpl
 LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-lllll_OBJECTS   =
+DevTelescopeImpl_OBJECTS   = DevTelescopeImpl
+DevTelescopeImpl_LIBS      =  TypesStubs DevTelescopeStubs
 
 #
 # Scripts (public and local)
@@ -107,12 +108,12 @@ tttlll_OBJECTS  =
 #
 # Configuration Database Files
 # ----------------------------
-CDB_SCHEMAS = 
+CDB_SCHEMAS = DevTelescope
 
 # 
 # IDL Files and flags
 # 
-IDL_FILES = Types CSATStatus CSATControl 
+IDL_FILES = Types CSATStatus CSATControl DevTelescope
 IDL_TAO_FLAGS =
 USER_IDL =
 #

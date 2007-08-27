@@ -13,6 +13,11 @@
          Code="alma.CSATSTATUS_MODULE.CSATStatusImpl.CSATStatusHelper"
          Type="IDL:alma/CSATSTATUS_MODULE/CSATStatus:1.0"
          Container="amContainer"/>
+
+      <_ Name="NEXSTAR"
+         Code="DevTelescopeImpl"
+         Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
+         Container="amContainerCpp"/>
 </Components>
 
 
