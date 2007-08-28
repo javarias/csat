@@ -41,13 +41,14 @@ public class CSATStatusClient extends ComponentClient
 		}
 		catch (Exception e) 
 		{
+			System.out.println("ACS has been found on this system, but it is not started.");
 			try 
 			{
 				Logger logger = csatsc.getContainerServices().getLogger();
 				logger.log(Level.SEVERE, "Client application failure", e);
 			} catch (Exception e2) 
 			{
-				e.printStackTrace(System.err);
+				//e.printStackTrace(System.err);
 			}
 		}
 		return null;

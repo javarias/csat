@@ -34,7 +34,8 @@ public class Presetting {
 			p_aa = new AltazPos();
 			p_aa.alt = c1;
 			p_aa.az = c2;
-			interfaz.getDrawingPanel().getCSATControl().goToAltAz(p_aa, null);
+			if(interfaz.getDrawingPanel().getCSATControl()!=null)
+				interfaz.getDrawingPanel().getCSATControl().goToAltAz(p_aa, null);
 			//Converter.altaz2radec(c1,c2);
 			//c1 = Converter.getRa();
 			//c2 = Converter.getDec();

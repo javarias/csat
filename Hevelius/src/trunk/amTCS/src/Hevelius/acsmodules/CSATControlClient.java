@@ -12,15 +12,8 @@ import alma.acs.component.client.ComponentClient;
 
 public class CSATControlClient extends ComponentClient
 {
-
 	private alma.CSATCONTROL_MODULE.CSATControl cscontrol;
 
-	/**
-	 * @param logger
-	 * @param managerLoc
-	 * @param clientName
-	 * @throws Exception
-	 */
 	public CSATControlClient(Logger logger, String managerLoc, String clientName)
 		throws Exception {
 			super(logger, managerLoc, clientName);
@@ -47,13 +40,14 @@ public class CSATControlClient extends ComponentClient
 		}
 		catch (Exception e) 
 		{
+			System.out.println("ACS has been found on this system, but it is not started.");
 			try 
 			{
 				Logger logger = csatcc.getContainerServices().getLogger();
 				logger.log(Level.SEVERE, "Client application failure", e);
 			} catch (Exception e2) 
 			{
-				e.printStackTrace(System.err);
+				//e.printStackTrace(System.err);
 			}
 		}
 		return null;

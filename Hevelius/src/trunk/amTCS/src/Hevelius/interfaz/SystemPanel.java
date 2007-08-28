@@ -32,8 +32,15 @@ public class SystemPanel extends JPanel
 		add(start);
 		start.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
+				try
+				{
 					interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
 					interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
+				}
+				catch(Exception err)
+				{
+					err.printStackTrace();
+				}
                         }
                 });
 

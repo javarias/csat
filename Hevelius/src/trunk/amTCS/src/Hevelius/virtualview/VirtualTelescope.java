@@ -41,6 +41,9 @@ public class VirtualTelescope
 		{
 			System.out.println("Malformed URL");
 		}
+		catch(IOException e)
+		{
+		}
 		catch(Exception e)
 		{
 			System.out.println("Exception Unhandled");

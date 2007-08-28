@@ -35,10 +35,10 @@ public class DrawingPanel extends JPanel
 	private Image stop=null;
 	private JButton zenith;
 	private JButton park;
-	private JButton rbutton;
-	private JButton lbutton;
-	private JButton tbutton;
-	private JButton bbutton;
+	private JButton rbutton = null;
+	private JButton lbutton = null;
+	private JButton tbutton = null;
+	private JButton bbutton = null;
 	private JLabel stimeL;
 	private JLabel stime;
 
@@ -338,10 +338,14 @@ public class DrawingPanel extends JPanel
 			coorpane.setBackground(c);
 		if(vtpane!=null)
 			vtpane.setBackground(c);
-		lbutton.setBackground(c);
-		rbutton.setBackground(c);
-		tbutton.setBackground(c);
-		bbutton.setBackground(c);
+		if(lbutton!=null)
+			lbutton.setBackground(c);
+		if(rbutton!=null)
+			rbutton.setBackground(c);
+		if(tbutton!=null)
+			tbutton.setBackground(c);
+		if(bbutton!=null)
+			bbutton.setBackground(c);
 	}
 	public void updateWindow(boolean init){
 		//Cambiar Background
