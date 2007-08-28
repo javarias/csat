@@ -81,4 +81,27 @@ public class TelStatusPanel extends JPanel
 		trkws.setLocation(110,75);
 		autog.setLocation(110,100);
 	}
+
+	public void setGlobalState(int state)
+	{
+		switch(state)
+		{
+			case 0: glstate.setText("OFF");
+		}
+	}
+
+	public void setTrackingState()
+	{
+
+	}
+
+	public void setPointingState()
+	{
+		
+	}
+
+	public void setPresettingState()
+	{
+
+	}
 }

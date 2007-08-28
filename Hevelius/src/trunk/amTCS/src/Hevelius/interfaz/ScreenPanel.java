@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.util.*;
 
 import Hevelius.virtualview.*;
+import alma.TYPES.*;
 
 public class ScreenPanel extends JPanel implements Runnable
 {
@@ -39,7 +40,7 @@ public class ScreenPanel extends JPanel implements Runnable
 			}
 			catch(InterruptedException e)
 			{
-				System.out.println("Error en Thread del ScreenPanel");
+				System.out.println("Error in ScreenPanel's Thread");
 			}
 		}
 	}
@@ -48,6 +49,9 @@ public class ScreenPanel extends JPanel implements Runnable
 		if(telescopeState)
 		{
 			//Code for obtaining image from ACS.
+			ImageHolder imgh = null;
+			interfaz.getDrawingPanel().getCSATControl().getPreviewImage(imgh);
+			//buf = imgh.value;
 		}
 		else
 		{
@@ -86,6 +90,7 @@ public class ScreenPanel extends JPanel implements Runnable
 		}
 		catch(NullPointerException e)
 		{
+			System.out.println("There is a Null pointer being used.");
 		}
 		return null;
 	}

@@ -20,6 +20,7 @@ public class IntroPanel extends JPanel
 		}
 		catch(IOException e)
 		{
+			System.out.println("There was a problem retrieving an Image");
 		}
 		imag = Transparency.makeColorTransparent(imag, Color.WHITE);
 		imag = imag.getScaledInstance(200,100,Image.SCALE_FAST);

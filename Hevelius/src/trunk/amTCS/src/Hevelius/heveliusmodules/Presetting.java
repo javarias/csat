@@ -23,56 +23,63 @@ public class Presetting {
 	//CDvoid callback;
 
 
-	public static void preset(double ra, double dec, int type){
+	public static void preset(double c1, double c2, int type){
 		
-		RadecPos pos;
+		RadecPos p_rd;
+		AltazPos p_aa;
 		CBDescIn reference;
-        	CBvoid callback;
+		CBvoid callback;
 
 		if(type == 1){
-			Converter.altaz2radec(ra,dec);
-			ra = Converter.getRa();
-			dec = Converter.getDec();
+			p_aa = new AltazPos();
+			p_aa.alt = c1;
+			p_aa.az = c2;
+			interfaz.getDrawingPanel().getCSATControl().goToAltAz(p_aa, null);
+			//Converter.altaz2radec(c1,c2);
+			//c1 = Converter.getRa();
+			//c2 = Converter.getDec();
 		}
-			
-		if(Converter.radecVerificate(ra,dec) == 1){
+		else
+		{
+			if(Converter.radecVerificate(c1,c2) == 1){
 
 
-			pos = createRadecType(ra,dec);
+				p_rd = createRadecType(c1,c2);
 
-		/*	ResponseReceiver callback  =  new ResponseReceiver() {
+				/*	ResponseReceiver callback  =  new ResponseReceiver() {
 
-				public void incomingResponse(Object x) {
+					public void incomingResponse(Object x) {
 					System.out.println("Incoming Response: "+x);
-				}
-				public void incomingException(Exception x) {
+					}
+					public void incomingException(Exception x) {
 					System.out.println("Responding failed: "+x);}
 
-			};
-		*/
+					};
+				 */
 
-			
-			
-			//try{
-			interfaz.getDrawingPanel().getCSATControl().preset(pos);
-			//}catch(ComponentLifecycleException e)
-			//{
-			//VENTANA DE DESCONEXION U OTRA WEA POR DISCUTIR	
-			//}
-		}
-		else{
-			System.out.println("RADEC MALO");
+
+
+				//try{
+				if(interfaz.getDrawingPanel().getCSATControl()!=null)
+				{
+					interfaz.getDrawingPanel().getCSATControl().preset(p_rd);
+				}
+				//}catch(ComponentLifecycleException e)
+				//{
+				//VENTANA DE DESCONEXION U OTRA WEA POR DISCUTIR	
+				//}
+			}
+			else{
+				System.out.println("RADEC MALO");
+			}
 		}
 
 	}
 
 	public static RadecPos createRadecType(double ra, double dec){
 		RadecPos tmp = new RadecPos();
-		
-
 		tmp.ra = ra;
 		tmp.dec = dec;
-
 		return tmp;
 	}
 

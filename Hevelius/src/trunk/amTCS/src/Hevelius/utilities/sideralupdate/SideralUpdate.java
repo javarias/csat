@@ -15,7 +15,7 @@ public class SideralUpdate implements Runnable
 		r = new RadecPosHolder();
 		a = new AltazPosHolder();
 	}
-	
+
 	public void run()
 	{
 		while (true)
@@ -24,26 +24,26 @@ public class SideralUpdate implements Runnable
 			{
 				if(interfaz.getDrawingPanel().getCSATStatus()!=null)
 				{
-				try
-				{
-					interfaz.getDrawingPanel().getCSATStatus().getPos(r,a);
-
-					ST = interfaz.getDrawingPanel().getCSATStatus().getSideralTime();
-					interfaz.getDrawingPanel().getCoordinatesPanel().setRa(r.value.ra);
-        	                        interfaz.getDrawingPanel().getCoordinatesPanel().setDec(r.value.dec);
-                	                interfaz.getDrawingPanel().getCoordinatesPanel().setAlt(a.value.alt);
-                        	        interfaz.getDrawingPanel().getCoordinatesPanel().setAz(a.value.az);
-
-					interfaz.getDrawingPanel().setSideralTime(ST);
-				}
-				catch(Exception e)
-				{
-				}
+					try
+					{
+						interfaz.getDrawingPanel().getCSATStatus().getPos(r,a);
+						ST = interfaz.getDrawingPanel().getCSATStatus().getSideralTime();
+						interfaz.getDrawingPanel().getCoordinatesPanel().setRa(r.value.ra);
+						interfaz.getDrawingPanel().getCoordinatesPanel().setDec(r.value.dec);
+						interfaz.getDrawingPanel().getCoordinatesPanel().setAlt(a.value.alt);
+						interfaz.getDrawingPanel().getCoordinatesPanel().setAz(a.value.az);
+						interfaz.getDrawingPanel().setSideralTime(ST);
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+					}
 				}
 				Thread.sleep(2000);
 			}
 			catch(InterruptedException e)
 			{
+				System.out.println("The thread updating information died.");
 			}
 		}
 	}

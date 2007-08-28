@@ -572,6 +572,7 @@ public class interfaz {
 				{
 					public void windowClosing(WindowEvent e)
 		{
+			interfaz.getDrawingPanel().getSystemPanel().stopTCS();
 			System.exit(0);
 		}
 		});

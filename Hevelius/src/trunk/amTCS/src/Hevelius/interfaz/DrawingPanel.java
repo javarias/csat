@@ -27,10 +27,6 @@ public class DrawingPanel extends JPanel
 	private Dimension dim;
 	private Dimension tam;
 	private Image img = null;
-	private Image rArrow = null;
-	private Image lArrow = null;
-	private Image tArrow = null;
-	private Image bArrow = null;
 	private Image hevelius = null;
 	private Image screen = null;
 
@@ -89,39 +85,7 @@ public class DrawingPanel extends JPanel
 		imag = imag.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
 		return imag;
 	}
-	/*private void setArrows(Dimension dim)
-	  {
 
-	//ImageIcon rArrow = new ImageIcon("../images/rArrow.jpg");
-	//rbutton = new JButton(rArrow);
-	//rbutton.setBackground(Color.WHITE);
-	//rbutton.setSize(200,200);
-	//rbutton.setLocation();
-	//add(rbutton);
-
-	//ImageIcon lArrow = new ImageIcon("../images/lArrow.jpg");
-	//lbutton = new JButton(lArrow);
-	//lbutton.setBackground(Color.WHITE);
-	//lbutton.setSize(50,20);
-	//add(lbutton);
-
-	//ImageIcon tArrow = new ImageIcon("../images/tArrow.jpg");
-	//tbutton = new JButton(tArrow);
-	tbutton.setBackground(Color.WHITE);
-	tbutton.setSize(50,20);
-	add(tbutton);
-
-	ImageIcon bArrow = new ImageIcon("../images/bArrow.jpg");
-	bbutton = new JButton(bArrow);
-	bbutton.setBackground(Color.WHITE);
-	bbutton.setSize(50,20);
-	add(bbutton);
-
-	rArrow = setImage("Hevelius/images/rArrow.jpg",dim);
-	lArrow = setImage("Hevelius/images/lArrow.jpg",dim);
-	tArrow = setImage("Hevelius/images/tArrow.jpg",dim);
-	bArrow = setImage("Hevelius/images/bArrow.jpg",dim);
-	}*/
 	public void init()
 	{
 		tam = new Dimension(0,0);
@@ -135,32 +99,7 @@ public class DrawingPanel extends JPanel
 		r = (dy-rect_y)/4;
 
 		//Interface Initialization
-		//setArrows(new Dimension(40,40));
 		img = setImage("Hevelius/images/image.jpg",new Dimension(200,200));
-
-		/*ImageIcon rarrow = new ImageIcon("../images/rArrow.jpg");
-		  JButton rbutton = new JButton(rarrow);
-		  rbutton.setBackground(Color.BLACK);
-
-		  ImageIcon larrow = new ImageIcon("../images/lArrow.jpg");
-		  JButton lbutton = new JButton(larrow);
-		  lbutton.setBackground(Color.BLACK);
-
-		  ImageIcon tarrow = new ImageIcon("../images/tArrow.jpg");
-		  JButton tbutton = new JButton(tarrow);
-		  tbutton.setBackground(Color.BLACK);
-
-		  ImageIcon barrow = new ImageIcon("../images/bArrow.jpg");
-		  JButton bbutton = new JButton(barrow);
-		  bbutton.setBackground(Color.BLACK);
-
-
-
-		 */
-		//Go to Zenith Button
-		zenith = new JButton("Zenith");
-		zenith.setSize(100,20);
-		add(zenith);
 
 		//Go to R Button
 		ImageIcon rArrow = new ImageIcon(new ImageIcon("Hevelius/images/rArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
@@ -171,11 +110,12 @@ public class DrawingPanel extends JPanel
 		add(rbutton);
 
 		rbutton.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent e){
-                                interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(1.0d);
-                        }
-                });
-		
+				public void actionPerformed(ActionEvent e){
+				if(csatc!=null)
+				csatc.AzimuthOffSet(1.0d);
+				}
+				});
+
 
 		//Go to L Button
 		ImageIcon lArrow = new ImageIcon(new ImageIcon("Hevelius/images/lArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
@@ -185,12 +125,11 @@ public class DrawingPanel extends JPanel
 		add(lbutton);
 
 		lbutton.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent e){
-				if(interfaz.getDrawingPanel().getCSATControl()==null)
-					System.out.println("Alo");
-                                interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(-1.0d);
-                        }
-                });
+				public void actionPerformed(ActionEvent e){
+				if(csatc!=null)
+				csatc.AzimuthOffSet(-1.0d);
+				}
+				});
 
 
 		//Go to T Botton
@@ -201,10 +140,11 @@ public class DrawingPanel extends JPanel
 		add(tbutton);
 
 		tbutton.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent e){
-                                interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(1.0d);
-                        }
-                });
+				public void actionPerformed(ActionEvent e){
+				if(csatc!=null)
+				csatc.AltitudeOffSet(1.0d);
+				}
+				});
 
 		//Go to B Button
 		ImageIcon bArrow = new ImageIcon(new ImageIcon("Hevelius/images/bArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
@@ -214,10 +154,25 @@ public class DrawingPanel extends JPanel
 		add(bbutton);
 
 		bbutton.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent e){
-                                interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(-1.0d);
-                        }
-                });
+				public void actionPerformed(ActionEvent e){
+				if(interfaz.getDrawingPanel().getCSATControl()!=null)
+				interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(-1.0d);
+				}
+				});
+
+		//Go to Zenith Button
+		zenith = new JButton("Zenith");
+		zenith.setSize(100,20);
+		add(zenith);
+		zenith.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+				AltazPos p = new AltazPos();
+				p.alt = 90;
+				p.az = 0;
+				if(csatc!=null)
+				csatc.goToAltAz(p, null);
+				}
+				});
 
 		//Go to Park Button
 		park = new JButton("Park");
@@ -285,9 +240,10 @@ public class DrawingPanel extends JPanel
 
 		//SideralUpdate
 		sdrl = new SideralUpdate();
-                //sdrl.init();
-                new Thread(sdrl).start();
+		//sdrl.init();
+		new Thread(sdrl).start();
 	}
+
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
@@ -319,10 +275,6 @@ public class DrawingPanel extends JPanel
 		if(VTelescope)
 			g.fillRect(oGLx+25,15,dx-oGLx-50,dx-oGLx-50);
 
-		g.drawImage(lArrow, (dx-rect_x*3/4)/2-40, dy/2-20,this);
-		g.drawImage(rArrow, (dx+rect_x*3/4)/2+0, dy/2-20,this);
-		g.drawImage(tArrow, dx/2-20, (dy-rect_y*3/4)/2-40,this);
-		g.drawImage(bArrow, dx/2-20, (dy+rect_y*3/4)/2+0,this);
 		if(tam.width != dx || tam.height != dy)
 		{
 			stop = setImage("Hevelius/images/stop.png",new Dimension(80,80));
@@ -355,16 +307,11 @@ public class DrawingPanel extends JPanel
 		stimeL.setLocation(60,400);
 		stime.setLocation(80,420);
 
-		//rbutton.setSize(200,200);
-
-		// Positions buttons
+		//Pointing buttons
 		rbutton.setLocation(((dx+rect_x*3/4)/2+0)+12, dy/2-20);
 		lbutton.setLocation(((dx-rect_x*3/4)/2-40)-22, dy/2-20);
-
 		tbutton.setLocation(dx/2-20, ((dy-rect_y*3/4)/2-40)-22);
 		bbutton.setLocation(dx/2-20, ((dy+rect_y*3/4)/2+0)+12);
-
-
 
 		zenith.setLocation(rect_x*3/4-50,3*dy/4-20);
 
@@ -391,6 +338,10 @@ public class DrawingPanel extends JPanel
 			coorpane.setBackground(c);
 		if(vtpane!=null)
 			vtpane.setBackground(c);
+		lbutton.setBackground(c);
+		rbutton.setBackground(c);
+		tbutton.setBackground(c);
+		bbutton.setBackground(c);
 	}
 	public void updateWindow(boolean init){
 		//Cambiar Background
@@ -420,10 +371,10 @@ public class DrawingPanel extends JPanel
 		}
 		else{
 			switch(Integer.parseInt(test.getOption("coordinate"))){
-                                case 0: coorpane.initCoorType(1==0); break;
-                                case 1: coorpane.initCoorType(1==1); break;
-                                default:coorpane.initCoorType(1==0); break;
-                        }
+				case 0: coorpane.initCoorType(1==0); break;
+				case 1: coorpane.initCoorType(1==1); break;
+				default:coorpane.initCoorType(1==0); break;
+			}
 		}
 
 		//Weather
@@ -457,10 +408,10 @@ public class DrawingPanel extends JPanel
 		//Tracking
 		if(interfaz.getDrawingPanel().getCSATControl() != null ){
 			switch(Integer.parseInt(test.getOption("tracking"))){
-                        	case 0: interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(false); break;
-                        	case 1: interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(true); break;
-                        	default: interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(true); break;
-                	}
+				case 0: interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(false); break;
+				case 1: interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(true); break;
+				default: interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(true); break;
+			}
 		}
 
 	}

@@ -40,7 +40,9 @@ public class Configuration extends Properties{
 				
 				archivo.close();
 								
-			}catch(IOException e){
+			}
+			catch(IOException e)
+			{
 				System.out.println("Error al crear el archivo de Configuration");
 			}
 		}

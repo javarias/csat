@@ -16,8 +16,8 @@ public class CSATStatusClient extends ComponentClient
 
 	public CSATStatusClient(Logger logger, String managerLoc, String clientName)
 		throws Exception {
-		super(logger, managerLoc, clientName);
-	}
+			super(logger, managerLoc, clientName);
+		}
 
 	public void loadComponent() throws AcsJContainerServicesEx {
 		csstatus = alma.CSATSTATUS_MODULE.CSATStatusHelper.narrow(getContainerServices().getDefaultComponent("IDL:alma/CSATSTATUS_MODULE/CSATStatus:1.0"));
@@ -26,107 +26,134 @@ public class CSATStatusClient extends ComponentClient
 	public static CSATStatusClient start()
 	{
 		String managerLoc = System.getProperty("ACS.manager");
-		if (managerLoc == null) {
+		if (managerLoc == null) 
+		{
 			System.out.println("Java property 'ACS.manager' must be set to the corbaloc of the ACS manager!");
 			System.exit(-1);
 		}
 		String clientName = "Manager";
 		CSATStatusClient csatsc = null;
-		try {
+		try 
+		{
 			csatsc = new CSATStatusClient(null, managerLoc, clientName);
 			csatsc.loadComponent();
 			return csatsc;
 		}
-		catch (Exception e) {
-			try {
+		catch (Exception e) 
+		{
+			try 
+			{
 				Logger logger = csatsc.getContainerServices().getLogger();
 				logger.log(Level.SEVERE, "Client application failure", e);
-			} catch (Exception e2) {
+			} catch (Exception e2) 
+			{
 				e.printStackTrace(System.err);
 			}
 		}
 		return null;
 	}
 
-        public static void stop(CSATStatusClient csatsc)
-        {
-                if (csatsc != null) {
-                        try {
-                                csatsc.tearDown();
-                        }
-                        catch (Exception e3) {
-                                // bad luck
-                                e3.printStackTrace();
-                        }
-                }
-        }
+	public static void stop(CSATStatusClient csatsc)
+	{
+		if (csatsc != null) 
+		{
+			try 
+			{
+				csatsc.tearDown();
+			}
+			catch (Exception e3) 
+			{
+				// bad luck
+				e3.printStackTrace();
+			}
+		}
+	}
 
 	public void on()
 	{
-		csstatus.on();
+		if(csstatus!=null)
+			csstatus.on();
 	}
 
 	public void stop()
 	{
-		csstatus.stop(null, null);
+		if(csstatus!=null)
+			csstatus.stop(null, null);
 	}
 
 	public void off()
 	{
-		csstatus.off();
+		if(csstatus!=null)
+			csstatus.off();
 	}
 
 	public void setUncalibrated()
 	{
-		csstatus.setUncalibrated();
+		if(csstatus!=null)
+			csstatus.setUncalibrated();
 	}
 
 	public void setCalibrated(AltazPos p)
 	{
-		csstatus.setCalibrated(p);
+		if(csstatus!=null)
+			csstatus.setCalibrated(p);
 	}
 
 	public void initialize()
 	{
-		csstatus.initialize(null, null);
+		if(csstatus!=null)
+			csstatus.initialize(null, null);
 	}
 
 	public void getPos(RadecPosHolder r, AltazPosHolder a)
 	{
-		csstatus.getPos(r, a);
+		if(csstatus!=null)
+			csstatus.getPos(r, a);
 	}
 
 	public int getState()
 	{
-		return csstatus.getState();
+		if(csstatus!=null)
+			return csstatus.getState();
+		return -1;
 	}
 
 	public boolean getTrackingStatus()
 	{
-		return csstatus.getTrackingStatus();
+		if(csstatus!=null)
+			return csstatus.getTrackingStatus();
+		return false;
 	}
 
 	public RadecVel getTrackingRate()
 	{
-		return csstatus.getTrackingRate();
+		if(csstatus!=null)
+			return csstatus.getTrackingRate();
+		return null;
 	}
 
-        public int getSafety(RadecPos p)
+	public int getSafety(RadecPos p)
 	{
-		return csstatus.getSafety(p);
+		if(csstatus!=null)
+			return csstatus.getSafety(p);
+		return -1;
 	}
-	
+
 	public void EmergencyStop()
 	{
-		csstatus.EmergencyStop();
+		if(csstatus!=null)
+			csstatus.EmergencyStop();
 	}
 	public void setMode(int s)
 	{
-		csstatus.setMode(s);
+		if(csstatus!=null)
+			csstatus.setMode(s);
 	}
 	public double getSideralTime()
 	{
-		return csstatus.getSideralTime();
+		if(csstatus!=null)
+			return csstatus.getSideralTime();
+		return -1.0d;
 	}
 
 }
