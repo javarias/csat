@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<LegoControl
-   xmlns="urn:schemas-cosylab-com:LegoControl:1.0"
+<DevTelescope
+   xmlns="urn:schemas-cosylab-com:DevTelescope:1.0"
    xmlns:cdb="urn:schemas-cosylab-com:CDB:1.0"
    xmlns:baci="urn:schemas-cosylab-com:BACI:1.0"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-   <altitude default_timer_trig="2.0"/>
-   <azimuth default_timer_trig="2.0"/>
-</LegoControl>
+   <azimuth/>
+   <altitude/>
+</DevTelescope>

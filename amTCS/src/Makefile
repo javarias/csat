@@ -113,7 +113,7 @@ CDB_SCHEMAS = DevTelescope
 # 
 # IDL Files and flags
 # 
-IDL_FILES = Types CSATStatus CSATControl DevTelescope
+IDL_FILES = Types CSATStatus CSATControl DevTelescope DevCCD
 IDL_TAO_FLAGS =
 USER_IDL =
 #

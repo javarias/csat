@@ -1,0 +1,73 @@
+#ifndef _DEVCCD_IDL_
+#define _DEVCCD_IDL_
+
+#include <baci.idl>
+#include <Types.idl>
+
+/**
+ * @file DevCCD.idl
+ * IDL specification for the DevCCD module interface. This interface is a CCD
+ * device abstraction, and, thus, it should be a generalization of a simple CCD
+ */
+
+module DEVCCD_MODULE {
+
+	/**
+	 * @interface DevCCD
+	 * The DecCCD interface defines a DevCCD-like ACS component that will
+	 * be the one in charge of communicate with the hardware itself. The
+	 * main purpose of this interface is to take images from the camera
+	 * with a certain exposure time
+	 */
+	interface DevCCD : ACS::CharacteristicComponent	{
+
+		/** Holds the last frame that has been taken */
+		readonly attribute TYPES::Image frame;
+
+		/** Holds the device name that should be accesed */
+		readonly attribute string device;
+
+		/** Locking status of the component. For further information, look at
+ 		 * the DevTelescope component documentation
+		 */
+		readonly attribute boolean locking;
+
+		/** Is the device turned on/off? */
+		readonly attribute boolean powered;
+
+		/**
+		 * Tell the camera to capture a frame with certain exposure time. This
+		 * is the main function of this component.
+		 */
+		TYPES::Image image(in double exposure);
+	
+		/**
+		 * This method locks the component, so any order received from
+		 * any other component that is not CSATStatus or CSATControl
+		 * will be ignored
+		 */
+		void lock();
+
+		/**
+		 * Unlocks the component, so the component will follow any
+		 * order that an external component may give it
+		 */
+		void unlock();
+	
+		/**
+		 * Turns the CCD on (in simple models it will only affect the
+		 * local variable
+		 */
+		void on();
+
+		/**
+		 * Turns the CCD off (in simple models it will only affect the
+		 * local variable
+		 */
+		void off();
+
+	};
+
+};
+
+#endif
