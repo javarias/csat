@@ -9,10 +9,24 @@
 <xs:import namespace="urn:schemas-cosylab-com:CDB:1.0" schemaLocation="CDB.xsd"/>
 <xs:import namespace="urn:schemas-cosylab-com:BACI:1.0" schemaLocation="BACI.xsd"/>
 
+<xs:complexType name="AltazVelType">
+   <xs:attribute name="altVel" type="xs:double"/>
+   <xs:attribute name="azmVel" type="xs:double"/>
+</xs:complexType>
+
+
 <xs:complexType name="DevTelescopeType">
    <xs:sequence>
-      <xs:element name="azimuth" type="baci:ROdouble"/>
-      <xs:element name="altitude" type="baci:ROdouble"/>
+      <xs:element name="realAzm" type="baci:ROdouble"/>
+      <xs:element name="realAlt" type="baci:ROdouble"/>
+      <xs:element name="locking" type="xs:boolean"/>
+      <xs:element name="velocity">
+         <xs:complexType>
+            <xs:sequence>
+               <xs:element name="_" type="AltazVelType"/>
+            </xs:sequence>
+         </xs:complexType>
+      </xs:element>
    </xs:sequence>
 
    <xs:attribute name="id" type="xs:int" use="optional" default="0"/>

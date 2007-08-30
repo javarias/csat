@@ -4,6 +4,8 @@
 #include <baci.idl>
 #include <Types.idl>
 
+#pragma prefix "alma"
+
 /**
  * @file DevCCD.idl
  * IDL specification for the DevCCD module interface. This interface is a CCD

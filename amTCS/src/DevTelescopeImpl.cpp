@@ -25,9 +25,9 @@ void DevTelescopeImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 {
 	ACS_TRACE("DevTelescopeImpl::initialize");
 	if( getComponent() != 0){
-		m_realAzm_sp = new ROdouble( (component_name + std::string(":azimuth")).c_str(),
+		m_realAzm_sp = new ROdouble( (component_name + std::string(":realAzm")).c_str(),
 		                             getComponent());
-		m_realAlt_sp = new ROdouble( (component_name + std::string(":altitude")).c_str(),
+		m_realAlt_sp = new ROdouble( (component_name + std::string(":realAlt")).c_str(),
 		                             getComponent());
 	}
 }
