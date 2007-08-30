@@ -20,6 +20,7 @@ import alma.acs.callbacks.ResponseReceiver;
 import Hevelius.utilities.converter.*;
 import Hevelius.utilities.sideralupdate.*;
 import Hevelius.interfaz.interfaz;
+import javax.swing.border.BevelBorder;
 
 public class DrawingPanel extends JPanel
 {
@@ -107,7 +108,7 @@ public class DrawingPanel extends JPanel
 		rbutton.setBackground(Color.WHITE);
 		rbutton.setSize(50,50);
 		//rbutton.setLocation();
-		add(rbutton);
+//		add(rbutton);
 
 		rbutton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
@@ -122,7 +123,7 @@ public class DrawingPanel extends JPanel
 		lbutton = new JButton(lArrow);
 		lbutton.setBackground(Color.WHITE);
 		lbutton.setSize(50,50);
-		add(lbutton);
+//		add(lbutton);
 
 		lbutton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
@@ -137,7 +138,7 @@ public class DrawingPanel extends JPanel
 		tbutton = new JButton(tArrow);
 		tbutton.setBackground(Color.WHITE);
 		tbutton.setSize(50,50);
-		add(tbutton);
+//		add(tbutton);
 
 		tbutton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
@@ -151,7 +152,7 @@ public class DrawingPanel extends JPanel
 		bbutton = new JButton(bArrow);
 		bbutton.setBackground(Color.WHITE);
 		bbutton.setSize(50,50);
-		add(bbutton);
+//		add(bbutton);
 
 		bbutton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
@@ -163,7 +164,7 @@ public class DrawingPanel extends JPanel
 		//Go to Zenith Button
 		zenith = new JButton("Zenith");
 		zenith.setSize(100,20);
-		add(zenith);
+//		add(zenith);
 		zenith.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 				AltazPos p = new AltazPos();
@@ -177,7 +178,7 @@ public class DrawingPanel extends JPanel
 		//Go to Park Button
 		park = new JButton("Park");
 		park.setSize(100,20);
-		add(park);
+//		add(park);
 
 		//Sidereal Time Label
 		stimeL = new JLabel("Sidereal Time");
@@ -214,6 +215,9 @@ public class DrawingPanel extends JPanel
 		//WeatherPanel
 		wpane = new WeatherPanel(null);
 		wpane.init();
+//		wpane.setBorder(BorderFactory.createEmptyBorder(0,10,10,10));
+//		wpane.setLayout(new BoxLayout(wpane, BoxLayout.Y_AXIS));
+//		wpane.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		add(wpane);
 		new Thread(wpane).start();
 
@@ -256,24 +260,33 @@ public class DrawingPanel extends JPanel
 		cy = (dy-dy/3)+(dy-rect_y)/4-20;
 		dist = (3*dx + rect_x)/4 -40;
 		r = (dy-rect_y)/4;
+		int oGLx = (dx-rect_x)/2+rect_x+20;
 
 		g.setColor(Color.GRAY);
 
-		int oGLx = (dx-rect_x)/2+rect_x+20;
+		g.fillRect(20,130,dx-40,3);
+		g.fillRect(rect_x*3/4+70,150,2,dy-170);
+		g.fillRect(oGLx,150,2,dy-170);
+
 		if(VTelescope)
 		{
-			g.drawRect(oGLx+20,10,dx-oGLx-40,dx-oGLx-40);
-			g.fillRect(oGLx+20,10,dx-oGLx-40,dx-oGLx-40);
+			g.drawRect(oGLx+20,10+170,dx-oGLx-40,dx-oGLx-40);
+			g.fillRect(oGLx+20,10+170,dx-oGLx-40,dx-oGLx-40);
 		}
 
-		g.drawRect((dx-rect_x*3/4)/2,(dy-rect_y*3/4)/2,rect_x*3/4,rect_y*3/4);
-		g.fillRect((dx-rect_x*3/4)/2,(dy-rect_y*3/4)/2,rect_x*3/4,rect_y*3/4);
+		//g.drawRect((dx-rect_x*3/4)/2,(dy-rect_y*3/4)/2,rect_x*3/4,rect_y*3/4);
+		//g.fillRect((dx-rect_x*3/4)/2,(dy-rect_y*3/4)/2,rect_x*3/4,rect_y*3/4);
+
+		g.drawRect(50,180,rect_x*3/4,rect_y*3/4);
+		g.fillRect(50,180,rect_x*3/4,rect_y*3/4);
 
 		g.setColor(Color.BLACK);
 
-		g.fillRect((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,rect_x*3/4-10,rect_y*3/4-10);
+		//g.fillRect((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,rect_x*3/4-10,rect_y*3/4-10);
+		g.fillRect(50+5,180+5,rect_x*3/4-10,rect_y*3/4-10);
+
 		if(VTelescope)
-			g.fillRect(oGLx+25,15,dx-oGLx-50,dx-oGLx-50);
+			g.fillRect(oGLx+25,15+170,dx-oGLx-50,dx-oGLx-50);
 
 		if(tam.width != dx || tam.height != dy)
 		{
@@ -281,31 +294,46 @@ public class DrawingPanel extends JPanel
 			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(200,100));
 			tam = new Dimension(dx,dy);
 		}
-		g.drawImage(stop, rect_x-40,dy - 140, this);
-		g.drawImage(hevelius,dx/2-100,40,this);
+		//g.drawImage(stop, rect_x-40,dy - 140, this);
+		g.drawImage(stop, dx - 120,dy - 290, this);
+		//g.drawImage(hevelius,dx/2-100,40,this);
+		g.drawImage(hevelius,20,20,this);
 
-		vtpane.setLocation(oGLx+25,15);
+		vtpane.setLocation(oGLx+25,15+170);
 		vtpane.setSize(dx-oGLx-50,dx-oGLx-50);
+
 		cpane.setSize(((dy-rect_y)/2+50)*3/4,((dy-rect_y)/2+50)*3/4);
 		cpane.setLocation(5,dy-cpane.getSize().height-50);
 
+		//spane.setSize(120,120);
+		//spane.setLocation(dx-120,dy-160);
 		spane.setSize(120,120);
-		spane.setLocation(dx-120,dy-160);
+		spane.setLocation(dx-140,dy-170);
 
-		wpane.setSize(300,200);
-		wpane.setLocation(0,0);
+		//wpane.setSize(300,200);
+		//wpane.setLocation(0,0);
+                wpane.setSize(300,200);
+                wpane.setLocation(630,185);
 
-		tspane.setSize(300,200);
-		tspane.setLocation(0,230);
+		//tspane.setSize(300,200);
+		//tspane.setLocation(0,230);
+		tspane.setSize(180,200);
+		tspane.setLocation(dx-200,dy/2+10);
 
+		//scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
+		//scpane.setLocation((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5);
 		scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
-		scpane.setLocation((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5);
+		scpane.setLocation(50+5,180+5);
 
-		coorpane.setSize(200,250);
-		coorpane.setLocation(oGLx+10,dx-oGLx);
+		//coorpane.setSize(200,250);
+		//coorpane.setLocation(oGLx+10,dx-oGLx);
+		coorpane.setSize(450,500);
+		coorpane.setLocation(50,550);
 
-		stimeL.setLocation(60,400);
-		stime.setLocation(80,420);
+		//stimeL.setLocation(60,400);
+		//stime.setLocation(80,420);
+		stimeL.setLocation(780-80,400);
+		stime.setLocation(800-80,420);
 
 		//Pointing buttons
 		rbutton.setLocation(((dx+rect_x*3/4)/2+0)+12, dy/2-20);

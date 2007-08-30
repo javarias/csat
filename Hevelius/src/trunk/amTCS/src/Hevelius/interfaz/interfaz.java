@@ -593,7 +593,7 @@ public class interfaz {
 			default: pane.setBackground(Color.BLACK); break;
 		}
 
-		frame.setResizable(false);
+		//frame.setResizable(false);
 
 		frame.setJMenuBar(createMenuBar());
 		frame.pack();
