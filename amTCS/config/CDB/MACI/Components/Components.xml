@@ -14,6 +14,16 @@
          Type="IDL:alma/CSATSTATUS_MODULE/CSATStatus:1.0"
          Container="amContainer"/>
 
+      <_ Name="LPI"
+         Code="lpiImpl"
+         Type="IDL:alma/DEVCCD_MODULE/DevCCD:1.0"
+         Container="amContainerCpp"/>
+
+      <_ Name="POINTING"
+         Code="alma.POINTING_MODULE.PointingImpl.PointingHelper"
+         Type="IDL:alma/POINTING_MODULE/Pointing:1.0"
+         Container="amContainer"/>
+
 </Components>
 
 

@@ -75,4 +75,4 @@ module DEVTELESCOPE_MODULE{
 };
 
 
-#endif
+#endif /* _DEVTELESCOPE_IDL_ */

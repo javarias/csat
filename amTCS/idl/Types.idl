@@ -27,6 +27,14 @@ module TYPES
 	};
 
 	/**
+	 * \struct EarthPos
+	 */
+	struct EarthPos{
+		double altitude;
+		double latitude;
+	};
+
+	/**
 	 * \struct RadecVel
 	 */
 	struct RadecVel{

@@ -1,3 +1,5 @@
+/* IDL for DevCCD component */
+
 #ifndef _DEVCCD_IDL_
 #define _DEVCCD_IDL_
 
@@ -24,13 +26,13 @@ module DEVCCD_MODULE {
 	interface DevCCD : ACS::CharacteristicComponent	{
 
 		/** Holds the last frame that has been taken */
-		readonly attribute TYPES::Image frame;
+		readonly attribute ACS::ROlongSeq frame;
 
 		/** Holds the device name that should be accesed */
 		readonly attribute string device;
 
-		/** Locking status of the component. For further information, look at
- 		 * the DevTelescope component documentation
+		/** Locking status of the component. For further information,
+		 * look at the DevTelescope component documentation
 		 */
 		readonly attribute boolean locking;
 
@@ -72,4 +74,4 @@ module DEVCCD_MODULE {
 
 };
 
-#endif
+#endif /* _DEVCCD_IDL_ */

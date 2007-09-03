@@ -51,18 +51,20 @@ xxxxx_LIBS      =
 #
 # Includes (.h) files (public only)
 # ---------------------------------
-INCLUDES        = DevTelescopeImpl.h
+INCLUDES        = DevTelescopeImpl.h lpiImpl.h
 
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = DevTelescopeImpl
+LIBRARIES       = DevTelescopeImpl lpiImpl
 LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
 DevTelescopeImpl_OBJECTS   = DevTelescopeImpl
-DevTelescopeImpl_LIBS      =  TypesStubs DevTelescopeStubs
+DevTelescopeImpl_LIBS      = TypesStubs DevTelescopeStubs
+lpiImpl_OBJECTS            = lpiImpl
+lpiImpl_LIBS               = TypesStubs DevCCDStubs
 
 #
 # Scripts (public and local)
@@ -113,13 +115,14 @@ CDB_SCHEMAS = DevTelescope
 # 
 # IDL Files and flags
 # 
-IDL_FILES = Types CSATStatus CSATControl DevTelescope DevCCD
+IDL_FILES = Types DevTelescope DevCCD DevGPS Telescope CCD Locale Pointing CSATStatus CSATControl
 IDL_TAO_FLAGS =
 USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES=CSATControlImpl CSATStatusImpl
+JARFILES= PointingImpl CSATControlImpl CSATStatusImpl
+PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
 jjj_EXTRAS= 
