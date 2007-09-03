@@ -128,6 +128,15 @@ module CSATSTATUS_MODULE {
 		 */
 		void EmergencyStop();
 
+		/**
+		 * Returns the sidereal time
+		 */
+		double getSiderealTime();
+
+		/**
+		 * Returns the global position, in Alt/Lat
+		 */
+		TYPES::EarthPos getLocalPos();
 	};
 
 };

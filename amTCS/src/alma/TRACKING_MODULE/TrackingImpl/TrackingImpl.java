@@ -20,7 +20,7 @@
  *    MA 02111-1307  USA
  */
 
-package alma.POINTING_MODULE.PointingImpl;
+package alma.TRACKING_MODULE.TrackingImpl;
 
 import java.util.logging.Logger;
 
@@ -28,15 +28,15 @@ import alma.ACS.*;
 import alma.TYPES.*;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.container.ContainerServices;
-import alma.POINTING_MODULE.PointingOperations;
+import alma.TRACKING_MODULE.TrackingOperations;
 
-public class PointingImpl implements PointingOperations, ComponentLifecycle {
+public class TrackingImpl implements TrackingOperations, ComponentLifecycle {
 
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
 
-	private double m_altOffset;
-	private double m_azmOffset;
+	private boolean m_status;
+	private RadecVel m_rate;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -47,8 +47,8 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
 
-		m_altOffset = 0;
-		m_azmOffset = 0;
+		m_status = false;
+		m_rate = new RadecVel();
 	}
     
 	public void execute() {
@@ -75,25 +75,24 @@ public class PointingImpl implements PointingOperations, ComponentLifecycle {
 		return m_containerServices.getName();
 	}
 
-	public double azmOffset(){
-		return m_azmOffset;
+	public RadecVel rate(){
+		return m_rate;
 	}
 	
-	public double altOffset(){
-		return m_altOffset;
+	public boolean status(){
+		return m_status;
 	}
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of PointingOperations
 	/////////////////////////////////////////////////////////////
 
-	public void offSetAlt(double degrees){
-		m_altOffset += degrees;
-		return;
+	public void setStatus(boolean status){
+		this.m_status = status;
 	}
 
-	public void offSetAzm(double degrees){
-		m_azmOffset += degrees;
-		return;
+	public void setRate(RadecVel rate){
+		this.m_rate = rate;
 	}
+
 }

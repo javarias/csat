@@ -38,17 +38,24 @@ TYPES::Image* image(CORBA::Double exposure) throw (CORBA::SystemException){
 }
 
 void lpiImpl::lock() throw (CORBA::SystemException){
-	//locking = true;
+	m_locking = true;
 }
 
 void lpiImpl::unlock() throw (CORBA::SystemException){
-	//locking = false;
+	m_locking = false;
 }
 
+void lpiImpl::on() throw (CORBA::SystemException){
+	m_powered = true;
+}
+
+void lpiImpl::off() throw (CORBA::SystemException){
+	m_powered = false;
+}
 
 /* Attributes returning */
 char* lpiImpl::device() throw (CORBA::SystemException){
-	return (char *)m_device.c_str();
+	return m_device;
 }
 
 bool lpiImpl::locking() throw (CORBA::SystemException){

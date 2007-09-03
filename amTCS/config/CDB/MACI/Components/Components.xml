@@ -24,6 +24,11 @@
          Type="IDL:alma/POINTING_MODULE/Pointing:1.0"
          Container="amContainer"/>
 
+      <_ Name="TRACKING"
+         Code="alma.TRACKING_MODULE.TrackingImpl.TrackingHelper"
+         Type="IDL:alma/TRACKING_MODULE/Tracking:1.0"
+         Container="amContainer"/>
+
 </Components>
 
 

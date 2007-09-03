@@ -115,14 +115,15 @@ CDB_SCHEMAS = DevTelescope
 # 
 # IDL Files and flags
 # 
-IDL_FILES = Types DevTelescope DevCCD DevGPS Telescope CCD Locale Pointing CSATStatus CSATControl
+IDL_FILES = Types DevTelescope DevCCD DevGPS Telescope CCD Locale Pointing Tracking CSATStatus CSATControl
 IDL_TAO_FLAGS =
 USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES= PointingImpl CSATControlImpl CSATStatusImpl
+JARFILES= PointingImpl TrackingImpl CSATControlImpl CSATStatusImpl
 PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
+TrackingImpl_DIRS=alma/TRACKING_MODULE/TrackingImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
 jjj_EXTRAS= 

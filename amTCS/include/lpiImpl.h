@@ -24,23 +24,13 @@ class lpiImpl : public virtual CharacteristicComponentImpl,
 {
 
 public:
-	/**
-	 * Constructor
-	 * @param poa POA which will activate this and also all other COBs
-	 * @param name Component name
-	 */
+
 	lpiImpl(const ACE_CString& name, maci::ContainerServices* containerServices);
-	/**
-	 * Destructor
-	 */
+
 	virtual ~lpiImpl();
 
-	/**
-	 * Component's Life-cycle implementation
-	 */
 	virtual void initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl);
 
-	/* IDL operations */
 	virtual TYPES::Image* image(CORBA::Double exposure) throw (CORBA::SystemException);
 
 	virtual void on() throw (CORBA::SystemException);
@@ -65,12 +55,12 @@ private:
 	SmartPropertyPointer<ROlongSeq> m_frame_sp;
 
 	// Private attributes (IDL)
-	std::string m_device;
+	char* m_device;
 	bool m_locking;
 	bool m_powered;
 
 	// Private attributes (others)
-	std::string  component_name;	
+	std::string  component_name;
 
 	/**
 	 * ALMA C++ coding standards state copy operators should be disabled.

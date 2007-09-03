@@ -32,16 +32,6 @@ module POINTING_MODULE {
 		readonly attribute double azmOffset;
 
 		/**
-		 * Gets the altitude offset, in degrees
-		 */
-		double getAltOffSet();
-
-		/**
-		 * Gets the azimuth offset, in degrees
-		 */
-		double getAzmOffSet();
-
-		/**
 		 * Adds an offset over the current altitude offset
 		 * @param degrees The additional offset
 		 */
