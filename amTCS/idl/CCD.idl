@@ -1,7 +1,7 @@
 /* IDL for CCD component */
 
-#ifndef _CCD_IDL
-#define _CCD_IDL
+#ifndef _CCD_IDL_
+#define _CCD_IDL_
 
 #include <baci.idl>
 #include <Types.idl>
@@ -39,4 +39,4 @@ module CCD_MODULE {
 
 };
 
-#endif /* _CCD_IDL */
+#endif /* _CCD_IDL_ */

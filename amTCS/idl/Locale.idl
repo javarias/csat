@@ -1,7 +1,7 @@
 /* IDL for Locale component */
 
-#ifndef _LOCALE_IDL
-#define _LOCALE_IDL
+#ifndef _LOCALE_IDL_
+#define _LOCALE_IDL_
 
 #include <baci.idl>
 #include <Types.idl>
@@ -39,4 +39,4 @@ module CCD_MODULE {
 
 };
 
-#endif /* _LOCALE_IDL */
+#endif /* _LOCALE_IDL_ */

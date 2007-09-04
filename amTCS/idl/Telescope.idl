@@ -1,7 +1,7 @@
 /* IDL for Telescope component */
 
-#ifndef _TELESCOPE_IDL
-#define _TELESCOPE_IDL
+#ifndef _TELESCOPE_IDL_
+#define _TELESCOPE_IDL_
 
 #include <baci.idl>
 #include <Types.idl>
@@ -74,4 +74,4 @@ module TELESCOPE_MODULE {
 
 };
 
-#endif /* _TELESCOPE_IDL */
+#endif /* _TELESCOPE_IDL_ */

@@ -1,7 +1,7 @@
 /* IDL for Tracking component */
 
-#ifndef _TRACKING_IDL
-#define _TRACKING_IDL
+#ifndef _TRACKING_IDL_
+#define _TRACKING_IDL_
 
 #include <baci.idl>
 #include <Types.idl>
@@ -49,4 +49,4 @@ module TRACKING_MODULE {
 
 };
 
-#endif /* _TRACKING_IDL */
+#endif /* _TRACKING_IDL_ */

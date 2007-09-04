@@ -1,7 +1,7 @@
 /* IDL for CSATStatus component */
 
-#ifndef _CSATSTATUS_IDL
-#define _CSATSTATUS_IDL
+#ifndef _CSATSTATUS_IDL_
+#define _CSATSTATUS_IDL_
 
 #include <baci.idl>
 #include <Types.idl>
@@ -141,4 +141,4 @@ module CSATSTATUS_MODULE {
 
 };
 
-#endif /* _CSATSTATUS_IDL */
+#endif /* _CSATSTATUS_IDL_ */

@@ -115,7 +115,7 @@ CDB_SCHEMAS = DevTelescope
 # 
 # IDL Files and flags
 # 
-IDL_FILES = Types DevTelescope DevCCD DevGPS Telescope CCD Locale Pointing Tracking CSATStatus CSATControl
+IDL_FILES = Types DevTelescope DevCCD DevGPS Telescope CCD Locale Pointing Tracking Calculations Safety CSATStatus CSATControl
 IDL_TAO_FLAGS =
 USER_IDL =
 #

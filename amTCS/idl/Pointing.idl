@@ -1,7 +1,7 @@
 /* IDL for Pointing component */
 
-#ifndef _POINTING_IDL
-#define _POINTING_IDL
+#ifndef _POINTING_IDL_
+#define _POINTING_IDL_
 
 #include <baci.idl>
 #include <Types.idl>
@@ -47,4 +47,4 @@ module POINTING_MODULE {
 
 };
 
-#endif /* _POINTING_IDL */
+#endif /* _POINTING_IDL_ */
