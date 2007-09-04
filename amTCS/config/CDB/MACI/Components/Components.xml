@@ -29,6 +29,11 @@
          Type="IDL:alma/TRACKING_MODULE/Tracking:1.0"
          Container="amContainer"/>
 
+      <_ Name="SAFETY"
+         Code="alma.SAFETY_MODULE.SafetyImpl.SafetyHelper"
+         Type="IDL:alma/SAFETY_MODULE/Safety:1.0"
+         Container="amContainer"/>
+
 </Components>
 
 

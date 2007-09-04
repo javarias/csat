@@ -121,9 +121,10 @@ USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES= PointingImpl TrackingImpl CSATControlImpl CSATStatusImpl
+JARFILES= PointingImpl TrackingImpl SafetyImpl CSATControlImpl CSATStatusImpl
 PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
 TrackingImpl_DIRS=alma/TRACKING_MODULE/TrackingImpl
+SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
 jjj_EXTRAS= 

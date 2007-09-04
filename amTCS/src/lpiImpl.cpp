@@ -13,6 +13,7 @@ lpiImpl::lpiImpl(const ACE_CString& name, maci::ContainerServices *containerServ
 {
 	component_name = name.c_str();
 	ACS_TRACE("lpiImpl::lpiImpl");
+	m_device = "/dev/video0";
 }
 
 /* Destructor */
@@ -33,8 +34,8 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 
 /* IDL implementation */
 
-TYPES::Image* image(CORBA::Double exposure) throw (CORBA::SystemException){
-	return new TYPES::Image(1);
+TYPES::Image* lpiImpl::image(CORBA::Double exposure) throw (CORBA::SystemException){
+	return new TYPES::Image();
 }
 
 void lpiImpl::lock() throw (CORBA::SystemException){
