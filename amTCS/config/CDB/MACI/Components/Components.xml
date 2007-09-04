@@ -34,6 +34,11 @@
          Type="IDL:alma/SAFETY_MODULE/Safety:1.0"
          Container="amContainer"/>
 
+      <_ Name="TELESCOPE"
+         Code="alma.TELESCOPE_MODULE.TelescopeImpl.TelescopeHelper"
+         Type="IDL:alma/TELESCOPE_MODULE/Telescope:1.0"
+         Container="amContainer"/>
+
 </Components>
 
 
