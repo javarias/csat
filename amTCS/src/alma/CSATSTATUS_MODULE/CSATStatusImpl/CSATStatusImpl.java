@@ -77,6 +77,10 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	public String name() {
 		return m_containerServices.getName();
 	}
+
+	public TCSStatus status(){
+		return status;
+	}
 	
 	/////////////////////////////////////////////////////////////
 	// Implementation of CSATStatusOperations
@@ -137,7 +141,12 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	public void EmergencyStop(){
 	}
 
-	public TCSStatus status(){
-		return status;
+	public double getSiderealTime(){
+		return 0;
 	}
+
+	public EarthPos getLocalPos(){
+		return new EarthPos();
+	}
+
 }
