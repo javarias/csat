@@ -61,7 +61,7 @@ LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-DevTelescopeImpl_OBJECTS   = DevTelescopeImpl
+DevTelescopeImpl_OBJECTS   = DevTelescopeImpl NexstarAltDevIO
 DevTelescopeImpl_LIBS      = TypesStubs DevTelescopeStubs
 lpiImpl_OBJECTS            = lpiImpl
 lpiImpl_LIBS               = TypesStubs DevCCDStubs
