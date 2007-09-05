@@ -2,7 +2,9 @@
 static char *rcsId="@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
-#include <DevTelescopeImpl.h>
+#include "DevTelescopeImpl.h"
+#include "NexstarAltDevIO.h"
+#include "NexstarAzmDevIO.h"
 
 using namespace baci;
 
@@ -27,9 +29,9 @@ void DevTelescopeImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 	ACS_TRACE("DevTelescopeImpl::initialize");
 	if( getComponent() != 0){
 		m_realAzm_sp = new ROdouble( (component_name + std::string(":realAzm")).c_str(),
-		                             getComponent());
+		                             getComponent(), new NexstarAzmDevIO("/dev/ttyS0"));
 		m_realAlt_sp = new ROdouble( (component_name + std::string(":realAlt")).c_str(),
-		                             getComponent());
+		                             getComponent(), new NexstarAltDevIO("/dev/ttyS0"));
 	}
 }
 

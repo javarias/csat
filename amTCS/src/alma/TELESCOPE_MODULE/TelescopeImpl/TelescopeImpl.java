@@ -89,18 +89,22 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	}
 
 	public void offSet(AltazPos offset){
+		m_commandedPos.alt += offset.alt;
+		m_commandedPos.az += offset.az;
 	}
 
 	public void gotoAltAz(AltazPos position){
+		m_commandedPos = position;
 	}
 
 	public void stop(){
 	}
 
 	public AltazPos getAltAz(){
-		return new AltazPos();
+		return m_commandedPos;
 	}
 
 	public void setCurrentAltAz(AltazPos position){
+		m_commandedPos = position;
 	}
 }
