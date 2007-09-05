@@ -14,6 +14,7 @@ lpiImpl::lpiImpl(const ACE_CString& name, maci::ContainerServices *containerServ
 	component_name = name.c_str();
 	ACS_TRACE("lpiImpl::lpiImpl");
 	m_device = "/dev/video0";
+	m_locking = true;
 }
 
 /* Destructor */

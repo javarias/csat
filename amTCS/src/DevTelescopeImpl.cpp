@@ -14,6 +14,7 @@ DevTelescopeImpl::DevTelescopeImpl(const ACE_CString& name, maci::ContainerServi
 {
 	component_name = name.c_str();
 	ACS_TRACE("DevTelescopeImpl::DevTelescopeImpl");
+	m_locking = true;
 }
 
 /* Destructor */
