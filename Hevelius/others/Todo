@@ -1,0 +1,21 @@
++Verificacion de Coordenadas
++Modelo OpenGL
++Boton de Emergencia
++Catalogo de Estrellas
+
+-Agregar info de Hevelius al Twiki
+-Rellenar avances en Twiki
+
+*Configuracion: Anotar ubicacion en vez de codigo
+*AutoResize:
+	-Autoubicar Elementos dentro de los paneles
+		+Labels,buttons,etc.
+			*Falta ajustar detalles debido al cambio de tamaño.
+	-Cambiar tamaño de elementos dentro de paneles
+		+Labels,buttons,etc.
+
+
+#Primer nivel de anidamiento:
++: Para entrega o importante.
+-: Cosas que hay que hacer pero que no son construccion.
+*: Necesario pero no importante(postergable...)
