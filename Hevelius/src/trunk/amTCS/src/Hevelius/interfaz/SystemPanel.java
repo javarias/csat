@@ -69,10 +69,13 @@ public class SystemPanel extends JPanel
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		system.setLocation(10,5);
-		start.setLocation(10,30);
-		stop.setLocation(10,55);
-		shutdown.setLocation(10,80);
+		int dx,dy;
+		dx = getSize().width;
+		dy = getSize().height;
+		system.setLocation(dx-130,5);
+		start.setLocation(dx-130,30);
+		stop.setLocation(dx-130,55);
+		shutdown.setLocation(dx-130,80);
 	}
 
 	public void stopTCS()

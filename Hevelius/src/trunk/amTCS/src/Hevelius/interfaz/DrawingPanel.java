@@ -34,8 +34,6 @@ public class DrawingPanel extends JPanel
 	private static Configuration test = new Configuration();
 
 	private Image stop=null;
-	private JButton zenith;
-	private JButton park;
 	private JButton rbutton = null;
 	private JButton lbutton = null;
 	private JButton tbutton = null;
@@ -161,25 +159,6 @@ public class DrawingPanel extends JPanel
 				}
 				});
 
-		//Go to Zenith Button
-		zenith = new JButton("Zenith");
-		zenith.setSize(100,20);
-//		add(zenith);
-		zenith.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-				AltazPos p = new AltazPos();
-				p.alt = 90;
-				p.az = 0;
-				if(csatc!=null)
-				csatc.goToAltAz(p, null);
-				}
-				});
-
-		//Go to Park Button
-		park = new JButton("Park");
-		park.setSize(100,20);
-//		add(park);
-
 		//Sidereal Time Label
 		stimeL = new JLabel("Sidereal Time");
 		stimeL.setSize(120,20);
@@ -264,71 +243,88 @@ public class DrawingPanel extends JPanel
 
 		g.setColor(Color.GRAY);
 
-		g.fillRect(20,130,dx-40,3);
-		g.fillRect(rect_x*3/4+70,150,2,dy-170);
-		g.fillRect(oGLx,150,2,dy-170);
+		g.fillRect(dx/60,dy/6,dx-40,3);
+		g.fillRect(dx*3/7,dy/6,2,dy);
+		g.fillRect(dx*5/7,dy/6,2,dy);
 
-		if(VTelescope)
-		{
-			g.drawRect(oGLx+20,10+170,dx-oGLx-40,dx-oGLx-40);
-			g.fillRect(oGLx+20,10+170,dx-oGLx-40,dx-oGLx-40);
-		}
+//		if(VTelescope)
+//		{
+//			g.drawRect(oGLx+20,10+170,dx-oGLx-40,dx-oGLx-40);
+//			g.fillRect(oGLx+20,10+170,dx-oGLx-40,dx-oGLx-40);
+//		}
 
 		//g.drawRect((dx-rect_x*3/4)/2,(dy-rect_y*3/4)/2,rect_x*3/4,rect_y*3/4);
 		//g.fillRect((dx-rect_x*3/4)/2,(dy-rect_y*3/4)/2,rect_x*3/4,rect_y*3/4);
 
-		g.drawRect(50,180,rect_x*3/4,rect_y*3/4);
-		g.fillRect(50,180,rect_x*3/4,rect_y*3/4);
+//		g.drawRect(50,180,rect_x*3/4,rect_y*3/4);
+//		g.fillRect(50,180,rect_x*3/4,rect_y*3/4);
 
 		g.setColor(Color.BLACK);
 
 		//g.fillRect((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,rect_x*3/4-10,rect_y*3/4-10);
-		g.fillRect(50+5,180+5,rect_x*3/4-10,rect_y*3/4-10);
+//		g.fillRect(50+5,180+5,rect_x*3/4-10,rect_y*3/4-10);
 
-		if(VTelescope)
-			g.fillRect(oGLx+25,15+170,dx-oGLx-50,dx-oGLx-50);
+//		if(VTelescope)
+//			g.fillRect(oGLx+25,15+170,dx-oGLx-50,dx-oGLx-50);
 
 		if(tam.width != dx || tam.height != dy)
 		{
 			stop = setImage("Hevelius/images/stop.png",new Dimension(80,80));
-			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(200,100));
+			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy/6-dy*2/40),dy/6-dy*2/40));
 			tam = new Dimension(dx,dy);
 		}
 		//g.drawImage(stop, rect_x-40,dy - 140, this);
 		g.drawImage(stop, dx - 120,dy - 290, this);
 		//g.drawImage(hevelius,dx/2-100,40,this);
-		g.drawImage(hevelius,20,20,this);
+		g.drawImage(hevelius,dy/40,dy/40,this);
 
-		vtpane.setLocation(oGLx+25,15+170);
-		vtpane.setSize(dx-oGLx-50,dx-oGLx-50);
+		//vtpane.setLocation(oGLx+25,15+170);
+		//vtpane.setSize(dx-oGLx-50,dx-oGLx-50);
+		int t;
+		if(dx*2/7 < dy/3)
+			t = dx*2/7;
+		else
+			t = dy/3;
+		vtpane.setLocation(dx*5/7+dx/30+(dx-dx/15-dx*5/7-t)/2,dy/6+dy/40);
+		vtpane.setSize(t,t);
 
 		cpane.setSize(((dy-rect_y)/2+50)*3/4,((dy-rect_y)/2+50)*3/4);
 		cpane.setLocation(5,dy-cpane.getSize().height-50);
 
 		//spane.setSize(120,120);
 		//spane.setLocation(dx-120,dy-160);
-		spane.setSize(120,120);
-		spane.setLocation(dx-140,dy-170);
+		//spane.setSize(120,120);
+		//spane.setLocation(dx-140,dy-170);
+		spane.setLocation(dx*5/7+dx/30,dy*5/6);
+		spane.setSize(dx*2/7-dx*2/30,dy*1/6);
 
 		//wpane.setSize(300,200);
 		//wpane.setLocation(0,0);
-                wpane.setSize(300,200);
-                wpane.setLocation(630,185);
+                //wpane.setSize(300,200);
+                //wpane.setLocation(630,185);
+		wpane.setLocation(dx*3/7+dx/30,dy/6+dy/40);
+		wpane.setSize(dx*2/7-dx*2/30,dy/3-dy*2/40);
 
 		//tspane.setSize(300,200);
 		//tspane.setLocation(0,230);
-		tspane.setSize(180,200);
-		tspane.setLocation(dx-200,dy/2+10);
+		//tspane.setSize(180,200);
+		//tspane.setLocation(dx-200,dy/2+10);
+		tspane.setLocation(dx*5/7+dx/30,dy/2+dy*2/40);
+		tspane.setSize(dx*2/7-dx*2/30,dy/6);
 
 		//scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
 		//scpane.setLocation((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5);
-		scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
-		scpane.setLocation(50+5,180+5);
+		//scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
+		//scpane.setLocation(50+5,180+5);
+		scpane.setLocation(0+dx/30,dy/6+dy/40);
+		scpane.setSize(dx*3/7-dx*2/30,dy/3-dy*2/40);
 
 		//coorpane.setSize(200,250);
 		//coorpane.setLocation(oGLx+10,dx-oGLx);
-		coorpane.setSize(450,500);
-		coorpane.setLocation(50,550);
+		//coorpane.setSize(450,500);
+		//coorpane.setLocation(50,550);
+		coorpane.setLocation(0+dx/30,dy/2+dy/40);
+		coorpane.setSize(dx*3/7-dx*2/30,dy/2-dy*2/40);
 
 		//stimeL.setLocation(60,400);
 		//stime.setLocation(80,420);
@@ -340,10 +336,6 @@ public class DrawingPanel extends JPanel
 		lbutton.setLocation(((dx-rect_x*3/4)/2-40)-22, dy/2-20);
 		tbutton.setLocation(dx/2-20, ((dy-rect_y*3/4)/2-40)-22);
 		bbutton.setLocation(dx/2-20, ((dy+rect_y*3/4)/2+0)+12);
-
-		zenith.setLocation(rect_x*3/4-50,3*dy/4-20);
-
-		park.setLocation(rect_x*5/4-50,3*dy/4-20);
 	}
 	public Dimension getDim()
 	{

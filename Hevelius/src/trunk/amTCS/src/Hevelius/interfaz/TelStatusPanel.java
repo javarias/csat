@@ -70,8 +70,8 @@ public class TelStatusPanel extends JPanel
 	{
 		int dx = getSize().width;
 		int dy = getSize().height;
+/*
 		telstate.setLocation(30,0);
-		//telstate.setHorizontalAlignment(SwingConstants.CENTER);
 		glstateL.setLocation(10,25);
 		modeswL.setLocation(10,50);
 		trkwsL.setLocation(10,75);
@@ -80,6 +80,16 @@ public class TelStatusPanel extends JPanel
 		modesw.setLocation(110,50);
 		trkws.setLocation(110,75);
 		autog.setLocation(110,100);
+*/
+                telstate.setLocation(dx-180,0);
+                glstateL.setLocation(dx-200,25);
+                modeswL.setLocation(dx-200,50);
+                trkwsL.setLocation(dx-200,75);
+                autogL.setLocation(dx-200,100);
+                glstate.setLocation(dx-100,25);
+                modesw.setLocation(dx-100,50);
+                trkws.setLocation(dx-100,75);
+                autog.setLocation(dx-100,100);
 	}
 
 	public void setGlobalState(int state)

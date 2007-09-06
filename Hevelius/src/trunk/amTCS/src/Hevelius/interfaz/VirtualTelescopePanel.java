@@ -75,7 +75,19 @@ public class VirtualTelescopePanel extends JPanel
 
 	public void paintComponent(Graphics g)
 	{
-		canvas.setSize(getSize());
+		super.paintComponent(g);
+		int dx, dy;
+		Dimension d = getSize();
+		dx = d.width;
+		dy = d.height;
+		g.setColor(Color.GRAY);
+		g.fillRect(0,0,dx,dy);
+		g.setColor(Color.BLACK);
+		g.fillRect(5,5,dx-10,dy-10);
+		d.width -= 10;
+		d.height -= 10;
+		canvas.setSize(d);
+		canvas.setLocation(5,5);
 	}	
 
 	public static synchronized void initializeDisplayList(GL gl) {
