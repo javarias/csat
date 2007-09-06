@@ -13,7 +13,7 @@
  * IDL specification for the Locale module interface.
  * This interface is in charge of controling the DevGPS component
  */
-module CCD_MODULE {
+module LOCALE_MODULE {
 
 	/** @interface Locale
 	 * Defines all the methods that are going to be used to get data from

@@ -46,6 +46,24 @@
          Default="true"
          Container="amContainer"/>
 
+      <_ Name="CALCULATIONS"
+         Code="alma.CALCULATIONS_MODULE.CalculationsImpl.CalculationsHelper"
+         Type="IDL:alma/CALCULATIONS_MODULE/Calculations:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+      <_ Name="LOCALE"
+         Code="alma.LOCALE_MODULE.LocaleImpl.LocaleHelper"
+         Type="IDL:alma/LOCALE_MODULE/Locale:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+      <_ Name="CCD"
+         Code="alma.CCD_MODULE.CCDImpl.CCDHelper"
+         Type="IDL:alma/CCD_MODULE/CCD:1.0"
+         Default="true"
+         Container="amContainer"/>
+
 </Components>
 
 

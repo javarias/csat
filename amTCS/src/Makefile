@@ -110,21 +110,24 @@ tttlll_OBJECTS  =
 #
 # Configuration Database Files
 # ----------------------------
-CDB_SCHEMAS = DevTelescope
+CDB_SCHEMAS = DevTelescope DevCCD
 
 # 
 # IDL Files and flags
 # 
-IDL_FILES = Types DevTelescope DevCCD DevGPS Telescope CCD Locale Pointing Tracking Calculations Safety CSATStatus CSATControl
+IDL_FILES = Types DevTelescope DevCCD DevGPS Telescope CCD Locale Pointing Tracking Calculations Safety CSATControl CSATStatus
 IDL_TAO_FLAGS =
 USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES= TelescopeImpl PointingImpl TrackingImpl SafetyImpl CSATControlImpl CSATStatusImpl
+JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl
 TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
+CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
+LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
 PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
 TrackingImpl_DIRS=alma/TRACKING_MODULE/TrackingImpl
+CalculationsImpl_DIRS=alma/CALCULATIONS_MODULE/CalculationsImpl
 SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
