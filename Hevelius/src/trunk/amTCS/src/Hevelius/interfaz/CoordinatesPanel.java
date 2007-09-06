@@ -35,24 +35,27 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 	private JLabel ccoorAzL;
 	private JButton catalogue;
 
-//Agregando...
+	//Agregando...
 	private JButton zenith;
-        private JButton park;
+	private JButton park;
 	private JButton tracking;
-        private JButton rbutton = null;
-        private JButton lbutton = null;
-        private JButton tbutton = null;
-        private JButton bbutton = null;
+	private JButton rbutton = null;
+	private JButton lbutton = null;
+	private JButton tbutton = null;
+	private JButton bbutton = null;
 	private JLabel laltoffset;
 	private JLabel lazoffset;
 	private JLabel altoffset;
 	private JLabel azoffset;
 	private JLabel offsetL;
-//
+	//
 
 	private boolean coortype;
 	private RadecPosHolder rdPos;
 	private AltazPosHolder aaPos;
+
+	private int dx = 0;
+	private int dy = 0;
 
 	public CoordinatesPanel(LayoutManager l)
 	{
@@ -98,16 +101,16 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		add(go);
 
 		go.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+				public void actionPerformed(ActionEvent e){
 				Double c1, c2;
 				Configuration test = new Configuration();
 
 				c1 = Double.parseDouble(coor1.getText());
 				c2 = Double.parseDouble(coor2.getText());
-				
+
 				Presetting.preset(c1,c2,Integer.parseInt(test.getOption("coordinate")));		
-			}
-		});
+				}
+				});
 
 		//Current coordinates
 		ccoor = new JLabel("Current Coordinates");
@@ -182,100 +185,100 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		catalogue.setMargin(new Insets(0,0,0,0));
 		add(catalogue);
 
-//Agregando...
+		//Agregando...
 		//Go to R Button
-                ImageIcon rArrow = new ImageIcon(new ImageIcon("Hevelius/images/rArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
-                rbutton = new JButton(rArrow);
-                rbutton.setBackground(Color.WHITE);
-                rbutton.setSize(50,50);
-                //rbutton.setLocation();
-                add(rbutton);
+		ImageIcon rArrow = new ImageIcon(new ImageIcon("Hevelius/images/rArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		rbutton = new JButton(rArrow);
+		rbutton.setBackground(Color.WHITE);
+		rbutton.setSize(50,50);
+		//rbutton.setLocation();
+		add(rbutton);
 
-                rbutton.addActionListener(new ActionListener(){
-                                public void actionPerformed(ActionEvent e){
-                                if(interfaz.getDrawingPanel().getCSATControl()!=null)
-                                interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(1.0d);
-                                }
-                                });
-
-
-                //Go to L Button
-                ImageIcon lArrow = new ImageIcon(new ImageIcon("Hevelius/images/lArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
-                lbutton = new JButton(lArrow);
-                lbutton.setBackground(Color.WHITE);
-                lbutton.setSize(50,50);
-                add(lbutton);
-
-                lbutton.addActionListener(new ActionListener(){
-                                public void actionPerformed(ActionEvent e){
-                                if(interfaz.getDrawingPanel().getCSATControl()!=null)
-                                interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(-1.0d);
-                                }
-                                });
+		rbutton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+				if(interfaz.getDrawingPanel().getCSATControl()!=null)
+				interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(1.0d);
+				}
+				});
 
 
-                //Go to T Botton
-                ImageIcon tArrow = new ImageIcon(new ImageIcon("Hevelius/images/tArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
-                tbutton = new JButton(tArrow);
-                tbutton.setBackground(Color.WHITE);
-                tbutton.setSize(50,50);
-                add(tbutton);
+		//Go to L Button
+		ImageIcon lArrow = new ImageIcon(new ImageIcon("Hevelius/images/lArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		lbutton = new JButton(lArrow);
+		lbutton.setBackground(Color.WHITE);
+		lbutton.setSize(50,50);
+		add(lbutton);
 
-                tbutton.addActionListener(new ActionListener(){
-                                public void actionPerformed(ActionEvent e){
-                                if(interfaz.getDrawingPanel().getCSATControl()!=null)
-                                interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(1.0d);
-                                }
-                                });
+		lbutton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+				if(interfaz.getDrawingPanel().getCSATControl()!=null)
+				interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(-1.0d);
+				}
+				});
 
-                //Go to B Button
-                ImageIcon bArrow = new ImageIcon(new ImageIcon("Hevelius/images/bArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
-                bbutton = new JButton(bArrow);
-                bbutton.setBackground(Color.WHITE);
-                bbutton.setSize(50,50);
-                add(bbutton);
 
-                bbutton.addActionListener(new ActionListener(){
-                                public void actionPerformed(ActionEvent e){
-                                if(interfaz.getDrawingPanel().getCSATControl()!=null)
-                                interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(-1.0d);
-                                }
-                                });
+		//Go to T Botton
+		ImageIcon tArrow = new ImageIcon(new ImageIcon("Hevelius/images/tArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		tbutton = new JButton(tArrow);
+		tbutton.setBackground(Color.WHITE);
+		tbutton.setSize(50,50);
+		add(tbutton);
+
+		tbutton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+				if(interfaz.getDrawingPanel().getCSATControl()!=null)
+				interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(1.0d);
+				}
+				});
+
+		//Go to B Button
+		ImageIcon bArrow = new ImageIcon(new ImageIcon("Hevelius/images/bArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		bbutton = new JButton(bArrow);
+		bbutton.setBackground(Color.WHITE);
+		bbutton.setSize(50,50);
+		add(bbutton);
+
+		bbutton.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+				if(interfaz.getDrawingPanel().getCSATControl()!=null)
+				interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(-1.0d);
+				}
+				});
 
 		//Activate/Deactivate Tracking
 		tracking = new JButton("Tracking");
 		tracking.setSize(100,20);
 		add(tracking);
 		tracking.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+				public void actionPerformed(ActionEvent e){
 				if(interfaz.getDrawingPanel().getCSATControl()!=null&&
 					interfaz.getDrawingPanel().getCSATStatus()!=null)
 				{
-					interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(
-						!interfaz.getDrawingPanel().getCSATStatus().getTrackingStatus());
+				interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(
+					!interfaz.getDrawingPanel().getCSATStatus().getTrackingStatus());
 				}
-			}
-		});
+				}
+				});
 
 
-                //Go to Zenith Button
-                zenith = new JButton("Zenith");
-                zenith.setSize(100,20);
-                add(zenith);
-                zenith.addActionListener(new ActionListener(){
-                                public void actionPerformed(ActionEvent e){
-                                AltazPos p = new AltazPos();
-                                p.alt = 90;
-                                p.az = 0;
-                                if(interfaz.getDrawingPanel().getCSATControl()!=null)
-                                interfaz.getDrawingPanel().getCSATControl().goToAltAz(p, null);
-                                }
-                                });
+		//Go to Zenith Button
+		zenith = new JButton("Zenith");
+		zenith.setSize(100,20);
+		add(zenith);
+		zenith.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+				AltazPos p = new AltazPos();
+				p.alt = 90;
+				p.az = 0;
+				if(interfaz.getDrawingPanel().getCSATControl()!=null)
+				interfaz.getDrawingPanel().getCSATControl().goToAltAz(p, null);
+				}
+				});
 
-                //Go to Park Button
-                park = new JButton("Park");
-                park.setSize(100,20);
-                add(park);
+		//Go to Park Button
+		park = new JButton("Park");
+		park.setSize(100,20);
+		add(park);
 
 		//Offset Label
 		offsetL = new JLabel("Offset");
@@ -306,69 +309,161 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		azoffset.setSize(30,20);
 		azoffset.setForeground(Color.WHITE);
 		add(azoffset);
-//
+		//
 	}
 
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
+		boolean updatePanel = false;
+		float fsize, osize;
+		if (dx != getSize().width || dy != getSize().height)
+			updatePanel = true;
+		dx = getSize().width;
+		dy = getSize().height;
 
-		//Interface Objects Positioning
-		coor.setLocation(30,0);
+		//		System.out.println(dx+"_"+dy);
+		if(updatePanel)
+		{
+			if(dx/5>dy/4)
+			{
+				fsize = (12.0f*dy)/418;
+				osize = dy/418.0f;
+			}
+			else
+			{
+				fsize = (12.0f*dx)/463;
+				osize = dx/463.0f;
+			}
 
-		coor1L.setLocation(20,30);
 
-		coor1.setLocation(50,30);
+			//Interface Objects Positioning
+			coor.setLocation((int)(30*osize),(int)(0*osize));
+			coor.setFont(coor.getFont().deriveFont(fsize));
+			coor.setSize((int)(150*osize),(int)(20*osize));
+			
 
-		coor2L.setLocation(20,55);
+			coor1L.setLocation((int)(20*osize),(int)(30*osize));
+			coor1L.setFont(coor1L.getFont().deriveFont(fsize));
+			coor1L.setSize((int)(30*osize),(int)(20*osize));
 
-		coor2.setLocation(50,55);
+			coor1.setLocation((int)(50*osize),(int)(30*osize));
+			coor1.setFont(coor1.getFont().deriveFont(fsize));
+			coor1.setSize((int)(80*osize),(int)(20*osize));
 
-		go.setLocation(135,30);
+			coor2L.setLocation((int)(20*osize),(int)(55*osize));
+			coor2L.setFont(coor2L.getFont().deriveFont(fsize));
+			coor2L.setSize((int)(30*osize),(int)(20*osize));
 
-		ccoor.setLocation(250,0);
+			coor2.setLocation((int)(50*osize),(int)(55*osize));
+			coor2.setFont(coor2.getFont().deriveFont(fsize));
+			coor2.setSize((int)(80*osize),(int)(20*osize));
 
-		radec.setLocation(240,40);
-		
-		horizontal.setLocation(350, 40);
+			go.setLocation((int)(135*osize),(int)(30*osize));
+			go.setFont(go.getFont().deriveFont(fsize));
+			go.setSize((int)(45*osize),(int)(45*osize));
 
-		ccoorRL.setLocation(220,70);
+			ccoor.setLocation((int)(250*osize),(int)(0*osize));
+			ccoor.setFont(ccoor.getFont().deriveFont(fsize));
+			ccoor.setSize((int)(150*osize),(int)(20*osize));
 
-		ccoorR.setLocation(260,70);
+			radec.setLocation((int)(240*osize),(int)(40*osize));
+			radec.setFont(radec.getFont().deriveFont(fsize));
+			radec.setSize((int)(80*osize),(int)(20*osize));
 
-		ccoorDL.setLocation(220, 90);
+			horizontal.setLocation((int)(350*osize), (int)(40*osize));
+			horizontal.setFont(horizontal.getFont().deriveFont(fsize));
+			horizontal.setSize((int)((int)(80*osize)*osize),(int)((int)(20*osize)*osize));
 
-		ccoorD.setLocation(260,90);
+			ccoorRL.setLocation((int)(220*osize),(int)(70*osize));
+			ccoorRL.setFont(ccoorRL.getFont().deriveFont(fsize));
+			ccoorRL.setSize((int)(30*osize),(int)(20*osize));
 
-		ccoorAlL.setLocation(340,70);
+			ccoorR.setLocation((int)(260*osize),(int)(70*osize));
+			ccoorR.setFont(ccoorR.getFont().deriveFont(fsize));
+			ccoorR.setSize((int)(80*osize),(int)(20*osize));
 
-		ccoorAl.setLocation(380,70);
+			ccoorDL.setLocation((int)(220*osize), (int)(90*osize));
+			ccoorDL.setFont(ccoorDL.getFont().deriveFont(fsize));
+			ccoorDL.setSize((int)(30*osize),(int)(20*osize));
 
-		ccoorAzL.setLocation(340,90);
+			ccoorD.setLocation((int)(260*osize),(int)(90*osize));
+			ccoorD.setFont(ccoorD.getFont().deriveFont(fsize));
+			ccoorD.setSize((int)(80*osize),(int)(20*osize));
 
-		ccoorAz.setLocation(380,90);
+			ccoorAlL.setLocation((int)(340*osize),(int)(70*osize));
+			ccoorAlL.setFont(ccoorAlL.getFont().deriveFont(fsize));
+			ccoorAlL.setSize((int)(30*osize),(int)(20*osize));
 
-		catalogue.setLocation(50,80);
+			ccoorAl.setLocation((int)(380*osize),(int)(70*osize));
+			ccoorAl.setFont(ccoorAl.getFont().deriveFont(fsize));
+			ccoorAl.setSize((int)(80*osize),(int)(20*osize));
 
-//Agregando...
-                //Pointing buttons
-                rbutton.setLocation(145,220);
-                lbutton.setLocation(25,220);
-                tbutton.setLocation(85,160);
-                bbutton.setLocation(85,280);
+			ccoorAzL.setLocation((int)(340*osize),(int)(90*osize));
+			ccoorAzL.setFont(ccoorAzL.getFont().deriveFont(fsize));
+			ccoorAzL.setSize((int)(30*osize),(int)(20*osize));
 
-		//Offset Lables
-		offsetL.setLocation(240,135);
-		laltoffset.setLocation(230,155);
-		lazoffset.setLocation(230,175);
-		altoffset.setLocation(270,155);
-		azoffset.setLocation(270,175);
+			ccoorAz.setLocation((int)(380*osize),(int)(90*osize));
+			ccoorAz.setFont(ccoorAz.getFont().deriveFont(fsize));
+			ccoorAz.setSize((int)(80*osize),(int)(20*osize));
 
-		//Park, Zenith & Tracking
-		park.setLocation(340,130);
-		zenith.setLocation(340,155);
-		tracking.setLocation(340,180);
-//
+			catalogue.setLocation((int)(50*osize),(int)(80*osize));
+			catalogue.setFont(catalogue.getFont().deriveFont(fsize));
+			catalogue.setSize((int)(130*osize),(int)(20*osize));
+
+			//Agregando...
+			//Pointing buttons
+			rbutton.setLocation((int)(145*osize),(int)(220*osize));
+			rbutton.setSize((int)(50*osize),(int)(50*osize));
+			rbutton.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/rArrow.jpg").getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+
+			lbutton.setLocation((int)(25*osize),(int)(220*osize));
+			lbutton.setSize((int)(50*osize),(int)(50*osize));
+			lbutton.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/lArrow.jpg").getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+
+			tbutton.setLocation((int)(85*osize),(int)(160*osize));
+			tbutton.setSize((int)(50*osize),(int)(50*osize));
+			tbutton.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/tArrow.jpg").getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+
+			bbutton.setLocation((int)(85*osize),(int)(280*osize));
+			bbutton.setSize((int)(50*osize),(int)(50*osize));
+			bbutton.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/bArrow.jpg").getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+
+			//Offset Lables
+			offsetL.setLocation((int)(240*osize),(int)(135*osize));
+			offsetL.setFont(offsetL.getFont().deriveFont(fsize));
+			offsetL.setSize((int)(80*osize),(int)(20*osize));
+
+			laltoffset.setLocation((int)(230*osize),(int)(155*osize));
+			laltoffset.setFont(laltoffset.getFont().deriveFont(fsize));
+			laltoffset.setSize((int)(30*osize),(int)(20*osize));
+
+			lazoffset.setLocation((int)(230*osize),(int)(175*osize));
+			lazoffset.setFont(lazoffset.getFont().deriveFont(fsize));
+			lazoffset.setSize((int)(30*osize),(int)(20*osize));
+
+			altoffset.setLocation((int)(270*osize),(int)(155*osize));
+			altoffset.setFont(altoffset.getFont().deriveFont(fsize));
+			altoffset.setSize((int)(30*osize),(int)(20*osize));
+
+			azoffset.setLocation((int)(270*osize),(int)(175*osize));
+			azoffset.setFont(azoffset.getFont().deriveFont(fsize));
+			azoffset.setSize((int)(30*osize),(int)(20*osize));
+
+			//Park, Zenith & Tracking
+			park.setLocation((int)(340*osize),(int)(130*osize));
+			park.setFont(park.getFont().deriveFont(fsize));
+			park.setSize((int)(100*osize),(int)(20*osize));
+
+			zenith.setLocation((int)(340*osize),(int)(155*osize));
+			zenith.setFont(zenith.getFont().deriveFont(fsize));
+			zenith.setSize((int)(100*osize),(int)(20*osize));
+
+			tracking.setLocation((int)(340*osize),(int)(180*osize));
+			tracking.setFont(tracking.getFont().deriveFont(fsize));
+			tracking.setSize((int)(100*osize),(int)(20*osize));
+		}
+		//
 	}
 	public void setCoorType(boolean type)
 	{
@@ -388,21 +483,21 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 	}
 
 	public void initCoorType(boolean type)
-        {
-                coortype = type;
-                if(!type)
-                {
-                        coor.setText("RaDec Coordinates");
-                        coor1L.setText("Ra");
-                        coor2L.setText("Dec");
-                }
-                else
-                {
-                        coor.setText("Horizontal Coordinates");
-                        coor1L.setText("Alt");
-                        coor2L.setText("Az");
-                }
-        }
+	{
+		coortype = type;
+		if(!type)
+		{
+			coor.setText("RaDec Coordinates");
+			coor1L.setText("Ra");
+			coor2L.setText("Dec");
+		}
+		else
+		{
+			coor.setText("Horizontal Coordinates");
+			coor1L.setText("Alt");
+			coor2L.setText("Az");
+		}
+	}
 
 	public double getRa()
 	{
