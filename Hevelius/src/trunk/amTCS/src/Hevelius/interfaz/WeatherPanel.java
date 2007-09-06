@@ -26,6 +26,9 @@ public class WeatherPanel extends JPanel implements Runnable
 	private WeatherCondition clima = new WeatherCondition(test.getOption("location"));
 	private Vector<WeatherCityCondition> vector = clima.ListCityCondition();
 
+	private int dx = 0;
+	private int dy = 0;
+
 	public WeatherPanel(LayoutManager l)
 	{
 		super(l);
@@ -132,29 +135,75 @@ public class WeatherPanel extends JPanel implements Runnable
 	{
 		super.paintComponent(g);
 
-		wLabel.setLocation(10,10);
+		boolean updatePanel = false;
+		float fsize, osize;
+		if (dx != getSize().width || dy != getSize().height)
+			updatePanel = true;
+		dx = getSize().width;
+		dy = getSize().height;
+		System.out.println(dx+"_"+dy);
+		if(updatePanel)
+		{
+			if(dx/280.0f>dy/263.0f)
+			{
+				fsize = (12.0f*dy)/263.0f;
+				osize = dy/263.0f;
+			}
+			else
+			{
+				fsize = (12.0f*dx)/280.0f;
+				osize = dx/280.0f;
+			}
 
-		tempL.setLocation(10,35);
+			wLabel.setLocation((int)(10*osize),(int)(10*osize));
+			wLabel.setFont(wLabel.getFont().deriveFont(fsize));
+			wLabel.setSize((int)(250*osize),(int)(20*osize));
 
-		wStatL.setLocation(10,60);
 
-		moonL.setLocation(10,85);
+			tempL.setLocation((int)(10*osize),(int)(35*osize));
+			tempL.setFont(tempL.getFont().deriveFont(fsize));
+			tempL.setSize((int)(100*osize),(int)(20*osize));
 
-		windL.setLocation(10,110);
+			wStatL.setLocation((int)(10*osize),(int)(60*osize));
+			wStatL.setFont(wStatL.getFont().deriveFont(fsize));
+			wStatL.setSize((int)(100*osize),(int)(20*osize));
 
-		humL.setLocation(10,135);
+			moonL.setLocation((int)(10*osize),(int)(85*osize));
+			moonL.setFont(moonL.getFont().deriveFont(fsize));
+			moonL.setSize((int)(100*osize),(int)(20*osize));
 
-		tempB.setLocation(140,35);
+			windL.setLocation((int)(10*osize),(int)(110*osize));
+			windL.setFont(windL.getFont().deriveFont(fsize));
+			windL.setSize((int)(100*osize),(int)(20*osize));
 
-		wStatB.setLocation(140,54);
+			humL.setLocation((int)(10*osize),(int)(135*osize));
+			humL.setFont(humL.getFont().deriveFont(fsize));
+			humL.setSize((int)(100*osize),(int)(20*osize));
 
-		moonB.setLocation(140,85);
+			tempB.setLocation((int)(140*osize),(int)(35*osize));
+			tempB.setFont(tempB.getFont().deriveFont(fsize));
+			tempB.setSize((int)(100*osize),(int)(20*osize));
 
-		windB.setLocation(140,110);
+			wStatB.setLocation((int)(140*osize),(int)(54*osize));
+			wStatB.setFont(wStatB.getFont().deriveFont(fsize));
+			wStatB.setSize((int)(200*osize),(int)(32*osize));
 
-		humB.setLocation(140,135);
+			moonB.setLocation((int)(140*osize),(int)(85*osize));
+			moonB.setFont(moonB.getFont().deriveFont(fsize));
+			moonB.setSize((int)(150*osize),(int)(20*osize));
 
-		more.setLocation(200,160);
+			windB.setLocation((int)(140*osize),(int)(110*osize));
+			windB.setFont(windB.getFont().deriveFont(fsize));
+			windB.setSize((int)(150*osize),(int)(20*osize));
+
+			humB.setLocation((int)(140*osize),(int)(135*osize));
+			humB.setFont(humB.getFont().deriveFont(fsize));
+			humB.setSize((int)(100*osize),(int)(20*osize));
+
+			more.setLocation((int)(200*osize),(int)(160*osize));
+			more.setFont(more.getFont().deriveFont(fsize));
+			more.setSize((int)(50*osize),(int)(20*osize));
+		}
 	}
 
 	public void run(){

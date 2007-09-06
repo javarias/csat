@@ -15,6 +15,10 @@ public class TelStatusPanel extends JPanel
 	private JLabel modesw;
 	private JLabel trkws;
 	private JLabel autog;
+
+	private int dx = 0;
+	private int dy = 0;
+
 	public TelStatusPanel(LayoutManager l)
 	{
 		super(l);
@@ -68,28 +72,62 @@ public class TelStatusPanel extends JPanel
 	}
 	public void paintComponent(Graphics g)
 	{
-		int dx = getSize().width;
-		int dy = getSize().height;
-/*
-		telstate.setLocation(30,0);
-		glstateL.setLocation(10,25);
-		modeswL.setLocation(10,50);
-		trkwsL.setLocation(10,75);
-		autogL.setLocation(10,100);
-		glstate.setLocation(110,25);
-		modesw.setLocation(110,50);
-		trkws.setLocation(110,75);
-		autog.setLocation(110,100);
-*/
-                telstate.setLocation(dx-180,0);
-                glstateL.setLocation(dx-200,25);
-                modeswL.setLocation(dx-200,50);
-                trkwsL.setLocation(dx-200,75);
-                autogL.setLocation(dx-200,100);
-                glstate.setLocation(dx-100,25);
-                modesw.setLocation(dx-100,50);
-                trkws.setLocation(dx-100,75);
-                autog.setLocation(dx-100,100);
+		boolean updatePanel = false;
+		float fsize, osize;
+		if (dx != getSize().width || dy != getSize().height)
+			updatePanel = true;
+		dx = getSize().width;
+		dy = getSize().height;
+
+		if(updatePanel)
+		{
+			if(dx/280.0f>dy/154.0f)
+			{
+				fsize = (12.0f*dy)/154.0f;
+				osize = dy/154.0f;
+			}
+			else
+			{
+				fsize = (12.0f*dx)/280.0f;
+				osize = dx/280.0f;
+			}
+
+                	telstate.setLocation((int)(100*osize),(int)(0*osize));
+			telstate.setFont(telstate.getFont().deriveFont(fsize));
+			telstate.setSize((int)(200*osize),(int)(20*osize));
+
+	                glstateL.setLocation((int)(80*osize),(int)(25*osize));
+			glstateL.setFont(glstateL.getFont().deriveFont(fsize));
+			glstateL.setSize((int)(200*osize),(int)(20*osize));
+
+        	        modeswL.setLocation((int)(80*osize),(int)(50*osize));
+			modeswL.setFont(modeswL.getFont().deriveFont(fsize));
+			modeswL.setSize((int)(200*osize),(int)(20*osize));
+
+                	trkwsL.setLocation((int)(80*osize),(int)(75*osize));
+			trkwsL.setFont(trkwsL.getFont().deriveFont(fsize));
+			trkwsL.setSize((int)(100*osize),(int)(20*osize));
+
+	                autogL.setLocation((int)(80*osize),(int)(100*osize));
+			autogL.setFont(autogL.getFont().deriveFont(fsize));
+			autogL.setSize((int)(100*osize),(int)(20*osize));
+
+        	        glstate.setLocation((int)(180*osize),(int)(25*osize));
+			glstate.setFont(glstate.getFont().deriveFont(fsize));
+			glstate.setSize((int)(100*osize),(int)(20*osize));
+
+                	modesw.setLocation((int)(180*osize),(int)(50*osize));
+			modesw.setFont(modesw.getFont().deriveFont(fsize));
+			modesw.setSize((int)(100*osize),(int)(20*osize));
+
+	                trkws.setLocation((int)(180*osize),(int)(75*osize));
+			trkws.setFont(trkws.getFont().deriveFont(fsize));
+			trkws.setSize((int)(100*osize),(int)(20*osize));
+
+        	        autog.setLocation((int)(180*osize),(int)(100*osize));
+			autog.setFont(autog.getFont().deriveFont(fsize));
+			autog.setSize((int)(100*osize),(int)(20*osize));
+		}
 	}
 
 	public void setGlobalState(int state)

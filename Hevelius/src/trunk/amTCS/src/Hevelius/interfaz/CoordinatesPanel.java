@@ -325,7 +325,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		//		System.out.println(dx+"_"+dy);
 		if(updatePanel)
 		{
-			if(dx/5>dy/4)
+			if(dx/463.0f>dy/418.0f)
 			{
 				fsize = (12.0f*dy)/418;
 				osize = dy/418.0f;

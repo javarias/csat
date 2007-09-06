@@ -14,6 +14,10 @@ public class SystemPanel extends JPanel
 	private JButton start;
 	private JButton stop;
 	private JButton shutdown;
+
+	private int dx = 0;
+	private int dy = 0;
+
 	public SystemPanel(LayoutManager l)
 	{
 		super(l);
@@ -69,13 +73,43 @@ public class SystemPanel extends JPanel
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		int dx,dy;
+
+		boolean updatePanel = false;
+		float fsize, osize;
+		if (dx != getSize().width || dy != getSize().height)
+			updatePanel = true;
 		dx = getSize().width;
 		dy = getSize().height;
-		system.setLocation(dx-130,5);
-		start.setLocation(dx-130,30);
-		stop.setLocation(dx-130,55);
-		shutdown.setLocation(dx-130,80);
+
+		if(updatePanel)
+		{
+			if(dx/280.0f>dy/154.0f)
+			{
+				fsize = (12.0f*dy)/154.0f;
+				osize = dy/154.0f;
+			}
+			else
+			{
+				fsize = (12.0f*dx)/280.0f;
+				osize = dx/280.0f;
+			}
+
+			system.setLocation((int)(150*osize),(int)(5*osize));
+			system.setFont(system.getFont().deriveFont(fsize));
+			system.setSize((int)(100*osize),(int)(20*osize));
+
+			start.setLocation((int)(150*osize),(int)(30*osize));
+			start.setFont(start.getFont().deriveFont(fsize));
+			start.setSize((int)(100*osize),(int)(20*osize));
+
+			stop.setLocation((int)(150*osize),(int)(55*osize));
+			stop.setFont(stop.getFont().deriveFont(fsize));
+			stop.setSize((int)(100*osize),(int)(20*osize));
+
+			shutdown.setLocation((int)(150*osize),(int)(80*osize));
+			shutdown.setFont(shutdown.getFont().deriveFont(fsize));
+			shutdown.setSize((int)(100*osize),(int)(20*osize));
+		}
 	}
 
 	public void stopTCS()
