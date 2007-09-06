@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 import alma.ACS.*;
 import alma.TYPES.*;
 import alma.acs.component.ComponentLifecycle;
+import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
 import alma.CSATSTATUS_MODULE.CSATStatusOperations;
 import alma.CSATSTATUS_MODULE.CSATStatusImpl.CSATStatusImpl;
@@ -36,21 +37,33 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
+
 	private TCSStatus status;
+
+	private alma.TELESCOPE_MODULE.Telescope telescope_comp;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
 	/////////////////////////////////////////////////////////////
 	
-	public void initialize(ContainerServices containerServices) {
+	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException {
 		m_containerServices = containerServices;
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
 
 		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STOP);
-	//	_RWTCSStatusStub statusPOA = new _RWTCSStatusStub();
-	//	RWTCSStatusPOATie statusTie = new RWTCSStatusPOATie(statusPOA);
-	//	m_status = RWTCSStatusHelper.narrow(this.registerProperty(statusPOA, statusTie));
+
+		org.omg.CORBA.Object obj = null;
+
+		/* We get the Telescope reference */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
+			telescope_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
+		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Telescope default component reference");
+			throw new ComponentLifecycleException("Failed to get Telescope component reference");
+		}
+
 	}
     
 	public void execute() {
@@ -118,8 +131,8 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa){
-		p_rd = new RadecPosHolder();
-		p_aa = new AltazPosHolder();
+		p_rd.value = new RadecPos(0,0);
+		p_aa.value = telescope_comp.getAltAz();
 	}
 
 	public int getState(){

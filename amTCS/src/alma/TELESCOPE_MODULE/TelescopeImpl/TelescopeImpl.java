@@ -27,7 +27,10 @@ import java.util.logging.Logger;
 import alma.ACS.*;
 import alma.TYPES.*;
 import alma.acs.component.ComponentLifecycle;
+import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
+import alma.ACSErr.CompletionHolder;
+
 import alma.TELESCOPE_MODULE.TelescopeOperations;
 
 public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
@@ -37,14 +40,27 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 
 	private AltazPos m_commandedPos;
 
+	private alma.DEVTELESCOPE_MODULE.DevTelescope devTelescope_comp;
+
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
 	/////////////////////////////////////////////////////////////
 	
-	public void initialize(ContainerServices containerServices) {
+	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException {
 		m_containerServices = containerServices;
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
+
+		org.omg.CORBA.Object obj = null;
+
+		/* We get the DevTelescope reference */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0");
+			devTelescope_comp = alma.DEVTELESCOPE_MODULE.DevTelescopeHelper.narrow(obj);
+		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get DevTelescope default component reference");
+			throw new ComponentLifecycleException("Failed to get DevTelescope component reference");
+		}
 
 		m_commandedPos = new AltazPos();
 	}
@@ -54,7 +70,10 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	}
     
 	public void cleanUp() {
-		m_logger.info("cleanUp() called..., nothing to clean up.");
+		if( devTelescope_comp != null )
+			m_containerServices.releaseComponent(devTelescope_comp.name());
+
+		m_logger.info("cleanUp() called");
 	}
     
 	public void aboutToAbort() {
@@ -101,7 +120,18 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	}
 
 	public AltazPos getAltAz(){
-		return m_commandedPos;
+		if( devTelescope_comp != null ){
+
+			AltazPos position = new AltazPos();
+			CompletionHolder completionHolder = new CompletionHolder();
+
+			position.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
+			position.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
+
+			return position;
+		}
+
+		return null;
 	}
 
 	public void setCurrentAltAz(AltazPos position){
