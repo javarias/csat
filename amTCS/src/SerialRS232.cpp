@@ -90,7 +90,6 @@ SerialRS232::~SerialRS232() throw (SerialRS232Exception &)
 	delete [] m_dev;
 
 	/* Restoring the old parameters */
-	printf("Restoring old parameters of serial port...\n");
 	if (ioctl (m_port, TCSETA, &oldterm)==-1)
 		throw SerialRS232Exception("[SerialRS232::SerialRS232] Error when calling ioctl (SET)");
 	

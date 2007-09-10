@@ -51,7 +51,8 @@ void NexstarImpl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemExcepti
 
 	SerialRS232 *sp = new SerialRS232("/dev/ttyS0");
 	
-	if( vel.altVel > 0 )
+	/* Setting the Altitude velocity */
+	if( vel.azVel > 0 )
 		movement = 0x24;
 	else
 		movement = 0x25;
@@ -60,7 +61,7 @@ void NexstarImpl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemExcepti
 	command[1] = 2;
 	command[2] = 0x10;
 	command[3] = movement;
-	command[4] = labs((long int)vel.altVel);
+	command[4] = labs((long int)vel.azVel);
 	command[5] = 0;
 	command[6] = 0;
 	command[7] = 0;
@@ -68,6 +69,23 @@ void NexstarImpl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemExcepti
 	sp->write_RS232(command,8);
 	sp->read_RS232();
 
+	/* Setting the azimuth velocity */
+	if( vel.altVel > 0 )
+		movement = 0x24;
+	else
+		movement = 0x25;
+
+	command[0] = 'P';
+	command[1] = 2;
+	command[2] = 0x11;
+	command[3] = movement;
+	command[4] = labs((long int)vel.altVel);
+	command[5] = 0;
+	command[6] = 0;
+	command[7] = 0;
+
+	sp->write_RS232(command,8);
+	sp->read_RS232();
 	delete sp;
 }
 
