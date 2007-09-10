@@ -2,7 +2,10 @@
 static char *rcsId="@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
+#include <stdlib.h>
+
 #include "NexstarImpl.h"
+#include "SerialRS232.h"
 #include "NexstarAltDevIO.h"
 #include "NexstarAzmDevIO.h"
 
@@ -42,6 +45,30 @@ void NexstarImpl::setCurrentAltAz(const TYPES::AltazPos &p) throw (CORBA::System
 }
 
 void NexstarImpl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemException){
+
+	char command[8];
+	int movement;
+
+	SerialRS232 *sp = new SerialRS232("/dev/ttyS0");
+	
+	if( vel.altVel > 0 )
+		movement = 0x24;
+	else
+		movement = 0x25;
+
+	command[0] = 'P';
+	command[1] = 2;
+	command[2] = 0x10;
+	command[3] = movement;
+	command[4] = labs((long int)vel.altVel);
+	command[5] = 0;
+	command[6] = 0;
+	command[7] = 0;
+
+	sp->write_RS232(command,8);
+	sp->read_RS232();
+
+	delete sp;
 }
 
 void NexstarImpl::lock() throw (CORBA::SystemException){

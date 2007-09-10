@@ -24,14 +24,26 @@ package alma.CSATSTATUS_MODULE.CSATStatusImpl;
 
 import java.util.logging.Logger;
 
-import alma.ACS.*;
-import alma.TYPES.*;
+import alma.ACS.CBDescIn;
+import alma.ACS.CBvoid;
+import alma.ACS.ComponentStates;
+
+import alma.TYPES.RadecPos;
+import alma.TYPES.RadecPosHolder;
+import alma.TYPES.AltazPos;
+import alma.TYPES.AltazPosHolder;
+import alma.TYPES.RadecVel;
+import alma.TYPES.EarthPos;
+
+import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
+
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
+
 import alma.CSATSTATUS_MODULE.CSATStatusOperations;
 import alma.CSATSTATUS_MODULE.CSATStatusImpl.CSATStatusImpl;
-import alma.CSATSTATUS_MODULE.*;
+import alma.CSATSTATUS_MODULE.TCSStatus;
 
 public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle {
 
@@ -59,7 +71,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		try{
 			obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
 			telescope_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
-		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+		} catch (AcsJContainerServicesEx e) {
 			m_logger.fine("Failed to get Telescope default component reference");
 			throw new ComponentLifecycleException("Failed to get Telescope component reference");
 		}

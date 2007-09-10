@@ -33,14 +33,19 @@ import alma.ACSErr.CompletionHolder;
 
 import alma.TELESCOPE_MODULE.TelescopeOperations;
 
-public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
+public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, Runnable {
 
+	private static final double PRESITION = 0.5;
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
 
 	private AltazPos m_commandedPos;
 
 	private alma.DEVTELESCOPE_MODULE.DevTelescope devTelescope_comp;
+	private alma.POINTING_MODULE.Pointing pointing_comp;
+	private Thread controlThread = null;
+	
+	private boolean doControl;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -62,7 +67,21 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 			throw new ComponentLifecycleException("Failed to get DevTelescope component reference");
 		}
 
+		/* We get the Pointing reference */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/POINTING_MODULE/Pointing:1.0");
+			pointing_comp = alma.POINTING_MODULE.PointingHelper.narrow(obj);
+		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Pointing default component reference");
+			throw new ComponentLifecycleException("Failed to get Pointing component reference");
+		}
+		
 		m_commandedPos = new AltazPos();
+		
+		doControl = true;
+		
+		controlThread = m_containerServices.getThreadFactory().newThread(this);
+		controlThread.start();
 	}
     
 	public void execute() {
@@ -70,9 +89,19 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	}
     
 	public void cleanUp() {
+		doControl = false;
+		try {
+			controlThread.join();
+		} catch (InterruptedException e) {
+			m_logger.info("Cannot end the control thread");
+		}
+		
 		if( devTelescope_comp != null )
 			m_containerServices.releaseComponent(devTelescope_comp.name());
 
+		if( pointing_comp != null )
+			m_containerServices.releaseComponent(pointing_comp.name());
+		
 		m_logger.info("cleanUp() called");
 	}
     
@@ -117,6 +146,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 	}
 
 	public void stop(){
+		doControl = false;
+		devTelescope_comp.setVel(new AltazVel(0,0));
 	}
 
 	public AltazPos getAltAz(){
@@ -136,5 +167,49 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle {
 
 	public void setCurrentAltAz(AltazPos position){
 		m_commandedPos = position;
+	}
+
+	public void run() {
+		m_logger.info("Starting Telescope control thread");
+		
+		CompletionHolder completionHolder = new CompletionHolder();
+		double realAltitude;
+		double realAzimuth;
+		double commandedAltitude;
+		double commandedAzimuth;
+		
+		
+		/* Main loop control */
+		while(true){
+			
+			/* Just control the telescope if doControl is true */
+			if(doControl){
+				
+				/* We get the real values from the telescope */
+				realAltitude = devTelescope_comp.realAlt().get_sync(completionHolder);
+				realAzimuth  = devTelescope_comp.realAzm().get_sync(completionHolder);
+				
+				/* We add to the commanded position the pointing corrections */
+				commandedAltitude = m_commandedPos.alt + pointing_comp.altOffset();
+				commandedAzimuth  = m_commandedPos.az + pointing_comp.azmOffset();
+				
+				if(realAltitude - commandedAltitude > PRESITION ||
+				   realAzimuth  - commandedAzimuth  > PRESITION ){
+					devTelescope_comp.setVel(new AltazVel());
+				}
+				/* We stop if we're there */
+				else{
+					devTelescope_comp.setVel(new AltazVel(0,0));
+				}
+				
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
 	}
 }

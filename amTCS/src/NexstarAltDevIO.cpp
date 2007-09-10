@@ -23,7 +23,7 @@ CORBA::Double NexstarAltDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbase
 	unsigned long read_alt, read_azm;
 
 	/* Send the message to the telescope */
-	this->sp->write_RS232("z");
+	this->sp->write_RS232("z",1);
 	msg = this->sp->read_RS232();
 	sscanf(msg,"%08lX,%08lX#",&read_azm, &read_alt);
 	alt = read_alt / MAX_PRECISE_ROTATION;
