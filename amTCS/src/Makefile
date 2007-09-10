@@ -51,20 +51,22 @@ xxxxx_LIBS      =
 #
 # Includes (.h) files (public only)
 # ---------------------------------
-INCLUDES        = DevTelescopeImpl.h lpiImpl.h
+INCLUDES        = NexstarImpl.h lpiImpl.h eTrexImpl.h
 
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = DevTelescopeImpl lpiImpl
+LIBRARIES       = NexstarImpl lpiImpl eTrexImpl
 LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-DevTelescopeImpl_OBJECTS   = DevTelescopeImpl NexstarAltDevIO NexstarAzmDevIO SerialRS232
-DevTelescopeImpl_LIBS      = TypesStubs DevTelescopeStubs
-lpiImpl_OBJECTS            = lpiImpl
-lpiImpl_LIBS               = TypesStubs DevCCDStubs
+NexstarImpl_OBJECTS   = NexstarImpl NexstarAltDevIO NexstarAzmDevIO SerialRS232
+NexstarImpl_LIBS      = TypesStubs DevTelescopeStubs
+lpiImpl_OBJECTS       = lpiImpl
+lpiImpl_LIBS          = TypesStubs DevCCDStubs
+eTrexImpl_OBJECTS     = eTrexImpl
+eTrexImpl_LIBS        = TypesStubs DevGPSStubs
 
 #
 # Scripts (public and local)

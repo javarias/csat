@@ -34,11 +34,11 @@ module DEVGPS_MODULE {
 		/** Property for reading the time from the GPS */
 		readonly attribute ACS::ROdouble time;
 
-		/** Property for reading the altitude from the GPS */
-		readonly attribute ACS::ROdouble altitude;
-
 		/** Property for reading the latitude from the GPS */
 		readonly attribute ACS::ROdouble latitude;
+
+		/** Property for reading the longitude from the GPS */
+		readonly attribute ACS::ROdouble longitude;
 
 		/**
 		 * This method locks the component, so any order received from

@@ -2,31 +2,31 @@
 static char *rcsId="@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
-#include "DevTelescopeImpl.h"
+#include "NexstarImpl.h"
 #include "NexstarAltDevIO.h"
 #include "NexstarAzmDevIO.h"
 
 using namespace baci;
 
 /* Constructor */
-DevTelescopeImpl::DevTelescopeImpl(const ACE_CString& name, maci::ContainerServices *containerServices) :
+NexstarImpl::NexstarImpl(const ACE_CString& name, maci::ContainerServices *containerServices) :
        CharacteristicComponentImpl(name,containerServices)
       ,m_realAzm_sp(this)
       ,m_realAlt_sp(this)
 {
 	component_name = name.c_str();
-	ACS_TRACE("DevTelescopeImpl::DevTelescopeImpl");
+	ACS_TRACE("NexstarImpl::NexstarImpl");
 	m_locking = true;
 }
 
 /* Destructor */
-DevTelescopeImpl::~DevTelescopeImpl(){
+NexstarImpl::~NexstarImpl(){
 }
 
 /* Component Lifecycle */
-void DevTelescopeImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
+void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 {
-	ACS_TRACE("DevTelescopeImpl::initialize");
+	ACS_TRACE("NexstarImpl::initialize");
 	if( getComponent() != 0){
 		m_realAzm_sp = new ROdouble( (component_name + std::string(":realAzm")).c_str(),
 		                             getComponent(), new NexstarAzmDevIO("/dev/ttyS0"));
@@ -37,34 +37,34 @@ void DevTelescopeImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 
 
 /* IDL implementation */
-void DevTelescopeImpl::setCurrentAltAz(const TYPES::AltazPos &p) throw (CORBA::SystemException){
-	ACS_TRACE("DevTelescopeImpl::setCurrentAlzAz");
+void NexstarImpl::setCurrentAltAz(const TYPES::AltazPos &p) throw (CORBA::SystemException){
+	ACS_TRACE("NexstarImpl::setCurrentAlzAz");
 }
 
-void DevTelescopeImpl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemException){
+void NexstarImpl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemException){
 }
 
-void DevTelescopeImpl::lock() throw (CORBA::SystemException){
-	//locking = true;
+void NexstarImpl::lock() throw (CORBA::SystemException){
+	m_locking = true;
 }
 
-void DevTelescopeImpl::unlock() throw (CORBA::SystemException){
-	//locking = false;
+void NexstarImpl::unlock() throw (CORBA::SystemException){
+	m_locking = false;
 }
 
 
 /* Attributes returning */
-TYPES::AltazVel DevTelescopeImpl::velocity() throw (CORBA::SystemException){
+TYPES::AltazVel NexstarImpl::velocity() throw (CORBA::SystemException){
 	return m_velocity;
 }
 
-bool DevTelescopeImpl::locking() throw (CORBA::SystemException){
+bool NexstarImpl::locking() throw (CORBA::SystemException){
 	return m_locking;
 }
 
 /* Properties returning */
 
-ACS::ROdouble_ptr DevTelescopeImpl::realAzm() throw (CORBA::SystemException){
+ACS::ROdouble_ptr NexstarImpl::realAzm() throw (CORBA::SystemException){
 	if( m_realAzm_sp == 0 ){
 		return ACS::ROdouble::_nil();
 	}
@@ -72,7 +72,7 @@ ACS::ROdouble_ptr DevTelescopeImpl::realAzm() throw (CORBA::SystemException){
 	return prop._retn();
 }
 
-ACS::ROdouble_ptr DevTelescopeImpl::realAlt() throw (CORBA::SystemException){
+ACS::ROdouble_ptr NexstarImpl::realAlt() throw (CORBA::SystemException){
 	if( m_realAlt_sp == 0 ){
 		return ACS::ROdouble::_nil();
 	}
@@ -82,7 +82,7 @@ ACS::ROdouble_ptr DevTelescopeImpl::realAlt() throw (CORBA::SystemException){
 
 /* --------------- [ MACI DLL support functions ] -----------------*/
 #include <maciACSComponentDefines.h>
-MACI_DLL_SUPPORT_FUNCTIONS(DevTelescopeImpl)
+MACI_DLL_SUPPORT_FUNCTIONS(NexstarImpl)
 /* ----------------------------------------------------------------*/
 
 /*___oOo___*/

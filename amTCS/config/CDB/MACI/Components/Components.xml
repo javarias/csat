@@ -22,6 +22,12 @@
          Default="true"
          Container="amContainerCpp"/>
 
+      <_ Name="ETREX"
+         Code="eTrexImpl"
+         Type="IDL:alma/DEVGPS_MODULE/DevGPS:1.0"
+         Default="true"
+         Container="amContainerCpp"/>
+
       <_ Name="POINTING"
          Code="alma.POINTING_MODULE.PointingImpl.PointingHelper"
          Type="IDL:alma/POINTING_MODULE/Pointing:1.0"
