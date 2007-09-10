@@ -12,6 +12,8 @@ public class VirtualTelescopePanel extends JPanel
 {
 	public static int gearDisplayList;
 	private GLCanvas canvas;
+	private GLCanvas canvas2;
+	private JDialog dialog;
 	private Listener list;
 	public VirtualTelescopePanel(LayoutManager l)
 	{
@@ -27,9 +29,9 @@ public class VirtualTelescopePanel extends JPanel
 		canvas.setSize(100,100);
 		add(canvas);
 
-		JDialog dialog = new JDialog(interfaz.getMainFrame(),"Telescopio");
+		dialog = new JDialog(interfaz.getMainFrame(),"Telescopio");
 		dialog.getContentPane().setLayout(null);
-		GLCanvas canvas2 = new GLCanvas(null,null,canvas.getContext(),null);
+		canvas2 = new GLCanvas(null,null,canvas.getContext(),null);
 		canvas2.setSize(600,600);
 		canvas2.setLocation(0,0);
 		canvas2.addGLEventListener(list);
@@ -78,6 +80,9 @@ public class VirtualTelescopePanel extends JPanel
 		super.paintComponent(g);
 		int dx, dy;
 		Dimension d = getSize();
+		Dimension d2 = getSize();
+		d2.width = d2.width*2;
+		d2.height = d2.height*2;
 		dx = d.width;
 		dy = d.height;
 		g.setColor(Color.GRAY);
@@ -87,6 +92,8 @@ public class VirtualTelescopePanel extends JPanel
 		d.width -= 10;
 		d.height -= 10;
 		canvas.setSize(d);
+		dialog.setSize(d2.width, d2.height+30);
+		canvas2.setSize(d2);
 		canvas.setLocation(5,5);
 	}	
 }
