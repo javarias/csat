@@ -103,7 +103,7 @@ char * SerialRS232::read_RS232() throw (SerialRS232Exception &)
 {
 	struct tms process_time;
 	long read_time;
-	char read_char = 0; // absurd value, might be STX (decimal 2)
+	char read_char = -111; // absurd value, might be STX (decimal 2)
 	int read_bytes = 0;
 	int i = 0;
 
@@ -151,12 +151,10 @@ void SerialRS232::write_RS232(const char * s, int lenght) throw (SerialRS232Exce
 		throw SerialRS232Exception("[SerialRS232::write_RS232] Too large string");
 
 	strncpy(m_buf, s, lenght+1);
-	for(int i=0; i!=lenght; i++)
-		printf("%d\n",m_buf[i]);
 
-	printf("\n");
 	if (write(m_port, m_buf, lenght) != (int)(lenght))
 		throw SerialRS232Exception("[SerialRS232::write_RS232] Error writing");
+
 }
 
 void SerialRS232::flush_RS232() throw (SerialRS232Exception &)

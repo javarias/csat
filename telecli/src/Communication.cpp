@@ -88,7 +88,6 @@ bool Communication::Slew(int rate, int direction){
 
 	this->sp->write_RS232(command,8);
 	this->sp->flush_RS232();
-	printf("Ya writeamos :D\n");
 
 	return true;
 }

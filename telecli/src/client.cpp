@@ -74,6 +74,8 @@ int main(int args, char *argv[]) {
 	char serialPort[256];
 	int rate = 0;
 
+	setbuf(stdout,NULL);
+
 	/* Set the serial port to use */
 	if( args < 2 ){
 		printf("\nUsage: %s var [value]\n\n",argv[0]);
