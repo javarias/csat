@@ -26,7 +26,7 @@ Communication::~Communication(){
 char *Communication::echo(char c){
 	char msg[3];
 	msg[0] = 'K'; 	msg[1] = c; msg[2] = '\0';
-	this->sp->write_RS232(msg);
+	this->sp->write_RS232(msg,2);
 	return (this->sp->read_RS232());
 }
 
@@ -34,7 +34,7 @@ bool Communication::alignmentComplete(){
 	char *msg;
 	bool retValue = false;
 	
-	this->sp->write_RS232("J");
+	this->sp->write_RS232("J",1);
 	msg = this->sp->read_RS232();
 	if( msg[0] == 1 )
 			  retValue = true;
@@ -77,14 +77,18 @@ bool Communication::Slew(int rate, int direction){
 	}
 	printf(" at %d rate\n",rate);
 	char command[8];
-	sprintf(command,"P%c%c%c%c%c%c%c",2,axis,movement,rate,0,0,0);
+	command[0] = 'P';
+	command[1] = 2;
+	command[2] = axis;
+	command[3] = movement;
+	command[4] = rate;
+	command[5] = 0;
+	command[6] = 0;
+	command[7] = 0;
 
+	this->sp->write_RS232(command,8);
 	this->sp->flush_RS232();
-	this->sp->write_RS232(command);
-	this->sp->flush_RS232();
-	this->sp->write_RS232(command);
-	this->sp->flush_RS232();
-	this->sp->read_RS232();
+	printf("Ya writeamos :D\n");
 
 	return true;
 }
@@ -106,7 +110,7 @@ bool Communication::goToAltAzm(double alt, double azm){
 	char *msg;
 	sprintf(command,"b%08x,%08x",(unsigned int)(azm*MAX_PRECISE_ROTATION), (unsigned int)(alt*MAX_PRECISE_ROTATION));
 
-	this->sp->write_RS232(command);
+	this->sp->write_RS232(command,18);
 	this->sp->flush_RS232();
 	msg = this->sp->read_RS232();
 
@@ -118,7 +122,7 @@ double Communication::getAlt(){
 	unsigned long read_alt, read_azm;
 	char *msg;
 
-	this->sp->write_RS232("z");
+	this->sp->write_RS232("z",1);
 	msg = this->sp->read_RS232();
 	sscanf(msg,"%08lX,%08lX#",&read_alt,&read_azm);
 
@@ -134,7 +138,7 @@ double Communication::getAzm(){
 	unsigned long read_alt, read_azm;
 	char *msg;
 
-	this->sp->write_RS232("z");
+	this->sp->write_RS232("z",1);
 	msg = this->sp->read_RS232();
 	sscanf(msg,"%08lX,%08lX#",&read_alt,&read_azm);
 
@@ -146,7 +150,7 @@ double Communication::getAzm(){
 }
 
 void Communication::cancelGoto(){
-	this->sp->write_RS232("M");
+	this->sp->write_RS232("M",1);
 	this->sp->read_RS232();
 	return;
 }
