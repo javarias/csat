@@ -142,7 +142,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 
 	public void goToAltAz(alma.TYPES.AltazPos p, alma.TYPES.AltazVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
-
+		telescope.gotoAltAz(p);
 	}
 
 	public void AltitudeOffSet(double degrees){

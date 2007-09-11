@@ -76,9 +76,12 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 			throw new ComponentLifecycleException("Failed to get Pointing component reference");
 		}
 		
-		m_commandedPos = new AltazPos(20,120);
-		
 		doControl = true;
+
+		CompletionHolder completionHolder = new CompletionHolder();
+		m_commandedPos = new AltazPos();
+		m_commandedPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
+		m_commandedPos.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
 		
 		controlThread = m_containerServices.getThreadFactory().newThread(this);
 		controlThread.start();
