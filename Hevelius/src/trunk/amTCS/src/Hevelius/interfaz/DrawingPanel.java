@@ -170,7 +170,12 @@ public class DrawingPanel extends JPanel
 		stime.setSize(60,20);
 		stime.setForeground(Color.WHITE);
 		add(stime);
-
+		
+		//VirtualTelescopePanel
+                vtpane = new VirtualTelescopePanel(null);
+                vtpane.init();
+                add(vtpane);
+		
 		//CoordinatesPanel
 		coorpane = new CoordinatesPanel(null);
 		coorpane.init();
@@ -212,9 +217,9 @@ public class DrawingPanel extends JPanel
 		new Thread(scpane).start();
 
 		//VirtualTelescopePanel
-		vtpane = new VirtualTelescopePanel(null);
+		/*vtpane = new VirtualTelescopePanel(null);
 		vtpane.init();
-		add(vtpane);
+		add(vtpane);*/
 
 		//TrackingModule
 		//trck = new Tracking();

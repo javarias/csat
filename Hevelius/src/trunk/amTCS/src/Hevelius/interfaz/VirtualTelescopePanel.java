@@ -95,5 +95,9 @@ public class VirtualTelescopePanel extends JPanel
 		dialog.setSize(d2.width, d2.height+30);
 		canvas2.setSize(d2);
 		canvas.setLocation(5,5);
+	}
+
+	public Listener getListener(){
+		return this.list;
 	}	
 }
