@@ -280,7 +280,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 				p.alt = 90;
 				p.az = 0;
 				if(interfaz.getDrawingPanel().getCSATControl()!=null)
-				interfaz.getDrawingPanel().getCSATControl().goToAltAz(p, null);
+					interfaz.getDrawingPanel().getCSATControl().goToAltAz(p, new AltazVel());
 				}
 				});
 

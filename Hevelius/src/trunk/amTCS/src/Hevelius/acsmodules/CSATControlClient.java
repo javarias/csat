@@ -110,7 +110,8 @@ public class CSATControlClient extends ComponentClient
 	{
 		if(cscontrol!=null)
 		{
-			cscontrol.goToAltAz(p,v, null, null);
+			CBDescIn desc = new CBDescIn(2000, 2000, 1);
+			cscontrol.goToAltAz(p,v, null, desc);
 		}
 	}
 

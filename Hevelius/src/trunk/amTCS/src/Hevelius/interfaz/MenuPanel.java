@@ -108,8 +108,6 @@ public class MenuPanel extends JPanel //implements Runnable
                                 setConfigWindow();
                                 }
                                 });
-
-	
 	}
 
 	public void paintComponent(Graphics g)
@@ -121,8 +119,8 @@ public class MenuPanel extends JPanel //implements Runnable
 		//ImageIcon cbutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(dy-dy/40,dy-dy/40,Image.SCALE_SMOOTH));
 		
 		//rbutton.setLocation((int)(145*osize),(int)(220*osize));
-                menu_config.setSize(2*(dy-dy*12/40),dy-dy*12/40);
-                menu_config.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(2*(dy-dy*12/40),dy-dy*12/40,Image.SCALE_SMOOTH)));
+                menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
+                menu_config.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
 
 		menu_config.setLocation(4*dx/6,dy*6/40);
 

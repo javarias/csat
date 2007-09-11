@@ -35,7 +35,7 @@ public class Presetting {
 			p_aa.alt = c1;
 			p_aa.az = c2;
 			if(interfaz.getDrawingPanel().getCSATControl()!=null)
-				interfaz.getDrawingPanel().getCSATControl().goToAltAz(p_aa, null);
+				interfaz.getDrawingPanel().getCSATControl().goToAltAz(p_aa, new AltazVel());
 			//Converter.altaz2radec(c1,c2);
 			//c1 = Converter.getRa();
 			//c2 = Converter.getDec();
@@ -71,7 +71,7 @@ public class Presetting {
 				//}
 			}
 			else{
-				System.out.println("RADEC MALO");
+				//System.out.println("RADEC MALO");
 			}
 		}
 

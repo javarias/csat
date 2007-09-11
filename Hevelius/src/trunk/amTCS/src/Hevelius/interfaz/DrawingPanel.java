@@ -34,10 +34,6 @@ public class DrawingPanel extends JPanel
 	private static Configuration test = new Configuration();
 
 	private Image stop=null;
-	private JButton rbutton = null;
-	private JButton lbutton = null;
-	private JButton tbutton = null;
-	private JButton bbutton = null;
 	private JLabel stimeL;
 	private JLabel stime;
 
@@ -101,65 +97,6 @@ public class DrawingPanel extends JPanel
 		//Interface Initialization
 		img = setImage("Hevelius/images/image.jpg",new Dimension(200,200));
 
-		//Go to R Button
-		ImageIcon rArrow = new ImageIcon(new ImageIcon("Hevelius/images/rArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
-		rbutton = new JButton(rArrow);
-		rbutton.setBackground(Color.WHITE);
-		rbutton.setSize(50,50);
-		//rbutton.setLocation();
-//		add(rbutton);
-
-		rbutton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-				if(csatc!=null)
-				csatc.AzimuthOffSet(1.0d);
-				}
-				});
-
-
-		//Go to L Button
-		ImageIcon lArrow = new ImageIcon(new ImageIcon("Hevelius/images/lArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
-		lbutton = new JButton(lArrow);
-		lbutton.setBackground(Color.WHITE);
-		lbutton.setSize(50,50);
-//		add(lbutton);
-
-		lbutton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-				if(csatc!=null)
-				csatc.AzimuthOffSet(-1.0d);
-				}
-				});
-
-
-		//Go to T Botton
-		ImageIcon tArrow = new ImageIcon(new ImageIcon("Hevelius/images/tArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
-		tbutton = new JButton(tArrow);
-		tbutton.setBackground(Color.WHITE);
-		tbutton.setSize(50,50);
-//		add(tbutton);
-
-		tbutton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-				if(csatc!=null)
-				csatc.AltitudeOffSet(1.0d);
-				}
-				});
-
-		//Go to B Button
-		ImageIcon bArrow = new ImageIcon(new ImageIcon("Hevelius/images/bArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
-		bbutton = new JButton(bArrow);
-		bbutton.setBackground(Color.WHITE);
-		bbutton.setSize(50,50);
-//		add(bbutton);
-
-		bbutton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-				if(interfaz.getDrawingPanel().getCSATControl()!=null)
-				interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(-1.0d);
-				}
-				});
-
 		//Sidereal Time Label
 		stimeL = new JLabel("Sidereal Time");
 		stimeL.setSize(120,20);
@@ -171,11 +108,6 @@ public class DrawingPanel extends JPanel
 		stime.setSize(60,20);
 		stime.setForeground(Color.WHITE);
 		add(stime);
-		
-		//VirtualTelescopePanel
-                vtpane = new VirtualTelescopePanel(null);
-                vtpane.init();
-                add(vtpane);
 		
 		//CoordinatesPanel
 		coorpane = new CoordinatesPanel(null);
@@ -200,9 +132,6 @@ public class DrawingPanel extends JPanel
 		//WeatherPanel
 		wpane = new WeatherPanel(null);
 		wpane.init();
-//		wpane.setBorder(BorderFactory.createEmptyBorder(0,10,10,10));
-//		wpane.setLayout(new BoxLayout(wpane, BoxLayout.Y_AXIS));
-//		wpane.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		add(wpane);
 		new Thread(wpane).start();
 
@@ -218,19 +147,14 @@ public class DrawingPanel extends JPanel
 		new Thread(scpane).start();
 
 		//VirtualTelescopePanel
-		/*vtpane = new VirtualTelescopePanel(null);
+		vtpane = new VirtualTelescopePanel(null);
 		vtpane.init();
-		add(vtpane);*/
+		add(vtpane);
 		
 		//MenuPanel
 		mpane = new MenuPanel(null);
 		mpane.init();
 		add(mpane);
-
-		//TrackingModule
-		//trck = new Tracking();
-		//trck.setACSTracking(false);
-		//trck.setTrackingState(true);
 
 		//SideralUpdate
 		sdrl = new SideralUpdate();
@@ -345,12 +269,6 @@ public class DrawingPanel extends JPanel
 		//stime.setLocation(80,420);
 		stimeL.setLocation(780-80,400);
 		stime.setLocation(800-80,420);
-
-		//Pointing buttons
-		rbutton.setLocation(((dx+rect_x*3/4)/2+0)+12, dy/2-20);
-		lbutton.setLocation(((dx-rect_x*3/4)/2-40)-22, dy/2-20);
-		tbutton.setLocation(dx/2-20, ((dy-rect_y*3/4)/2-40)-22);
-		bbutton.setLocation(dx/2-20, ((dy+rect_y*3/4)/2+0)+12);
 	}
 	public Dimension getDim()
 	{
@@ -373,14 +291,6 @@ public class DrawingPanel extends JPanel
 			coorpane.setBackground(c);
 		if(vtpane!=null)
 			vtpane.setBackground(c);
-		if(lbutton!=null)
-			lbutton.setBackground(c);
-		if(rbutton!=null)
-			rbutton.setBackground(c);
-		if(tbutton!=null)
-			tbutton.setBackground(c);
-		if(bbutton!=null)
-			bbutton.setBackground(c);
 	}
 	public void updateWindow(boolean init){
 		//Cambiar Background
@@ -528,7 +438,6 @@ public class DrawingPanel extends JPanel
 	public void setSideralTime(double ST)
 	{
 		DecimalFormat df = new DecimalFormat("#.###");
-		//stime.setText(Double.toString(ST));
 		stime.setText(df.format(ST));
 	}
 }
