@@ -51,9 +51,6 @@ void NexstarImpl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemExcepti
 
 	SerialRS232 *sp = new SerialRS232("/dev/ttyS0");
 
-	printf("altVel = %ld, azmVel = %ld\n",labs((long int)vel.altVel),labs((long int)vel.azVel));
-	;
-	
 	/* Setting the Altitude velocity */
 	if( vel.azVel > 0 )
 		movement = 0x24;

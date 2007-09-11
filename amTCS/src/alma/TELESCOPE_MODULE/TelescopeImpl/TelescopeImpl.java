@@ -35,7 +35,7 @@ import alma.TELESCOPE_MODULE.TelescopeOperations;
 
 public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, Runnable {
 
-	private static final double PRESITION = 0.5;
+	private static final double PRESITION = 0.1;
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
 
@@ -76,7 +76,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 			throw new ComponentLifecycleException("Failed to get Pointing component reference");
 		}
 		
-		m_commandedPos = new AltazPos();
+		m_commandedPos = new AltazPos(20,120);
 		
 		doControl = true;
 		
@@ -134,7 +134,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 	public void preseting(RadecPos position){
 		doControl = true;
 
-		if( controlThread != null ){
+		if( controlThread == null ){
 			controlThread = m_containerServices.getThreadFactory().newThread(this);
 			controlThread.start();
 		}
@@ -152,11 +152,12 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 	}
 
 	public void gotoAltAz(AltazPos position){
-		m_commandedPos = position;
+		m_commandedPos.alt = position.alt;
+		m_commandedPos.az  = position.az;
 
 		doControl = true;
 
-		if( controlThread != null ){
+		if( controlThread == null ){
 			controlThread = m_containerServices.getThreadFactory().newThread(this);
 			controlThread.start();
 		}
@@ -164,15 +165,18 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 
 	public void stop(){
 		doControl = false;
-		devTelescope_comp.setVel(new AltazVel(0,0));
+		
 		if( controlThread != null ){
 			try {
 				controlThread.join();
 			} catch (InterruptedException e) {
 				m_logger.info("Cannot end the control thread");
 			}
+			controlThread = null;
 		}
-		controlThread = null;
+		
+		AltazVel altazVel = new AltazVel(0,0);
+		devTelescope_comp.setVel(altazVel);
 	}
 
 	public AltazPos getAltAz(){
@@ -198,6 +202,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 		m_logger.info("Starting Telescope control thread");
 		
 		CompletionHolder completionHolder = new CompletionHolder();
+		AltazVel altazVel = new AltazVel();
 		double realAltitude;
 		double realAzimuth;
 		double commandedAltitude;
@@ -220,14 +225,31 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 				commandedAltitude = m_commandedPos.alt + pointing_comp.altOffset();
 				commandedAzimuth  = m_commandedPos.az + pointing_comp.azmOffset();
 				
-				if(realAltitude - commandedAltitude > PRESITION ||
-				   realAzimuth  - commandedAzimuth  > PRESITION ){
+				/* We search which movement is shorter in azimuth (left or right) */
+				if( commandedAzimuth > realAzimuth ){
+					if( commandedAzimuth - realAzimuth > (realAzimuth + 360) - commandedAzimuth ){
+						realAzimuth += 360;
+					}
+				}
+				else if( commandedAzimuth < realAzimuth) {
+					if( commandedAzimuth - (realAzimuth - 360) < realAzimuth - commandedAzimuth )
+						realAzimuth -= 360;
+				}
+				
+				/* We search which movement is shorter in altitude (up or down) */
+				if( commandedAltitude > realAltitude ){
+					if( commandedAltitude - realAltitude > (realAltitude + 360) - commandedAltitude ){
+						realAltitude += 360;
+					}
+				}
+				else if( commandedAltitude < realAltitude) {
+					if( commandedAltitude - (realAltitude - 360) < realAltitude- commandedAltitude )
+						realAltitude -= 360;
+				}
+				
+				if(Math.abs(realAltitude - commandedAltitude) > PRESITION ){		
 
-					AltazVel altazVel = new AltazVel();
-
-					/* Diffs from PRESITION to 1º */
 					diffAlt = commandedAltitude - realAltitude;
-					diffAzm = commandedAzimuth  - realAzimuth ;
 
 					/* Set the Alt velocity depending on the diffAlt */
 					altazVel.altVel = 1;
@@ -240,8 +262,16 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 					else if( diffAlt >= 1 && diffAlt < 3 ) altazVel.altVel *= 6;
 					else if( diffAlt >= 3 && diffAlt < 7 ) altazVel.altVel *= 7;
 					else if( diffAlt >= 7 && diffAlt < 10) altazVel.altVel *= 8;
-					else if( diffAlt >= 10)                altazVel.altVel *= 9;
+					else if( diffAlt >= 10)                altazVel.altVel *= 9;					     
 
+					
+				} else {
+					altazVel.altVel = 0;
+				}
+				
+				if(Math.abs(realAzimuth  - commandedAzimuth)  > PRESITION ){
+
+					diffAzm = commandedAzimuth  - realAzimuth;
 					/* Set the Azm velocity depending on the diffAzm */
 					altazVel.azVel = 1;
 					if( diffAzm < 0 ){
@@ -249,29 +279,27 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 						diffAzm       *= (-1);
 					}
 
-					     if( diffAzm <  1 )                altazVel.azVel *= 1;
-					else if( diffAzm >= 1 && diffAzm < 3 ) altazVel.azVel *= 2;
-					else if( diffAzm >= 3 && diffAzm < 5 ) altazVel.azVel *= 5;
-					else if( diffAzm >= 5 && diffAzm < 7 ) altazVel.azVel *= 7;
+					     if( diffAzm <  1 )                altazVel.azVel *= 3;
+					else if( diffAzm >= 1 && diffAzm < 3 ) altazVel.azVel *= 6;
+					else if( diffAzm >= 3 && diffAzm < 7 ) altazVel.azVel *= 7;
 					else if( diffAzm >= 7 && diffAzm < 10) altazVel.azVel *= 8;
 					else if( diffAzm >= 10)                altazVel.azVel *= 9;
 
-					devTelescope_comp.setVel(altazVel);
+				} else {
+					altazVel.azVel = 0;
 				}
-				/* We stop if we're there */
-				else{
-					devTelescope_comp.setVel(new AltazVel(0,0));
-				}
+
+				/* Send the velocity to the telescope */
+				devTelescope_comp.setVel(altazVel);
 				
 				try {
-					Thread.sleep(50);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 
 			else break;
-			
 		}
 		
 	}
