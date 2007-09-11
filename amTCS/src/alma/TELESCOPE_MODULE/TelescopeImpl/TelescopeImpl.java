@@ -40,6 +40,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 	private Logger m_logger;
 
 	private AltazPos m_commandedPos;
+	private AltazPos m_softRealPos;
 
 	private alma.DEVTELESCOPE_MODULE.DevTelescope devTelescope_comp;
 	private alma.POINTING_MODULE.Pointing pointing_comp;
@@ -80,8 +81,13 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 
 		CompletionHolder completionHolder = new CompletionHolder();
 		m_commandedPos = new AltazPos();
+		m_softRealPos  = new AltazPos();
+
 		m_commandedPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
 		m_commandedPos.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
+
+		m_softRealPos.alt = m_commandedPos.alt;
+		m_softRealPos.az  = m_commandedPos.az;
 		
 		controlThread = m_containerServices.getThreadFactory().newThread(this);
 		controlThread.start();
@@ -183,18 +189,14 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 	}
 
 	public AltazPos getAltAz(){
-		if( devTelescope_comp != null ){
 
-			AltazPos position = new AltazPos();
+		if( doControl == false && controlThread != null ){
 			CompletionHolder completionHolder = new CompletionHolder();
-
-			position.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
-			position.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
-
-			return position;
+			m_softRealPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
+			m_softRealPos.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
 		}
 
-		return null;
+		return m_softRealPos;
 	}
 
 	public void setCurrentAltAz(AltazPos position){
@@ -223,6 +225,9 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 				/* We get the real values from the telescope */
 				realAltitude = devTelescope_comp.realAlt().get_sync(completionHolder);
 				realAzimuth  = devTelescope_comp.realAzm().get_sync(completionHolder);
+
+				m_softRealPos.alt = realAltitude;
+				m_softRealPos.az  = realAzimuth;
 				
 				/* We add to the commanded position the pointing corrections */
 				commandedAltitude = m_commandedPos.alt + pointing_comp.altOffset();
