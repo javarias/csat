@@ -58,7 +58,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 	private int dx = 0;
 	private int dy = 0;
 	
-	Listener list = interfaz.getDrawingPanel().getVirtualTelescopePanel().getListener();
+	//Listener list = interfaz.getDrawingPanel().getVirtualTelescopePanel().getListener();
 
 	public CoordinatesPanel(LayoutManager l)
 	{
@@ -106,18 +106,18 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		go.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 				Double c1, c2;
-				float tmp1, tmp2;
+				//float tmp1, tmp2;
 				Configuration test = new Configuration();
 				//Listener list = new Listener();
 
 				c1 = Double.parseDouble(coor1.getText());
 				c2 = Double.parseDouble(coor2.getText());
 				
-				tmp1=Float.parseFloat(coor1.getText());
-				tmp2=Float.parseFloat(coor2.getText());
+				//tmp1=Float.parseFloat(coor1.getText());
+				//tmp2=Float.parseFloat(coor2.getText());
 
 				Presetting.preset(c1,c2,Integer.parseInt(test.getOption("coordinate")));
-				list.setAltAzDest(tmp1,tmp2);		
+				//list.setAltAzDest(tmp1,tmp2);		
 				}
 				});
 
