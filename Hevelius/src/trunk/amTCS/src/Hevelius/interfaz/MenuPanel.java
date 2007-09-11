@@ -1,18 +1,33 @@
 package Hevelius.interfaz;
 
-import java.io.*;
-import javax.imageio.*;
-import java.util.*;
-
+//import Hevelius.utilities.converter.*;
+import Hevelius.acsmodules.*;
+import Hevelius.heveliusmodules.*;
+import Hevelius.interfaz.*;
+import Hevelius.utilities.converter.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+import java.text.DecimalFormat;
+import alma.TYPES.*;
 import Hevelius.weather.*;
+import java.io.*;
+import javax.imageio.*;
+import java.util.*;
+import java.awt.Image;
+import javax.swing.border.BevelBorder;
 
-public class interfaz {
+public class MenuPanel extends JPanel //implements Runnable
+{
+//VARIABLES
+	private JLabel conf;
+	
+	private int dy;
+        private int dx;
+
 	private static JFrame frame;
-	private static DrawingPanel pane;
+        private static DrawingPanel pane = interfaz.getDrawingPanel();
+	private Image hevelius = null;	
 
 	private static JDialog config;
 	private static JDialog about;
@@ -42,99 +57,67 @@ public class interfaz {
 	private static JComboBox color;
 
 	private static Vector<WeatherCityId> vector_city = new Vector<WeatherCityId>();
+	
+	private static JButton menu_config;
+	private static JButton menu_help;
+	private static JButton menu_about;
 
 
-
-	static String[ ] fileItems = new String[ ] { "Exit" };
-	static String[ ] editItems = new String[ ] { "Configuration" };
-	static char[ ] fileShortcuts = { 'Q' };
-	static char[ ] editShortcuts = { 'P' };	
-
-	public static JFrame getMainFrame()
+//CONSTRUCTOR
+	public MenuPanel(LayoutManager l)
 	{
-		return frame;
+		super(l);
 	}
 
-	public static DrawingPanel getDrawingPanel()
-	{
-		return pane;
-	}
+//INIT
+	public void init()
+	{	
+		//dy = getSize().height;
+                //dx = getSize().width;
 
-	public static JMenuBar createMenuBar() {
-		JMenuBar menu = new JMenuBar();
+		setBackground(Color.BLACK);
+		aboutWindow();
+		configWindow();
 
-		JMenu fileMenu = new JMenu("File");
-		JMenu editMenu = new JMenu("Edit");
-		JMenu aboutMenu = new JMenu("Help");
-		JMenu subMenu = new JMenu("SubMenu");
-		JMenu subMenu2 = new JMenu("SubMenu2");
-
-		// Assemble the File menus with mnemonics.
-		ActionListener printListener = new ActionListener(  ) {
-			public void actionPerformed(ActionEvent event) {
-				if(event.getActionCommand().compareTo("Exit")==0){
-					System.exit(0);
-				}
-				else{
-					if(event.getActionCommand().compareTo("Configuration")==0){
-						//frame.setVisible(false);
-						config.setVisible(true);
-					}
-					else{
-						if(event.getActionCommand().compareTo("About Hevelius")==0){
-							//frame.setVisible(false);
-							about.setVisible(true);
-						}
-					/*	else{
-							System.out.println("Menu item [" + 
-									event.getActionCommand(  ) + "] was pressed.");
-						}*/
-					}
-				}
-			}
-		};
-		for (int i=0; i < fileItems.length; i++) {
-			JMenuItem item = new JMenuItem(fileItems[i], fileShortcuts[i]);
-			item.addActionListener(printListener);
-			fileMenu.add(item);
-		}
-
-		// Assemble the File menus with keyboard accelerators.
-		for (int i=0; i < editItems.length; i++) {
-			JMenuItem item = new JMenuItem(editItems[i]);
-			item.setAccelerator(KeyStroke.getKeyStroke(editShortcuts[i],
-						Toolkit.getDefaultToolkit(  ).getMenuShortcutKeyMask(  ), false));
-
-			/* if(item.getName().compareTo("Configuration") == 0){
-			   item.addActionListener(new ActionListener() {
-			   public void actionPerformed(ActionEvent e) {
-			   frame.setVisible(false);
-			   config.setVisible(true);
-			   }
-
-			   });
-			   }
-			   else{*/
-			item.addActionListener(printListener);
-			//}
-
-			editMenu.add(item);
-		}
-
-		JMenuItem item;
+		/*conf = new JLabel("MENU");
+                conf.setSize(250,20);
+                conf.setForeground(Color.WHITE);
+		conf.setBackground(Color.BLACK);
+                conf.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                add(conf);*/
 		
-		aboutMenu.add(item = new JMenuItem("About Hevelius"));
-		item.addActionListener(printListener);
+		//hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy/6-dy*2/40),dy/6-dy*2/40));
 
-		// Finally, add all the menus to the menu bar.
-		menu.add(fileMenu);
-		menu.add(editMenu);
-		menu.add(aboutMenu);
+		menu_config = new JButton("CONFIG");
+		//menu_config.setLocation(5*dx/6,dy/2);
+                menu_config.setSize(70,25);
+                add(menu_config);
 
-		return menu;
+		menu_config.addActionListener(new ActionListener(  ) {
+                                public void actionPerformed(ActionEvent event) {
+                                config.setVisible(true);
+                                setConfigWindow();
+                                }
+                                });
+
+	
 	}
 
+	public void paintComponent(Graphics g)
+        {
+                super.paintComponent(g);
+		dy = getSize().height;
+                dx = getSize().width;
 
+
+		menu_config.setLocation(5*dx/6,dy/2);
+
+		hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy-dy*2/40),dy-dy*2/40));
+		g.drawImage(hevelius,dy/40,dy/40,this);
+                //conf.setLocation(10,10);
+	}
+
+//VENTANAS DEL MENU: CONFIGURATION Y ABOUT	
 
 	public static void configWindow() {
 
@@ -536,87 +519,19 @@ public class interfaz {
 
 	}
 
-	private static void createAndShowGUI()
-	{
-		long time1 = System.currentTimeMillis();
-		long time2 = System.currentTimeMillis();
+	public Image setImage(String img, Dimension dim)
+        {
+                Image imag = null;
+                try
+                {
+                        imag = ImageIO.read(new File(img));
+                }
+                catch(IOException e)
+                {
+                }
+                imag = Transparency.makeColorTransparent(imag, Color.BLACK);
+                imag = imag.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
+                return imag;
+        }
 
-		//Intro
-		JFrame intro = new JFrame("Hevelius");
-		IntroPanel in = new IntroPanel(null);
-		intro.setContentPane(in);
-		intro.setUndecorated(true);
-		intro.pack();
-		in.setBackground(Color.WHITE);
-		intro.setResizable(false);
-		intro.setSize(400,200);
-		intro.setLocationRelativeTo(null);
-		intro.setVisible(true);
-
-		frame = new JFrame("Hevelius");
-		Image icono = null;
-		try
-		{
-			icono = ImageIO.read(new File("Hevelius/images/hevelius.png"));
-		}
-		catch(IOException e)
-		{
-		}
-		frame.setIconImage(icono);
-		pane = new DrawingPanel(null);
-		pane.init();
-		pane.updateWindow(true);
-		frame.setContentPane(pane);
-		Dimension ScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.addWindowListener(new WindowAdapter()
-				{
-					public void windowClosing(WindowEvent e)
-		{
-			interfaz.getDrawingPanel().getSystemPanel().stopTCS();
-			System.exit(0);
-		}
-		});
-
-		switch(Integer.parseInt(test.getOption("background"))){
-			case 0: pane.setBackground(Color.BLACK); break;
-			case 1: pane.setBackground(Color.BLUE); break;
-			case 2: pane.setBackground(Color.CYAN); break;
-			case 3: pane.setBackground(Color.DARK_GRAY); break;
-			case 4: pane.setBackground(Color.GRAY); break;
-			case 5: pane.setBackground(Color.GREEN); break;
-			case 6: pane.setBackground(Color.LIGHT_GRAY); break;
-			case 7: pane.setBackground(Color.MAGENTA); break;
-			case 8: pane.setBackground(Color.ORANGE); break;
-			case 9: pane.setBackground(Color.PINK); break;
-			case 10: pane.setBackground(Color.RED); break;
-			case 11: pane.setBackground(Color.YELLOW); break;
-			default: pane.setBackground(Color.BLACK); break;
-		}
-
-		//frame.setResizable(false);
-
-		//frame.setJMenuBar(createMenuBar());
-		frame.pack();
-		frame.setSize(ScreenSize);
-		while(time2-time1<5000)
-			time2 = System.currentTimeMillis();
-		intro.setVisible(false);
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-		time1 = System.currentTimeMillis();
-		time2 = System.currentTimeMillis();
-		while(time2-time1<500)
-			time2 = System.currentTimeMillis();
-	}
-
-	public static void main(String[] args){
-		try {
-			UIManager.setLookAndFeel(
-					UIManager.getCrossPlatformLookAndFeelClassName());
-		} catch (Exception e) { }
-
-		//aboutWindow();
-		//configWindow();
-		createAndShowGUI();
-	}
 }

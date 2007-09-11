@@ -80,7 +80,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		add(coor1L);
 
 		//RA or ALT Coordinate
-		coor1 = new JTextField("0");
+		coor1 = new JTextField("90");
 		coor1.setSize(80,20);
 		coor1.setText("0");
 		add(coor1);
@@ -564,7 +564,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		DecimalFormat df = new DecimalFormat("#.###");
 		//ccoorAz.setText(Double.toString(AZ));
 		ccoorAz.setText(df.format(AZ));
-		interfaz.getDrawingPanel().getCompassPanel().setCompassPoints(AZ);
+		//interfaz.getDrawingPanel().getCompassPanel().setCompassPoints(AZ);
 	}
 
 	public void setAltOffset(double deg)

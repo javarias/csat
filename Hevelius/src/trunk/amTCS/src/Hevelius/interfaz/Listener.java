@@ -328,6 +328,9 @@ public class Listener implements GLEventListener, MouseListener {
 	public void setAltAzDest(float Alt, float Az)
 	{
 		System.out.println(Alt + " -- " + Az );
+
+		this.az= Az;
+		this.alt = 90 - Alt;
 		/*if(Alt<0){
 			this.alt = -1*Alt;
 			az = az + 180;
@@ -336,24 +339,30 @@ public class Listener implements GLEventListener, MouseListener {
 			this.alt = 90;
 		else
 			this.alt=Alt;*/
-		if (Az<0)
+		/*if (Az<0)
 			this.az = Az+360;
 		else
 			this.az=Az;
 
-		if(Alt<0 && Alt >= -90){
-                        this.alt = -1*Alt;
-                        az = az + 180;
-                }
-                else if (Alt > 90)
+		if(Alt<0){
                         this.alt = 90;
+                        //az = az + 180;
+                }
+                else if (Alt > 90){
+			private int i;
+                        while(this.alt > 90){
+				this.alt = this.alt - 90;
+			
+		}
 		else if (Alt < -90){
 			this.alt = -90;
 			az = az + 180;
 		}
 		else
                         this.alt=Alt;
-		 System.out.println(this.alt + " -- " + this.az );
+		 System.out.println(this.alt + " -- " + this.az );*/
+
+
 		//if(alt< Alt)
 		//	alt=Alt-alt;
 		//if(alt>Alt)

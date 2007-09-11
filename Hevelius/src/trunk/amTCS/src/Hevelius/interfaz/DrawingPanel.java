@@ -52,13 +52,14 @@ public class DrawingPanel extends JPanel
 
 	private boolean VTelescope;
 
-	private CompassPanel cpane = null;
+	//private CompassPanel cpane = null;
 	private SystemPanel spane = null;
 	private WeatherPanel wpane = null;
 	private TelStatusPanel tspane = null;
 	private ScreenPanel scpane = null;
 	private CoordinatesPanel coorpane = null;
 	private VirtualTelescopePanel vtpane = null;
+	private MenuPanel mpane = null;
 
 	private Tracking trck = null;
 	private SideralUpdate sdrl = null;
@@ -187,9 +188,9 @@ public class DrawingPanel extends JPanel
 		add(coorpane);
 
 		//CompassPanel
-		cpane = new CompassPanel(null);
-		cpane.init();
-		add(cpane);
+		//cpane = new CompassPanel(null);
+		//cpane.init();
+		//add(cpane);
 
 		//SystemPanel
 		spane = new SystemPanel(null);
@@ -220,6 +221,11 @@ public class DrawingPanel extends JPanel
 		/*vtpane = new VirtualTelescopePanel(null);
 		vtpane.init();
 		add(vtpane);*/
+		
+		//MenuPanel
+		mpane = new MenuPanel(null);
+		mpane.init();
+		add(mpane);
 
 		//TrackingModule
 		//trck = new Tracking();
@@ -275,13 +281,13 @@ public class DrawingPanel extends JPanel
 		if(tam.width != dx || tam.height != dy)
 		{
 			stop = setImage("Hevelius/images/stop.png",new Dimension(80,80));
-			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy/6-dy*2/40),dy/6-dy*2/40));
+			//hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy/6-dy*2/40),dy/6-dy*2/40));
 			tam = new Dimension(dx,dy);
 		}
 		//g.drawImage(stop, rect_x-40,dy - 140, this);
 		g.drawImage(stop, dx - 120,dy - 290, this);
 		//g.drawImage(hevelius,dx/2-100,40,this);
-		g.drawImage(hevelius,dy/40,dy/40,this);
+		//g.drawImage(hevelius,dy/40,dy/40,this);
 
 		//vtpane.setLocation(oGLx+25,15+170);
 		//vtpane.setSize(dx-oGLx-50,dx-oGLx-50);
@@ -293,8 +299,8 @@ public class DrawingPanel extends JPanel
 		vtpane.setLocation(dx*5/7+dx/30+(dx-dx/15-dx*5/7-t)/2,dy/6+dy/40);
 		vtpane.setSize(t,t);
 
-		cpane.setSize(((dy-rect_y)/2+50)*3/4,((dy-rect_y)/2+50)*3/4);
-		cpane.setLocation(5,dy-cpane.getSize().height-50);
+		//cpane.setSize(((dy-rect_y)/2+50)*3/4,((dy-rect_y)/2+50)*3/4);
+		//cpane.setLocation(5,dy-cpane.getSize().height-50);
 
 		//spane.setSize(120,120);
 		//spane.setLocation(dx-120,dy-160);
@@ -331,6 +337,10 @@ public class DrawingPanel extends JPanel
 		coorpane.setLocation(0+dx/30,dy/2+dy/40);
 		coorpane.setSize(dx*3/7-dx*2/30,dy/2-dy*2/40);
 
+		mpane.setLocation(0,0);
+		//mpane.setSize(dx*3/7-dx*2/30,dy/6-dy*2/40);
+		mpane.setSize(dx,dy/6);
+
 		//stimeL.setLocation(60,400);
 		//stime.setLocation(80,420);
 		stimeL.setLocation(780-80,400);
@@ -349,8 +359,8 @@ public class DrawingPanel extends JPanel
 	public void setBackground(Color c)
 	{
 		super.setBackground(c);
-		if(cpane!=null)
-			cpane.setBackground(c);
+		//if(cpane!=null)
+		//	cpane.setBackground(c);
 		if(spane!=null)
 			spane.setBackground(c);
 		if(wpane!=null)
@@ -417,11 +427,11 @@ public class DrawingPanel extends JPanel
 		}
 
 		//Compass
-		switch(Integer.parseInt(test.getOption("compass"))){
+		/*switch(Integer.parseInt(test.getOption("compass"))){
 			case 0: cpane.setVisible(false); break;
 			case 1: cpane.setVisible(true); break;
 			default:cpane.setVisible(true); break;
-		}
+		}*/
 
 		//OpenGL
 		switch(Integer.parseInt(test.getOption("opengl"))){
@@ -450,10 +460,10 @@ public class DrawingPanel extends JPanel
 		return test;
 	}
 
-	public CompassPanel getCompassPanel()
+	/*public CompassPanel getCompassPanel()
 	{
 		return cpane;
-	}
+	}*/
 
 	public SystemPanel getSystemPanel()
 	{
@@ -493,6 +503,16 @@ public class DrawingPanel extends JPanel
 	public CSATStatusClient getCSATStatus()
 	{
 		return csats;
+	}
+
+	public int getDx()
+	{
+		return this.dx;
+	}
+	
+	public int getDy()
+	{	
+		return this.dy;
 	}
 
 	public void setCSATControl(CSATControlClient csatc)
