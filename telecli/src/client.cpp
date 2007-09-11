@@ -82,7 +82,8 @@ int main(int args, char *argv[]) {
 		printf("Variables supported are:\n");
 		printf("      [slal | slaz] rate    (slew in altitud and azimuth direction)\n");
 		printf("      echo char             (to test connection to telescope)\n");
-		printf("      [gtal | gtaz] degrees (go to altitud and azimuth coordinates)\n");
+		printf("      [gtal | gtaz] degrees (go to altitude and azimuth coordinates)\n");
+		printf("      gtalaz alt az         (go to cetain altitude/azimuth coordinate)\n");
 		printf("      [getalt | getazm]     (gets the actuals altitud/azimuth coords)\n");
 		printf("      cancel                (Cancels a GOTO)\n\n");
 		exit(EXIT_FAILURE);
@@ -125,6 +126,9 @@ int main(int args, char *argv[]) {
 
 	else if( !strcmp("gtaz",argv[1]))
 		com->goToAltAzm(com->getAlt(),atof(argv[2]));
+
+	else if( !strcmp("gtalaz",argv[1]))
+		com->goToAltAzm(atof(argv[2]),atof(argv[3]));
 
 	else if( !strcmp("getal",argv[1]))
 		printf("Actual Alt: %lf\n",com->getAlt());
