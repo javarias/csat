@@ -141,7 +141,6 @@ public class WeatherPanel extends JPanel implements Runnable
 			updatePanel = true;
 		dx = getSize().width;
 		dy = getSize().height;
-		System.out.println(dx+"_"+dy);
 		if(updatePanel)
 		{
 			if(dx/280.0f>dy/263.0f)
