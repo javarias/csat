@@ -88,9 +88,18 @@ public class MenuPanel extends JPanel //implements Runnable
 		
 		//hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy/6-dy*2/40),dy/6-dy*2/40));
 
-		menu_config = new JButton("CONFIG");
+		//ImageIcon cbutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(dy-dy/40,dy-dy/40,Image.SCALE_SMOOTH));
+                //rbutton = new JButton(rArrow);
+                //rbutton.setBackground(Color.WHITE);
+                //rbutton.setSize(50,50);
+                //rbutton.setLocation();
+                //add(rbutton);
+		ImageIcon cbutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));		
+
+		menu_config = new JButton(cbutton);
+		menu_config.setBackground(Color.BLACK);
 		//menu_config.setLocation(5*dx/6,dy/2);
-                menu_config.setSize(70,25);
+                menu_config.setSize(50,50);
                 add(menu_config);
 
 		menu_config.addActionListener(new ActionListener(  ) {
@@ -109,11 +118,16 @@ public class MenuPanel extends JPanel //implements Runnable
 		dy = getSize().height;
                 dx = getSize().width;
 
+		//ImageIcon cbutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(dy-dy/40,dy-dy/40,Image.SCALE_SMOOTH));
+		
+		//rbutton.setLocation((int)(145*osize),(int)(220*osize));
+                menu_config.setSize(2*(dy-dy*12/40),dy-dy*12/40);
+                menu_config.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(2*(dy-dy*12/40),dy-dy*12/40,Image.SCALE_SMOOTH)));
 
-		menu_config.setLocation(5*dx/6,dy/2);
+		menu_config.setLocation(4*dx/6,dy*6/40);
 
-		hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy-dy*2/40),dy-dy*2/40));
-		g.drawImage(hevelius,dy/40,dy/40,this);
+		hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy-dy*12/40),dy-dy*12/40));
+		g.drawImage(hevelius,dy*6/40,dy*6/40,this);
                 //conf.setLocation(10,10);
 	}
 
