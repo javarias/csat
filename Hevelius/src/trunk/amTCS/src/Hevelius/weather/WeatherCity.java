@@ -50,7 +50,9 @@ public class WeatherCity
 
 	catch (Exception e)
 	{
-		e.printStackTrace();
+		//e.printStackTrace();
+		vector_city = new Vector<WeatherCityId>();
+                return vector_city;
 	}
 	return null;
 }
