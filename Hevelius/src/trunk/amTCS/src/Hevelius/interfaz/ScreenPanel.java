@@ -97,7 +97,7 @@ public class ScreenPanel extends JPanel implements Runnable
 		}
 		catch(NullPointerException e)
 		{
-			System.out.println("There is a Null pointer being used.");
+			//System.out.println("There is a Null pointer being used.");
 		}
 		return null;
 	}

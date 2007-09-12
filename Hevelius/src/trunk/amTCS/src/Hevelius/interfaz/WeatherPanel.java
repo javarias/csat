@@ -551,8 +551,6 @@ public class WeatherPanel extends JPanel implements Runnable
 				}
 				});
 		window.add(reload);
-
-
 		window.setVisible(true);
 	}
 

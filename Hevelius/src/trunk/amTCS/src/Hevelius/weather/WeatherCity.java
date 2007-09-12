@@ -54,6 +54,5 @@ public class WeatherCity
 		vector_city = new Vector<WeatherCityId>();
                 return vector_city;
 	}
-	return null;
 }
 }

@@ -36,6 +36,7 @@ public class DrawingPanel extends JPanel
 //	private Image stop=null;
 	private JLabel stimeL;
 	private JLabel stime;
+	private JLabel stimeh;
 
 	private int cx;
 	private int cy;
@@ -108,6 +109,12 @@ public class DrawingPanel extends JPanel
 		stime.setSize(60,20);
 		stime.setForeground(Color.WHITE);
 		add(stime);
+
+		//Sideral Time in Hour
+		stimeh = new JLabel("00:00:00");
+		stimeh.setSize(100,20);
+		stimeh.setForeground(Color.WHITE);
+		add(stimeh);
 		
 		//CoordinatesPanel
 		coorpane = new CoordinatesPanel(null);
@@ -162,10 +169,17 @@ public class DrawingPanel extends JPanel
 		new Thread(sdrl).start();
 	}
 
+	public void paint(Graphics g)
+	{
+		super.paint(g);
+	}
+
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-
+		boolean updatePanel = false;
+		if(dx != getSize().width || dy != getSize().height)
+			updatePanel = true;
 		dy = getSize().height;
 		dx = getSize().width;
 		rect_x = dx/2;
@@ -182,34 +196,34 @@ public class DrawingPanel extends JPanel
 		g.fillRect(dx*3/7,dy/6,2,dy);
 		g.fillRect(dx*5/7,dy/6,2,dy);
 
-//		if(VTelescope)
-//		{
-//			g.drawRect(oGLx+20,10+170,dx-oGLx-40,dx-oGLx-40);
-//			g.fillRect(oGLx+20,10+170,dx-oGLx-40,dx-oGLx-40);
-//		}
+		//		if(VTelescope)
+		//		{
+		//			g.drawRect(oGLx+20,10+170,dx-oGLx-40,dx-oGLx-40);
+		//			g.fillRect(oGLx+20,10+170,dx-oGLx-40,dx-oGLx-40);
+		//		}
 
 		//g.drawRect((dx-rect_x*3/4)/2,(dy-rect_y*3/4)/2,rect_x*3/4,rect_y*3/4);
 		//g.fillRect((dx-rect_x*3/4)/2,(dy-rect_y*3/4)/2,rect_x*3/4,rect_y*3/4);
 
-//		g.drawRect(50,180,rect_x*3/4,rect_y*3/4);
-//		g.fillRect(50,180,rect_x*3/4,rect_y*3/4);
+		//		g.drawRect(50,180,rect_x*3/4,rect_y*3/4);
+		//		g.fillRect(50,180,rect_x*3/4,rect_y*3/4);
 
 		g.setColor(Color.BLACK);
 
 		//g.fillRect((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,rect_x*3/4-10,rect_y*3/4-10);
-//		g.fillRect(50+5,180+5,rect_x*3/4-10,rect_y*3/4-10);
+		//		g.fillRect(50+5,180+5,rect_x*3/4-10,rect_y*3/4-10);
 
-//		if(VTelescope)
-//			g.fillRect(oGLx+25,15+170,dx-oGLx-50,dx-oGLx-50);
+		//		if(VTelescope)
+		//			g.fillRect(oGLx+25,15+170,dx-oGLx-50,dx-oGLx-50);
 
 		if(tam.width != dx || tam.height != dy)
 		{
-//			stop = setImage("Hevelius/images/stop.png",new Dimension(80,80));
+			//			stop = setImage("Hevelius/images/stop.png",new Dimension(80,80));
 			//hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy/6-dy*2/40),dy/6-dy*2/40));
 			tam = new Dimension(dx,dy);
 		}
 		//g.drawImage(stop, rect_x-40,dy - 140, this);
-//		g.drawImage(stop, dx - 120,dy - 290, this);
+		//		g.drawImage(stop, dx - 120,dy - 290, this);
 		//g.drawImage(hevelius,dx/2-100,40,this);
 		//g.drawImage(hevelius,dy/40,dy/40,this);
 
@@ -220,55 +234,60 @@ public class DrawingPanel extends JPanel
 			t = dx*2/7;
 		else
 			t = dy/3;
-		vtpane.setLocation(dx*5/7+dx/30+(dx-dx/15-dx*5/7-t)/2,dy/6+dy/40);
-		vtpane.setSize(t,t);
 
-		//cpane.setSize(((dy-rect_y)/2+50)*3/4,((dy-rect_y)/2+50)*3/4);
-		//cpane.setLocation(5,dy-cpane.getSize().height-50);
+		if(updatePanel)
+		{
+			vtpane.setLocation(dx*5/7+dx/30+(dx-dx/15-dx*5/7-t)/2,dy/6+dy/40);
+			vtpane.setSize(t,t);
 
-		//spane.setSize(120,120);
-		//spane.setLocation(dx-120,dy-160);
-		//spane.setSize(120,120);
-		//spane.setLocation(dx-140,dy-170);
-		spane.setLocation(dx*5/7+dx/30,dy*5/6);
-		spane.setSize(dx*2/7-dx*2/30,dy*1/6);
+			//cpane.setSize(((dy-rect_y)/2+50)*3/4,((dy-rect_y)/2+50)*3/4);
+			//cpane.setLocation(5,dy-cpane.getSize().height-50);
 
-		//wpane.setSize(300,200);
-		//wpane.setLocation(0,0);
-                //wpane.setSize(300,200);
-                //wpane.setLocation(630,185);
-		wpane.setLocation(dx*3/7+dx/30,dy/6+dy/40);
-		wpane.setSize(dx*2/7-dx*2/30,dy/3-dy*2/40);
+			//spane.setSize(120,120);
+			//spane.setLocation(dx-120,dy-160);
+			//spane.setSize(120,120);
+			//spane.setLocation(dx-140,dy-170);
+			spane.setLocation(dx*5/7+dx/30,dy*5/6);
+			spane.setSize(dx*2/7-dx*2/30,dy*1/6);
 
-		//tspane.setSize(300,200);
-		//tspane.setLocation(0,230);
-		//tspane.setSize(180,200);
-		//tspane.setLocation(dx-200,dy/2+10);
-		tspane.setLocation(dx*5/7+dx/30,dy/2+dy*2/40);
-		tspane.setSize(dx*2/7-dx*2/30,dy/6);
+			//wpane.setSize(300,200);
+			//wpane.setLocation(0,0);
+			//wpane.setSize(300,200);
+			//wpane.setLocation(630,185);
+			wpane.setLocation(dx*3/7+dx/30,dy/6+dy/40);
+			wpane.setSize(dx*2/7-dx*2/30,dy/3-dy*2/40);
 
-		//scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
-		//scpane.setLocation((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5);
-		//scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
-		//scpane.setLocation(50+5,180+5);
-		scpane.setLocation(0+dx/30,dy/6+dy/40);
-		scpane.setSize(dx*3/7-dx*2/30,dy/3-dy*2/40);
+			//tspane.setSize(300,200);
+			//tspane.setLocation(0,230);
+			//tspane.setSize(180,200);
+			//tspane.setLocation(dx-200,dy/2+10);
+			tspane.setLocation(dx*5/7+dx/30,dy/2+dy*2/40);
+			tspane.setSize(dx*2/7-dx*2/30,dy/6);
 
-		//coorpane.setSize(200,250);
-		//coorpane.setLocation(oGLx+10,dx-oGLx);
-		//coorpane.setSize(450,500);
-		//coorpane.setLocation(50,550);
-		coorpane.setLocation(0+dx/30,dy/2+dy/40);
-		coorpane.setSize(dx*3/7-dx*2/30,dy/2-dy*2/40);
+			//scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
+			//scpane.setLocation((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5);
+			//scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
+			//scpane.setLocation(50+5,180+5);
+			scpane.setLocation(0+dx/30,dy/6+dy/40);
+			scpane.setSize(dx*3/7-dx*2/30,dy/3-dy*2/40);
 
-		mpane.setLocation(0,0);
-		//mpane.setSize(dx*3/7-dx*2/30,dy/6-dy*2/40);
-		mpane.setSize(dx,dy/6);
+			//coorpane.setSize(200,250);
+			//coorpane.setLocation(oGLx+10,dx-oGLx);
+			//coorpane.setSize(450,500);
+			//coorpane.setLocation(50,550);
+			coorpane.setLocation(0+dx/30,dy/2+dy/40);
+			coorpane.setSize(dx*3/7-dx*2/30,dy/2-dy*2/40);
 
-		//stimeL.setLocation(60,400);
-		//stime.setLocation(80,420);
-		stimeL.setLocation(dx*4/7-60,dy/6-dy/40+dy/3);
-		stime.setLocation(dx*4/7-30,dy/6-dy/40+dy/3+20);
+			mpane.setLocation(0,0);
+			//mpane.setSize(dx*3/7-dx*2/30,dy/6-dy*2/40);
+			mpane.setSize(dx,dy/6);
+
+			//stimeL.setLocation(60,400);
+			//stime.setLocation(80,420);
+			stimeL.setLocation(dx*4/7-60,dy/6-dy/40+dy/3);
+			stime.setLocation(dx*4/7-30,dy/6-dy/40+dy/3+20);
+			stimeh.setLocation(dx*4/7-40,dy/6-dy/40+dy/3+40);
+		}
 	}
 	public Dimension getDim()
 	{
@@ -291,6 +310,8 @@ public class DrawingPanel extends JPanel
 			coorpane.setBackground(c);
 		if(vtpane!=null)
 			vtpane.setBackground(c);
+		if(mpane!=null)
+			mpane.setBackground(c);
 	}
 	public void updateWindow(boolean init){
 		//Cambiar Background
@@ -327,21 +348,21 @@ public class DrawingPanel extends JPanel
 		}
 
 		//Weather
-/*
-		wpane.reloadWeather();
+		/*
+		   wpane.reloadWeather();
 
-		switch(Integer.parseInt(test.getOption("weather"))){
-			case 0: wpane.setVisible(false); break;
-			case 1: wpane.setVisible(true); break;
-			default:wpane.setVisible(true); break;
-		}
-*/
+		   switch(Integer.parseInt(test.getOption("weather"))){
+		   case 0: wpane.setVisible(false); break;
+		   case 1: wpane.setVisible(true); break;
+		   default:wpane.setVisible(true); break;
+		   }
+		 */
 		//Compass
 		/*switch(Integer.parseInt(test.getOption("compass"))){
-			case 0: cpane.setVisible(false); break;
-			case 1: cpane.setVisible(true); break;
-			default:cpane.setVisible(true); break;
-		}*/
+		  case 0: cpane.setVisible(false); break;
+		  case 1: cpane.setVisible(true); break;
+		  default:cpane.setVisible(true); break;
+		  }*/
 
 		//OpenGL
 		switch(Integer.parseInt(test.getOption("opengl"))){
@@ -371,9 +392,9 @@ public class DrawingPanel extends JPanel
 	}
 
 	/*public CompassPanel getCompassPanel()
-	{
-		return cpane;
-	}*/
+	  {
+	  return cpane;
+	  }*/
 
 	public SystemPanel getSystemPanel()
 	{
@@ -419,7 +440,7 @@ public class DrawingPanel extends JPanel
 	{
 		return this.dx;
 	}
-	
+
 	public int getDy()
 	{	
 		return this.dy;
@@ -438,6 +459,31 @@ public class DrawingPanel extends JPanel
 	public void setSideralTime(double ST)
 	{
 		DecimalFormat df = new DecimalFormat("#.###");
+		if(ST < 0)
+			ST = ST + 360;
+		if(ST > 360)
+			ST = ST - 360;
 		stime.setText(df.format(ST));
+		int hours, mins, secs;
+		String hour, min, sec;
+		ST = ST/15;
+		hours = (int)(ST);
+		ST = (ST - hours)*60;
+		mins = (int)(ST);
+		ST = (ST - mins)*60;
+		secs = (int)(ST);
+		if(hours < 10)
+			hour = new String("0"+hours);
+		else
+			hour = new String(""+hours);
+		if(mins < 10)
+			min = new String("0"+mins);
+		else
+			min = new String(""+mins);
+		if(secs < 10)
+			sec = new String("0"+secs);
+		else
+			sec = new String(""+secs);
+		stimeh.setText(hour+":"+min+":"+sec);
 	}
 }

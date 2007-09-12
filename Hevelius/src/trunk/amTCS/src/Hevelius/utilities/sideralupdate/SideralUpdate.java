@@ -22,6 +22,7 @@ public class SideralUpdate implements Runnable
 		{
 			try
 			{
+				interfaz.getDrawingPanel().repaint();
 				if(interfaz.getDrawingPanel().getCSATStatus()!=null)
 				{
 					try
@@ -40,7 +41,7 @@ public class SideralUpdate implements Runnable
 						e.printStackTrace();
 					}
 				}
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 			}
 			catch(InterruptedException e)
 			{

@@ -38,7 +38,6 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 	private JLabel ccoorAz;
 	private JLabel ccoorAzL;
 	private JButton catalogue;
-	private Image stop=null;
 
 	//Agregando...
 	private JButton zenith;
@@ -48,6 +47,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 	private JButton lbutton = null;
 	private JButton tbutton = null;
 	private JButton bbutton = null;
+	private JButton stopbutton = null;
 	private JLabel laltoffset;
 	private JLabel lazoffset;
 	private JLabel altoffset;
@@ -284,6 +284,19 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 				}
 				});
 
+		ImageIcon stop = new ImageIcon(new ImageIcon("Hevelius/images/stop.png").getImage().getScaledInstance(80,80,Image.SCALE_SMOOTH));
+		stopbutton = new JButton(stop);
+		stopbutton.setBackground(Color.WHITE);
+		stopbutton.setSize(80,80);
+		add(stopbutton);
+
+		stopbutton.addActionListener(new ActionListener(){
+                                public void actionPerformed(ActionEvent e){
+                                if(interfaz.getDrawingPanel().getCSATControl()!=null)
+                                interfaz.getDrawingPanel().getCSATControl().stopTelescope();
+                                }
+                                });
+
 		//Activate/Deactivate Tracking
 		tracking = new JButton("Tracking");
 		tracking.setSize(100,20);
@@ -361,7 +374,6 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		dx = getSize().width;
 		dy = getSize().height;
 
-		//		System.out.println(dx+"_"+dy);
 		if(updatePanel)
 		{
 			if(dx/463.0f>dy/418.0f)
@@ -501,10 +513,10 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 			tracking.setFont(tracking.getFont().deriveFont(fsize));
 			tracking.setSize((int)(100*osize),(int)(20*osize));
 
-			 stop = setImage("Hevelius/images/stop.png",new Dimension((int)(80*osize),(int)(80*osize)));
+			stopbutton.setLocation((int)(340*osize),(int)(280*osize));
+			stopbutton.setSize((int)(85*osize),(int)(85*osize));
+			stopbutton.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/stop.png").getImage().getScaledInstance((int)(80*osize),(int)(80*osize),Image.SCALE_SMOOTH)));
 		}
-			if(stop!=null)
-				g.drawImage(stop, (int)(340*osize), (int)(280*osize), this);
 	}
 	public void setCoorType(boolean type)
 	{

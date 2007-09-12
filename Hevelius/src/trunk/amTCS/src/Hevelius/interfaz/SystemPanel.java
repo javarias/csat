@@ -116,9 +116,15 @@ public class SystemPanel extends JPanel
 
 	public void stopTCS()
 	{
-			CSATControlClient.stop(interfaz.getDrawingPanel().getCSATControl());
+			CSATControlClient temp1;
+			CSATStatusClient temp2;
+			if(interfaz.getDrawingPanel().getCSATControl()!=null)
+				interfaz.getDrawingPanel().getCSATControl().stopTelescope();
+			temp1 = interfaz.getDrawingPanel().getCSATControl();
+			temp2 = interfaz.getDrawingPanel().getCSATStatus();
 			interfaz.getDrawingPanel().setCSATControl(null);
-			CSATStatusClient.stop(interfaz.getDrawingPanel().getCSATStatus());
 			interfaz.getDrawingPanel().setCSATStatus(null);
+			CSATControlClient.stop(temp1);
+			CSATStatusClient.stop(temp2);
 	}
 }

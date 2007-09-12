@@ -31,24 +31,24 @@ public class VirtualTelescope
 		}
 		catch(UnknownHostException e )
 		{
-			System.out.println("Unknown Host when trying to retrieve Image from Eso.");
+			//System.out.println("Unknown Host when trying to retrieve Image from Eso.");
 		}
 		catch(SocketException e)
 		{
-			System.out.println("Socket Exception when trying to retrieve Image from Eso");
+			//System.out.println("Socket Exception when trying to retrieve Image from Eso");
 		}
 		catch(MalformedURLException e)
 		{
-			System.out.println("Malformed URL");
+			//System.out.println("Malformed URL");
 		}
 		catch(IOException e)
 		{
-			System.out.println("A");
+			//System.out.println("A");
 		}
 		catch(Exception e)
 		{
-			System.out.println("Exception Unhandled");
-			e.printStackTrace();
+			//System.out.println("Exception Unhandled");
+			//e.printStackTrace();
 		}
 		return null;
 	}
