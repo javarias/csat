@@ -55,6 +55,8 @@ public class SystemPanel extends JPanel
 		stop.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
 				stopTCS();
+				interfaz.getDrawingPanel().getCoordinatePanel().setAltOffset(0.0);
+				interfaz.getDrawingPanel().getCoordinatePanel().setAzOffset(0.0);
                         }
                 });
 
