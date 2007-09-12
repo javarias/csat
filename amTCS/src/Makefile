@@ -71,7 +71,7 @@ eTrexImpl_LIBS        = TypesStubs DevGPSStubs
 #
 # Scripts (public and local)
 # ----------------------------
-SCRIPTS         =
+SCRIPTS         = Hevelius-ALFA-rc1
 SCRIPTS_L       =
 
 #
@@ -123,7 +123,7 @@ USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl
+JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl Hevelius
 TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
 CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
 LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
@@ -133,6 +133,7 @@ CalculationsImpl_DIRS=alma/CALCULATIONS_MODULE/CalculationsImpl
 SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
+Hevelius_DIRS=Hevelius/
 jjj_EXTRAS= 
 #
 # java sources in Jarfile on/off

@@ -27,8 +27,10 @@ import java.util.logging.Logger;
 import alma.ACS.*;
 import alma.TYPES.*;
 import alma.acs.component.ComponentLifecycle;
+import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
 import alma.CALCULATIONS_MODULE.CalculationsOperations;
+import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
 
 public class CalculationsImpl implements CalculationsOperations, ComponentLifecycle {
 
@@ -38,14 +40,27 @@ public class CalculationsImpl implements CalculationsOperations, ComponentLifecy
 	private double m_altOffset;
 	private double m_azmOffset;
 
+	private alma.LOCALE_MODULE.Locale locale_comp;
+
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
 	/////////////////////////////////////////////////////////////
 	
-	public void initialize(ContainerServices containerServices) {
+	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException {
 		m_containerServices = containerServices;
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
+
+		org.omg.CORBA.Object obj = null;
+
+		/* We get the Locale referece */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/LOCALE_MODULE/Locale:1.0");
+			locale_comp = alma.LOCALE_MODULE.LocaleHelper.narrow(obj);
+		} catch (AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Locale default component reference");
+			throw new ComponentLifecycleException("Failed to get Locale component reference");
+		}
 	}
     
 	public void execute() {
@@ -77,10 +92,66 @@ public class CalculationsImpl implements CalculationsOperations, ComponentLifecy
 	/////////////////////////////////////////////////////////////
 
 	public AltazPos Radec2Altaz(RadecPos position){
-		return new AltazPos();
+		
+		double LAT;
+		double HA;
+		double LMST;
+		double DEC;
+		double RA;
+		double ALT;
+		double AZ;
+
+		RA  = position.ra;
+		DEC = position.dec;
+
+		LMST = locale_comp.siderealTime();
+		LAT  = locale_comp.localPos().latitude;
+
+		HA = LMST - RA; //Se obtiene Hour Angle.
+
+		//Se obtiene la altitud en grados.
+		ALT = Math.sin(DEC*Math.PI/180)*Math.sin(LAT*Math.PI/180);
+		ALT += Math.cos(DEC*Math.PI/180)*Math.cos(LAT*Math.PI/180)*Math.cos(HA*Math.PI/180);
+		ALT = Math.asin(ALT)*180/Math.PI;
+
+		//Se obtiene el Azimuth en grados
+		AZ = Math.sin(DEC*Math.PI/180) -Math.sin(ALT*Math.PI/180)*Math.sin(LAT*Math.PI/180);
+		AZ /= Math.cos(ALT*Math.PI/180)*Math.cos(LAT*Math.PI/180);
+		AZ = Math.acos(AZ)*180/Math.PI;
+
+		AltazPos altazPos = new AltazPos();
+		altazPos.alt = ALT;
+		altazPos.az  = AZ;
+
+		return altazPos;
 	}
 
 	public RadecPos Altaz2Radec(AltazPos position){
-		return new RadecPos();
+
+		double DEC;
+		double HA;
+		double RA;
+		double LMST;
+		double LAT;
+		double ALT;
+		double AZ;
+
+		ALT = position.alt;
+		AZ  = position.az;
+
+		LAT  = locale_comp.localPos().latitude;
+		LMST = locale_comp.siderealTime();
+
+		DEC = (180/Math.PI)*Math.asin((Math.cos(Math.PI*AZ/180)*Math.cos(Math.PI*ALT/180)*Math.cos(Math.PI*LAT/180)) + (Math.sin(Math.PI*ALT/180)*Math.sin(Math.PI*LAT/180)));
+
+		HA = (180/Math.PI)*Math.acos((Math.sin(Math.PI*ALT/180) - (Math.sin(Math.PI*DEC/180)*Math.sin(Math.PI*LAT/180))) / (Math.cos(Math.PI*DEC/180)*Math.cos(Math.PI*LAT/180)));	
+
+		RA = LMST - HA; //Se obtiene Hour Angle.
+
+		RadecPos radecPos = new RadecPos();
+		radecPos.ra  = RA;
+		radecPos.dec = DEC;
+
+		return radecPos;
 	}
 }
