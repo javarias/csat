@@ -338,13 +338,13 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		add(lazoffset);
 
 		//Alt Offset Value
-		altoffset = new JLabel("0.0");
+		altoffset = new JLabel("0");
 		altoffset.setSize(30,20);
 		altoffset.setForeground(Color.WHITE);
 		add(altoffset);
 
 		//Az Offset Value
-		azoffset = new JLabel("0.0");
+		azoffset = new JLabel("0");
 		azoffset.setSize(30,20);
 		azoffset.setForeground(Color.WHITE);
 		add(azoffset);
