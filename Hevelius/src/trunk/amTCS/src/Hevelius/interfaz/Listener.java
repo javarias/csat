@@ -22,7 +22,7 @@ public class Listener implements GLEventListener, MouseListener {
 
 	//#define DELTA 5
 	private float angle = 0;
-	private float angle2 = 0;
+	private float angle2 =0;
 	private float az=0;
 	private float alt=0;
 	private JDialog dialog;
@@ -224,29 +224,57 @@ public class Listener implements GLEventListener, MouseListener {
 		glu.gluQuadricDrawStyle(quadric, GLU.GLU_FILL);
 		gl.glEnable(GL.GL_DEPTH_TEST);
 		gl.glColor3f(1, 1, 0);
-		 gl.glRotatef(-90,1,0,0);
+		 //gl.glRotatef(-90,1,0,0);
 		gl.glTranslatef(0, 0 ,-0.4f);
 		//gl.glRotatef(-90,1,0,0);
 		glu.gluCylinder(quadric, 0.4, 0.6, 2, 30, 30);
 		//gl.glRotatef(90,1,0,0);
 		gl.glTranslatef(0, 0, 0.4f);
-		gl.glRotatef(90,1,0,0);
-		glu.gluDeleteQuadric(quadric);
+		//gl.glRotatef(90,1,0,0);
+		//glu.gluDeleteQuadric(quadric);
 		
+		//gl.glPushMatrix();	
+		//lente trasero
+		/*gl.glColor3f(1, 1, 1);
+ 		//gl.glRotatef(-90,1,0,0);
+                gl.glTranslatef(0, 0, 1.36f);
+                //gl.glRotatef(-90,0,1,0);
+                glu.gluCylinder(quadric, 0.6, 0.6, 0.01 , 30, 30);
+                //gl.glRotatef(90,0,1,0);
+                gl.glTranslatef(0, 0, -1.36f);
+		//gl.glRotatef(90,1,0,0);*/
 		
-	/*	//lente delantero
-		gl.glColor4f(1, 1, 1,0);
+		gl.glColor3f(1, 1, 1);
+		gl.glRotatef(-90,1,0,0);
+                gl.glTranslatef(0, -1.55f, -0.6f);
+                //gl.glRotatef(-90,0,1,0);
+                glu.gluCylinder(quadric, 0.01, 0.01, 1.195 , 30, 30);
+                //gl.glRotatef(90,0,1,0);
+                gl.glTranslatef(0, 1.55f, 0.6f);
+                gl.glRotatef(90,1,0,0);
+
+		 gl.glColor3f(1, 1, 1);
+                gl.glRotatef(-90,0,1,0);
+                gl.glTranslatef(1.6f, 0f, -0.6f);
+                //gl.glRotatef(-90,0,1,0);
+                glu.gluCylinder(quadric, 0.01, 0.01, 1.195 , 30, 30);
+                //gl.glRotatef(90,0,1,0);
+                gl.glTranslatef(-1.6f, 0f, 0.6f);
+                gl.glRotatef(90,0,1,0);
+		//gl.glPopMatrix();
+			//lente delantero
+		gl.glColor4f(1, 1, 1,1);
 		//gl.
 		gl.glDepthMask(false);
 		gl.glRotatef(0,1,0,0);
-                gl.glTranslatef(0, 0, 1.36f);
+                gl.glTranslatef(0,0, -0.4f);
                 //gl.glRotatef(-90,0,1,0);
-                glu.gluDisk(quadric, 0, 0.6, 15, 15);
+                glu.gluDisk(quadric, 0, 0.4, 15, 15);
                 //gl.glRotatef(90,0,1,0);
-                gl.glTranslatef(0, 0, -1.36f);
+                gl.glTranslatef(0, 0f, 0.4f);
 		gl.glRotatef(0,1,0,0);
-		gl.glDepthMask(true);*/
-		
+		gl.glDepthMask(true);
+		//glu.gluDeleteQuadric(quadric);
 		gl.glEndList();
 	}
 
