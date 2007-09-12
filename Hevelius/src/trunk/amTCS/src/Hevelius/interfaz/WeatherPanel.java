@@ -124,7 +124,7 @@ public class WeatherPanel extends JPanel implements Runnable
 					try{
 						fullWeatherWindow();
 					}catch(ArrayIndexOutOfBoundsException e){
-						
+					System.out.println("Array Out of Bounds");	
 					}
 				}
 				});
@@ -545,7 +545,7 @@ public class WeatherPanel extends JPanel implements Runnable
 							image3 = new ImageIcon("Hevelius/images/big_weather_images/"+vector.get(0).getIconWt()+".png");
 						bigWt.setIcon(image3);
 					}catch(ArrayIndexOutOfBoundsException e){
-						
+						System.out.println("Array out of bounds");						
 					}
 
 				}

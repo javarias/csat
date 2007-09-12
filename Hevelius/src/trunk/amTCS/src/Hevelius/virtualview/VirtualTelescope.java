@@ -43,6 +43,7 @@ public class VirtualTelescope
 		}
 		catch(IOException e)
 		{
+			System.out.println("A");
 		}
 		catch(Exception e)
 		{

@@ -72,7 +72,7 @@ public class VirtualTelescopePanel extends JPanel
 		};
 		dialog.addWindowListener(windowListener2);
 		interfaz.getMainFrame().addWindowListener(windowListener);
-		//animator.start();
+		animator.start();
 	}
 
 	public void paintComponent(Graphics g)

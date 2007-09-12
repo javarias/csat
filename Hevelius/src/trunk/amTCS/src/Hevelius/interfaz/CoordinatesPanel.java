@@ -12,6 +12,9 @@ import java.awt.event.*;
 import java.text.DecimalFormat;
 import alma.TYPES.*;
 
+import java.io.*;
+import javax.imageio.*;
+
 public class CoordinatesPanel extends JPanel //implements Runnable
 {
 	//private Configuration test = DrawingPanel.getConfig();
@@ -35,6 +38,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 	private JLabel ccoorAz;
 	private JLabel ccoorAzL;
 	private JButton catalogue;
+	private Image stop=null;
 
 	//Agregando...
 	private JButton zenith;
@@ -57,6 +61,8 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 	private int dx = 0;
 	private int dy = 0;
+
+	float osize = 0;
 	
 	//Listener list = interfaz.getDrawingPanel().getVirtualTelescopePanel().getListener();
 
@@ -64,6 +70,22 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 	{
 		super(l);
 	}
+
+	public Image setImage(String img, Dimension dim)
+        {
+                Image imag = null;
+                try
+                {
+                        imag = ImageIO.read(new File(img));
+                }
+                catch(IOException e)
+                {
+                }
+                imag = Transparency.makeColorTransparent(imag, Color.BLACK);
+                imag = imag.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
+                return imag;
+        }
+
 	public void init()
 	{
 		//Coordinate Label
@@ -325,7 +347,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 	{
 		super.paintComponent(g);
 		boolean updatePanel = false;
-		float fsize, osize;
+		float fsize;
 		if (dx != getSize().width || dy != getSize().height)
 			updatePanel = true;
 		dx = getSize().width;
@@ -344,7 +366,6 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 				fsize = (12.0f*dx)/463;
 				osize = dx/463.0f;
 			}
-
 
 			//Interface Objects Positioning
 			coor.setLocation((int)(30*osize),(int)(0*osize));
@@ -471,8 +492,11 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 			tracking.setLocation((int)(340*osize),(int)(180*osize));
 			tracking.setFont(tracking.getFont().deriveFont(fsize));
 			tracking.setSize((int)(100*osize),(int)(20*osize));
+
+			 stop = setImage("Hevelius/images/stop.png",new Dimension((int)(80*osize),(int)(80*osize)));
 		}
-		//
+			if(stop!=null)
+				g.drawImage(stop, (int)(340*osize), (int)(280*osize), this);
 	}
 	public void setCoorType(boolean type)
 	{

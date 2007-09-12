@@ -33,7 +33,7 @@ public class DrawingPanel extends JPanel
 
 	private static Configuration test = new Configuration();
 
-	private Image stop=null;
+//	private Image stop=null;
 	private JLabel stimeL;
 	private JLabel stime;
 
@@ -204,12 +204,12 @@ public class DrawingPanel extends JPanel
 
 		if(tam.width != dx || tam.height != dy)
 		{
-			stop = setImage("Hevelius/images/stop.png",new Dimension(80,80));
+//			stop = setImage("Hevelius/images/stop.png",new Dimension(80,80));
 			//hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy/6-dy*2/40),dy/6-dy*2/40));
 			tam = new Dimension(dx,dy);
 		}
 		//g.drawImage(stop, rect_x-40,dy - 140, this);
-		g.drawImage(stop, dx - 120,dy - 290, this);
+//		g.drawImage(stop, dx - 120,dy - 290, this);
 		//g.drawImage(hevelius,dx/2-100,40,this);
 		//g.drawImage(hevelius,dy/40,dy/40,this);
 
@@ -267,8 +267,8 @@ public class DrawingPanel extends JPanel
 
 		//stimeL.setLocation(60,400);
 		//stime.setLocation(80,420);
-		stimeL.setLocation(780-80,400);
-		stime.setLocation(800-80,420);
+		stimeL.setLocation(dx*4/7-60,dy/6-dy/40+dy/3);
+		stime.setLocation(dx*4/7-30,dy/6-dy/40+dy/3+20);
 	}
 	public Dimension getDim()
 	{
@@ -327,7 +327,7 @@ public class DrawingPanel extends JPanel
 		}
 
 		//Weather
-
+/*
 		wpane.reloadWeather();
 
 		switch(Integer.parseInt(test.getOption("weather"))){
@@ -335,7 +335,7 @@ public class DrawingPanel extends JPanel
 			case 1: wpane.setVisible(true); break;
 			default:wpane.setVisible(true); break;
 		}
-
+*/
 		//Compass
 		/*switch(Integer.parseInt(test.getOption("compass"))){
 			case 0: cpane.setVisible(false); break;

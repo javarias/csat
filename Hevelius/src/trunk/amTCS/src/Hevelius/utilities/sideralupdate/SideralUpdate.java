@@ -33,6 +33,7 @@ public class SideralUpdate implements Runnable
 						interfaz.getDrawingPanel().getCoordinatesPanel().setAlt(a.value.alt);
 						interfaz.getDrawingPanel().getCoordinatesPanel().setAz(a.value.az);
 						interfaz.getDrawingPanel().setSideralTime(ST);
+						interfaz.getDrawingPanel().getVirtualTelescopePanel().getListener().setAltAzDest((float) a.value.alt, (float)a.value.az);
 					}
 					catch(Exception e)
 					{

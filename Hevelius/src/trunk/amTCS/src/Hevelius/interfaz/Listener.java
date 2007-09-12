@@ -25,7 +25,6 @@ public class Listener implements GLEventListener, MouseListener {
 	private float angle2 = 0;
 	private float az=0;
 	private float alt=0;
-
 	private JDialog dialog;
 	private Animator animator;
 	private int BaseDisplayList;
@@ -67,6 +66,7 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_DIFFUSE, mat_diffuse,0);
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_SPECULAR, mat_specular,0);
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_SHININESS, mat_shininess,0);
+		prepare_scene(drawable);	
 		render_scene(drawable);
 		gl.glFlush();
 
@@ -250,20 +250,29 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glEndList();
 	}
 
+	public void prepare_scene(GLAutoDrawable drawable)
+	{
+		if(Math.abs(alt -angle) >= 0.1f || Math.abs(az-angle2) >= 0.1f )
+		{
+			if(az >= angle2)
+			{
+				//System.out.println("az :"+az);
+				IncreaseAngleAz(drawable);
+			}
+			else //(az <= angle)
+				DecreaseAngleAz(drawable);
+			if(alt >= angle)
+				IncreaseAngleAlt(drawable);
+			else //if(alt<= angle)
+				DecreaseAngleAlt(drawable);
+		}
+	}
+
 	public void render_scene(GLAutoDrawable drawable)
 	{
+		MoveToAlt(drawable);
+		MoveToAz(drawable);
 		
-		if(az >= angle2)
-		{
-			//System.out.println("az :"+az);
-			IncreaseAngleAz(drawable);
-		}
-		else //(az <= angle)
-			 DecreaseAngleAz(drawable);
-		if(alt >= angle)
-			IncreaseAngleAlt(drawable);
-		else //if(alt<= angle)
-			DecreaseAngleAlt(drawable);
 	}
 
 	public void IncreaseAngleAz(GLAutoDrawable drawable){
@@ -271,20 +280,18 @@ public class Listener implements GLEventListener, MouseListener {
 		//System.out.println("angle2 :"+angle2+ "   az :"+this.az);
 		GL gl =drawable.getGL();
 		if (angle2 < this.az){
-			angle2 = angle2 + 0.5f;
+			angle2 = angle2 + 2f;
 			//System.out.println("increaseaz "+angle2);
 		}
-		          //    System.out.println("increaseaz "+angle2);      
-		MoveToAz(drawable);
+		//    System.out.println("increaseaz "+angle2);      
 	}
 	public void IncreaseAngleAlt(GLAutoDrawable drawable){
 		GL gl = drawable.getGL();
 		if ( angle < alt ){
 			//System.out.println("ENTRO increase alt");
 			//MoveToAlt(angle);
-			angle = angle + 0.5f;
+			angle = angle + 2f;
 		}
-		MoveToAlt(drawable );
 	}
 
 	public void DecreaseAngleAz(GLAutoDrawable drawable){
@@ -292,19 +299,19 @@ public class Listener implements GLEventListener, MouseListener {
 		//System.out.println("decreaseaz"+ angle2);
 		GL gl =drawable.getGL();
 		if (angle2 > az){
-			angle2 = angle2 - 0.5f;
+			angle2 = angle2 - 2f;
 		}
 		//              printf("Angulo de entrada : %g \n",angle);      
 		MoveToAz(drawable);
 	}
 	public void DecreaseAngleAlt(GLAutoDrawable drawable){
-		
+
 		//System.out.println("decreasealt "+angle);
 		GL gl = drawable.getGL();
 		if ( angle > alt ){
 			//System.out.println("ENTRO");
 			//MoveToAlt(angle);
-			angle = angle - 0.5f;
+			angle = angle - 2f;
 		}
 		MoveToAlt(drawable );
 	}
@@ -316,9 +323,9 @@ public class Listener implements GLEventListener, MouseListener {
 
 		gl.glPushMatrix();
 		gl.glRotatef(0,0,0,1);
-		gl.glRotatef(angle2,0,1,0);
+		gl.glRotatef(-angle2,0,1,0);
 		//if(angle2==az)
-			gl.glRotatef(angle,-1,0,0);
+		gl.glRotatef(angle,-1,0,0);
 		//System.out.println(angle);
 		//gl.glRotatef(angle2,0,1,0);
 		gl.glCallList(TelescopeDisplayList);
@@ -332,7 +339,7 @@ public class Listener implements GLEventListener, MouseListener {
 
 		gl.glPushMatrix();
 		gl.glScalef(1.5f,1.5f,1.5f);
-		gl.glRotatef(angle2,0f,1f,0f);
+		gl.glRotatef(-angle2,0f,1f,0f);
 		gl.glRotatef(270,1,0,0);
 		gl.glTranslatef(0,0,-1);
 		gl.glCallList(BaseDisplayList);
