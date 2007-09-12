@@ -176,7 +176,10 @@ public class WeatherCondition
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
+			WeatherCityCondition weather = new WeatherCityCondition();
+                        weather.setAll();
+                        vector_condition.add(weather);
 		}
 		return vector_condition;	
 	}
