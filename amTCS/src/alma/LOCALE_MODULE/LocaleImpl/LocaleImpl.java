@@ -132,6 +132,9 @@ public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 
 		LMST = MST + longitude; //Se centra el MST en el punto de observacion.
 
+		while(LMST>360)
+			LMST -= 360;
+
 		return LMST;
 	}
 

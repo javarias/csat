@@ -44,6 +44,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 
 	private alma.DEVTELESCOPE_MODULE.DevTelescope devTelescope_comp;
 	private alma.POINTING_MODULE.Pointing pointing_comp;
+	private alma.CALCULATIONS_MODULE.Calculations calculations_comp;
 	private Thread controlThread = null;
 	
 	private boolean doControl;
@@ -75,6 +76,15 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
 			m_logger.fine("Failed to get Pointing default component reference");
 			throw new ComponentLifecycleException("Failed to get Pointing component reference");
+		}
+
+		/* We get the Pointing reference */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/CALCULATIONS_MODULE/Calculations:1.0");
+			calculations_comp = alma.CALCULATIONS_MODULE.CalculationsHelper.narrow(obj);
+		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Calculations default component reference");
+			throw new ComponentLifecycleException("Failed to get Calculations component reference");
 		}
 		
 		doControl = true;
@@ -148,7 +158,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 			controlThread.start();
 		}
 
-		m_commandedPos = new AltazPos(0,0);
+		m_commandedPos = calculations_comp.Radec2Altaz(position);
 	}
 
 	public RadecPos getRadec(){

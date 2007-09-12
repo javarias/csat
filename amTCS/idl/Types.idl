@@ -30,7 +30,7 @@ module TYPES
 	 * \struct EarthPos
 	 */
 	struct EarthPos{
-		double altitude;
+		double longitude;
 		double latitude;
 	};
 
