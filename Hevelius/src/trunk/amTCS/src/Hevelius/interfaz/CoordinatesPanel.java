@@ -227,9 +227,10 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 		rbutton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-				if(interfaz.getDrawingPanel().getCSATControl()!=null)
-				interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(1.0d);
-				setAzOffset((double)(getAzOffset()+1));
+					if(interfaz.getDrawingPanel().getCSATControl()!=null){
+						interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(1.0d);
+						setAzOffset((double)(getAzOffset()+1));
+					}
 				}
 				});
 
@@ -243,9 +244,10 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 		lbutton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-				if(interfaz.getDrawingPanel().getCSATControl()!=null)
-				interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(-1.0d);
-				setAzOffset((double)(getAzOffset()-1));
+					if(interfaz.getDrawingPanel().getCSATControl()!=null){
+						interfaz.getDrawingPanel().getCSATControl().AzimuthOffSet(-1.0d);
+						setAzOffset((double)(getAzOffset()-1));
+					}
 				}
 				});
 
@@ -259,9 +261,10 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 		tbutton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-				if(interfaz.getDrawingPanel().getCSATControl()!=null)
-				interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(1.0d);
-				setAltOffset((double)(getAltOffset()+1));
+					if(interfaz.getDrawingPanel().getCSATControl()!=null){
+						interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(1.0d);
+						setAltOffset((double)(getAltOffset()+1));
+					}	
 				}
 				});
 
@@ -274,9 +277,10 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 		bbutton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-				if(interfaz.getDrawingPanel().getCSATControl()!=null)
-				interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(-1.0d);
-				setAltOffset((double)(getAltOffset()-1));
+					if(interfaz.getDrawingPanel().getCSATControl()!=null){
+						interfaz.getDrawingPanel().getCSATControl().AltitudeOffSet(-1.0d);
+						setAltOffset((double)(getAltOffset()-1));
+					}
 				}
 				});
 
