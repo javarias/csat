@@ -405,7 +405,7 @@ public class MenuPanel extends JPanel //implements Runnable
 				if(String.valueOf(location.getSelectedItem()).compareTo("(none)") != 0){				
 					test.setOption("location",String.valueOf(vector_city.get(
 						location.getSelectedIndex()).getId()));
-					test.setOption("location",String.valueOf(vector_city.get(
+					test.setOption("city",String.valueOf(vector_city.get(
                                                 location.getSelectedIndex()).getNameCity()));
 				}
 
