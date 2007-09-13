@@ -34,10 +34,15 @@ public class Listener implements GLEventListener, MouseListener {
 	private int BaseDisplayList;
 	private int TelescopeDisplayList;
 
-	public synchronized void initializeDisplayList(GL gl) {
+	public synchronized void initializeDisplayList(GLAutoDrawable drawable) {
+		GL gl =drawable.getGL();
 		BaseDisplayList = gl.glGenLists(1);
 		TelescopeDisplayList = gl.glGenLists(1);
 		init_scene(gl);
+		BaseTelescope(drawable);
+                //GL gl =drawable.getGL();
+
+		
 	}
 
 	public void init(GLAutoDrawable drawable) {
@@ -123,13 +128,65 @@ public class Listener implements GLEventListener, MouseListener {
 		dialog = diag;
 		animator = a;
 	}
+	public void BaseTelescope(GLAutoDrawable drawable)
+	{
+                GL gl =drawable.getGL();
+		GLU glu = new GLU();
+		GLUquadric quadric;
+		BaseDisplayList = gl.glGenLists(1);
 
+                gl.glNewList(BaseDisplayList, GL.GL_COMPILE);
+                quadric = glu.gluNewQuadric();
+                glu.gluQuadricDrawStyle(quadric, GLU.GLU_FILL);
+                gl.glColor3f(1, 0, 0);
+                glu.gluCylinder(quadric, 0.8, 0.6, 0.3, 30, 30);
+
+                //Disco de base
+                //gl.glColor3f(0, 1, 0);
+                gl.glTranslatef(0f,0f,0.3f);
+                glu.gluDisk(quadric, 0, 0.6, 15, 15);
+                gl.glTranslatef(0,0,-0.3f);
+
+                //Soportes grandes del telescopio
+
+                gl.glColor3f(0, 0, 1f);
+                gl.glRotatef(90,0,0,1);
+                gl.glTranslatef(0, 0.5f ,0.3f);
+                glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 60, 60);
+                gl.glTranslatef(0, -0.5f,-0.3f);
+                gl.glRotatef(-90,0,0,1);
+
+                gl.glColor3f(0, 0, 1);
+                gl.glRotatef(90,0,0,1);
+                gl.glTranslatef(0, -0.5f ,0.3f);
+                glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 60, 60);
+                gl.glTranslatef(0, 0.5f, -0.3f);
+                gl.glRotatef(-90,0,0,1);
+                //Tapas pequenas de los pilares
+
+
+                gl.glColor3f(1, 1, 1);
+                gl.glRotatef(90,0,0,1);
+                gl.glTranslatef(0, 0.5f,1.1f);
+                glu.gluDisk(quadric, 0, 0.06, 15, 15);
+                gl.glTranslatef(0, -0.5f,-1.1f);
+                gl.glRotatef(-90,0,0,1);
+
+                gl.glColor3f(1, 1, 1);
+                gl.glRotatef(90,0,0,1);
+                gl.glTranslatef(0, -0.5f ,1.1f);
+                glu.gluDisk(quadric, 0, 0.06, 15, 15);
+                gl.glTranslatef(0, 0.5f,-1.1f);
+                gl.glRotatef(-90,0,0,1);
+
+		
+	}
 	public void init_scene(GL gl)
 	{
 		GLU glu = new GLU();
 		//float light_position[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 		GLUquadric quadric;
-		gl.glEnable(GL.GL_LIGHTING);
+		/*gl.glEnable(GL.GL_LIGHTING);
 		gl.glEnable(GL.GL_LIGHT0);
 		gl.glDepthFunc(GL.GL_LESS);
 		gl.glEnable(GL.GL_DEPTH_TEST);
@@ -167,7 +224,7 @@ public class Listener implements GLEventListener, MouseListener {
 		glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 60, 60);
 		gl.glTranslatef(0, 0.5f, -0.3f);
 		gl.glRotatef(-90,0,0,1);
-		//Tapas pequenas de los pilares
+		//Tapas pequenas de los pilares*/
 
 
 		gl.glColor3f(1, 1, 1);

@@ -1,7 +1,7 @@
 /* IDL for CSATStatus component */
 
-#ifndef _CSATSTATUS_IDL
-#define _CSATSTATUS_IDL
+#ifndef _CSATSTATUS_IDL_
+#define _CSATSTATUS_IDL_
 
 #include <baci.idl>
 #include <Types.idl>
@@ -17,6 +17,16 @@
  */
 module CSATSTATUS_MODULE {
 
+	/** Possible states of the amTCS
+	 */
+	enum TCSStatus {
+		STOP,
+		STAND_BY,
+		CALIBRATING,
+		READY,
+		AUTOMATIC
+	};
+
 	/** @interface CSATStatus
 	 * Defines the interface that will be used by external clients to control the
 	 * TCS. This interface allow external software to move the TCS trough its statues
@@ -26,6 +36,10 @@ module CSATSTATUS_MODULE {
 	 */
 	interface CSATStatus : ACS::ACSComponent
 	{
+
+		/** Current TCS status */
+		readonly attribute TCSStatus status;
+		
 		/**
 		 * Moves the TCS from the "Stop" state to the "Stand-by" state.  In this
 		 * step all hardware is initialized (set on). No software components are
@@ -114,10 +128,17 @@ module CSATSTATUS_MODULE {
 		 */
 		void EmergencyStop();
 
-		double getSideralTime();
+		/**
+		 * Returns the sidereal time
+		 */
+		double getSiderealTime();
 
+		/**
+		 * Returns the global position, in Alt/Lat
+		 */
+		TYPES::EarthPos getLocalPos();
 	};
 
 };
 
-#endif /* _CSATSTATUS_IDL */
+#endif /* _CSATSTATUS_IDL_ */

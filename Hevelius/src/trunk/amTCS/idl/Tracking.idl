@@ -1,18 +1,52 @@
+/* IDL for Tracking component */
+
 #ifndef _TRACKING_IDL_
 #define _TRACKING_IDL_
 
 #include <baci.idl>
 #include <Types.idl>
+
 #pragma prefix "alma"
 
-module TRACKING_MODULE
-{
-        interface Tracking : ACS::ACSComponent
+/**
+ * @file Tracking.idl
+ * IDL specification for the Tracking module interface.
+ * This interface manages the tracking model for the TCS. This tracking model
+ * will calculate small offsets, and then will change Telescope component's
+ * commanded coordinates, so it will move the telescope. This will continue
+ * until tracking is off
+ */
+module TRACKING_MODULE {
+
+	/** @interface Tracking
+	 * Defines the interface for work with a tracking model. This will take
+	 * the actual coordinates, calculate offsets acoording to this actual
+	 * coordinate and the sidereal time, and give offsets to the Telescope
+	 * to move.
+	 */
+	interface Tracking : ACS::ACSComponent
 	{
-		void setTrackingStatus(in boolean s);
-		void setTrackingRate(in TYPES::RadecVel v);
-		boolean getTrackingStatus();
-		TYPES::RadecVel getTrackingRate();
+
+		/** Tell us if tracking is on or off */
+		readonly attribute boolean status;
+
+		/** Holds the offset in the azimuth direction */
+		readonly attribute TYPES::RadecVel rate;
+
+		/**
+		 * Sets an specific additional rate
+		 * @param rate The rate to be added
+		 */
+		void setRate(in TYPES::RadecVel rate);
+
+		/**
+		 * Sets the status of Tracking module on/off
+		 * @param status The status of the Trackinf mode
+		 */
+		void setStatus(in boolean status);
+
 	};
+
 };
-#endif
+
+#endif /* _TRACKING_IDL_ */

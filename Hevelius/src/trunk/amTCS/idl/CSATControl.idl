@@ -1,7 +1,7 @@
 /* IDL for CSATControl component */
 
-#ifndef _CSATCONTROL_IDL
-#define _CSATCONTROL_IDL
+#ifndef _CSATCONTROL_IDL_
+#define _CSATCONTROL_IDL_
 
 #include <baci.idl>
 #include <Types.idl>
@@ -101,4 +101,4 @@ module CSATCONTROL_MODULE {
 
 };
 
-#endif /* _CSATCONTROL_IDL */
+#endif /* _CSATCONTROL_IDL_ */
