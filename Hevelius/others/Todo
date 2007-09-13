@@ -1,16 +1,24 @@
-+Verificacion de Coordenadas
-+Modelo OpenGL
-+Boton de Emergencia
+?Verificacion de Coordenadas
+?Modelo OpenGL
 +Catalogo de Estrellas
-+Interfaz
-
--Agregar info de Hevelius al Twiki
--Rellenar avances en Twiki
+?Interfaz
 
 *Configuracion: Anotar ubicacion en vez de codigo
 *Agregar tridimensionalidad a los paneles.
+
+-IDLs: getOffset(), getDestinyPosition().
+
+*Mapa de estrellas
+*Prediccion de la Observacion
+*Error en la Posicion
+*Fuente mas grande
+*Offset mas fino
+*Agregar a restriccion de observacion la masa de aire, campo visible
+
+
 
 #Primer nivel de anidamiento:
 +: Para entrega o importante.
 -: Cosas que hay que hacer pero que no son construccion.
 *: Necesario pero no importante(postergable...)
+?: No se sabe el estado
