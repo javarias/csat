@@ -79,21 +79,6 @@ public class MenuPanel extends JPanel //implements Runnable
 		aboutWindow();
 		configWindow();
 
-		/*conf = new JLabel("MENU");
-                conf.setSize(250,20);
-                conf.setForeground(Color.WHITE);
-		conf.setBackground(Color.BLACK);
-                conf.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                add(conf);*/
-		
-		//hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy/6-dy*2/40),dy/6-dy*2/40));
-
-		//ImageIcon cbutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(dy-dy/40,dy-dy/40,Image.SCALE_SMOOTH));
-                //rbutton = new JButton(rArrow);
-                //rbutton.setBackground(Color.WHITE);
-                //rbutton.setSize(50,50);
-                //rbutton.setLocation();
-                //add(rbutton);
 		ImageIcon cbutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));		
 
 		menu_config = new JButton(cbutton);
@@ -106,6 +91,36 @@ public class MenuPanel extends JPanel //implements Runnable
                                 public void actionPerformed(ActionEvent event) {
                                 config.setVisible(true);
                                 setConfigWindow();
+                                }
+                                });
+
+		ImageIcon abutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-about.gif").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+
+                menu_about = new JButton(abutton);
+                menu_about.setBackground(Color.BLACK);
+                //menu_config.setLocation(5*dx/6,dy/2);
+                menu_about.setSize(50,50);
+                add(menu_about);
+
+                menu_about.addActionListener(new ActionListener(  ) {
+                                public void actionPerformed(ActionEvent event) {
+                                about.setVisible(true);
+                                //setConfigWindow();
+                                }
+                                });
+
+		ImageIcon hbutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-help.gif").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+
+                menu_help = new JButton(hbutton);
+                menu_help.setBackground(Color.BLACK);
+                //menu_config.setLocation(5*dx/6,dy/2);
+                menu_help.setSize(50,50);
+                add(menu_help);
+
+                menu_help.addActionListener(new ActionListener(  ) {
+                                public void actionPerformed(ActionEvent event) {
+                                //config.setVisible(true);
+                                //setConfigWindow();
                                 }
                                 });
 	}
@@ -129,10 +144,17 @@ public class MenuPanel extends JPanel //implements Runnable
 		{
 			menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
 			menu_config.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-
 			menu_config.setLocation(4*dx/6,dy*6/40);
 
 			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy-dy*12/40),dy-dy*12/40));
+
+			menu_help.setSize(dy-dy*12/40,dy-dy*12/40);
+                        menu_help.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/menu-help.gif").getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                        menu_help.setLocation(5*dx/6,dy*6/40);
+
+			menu_about.setSize(dy-dy*12/40,dy-dy*12/40);
+                        menu_about.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/menu-about.gif").getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                        menu_about.setLocation(6*dx/6,dy*6/40);
 		}
 		g.drawImage(hevelius,dy*6/40,dy*6/40,this);
 		//conf.setLocation(10,10);

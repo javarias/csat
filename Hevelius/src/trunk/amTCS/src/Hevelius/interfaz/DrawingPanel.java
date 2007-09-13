@@ -348,7 +348,7 @@ public class DrawingPanel extends JPanel
 		}
 
 		//Weather
-		/*
+		
 		   wpane.reloadWeather();
 
 		   switch(Integer.parseInt(test.getOption("weather"))){
@@ -356,7 +356,7 @@ public class DrawingPanel extends JPanel
 		   case 1: wpane.setVisible(true); break;
 		   default:wpane.setVisible(true); break;
 		   }
-		 */
+		
 		//Compass
 		/*switch(Integer.parseInt(test.getOption("compass"))){
 		  case 0: cpane.setVisible(false); break;
