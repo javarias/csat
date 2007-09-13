@@ -464,11 +464,12 @@ public class MenuPanel extends JPanel //implements Runnable
 
 		test.setOption("background", String.valueOf(color.getSelectedIndex()));
 
-		if(String.valueOf(location.getSelectedItem()).compareTo("(none)") != 0)				
+		if(String.valueOf(location.getSelectedItem()).compareTo("(none)") != 0){				
 			test.setOption("location",String.valueOf(vector_city.get(
 				location.getSelectedIndex()).getId()));
 			test.setOption("city",String.valueOf(vector_city.get(
                                 location.getSelectedIndex()).getNameCity()));
+		}
 
 		test.store();
 
