@@ -123,6 +123,16 @@ public class CalculationsImpl implements CalculationsOperations, ComponentLifecy
 		altazPos.alt = ALT;
 		altazPos.az  = AZ;
 
+		while(ALT>360)
+			ALT -= 360;
+		while(ALT<0)
+			ALT += 0;
+
+		while(AZ>360)
+			AZ -= 360;
+		while(AZ<0)
+			AZ += 0;
+
 		return altazPos;
 	}
 
@@ -144,9 +154,19 @@ public class CalculationsImpl implements CalculationsOperations, ComponentLifecy
 
 		DEC = (180/Math.PI)*Math.asin((Math.cos(Math.PI*AZ/180)*Math.cos(Math.PI*ALT/180)*Math.cos(Math.PI*LAT/180)) + (Math.sin(Math.PI*ALT/180)*Math.sin(Math.PI*LAT/180)));
 
-		HA = (180/Math.PI)*Math.acos((Math.sin(Math.PI*ALT/180) - (Math.sin(Math.PI*DEC/180)*Math.sin(Math.PI*LAT/180))) / (Math.cos(Math.PI*DEC/180)*Math.cos(Math.PI*LAT/180)));	
+		HA = (180/Math.PI)*Math.acos((Math.sin(Math.PI*ALT/180) - (Math.sin(Math.PI*DEC/180)*Math.sin(Math.PI*LAT/180))) / (Math.cos(Math.PI*DEC/180)*Math.cos(Math.PI*LAT/180)));
 
 		RA = LMST - HA; //Se obtiene Hour Angle.
+
+		while( RA < 0 )
+			RA += 360;
+		while( RA > 360 )
+			RA -= 360;
+
+		while( DEC < 0 )
+			DEC += 360;
+		while( DEC > 360 )
+			DEC -= 360;
 
 		RadecPos radecPos = new RadecPos();
 		radecPos.ra  = RA;

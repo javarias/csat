@@ -48,7 +48,8 @@ public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
 
-		longitude = -71.53;
+		//longitude = -71.53;
+		longitude = 0;
 		latitude = -32.78;
 	}
     
@@ -134,6 +135,8 @@ public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 
 		while(LMST>360)
 			LMST -= 360;
+		while(LMST<0)
+			LMST+=360;
 
 		return LMST;
 	}
