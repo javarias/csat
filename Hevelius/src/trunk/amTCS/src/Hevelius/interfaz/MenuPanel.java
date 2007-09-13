@@ -113,23 +113,32 @@ public class MenuPanel extends JPanel //implements Runnable
 	public void paintComponent(Graphics g)
         {
                 super.paintComponent(g);
+		boolean updatePanel = false;
+
+		if(dx != getSize().width || dy != getSize().height)
+		{
+			updatePanel = true;
+		}
 		dy = getSize().height;
                 dx = getSize().width;
 
 		//ImageIcon cbutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(dy-dy/40,dy-dy/40,Image.SCALE_SMOOTH));
 		
 		//rbutton.setLocation((int)(145*osize),(int)(220*osize));
-                menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
-                menu_config.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+		if(updatePanel)
+		{
+			menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
+			menu_config.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
 
-		menu_config.setLocation(4*dx/6,dy*6/40);
+			menu_config.setLocation(4*dx/6,dy*6/40);
 
-		hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy-dy*12/40),dy-dy*12/40));
+			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy-dy*12/40),dy-dy*12/40));
+		}
 		g.drawImage(hevelius,dy*6/40,dy*6/40,this);
-                //conf.setLocation(10,10);
+		//conf.setLocation(10,10);
 	}
 
-//VENTANAS DEL MENU: CONFIGURATION Y ABOUT	
+	//VENTANAS DEL MENU: CONFIGURATION Y ABOUT	
 
 	public static void configWindow() {
 
@@ -175,7 +184,7 @@ public class MenuPanel extends JPanel //implements Runnable
 		radec = new JRadioButton("RaDec");
 		altaz = new JRadioButton("Horizontal");
 		coord = new ButtonGroup();
-		
+
 		try{
 			if(Integer.parseInt(test.getOption("coordinate"))==0)
 				radec.setSelected(true);
@@ -204,7 +213,7 @@ public class MenuPanel extends JPanel //implements Runnable
 		city2find.setSize(100,20);
 		city2find.setText(test.getOption("location"));
 		panel1.add(city2find);
-		
+
 		find = new JButton("Find");
 		find.setLocation(260,70);
 		find.setSize(70,20);

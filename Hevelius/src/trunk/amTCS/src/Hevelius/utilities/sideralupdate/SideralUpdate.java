@@ -22,7 +22,7 @@ public class SideralUpdate implements Runnable
 		{
 			try
 			{
-				interfaz.getDrawingPanel().repaint();
+//				interfaz.getDrawingPanel().repaint();
 				if(interfaz.getDrawingPanel().getCSATStatus()!=null)
 				{
 					try
