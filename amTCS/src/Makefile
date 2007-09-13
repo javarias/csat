@@ -112,7 +112,7 @@ tttlll_OBJECTS  =
 #
 # Configuration Database Files
 # ----------------------------
-CDB_SCHEMAS = DevTelescope DevCCD
+CDB_SCHEMAS = DevTelescope DevCCD DevGPS
 
 # 
 # IDL Files and flags
