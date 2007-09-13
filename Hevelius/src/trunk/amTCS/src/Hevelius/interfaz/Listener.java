@@ -38,17 +38,12 @@ public class Listener implements GLEventListener, MouseListener {
 		GL gl =drawable.getGL();
 		BaseDisplayList = gl.glGenLists(1);
 		TelescopeDisplayList = gl.glGenLists(1);
-		init_scene(gl);
-		BaseTelescope(drawable);
-                //GL gl =drawable.getGL();
+		init_scene(drawable);
 
 		
 	}
 
 	public void init(GLAutoDrawable drawable) {
-		//System.out.println("Listener.init()");
-		drawable.setGL(new DebugGL(drawable.getGL()));
-
 		GL gl = drawable.getGL();
 
 		gl.glClearColor(RED, GREEN, BLUE, ALPHA);
@@ -56,14 +51,13 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glDepthFunc(GL.GL_LESS);
 		gl.glEnable(GL.GL_DEPTH_TEST);
 
-		initializeDisplayList(gl);
+		initializeDisplayList(drawable);
 
 		reshape(drawable, 0, 0, drawable.getWidth(), drawable.getHeight());
 		drawable.addMouseListener(this);
 	}
 
 	public void display(GLAutoDrawable drawable) {
-		//interfaz.getDrawingPanel().getCompassPanel().setCompassPoints((double)angle);
 		GL gl = drawable.getGL();
 		GLU glu = new GLU();
 
@@ -128,152 +122,95 @@ public class Listener implements GLEventListener, MouseListener {
 		dialog = diag;
 		animator = a;
 	}
-	public void BaseTelescope(GLAutoDrawable drawable)
-	{
+	public void init_scene(GLAutoDrawable drawable)
+        {
                 GL gl =drawable.getGL();
-		GLU glu = new GLU();
-		GLUquadric quadric;
-		BaseDisplayList = gl.glGenLists(1);
-
-                gl.glNewList(BaseDisplayList, GL.GL_COMPILE);
-                quadric = glu.gluNewQuadric();
-                glu.gluQuadricDrawStyle(quadric, GLU.GLU_FILL);
-                gl.glColor3f(1, 0, 0);
-                glu.gluCylinder(quadric, 0.8, 0.6, 0.3, 30, 30);
-
-                //Disco de base
-                //gl.glColor3f(0, 1, 0);
-                gl.glTranslatef(0f,0f,0.3f);
-                glu.gluDisk(quadric, 0, 0.6, 15, 15);
-                gl.glTranslatef(0,0,-0.3f);
-
-                //Soportes grandes del telescopio
-
-                gl.glColor3f(0, 0, 1f);
-                gl.glRotatef(90,0,0,1);
-                gl.glTranslatef(0, 0.5f ,0.3f);
-                glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 60, 60);
-                gl.glTranslatef(0, -0.5f,-0.3f);
-                gl.glRotatef(-90,0,0,1);
-
-                gl.glColor3f(0, 0, 1);
-                gl.glRotatef(90,0,0,1);
-                gl.glTranslatef(0, -0.5f ,0.3f);
-                glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 60, 60);
-                gl.glTranslatef(0, 0.5f, -0.3f);
-                gl.glRotatef(-90,0,0,1);
-                //Tapas pequenas de los pilares
-
-
-                gl.glColor3f(1, 1, 1);
-                gl.glRotatef(90,0,0,1);
-                gl.glTranslatef(0, 0.5f,1.1f);
-                glu.gluDisk(quadric, 0, 0.06, 15, 15);
-                gl.glTranslatef(0, -0.5f,-1.1f);
-                gl.glRotatef(-90,0,0,1);
-
-                gl.glColor3f(1, 1, 1);
-                gl.glRotatef(90,0,0,1);
-                gl.glTranslatef(0, -0.5f ,1.1f);
-                glu.gluDisk(quadric, 0, 0.06, 15, 15);
-                gl.glTranslatef(0, 0.5f,-1.1f);
-                gl.glRotatef(-90,0,0,1);
-
-		
-	}
-	public void init_scene(GL gl)
-	{
 		GLU glu = new GLU();
 		//float light_position[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 		GLUquadric quadric;
-		/*gl.glEnable(GL.GL_LIGHTING);
+		gl.glEnable(GL.GL_LIGHTING);
 		gl.glEnable(GL.GL_LIGHT0);
 		gl.glDepthFunc(GL.GL_LESS);
 		gl.glEnable(GL.GL_DEPTH_TEST);
 		gl.glPolygonMode(GL.GL_FRONT, GL.GL_FILL);
+		
 		//Base Telescopio       
 
-		//GLUquadricObj *quadric;
-		//GLUquadricObj ;
 		BaseDisplayList = gl.glGenLists(1);
-
 		gl.glNewList(BaseDisplayList, GL.GL_COMPILE);
 		quadric = glu.gluNewQuadric();
 		glu.gluQuadricDrawStyle(quadric, GLU.GLU_FILL);
-		gl.glColor3f(1, 0, 0);
+		
+		//gl.glColor3f(1, 0, 0);
+		gl.glPushMatrix();
 		glu.gluCylinder(quadric, 0.8, 0.6, 0.3, 30, 30);
+		gl.glPopMatrix();
 
 		//Disco de base
-		gl.glColor3f(0, 1, 0);
+		gl.glPushMatrix();
+		//gl.glColor3f(0, 1, 0);
 		gl.glTranslatef(0f,0f,0.3f);
 		glu.gluDisk(quadric, 0, 0.6, 15, 15);
-		gl.glTranslatef(0,0,-0.3f);
+		gl.glPopMatrix();
 
 		//Soportes grandes del telescopio
-
-		gl.glColor3f(0, 0, 1f);
+		gl.glPushMatrix();
+		//gl.glColor3f(0, 0, 1f);
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, 0.5f ,0.3f);
 		glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 60, 60);
-		gl.glTranslatef(0, -0.5f,-0.3f);
-		gl.glRotatef(-90,0,0,1);
-
-		gl.glColor3f(0, 0, 1);
+		gl.glPopMatrix();
+	
+		gl.glPushMatrix();
+		//gl.glColor3f(0, 0, 1);
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, -0.5f ,0.3f);
 		glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 60, 60);
-		gl.glTranslatef(0, 0.5f, -0.3f);
-		gl.glRotatef(-90,0,0,1);
+		gl.glPopMatrix();
 		//Tapas pequenas de los pilares*/
 
-
-		gl.glColor3f(1, 1, 1);
+		gl.glPushMatrix();
+		//gl.glColor3f(1, 1, 1);
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, 0.5f,1.1f);
 		glu.gluDisk(quadric, 0, 0.06, 15, 15);
-		gl.glTranslatef(0, -0.5f,-1.1f);
-		gl.glRotatef(-90,0,0,1);
-
-		gl.glColor3f(1, 1, 1);
+		gl.glPopMatrix();
+		
+		gl.glPushMatrix();
+		//gl.glColor3f(1, 1, 1);
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, -0.5f ,1.1f);
 		glu.gluDisk(quadric, 0, 0.06, 15, 15);
-		gl.glTranslatef(0, 0.5f,-1.1f);
-		gl.glRotatef(-90,0,0,1);
-
+		gl.glPopMatrix();
 		//Soportes pequeños del Telescopio
 
-		gl.glColor3f(1, 1, 0);
+		gl.glPushMatrix();
+		//gl.glColor3f(1, 1, 0);
 		gl.glTranslatef(-0.45f, 0, 1.06f);
 		gl.glRotatef(90,0,1,0);
 		glu.gluCylinder(quadric, 0.05, 0.05, 0.17 , 30, 30);
-		gl.glRotatef(-90,0,1,0);
-		gl.glTranslatef(0.45f, 0, -1.06f);
+		gl.glPopMatrix();
 
-
-		gl.glColor3f(1, 1, 0);
+		gl.glPushMatrix();
+		//gl.glColor3f(1, 1, 0);
 		gl.glTranslatef(0.45f, 0, 1.06f);
 		gl.glRotatef(-90,0,1,0);
 		glu.gluCylinder(quadric, 0.05, 0.05, 0.17 , 30, 30);
-		gl.glRotatef(90,0,1,0);
-		gl.glTranslatef(-0.45f, 0, -1.06f);
-
+		gl.glPopMatrix();
 		/*Tapas de cilindros pequeñ*/
 
-		gl.glColor3f(1, 0, 0);
+		gl.glPushMatrix();
+		//gl.glColor3f(1, 0, 0);
 		gl.glTranslatef(-0.3f, 0, 1.06f);
 		gl.glRotatef(90,0,1,0);
 		glu.gluDisk(quadric, 0, 0.05, 15, 15);
-		gl.glRotatef(-90,0,1,0);
-		gl.glTranslatef(0.3f, 0, -1.06f);
-
-		gl.glColor3f(1, 0, 0);
+		gl.glPopMatrix();
+		gl.glPushMatrix();
+		//gl.glColor3f(1, 0, 0);
 		gl.glTranslatef(0.3f, 0, 1.06f);
 		gl.glRotatef(-90,0,1,0);
 		glu.gluDisk(quadric, 0, 0.05, 15, 15);
-		gl.glRotatef(90,0,1,0);
-		gl.glTranslatef(-0.3f, 0, -1.06f);
-
+		gl.glPopMatrix();
 		glu.gluDeleteQuadric(quadric);
 		gl.glEndList();
 
@@ -284,58 +221,39 @@ public class Listener implements GLEventListener, MouseListener {
 		quadric = glu.gluNewQuadric();
 		glu.gluQuadricDrawStyle(quadric, GLU.GLU_FILL);
 		gl.glEnable(GL.GL_DEPTH_TEST);
+		
+		gl.glPushMatrix();
 		gl.glColor3f(1, 1, 0);
-		 //gl.glRotatef(-90,1,0,0);
 		gl.glTranslatef(0, 0 ,-0.4f);
-		//gl.glRotatef(-90,1,0,0);
 		glu.gluCylinder(quadric, 0.4, 0.6, 2, 30, 30);
-		//gl.glRotatef(90,1,0,0);
-		gl.glTranslatef(0, 0, 0.4f);
-		//gl.glRotatef(90,1,0,0);
-		//glu.gluDeleteQuadric(quadric);
-		
-		//gl.glPushMatrix();	
+		gl.glPopMatrix();
+	
 		//lente trasero
-		/*gl.glColor3f(1, 1, 1);
- 		//gl.glRotatef(-90,1,0,0);
-                gl.glTranslatef(0, 0, 1.36f);
-                //gl.glRotatef(-90,0,1,0);
-                glu.gluCylinder(quadric, 0.6, 0.6, 0.01 , 30, 30);
-                //gl.glRotatef(90,0,1,0);
-                gl.glTranslatef(0, 0, -1.36f);
-		//gl.glRotatef(90,1,0,0);*/
-		
-		gl.glColor3f(1, 1, 1);
+		gl.glPushMatrix();
+		//gl.glColor3f(1, 1, 1);
 		gl.glRotatef(-90,1,0,0);
                 gl.glTranslatef(0, -1.55f, -0.6f);
-                //gl.glRotatef(-90,0,1,0);
                 glu.gluCylinder(quadric, 0.01, 0.01, 1.195 , 30, 30);
-                //gl.glRotatef(90,0,1,0);
-                gl.glTranslatef(0, 1.55f, 0.6f);
-                gl.glRotatef(90,1,0,0);
+		gl.glPopMatrix();
 
-		 gl.glColor3f(1, 1, 1);
-                gl.glRotatef(-90,0,1,0);
+		 //gl.glColor3f(1, 1, 1);
+                gl.glPushMatrix();
+		gl.glRotatef(-90,0,1,0);
                 gl.glTranslatef(1.6f, 0f, -0.6f);
-                //gl.glRotatef(-90,0,1,0);
                 glu.gluCylinder(quadric, 0.01, 0.01, 1.195 , 30, 30);
-                //gl.glRotatef(90,0,1,0);
-                gl.glTranslatef(-1.6f, 0f, 0.6f);
-                gl.glRotatef(90,0,1,0);
-		//gl.glPopMatrix();
-			//lente delantero
+		gl.glPopMatrix();
+		
+		//lente delantero
+		
+		gl.glPushMatrix();
 		gl.glColor4f(1, 1, 1,1);
-		//gl.
 		gl.glDepthMask(false);
 		gl.glRotatef(0,1,0,0);
                 gl.glTranslatef(0,0, -0.4f);
-                //gl.glRotatef(-90,0,1,0);
                 glu.gluDisk(quadric, 0, 0.4, 15, 15);
-                //gl.glRotatef(90,0,1,0);
-                gl.glTranslatef(0, 0f, 0.4f);
-		gl.glRotatef(0,1,0,0);
 		gl.glDepthMask(true);
-		//glu.gluDeleteQuadric(quadric);
+		gl.glPopMatrix();
+		glu.gluDeleteQuadric(quadric);
 		gl.glEndList();
 	}
 
@@ -343,14 +261,29 @@ public class Listener implements GLEventListener, MouseListener {
 	{
 		if(Math.abs(alt -angle) >= 1f || Math.abs(az-angle2) >= 1f )
 		{
-			if(az >= angle2)
-				IncreaseAngleAz(drawable);
-			else //(az <= angle)
-				DecreaseAngleAz(drawable);
-			if(alt >= angle)
+			if(az >= angle2) 
+			{
+				if(az < 360-az)
+					DecreaseAngleAlt(drawable);
+				else
+					IncreaseAngleAz(drawable);
+			}
+			else
+			{
+				if(az > 360-az)
+					IncreaseAngleAz(drawable);
+				else
+					DecreaseAngleAz(drawable);
+			}
+
+			if(alt >= angle || alt > 360-alt)
 				IncreaseAngleAlt(drawable);
-			else //if(alt<= angle)
+			else 
 				DecreaseAngleAlt(drawable);
+			if(angle>=360)
+				angle=angle-360;
+			if(angle2>=360)
+				angle2=angle2-360;
 		}
 	}
 
@@ -362,40 +295,30 @@ public class Listener implements GLEventListener, MouseListener {
 
 	public void IncreaseAngleAz(GLAutoDrawable drawable){
 
-		//System.out.println("angle2 :"+angle2+ "   az :"+this.az);
 		GL gl =drawable.getGL();
 		if (angle2 < this.az){
 			angle2 = angle2 + vel;
-			//System.out.println("increaseaz "+angle2);
 		}
-		//    System.out.println("increaseaz "+angle2);      
 	}
 	public void IncreaseAngleAlt(GLAutoDrawable drawable){
 		GL gl = drawable.getGL();
 		if ( angle < alt ){
-			//System.out.println("ENTRO increase alt");
-			//MoveToAlt(angle);
 			angle = angle + vel;
 		}
 	}
 
 	public void DecreaseAngleAz(GLAutoDrawable drawable){
 
-		//System.out.println("decreaseaz"+ angle2);
 		GL gl =drawable.getGL();
 		if (angle2 > az){
 			angle2 = angle2 - vel;
 		}
-		//              printf("Angulo de entrada : %g \n",angle);      
 		MoveToAz(drawable);
 	}
 	public void DecreaseAngleAlt(GLAutoDrawable drawable){
 
-		//System.out.println("decreasealt "+angle);
 		GL gl = drawable.getGL();
 		if ( angle > alt ){
-			//System.out.println("ENTRO");
-			//MoveToAlt(angle);
 			angle = angle - vel;
 		}
 		MoveToAlt(drawable );
@@ -408,11 +331,8 @@ public class Listener implements GLEventListener, MouseListener {
 
 		gl.glPushMatrix();
 		gl.glRotatef(0,0,0,1);
-		gl.glRotatef(-angle2,0,1,0);
-		//if(angle2==az)
-		gl.glRotatef(angle+90,-1,0,0);
-		//System.out.println(angle);
-		//gl.glRotatef(angle2,0,1,0);
+		gl.glRotatef(-angle,0,1,0);
+		gl.glRotatef(-angle+90,-1,0,0);
 		gl.glCallList(TelescopeDisplayList);
 		gl.glPopMatrix();
 
@@ -424,7 +344,7 @@ public class Listener implements GLEventListener, MouseListener {
 
 		gl.glPushMatrix();
 		gl.glScalef(1.5f,1.5f,1.5f);
-		gl.glRotatef(-angle2,0f,1f,0f);
+		gl.glRotatef(-angle,0f,1f,0f);
 		gl.glRotatef(270,1,0,0);
 		gl.glTranslatef(0,0,-1);
 		gl.glCallList(BaseDisplayList);
@@ -433,7 +353,6 @@ public class Listener implements GLEventListener, MouseListener {
 
 	public void setAltAzDest(float Alt, float Az)
 	{
-		//System.out.println(Alt + " -- " + Az );
 
 		az= Az;
 		alt = 90 - Alt;
