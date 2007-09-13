@@ -51,17 +51,23 @@ xxxxx_LIBS      =
 #
 # Includes (.h) files (public only)
 # ---------------------------------
-INCLUDES        =
+INCLUDES        = NexstarImpl.h lpiImpl.h eTrexImpl.h
 
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       =
+LIBRARIES       = NexstarImpl lpiImpl eTrexImpl
 LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-lllll_OBJECTS   =
+lllll_OBJECTS   = 
+NexstarImpl_OBJECTS   = NexstarImpl NexstarAltDevIO NexstarAzmDevIO SerialRS232
+NexstarImpl_LIBS      = TypesStubs DevTelescopeStubs
+lpiImpl_OBJECTS       = lpiImpl
+lpiImpl_LIBS          = TypesStubs DevCCDStubs
+eTrexImpl_OBJECTS     = eTrexImpl
+eTrexImpl_LIBS        = TypesStubs DevGPSStubs
 
 #
 # Scripts (public and local)
@@ -107,23 +113,27 @@ tttlll_OBJECTS  =
 #
 # Configuration Database Files
 # ----------------------------
-CDB_SCHEMAS = 
+CDB_SCHEMAS = DevTelescope DevCCD
 
 # 
 # IDL Files and flags
 # 
-IDL_FILES = Types CSATControl CSATStatus Pointing Telescope Tracking
+IDL_FILES = Types DevTelescope DevCCD DevGPS Telescope CCD Locale Pointing Tracking Calculations Safety CSATControl CSATStatus
 IDL_TAO_FLAGS =
 USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES=CSATControlImpl CSATStatusImpl PointingImpl TelescopeImpl TrackingImpl Hevelius
-CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
-CSATStatusImpl_DIRS=alma/CSATSTATUS_MODULE/CSATStatusImpl
-PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
+JARFILES=  TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl Hevelius
 TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
+CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
+LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
+PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
 TrackingImpl_DIRS=alma/TRACKING_MODULE/TrackingImpl
+CalculationsImpl_DIRS=alma/CALCULATIONS_MODULE/CalculationsImpl
+SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
+CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
+CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
 Hevelius_DIRS=Hevelius/
 
 

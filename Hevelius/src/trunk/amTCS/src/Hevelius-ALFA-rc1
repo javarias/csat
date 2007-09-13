@@ -1,3 +1,3 @@
 #!/bin/bash
 
-acsStartJava Hevelius/interfaz/interfaz
+acsStartJava Hevelius/interfaz/interfaz -m corbaloc::10.0.0.118:3000/Manager
