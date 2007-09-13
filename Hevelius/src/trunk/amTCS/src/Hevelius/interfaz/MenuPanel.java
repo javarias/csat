@@ -467,6 +467,8 @@ public class MenuPanel extends JPanel //implements Runnable
 		if(String.valueOf(location.getSelectedItem()).compareTo("(none)") != 0)				
 			test.setOption("location",String.valueOf(vector_city.get(
 				location.getSelectedIndex()).getId()));
+			test.setOption("city",String.valueOf(vector_city.get(
+                                location.getSelectedIndex()).getNameCity()));
 
 		test.store();
 
@@ -480,7 +482,7 @@ public class MenuPanel extends JPanel //implements Runnable
 		if(Integer.parseInt(test.getOption("coordinate"))==1)
 			altaz.setSelected(true);
 		
-		city2find.setText(test.getOption("location"));
+		city2find.setText(test.getOption("city"));
 		
 		location.removeAllItems();
 		location.addItem("(none)");
