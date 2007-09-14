@@ -53,6 +53,8 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	private TCSStatus status;
 
 	private alma.TELESCOPE_MODULE.Telescope telescope_comp;
+	private alma.LOCALE_MODULE.Locale locale_comp;
+	private alma.CALCULATIONS_MODULE.Calculations calculations_comp;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -74,6 +76,24 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		} catch (AcsJContainerServicesEx e) {
 			m_logger.fine("Failed to get Telescope default component reference");
 			throw new ComponentLifecycleException("Failed to get Telescope component reference");
+		}
+
+		/* We get the Locale referece */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/LOCALE_MODULE/Locale:1.0");
+			locale_comp = alma.LOCALE_MODULE.LocaleHelper.narrow(obj);
+		} catch (AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Locale default component reference");
+			throw new ComponentLifecycleException("Failed to get Locale component reference");
+		}
+
+		/* We get the Calculations referece */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/CALCULATIONS_MODULE/Calculations:1.0");
+			calculations_comp = alma.CALCULATIONS_MODULE.CalculationsHelper.narrow(obj);
+		} catch (AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Calculations default component reference");
+			throw new ComponentLifecycleException("Failed to get Calculations component reference");
 		}
 
 	}
@@ -132,6 +152,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public void stop(CBvoid cb,CBDescIn desc){
+		telescope_comp.stop();
 		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STAND_BY);
 	}
 
@@ -143,8 +164,8 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa){
-		p_rd.value = new RadecPos(0,0);
 		p_aa.value = telescope_comp.getAltAz();
+		p_rd.value = calculations_comp.Altaz2Radec(p_aa.value);
 	}
 
 	public int getState(){
@@ -167,6 +188,8 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public double getSiderealTime(){
+		if( locale_comp != null )
+			return locale_comp.siderealTime();
 		return 0;
 	}
 

@@ -69,7 +69,7 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_DIFFUSE, mat_diffuse,0);
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_SPECULAR, mat_specular,0);
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_SHININESS, mat_shininess,0);
-		prepare_scene(drawable);	
+		prepare_scene();
 		render_scene(drawable);
 		gl.glFlush();
 
@@ -257,33 +257,48 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glEndList();
 	}
 
-	public void prepare_scene(GLAutoDrawable drawable)
+	public void prepare_scene()
 	{
 		if(Math.abs(alt -angle) >= 1f || Math.abs(az-angle2) >= 1f )
 		{
-			if(az >= angle2) 
+			if(az > angle2) 
 			{
-				if(az < 360-az)
-					DecreaseAngleAlt(drawable);
+				if(360-az+angle2 < az - angle2)
+					DecreaseAngleAz();
 				else
-					IncreaseAngleAz(drawable);
+					IncreaseAngleAz();
 			}
-			else
+			else if (az < angle2)
 			{
-				if(az > 360-az)
-					IncreaseAngleAz(drawable);
+				if(360-angle2+az < angle2 - az)
+					IncreaseAngleAz();
 				else
-					DecreaseAngleAz(drawable);
+					DecreaseAngleAz();
 			}
 
-			if(alt >= angle || alt > 360-alt)
-				IncreaseAngleAlt(drawable);
-			else 
-				DecreaseAngleAlt(drawable);
+			if(alt > angle)
+			{
+				if(360-alt+angle < alt - angle)
+                                        DecreaseAngleAlt();
+                                else
+                                        IncreaseAngleAlt();
+			}
+			else if(alt < angle)
+			{
+				if(360-angle+alt < angle - alt)
+					IncreaseAngleAlt();
+				else
+					DecreaseAngleAlt();
+			}
 			if(angle>=360)
 				angle=angle-360;
 			if(angle2>=360)
 				angle2=angle2-360;
+			if(angle<0)
+				angle += 360;
+			if(angle2<0)
+				angle2 += 360;
+
 		}
 	}
 
@@ -293,35 +308,18 @@ public class Listener implements GLEventListener, MouseListener {
 		MoveToAz(drawable);
 	}
 
-	public void IncreaseAngleAz(GLAutoDrawable drawable){
-
-		GL gl =drawable.getGL();
-		if (angle2 < this.az){
+	public void IncreaseAngleAz(){
 			angle2 = angle2 + vel;
-		}
 	}
-	public void IncreaseAngleAlt(GLAutoDrawable drawable){
-		GL gl = drawable.getGL();
-		if ( angle < alt ){
+	public void IncreaseAngleAlt(){
 			angle = angle + vel;
-		}
 	}
 
-	public void DecreaseAngleAz(GLAutoDrawable drawable){
-
-		GL gl =drawable.getGL();
-		if (angle2 > az){
+	public void DecreaseAngleAz(){
 			angle2 = angle2 - vel;
-		}
-		MoveToAz(drawable);
 	}
-	public void DecreaseAngleAlt(GLAutoDrawable drawable){
-
-		GL gl = drawable.getGL();
-		if ( angle > alt ){
+	public void DecreaseAngleAlt(){
 			angle = angle - vel;
-		}
-		MoveToAlt(drawable );
 	}
 
 
@@ -331,7 +329,7 @@ public class Listener implements GLEventListener, MouseListener {
 
 		gl.glPushMatrix();
 		gl.glRotatef(0,0,0,1);
-		gl.glRotatef(-angle,0,1,0);
+		gl.glRotatef(angle2,0,1,0);
 		gl.glRotatef(-angle+90,-1,0,0);
 		gl.glCallList(TelescopeDisplayList);
 		gl.glPopMatrix();
@@ -344,7 +342,7 @@ public class Listener implements GLEventListener, MouseListener {
 
 		gl.glPushMatrix();
 		gl.glScalef(1.5f,1.5f,1.5f);
-		gl.glRotatef(-angle,0f,1f,0f);
+		gl.glRotatef(angle2,0f,1f,0f);
 		gl.glRotatef(270,1,0,0);
 		gl.glTranslatef(0,0,-1);
 		gl.glCallList(BaseDisplayList);
@@ -354,9 +352,13 @@ public class Listener implements GLEventListener, MouseListener {
 	public void setAltAzDest(float Alt, float Az)
 	{
 
-		az= Az;
+		az= 180 - Az;
 		alt = 90 - Alt;
-		DecimalFormat df = new DecimalFormat("#.##");
+		if(alt < 0)
+			alt += 360;
+		if(az < 0)
+			az += 360;
+		DecimalFormat df = new DecimalFormat("#.#");
 		az = Float.parseFloat(df.format(az));
 		alt = Float.parseFloat(df.format(alt));
 	}

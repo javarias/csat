@@ -24,7 +24,7 @@
 #
 # additional include and library search paths
 #USER_INC = 
-#USER_LIB = 
+#USER_LIB =
 
 #
 # MODULE CODE DESCRIPTION:
@@ -61,7 +61,6 @@ LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-lllll_OBJECTS   = 
 NexstarImpl_OBJECTS   = NexstarImpl NexstarAltDevIO NexstarAzmDevIO SerialRS232
 NexstarImpl_LIBS      = TypesStubs DevTelescopeStubs
 lpiImpl_OBJECTS       = lpiImpl
@@ -113,7 +112,7 @@ tttlll_OBJECTS  =
 #
 # Configuration Database Files
 # ----------------------------
-CDB_SCHEMAS = DevTelescope DevCCD
+CDB_SCHEMAS = DevTelescope DevCCD DevGPS
 
 # 
 # IDL Files and flags
@@ -124,7 +123,7 @@ USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES=  TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl Hevelius
+JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl Hevelius
 TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
 CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
 LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
@@ -135,8 +134,7 @@ SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
 Hevelius_DIRS=Hevelius/
-
-
+jjj_EXTRAS= 
 #
 # java sources in Jarfile on/off
 DEBUG= 
