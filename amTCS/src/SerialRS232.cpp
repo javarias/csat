@@ -142,7 +142,7 @@ char * SerialRS232::read_RS232() throw (SerialRS232Exception &)
 	return m_buf;
 }
 
-void SerialRS232::write_RS232(const char * s, int lenght) throw (SerialRS232Exception &)
+void SerialRS232::write_RS232(const char * s,unsigned int lenght) throw (SerialRS232Exception &)
 {
 	if (index(s, '\0') == NULL)
 		throw SerialRS232Exception("[SerialRS232::write_RS232] String to be written must be null terminated");
