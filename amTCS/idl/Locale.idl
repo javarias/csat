@@ -31,8 +31,7 @@ module LOCALE_MODULE {
 		double siderealTime();
 
 		/**
-		 * Gets, asynchronously, an image from the camera for certain
-		 * exposure time
+		 * Gets the local position in Earth coordinates (Latitude/Longitude)
 		 */
 		TYPES::EarthPos localPos();
 	};
