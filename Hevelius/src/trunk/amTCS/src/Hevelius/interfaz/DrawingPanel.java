@@ -60,6 +60,7 @@ public class DrawingPanel extends JPanel
 
 	private Tracking trck = null;
 	private SideralUpdate sdrl = null;
+	private Safety sfty = null;
 
 	private CSATControlClient csatc = null;
 	private CSATStatusClient csats = null;
@@ -167,6 +168,10 @@ public class DrawingPanel extends JPanel
 		sdrl = new SideralUpdate();
 		//sdrl.init();
 		new Thread(sdrl).start();
+
+		//Safety
+		sfty = new Safety();
+		new Thread(sfty).start();
 	}
 
 	public void paint(Graphics g)

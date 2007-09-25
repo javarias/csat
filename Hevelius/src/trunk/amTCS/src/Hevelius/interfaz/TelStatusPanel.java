@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import java.util.*;
+import Hevelius.acsmodules.*;
+import Hevelius.interfaz.*;
+import alma.TYPES.*;
+
 public class TelStatusPanel extends JPanel
 {
 	private JLabel telstate;
@@ -11,10 +16,12 @@ public class TelStatusPanel extends JPanel
 	private JLabel modeswL;
 	private JLabel trkwsL;
 	private JLabel autogL;
+	private JLabel safetyL;
 	private JLabel glstate;
 	private JLabel modesw;
 	private JLabel trkws;
 	private JLabel autog;
+	private JLabel safety;
 
 	private int dx = 0;
 	private int dy = 0;
@@ -50,6 +57,11 @@ public class TelStatusPanel extends JPanel
 		autogL.setForeground(Color.WHITE);
 		add(autogL);
 
+		safetyL = new JLabel("Danger");
+		safetyL.setSize(100,20);
+                safetyL.setForeground(Color.WHITE);
+                add(safetyL);
+
 		glstate = new JLabel("ONLINE");
 		glstate.setSize(100,20);
 		glstate.setForeground(Color.WHITE);
@@ -69,6 +81,12 @@ public class TelStatusPanel extends JPanel
 		autog.setSize(100,20);
 		autog.setForeground(Color.WHITE);
 		add(autog);
+
+		safety = new JLabel("N/A");
+                safety.setSize(100,20);
+                safety.setForeground(Color.WHITE);
+                add(safety);
+
 	}
 	public void paintComponent(Graphics g)
 	{
@@ -111,6 +129,10 @@ public class TelStatusPanel extends JPanel
 	                autogL.setLocation((int)(80*osize),(int)(100*osize));
 			autogL.setFont(autogL.getFont().deriveFont(fsize));
 			autogL.setSize((int)(100*osize),(int)(20*osize));
+			
+			safetyL.setLocation((int)(80*osize),(int)(125*osize));
+                        safetyL.setFont(safetyL.getFont().deriveFont(fsize));
+                        safetyL.setSize((int)(100*osize),(int)(20*osize));
 
         	        glstate.setLocation((int)(180*osize),(int)(25*osize));
 			glstate.setFont(glstate.getFont().deriveFont(fsize));
@@ -127,6 +149,11 @@ public class TelStatusPanel extends JPanel
         	        autog.setLocation((int)(180*osize),(int)(100*osize));
 			autog.setFont(autog.getFont().deriveFont(fsize));
 			autog.setSize((int)(100*osize),(int)(20*osize));
+
+			safety.setLocation((int)(180*osize),(int)(125*osize));
+                        safety.setFont(safety.getFont().deriveFont(fsize));
+                        safety.setSize((int)(100*osize),(int)(20*osize));
+
 		}
 	}
 
@@ -151,5 +178,35 @@ public class TelStatusPanel extends JPanel
 	public void setPresettingState()
 	{
 
+	}
+
+	public void setDangerState(int state)
+	{
+		switch(state)
+		{
+			case 0: safety.setText("N/A"); 
+				safety.setForeground(Color.WHITE);
+				break;
+
+			case 1: safety.setText("Low");
+				safety.setForeground(Color.GREEN);
+				break;
+
+			case 2: safety.setText("Moderate");
+				safety.setForeground(Color.YELLOW);
+				break;
+
+			case 3: safety.setText("High");
+				safety.setForeground(Color.ORANGE);
+				break;
+	
+			case 4: safety.setText("Extreme");
+				safety.setForeground(Color.RED);
+				break;
+
+			default: 	safety.setText("N/A"); 
+					safety.setForeground(Color.WHITE);
+					break;
+		}
 	}
 }
