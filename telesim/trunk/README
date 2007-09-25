@@ -3,13 +3,13 @@ Computer Systems Research Group
 Universidad Tecnica Federico Santa Maria
 Valparaiso, Chile
 
-This program simulates the beahavior of some amateur telescopes
+This program simulates the behavior of some amateur telescopes
 through a computer's serial port. It listens for commands on the
 first RS232 port (or any other specified port) and sends responses
 according to some telescope communication protocol specification.
 
-It is itended to test telescope control systems. For a list of
-supportes telescopes see the TELESCOPES file.
+It is intended to test telescope control systems. For a list of
+supported telescopes see the TELESCOPES file.
 
 To use it just go to the 'src' directory and run "make". This should
 build the simulator into the 'bin' directory. You can run it with
@@ -24,6 +24,6 @@ are welcome, too.
 -- 
 UTFSM-ACS team
 http://acs.inf.utfsm.cl/
-rtobar@inf.utfsm.cl
+rtobar@csrg.inf.utfsm.cl
 jorjazo@labsd.inf.utfsm.cl
 
