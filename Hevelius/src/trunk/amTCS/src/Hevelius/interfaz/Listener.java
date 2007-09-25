@@ -3,12 +3,10 @@ package Hevelius.interfaz;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
 import java.util.*;
 import javax.media.opengl.*;
 import com.sun.opengl.util.*;
 import javax.media.opengl.glu.*;
-
 import java.text.DecimalFormat;
 
 
@@ -18,12 +16,16 @@ public class Listener implements GLEventListener, MouseListener {
         public static final int BLUE = 0;
 	public static final int ALPHA = 1;
 
-	private float mat_ambient[] = { 0.7f, 0.7f, 0.7f, 1.0f };
+	private float mat_ambient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
 	private float mat_diffuse[] = { 0.1f, 0.5f, 0.8f, 1.0f };
 	private float mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	private float mat_shininess[] = { 100.0f };
 
-	//#define DELTA 5
+	private float luzdifusa[]= {0.7f,1.0f,0.7f,1.0f};
+	private float luzambiente[]={0.7f,0.5f,0.7f,1.0f};
+	private float luzspecular[]={0.5f,0,0.5f,0};
+	private float posicion[]={1f,1f,1f,0};
+
 	private float angle = 0;
 	private float angle2 =0;
 	private float az=0;
@@ -45,11 +47,19 @@ public class Listener implements GLEventListener, MouseListener {
 
 	public void init(GLAutoDrawable drawable) {
 		GL gl = drawable.getGL();
-
+		gl.glShadeModel(GL.GL_SMOOTH);
 		gl.glClearColor(RED, GREEN, BLUE, ALPHA);
 		gl.glClearDepth(1.0);
 		gl.glDepthFunc(GL.GL_LESS);
 		gl.glEnable(GL.GL_DEPTH_TEST);
+		//gl.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
+		//gl.glLightModel(GL.GL_LIGHT_MODEL_TWO_SIDE,1);
+		gl.glLightfv(GL.GL_LIGHT0,GL.GL_DIFFUSE, luzdifusa,0);
+		gl.glLightfv(GL.GL_LIGHT0,GL.GL_AMBIENT, luzambiente,0);
+		gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR, luzspecular,0);
+		gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION, posicion,0);
+		gl.glEnable(GL.GL_LIGHTING);
+		gl.glEnable(GL.GL_LIGHT0);
 
 		initializeDisplayList(drawable);
 
@@ -145,17 +155,21 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glPushMatrix();
 		glu.gluCylinder(quadric, 0.8, 0.6, 0.3, 30, 30);
 		gl.glPopMatrix();
-
+		//gl.glDisable(GL.GL_LIGHTING);
+                //gl.glDisable(GL.GL_LIGHT0);	
 		//Disco de base
+
 		gl.glPushMatrix();
 		//gl.glColor3f(0, 1, 0);
+
 		gl.glTranslatef(0f,0f,0.3f);
-		glu.gluDisk(quadric, 0, 0.6, 15, 15);
+		glu.gluDisk(quadric, 0, 0.61, 15, 15);
 		gl.glPopMatrix();
 
 		//Soportes grandes del telescopio
 		gl.glPushMatrix();
 		//gl.glColor3f(0, 0, 1f);
+
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, 0.5f ,0.3f);
 		glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 60, 60);
@@ -197,7 +211,8 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glRotatef(-90,0,1,0);
 		glu.gluCylinder(quadric, 0.05, 0.05, 0.17 , 30, 30);
 		gl.glPopMatrix();
-		/*Tapas de cilindros pequeñ*/
+		
+		//Tapas de cilindros pequeñ
 
 		gl.glPushMatrix();
 		//gl.glColor3f(1, 0, 0);
@@ -225,22 +240,24 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glPushMatrix();
 		gl.glColor3f(1, 1, 0);
 		gl.glTranslatef(0, 0 ,-0.4f);
-		glu.gluCylinder(quadric, 0.4, 0.6, 2, 30, 30);
+		glu.gluCylinder(quadric, 0.4, 0.5, 2, 30, 30);
 		gl.glPopMatrix();
 	
 		//lente trasero
+
 		gl.glPushMatrix();
 		//gl.glColor3f(1, 1, 1);
+
 		gl.glRotatef(-90,1,0,0);
-                gl.glTranslatef(0, -1.55f, -0.6f);
-                glu.gluCylinder(quadric, 0.01, 0.01, 1.195 , 30, 30);
+                gl.glTranslatef(0, -1.55f, -0.5f);
+                glu.gluCylinder(quadric, 0.01, 0.01, 1 , 30, 30);
 		gl.glPopMatrix();
 
 		 //gl.glColor3f(1, 1, 1);
                 gl.glPushMatrix();
 		gl.glRotatef(-90,0,1,0);
-                gl.glTranslatef(1.6f, 0f, -0.6f);
-                glu.gluCylinder(quadric, 0.01, 0.01, 1.195 , 30, 30);
+                gl.glTranslatef(1.6f, 0f, -0.5f);
+                glu.gluCylinder(quadric, 0.01, 0.01, 1 , 30, 30);
 		gl.glPopMatrix();
 		
 		//lente delantero
@@ -252,6 +269,7 @@ public class Listener implements GLEventListener, MouseListener {
                 gl.glTranslatef(0,0, -0.4f);
                 glu.gluDisk(quadric, 0, 0.4, 15, 15);
 		gl.glDepthMask(true);
+
 		gl.glPopMatrix();
 		glu.gluDeleteQuadric(quadric);
 		gl.glEndList();
