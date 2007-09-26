@@ -28,5 +28,7 @@
 # --------  --------  ----------------------------------------------
 # dave 2003-08-13 converted to eccs test driver
 #
-SOURCE TATEnvironment
+# SOURCE TATEnvironment
+# PROLOGUE TATPrologue
 1 tatTest tatTest.sh
+# EPILOGUE TATEpilogue
