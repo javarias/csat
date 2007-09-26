@@ -28,13 +28,13 @@ public class ScreenPanel extends JPanel implements Runnable
 		int dx, dy;
 		dx = getSize().width;
 		dy = getSize().height;
-		g.setColor(Color.GRAY);
+		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0,0,dx,dy);
 		g.setColor(Color.BLACK);
-		g.fillRect(5,5,dx-10,dy-10);
+		g.fillRect(2,2,dx-4,dy-4);
 		screen = buf;
 		if(screen != null)
-			g.drawImage(screen,5,5,this);
+			g.drawImage(screen,2,2,this);
 	}
 	public void run()
 	{
@@ -89,8 +89,8 @@ public class ScreenPanel extends JPanel implements Runnable
 			minutes = Math.abs((int)((DECd-hours)*60));
 			seconds = Math.abs(((DECd-hours)*60-minutes)*60);
 			DEC = new String(hours+"+"+minutes+"+"+seconds);
-			x = (getSize().width-10)/35.31f;
-			y = (getSize().height-10)/35.31f;
+			x = (getSize().width-4)/35.31f;
+			y = (getSize().height-4)/35.31f;
 			buffer = VirtualTelescope.getScreen(RA,DEC,x,y);
 			paintComponent(getGraphics());
 			return buffer;

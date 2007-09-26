@@ -12,7 +12,7 @@ import alma.TYPES.*;
 
 public class TelStatusPanel extends JPanel
 {
-	private JLabel telstate;
+	//private JLabel telstate;
 	private JLabel glstateL;
 	private JLabel modeswL;
 	private JLabel trkwsL;
@@ -38,10 +38,10 @@ public class TelStatusPanel extends JPanel
 	}
 	public void init()
 	{
-		telstate = new JLabel("TELESCOPE STATE");
+		/*telstate = new JLabel("TELESCOPE STATE");
 		telstate.setSize(200, 20);
 		telstate.setForeground(Color.WHITE);
-		add(telstate);
+		add(telstate);*/
 
 		glstateL = new JLabel("Global State");
 		glstateL.setSize(200,20);
@@ -116,9 +116,9 @@ public class TelStatusPanel extends JPanel
 				osize = dx/280.0f;
 			}
 
-                	telstate.setLocation((int)(100*osize),(int)(0*osize));
+                	/*telstate.setLocation((int)(100*osize),(int)(0*osize));
 			telstate.setFont(telstate.getFont().deriveFont(fsize));
-			telstate.setSize((int)(200*osize),(int)(20*osize));
+			telstate.setSize((int)(200*osize),(int)(20*osize));*/
 
 	                glstateL.setLocation((int)(80*osize),(int)(25*osize));
 			glstateL.setFont(glstateL.getFont().deriveFont(fsize));

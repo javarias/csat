@@ -36,7 +36,7 @@ public class WeatherPanel extends JPanel implements Runnable
 	public void init()
 	{
 		//Weather Status Label
-		wLabel = new JLabel("Weather Conditions at "+vector.get(0).getTime());
+		wLabel = new JLabel(vector.get(0).getCity()+" at "+vector.get(0).getTime());
 		wLabel.setSize(250,20);
 		wLabel.setForeground(Color.WHITE);
 		wLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -154,52 +154,52 @@ public class WeatherPanel extends JPanel implements Runnable
 				osize = dx/280.0f;
 			}
 
-			wLabel.setLocation((int)(10*osize),(int)(10*osize));
+			wLabel.setLocation((int)(10*osize),(int)(40*osize));
 			wLabel.setFont(wLabel.getFont().deriveFont(fsize));
 			wLabel.setSize((int)(250*osize),(int)(20*osize));
 
 
-			tempL.setLocation((int)(10*osize),(int)(35*osize));
+			tempL.setLocation((int)(20*osize),(int)(65*osize));
 			tempL.setFont(tempL.getFont().deriveFont(fsize));
 			tempL.setSize((int)(100*osize),(int)(20*osize));
 
-			wStatL.setLocation((int)(10*osize),(int)(60*osize));
+			wStatL.setLocation((int)(20*osize),(int)(90*osize));
 			wStatL.setFont(wStatL.getFont().deriveFont(fsize));
 			wStatL.setSize((int)(100*osize),(int)(20*osize));
 
-			moonL.setLocation((int)(10*osize),(int)(85*osize));
+			moonL.setLocation((int)(20*osize),(int)(115*osize));
 			moonL.setFont(moonL.getFont().deriveFont(fsize));
 			moonL.setSize((int)(100*osize),(int)(20*osize));
 
-			windL.setLocation((int)(10*osize),(int)(110*osize));
+			windL.setLocation((int)(20*osize),(int)(140*osize));
 			windL.setFont(windL.getFont().deriveFont(fsize));
 			windL.setSize((int)(100*osize),(int)(20*osize));
 
-			humL.setLocation((int)(10*osize),(int)(135*osize));
+			humL.setLocation((int)(20*osize),(int)(165*osize));
 			humL.setFont(humL.getFont().deriveFont(fsize));
 			humL.setSize((int)(100*osize),(int)(20*osize));
 
-			tempB.setLocation((int)(140*osize),(int)(35*osize));
+			tempB.setLocation((int)(140*osize),(int)(65*osize));
 			tempB.setFont(tempB.getFont().deriveFont(fsize));
 			tempB.setSize((int)(100*osize),(int)(20*osize));
 
-			wStatB.setLocation((int)(140*osize),(int)(54*osize));
+			wStatB.setLocation((int)(140*osize),(int)(84*osize));
 			wStatB.setFont(wStatB.getFont().deriveFont(fsize));
 			wStatB.setSize((int)(200*osize),(int)(32*osize));
 
-			moonB.setLocation((int)(140*osize),(int)(85*osize));
+			moonB.setLocation((int)(140*osize),(int)(115*osize));
 			moonB.setFont(moonB.getFont().deriveFont(fsize));
 			moonB.setSize((int)(150*osize),(int)(20*osize));
 
-			windB.setLocation((int)(140*osize),(int)(110*osize));
+			windB.setLocation((int)(140*osize),(int)(140*osize));
 			windB.setFont(windB.getFont().deriveFont(fsize));
 			windB.setSize((int)(150*osize),(int)(20*osize));
 
-			humB.setLocation((int)(140*osize),(int)(135*osize));
+			humB.setLocation((int)(140*osize),(int)(165*osize));
 			humB.setFont(humB.getFont().deriveFont(fsize));
 			humB.setSize((int)(100*osize),(int)(20*osize));
 
-			more.setLocation((int)(200*osize),(int)(160*osize));
+			more.setLocation((int)(210*osize),(int)(190*osize));
 			more.setFont(more.getFont().deriveFont(fsize));
 			more.setSize((int)(50*osize),(int)(20*osize));
 		}
@@ -227,7 +227,7 @@ public class WeatherPanel extends JPanel implements Runnable
 			clima = new WeatherCondition(test.getOption("location"));
 			vector = clima.ListCityCondition();
 
-			wLabel.setText("Weather Conditions at "+vector.get(0).getTime());
+			wLabel.setText(vector.get(0).getCity()+" at "+vector.get(0).getTime());
 			tempB.setText(vector.get(0).getTm()+"°C");
 			Icon image;
 			if(vector.get(0).getIconWt().compareTo("N/A")==0)

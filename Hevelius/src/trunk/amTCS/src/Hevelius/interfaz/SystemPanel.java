@@ -10,7 +10,7 @@ import alma.acs.component.ComponentLifecycleException;
 
 public class SystemPanel extends JPanel
 {
-	private JLabel system;
+	//private JLabel system;
 	private JButton start;
 	private JButton stop;
 	private JButton shutdown;
@@ -25,10 +25,10 @@ public class SystemPanel extends JPanel
 	public void init()
 	{
 		//System Label
-		system = new JLabel("System");
+	/*	system = new JLabel("System");
 		system.setSize(100,20);
 		system.setForeground(Color.WHITE);
-		add(system);
+		add(system);*/
 
 		//TCS Start Button
 		start = new JButton("Start TCS");
@@ -88,30 +88,30 @@ public class SystemPanel extends JPanel
 
 		if(updatePanel)
 		{
-			if(dx/280.0f>dy/154.0f)
+			if(dx/280.0f>dy/135.0f)
 			{
-				fsize = (12.0f*dy)/154.0f;
-				osize = dy/154.0f;
+				fsize = (12.0f*dy)/135.0f;
+				osize = dy/135.0f;
 			}
 			else
 			{
 				fsize = (12.0f*dx)/280.0f;
 				osize = dx/280.0f;
 			}
-
-			system.setLocation((int)(150*osize),(int)(5*osize));
+		//	System.out.println(dx+" "+dy);
+			/*system.setLocation((int)(150*osize),(int)(5*osize));
 			system.setFont(system.getFont().deriveFont(fsize));
-			system.setSize((int)(100*osize),(int)(20*osize));
+			system.setSize((int)(100*osize),(int)(20*osize));*/
 
-			start.setLocation((int)(150*osize),(int)(30*osize));
+			start.setLocation((int)(100*osize),(int)(30*osize));
 			start.setFont(start.getFont().deriveFont(fsize));
 			start.setSize((int)(100*osize),(int)(20*osize));
 
-			stop.setLocation((int)(150*osize),(int)(55*osize));
+			stop.setLocation((int)(100*osize),(int)(55*osize));
 			stop.setFont(stop.getFont().deriveFont(fsize));
 			stop.setSize((int)(100*osize),(int)(20*osize));
 
-			shutdown.setLocation((int)(150*osize),(int)(80*osize));
+			shutdown.setLocation((int)(100*osize),(int)(80*osize));
 			shutdown.setFont(shutdown.getFont().deriveFont(fsize));
 			shutdown.setSize((int)(100*osize),(int)(20*osize));
 		}

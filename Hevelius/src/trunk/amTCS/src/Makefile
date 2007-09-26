@@ -71,7 +71,7 @@ eTrexImpl_LIBS        = TypesStubs DevGPSStubs
 #
 # Scripts (public and local)
 # ----------------------------
-SCRIPTS         = Hevelius-ALFA-rc1
+SCRIPTS         = HeveliusTCS
 SCRIPTS_L       =
 
 #

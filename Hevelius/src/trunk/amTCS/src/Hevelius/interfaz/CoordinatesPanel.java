@@ -388,132 +388,132 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 			}
 
 			//Interface Objects Positioning
-			coor.setLocation((int)(30*osize),(int)(0*osize));
+			coor.setLocation((int)(30*osize),(int)(40*osize));
 			coor.setFont(coor.getFont().deriveFont(fsize));
 			coor.setSize((int)(150*osize),(int)(20*osize));
 			
 
-			coor1L.setLocation((int)(20*osize),(int)(30*osize));
+			coor1L.setLocation((int)(20*osize),(int)(70*osize));
 			coor1L.setFont(coor1L.getFont().deriveFont(fsize));
 			coor1L.setSize((int)(30*osize),(int)(20*osize));
 
-			coor1.setLocation((int)(50*osize),(int)(30*osize));
+			coor1.setLocation((int)(50*osize),(int)(70*osize));
 			coor1.setFont(coor1.getFont().deriveFont(fsize));
 			coor1.setSize((int)(80*osize),(int)(20*osize));
 
-			coor2L.setLocation((int)(20*osize),(int)(55*osize));
+			coor2L.setLocation((int)(20*osize),(int)(95*osize));
 			coor2L.setFont(coor2L.getFont().deriveFont(fsize));
 			coor2L.setSize((int)(30*osize),(int)(20*osize));
 
-			coor2.setLocation((int)(50*osize),(int)(55*osize));
+			coor2.setLocation((int)(50*osize),(int)(95*osize));
 			coor2.setFont(coor2.getFont().deriveFont(fsize));
 			coor2.setSize((int)(80*osize),(int)(20*osize));
 
-			go.setLocation((int)(135*osize),(int)(30*osize));
+			go.setLocation((int)(135*osize),(int)(70*osize));
 			go.setFont(go.getFont().deriveFont(fsize));
 			go.setSize((int)(45*osize),(int)(45*osize));
 
-			ccoor.setLocation((int)(250*osize),(int)(0*osize));
+			ccoor.setLocation((int)(250*osize),(int)(40*osize));
 			ccoor.setFont(ccoor.getFont().deriveFont(fsize));
 			ccoor.setSize((int)(150*osize),(int)(20*osize));
 
-			radec.setLocation((int)(240*osize),(int)(40*osize));
+			radec.setLocation((int)(240*osize),(int)(80*osize));
 			radec.setFont(radec.getFont().deriveFont(fsize));
 			radec.setSize((int)(80*osize),(int)(20*osize));
 
-			horizontal.setLocation((int)(350*osize), (int)(40*osize));
+			horizontal.setLocation((int)(350*osize), (int)(80*osize));
 			horizontal.setFont(horizontal.getFont().deriveFont(fsize));
 			horizontal.setSize((int)((int)(80*osize)*osize),(int)((int)(20*osize)*osize));
 
-			ccoorRL.setLocation((int)(220*osize),(int)(70*osize));
+			ccoorRL.setLocation((int)(220*osize),(int)(110*osize));
 			ccoorRL.setFont(ccoorRL.getFont().deriveFont(fsize));
 			ccoorRL.setSize((int)(30*osize),(int)(20*osize));
 
-			ccoorR.setLocation((int)(260*osize),(int)(70*osize));
+			ccoorR.setLocation((int)(260*osize),(int)(110*osize));
 			ccoorR.setFont(ccoorR.getFont().deriveFont(fsize));
 			ccoorR.setSize((int)(80*osize),(int)(20*osize));
 
-			ccoorDL.setLocation((int)(220*osize), (int)(90*osize));
+			ccoorDL.setLocation((int)(220*osize), (int)(130*osize));
 			ccoorDL.setFont(ccoorDL.getFont().deriveFont(fsize));
 			ccoorDL.setSize((int)(30*osize),(int)(20*osize));
 
-			ccoorD.setLocation((int)(260*osize),(int)(90*osize));
+			ccoorD.setLocation((int)(260*osize),(int)(130*osize));
 			ccoorD.setFont(ccoorD.getFont().deriveFont(fsize));
 			ccoorD.setSize((int)(80*osize),(int)(20*osize));
 
-			ccoorAlL.setLocation((int)(340*osize),(int)(70*osize));
+			ccoorAlL.setLocation((int)(340*osize),(int)(110*osize));
 			ccoorAlL.setFont(ccoorAlL.getFont().deriveFont(fsize));
 			ccoorAlL.setSize((int)(30*osize),(int)(20*osize));
 
-			ccoorAl.setLocation((int)(380*osize),(int)(70*osize));
+			ccoorAl.setLocation((int)(380*osize),(int)(110*osize));
 			ccoorAl.setFont(ccoorAl.getFont().deriveFont(fsize));
 			ccoorAl.setSize((int)(80*osize),(int)(20*osize));
 
-			ccoorAzL.setLocation((int)(340*osize),(int)(90*osize));
+			ccoorAzL.setLocation((int)(340*osize),(int)(130*osize));
 			ccoorAzL.setFont(ccoorAzL.getFont().deriveFont(fsize));
 			ccoorAzL.setSize((int)(30*osize),(int)(20*osize));
 
-			ccoorAz.setLocation((int)(380*osize),(int)(90*osize));
+			ccoorAz.setLocation((int)(380*osize),(int)(130*osize));
 			ccoorAz.setFont(ccoorAz.getFont().deriveFont(fsize));
 			ccoorAz.setSize((int)(80*osize),(int)(20*osize));
 
-			catalogue.setLocation((int)(50*osize),(int)(80*osize));
+			catalogue.setLocation((int)(50*osize),(int)(120*osize));
 			catalogue.setFont(catalogue.getFont().deriveFont(fsize));
 			catalogue.setSize((int)(130*osize),(int)(20*osize));
 
 			//Agregando...
 			//Pointing buttons
-			rbutton.setLocation((int)(145*osize),(int)(220*osize));
+			rbutton.setLocation((int)(145*osize),(int)(260*osize));
 			rbutton.setSize((int)(50*osize),(int)(50*osize));
 			rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rArrow.jpg")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
 
-			lbutton.setLocation((int)(25*osize),(int)(220*osize));
+			lbutton.setLocation((int)(25*osize),(int)(260*osize));
 			lbutton.setSize((int)(50*osize),(int)(50*osize));
 			lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/lArrow.jpg")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
 
-			tbutton.setLocation((int)(85*osize),(int)(160*osize));
+			tbutton.setLocation((int)(85*osize),(int)(200*osize));
 			tbutton.setSize((int)(50*osize),(int)(50*osize));
 			tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/tArrow.jpg")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
 
-			bbutton.setLocation((int)(85*osize),(int)(280*osize));
+			bbutton.setLocation((int)(85*osize),(int)(320*osize));
 			bbutton.setSize((int)(50*osize),(int)(50*osize));
 			bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/bArrow.jpg")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
 
 			//Offset Lables
-			offsetL.setLocation((int)(240*osize),(int)(135*osize));
+			offsetL.setLocation((int)(240*osize),(int)(185*osize));
 			offsetL.setFont(offsetL.getFont().deriveFont(fsize));
 			offsetL.setSize((int)(80*osize),(int)(20*osize));
 
-			laltoffset.setLocation((int)(230*osize),(int)(155*osize));
+			laltoffset.setLocation((int)(230*osize),(int)(205*osize));
 			laltoffset.setFont(laltoffset.getFont().deriveFont(fsize));
 			laltoffset.setSize((int)(30*osize),(int)(20*osize));
 
-			lazoffset.setLocation((int)(230*osize),(int)(175*osize));
+			lazoffset.setLocation((int)(230*osize),(int)(225*osize));
 			lazoffset.setFont(lazoffset.getFont().deriveFont(fsize));
 			lazoffset.setSize((int)(30*osize),(int)(20*osize));
 
-			altoffset.setLocation((int)(270*osize),(int)(155*osize));
+			altoffset.setLocation((int)(270*osize),(int)(205*osize));
 			altoffset.setFont(altoffset.getFont().deriveFont(fsize));
 			altoffset.setSize((int)(30*osize),(int)(20*osize));
 
-			azoffset.setLocation((int)(270*osize),(int)(175*osize));
+			azoffset.setLocation((int)(270*osize),(int)(225*osize));
 			azoffset.setFont(azoffset.getFont().deriveFont(fsize));
 			azoffset.setSize((int)(30*osize),(int)(20*osize));
 
 			//Park, Zenith & Tracking
-			park.setLocation((int)(340*osize),(int)(130*osize));
+			park.setLocation((int)(330*osize),(int)(180*osize));
 			park.setFont(park.getFont().deriveFont(fsize));
 			park.setSize((int)(100*osize),(int)(20*osize));
 
-			zenith.setLocation((int)(340*osize),(int)(155*osize));
+			zenith.setLocation((int)(330*osize),(int)(205*osize));
 			zenith.setFont(zenith.getFont().deriveFont(fsize));
 			zenith.setSize((int)(100*osize),(int)(20*osize));
 
-			tracking.setLocation((int)(340*osize),(int)(180*osize));
+			tracking.setLocation((int)(330*osize),(int)(230*osize));
 			tracking.setFont(tracking.getFont().deriveFont(fsize));
 			tracking.setSize((int)(100*osize),(int)(20*osize));
 
-			stopbutton.setLocation((int)(340*osize),(int)(280*osize));
+			stopbutton.setLocation((int)(340*osize),(int)(300*osize));
 			stopbutton.setSize((int)(85*osize),(int)(85*osize));
 			stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop.png")).getImage().getScaledInstance((int)(80*osize),(int)(80*osize),Image.SCALE_SMOOTH)));
 		}

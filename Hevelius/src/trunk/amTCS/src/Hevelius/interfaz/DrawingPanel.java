@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.Image;
 import java.text.DecimalFormat;
+import javax.swing.BorderFactory;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 
 import java.io.*;
 import javax.imageio.*;
@@ -34,9 +37,9 @@ public class DrawingPanel extends JPanel
 	private static Configuration test = new Configuration();
 
 //	private Image stop=null;
-	private JLabel stimeL;
+/*	private JLabel stimeL;
 	private JLabel stime;
-	private JLabel stimeh;
+	private JLabel stimeh;*/
 
 	private int cx;
 	private int cy;
@@ -57,6 +60,7 @@ public class DrawingPanel extends JPanel
 	private CoordinatesPanel coorpane = null;
 	private VirtualTelescopePanel vtpane = null;
 	private MenuPanel mpane = null;
+	private SiderealPanel stpane = null;
 
 	private Tracking trck = null;
 	private SideralUpdate sdrl = null;
@@ -100,7 +104,7 @@ public class DrawingPanel extends JPanel
 		img = setImage("Hevelius/images/image.jpg",new Dimension(200,200));
 
 		//Sidereal Time Label
-		stimeL = new JLabel("Sidereal Time");
+		/*stimeL = new JLabel("Sidereal Time");
 		stimeL.setSize(120,20);
 		stimeL.setForeground(Color.WHITE);
 		add(stimeL);
@@ -115,8 +119,14 @@ public class DrawingPanel extends JPanel
 		stimeh = new JLabel("00:00:00");
 		stimeh.setSize(100,20);
 		stimeh.setForeground(Color.WHITE);
-		add(stimeh);
+		add(stimeh);*/
 		
+
+		//SiderealPanel
+		stpane = new SiderealPanel(null);
+		stpane.init();
+		add(stpane);
+
 		//CoordinatesPanel
 		coorpane = new CoordinatesPanel(null);
 		coorpane.init();
@@ -195,7 +205,7 @@ public class DrawingPanel extends JPanel
 		r = (dy-rect_y)/4;
 		int oGLx = (dx-rect_x)/2+rect_x+20;
 
-		g.setColor(Color.GRAY);
+		g.setColor(Color.DARK_GRAY);
 
 		g.fillRect(dx/60,dy/6,dx-40,3);
 		g.fillRect(dx*3/7,dy/6,2,dy);
@@ -242,6 +252,10 @@ public class DrawingPanel extends JPanel
 
 		if(updatePanel)
 		{
+			Border line = BorderFactory.createLineBorder(Color.DARK_GRAY);
+		
+			
+
 			vtpane.setLocation(dx*5/7+dx/30+(dx-dx/15-dx*5/7-t)/2,dy/6+dy/40);
 			vtpane.setSize(t,t);
 
@@ -253,7 +267,9 @@ public class DrawingPanel extends JPanel
 			//spane.setSize(120,120);
 			//spane.setLocation(dx-140,dy-170);
 			spane.setLocation(dx*5/7+dx/30,dy*5/6);
-			spane.setSize(dx*2/7-dx*2/30,dy*1/6);
+			spane.setSize(dx*2/7-dx*2/30,dy*1/6-dy/40);
+			Border sBorder = BorderFactory.createTitledBorder(line, "SYSTEM");
+                        spane.setBorder(sBorder);
 
 			//wpane.setSize(300,200);
 			//wpane.setLocation(0,0);
@@ -261,6 +277,8 @@ public class DrawingPanel extends JPanel
 			//wpane.setLocation(630,185);
 			wpane.setLocation(dx*3/7+dx/30,dy/6+dy/40);
 			wpane.setSize(dx*2/7-dx*2/30,dy/3-dy*2/40);
+			Border wBorder = BorderFactory.createTitledBorder(line, "WEATHER CONDITIONS");
+                        wpane.setBorder(wBorder);
 
 			//tspane.setSize(300,200);
 			//tspane.setLocation(0,230);
@@ -268,7 +286,9 @@ public class DrawingPanel extends JPanel
 			//tspane.setLocation(dx-200,dy/2+10);
 			tspane.setLocation(dx*5/7+dx/30,dy/2+dy*2/40);
 			tspane.setSize(dx*2/7-dx*2/30,dy/6);
-
+			//Border line = BorderFactory.createLineBorder(Color.DARK_GRAY);
+                        Border tsBorder = BorderFactory.createTitledBorder(line, "TELESCOPE STATUS");
+                        tspane.setBorder(tsBorder);
 			//scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
 			//scpane.setLocation((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5);
 			//scpane.setSize(rect_x*3/4-10,rect_y*3/4-10);
@@ -282,6 +302,12 @@ public class DrawingPanel extends JPanel
 			//coorpane.setLocation(50,550);
 			coorpane.setLocation(0+dx/30,dy/2+dy/40);
 			coorpane.setSize(dx*3/7-dx*2/30,dy/2-dy*2/40);
+			//Border coorBorder = new BevelBorder(BevelBorder.LOWERED, Color.WHITE);
+			//Border coorBorder = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+			//Border coorBorder = BorderFactory.createLineBorder( Color.WHITE );
+			//Border line = BorderFactory.createLineBorder(Color.DARK_GRAY);
+			Border coorBorder = BorderFactory.createTitledBorder(line, "CONTROL");
+			coorpane.setBorder(coorBorder);
 
 			mpane.setLocation(0,0);
 			//mpane.setSize(dx*3/7-dx*2/30,dy/6-dy*2/40);
@@ -289,9 +315,14 @@ public class DrawingPanel extends JPanel
 
 			//stimeL.setLocation(60,400);
 			//stime.setLocation(80,420);
-			stimeL.setLocation(dx*4/7-60,dy/6-dy/40+dy/3);
+			/*stimeL.setLocation(dx*4/7-60,dy/6-dy/40+dy/3);
 			stime.setLocation(dx*4/7-30,dy/6-dy/40+dy/3+20);
-			stimeh.setLocation(dx*4/7-40,dy/6-dy/40+dy/3+40);
+			stimeh.setLocation(dx*4/7-40,dy/6-dy/40+dy/3+40);*/
+
+			stpane.setLocation(dx*3/7+dx/30,dy*3/6+dy/40);
+			stpane.setSize(dx*2/7-dx*2/30,(dy/3-dy*2/40)/4);
+			Border stBorder = BorderFactory.createTitledBorder(line, "SIDEREAL TIME");
+                        stpane.setBorder(stBorder);
 		}
 	}
 	public Dimension getDim()
@@ -468,7 +499,8 @@ public class DrawingPanel extends JPanel
 			ST = ST + 360;
 		if(ST > 360)
 			ST = ST - 360;
-		stime.setText(df.format(ST));
+//		stime.setText(df.format(ST));
+		double TMP = ST;
 		int hours, mins, secs;
 		String hour, min, sec;
 		ST = ST/15;
@@ -489,6 +521,6 @@ public class DrawingPanel extends JPanel
 			sec = new String("0"+secs);
 		else
 			sec = new String(""+secs);
-		stimeh.setText(hour+":"+min+":"+sec);
+		stpane.setTime(hour+":"+min+":"+sec,df.format(TMP));
 	}
 }
