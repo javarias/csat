@@ -10,6 +10,10 @@ import alma.ACS.CBDescIn;
 import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
 import alma.acs.component.client.ComponentClient;
 
+import Hevelius.interfaz.*;
+import alma.acs.callbacks.RequesterUtil;
+import alma.acs.callbacks.ResponseReceiver;
+
 public class CSATControlClient extends ComponentClient
 {
 	private alma.CSATCONTROL_MODULE.CSATControl cscontrol;
@@ -73,11 +77,16 @@ public class CSATControlClient extends ComponentClient
 	{
 		if(cscontrol!=null)
 		{
-			//cscontrol.preset(p, new CBvoid(), new CBDescIn());
-			//cscontrol.preset(p, null, new CBDescIn());
-			//cscontrol.preset(p, new CBvoid(), new CBDescIn());
+			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(2);
+//			ResponseReceiver rere  =  new ResponseReceiver() {
+//				public void incomingResponse(Object x) {
+//					System.out.println("Incoming Response: "+x);
+//				}
+//				public void incomingException(Exception x) {
+//					System.out.println("Responding failed: "+x);}
+//
+//			};
 			CBDescIn desc = new CBDescIn(2000, 2000, 1);
-			//alma.ACS.TimeInterval t1 = 2000;
 			cscontrol.preset(p, null, desc);
 		}
 	}
@@ -102,7 +111,9 @@ public class CSATControlClient extends ComponentClient
 	{
 		if(cscontrol!=null)
 		{
-			cscontrol.goToRadec(p,v, null, null);
+			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(2);
+			CBDescIn desc = new CBDescIn(2000, 2000, 1);
+			cscontrol.goToRadec(p,v, null, desc);
 		}
 	}
 
@@ -110,6 +121,7 @@ public class CSATControlClient extends ComponentClient
 	{
 		if(cscontrol!=null)
 		{
+			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(2);
 			CBDescIn desc = new CBDescIn(2000, 2000, 1);
 			cscontrol.goToAltAz(p,v, null, desc);
 		}

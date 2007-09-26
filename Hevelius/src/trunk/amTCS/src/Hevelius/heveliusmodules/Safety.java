@@ -1,10 +1,13 @@
-package Hevelius.interfaz;
+package Hevelius.heveliusmodules;
+
+import Hevelius.interfaz.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 import java.util.*;
+import alma.TYPES.*;
 
 public class Safety implements Runnable
 {
@@ -17,7 +20,10 @@ public class Safety implements Runnable
                                 {
                                         try
                                         {
-						interfaz.getDrawingPanel().getTelStatusPanel().setDangerState(interfaz.getDrawingPanel().getCSATStatus().getSafety());
+						RadecPos rd = new RadecPos();
+						rd.ra = (interfaz.getDrawingPanel().getCoordinatesPanel().getRa());
+						rd.dec = (interfaz.getDrawingPanel().getCoordinatesPanel().getDec());
+						interfaz.getDrawingPanel().getTelStatusPanel().setDangerState(interfaz.getDrawingPanel().getCSATStatus().getSafety(rd));
                                         }
                                         catch(Exception e)
                                         {
