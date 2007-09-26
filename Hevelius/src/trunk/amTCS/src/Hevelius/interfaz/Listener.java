@@ -11,12 +11,15 @@ import java.text.DecimalFormat;
 
 
 public class Listener implements GLEventListener, MouseListener {
-        public static final int RED = 0;
-        public static final int GREEN = 0;
-        public static final int BLUE = 0;
-	public static final int ALPHA = 1;
+        public static final float RED = 0;
+        public static final float GREEN = 0;
+        public static final float BLUE = 0.05f;
+	public static final float ALPHA = 0.05f;
 
-	private float mat_ambient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+	private float mat_ambient[] = { 0.44f, 0.44f, 0.44f, 1.0f };
+	private float mat_ambient1[] = { 0.8f, 0.4f, 0f, 1.0f };
+	private float mat_ambient2[] = { 0.22f, 0.22f, 0.22f, 1.0f };
+	private float mat_ambient3[] = { 0f, 0f, 0f, 1f };
 	private float mat_diffuse[] = { 0.1f, 0.5f, 0.8f, 1.0f };
 	private float mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	private float mat_shininess[] = { 100.0f };
@@ -151,32 +154,35 @@ public class Listener implements GLEventListener, MouseListener {
 		quadric = glu.gluNewQuadric();
 		glu.gluQuadricDrawStyle(quadric, GLU.GLU_FILL);
 		
-		//gl.glColor3f(1, 0, 0);
 		gl.glPushMatrix();
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient3,0);
 		glu.gluCylinder(quadric, 0.8, 0.6, 0.3, 30, 30);
 		gl.glPopMatrix();
-		//gl.glDisable(GL.GL_LIGHTING);
-                //gl.glDisable(GL.GL_LIGHT0);	
 		//Disco de base
 
-		gl.glPushMatrix();
-		//gl.glColor3f(0, 1, 0);
+		 gl.glPushMatrix();
+                gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
+                //gl.glTranslatef(0,0,-0.3f);
+		glu.gluCylinder(quadric, 0.81, 0.71, 0.11, 30, 30);
+                gl.glPopMatrix();
 
-		gl.glTranslatef(0f,0f,0.3f);
-		glu.gluDisk(quadric, 0, 0.61, 15, 15);
+
+		gl.glPushMatrix();
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient,0);
+		gl.glTranslatef(0.02f,0f,0.28f);
+		glu.gluDisk(quadric, 0, 0.6, 15, 15);
 		gl.glPopMatrix();
 
 		//Soportes grandes del telescopio
 		gl.glPushMatrix();
-		//gl.glColor3f(0, 0, 1f);
-
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, 0.5f ,0.3f);
 		glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 60, 60);
 		gl.glPopMatrix();
 	
 		gl.glPushMatrix();
-		//gl.glColor3f(0, 0, 1);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, -0.5f ,0.3f);
 		glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 60, 60);
@@ -184,14 +190,14 @@ public class Listener implements GLEventListener, MouseListener {
 		//Tapas pequenas de los pilares*/
 
 		gl.glPushMatrix();
-		//gl.glColor3f(1, 1, 1);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, 0.5f,1.1f);
 		glu.gluDisk(quadric, 0, 0.06, 15, 15);
 		gl.glPopMatrix();
 		
 		gl.glPushMatrix();
-		//gl.glColor3f(1, 1, 1);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, -0.5f ,1.1f);
 		glu.gluDisk(quadric, 0, 0.06, 15, 15);
@@ -199,14 +205,14 @@ public class Listener implements GLEventListener, MouseListener {
 		//Soportes pequeños del Telescopio
 
 		gl.glPushMatrix();
-		//gl.glColor3f(1, 1, 0);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glTranslatef(-0.45f, 0, 1.06f);
 		gl.glRotatef(90,0,1,0);
 		glu.gluCylinder(quadric, 0.05, 0.05, 0.17 , 30, 30);
 		gl.glPopMatrix();
 
 		gl.glPushMatrix();
-		//gl.glColor3f(1, 1, 0);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glTranslatef(0.45f, 0, 1.06f);
 		gl.glRotatef(-90,0,1,0);
 		glu.gluCylinder(quadric, 0.05, 0.05, 0.17 , 30, 30);
@@ -215,17 +221,19 @@ public class Listener implements GLEventListener, MouseListener {
 		//Tapas de cilindros pequeñ
 
 		gl.glPushMatrix();
-		//gl.glColor3f(1, 0, 0);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glTranslatef(-0.3f, 0, 1.06f);
 		gl.glRotatef(90,0,1,0);
 		glu.gluDisk(quadric, 0, 0.05, 15, 15);
 		gl.glPopMatrix();
+		
 		gl.glPushMatrix();
-		//gl.glColor3f(1, 0, 0);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glTranslatef(0.3f, 0, 1.06f);
 		gl.glRotatef(-90,0,1,0);
 		glu.gluDisk(quadric, 0, 0.05, 15, 15);
 		gl.glPopMatrix();
+
 		glu.gluDeleteQuadric(quadric);
 		gl.glEndList();
 
@@ -238,7 +246,7 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glEnable(GL.GL_DEPTH_TEST);
 		
 		gl.glPushMatrix();
-		gl.glColor3f(1, 1, 0);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient1,0);
 		gl.glTranslatef(0, 0 ,-0.4f);
 		glu.gluCylinder(quadric, 0.4, 0.5, 2, 30, 30);
 		gl.glPopMatrix();
@@ -246,15 +254,15 @@ public class Listener implements GLEventListener, MouseListener {
 		//lente trasero
 
 		gl.glPushMatrix();
-		//gl.glColor3f(1, 1, 1);
-
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient3,0);		
 		gl.glRotatef(-90,1,0,0);
                 gl.glTranslatef(0, -1.55f, -0.5f);
                 glu.gluCylinder(quadric, 0.01, 0.01, 1 , 30, 30);
 		gl.glPopMatrix();
 
-		 //gl.glColor3f(1, 1, 1);
+		
                 gl.glPushMatrix();
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient3,0);
 		gl.glRotatef(-90,0,1,0);
                 gl.glTranslatef(1.6f, 0f, -0.5f);
                 glu.gluCylinder(quadric, 0.01, 0.01, 1 , 30, 30);
@@ -263,14 +271,28 @@ public class Listener implements GLEventListener, MouseListener {
 		//lente delantero
 		
 		gl.glPushMatrix();
-		gl.glColor4f(1, 1, 1,1);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient3,0);
 		gl.glDepthMask(false);
 		gl.glRotatef(0,1,0,0);
                 gl.glTranslatef(0,0, -0.4f);
                 glu.gluDisk(quadric, 0, 0.4, 15, 15);
 		gl.glDepthMask(true);
-
 		gl.glPopMatrix();
+
+		//adorno
+		gl.glPushMatrix();
+                gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient3,0);
+                gl.glTranslatef(0, 0 ,-0.4f);
+                glu.gluCylinder(quadric, 0.42, 0.42, 0.3, 30, 30);
+                gl.glPopMatrix();
+
+		gl.glPushMatrix();
+                gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient3,0);
+                gl.glTranslatef(0f, 0f ,1.45f);
+                glu.gluCylinder(quadric, 0.5, 0.52, 0.3, 30, 30);
+                gl.glPopMatrix();
+
+		
 		glu.gluDeleteQuadric(quadric);
 		gl.glEndList();
 	}
