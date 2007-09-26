@@ -134,6 +134,7 @@ SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
 Hevelius_DIRS=Hevelius/
+Hevelius_EXTRAS=Hevelius/images/
 jjj_EXTRAS= 
 #
 # java sources in Jarfile on/off

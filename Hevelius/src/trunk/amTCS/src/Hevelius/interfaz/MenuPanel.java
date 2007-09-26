@@ -79,7 +79,7 @@ public class MenuPanel extends JPanel //implements Runnable
 		aboutWindow();
 		configWindow();
 
-		ImageIcon cbutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));		
+		ImageIcon cbutton = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));		
 
 		menu_config = new JButton(cbutton);
 		menu_config.setBackground(Color.BLACK);
@@ -109,7 +109,7 @@ public class MenuPanel extends JPanel //implements Runnable
                                 }
                                 });*/
 
-		ImageIcon hbutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-help.gif").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		ImageIcon hbutton = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
 
                 menu_help = new JButton(hbutton);
                 menu_help.setBackground(Color.BLACK);
@@ -143,13 +143,13 @@ public class MenuPanel extends JPanel //implements Runnable
 		if(updatePanel)
 		{
 			menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
-			menu_config.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+			menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
 			menu_config.setLocation(4*dx/6 + dy-dy*12/40 + 1,dy*6/40);
 
 			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy-dy*12/40),dy-dy*12/40));
 
 			menu_help.setSize(dy-dy*12/40,dy-dy*12/40);
-                        menu_help.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/menu-help.gif").getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                        menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
                         menu_help.setLocation(4*dx/6 + 2*(dy-dy*12/40 + 1),dy*6/40);
 
 			/*menu_about.setSize(dy-dy*12/40,dy-dy*12/40);
@@ -168,7 +168,7 @@ public class MenuPanel extends JPanel //implements Runnable
 		config.setLayout(null);
 		config.pack();	
 
-		Image icono = Toolkit.getDefaultToolkit().getImage("Hevelius/images/hevelius.png");
+		Image icono = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemClassLoader().getResource("Hevelius/images/hevelius.png"));
 		//config.setIconImage(icono);
 
 		config.addWindowListener(new WindowAdapter() {
@@ -542,7 +542,7 @@ public class MenuPanel extends JPanel //implements Runnable
 		JLabel about2 = new JLabel("DevNull Enterprise");
 		JLabel about3 = new JLabel("2007");
 		
-		Icon logoImagen = new ImageIcon("Hevelius/images/logo.png");
+		Icon logoImagen = new ImageIcon(ClassLoader.getSystemClassLoader().getResource("Hevelius/images/logo.png"));
 		JLabel logo = new JLabel(logoImagen);
 
 		about1.setLocation(50,15);
@@ -573,7 +573,7 @@ public class MenuPanel extends JPanel //implements Runnable
                 Image imag = null;
                 try
                 {
-                        imag = ImageIO.read(new File(img));
+                        imag = ImageIO.read(getClass().getClassLoader().getResource(img));
                 }
                 catch(IOException e)
                 {

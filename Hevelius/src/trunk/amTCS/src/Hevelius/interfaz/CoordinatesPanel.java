@@ -76,7 +76,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
                 Image imag = null;
                 try
                 {
-                        imag = ImageIO.read(new File(img));
+                        imag = ImageIO.read(getClass().getClassLoader().getResource(img));
                 }
                 catch(IOException e)
                 {
@@ -218,7 +218,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 		//Agregando...
 		//Go to R Button
-		ImageIcon rArrow = new ImageIcon(new ImageIcon("Hevelius/images/rArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		ImageIcon rArrow = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rArrow.jpg")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
 		rbutton = new JButton(rArrow);
 		rbutton.setBackground(Color.WHITE);
 		rbutton.setSize(50,50);
@@ -236,7 +236,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 
 		//Go to L Button
-		ImageIcon lArrow = new ImageIcon(new ImageIcon("Hevelius/images/lArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		ImageIcon lArrow = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/lArrow.jpg")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
 		lbutton = new JButton(lArrow);
 		lbutton.setBackground(Color.WHITE);
 		lbutton.setSize(50,50);
@@ -253,7 +253,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 
 		//Go to T Botton
-		ImageIcon tArrow = new ImageIcon(new ImageIcon("Hevelius/images/tArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		ImageIcon tArrow = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/tArrow.jpg")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
 		tbutton = new JButton(tArrow);
 		tbutton.setBackground(Color.WHITE);
 		tbutton.setSize(50,50);
@@ -269,7 +269,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 				});
 
 		//Go to B Button
-		ImageIcon bArrow = new ImageIcon(new ImageIcon("Hevelius/images/bArrow.jpg").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		ImageIcon bArrow = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/bArrow.jpg")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
 		bbutton = new JButton(bArrow);
 		bbutton.setBackground(Color.WHITE);
 		bbutton.setSize(50,50);
@@ -284,7 +284,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 				}
 				});
 
-		ImageIcon stop = new ImageIcon(new ImageIcon("Hevelius/images/stop.png").getImage().getScaledInstance(80,80,Image.SCALE_SMOOTH));
+		ImageIcon stop = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop.png")).getImage().getScaledInstance(80,80,Image.SCALE_SMOOTH));
 		stopbutton = new JButton(stop);
 		stopbutton.setBackground(Color.WHITE);
 		stopbutton.setSize(80,80);
@@ -465,19 +465,19 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 			//Pointing buttons
 			rbutton.setLocation((int)(145*osize),(int)(220*osize));
 			rbutton.setSize((int)(50*osize),(int)(50*osize));
-			rbutton.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/rArrow.jpg").getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+			rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rArrow.jpg")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
 
 			lbutton.setLocation((int)(25*osize),(int)(220*osize));
 			lbutton.setSize((int)(50*osize),(int)(50*osize));
-			lbutton.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/lArrow.jpg").getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+			lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/lArrow.jpg")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
 
 			tbutton.setLocation((int)(85*osize),(int)(160*osize));
 			tbutton.setSize((int)(50*osize),(int)(50*osize));
-			tbutton.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/tArrow.jpg").getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+			tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/tArrow.jpg")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
 
 			bbutton.setLocation((int)(85*osize),(int)(280*osize));
 			bbutton.setSize((int)(50*osize),(int)(50*osize));
-			bbutton.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/bArrow.jpg").getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+			bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/bArrow.jpg")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
 
 			//Offset Lables
 			offsetL.setLocation((int)(240*osize),(int)(135*osize));
@@ -515,7 +515,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 			stopbutton.setLocation((int)(340*osize),(int)(280*osize));
 			stopbutton.setSize((int)(85*osize),(int)(85*osize));
-			stopbutton.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/stop.png").getImage().getScaledInstance((int)(80*osize),(int)(80*osize),Image.SCALE_SMOOTH)));
+			stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop.png")).getImage().getScaledInstance((int)(80*osize),(int)(80*osize),Image.SCALE_SMOOTH)));
 		}
 	}
 	public void setCoorType(boolean type)

@@ -74,7 +74,7 @@ public class DrawingPanel extends JPanel
 		Image imag = null;
 		try
 		{
-			imag = ImageIO.read(new File(img));
+			imag = ImageIO.read(getClass().getClassLoader().getResource(img));
 		}
 		catch(IOException e)
 		{

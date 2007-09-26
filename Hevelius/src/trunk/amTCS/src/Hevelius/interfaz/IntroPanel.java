@@ -6,6 +6,7 @@ import javax.imageio.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 
 public class IntroPanel extends JPanel
 {
@@ -16,7 +17,7 @@ public class IntroPanel extends JPanel
 		super(l);
 		try
 		{
-			imag = ImageIO.read(new File("Hevelius/images/hevelius.png"));
+			imag = ImageIO.read(getClass().getClassLoader().getResource("Hevelius/images/hevelius.png"));
 		}
 		catch(IOException e)
 		{
@@ -35,4 +36,5 @@ public class IntroPanel extends JPanel
 		g.drawImage(imag,getSize().width/2-100,40,this);
 		bar.setLocation(getSize().width/2-75,160);
 	}
+
 }
