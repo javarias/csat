@@ -28,8 +28,8 @@ public class ScreenPanel extends JPanel implements Runnable
 		int dx, dy;
 		dx = getSize().width;
 		dy = getSize().height;
-		g.setColor(Color.DARK_GRAY);
-		g.fillRect(0,0,dx,dy);
+		//g.setColor(Color.DARK_GRAY);
+		//g.fillRect(0,0,dx,dy);
 		g.setColor(Color.BLACK);
 		g.fillRect(2,2,dx-4,dy-4);
 		screen = buf;

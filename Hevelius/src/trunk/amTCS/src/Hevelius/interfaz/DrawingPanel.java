@@ -258,6 +258,8 @@ public class DrawingPanel extends JPanel
 
 			vtpane.setLocation(dx*5/7+dx/30+(dx-dx/15-dx*5/7-t)/2,dy/6+dy/40);
 			vtpane.setSize(t,t);
+			Border vtBorder = BorderFactory.createTitledBorder(line, "VIRTUAL TELESCOPE");
+                        vtpane.setBorder(vtBorder);
 
 			//cpane.setSize(((dy-rect_y)/2+50)*3/4,((dy-rect_y)/2+50)*3/4);
 			//cpane.setLocation(5,dy-cpane.getSize().height-50);
@@ -295,6 +297,8 @@ public class DrawingPanel extends JPanel
 			//scpane.setLocation(50+5,180+5);
 			scpane.setLocation(0+dx/30,dy/6+dy/40);
 			scpane.setSize(dx*3/7-dx*2/30,dy/3-dy*2/40);
+			Border scBorder = BorderFactory.createTitledBorder(line, "CCD");
+                        scpane.setBorder(scBorder);
 
 			//coorpane.setSize(200,250);
 			//coorpane.setLocation(oGLx+10,dx-oGLx);
