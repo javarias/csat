@@ -81,20 +81,20 @@ public class VirtualTelescopePanel extends JPanel
 		int dx, dy;
 		Dimension d = getSize();
 		Dimension d2 = getSize();
-		d2.width = d2.width*2;
-		d2.height = d2.height*2;
+		d2.width = d2.width*2-30;
+		d2.height = d2.height*2-30;
 		dx = d.width;
 		dy = d.height;
 		//g.setColor(Color.DARK_GRAY);
 		//g.fillRect(0,0,dx,dy);
 		g.setColor(Color.BLACK);
-		g.fillRect(12,12,dx-24,dy-24);
-		d.width -= 10;
-		d.height -= 10;
+		g.fillRect(15,15,dx-30,dy-30);
+		d.width -= 30;
+		d.height -= 30;
 		canvas.setSize(d);
 		dialog.setSize(d2.width, d2.height+30);
 		canvas2.setSize(d2);
-		canvas.setLocation(12,12);
+		canvas.setLocation(15,15);
 	}
 
 	public Listener getListener(){
