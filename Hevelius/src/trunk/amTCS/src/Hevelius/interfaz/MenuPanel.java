@@ -20,14 +20,14 @@ import javax.swing.border.BevelBorder;
 
 public class MenuPanel extends JPanel //implements Runnable
 {
-//VARIABLES
+	//VARIABLES
 	private JLabel conf;
-	
+
 	private int dy;
-        private int dx;
+	private int dx;
 
 	private static JFrame frame;
-        private static DrawingPanel pane = interfaz.getDrawingPanel();
+	private static DrawingPanel pane = interfaz.getDrawingPanel();
 	private Image hevelius = null;	
 
 	private static JDialog config;
@@ -45,9 +45,9 @@ public class MenuPanel extends JPanel //implements Runnable
 	private static JButton find;
 	private static JComboBox location;
 	private static JLabel tracking;
-        private static JRadioButton activate_track;
-        private static JRadioButton desactivate_track;
-        private static ButtonGroup track;	
+	private static JRadioButton activate_track;
+	private static JRadioButton desactivate_track;
+	private static ButtonGroup track;	
 
 	private static JPanel panel2;
 	private static JLabel modules;
@@ -58,104 +58,47 @@ public class MenuPanel extends JPanel //implements Runnable
 	private static JComboBox color;
 
 	private static Vector<WeatherCityId> vector_city = new Vector<WeatherCityId>();
-	
+
 	//private static JButton menu_config;
 	private static JLabel menu_config;
 	private static JLabel menu_help;
 	//private static JButton menu_about;
 
 
-//CONSTRUCTOR
+	//CONSTRUCTOR
 	public MenuPanel(LayoutManager l)
 	{
 		super(l);
 	}
 
-//INIT
+	//INIT
 	public void init()
 	{	
 		//dy = getSize().height;
-                //dx = getSize().width;
+		//dx = getSize().width;
 
 		setBackground(Color.BLACK);
 		aboutWindow();
 		configWindow();
 
-//		ImageIcon cbutton = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));		
-
-		//menu_config = new JButton(cbutton);
-//		menu_config = new JLabel(cbutton);
 		menu_config = new JLabel(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		menu_config.setBackground(Color.BLACK);
-		//menu_config.setLocation(5*dx/6,dy/2);
-                menu_config.setSize(50,50);
-                add(menu_config);
-
-		/*menu_config.addActionListener(new ActionListener( ){
-                                public void actionPerformed(ActionEvent event) {
-                                config.setVisible(true);
-                                setConfigWindow();
-                                }
-                                });*/
-
-	/*	menu_config.addMouseListener(new MouseListener(){
-				
-			public void mouseExited(MouseEvent event){
-				menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
-			}
-
-			public void mouseEntered(MouseEvent event){
-      				menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config01.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
-    			}
-                                
-			public void mouseReleased(MouseEvent event){ 
-                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
-                        }
-
-			public void mouseClicked(MouseEvent event){ 
-                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config01.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
-                        }
-
-			public void mousePressed(MouseEvent event){ 
-                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config03.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
-                        }
-
-		});*/
-
-		/*ImageIcon abutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-about.gif").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
-
-                menu_about = new JButton(abutton);
-                menu_about.setBackground(Color.BLACK);
-                //menu_config.setLocation(5*dx/6,dy/2);
-                menu_about.setSize(50,50);
-                add(menu_about);
-
-                menu_about.addActionListener(new ActionListener(  ) {
-                                public void actionPerformed(ActionEvent event) {
-                                about.setVisible(true);
-                                //setConfigWindow();
-                                }
-                                });*/
+		menu_config.setSize(50,50);
+		add(menu_config);
 
 		ImageIcon hbutton = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help02.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
 
-                menu_help = new JLabel(hbutton);
-                menu_help.setBackground(Color.BLACK);
-                //menu_config.setLocation(5*dx/6,dy/2);
-                menu_help.setSize(50,50);
-                add(menu_help);
+		menu_help = new JLabel(hbutton);
+		menu_help.setBackground(Color.BLACK);
+		//menu_config.setLocation(5*dx/6,dy/2);
+		menu_help.setSize(50,50);
+		add(menu_help);
 
-                /*menu_help.addActionListener(new ActionListener(  ) {
-                                public void actionPerformed(ActionEvent event) {
-                                about.setVisible(true);
-                                //setConfigWindow();
-                                }
-                                });*/
 	}
 
 	public void paintComponent(Graphics g)
-        {
-                super.paintComponent(g);
+	{
+		super.paintComponent(g);
 		boolean updatePanel = false;
 
 		if(dx != getSize().width || dy != getSize().height)
@@ -163,11 +106,8 @@ public class MenuPanel extends JPanel //implements Runnable
 			updatePanel = true;
 		}
 		dy = getSize().height;
-                dx = getSize().width;
+		dx = getSize().width;
 
-		//ImageIcon cbutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-config.gif").getImage().getScaledInstance(dy-dy/40,dy-dy/40,Image.SCALE_SMOOTH));
-		
-		//rbutton.setLocation((int)(145*osize),(int)(220*osize));
 		if(updatePanel)
 		{
 			menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
@@ -175,31 +115,31 @@ public class MenuPanel extends JPanel //implements Runnable
 
 
 
-	menu_config.addMouseListener(new MouseListener(){
+			menu_config.addMouseListener(new MouseListener(){
 
-                        public void mouseExited(MouseEvent event){
-                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-                        }
+					public void mouseExited(MouseEvent event){
+					menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					}
 
-                        public void mouseEntered(MouseEvent event){
-                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config01.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-                        }
+					public void mouseEntered(MouseEvent event){
+					menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config01.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					}
 
-                        public void mouseReleased(MouseEvent event){
-                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-                        }
+					public void mouseReleased(MouseEvent event){
+					menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					}
 
-                        public void mouseClicked(MouseEvent event){
-                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config01.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-				config.setVisible(true);
-                                setConfigWindow();			
-                        }
+					public void mouseClicked(MouseEvent event){
+					menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config01.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					config.setVisible(true);
+					setConfigWindow();			
+					}
 
-                        public void mousePressed(MouseEvent event){
-                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config03.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-                        }
+					public void mousePressed(MouseEvent event){
+						menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config03.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					}
 
-                });
+			});
 
 
 			menu_config.setLocation(4*dx/6 + dy-dy*12/40 + 1,dy*6/40);
@@ -207,47 +147,42 @@ public class MenuPanel extends JPanel //implements Runnable
 			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy-dy*12/40),dy-dy*12/40));
 
 			menu_help.setSize(dy-dy*12/40,dy-dy*12/40);
-                        menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+			menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
 
 
 
 
-menu_help.addMouseListener(new MouseListener(){
+			menu_help.addMouseListener(new MouseListener(){
 
-                        public void mouseExited(MouseEvent event){
-                                menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-                        }
+					public void mouseExited(MouseEvent event){
+					menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					}
 
-                        public void mouseEntered(MouseEvent event){
-                                menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help01.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-                        }
+					public void mouseEntered(MouseEvent event){
+					menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help01.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					}
 
-                        public void mouseReleased(MouseEvent event){
-                                menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-                        }
+					public void mouseReleased(MouseEvent event){
+					menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					}
 
-                        public void mouseClicked(MouseEvent event){
-                                menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help01.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-                                about.setVisible(true);
-                                //setConfigWindow();
-                        }
+					public void mouseClicked(MouseEvent event){
+					menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help01.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					about.setVisible(true);
+					}
 
-                        public void mousePressed(MouseEvent event){
-                                menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help03.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-                        }
+					public void mousePressed(MouseEvent event){
+					menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help03.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					}
 
-                });
-
+			});
 
 
-                        menu_help.setLocation(4*dx/6 + 2*(dy-dy*12/40 + dx/40),dy*6/40);
 
-			/*menu_about.setSize(dy-dy*12/40,dy-dy*12/40);
-                        menu_about.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/menu-about.gif").getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-                        menu_about.setLocation(4*dx/6 + 2*(dy-dy*12/40 + 1),dy*6/40);*/
+			menu_help.setLocation(4*dx/6 + 2*(dy-dy*12/40 + dx/40),dy*6/40);
+
 		}
 		g.drawImage(hevelius,dy*6/40,dy*6/40,this);
-		//conf.setLocation(10,10);
 	}
 
 	//VENTANAS DEL MENU: CONFIGURATION Y ABOUT	
@@ -340,31 +275,31 @@ menu_help.addMouseListener(new MouseListener(){
 		panel1.add(location);
 
 		tracking = new JLabel("Tracking: ");
-                tracking.setLocation(10,120);
-                tracking.setSize(150,20);
-                panel1.add(tracking);
+		tracking.setLocation(10,120);
+		tracking.setSize(150,20);
+		panel1.add(tracking);
 
-                activate_track = new JRadioButton("Enable");
-                desactivate_track = new JRadioButton("Disable");
-                track = new ButtonGroup();
+		activate_track = new JRadioButton("Enable");
+		desactivate_track = new JRadioButton("Disable");
+		track = new ButtonGroup();
 
-                try{
-                        if(Integer.parseInt(test.getOption("tracking"))==0)
-                                desactivate_track.setSelected(true);
-                        if(Integer.parseInt(test.getOption("tracking"))==1)
-                                activate_track.setSelected(true);
-                }catch(NumberFormatException e){
-                        activate_track.setSelected(true);
-                }
-                track.add(activate_track);
-                track.add(desactivate_track);
+		try{
+			if(Integer.parseInt(test.getOption("tracking"))==0)
+				desactivate_track.setSelected(true);
+			if(Integer.parseInt(test.getOption("tracking"))==1)
+				activate_track.setSelected(true);
+		}catch(NumberFormatException e){
+			activate_track.setSelected(true);
+		}
+		track.add(activate_track);
+		track.add(desactivate_track);
 
-                activate_track.setLocation(150,123);
-                desactivate_track.setLocation(150,143);
-                activate_track.setSize(150,15);
-                desactivate_track.setSize(150,15);
-                panel1.add(activate_track);
-                panel1.add(desactivate_track);
+		activate_track.setLocation(150,123);
+		desactivate_track.setLocation(150,143);
+		activate_track.setSize(150,15);
+		desactivate_track.setSize(150,15);
+		panel1.add(activate_track);
+		panel1.add(desactivate_track);
 
 
 		panel2 = new JPanel();
@@ -481,12 +416,12 @@ menu_help.addMouseListener(new MouseListener(){
 				test.setOption("opengl","0");
 
 				if(activate_track.isSelected())
-                                test.setOption("tracking","1");
-                                if(desactivate_track.isSelected())
-                                test.setOption("tracking","0");
+				test.setOption("tracking","1");
+				if(desactivate_track.isSelected())
+					test.setOption("tracking","0");
 
 				if(compass.isSelected())
-				test.setOption("compass","1");
+					test.setOption("compass","1");
 				else
 					test.setOption("compass","0");
 
@@ -494,9 +429,9 @@ menu_help.addMouseListener(new MouseListener(){
 
 				if(String.valueOf(location.getSelectedItem()).compareTo("(none)") != 0){				
 					test.setOption("location",String.valueOf(vector_city.get(
-						location.getSelectedIndex()).getId()));
+									location.getSelectedIndex()).getId()));
 					test.setOption("city",String.valueOf(vector_city.get(
-                                                location.getSelectedIndex()).getNameCity()));
+									location.getSelectedIndex()).getNameCity()));
 				}
 
 				test.store();
@@ -507,22 +442,22 @@ menu_help.addMouseListener(new MouseListener(){
 		});
 
 		find.addActionListener(new ActionListener(  ) {
-                                public void actionPerformed(ActionEvent event) {
-					if(city2find.getText().trim().compareTo("") != 0){
-						location.removeAllItems();						
-						WeatherCity weather=  new WeatherCity(city2find.getText().trim());
-						vector_city.clear();
-						vector_city = weather.ListCity();
-						
-						if(vector_city.size() > 0)
-							for(int i = 0; i < vector_city.size(); i++)
-								location.addItem(vector_city.get(i).getNameCity());
-							//System.out.println(vector_city.get(i).getNameCity());
-						
-						location.addItem("(none)");
-					}
-                                }
-                });
+				public void actionPerformed(ActionEvent event) {
+				if(city2find.getText().trim().compareTo("") != 0){
+				location.removeAllItems();						
+				WeatherCity weather=  new WeatherCity(city2find.getText().trim());
+				vector_city.clear();
+				vector_city = weather.ListCity();
+
+				if(vector_city.size() > 0)
+				for(int i = 0; i < vector_city.size(); i++)
+				location.addItem(vector_city.get(i).getNameCity());
+				//System.out.println(vector_city.get(i).getNameCity());
+
+				location.addItem("(none)");
+				}
+				}
+				});
 
 
 	}
@@ -546,9 +481,9 @@ menu_help.addMouseListener(new MouseListener(){
 			test.setOption("opengl","0");
 
 		if(activate_track.isSelected())
-                        test.setOption("tracking","1");
-                if(desactivate_track.isSelected())
-                        test.setOption("tracking","0");
+			test.setOption("tracking","1");
+		if(desactivate_track.isSelected())
+			test.setOption("tracking","0");
 
 		if(compass.isSelected())
 			test.setOption("compass","1");
@@ -559,9 +494,9 @@ menu_help.addMouseListener(new MouseListener(){
 
 		if(String.valueOf(location.getSelectedItem()).compareTo("(none)") != 0){				
 			test.setOption("location",String.valueOf(vector_city.get(
-				location.getSelectedIndex()).getId()));
+							location.getSelectedIndex()).getId()));
 			test.setOption("city",String.valueOf(vector_city.get(
-                                location.getSelectedIndex()).getNameCity()));
+							location.getSelectedIndex()).getNameCity()));
 		}
 
 		test.store();
@@ -575,28 +510,28 @@ menu_help.addMouseListener(new MouseListener(){
 			radec.setSelected(true);
 		if(Integer.parseInt(test.getOption("coordinate"))==1)
 			altaz.setSelected(true);
-		
+
 		city2find.setText(test.getOption("city"));
-		
+
 		location.removeAllItems();
 		location.addItem("(none)");
 		location.setSelectedIndex(0);
-		
+
 		if(Integer.parseInt(test.getOption("tracking"))==0)
-                        desactivate_track.setSelected(true);
-                if(Integer.parseInt(test.getOption("tracking"))==1)
-                        activate_track.setSelected(true);
+			desactivate_track.setSelected(true);
+		if(Integer.parseInt(test.getOption("tracking"))==1)
+			activate_track.setSelected(true);
 
 		if(Integer.parseInt(test.getOption("weather"))==1)
 			weather.setSelected(true);
 		else
 			weather.setSelected(false);
-		
+
 		if(Integer.parseInt(test.getOption("opengl"))==1)
 			opengl.setSelected(true);
 		else
 			opengl.setSelected(false);
-		
+
 		if(Integer.parseInt(test.getOption("compass"))==1)
 			compass.setSelected(true);
 		else
@@ -631,7 +566,7 @@ menu_help.addMouseListener(new MouseListener(){
 		JLabel about1 = new JLabel("Hevelius v. ALFA rc1");
 		JLabel about2 = new JLabel("DevNull Enterprise");
 		JLabel about3 = new JLabel("2007");
-		
+
 		Icon logoImagen = new ImageIcon(ClassLoader.getSystemClassLoader().getResource("Hevelius/images/logo.png"));
 		JLabel logo = new JLabel(logoImagen);
 
@@ -659,18 +594,18 @@ menu_help.addMouseListener(new MouseListener(){
 	}
 
 	public Image setImage(String img, Dimension dim)
-        {
-                Image imag = null;
-                try
-                {
-                        imag = ImageIO.read(getClass().getClassLoader().getResource(img));
-                }
-                catch(IOException e)
-                {
-                }
-                imag = Transparency.makeColorTransparent(imag, Color.BLACK);
-                imag = imag.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
-                return imag;
-        }
+	{
+		Image imag = null;
+		try
+		{
+			imag = ImageIO.read(getClass().getClassLoader().getResource(img));
+		}
+		catch(IOException e)
+		{
+		}
+		imag = Transparency.makeColorTransparent(imag, Color.BLACK);
+		imag = imag.getScaledInstance(dim.width,dim.height,Image.SCALE_FAST);
+		return imag;
+	}
 
 }
