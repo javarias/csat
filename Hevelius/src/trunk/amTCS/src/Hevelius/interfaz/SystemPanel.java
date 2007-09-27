@@ -40,9 +40,12 @@ public class SystemPanel extends JPanel
 				{
 					interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
 					interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
-					interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
-					interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
-					interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+					
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+						interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
+						interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
+						interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+					}
 				}
 				catch(Exception err)
 				{
