@@ -249,6 +249,7 @@ public class TelStatusPanel extends JPanel
 
 	public void setDangerState(int state)
 	{
+		System.out.println(state+"");
 		switch(state)
 		{
 			case 0: safety.setText("N/A"); 

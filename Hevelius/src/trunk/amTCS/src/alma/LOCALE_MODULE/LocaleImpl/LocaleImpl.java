@@ -23,7 +23,7 @@
 package alma.LOCALE_MODULE.LocaleImpl;
 
 import java.util.logging.Logger;
-import java.util.Calendar;
+import java.util.*;
 
 import alma.ACS.*;
 import alma.TYPES.*;
@@ -48,9 +48,11 @@ public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
 
-		//longitude = -71.53;
-		longitude = 0;
+		longitude = -71.53;
+		//longitude = 0;
 		latitude = -32.78;
+		//longitude = -77.06555556;
+		//latitude = 38.92138889;
 	}
     
 	public void execute() {
@@ -94,13 +96,55 @@ public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 		double  MST;
 		double LMST;
 
+                Calendar calendario = Calendar.getInstance();
+                calendario.setTimeZone(TimeZone.getTimeZone("UTC"));
+                hora =calendario.get(Calendar.HOUR_OF_DAY);
+                min = calendario.get(Calendar.MINUTE);
+                sec = calendario.get(Calendar.SECOND);
+                an_o = calendario.get(Calendar.YEAR);
+                dia = calendario.get(Calendar.DAY_OF_MONTH);
+                mes = calendario.get(Calendar.MONTH)+ 1;
+
+/*
+                an_o=1987;
+                dia = 10;
+                mes = 4;
+                hora = 19;
+                min = 21;
+                sec = 0;
+*/
+
+                if((mes == 1) || (mes == 2))
+                {
+                        mes += 12;
+                        an_o -= 1;
+                }
+                jd = (int)(an_o/100.0); //Cada 100 años se resta 1 dia.
+
+
+                jd = 2 - jd + (int)(jd/4.0); //Cada 4 años se suma 1 dia. La base no se xke.
+                jd += (int)(365.25*(an_o+4716)); //Se cuentan los dias de cada año.
+                jd += (int)(30.6001*(mes+1)); //Se le suman los dias de los meses que faltan.
+                jd += dia - 1524.5; //Se suman los dias y se resta una constante.
+                jd += (hora + min/60.0 + sec/3600.0)/24.0; //Se suman fracciones de dia.
+
+/*
 		Calendar calendario = Calendar.getInstance();
+		calendario.setTimeZone(TimeZone.getTimeZone("UTC"));
 		hora =calendario.get(Calendar.HOUR_OF_DAY);
 		min = calendario.get(Calendar.MINUTE);
 		sec = calendario.get(Calendar.SECOND);
 		an_o = calendario.get(Calendar.YEAR);
 		dia = calendario.get(Calendar.DAY_OF_MONTH);
 		mes = calendario.get(Calendar.MONTH)+ 1;
+
+		an_o=1987;
+		dia = 10;
+		mes = 4;
+		hora = 19;
+		min = 21;
+		sec = 0;
+		
 
 		if((mes == 1) || (mes == 2))
 		{
@@ -115,16 +159,15 @@ public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 		jd += (int)(30.6001*(mes+1)); //Se le suman los dias de los meses que faltan.
 		jd += dia - 730550.5; //Se suman los dias y se resta una constante.
 		jd += (hora + min/60.0 + sec/3600.0)/24.0; //Se suman fracciones de dia.
-	
+*/	
 	
 		//Con esto se obtienen los Julian Days contando desde Epoch J2000.0
-		jt = jd/36525; //Se obtienen Julian Centuries.
+		jt = (jd-2451545)/36525; //Se obtienen Julian Centuries.
 
 
-		MST = 280.46061837 + 360.98564736629*jd; //Se obtiene una buena aprox.
+		MST = 280.46061837 + 360.98564736629*(jd-2451545); //Se obtiene una buena aprox.
 		MST += 0.000387933*jt*jt - jt*jt*jt/38710000; //Mas exacto.
 		//Esto es el Mean Sidereal Time... Formula.
-
 
 		while(MST>360)
 			MST -= 360;

@@ -169,8 +169,8 @@ public class Listener implements GLEventListener, MouseListener {
 
 		gl.glPushMatrix();
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient,0);
-		gl.glTranslatef(0.02f,0f,0.28f);
-		glu.gluDisk(quadric, 0, 0.6, 15, 15);
+		gl.glTranslatef(0f,0f,0.3f);
+		glu.gluDisk(quadric, 0, 0.6, 30, 30);
 		gl.glPopMatrix();
 
 		//Soportes grandes del telescopio
@@ -178,14 +178,14 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, 0.5f ,0.3f);
-		glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 60, 60);
+		glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 30, 30);
 		gl.glPopMatrix();
 	
 		gl.glPushMatrix();
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, -0.5f ,0.3f);
-		glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 60, 60);
+		glu.gluCylinder(quadric, 0.06, 0.06, 0.8 , 30, 30);
 		gl.glPopMatrix();
 		//Tapas pequenas de los pilares*/
 
@@ -193,14 +193,14 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, 0.5f,1.1f);
-		glu.gluDisk(quadric, 0, 0.06, 15, 15);
+		glu.gluDisk(quadric, 0, 0.06, 30, 30);
 		gl.glPopMatrix();
 		
 		gl.glPushMatrix();
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glRotatef(90,0,0,1);
 		gl.glTranslatef(0, -0.5f ,1.1f);
-		glu.gluDisk(quadric, 0, 0.06, 15, 15);
+		glu.gluDisk(quadric, 0, 0.06, 30, 30);
 		gl.glPopMatrix();
 		//Soportes pequeños del Telescopio
 
@@ -224,14 +224,14 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glTranslatef(-0.3f, 0, 1.06f);
 		gl.glRotatef(90,0,1,0);
-		glu.gluDisk(quadric, 0, 0.05, 15, 15);
+		glu.gluDisk(quadric, 0, 0.05, 30, 30);
 		gl.glPopMatrix();
 		
 		gl.glPushMatrix();
 		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient2,0);
 		gl.glTranslatef(0.3f, 0, 1.06f);
 		gl.glRotatef(-90,0,1,0);
-		glu.gluDisk(quadric, 0, 0.05, 15, 15);
+		glu.gluDisk(quadric, 0, 0.05, 30, 30);
 		gl.glPopMatrix();
 
 		glu.gluDeleteQuadric(quadric);
@@ -275,7 +275,7 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glDepthMask(false);
 		gl.glRotatef(0,1,0,0);
                 gl.glTranslatef(0,0, -0.4f);
-                glu.gluDisk(quadric, 0, 0.4, 15, 15);
+                glu.gluDisk(quadric, 0, 0.4, 30, 30);
 		gl.glDepthMask(true);
 		gl.glPopMatrix();
 
@@ -398,8 +398,8 @@ public class Listener implements GLEventListener, MouseListener {
 			alt += 360;
 		if(az < 0)
 			az += 360;
-		DecimalFormat df = new DecimalFormat("#.#");
-		az = Float.parseFloat(df.format(az));
-		alt = Float.parseFloat(df.format(alt));
+		DecimalFormat df = new DecimalFormat("#");
+		az = Float.parseFloat(df.format(Math.floor(az)));
+		alt = Float.parseFloat(df.format(Math.floor(alt)));
 	}
 }

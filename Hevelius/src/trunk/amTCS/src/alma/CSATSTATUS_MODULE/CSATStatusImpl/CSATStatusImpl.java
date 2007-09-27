@@ -55,6 +55,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	private alma.TELESCOPE_MODULE.Telescope telescope_comp;
 	private alma.LOCALE_MODULE.Locale locale_comp;
 	private alma.CALCULATIONS_MODULE.Calculations calculations_comp;
+	private alma.SAFETY_MODULE.Safety safety_comp;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -95,6 +96,15 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 			m_logger.fine("Failed to get Calculations default component reference");
 			throw new ComponentLifecycleException("Failed to get Calculations component reference");
 		}
+
+                /* We get the Safety referece */
+                try{
+                        obj = m_containerServices.getDefaultComponent("IDL:alma/SAFETY_MODULE/Safety:1.0");
+                        safety_comp = alma.SAFETY_MODULE.SafetyHelper.narrow(obj);
+                } catch (AcsJContainerServicesEx e) {
+                        m_logger.fine("Failed to get Safety default component reference");
+                        throw new ComponentLifecycleException("Failed to get Safety component reference");
+                }
 
 	}
     
@@ -181,7 +191,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public int getSafety(RadecPos p){
-		return 0;
+		return safety_comp.getSafety(p);
 	}
 
 	public void EmergencyStop(){

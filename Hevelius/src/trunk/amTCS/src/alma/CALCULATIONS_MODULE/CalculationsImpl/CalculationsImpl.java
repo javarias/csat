@@ -23,6 +23,7 @@
 package alma.CALCULATIONS_MODULE.CalculationsImpl;
 
 import java.util.logging.Logger;
+import java.util.*;
 
 import alma.ACS.*;
 import alma.TYPES.*;
@@ -108,7 +109,7 @@ public class CalculationsImpl implements CalculationsOperations, ComponentLifecy
 		LAT  = locale_comp.localPos().latitude;
 
 		HA = LMST - RA; //Se obtiene Hour Angle.
-
+/*
 		//Se obtiene la altitud en grados.
 		ALT = Math.sin(DEC*Math.PI/180)*Math.sin(LAT*Math.PI/180);
 		ALT += Math.cos(DEC*Math.PI/180)*Math.cos(LAT*Math.PI/180)*Math.cos(HA*Math.PI/180);
@@ -118,20 +119,38 @@ public class CalculationsImpl implements CalculationsOperations, ComponentLifecy
 		AZ = Math.sin(DEC*Math.PI/180) -Math.sin(ALT*Math.PI/180)*Math.sin(LAT*Math.PI/180);
 		AZ /= Math.cos(ALT*Math.PI/180)*Math.cos(LAT*Math.PI/180);
 		AZ = Math.acos(AZ)*180/Math.PI;
+*/
 
-		AltazPos altazPos = new AltazPos();
-		altazPos.alt = ALT;
-		altazPos.az  = AZ;
 
-		while(ALT>360)
+		ALT = Math.sin(DEC*Math.PI/180)*Math.sin(LAT*Math.PI/180);
+		ALT += Math.cos(DEC*Math.PI/180)*Math.cos(LAT*Math.PI/180)*Math.cos(HA*Math.PI/180);
+		ALT = Math.asin(ALT)*180/Math.PI;
+
+
+		AZ = Math.sin(LAT*Math.PI/180)*Math.cos(HA*Math.PI/180);
+		AZ -= Math.tan(DEC*Math.PI/180)*Math.cos(LAT*Math.PI/180);
+		AZ = Math.atan2(Math.sin(HA*Math.PI/180), AZ)*180/Math.PI;
+		AZ += 180;
+
+/*
+		AZ = Math.sin(DEC*Math.PI/180) -Math.sin(ALT*Math.PI/180)*Math.sin(LAT*Math.PI/180);
+                AZ /= Math.cos(ALT*Math.PI/180)*Math.cos(LAT*Math.PI/180);
+                AZ = Math.acos(AZ)*180/Math.PI;
+*/
+
+/*		while(ALT>360)
 			ALT -= 360;
 		while(ALT<0)
-			ALT += 0;
+			ALT += 0;*/
 
 		while(AZ>360)
 			AZ -= 360;
 		while(AZ<0)
-			AZ += 0;
+			AZ += 360;
+
+                AltazPos altazPos = new AltazPos();
+                altazPos.alt = ALT;
+                altazPos.az  = AZ;
 
 		return altazPos;
 	}
@@ -152,9 +171,21 @@ public class CalculationsImpl implements CalculationsOperations, ComponentLifecy
 		LAT  = locale_comp.localPos().latitude;
 		LMST = locale_comp.siderealTime();
 
+/*
 		DEC = (180/Math.PI)*Math.asin((Math.cos(Math.PI*AZ/180)*Math.cos(Math.PI*ALT/180)*Math.cos(Math.PI*LAT/180)) + (Math.sin(Math.PI*ALT/180)*Math.sin(Math.PI*LAT/180)));
 
 		HA = (180/Math.PI)*Math.acos((Math.sin(Math.PI*ALT/180) - (Math.sin(Math.PI*DEC/180)*Math.sin(Math.PI*LAT/180))) / (Math.cos(Math.PI*DEC/180)*Math.cos(Math.PI*LAT/180)));
+*/
+
+		AZ = AZ-180;
+		HA = Math.cos(Math.PI*AZ/180)*Math.sin(Math.PI*LAT/180);
+		HA += Math.tan(Math.PI*ALT/180)*Math.cos(Math.PI*LAT/180);
+		HA = Math.atan2(Math.sin(Math.PI*AZ/180),HA)*180/Math.PI;
+
+
+		DEC = Math.sin(Math.PI*LAT/180)*Math.sin(Math.PI*ALT/180);
+		DEC -= Math.cos(Math.PI*LAT/180)*Math.cos(Math.PI*ALT/180)*Math.cos(Math.PI*AZ/180);
+		DEC = Math.asin(DEC)*180/Math.PI;
 
 		RA = LMST - HA; //Se obtiene Hour Angle.
 
@@ -163,11 +194,12 @@ public class CalculationsImpl implements CalculationsOperations, ComponentLifecy
 		while( RA > 360 )
 			RA -= 360;
 
+/*
 		while( DEC < 0 )
 			DEC += 360;
 		while( DEC > 360 )
 			DEC -= 360;
-
+*/
 		RadecPos radecPos = new RadecPos();
 		radecPos.ra  = RA;
 		radecPos.dec = DEC;

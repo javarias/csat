@@ -30,7 +30,8 @@ public class Safety implements Runnable
                                                 e.printStackTrace();
                                         }
                                 }
-                                Thread.sleep(300000);
+                                //Thread.sleep(300000);
+				Thread.sleep(20000);
 
 
 				

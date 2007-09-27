@@ -462,7 +462,7 @@ public class SafetyImpl implements SafetyOperations, ComponentLifecycle {
 		double sumL = 0;
 		double sumR = 0;
 		double sumB = 0;
-		double mR = 0;
+		double mR = 1738.0d;
 		JDE = jd();
 		T = (JDE - 2451545)/36525;
 		T2 = T*T;
@@ -571,24 +571,48 @@ public class SafetyImpl implements SafetyOperations, ComponentLifecycle {
                         ra += 360.0d;
 
 		lambda = Math.sin(rd.ra*Math.PI/180)*Math.cos(epsR)+Math.tan(rd.dec*Math.PI/180)*Math.sin(epsR);
-		lambda = Math.atan2(lambda,Math.cos(rd.ra*Math.PI/180))*180/Math.PI;
+		lambda = Math.atan2(lambda,Math.cos(rd.ra*Math.PI/180));
 
-		beta = Math.sin(rd.dec*Math.PI/180)*Math.cos(epsR);
-		beta -= Math.cos(rd.dec*Math.PI/180)*Math.sin(epsR)*Math.sin(rd.ra*Math.PI/180)*180/Math.PI;
+                beta = Math.sin(rd.dec*Math.PI/180)*Math.cos(epsR);
+                beta -= Math.cos(rd.dec*Math.PI/180)*Math.sin(epsR)*Math.sin(rd.ra*Math.PI/180);
+                beta = Math.asin(beta);
 
 		if(lambda < 0)
-			lambda += 360;
+			lambda += Math.PI*2;
 		if(beta < 0)
-			beta += 360;
+			beta += Math.PI*2;
 
-		if(gLonR-lambda < 0)
-			londiff = Math.tan(2*Math.PI-(gLonR-lambda))*gRad;
-		else
-			londiff = Math.tan(gLonR-lambda)*gRad;
-		if(gLatR-beta < 0)
-			latdiff = Math.tan(2*Math.PI-(gLatR-beta))*gRad;
-		else
-			latdiff = Math.tan(gLatR-beta)*gRad;
+		m_logger.info("lambda"+(lambda*180/Math.PI));
+		m_logger.info("beta"+(beta*180/Math.PI));
+
+		m_logger.info("diflon"+(gLonR-lambda));
+		m_logger.info("diflat"+(gLatR-beta));
+
+                if(gLonR-lambda < 0 && gLonR-lambda > -Math.PI/2)
+                        londiff = Math.tan(-(gLonR-lambda))*gRad;
+                else if (gLonR-lambda >= 0 && gLonR-lambda < Math.PI/2)
+                        londiff = Math.tan(gLonR-lambda)*gRad;
+                else if (gLonR-lambda > 3/2*Math.PI)
+                        londiff = Math.tan(2*Math.PI-(gLonR-lambda))*gRad;
+                else if (gLonR-lambda < -3/2*Math.PI)
+                        londiff = Math.tan(2*Math.PI+(gLonR-lambda))*gRad;
+                else
+                        londiff = 10*mR;
+
+                if(gLatR-beta < 0 && gLatR-beta > -Math.PI/2)
+                        latdiff = Math.tan(-(gLatR-beta))*gRad;
+                else if (gLatR-beta >= 0 && gLatR-beta < Math.PI/2)
+                        latdiff = Math.tan(gLatR-beta)*gRad;
+                else if (gLatR-beta > 3/2*Math.PI)
+                        latdiff = Math.tan(2*Math.PI-(gLatR-beta))*gRad;
+                else if (gLatR-beta < -3/2*Math.PI)
+                        latdiff = Math.tan(2*Math.PI+(gLatR-beta))*gRad;
+                else
+                        latdiff = 10*mR;
+
+
+		System.out.println(londiff+"");
+		System.out.println(latdiff+"");
 
 		int lonDanger, latDanger;
 
@@ -608,6 +632,7 @@ public class SafetyImpl implements SafetyOperations, ComponentLifecycle {
                 if(latdiff < 3/2*mR)
                         latDanger = 4;
 
+		System.out.println("LonD "+lonDanger+" LatD "+latDanger);
 		if (lonDanger > latDanger)
 			return lonDanger;
 		else
