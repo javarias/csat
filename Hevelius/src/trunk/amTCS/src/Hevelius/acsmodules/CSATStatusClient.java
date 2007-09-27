@@ -150,7 +150,7 @@ public class CSATStatusClient extends ComponentClient
 		if(csstatus!=null)
 			csstatus.setMode(s);
 	}
-	public double getSideralTime()
+	public double getSiderealTime()
 	{
 		if(csstatus!=null)
 			return csstatus.getSiderealTime();

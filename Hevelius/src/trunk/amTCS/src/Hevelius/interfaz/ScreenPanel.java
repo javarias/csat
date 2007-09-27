@@ -31,10 +31,10 @@ public class ScreenPanel extends JPanel implements Runnable
 		//g.setColor(Color.DARK_GRAY);
 		//g.fillRect(0,0,dx,dy);
 		g.setColor(Color.BLACK);
-		g.fillRect(2,2,dx-4,dy-4);
+		g.fillRect(15,15,dx-30,dy-30);
 		screen = buf;
 		if(screen != null)
-			g.drawImage(screen,2,2,this);
+			g.drawImage(screen,15,15,this);
 	}
 	public void run()
 	{
