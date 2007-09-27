@@ -223,7 +223,7 @@ public class DrawingPanel extends JPanel
 		//		g.drawRect(50,180,rect_x*3/4,rect_y*3/4);
 		//		g.fillRect(50,180,rect_x*3/4,rect_y*3/4);
 
-		g.setColor(Color.BLACK);
+		//g.setColor(Color.BLACK);
 
 		//g.fillRect((dx-rect_x*3/4)/2+5,(dy-rect_y*3/4)/2+5,rect_x*3/4-10,rect_y*3/4-10);
 		//		g.fillRect(50+5,180+5,rect_x*3/4-10,rect_y*3/4-10);
@@ -297,8 +297,8 @@ public class DrawingPanel extends JPanel
 			//scpane.setLocation(50+5,180+5);
 			scpane.setLocation(0+dx/30,dy/6+dy/40);
 			scpane.setSize(dx*3/7-dx*2/30,dy/3-dy*2/40);
-			Border scBorder = BorderFactory.createTitledBorder(line, "CCD");
-                        scpane.setBorder(scBorder);
+			//Border scBorder = BorderFactory.createTitledBorder(line, "CCD");
+                        //scpane.setBorder(scBorder);
 
 			//coorpane.setSize(200,250);
 			//coorpane.setLocation(oGLx+10,dx-oGLx);
