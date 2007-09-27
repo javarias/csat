@@ -1,0 +1,10 @@
+#!/bin/bash
+
+acsutilTATPrologue
+export ACS_INSTANCE=$(cat $ACS_TMP/acs_instance)
+echo "Using ACS_INSTANCE=$ACS_INSTANCE"
+
+echo " Starting POINTING container"
+acsStartContainer -java amContainer &> $ACS_TMP/container.log &
+sleep 5
+
