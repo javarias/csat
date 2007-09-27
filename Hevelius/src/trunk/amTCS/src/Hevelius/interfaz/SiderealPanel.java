@@ -31,15 +31,6 @@ public class SiderealPanel extends JPanel
 	}
 	public void init()
 	{
-		/*telstate = new JLabel("TELESCOPE STATE");
-		telstate.setSize(200, 20);
-		telstate.setForeground(Color.WHITE);
-		add(telstate);*/
-
-		/*stimeL = new JLabel("Sidereal Time");
-                stimeL.setSize(120,20);
-                stimeL.setForeground(Color.WHITE);
-                add(stimeL);*/
 
                 //Sidereal Time
                 stime = new JLabel("0.000");
@@ -56,6 +47,8 @@ public class SiderealPanel extends JPanel
 	}
 	public void paintComponent(Graphics g)
 	{
+		super.paintComponent(g);
+
 		boolean updatePanel = false;
 		float fsize, osize;
 		if (dx != getSize().width || dy != getSize().height)
@@ -76,16 +69,6 @@ public class SiderealPanel extends JPanel
 				osize = dx/280.0f;
 			}
 
-//			System.out.println(dx+" "+dy);
-                	/*telstate.setLocation((int)(100*osize),(int)(0*osize));
-			telstate.setFont(telstate.getFont().deriveFont(fsize));
-			telstate.setSize((int)(200*osize),(int)(20*osize));*/
-
-			/*stimeL.setLocation(dx*4/7-60,dy/6-dy/40+dy/3);
-                        stime.setLocation(dx*4/7-30,dy/6-dy/40+dy/3+20);
-                        stimeh.setLocation(dx*4/7-40,dy/6-dy/40+dy/3+40);*/
-
-		//	stimeL.setLocation((int)(100*osize),(int)(0*osize));
                         stime.setLocation((int)(100*osize),(int)(20*osize));
 			stime.setFont(stime.getFont().deriveFont(fsize));
                         stime.setSize((int)(60*osize),(int)(20*osize));

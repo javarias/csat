@@ -352,6 +352,8 @@ public class DrawingPanel extends JPanel
 			vtpane.setBackground(c);
 		if(mpane!=null)
 			mpane.setBackground(c);
+		if(stpane!=null)
+			stpane.setBackground(c);
 	}
 	public void updateWindow(boolean init){
 		//Cambiar Background

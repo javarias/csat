@@ -96,6 +96,7 @@ public class TelStatusPanel extends JPanel
 	}
 	public void paintComponent(Graphics g)
 	{
+		super.paintComponent(g);
 		boolean updatePanel = false;
 		float fsize, osize;
 		if (dx != getSize().width || dy != getSize().height)
@@ -249,7 +250,6 @@ public class TelStatusPanel extends JPanel
 
 	public void setDangerState(int state)
 	{
-		System.out.println(state+"");
 		switch(state)
 		{
 			case 0: safety.setText("N/A"); 
