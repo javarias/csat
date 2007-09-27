@@ -8,6 +8,7 @@ import Hevelius.utilities.converter.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+//import java.awt.event.MouseEvent.*;
 import java.text.DecimalFormat;
 import alma.TYPES.*;
 import Hevelius.weather.*;
@@ -58,8 +59,9 @@ public class MenuPanel extends JPanel //implements Runnable
 
 	private static Vector<WeatherCityId> vector_city = new Vector<WeatherCityId>();
 	
-	private static JButton menu_config;
-	private static JButton menu_help;
+	//private static JButton menu_config;
+	private static JLabel menu_config;
+	private static JLabel menu_help;
 	//private static JButton menu_about;
 
 
@@ -79,20 +81,46 @@ public class MenuPanel extends JPanel //implements Runnable
 		aboutWindow();
 		configWindow();
 
-		ImageIcon cbutton = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));		
+//		ImageIcon cbutton = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));		
 
-		menu_config = new JButton(cbutton);
+		//menu_config = new JButton(cbutton);
+//		menu_config = new JLabel(cbutton);
+		menu_config = new JLabel(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		menu_config.setBackground(Color.BLACK);
 		//menu_config.setLocation(5*dx/6,dy/2);
                 menu_config.setSize(50,50);
                 add(menu_config);
 
-		menu_config.addActionListener(new ActionListener(  ) {
+		/*menu_config.addActionListener(new ActionListener( ){
                                 public void actionPerformed(ActionEvent event) {
                                 config.setVisible(true);
                                 setConfigWindow();
                                 }
-                                });
+                                });*/
+
+	/*	menu_config.addMouseListener(new MouseListener(){
+				
+			public void mouseExited(MouseEvent event){
+				menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+			}
+
+			public void mouseEntered(MouseEvent event){
+      				menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config01.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+    			}
+                                
+			public void mouseReleased(MouseEvent event){ 
+                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+                        }
+
+			public void mouseClicked(MouseEvent event){ 
+                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config01.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+                        }
+
+			public void mousePressed(MouseEvent event){ 
+                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config03.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+                        }
+
+		});*/
 
 		/*ImageIcon abutton = new ImageIcon(new ImageIcon("Hevelius/images/menu-about.gif").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
 
@@ -109,20 +137,20 @@ public class MenuPanel extends JPanel //implements Runnable
                                 }
                                 });*/
 
-		ImageIcon hbutton = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+		ImageIcon hbutton = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help02.gif")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
 
-                menu_help = new JButton(hbutton);
+                menu_help = new JLabel(hbutton);
                 menu_help.setBackground(Color.BLACK);
                 //menu_config.setLocation(5*dx/6,dy/2);
                 menu_help.setSize(50,50);
                 add(menu_help);
 
-                menu_help.addActionListener(new ActionListener(  ) {
+                /*menu_help.addActionListener(new ActionListener(  ) {
                                 public void actionPerformed(ActionEvent event) {
                                 about.setVisible(true);
                                 //setConfigWindow();
                                 }
-                                });
+                                });*/
 	}
 
 	public void paintComponent(Graphics g)
@@ -143,14 +171,76 @@ public class MenuPanel extends JPanel //implements Runnable
 		if(updatePanel)
 		{
 			menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
-			menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+			menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+
+
+
+	menu_config.addMouseListener(new MouseListener(){
+
+                        public void mouseExited(MouseEvent event){
+                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                        }
+
+                        public void mouseEntered(MouseEvent event){
+                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config01.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                        }
+
+                        public void mouseReleased(MouseEvent event){
+                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                        }
+
+                        public void mouseClicked(MouseEvent event){
+                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config01.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+				config.setVisible(true);
+                                setConfigWindow();			
+                        }
+
+                        public void mousePressed(MouseEvent event){
+                                menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-config03.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                        }
+
+                });
+
+
 			menu_config.setLocation(4*dx/6 + dy-dy*12/40 + 1,dy*6/40);
 
 			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy-dy*12/40),dy-dy*12/40));
 
 			menu_help.setSize(dy-dy*12/40,dy-dy*12/40);
-                        menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-                        menu_help.setLocation(4*dx/6 + 2*(dy-dy*12/40 + 1),dy*6/40);
+                        menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+
+
+
+
+menu_help.addMouseListener(new MouseListener(){
+
+                        public void mouseExited(MouseEvent event){
+                                menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                        }
+
+                        public void mouseEntered(MouseEvent event){
+                                menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help01.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                        }
+
+                        public void mouseReleased(MouseEvent event){
+                                menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help02.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                        }
+
+                        public void mouseClicked(MouseEvent event){
+                                menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help01.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                                about.setVisible(true);
+                                //setConfigWindow();
+                        }
+
+                        public void mousePressed(MouseEvent event){
+                                menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/menu-help03.gif")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                        }
+
+                });
+
+
+
+                        menu_help.setLocation(4*dx/6 + 2*(dy-dy*12/40 + dx/40),dy*6/40);
 
 			/*menu_about.setSize(dy-dy*12/40,dy-dy*12/40);
                         menu_about.setIcon(new ImageIcon(new ImageIcon("Hevelius/images/menu-about.gif").getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
