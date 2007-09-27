@@ -30,5 +30,5 @@
 #
 # SOURCE TATEnvironment
 # PROLOGUE TATPrologue
-1 tatTest tatTest.sh
+1 pointingTest pointingTestClient.py
 # EPILOGUE TATEpilogue
