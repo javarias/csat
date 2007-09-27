@@ -42,9 +42,12 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 	private AltazPos m_commandedPos;
 	private AltazPos m_softRealPos;
 
+	private RadecPos m_resultPos;
+
 	private alma.DEVTELESCOPE_MODULE.DevTelescope devTelescope_comp;
 	private alma.POINTING_MODULE.Pointing pointing_comp;
 	private alma.CALCULATIONS_MODULE.Calculations calculations_comp;
+	private alma.TRACKING_MODULE.Tracking tracking_comp;
 	private Thread controlThread = null;
 	
 	private boolean doControl;
@@ -86,6 +89,15 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 			m_logger.fine("Failed to get Calculations default component reference");
 			throw new ComponentLifecycleException("Failed to get Calculations component reference");
 		}
+
+                /* We get the Tracking referece */
+                try{
+                        obj = m_containerServices.getDefaultComponent("IDL:alma/TRACKING_MODULE/Tracking:1.0");
+                        tracking_comp = alma.TRACKING_MODULE.TrackingHelper.narrow(obj);
+                } catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+                        m_logger.fine("Failed to get Tracking default component reference");
+                        throw new ComponentLifecycleException("Failed to get Tracking component reference");
+                }
 		
 		doControl = true;
 
@@ -93,11 +105,15 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 		m_commandedPos = new AltazPos();
 		m_softRealPos  = new AltazPos();
 
+		m_resultPos = new RadecPos();
+
 		m_commandedPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
 		m_commandedPos.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
 
 		m_softRealPos.alt = m_commandedPos.alt;
 		m_softRealPos.az  = m_commandedPos.az;
+
+		m_resultPos = calculations_comp.Altaz2Radec(m_softRealPos);
 		
 		controlThread = m_containerServices.getThreadFactory().newThread(this);
 		controlThread.start();
@@ -158,11 +174,17 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 			controlThread.start();
 		}
 
+		m_resultPos = new RadecPos();
+		m_resultPos.ra = position.ra;
+		m_resultPos.dec = position.dec;
 		m_commandedPos = calculations_comp.Radec2Altaz(position);
 	}
 
 	public RadecPos getRadec(){
-		return new RadecPos();
+		RadecPos p = new RadecPos();
+		p.ra = m_resultPos.ra;
+		p.dec = m_resultPos.dec;
+		return (p);
 	}
 
 	public void offSet(AltazPos offset){
@@ -173,6 +195,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 	public void gotoAltAz(AltazPos position){
 		m_commandedPos.alt = position.alt;
 		m_commandedPos.az  = position.az;
+
+		m_resultPos = calculations_comp.Altaz2Radec(position);
 
 		doControl = true;
 
@@ -211,6 +235,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 
 	public void setCurrentAltAz(AltazPos position){
 		m_commandedPos = position;
+		m_resultPos = calculations_comp.Altaz2Radec(position);
 	}
 
 	public void run() {
@@ -311,7 +336,16 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 
 				/* Send the velocity to the telescope */
 				devTelescope_comp.setVel(altazVel);
-				
+
+				if(altazVel.azVel == 0 && tracking_comp.status())
+				{
+					preseting(m_resultPos);
+				}
+				else if (altazVel.azVel == 0)
+				{
+					m_resultPos = calculations_comp.Altaz2Radec(m_softRealPos);
+				}
+
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e) {

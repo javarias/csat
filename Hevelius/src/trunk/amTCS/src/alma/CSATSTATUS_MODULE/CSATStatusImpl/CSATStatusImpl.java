@@ -56,6 +56,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	private alma.LOCALE_MODULE.Locale locale_comp;
 	private alma.CALCULATIONS_MODULE.Calculations calculations_comp;
 	private alma.SAFETY_MODULE.Safety safety_comp;
+	private alma.TRACKING_MODULE.Tracking tracking_comp;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -106,6 +107,14 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
                         throw new ComponentLifecycleException("Failed to get Safety component reference");
                 }
 
+                /* We get the Tracking referece */
+                try{
+                        obj = m_containerServices.getDefaultComponent("IDL:alma/TRACKING_MODULE/Tracking:1.0");
+                        tracking_comp = alma.TRACKING_MODULE.TrackingHelper.narrow(obj);
+                } catch (AcsJContainerServicesEx e) {
+                        m_logger.fine("Failed to get Tracking default component reference");
+                        throw new ComponentLifecycleException("Failed to get Tracking component reference");
+                }
 	}
     
 	public void execute() {
@@ -175,7 +184,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 
 	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa){
 		p_aa.value = telescope_comp.getAltAz();
-		p_rd.value = calculations_comp.Altaz2Radec(p_aa.value);
+		p_rd.value = telescope_comp.getRadec();
 	}
 
 	public int getState(){
@@ -183,7 +192,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public boolean getTrackingStatus(){
-		return false;
+		return tracking_comp.status();
 	}
 
 	public RadecVel getTrackingRate(){
