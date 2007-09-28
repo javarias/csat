@@ -1,0 +1,1 @@
+s/[0-9]\+-[0-9]\+-[0-9]\+T[0-9]\+:[0-9]\+:[0-9]\+\.[0-9]\+ PySingletonClient disconnect - Shutdown called for client/nnnn-nn-nnTnn:nn:nn.nnn PySingletonClient disconnect - Shutdown called for client/g

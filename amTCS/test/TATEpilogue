@@ -1,6 +1,4 @@
 #!/bin/bash
 
-rm -rf $ACS_TMP/*
-
 acsutilTATEpilogue
 
