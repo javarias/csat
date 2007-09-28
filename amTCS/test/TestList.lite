@@ -31,4 +31,5 @@
 SOURCE TATEnvironment
 PROLOGUE TATPrologue
 1 pointingTest pointingTestClient.py
+2 localeTest   localeTestClient.py
 EPILOGUE TATEpilogue
