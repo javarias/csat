@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="simulator2" size="860,157" id="cl.utfsm.acs.telescope.simulator" metadata="uml2-1.0" initialized="true" scrolledY="-35" tag="1000" key="32303037303533312D31303030206D7954656C6573696D2F64636F6E74617264">
+  <children xsi:type="editmodel:PackageEditModel" name="cl.utfsm.acs.telescope.simulator.comm" location="0,-30" size="586,556" id="cl.utfsm.acs.telescope.simulator.comm">
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.1/@sourceConnections.0" name="Nexstar4MessageWrapper" location="321,39" size="238,122" id="cl.utfsm.acs.telescope.simulator.comm/Nexstar4MessageWrapper" runTimeClassModel="isAlignmentComplete,getModel,setLocation,setTrackingMode,getPreciseAZMALT,echo,telescope,Nexstar4MessageWrapper(),getAZMALT,gotoPreciseRADEC,passThroughCommand,isGotoInProgress,syncRADEC,gotoPreciseAZMALT,executeAction(Ljava.lang.String;),cancelGoto,getLocation,expectedMessageLength(Ljava.lang.String;),syncPreciseRADEC,getTime,getVersion,getTrackingMode,getRADEC,gotoAZMALT,getPreciseRADEC,gotoRADEC,setTime">
+      <children xsi:type="editmodel:CompartmentEditModel" size="163,18">
+        <children xsi:type="editmodel:AttributeEditModel" name="telescope" id="cl.utfsm.acs.telescope.simulator.comm/Nexstar4MessageWrapper#telescope"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="179,54">
+        <children xsi:type="editmodel:MethodEditModel" name="Nexstar4MessageWrapper" id="cl.utfsm.acs.telescope.simulator.comm/Nexstar4MessageWrapper#Nexstar4MessageWrapper()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="expectedMessageLength" id="cl.utfsm.acs.telescope.simulator.comm/Nexstar4MessageWrapper#expectedMessageLength(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="executeAction" id="cl.utfsm.acs.telescope.simulator.comm/Nexstar4MessageWrapper#executeAction(Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="cl.utfsm.acs.telescope.simulator.comm/Nexstar4MessageWrapper-Standard::Call->cl.utfsm.acs.telescope.simulator.state/Nexstar4State" source="//@children.0/@children.0" target="//@children.1/@children.1" targetEnd="//@children.0/@children.0/@sourceConnections.0/@children.2" label="//@children.0/@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Call»" size="35,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="191,72" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,50"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="SerialPortListener" location="28,42" size="204,522" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="133,54">
+        <children xsi:type="editmodel:MethodEditModel" name="SerialPortListener" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener#SerialPortListener()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="connect" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener#connect(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="main" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener#main([Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="181,408">
+        <children xsi:type="editmodel:ClassEditModel" name="SerialReader" size="136,104" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReader">
+          <children xsi:type="editmodel:CompartmentEditModel" size="107,18">
+            <children xsi:type="editmodel:AttributeEditModel" name="in" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReader#in"/>
+          </children>
+          <children xsi:type="editmodel:CompartmentEditModel" size="104,36">
+            <children xsi:type="editmodel:MethodEditModel" name="SerialReader" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReader#SerialReader(Ljava.io.InputStream;)"/>
+            <children xsi:type="editmodel:MethodEditModel" name="run" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReader#run()"/>
+          </children>
+          <children xsi:type="editmodel:CompartmentEditModel"/>
+          <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+        </children>
+        <children xsi:type="editmodel:ClassEditModel" name="SerialReaderWriter" size="181,194" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReaderWriter">
+          <children xsi:type="editmodel:CompartmentEditModel" size="125,108">
+            <children xsi:type="editmodel:AttributeEditModel" name="altitude" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReaderWriter#altitude"/>
+            <children xsi:type="editmodel:AttributeEditModel" name="azimuth" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReaderWriter#azimuth"/>
+            <children xsi:type="editmodel:AttributeEditModel" name="in" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReaderWriter#in"/>
+            <children xsi:type="editmodel:AttributeEditModel" name="out" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReaderWriter#out"/>
+            <children xsi:type="editmodel:AttributeEditModel" name="slewSpeed" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReaderWriter#slewSpeed"/>
+            <children xsi:type="editmodel:AttributeEditModel" name="time" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReaderWriter#time"/>
+          </children>
+          <children xsi:type="editmodel:CompartmentEditModel" size="136,36">
+            <children xsi:type="editmodel:MethodEditModel" name="SerialReaderWriter" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReaderWriter#SerialReaderWriter(Ljava.io.InputStream;Ljava.io.OutputStream;)"/>
+            <children xsi:type="editmodel:MethodEditModel" name="run" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialReaderWriter#run()"/>
+          </children>
+          <children xsi:type="editmodel:CompartmentEditModel"/>
+          <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+        </children>
+        <children xsi:type="editmodel:ClassEditModel" name="SerialWriter" size="148,104" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialWriter">
+          <children xsi:type="editmodel:CompartmentEditModel" size="125,18">
+            <children xsi:type="editmodel:AttributeEditModel" name="out" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialWriter#out"/>
+          </children>
+          <children xsi:type="editmodel:CompartmentEditModel" size="97,36">
+            <children xsi:type="editmodel:MethodEditModel" name="SerialWriter" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialWriter#SerialWriter(Ljava.io.OutputStream;)"/>
+            <children xsi:type="editmodel:MethodEditModel" name="run" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener$SerialWriter#run()"/>
+          </children>
+          <children xsi:type="editmodel:CompartmentEditModel"/>
+          <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+        </children>
+      </children>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="cl.utfsm.acs.telescope.simulator.comm/SerialPortListener-Standard::Instantiate->cl.utfsm.acs.telescope.simulator.comm/Nexstar4MessageWrapper*cl.utfsm.acs.telescope.simulator.comm/SerialPortListener-Soyatec::Import->cl.utfsm.acs.telescope.simulator.comm/Nexstar4MessageWrapper" source="//@children.0/@children.1" target="//@children.0/@children.0" targetEnd="//@children.0/@children.1/@sourceConnections.0/@children.2" label="//@children.0/@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Instantiate, Import»" size="119,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="204,59" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="26,62"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="cl.utfsm.acs.telescope.simulator.comm-Standard::Call->cl.utfsm.acs.telescope.simulator.state" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call»" size="35,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="586,293" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,263"/>
+    </sourceConnections>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" targetConnections="//@children.0/@sourceConnections.0" name="cl.utfsm.acs.telescope.simulator.state" location="645,0" size="571,706" id="cl.utfsm.acs.telescope.simulator.state">
+    <children xsi:type="editmodel:ClassEditModel" name="Nexstar4PositionControl" location="356,30" size="220,194" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4PositionControl" runTimeClassModel="cancelGoto(),variableRateALT_DEC(),fixedRateAZM_RA(),fixedRateALT_DEC(),syncRA_DEC(),variableRateAZM_RA(),gotoRA_DEC(),gotoAZM_ALT()">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="148,144">
+        <children xsi:type="editmodel:MethodEditModel" name="cancelGoto" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4PositionControl#cancelGoto()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="fixedRateALT_DEC" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4PositionControl#fixedRateALT_DEC()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="fixedRateAZM_RA" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4PositionControl#fixedRateAZM_RA()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="gotoAZM_ALT" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4PositionControl#gotoAZM_ALT()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="gotoRA_DEC" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4PositionControl#gotoRA_DEC()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="syncRA_DEC" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4PositionControl#syncRA_DEC()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="variableRateALT_DEC" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4PositionControl#variableRateALT_DEC()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="variableRateAZM_RA" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4PositionControl#variableRateAZM_RA()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4PositionControl-Soyatec::Import->cl.utfsm.acs.telescope.simulator.state/Nexstar4State" source="//@children.1/@children.0" target="//@children.1/@children.1" targetEnd="//@children.1/@children.0/@sourceConnections.0/@children.2" label="//@children.1/@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="51,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,97" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="181,96"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.0/@sourceConnections.0 //@children.1/@children.0/@sourceConnections.0" name="Nexstar4State" location="49,31" size="181,662" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State" runTimeClassModel="secondsOfLongitude,maxXAxis,isGotoInProgress(),calibrated,getModel(),getVersion(),west,slewSpeed,isCalibrated(),slewSpeed_4x,secondsOfLatitude,gotoInProgress,trackingMode_EQSouth,trackingMode_EQNorth,device_AzmRaMotor,maxYAxis,slewSpeed_2DegreesPerSec,setGotoInProgress(Z),minutesOfLongitude,slewSpeed_1DegreesPerSec,xAxis,getSlewSpeed(),slewSpeed_2x,getYAxis(),version,trackingMode_Off,setYAxis(J),slewSpeed_8x,trackingMode_AltAz,device_AltDecMotor,slewSpeed_4DegreesPerSec,device_Rtc,getDeviceVersion(),getTrackingMode(),isGpsLinked(),setGpsLinked(Z),minutesOfLatitude,slewSpeed_0x,getXAxis(),slewSpeed_32x,yAxis,setCalibrated(Z),setXAxis(J),slewSpeed_5MinutessPerSec,deviceVersion,degreesOfLatitude,setSlewSpeed(C),gpsLinked,degreesOfLongitude,setTrackingMode(S),trackingMode,device_GpsUnit,slewSpeed_16x,model">
+      <children xsi:type="editmodel:CompartmentEditModel" size="158,306">
+        <children xsi:type="editmodel:AttributeEditModel" name="version" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#version"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="gpsLinked" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#gpsLinked"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="model" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#model"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="gotoInProgress" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#gotoInProgress"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="trackingMode" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#trackingMode"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="secondsOfLatitude" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#secondsOfLatitude"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="minutesOfLongitude" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#minutesOfLongitude"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="deviceVersion" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#deviceVersion"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="secondsOfLongitude" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#secondsOfLongitude"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="calibrated" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#calibrated"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="west" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#west"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="xAxis" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#xAxis"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="degreesOfLatitude" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#degreesOfLatitude"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="degreesOfLongitude" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#degreesOfLongitude"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="minutesOfLatitude" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#minutesOfLatitude"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="yAxis" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#yAxis"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="slewSpeed" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#slewSpeed"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="137,306">
+        <children xsi:type="editmodel:MethodEditModel" name="setCalibrated" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#setCalibrated(Z)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="setSlewSpeed" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#setSlewSpeed(C)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="setGotoInProgress" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#setGotoInProgress(Z)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="setGpsLinked" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#setGpsLinked(Z)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="setXAxis" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#setXAxis(J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="setYAxis" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#setYAxis(J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="setTrackingMode" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#setTrackingMode(S)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="isCalibrated" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#isCalibrated()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getSlewSpeed" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#getSlewSpeed()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="isGotoInProgress" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#isGotoInProgress()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="isGpsLinked" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#isGpsLinked()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getXAxis" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#getXAxis()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getYAxis" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#getYAxis()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getDeviceVersion" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#getDeviceVersion()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getModel" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#getModel()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getTrackingMode" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#getTrackingMode()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getVersion" id="cl.utfsm.acs.telescope.simulator.state/Nexstar4State#getVersion()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Visibility" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" level="-2" properties="wireOptions=7;Product=eUML2"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
