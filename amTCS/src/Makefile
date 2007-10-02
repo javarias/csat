@@ -137,7 +137,7 @@ Hevelius_DIRS=Hevelius/
 Hevelius_EXTRAS=Hevelius/images
 #
 # java sources in Jarfile on/off
-DEBUG= 
+DEBUG=on
 #
 # ACS XmlIdl generation on/off
 #
