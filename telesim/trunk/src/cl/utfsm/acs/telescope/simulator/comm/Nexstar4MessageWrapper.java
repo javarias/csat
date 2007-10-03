@@ -108,66 +108,98 @@ public class Nexstar4MessageWrapper {
 	
 	public String executeAction(String message){
 		String response = "#";
-		char firstChar;
-		
-		if(message.length()==0)
-			return response;
-		
-		firstChar = message.charAt(0);
-		if(firstChar == GetRADEC){
+		try{
+			char firstChar;
 			
-		}else if(firstChar == GetPreciseRADEC){
-			telescope.getTrackingMode();
-		}else if(firstChar == GetAZMALT){
+			if(message.length()==0)
+				return response;
 			
-		}else if(firstChar == GetPreciseAZMALT){
-		
-		}else if(firstChar == GotoRADEC ){
-			
-		}else if(firstChar == GotoPreciseRADEC ){
-			
-		}else if(firstChar == GotoAZMALT ){
-			
-		}else if(firstChar == GotoPreciseAZMALT ){
-		
-		}else if(firstChar == SyncRADEC ){
-			
-		}else if(firstChar == SyncPreciseRADEC ){
-		
-		}else if(firstChar == GetTrackingMode ){
-			
-		}else if(firstChar == SetTrackingMode ){
-/*			if(firstChar == TrackingModeOff ){
+			firstChar = message.charAt(0);
+			if(firstChar == GetRADEC){
+				response =	telescope.getRaDec();
+			}else if(firstChar == GetPreciseRADEC){
+				response =	telescope.getPreciseRaDec();
+			}else if(firstChar == GetAZMALT){
+				response =	telescope.getAzmAlt();
+			}else if(firstChar == GetPreciseAZMALT){
+				response =	telescope.getPreciseAzmAlt();
+			}else if(firstChar == GotoRADEC ){
+				String ra, dec;
+				long ral, decl;
+				ra  = message.substring(1,  5);
+				dec = message.substring(7, 10);
+				ral = Long.parseLong( ra, 16);
+				decl= Long.parseLong(dec, 16);
+				response =	telescope.gotoRA_DEC(ral,decl);
+			}else if(firstChar == GotoPreciseRADEC ){
+				String ra, dec;
+				long ral, decl;
+				ra  = message.substring( 1,  9);
+				dec = message.substring(10, 18);
+				ral = Long.parseLong( ra, 16);
+				decl= Long.parseLong(dec, 16);
+				response =	telescope.gotoPreciseRA_DEC(ral,decl);
+			}else if(firstChar == GotoAZMALT ){
+				String azm, alt;
+				long azml, altl;
+				azm = message.substring(1,  5);
+				alt = message.substring(7, 10);
+				azml= Long.parseLong(azm, 16);
+				altl= Long.parseLong(alt, 16);
+				response =	telescope.gotoAZM_ALT(azml, altl);
+			}else if(firstChar == GotoPreciseAZMALT ){
+				String azm, alt;
+				long azml, altl;
+				azm = message.substring( 1,  9);
+				alt = message.substring(10, 18);
+				azml= Long.parseLong(azm, 16);
+				altl= Long.parseLong(alt, 16);
+				response =	telescope.gotoPreciseAZM_ALT(azml, altl);
+			}else if(firstChar == SyncRADEC ){
+				String ra, dec;
+				long ral, decl;
+				ra  = message.substring(1,  5);
+				dec = message.substring(7, 10);
+				ral = Long.parseLong( ra, 16);
+				decl= Long.parseLong(dec, 16);
+				response = telescope.syncRA_DEC(ral, decl);
+			}else if(firstChar == SyncPreciseRADEC ){
+				String ra, dec;
+				long ral, decl;
+				ra  = message.substring( 1,  9);
+				dec = message.substring(10, 18);
+				ral = Long.parseLong( ra, 16);
+				decl= Long.parseLong(dec, 16);
+				response = telescope.syncPreciseRA_DEC(ral, decl);
+			}else if(firstChar == GetTrackingMode ){
+				response = telescope.getTrackingMode();
+			}else if(firstChar == SetTrackingMode ){
+				response = telescope.setTrackingMode(message.charAt(1));
+			}else if(firstChar == PassThroughCommand ){
+				response = handlePassThroughCommand(message);
+			}else if(firstChar == GetLocation ){
 				
-			}else if(firstChar == TrackingModeAltAz ){
+			}else if(firstChar == SetLocation ){
+			
+			}else if(firstChar == GetTime ){
 				
-			}else if(firstChar == TrackingModeEQNorth ){
-				
-			}else if(firstChar == TrackingModeEQSouth ){
-				
+			}else if(firstChar == SetTime ){
+			
+			}else if(firstChar == GetVersion){
+				response = telescope.getVersion();
+			}else if(firstChar == GetModel){
+				response = telescope.getModel();
+			}else if(firstChar == Echo){
+				response = telescope.echo(message.charAt(1));
+			}else if(firstChar == IsAlignmentComplete){
+				response = telescope.isAlignmentComplete();
+			}else if(firstChar == IsGotoInProgress){
+				response = telescope.isGotoInProgress();
+			}else if(firstChar == CancelGoto){
+				response = telescope.cancelGoto();
 			}
-*/		}else if(firstChar == PassThroughCommand ){
-			response = handlePassThroughCommand(message);
-		}else if(firstChar == GetLocation ){
-			
-		}else if(firstChar == SetLocation ){
-		
-		}else if(firstChar == GetTime ){
-			
-		}else if(firstChar == SetTime ){
-		
-		}else if(firstChar == GetVersion){
-			
-		}else if(firstChar == GetModel){
-		
-		}else if(firstChar == Echo){
-		
-		}else if(firstChar == IsAlignmentComplete){
-			
-		}else if(firstChar == IsGotoInProgress){
-			
-		}else if(firstChar == CancelGoto){
-			
+		}catch (NumberFormatException e) {
+			// bad hexadecimal format in goto or sync call
 		}
 		return response;
 	}
@@ -187,7 +219,22 @@ public class Nexstar4MessageWrapper {
 					(int) message.charAt(6) ==  0 && 
 					(int) message.charAt(7) ==  0){
 				//TODO telescope.setVariableSlewRate
-				return defaultResponse;
+				boolean direction;
+				int trackRateHigh, trackRateLow, rate;
+				
+				if((int) message.charAt(3) ==  6)
+					direction = Nexstar4State.positiveDirection;
+				else
+					direction = Nexstar4State.negativeDirection;
+				
+				trackRateHigh = (int) message.charAt(4);
+				trackRateLow = (int) message.charAt(5);
+				rate = (trackRateHigh*256/4) + (int)(Math.floor(((double)trackRateLow)/4.0));
+				
+				if((int) message.charAt(2) == 16)
+					return telescope.setVariableRateAZM_RA(direction, rate);
+				else
+					return telescope.setVariableRateALT_DEC(direction, rate);
 			}
 			// Set Date or Year on the CGE mount
 			else if((int) message.charAt(2) == 178 && 
@@ -208,8 +255,21 @@ public class Nexstar4MessageWrapper {
 					(int) message.charAt(5) == 0 && 
 					(int) message.charAt(6) == 0 && 
 					(int) message.charAt(7) == 0){
-					//TODO telescope.setFixedSlewRate
-					return defaultResponse;
+			
+				boolean direction;
+				char rate;
+				
+				if((int) message.charAt(3) == 36)
+					direction = Nexstar4State.positiveDirection;
+				else
+					direction = Nexstar4State.negativeDirection;
+				
+				rate = message.charAt(4);
+				
+				if((int) message.charAt(2) == 16)
+					return telescope.setFixedRateAZM_RA(direction, rate);
+				else
+					return telescope.setFixedRateALT_DEC(direction, rate);
 			}
 			// Bad Message
 			else{
