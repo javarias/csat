@@ -94,7 +94,7 @@ TCL_SCRIPTS_L   =
 # Python stuff (public and local)
 # ----------------------------
 PY_SCRIPTS         =
-PY_SCRIPTS_L       = pointingTestClient.py
+PY_SCRIPTS_L       = pointingTestClient.py localeTestClient.py devTelescopeTestClient.py
 
 PY_MODULES         =
 PY_MODULES_L       =

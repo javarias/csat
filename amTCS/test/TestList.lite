@@ -30,6 +30,7 @@
 #
 SOURCE TATEnvironment
 PROLOGUE TATPrologue
-1 pointingTest pointingTestClient.py
-2 localeTest   localeTestClient.py
+1 pointingTest     pointingTestClient.py
+2 localeTest       localeTestClient.py
+3 devTelescopeTest devTelescopeTestClient.py
 EPILOGUE TATEpilogue

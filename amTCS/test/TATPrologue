@@ -3,6 +3,6 @@
 acsutilTATPrologue
 export ACS_INSTANCE=$(cat $ACS_TMP/acs_instance)
 
-acsStartContainer -java amContainer &> $ACS_TMP/container.log &
-sleep 5
-
+acsStartContainer -java amContainer    &> $ACS_TMP/containerJava.log &
+acsStartContainer -cpp  amContainerCpp &> $ACS_TMP/containerCpp.log  &
+sleep 10
