@@ -29,6 +29,7 @@ class Communication{
 	Communication(char *deviceName);
 	~Communication();
 	char *echo(char c);
+	char trackingMode();
 	bool alignmentComplete();
 	bool Slew(int rate, int direction);
 	bool goToAltAzm(double alt, double azm);

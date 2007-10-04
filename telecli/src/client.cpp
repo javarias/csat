@@ -85,6 +85,7 @@ int main(int args, char *argv[]) {
 		printf("      [gtal | gtaz] degrees (go to altitude and azimuth coordinates)\n");
 		printf("      gtalaz alt az         (go to cetain altitude/azimuth coordinate)\n");
 		printf("      [getalt | getazm]     (gets the actuals altitud/azimuth coords)\n");
+		printf("      track                 (returns the tracking mode)\n");
 		printf("      cancel                (Cancels a GOTO)\n\n");
 		exit(EXIT_FAILURE);
 	}
@@ -130,14 +131,16 @@ int main(int args, char *argv[]) {
 	else if( !strcmp("gtalaz",argv[1]))
 		com->goToAltAzm(atof(argv[2]),atof(argv[3]));
 
-	else if( !strcmp("getal",argv[1]))
+	else if( !strcmp("getalt",argv[1]))
 		printf("Actual Alt: %lf\n",com->getAlt());
 
-	else if( !strcmp("getaz",argv[1]))
+	else if( !strcmp("getazm",argv[1]))
 		printf("Actual Azm: %lf\n",com->getAzm());
 
 	else if( !strcmp("cancel",argv[1]))
 		com->cancelGoto();
+	else if( !strcmp("track",argv[1]))
+		printf("Tracking mode: %d\n",com->trackingMode());
 
 	else{
 		printf("Variable not supported: %s\n",argv[1]);

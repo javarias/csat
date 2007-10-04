@@ -23,6 +23,14 @@ Communication::~Communication(){
 	delete this->sp;
 }
 
+char Communication::trackingMode(){
+	char *msg;
+
+	this->sp->write_RS232("t",1);
+	msg = this->sp->read_RS232();
+	return msg[0];
+}
+
 char *Communication::echo(char c){
 	char msg[3];
 	msg[0] = 'K'; 	msg[1] = c; msg[2] = '\0';
