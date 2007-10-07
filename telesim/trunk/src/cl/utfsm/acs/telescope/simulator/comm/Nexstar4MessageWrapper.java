@@ -40,13 +40,15 @@ public class Nexstar4MessageWrapper {
 	public static final char IsGotoInProgress = 'L';
 	public static final char CancelGoto = 'M';
 	
+	protected static final String defaultResponse = "#";
+	protected static final String badMessageResponse = "#";
+	
 	protected Nexstar4State telescope;
 	
 	public Nexstar4MessageWrapper() {
 		super();
 		telescope = new Nexstar4State();
 	}
-
 	int expectedMessageLength(String partialMessage){
 		char firstChar;
 		
@@ -102,12 +104,10 @@ public class Nexstar4MessageWrapper {
 		}else if(firstChar == CancelGoto){
 			return 1;
 		}
-		
 		return -2; //not recognized message
 	}
-	
 	public String executeAction(String message){
-		String response = "#";
+		String response = defaultResponse;
 		try{
 			char firstChar;
 			
@@ -205,8 +205,6 @@ public class Nexstar4MessageWrapper {
 	}
 	
 	protected String handlePassThroughCommand(String message){
-		String defaultResponse = "#";
-		String badMessageResponse = "#";
 		
 		if(message.length() < 8)
 			return defaultResponse;
@@ -218,7 +216,7 @@ public class Nexstar4MessageWrapper {
 				(	(int) message.charAt(3) ==  6 || (int) message.charAt(3) ==  7) && // Positive || Negative  
 					(int) message.charAt(6) ==  0 && 
 					(int) message.charAt(7) ==  0){
-				//TODO telescope.setVariableSlewRate
+				
 				boolean direction;
 				int trackRateHigh, trackRateLow, rate;
 				
@@ -232,9 +230,9 @@ public class Nexstar4MessageWrapper {
 				rate = (trackRateHigh*256/4) + (int)(Math.floor(((double)trackRateLow)/4.0));
 				
 				if((int) message.charAt(2) == 16)
-					return telescope.setVariableRateAZM_RA(direction, rate);
+					return telescope.setVariableRateAZM_RA(rate, direction);
 				else
-					return telescope.setVariableRateALT_DEC(direction, rate);
+					return telescope.setVariableRateALT_DEC(rate, direction);
 			}
 			// Set Date or Year on the CGE mount
 			else if((int) message.charAt(2) == 178 && 
@@ -242,6 +240,7 @@ public class Nexstar4MessageWrapper {
 					(int) message.charAt(6) ==   0 && 
 					(int) message.charAt(7) ==   0){
 				//TODO setCGEDate & setCGEYear
+				return defaultResponse;
 			}
 			else{
 				return badMessageResponse;
@@ -303,7 +302,7 @@ public class Nexstar4MessageWrapper {
 					(int) message.charAt(6) ==  0 && 
 					(int) message.charAt(7) ==  1){
 					//TODO telescope.isGPSLinked
-					return "#";
+					return defaultResponse;
 				}
 				// Get Latitude 
 				else if((int) message.charAt(3) == 1 && 
@@ -312,7 +311,7 @@ public class Nexstar4MessageWrapper {
 						(int) message.charAt(6) == 0 && 
 						(int) message.charAt(7) == 3){
 						//TODO telescope.getLatitude
-						return "#";
+						return defaultResponse;
 				}
 				// Get Longitude 
 				else if((int) message.charAt(3) == 2 && 
@@ -321,7 +320,7 @@ public class Nexstar4MessageWrapper {
 						(int) message.charAt(6) == 0 && 
 						(int) message.charAt(7) == 3){
 						//TODO telescope.getLongitude
-						return "#";
+						return defaultResponse;
 				}
 				// Get Date
 				else if((int) message.charAt(3) == 3 && 
@@ -330,7 +329,7 @@ public class Nexstar4MessageWrapper {
 						(int) message.charAt(6) == 0 && 
 						(int) message.charAt(7) == 2){
 						//TODO telescope.getGPSDate
-						return "#";
+						return defaultResponse;
 				}
 				// Get Year
 				else if((int) message.charAt(3) == 4 && 
@@ -339,7 +338,7 @@ public class Nexstar4MessageWrapper {
 						(int) message.charAt(6) == 0 && 
 						(int) message.charAt(7) == 2){
 						//TODO telescope.getGPSYear
-						return "#";
+						return defaultResponse;
 				}
 				// Get Time
 				else if((int) message.charAt(3) == 51 && 
@@ -348,7 +347,7 @@ public class Nexstar4MessageWrapper {
 						(int) message.charAt(6) ==  0 && 
 						(int) message.charAt(7) ==  3){
 						//TODO telescope.getGPSTime
-						return "#";
+						return defaultResponse;
 				}
 				else{
 					return badMessageResponse;
@@ -364,7 +363,7 @@ public class Nexstar4MessageWrapper {
 					(int) message.charAt(6) == 0 && 
 					(int) message.charAt(7) == 2){
 					//TODO telescope.getDate
-					return "#";
+					return defaultResponse;
 				}
 				// Get Year
 				else if((int) message.charAt(3) == 4 && 
@@ -373,7 +372,7 @@ public class Nexstar4MessageWrapper {
 						(int) message.charAt(6) == 0 && 
 						(int) message.charAt(7) == 2){
 						//TODO telescope.getYear
-						return "#";
+						return defaultResponse;
 				}
 				// Get Time
 				else if((int) message.charAt(3) == 51 && 
@@ -382,7 +381,7 @@ public class Nexstar4MessageWrapper {
 						(int) message.charAt(6) ==  0 && 
 						(int) message.charAt(7) ==  3){
 						//TODO telescope.getTime
-						return "#";
+						return defaultResponse;
 				}
 				else{
 					return badMessageResponse;
@@ -400,7 +399,7 @@ public class Nexstar4MessageWrapper {
 					(int) message.charAt(6) ==   0 && 
 					(int) message.charAt(7) ==   2){
 					//TODO telescope.getDeviceVersion
-					return "#";
+					return defaultResponse;
 				}
 			else{
 				return badMessageResponse;
