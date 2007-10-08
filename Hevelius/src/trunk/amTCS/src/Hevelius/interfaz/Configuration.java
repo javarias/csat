@@ -9,19 +9,26 @@ public class Configuration extends Properties{
 
       
       
-	static File file = new File("hevelius.properties");
-	static File dir = new File("~/.hevelius");
+//	static File file = new File("hevelius.properties");
+//	static File dir = new File("~/.hevelius");
+	static final public String configurationDir  = System.getProperty("user.home") + "/.hevelius";
+	static final public String configurationFile = configurationDir + "/" + "hevelius.properties";
+
+	static File dir = new File(configurationDir);
+	static File file = new File(configurationFile)
 	
 	public Configuration(){
 		
-		/*if(!dir.exists()){
+		if(!dir.exists()){
 			dir.mkdir();
-		}*/
+		}
 				
 		if(!file.exists()){
 			try{
+//				PrintWriter archivo = new PrintWriter(
+//						new FileWriter("hevelius.properties",true));
 				PrintWriter archivo = new PrintWriter(
-						new FileWriter("hevelius.properties",true));
+						new FileWriter(configurationFile,true));
 				
 				archivo.println("### Hevelius Configuration File ###");
 				archivo.println("");
@@ -49,7 +56,8 @@ public class Configuration extends Properties{
 		}
 		
 		try{
-		    FileInputStream f = new FileInputStream("hevelius.properties");
+		    //FileInputStream f = new FileInputStream("hevelius.properties");
+		    FileInputStream f = new FileInputStream(configurationFile);
 		    propiedades = new Properties();
 		    propiedades.load(f);
 		    f.close();
@@ -71,7 +79,8 @@ public class Configuration extends Properties{
 
 	public void store(){
 		try{
-			OutputStream s = new FileOutputStream(new File("hevelius.properties"));
+			//OutputStream s = new FileOutputStream(new File("hevelius.properties"));
+			OutputStream s = new FileOutputStream(new File(configurationFile));
 			propiedades.store(s,"#HEVELIUS CONFIGURATION FILE");
 			s.close();
 		}catch(Exception e){
