@@ -5,7 +5,7 @@ import Hevelius.acsmodules.*;
 import Hevelius.interfaz.*;
 import alma.TYPES.*;
 
-public class Historial implements Runnable
+public class Historial //implements Runnable
 {
 	private RadecPosHolder r; 
 	private AltazPosHolder a;
@@ -16,7 +16,8 @@ public class Historial implements Runnable
 		a = new AltazPosHolder();
 	}
 
-	public void run()
+
+	/*public void run()
 	{
 		while (true)
 		{
@@ -49,5 +50,5 @@ public class Historial implements Runnable
 				System.out.println("The thread updating information died.");
 			}
 		}
-	}
+	}*/
 }
