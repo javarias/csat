@@ -127,9 +127,9 @@ public class Nexstar4MessageWrapper {
 				String ra, dec;
 				long ral, decl;
 				ra  = message.substring(1,  5);
-				dec = message.substring(7, 10);
-				ral = Long.parseLong( ra, 16);
-				decl= Long.parseLong(dec, 16);
+				dec = message.substring(6, 10);
+				ral = Long.parseLong( ra + "0000", 16);
+				decl= Long.parseLong(dec + "0000", 16);
 				response =	telescope.gotoRA_DEC(ral,decl);
 			}else if(firstChar == GotoPreciseRADEC ){
 				String ra, dec;
@@ -143,10 +143,12 @@ public class Nexstar4MessageWrapper {
 				String azm, alt;
 				long azml, altl;
 				azm = message.substring(1,  5);
-				alt = message.substring(7, 10);
-				azml= Long.parseLong(azm, 16);
-				altl= Long.parseLong(alt, 16);
+				alt = message.substring(6, 10);
+				azml= Long.parseLong(azm + "0000", 16);
+				altl= Long.parseLong(alt + "0000", 16);
 				response =	telescope.gotoAZM_ALT(azml, altl);
+				
+				System.out.println("Go to "+azml+","+altl);
 			}else if(firstChar == GotoPreciseAZMALT ){
 				String azm, alt;
 				long azml, altl;
@@ -155,13 +157,15 @@ public class Nexstar4MessageWrapper {
 				azml= Long.parseLong(azm, 16);
 				altl= Long.parseLong(alt, 16);
 				response =	telescope.gotoPreciseAZM_ALT(azml, altl);
+				
+				System.out.println("Go to "+azml+","+altl);
 			}else if(firstChar == SyncRADEC ){
 				String ra, dec;
 				long ral, decl;
 				ra  = message.substring(1,  5);
 				dec = message.substring(7, 10);
-				ral = Long.parseLong( ra, 16);
-				decl= Long.parseLong(dec, 16);
+				ral = Long.parseLong( ra + "0000", 16);
+				decl= Long.parseLong(dec + "0000", 16);
 				response = telescope.syncRA_DEC(ral, decl);
 			}else if(firstChar == SyncPreciseRADEC ){
 				String ra, dec;

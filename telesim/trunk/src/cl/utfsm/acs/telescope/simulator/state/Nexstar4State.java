@@ -42,9 +42,13 @@ public class Nexstar4State {
 	protected short deviceVersion;
 	protected short model;
 	
+	protected Thread positionControlThread;
+	
 	public Nexstar4State( ) {
 		super();
 		positionControl = new Nexstar4PositionControl(this);
+		positionControlThread = new Thread(positionControl);
+		positionControlThread.start();
 	}
 	/**
 	 * @param calibrated
@@ -144,7 +148,7 @@ public class Nexstar4State {
 	 */
 	public String getVersion() {
 		return	Character.toString((char)  4) +
-				Character.toString((char) 12) +defaultResponse;
+				Character.toString((char) 12) + defaultResponse;
 	}
 	/**
 	 * 
@@ -179,11 +183,15 @@ public class Nexstar4State {
 		buffer.append(azm);
 		buffer.append(',');
 		alt = Long.toHexString(altAxis);
-		for(int i = 0; i<8-azm.length(); i++)
+		for(int i = 0; i<8-alt.length(); i++)
 			buffer.append('0');
 		buffer.append(alt);
 		buffer.append('#');
-		response = buffer.toString();
+		response = buffer.toString().toUpperCase();
+		System.out.println("ALT axis position: "+altAxis);
+		System.out.println("Example: "+(0l-(maxAltAxis+44l)));
+		System.out.println("Example: "+((0l-(maxAltAxis+44l))%maxAltAxis));
+		System.out.println("Example: "+(maxAltAxis+(0l-(maxAltAxis+44l))%maxAltAxis));
 		return response;
 	}
 	/**
@@ -211,11 +219,11 @@ public class Nexstar4State {
 		buffer.append(azm);
 		buffer.append(',');
 		alt = Long.toHexString(altAxis);
-		for(int i = 0; i<8-azm.length(); i++)
+		for(int i = 0; i<8-alt.length(); i++)
 			buffer.append('0');
 		buffer.append(alt);
 		buffer.append('#');
-		response = buffer.toString();
+		response = buffer.toString().toUpperCase();
 		return response;
 	}
 	/* TODO

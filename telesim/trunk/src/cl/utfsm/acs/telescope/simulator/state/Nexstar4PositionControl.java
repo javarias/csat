@@ -117,13 +117,26 @@ public class Nexstar4PositionControl implements Runnable{
 		actionInProgress = action_noActionInProgress;
 		gotoAzmDestination = ra;
 		gotoAltDestination = dec;
+		
+		if(gotoAzmDestination < 0l)
+			gotoAzmDestination = Nexstar4State.maxAzmAxis - gotoAzmDestination;
+		if(gotoAltDestination < 0l)
+			gotoAltDestination = Nexstar4State.maxAltAxis - gotoAltDestination;
+		
 		gotoPrecise = true;
 		actionInProgress = action_gotoInProgress;
 	}
 	public void gotoPreciseAZM_ALT(long azm, long alt){
 		actionInProgress = action_noActionInProgress;
-		gotoAzmDestination = azm;
-		gotoAltDestination = alt;
+		
+		gotoAzmDestination = azm % Nexstar4State.maxAzmAxis;
+		gotoAltDestination = alt % Nexstar4State.maxAltAxis;
+		
+		if(gotoAzmDestination < 0l)
+			gotoAzmDestination = Nexstar4State.maxAzmAxis - gotoAzmDestination;
+		if(gotoAltDestination < 0l)
+			gotoAltDestination = Nexstar4State.maxAltAxis - gotoAltDestination;
+		
 		gotoPrecise = true;
 		actionInProgress = action_gotoInProgress;
 	}
@@ -137,8 +150,8 @@ public class Nexstar4PositionControl implements Runnable{
 	}
 	public void gotoAZM_ALT(long azm, long alt){
 		actionInProgress = action_noActionInProgress;
-		gotoAzmDestination = azm;
-		gotoAltDestination = alt;
+		gotoAzmDestination = azm % Nexstar4State.maxAzmAxis;
+		gotoAltDestination = alt % Nexstar4State.maxAltAxis;
 		gotoPrecise = false;
 		actionInProgress = action_gotoInProgress;
 	}
@@ -251,7 +264,7 @@ public class Nexstar4PositionControl implements Runnable{
 		if(direction == negativeDirection)
 			slewRateInAzmAxis = (-1l)*slewRateInAzmAxis;
 		
-		variableSlewingInAzmAxis = true;
+		variableSlewingInAzmAxis = false;
 		slewingInAzmAxis = true;
 		actionInProgress = action_slewingInProgress;
 	}
@@ -262,6 +275,8 @@ public class Nexstar4PositionControl implements Runnable{
 		slewingInAltAxis = false;
 		variableRateInAltAxis = 0l;
 		totalRateInAltAxis = 0l;
+		
+		System.out.println("slewSpeedSymbol:"+(int)slewSpeedSymbol);
 		
 		switch (slewSpeedSymbol) {
 		case slewSpeedSymbol_4DegreesPerSec:
@@ -305,9 +320,9 @@ public class Nexstar4PositionControl implements Runnable{
 			break;
 		}
 		if(direction == negativeDirection)
-			slewRateInAltAxis = (-1l)*slewRateInAzmAxis;
+			slewRateInAltAxis = (-1l)*slewRateInAltAxis;
 		
-		variableSlewingInAltAxis = true;
+		variableSlewingInAltAxis = false;
 		slewingInAltAxis = true;
 		actionInProgress = action_slewingInProgress;
 	}
@@ -316,7 +331,7 @@ public class Nexstar4PositionControl implements Runnable{
 				(trackingMode != trackingMode_EQNorth)	&&
 				(trackingMode != trackingMode_EQSouth)	&&
 				(trackingMode != trackingMode_Off)		  )
-			this.trackingMode = trackingMode_Off;
+			this.trackingMode  = trackingMode_Off;
 		else
 			this.trackingMode = trackingMode;
 	}
@@ -339,6 +354,7 @@ public class Nexstar4PositionControl implements Runnable{
 					
 				case action_gotoInProgress:
 					actionGotoInProgress();
+					//System.out.println("Goto In Progress");
 					break;
 					
 				case action_slewingInProgress:
@@ -368,13 +384,20 @@ public class Nexstar4PositionControl implements Runnable{
 				azmChange, altChange, 
 				noisyAzmChange, noisyAltChange,
 				azmNewPosition, altNewPosition;
+		double azmChangeD, altChangeD;
 		
 		azmDirection = setDirection(gotoAzmDestination,telescope.getAzmAxis(),Nexstar4State.maxAzmAxis);
 		altDirection = setDirection(gotoAltDestination,telescope.getAltAxis(),Nexstar4State.maxAltAxis);
+		
 		azmTrace = Math.abs(gotoAzmDestination - telescope.getAzmAxis());
-		altTrace = Math.abs(gotoAzmDestination - telescope.getAzmAxis());
-		azmChange = (long) Math.ceil( ((double)getProperSlewSpeedForTrace(azmTrace)) * ((double)azmDirection) * ((double)refreshRateInMilliseconds)/(1000.0) );
-		altChange = (long) Math.ceil( ((double)getProperSlewSpeedForTrace(altTrace)) * ((double)altDirection) * ((double)refreshRateInMilliseconds)/(1000.0) );
+		altTrace = Math.abs(gotoAltDestination - telescope.getAltAxis());
+				
+		azmChangeD = Math.ceil( ((double)getProperSlewSpeedForTrace(azmTrace)) * ((double)azmDirection) * ((double)refreshRateInMilliseconds)/(1000.0) );
+		altChangeD = Math.ceil( ((double)getProperSlewSpeedForTrace(altTrace)) * ((double)altDirection) * ((double)refreshRateInMilliseconds)/(1000.0) );
+				
+		azmChange = (long) azmChangeD;
+		altChange = (long) altChangeD;
+				
 		if(noiseOn){
 			noisyAzmChange = azmChange + getNoise(azmChange, altChange, telescope.getAzmAxis(), telescope.getAltAxis());
 			noisyAltChange = altChange + getNoise(altChange, azmChange, telescope.getAltAxis(), telescope.getAzmAxis());
@@ -383,23 +406,45 @@ public class Nexstar4PositionControl implements Runnable{
 			noisyAzmChange = azmChange;
 			noisyAltChange = altChange;
 		}
+		
 		azmNewPosition = (telescope.getAzmAxis() + noisyAzmChange) % Nexstar4State.maxAzmAxis;
 		altNewPosition = (telescope.getAltAxis() + noisyAltChange) % Nexstar4State.maxAltAxis;
+		
+		if(azmNewPosition < 0l)
+			azmNewPosition = Nexstar4State.maxAzmAxis - gotoAzmDestination;
+		if(azmNewPosition < 0l)
+			azmNewPosition = Nexstar4State.maxAltAxis - gotoAltDestination;
 		
 		telescope.setAzmAxis(azmNewPosition);
 		telescope.setAltAxis(altNewPosition);
 		
+/*		System.out.println("Direction in Azm: "+ azmDirection);
+		System.out.println("Direction in Alt: "+ altDirection);
+		System.out.println("Trace in Azm: "+ azmTrace);
+		System.out.println("Trace in Alt: "+ altTrace);
+		System.out.println("Exact Change in Azm: "+ azmChangeD);
+		System.out.println("Exact Change in Alt: "+ altChangeD);
+		System.out.println("Truncated Change in Azm: "+ azmChange);
+		System.out.println("Truncated Change in Alt: "+ altChange);
+		System.out.println("Noisy Change in Azm: "+ noisyAzmChange);
+		System.out.println("Noisy Change in Alt: "+ noisyAltChange);
+		System.out.println("Azm new position: "+ azmNewPosition);
+		System.out.println("Alt new position: "+ altNewPosition);
+*/		
 		if(	( gotoPrecise ) &&
 			( Math.abs(gotoAzmDestination - telescope.getAzmAxis()) <= precisePrecision ) &&
 			( Math.abs(gotoAltDestination - telescope.getAltAxis()) <= precisePrecision )){
 			actionInProgress = action_noActionInProgress;
 			gotoAzmDestination = telescope.getAzmAxis();
 			gotoAltDestination = telescope.getAltAxis();
-		} else if(	( Math.abs(gotoAzmDestination - telescope.getAzmAxis()) <= standardPrecision ) &&
+//			System.out.println("Goto not in progress");
+		} else if(	( gotoPrecise ) &&
+					( Math.abs(gotoAzmDestination - telescope.getAzmAxis()) <= standardPrecision ) &&
 					( Math.abs(gotoAltDestination - telescope.getAltAxis()) <= standardPrecision )){
 			actionInProgress = action_noActionInProgress;
 			gotoAzmDestination = telescope.getAzmAxis();
 			gotoAltDestination = telescope.getAltAxis();
+//			System.out.println("Goto not in progress");
 		}
 	}
 	private long getNoise(long principalAxisChange, long secondaryAxisChange, long principalAxisPosition, long secondaryAxisPosition){
@@ -462,11 +507,11 @@ public class Nexstar4PositionControl implements Runnable{
 				numberOfRatesInAzmAxis++;
 			}
 		}
-		if(slewingInAzmAxis){
+		if(slewingInAltAxis){
 			if(!variableSlewingInAltAxis){
 				altChange = (long) Math.ceil( ((double)slewRateInAltAxis) * ((double)refreshRateInMilliseconds)/(1000.0) );
 			} else {
-				altChange = (long) Math.ceil( ((double) getFixedSlewRateForVariableSlewRate(variableRateInAltAxis, ((double)totalRateInAzmAxis)/((double)numberOfRatesInAzmAxis))) * ((double)refreshRateInMilliseconds)/(1000.0) );
+				altChange = (long) Math.ceil( ((double) getFixedSlewRateForVariableSlewRate(variableRateInAltAxis, ((double)totalRateInAltAxis)/((double)numberOfRatesInAzmAxis))) * ((double)refreshRateInMilliseconds)/(1000.0) );
 				numberOfRatesInAltAxis++;
 			}
 		}
@@ -483,6 +528,11 @@ public class Nexstar4PositionControl implements Runnable{
 		azmNewPosition = (telescope.getAzmAxis() + noisyAzmChange) % Nexstar4State.maxAzmAxis;
 		altNewPosition = (telescope.getAltAxis() + noisyAltChange) % Nexstar4State.maxAltAxis;
 		
+		if(azmNewPosition < 0l)
+			azmNewPosition = Nexstar4State.maxAzmAxis - azmNewPosition;
+		if(altNewPosition < 0l)
+			altNewPosition = Nexstar4State.maxAltAxis - altNewPosition;
+		
 		telescope.setAzmAxis(azmNewPosition);
 		telescope.setAltAxis(altNewPosition);
 		
@@ -495,8 +545,8 @@ public class Nexstar4PositionControl implements Runnable{
 		
 		if (!slewingInAzmAxis && !slewingInAltAxis){
 			actionInProgress = action_noActionInProgress;
-		}	
-		else if(	
+			System.out.println("A: Slewing not in progress");
+		}else if(	
 				(( variableSlewingInAzmAxis && variableRateInAzmAxis == 0l) || 
 				 (!variableSlewingInAzmAxis && slewRateInAzmAxis 	 == 0l)	  )	
 			 								&&
@@ -505,6 +555,9 @@ public class Nexstar4PositionControl implements Runnable{
 		   	   )
 		{
 			   	   actionInProgress = action_noActionInProgress;
+			   	   System.out.println("B: Slewing not in progress");
+			   	   System.out.println("variableSlewingInAzmAxis:"+variableSlewingInAzmAxis+" variableRateInAzmAxis:"+variableRateInAzmAxis+" slewRateInAzmAxis:"+slewRateInAzmAxis);
+			   	   System.out.println("variableSlewingInAltAxis:"+variableSlewingInAltAxis+" variableRateInAltAxis:"+variableRateInAltAxis+" slewRateInAltAxis:"+slewRateInAltAxis);
 		}
 	}
 	private long getFixedSlewRateForVariableSlewRate(long variableSlewRate, double meanSlewRate){

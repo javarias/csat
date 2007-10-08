@@ -92,6 +92,15 @@ public class SerialPortListener implements Runnable {
 
                 	}
                 	System.out.println("Message: " + message + " Lenght: " + message.length() + " Expected Lenght: " + expectedLength);
+                	if(message.charAt(0)=='P'){
+                		System.out.println("P"
+                			   +" "+(int)message.charAt(1)+" "+(int)message.charAt(2)
+                			   +" "+(int)message.charAt(3)+" "+(int)message.charAt(4)
+                			   +" "+(int)message.charAt(5)+" "+(int)message.charAt(6)
+                			   +" "+(int)message.charAt(7));
+                	}
+                	if( message.length() == 1 && expectedLength == -2 )
+                		System.out.println(message+" - "+(int)message.charAt(0));
                 	//if(message.length() == expectedLength){
                 		reply = wrapper.executeAction(message);
                 		outBuffer = reply.getBytes("US-ASCII");
