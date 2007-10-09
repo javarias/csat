@@ -488,8 +488,8 @@ public class Nexstar4PositionControl implements Runnable{
 			negativeTrace = actualPosition + maxPosition - destination;
 		}
 		else{
-			positiveTrace = actualPosition - destination;
-			negativeTrace = destination + maxPosition - actualPosition;
+			negativeTrace = actualPosition - destination;
+			positiveTrace = destination + maxPosition - actualPosition;
 		}
 		if(positiveTrace < negativeTrace)
 			return 1;
@@ -508,8 +508,8 @@ public class Nexstar4PositionControl implements Runnable{
 			negativeTrace = actualPosition + maxPosition - destination;
 		}
 		else{
-			positiveTrace = actualPosition - destination;
-			negativeTrace = destination + maxPosition - actualPosition;
+			negativeTrace = actualPosition - destination;
+			positiveTrace = destination + maxPosition - actualPosition;
 		}
 		if(positiveTrace < negativeTrace)
 			return positiveTrace;
