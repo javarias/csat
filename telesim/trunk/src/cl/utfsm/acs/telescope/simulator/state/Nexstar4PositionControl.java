@@ -115,13 +115,14 @@ public class Nexstar4PositionControl implements Runnable{
 	public void gotoPreciseRA_DEC(long ra, long dec){
 		//TODO: change ra-dec coordinates to azm-alt coordinates
 		actionInProgress = action_noActionInProgress;
-		gotoAzmDestination = ra;
-		gotoAltDestination = dec;
+		
+		gotoAzmDestination = ra  % Nexstar4State.maxAzmAxis;
+		gotoAltDestination = dec % Nexstar4State.maxAltAxis;
 		
 		if(gotoAzmDestination < 0l)
-			gotoAzmDestination = Nexstar4State.maxAzmAxis - gotoAzmDestination;
+			gotoAzmDestination = Nexstar4State.maxAzmAxis + gotoAzmDestination;
 		if(gotoAltDestination < 0l)
-			gotoAltDestination = Nexstar4State.maxAltAxis - gotoAltDestination;
+			gotoAltDestination = Nexstar4State.maxAltAxis + gotoAltDestination;
 		
 		gotoPrecise = true;
 		actionInProgress = action_gotoInProgress;
@@ -133,9 +134,9 @@ public class Nexstar4PositionControl implements Runnable{
 		gotoAltDestination = alt % Nexstar4State.maxAltAxis;
 		
 		if(gotoAzmDestination < 0l)
-			gotoAzmDestination = Nexstar4State.maxAzmAxis - gotoAzmDestination;
+			gotoAzmDestination = Nexstar4State.maxAzmAxis + gotoAzmDestination;
 		if(gotoAltDestination < 0l)
-			gotoAltDestination = Nexstar4State.maxAltAxis - gotoAltDestination;
+			gotoAltDestination = Nexstar4State.maxAltAxis + gotoAltDestination;
 		
 		gotoPrecise = true;
 		actionInProgress = action_gotoInProgress;
@@ -143,15 +144,29 @@ public class Nexstar4PositionControl implements Runnable{
 	public void gotoRA_DEC(long ra, long dec){
 		//TODO: change ra-dec coordinates to azm-alt coordinates
 		actionInProgress = action_noActionInProgress;
-		gotoAzmDestination = ra;
-		gotoAltDestination = dec;
+		
+		gotoAzmDestination = ra  % Nexstar4State.maxAzmAxis;
+		gotoAltDestination = dec % Nexstar4State.maxAltAxis;
+		
+		if(gotoAzmDestination < 0l)
+			gotoAzmDestination = Nexstar4State.maxAzmAxis + gotoAzmDestination;
+		if(gotoAltDestination < 0l)
+			gotoAltDestination = Nexstar4State.maxAltAxis + gotoAltDestination;
+		
 		gotoPrecise = false;
 		actionInProgress = action_gotoInProgress;
 	}
 	public void gotoAZM_ALT(long azm, long alt){
 		actionInProgress = action_noActionInProgress;
+		
 		gotoAzmDestination = azm % Nexstar4State.maxAzmAxis;
 		gotoAltDestination = alt % Nexstar4State.maxAltAxis;
+		
+		if(gotoAzmDestination < 0l)
+			gotoAzmDestination = Nexstar4State.maxAzmAxis + gotoAzmDestination;
+		if(gotoAltDestination < 0l)
+			gotoAltDestination = Nexstar4State.maxAltAxis + gotoAltDestination;
+		
 		gotoPrecise = false;
 		actionInProgress = action_gotoInProgress;
 	}
@@ -386,17 +401,17 @@ public class Nexstar4PositionControl implements Runnable{
 				azmNewPosition, altNewPosition;
 		double azmChangeD, altChangeD;
 		
-		azmDirection = setDirection(gotoAzmDestination,telescope.getAzmAxis(),Nexstar4State.maxAzmAxis);
-		altDirection = setDirection(gotoAltDestination,telescope.getAltAxis(),Nexstar4State.maxAltAxis);
+		azmDirection = determinateDirection(gotoAzmDestination,telescope.getAzmAxis(),Nexstar4State.maxAzmAxis);
+		altDirection = determinateDirection(gotoAltDestination,telescope.getAltAxis(),Nexstar4State.maxAltAxis);
 		
-		azmTrace = Math.abs(gotoAzmDestination - telescope.getAzmAxis());
-		altTrace = Math.abs(gotoAltDestination - telescope.getAltAxis());
+		azmTrace = determinateTrace(gotoAzmDestination,telescope.getAzmAxis(),Nexstar4State.maxAzmAxis);
+		altTrace = determinateTrace(gotoAltDestination,telescope.getAltAxis(),Nexstar4State.maxAltAxis);
 				
-		azmChangeD = Math.ceil( ((double)getProperSlewSpeedForTrace(azmTrace)) * ((double)azmDirection) * ((double)refreshRateInMilliseconds)/(1000.0) );
-		altChangeD = Math.ceil( ((double)getProperSlewSpeedForTrace(altTrace)) * ((double)altDirection) * ((double)refreshRateInMilliseconds)/(1000.0) );
+		azmChangeD = ((double)getProperSlewSpeedForTrace(azmTrace)) * ((double)azmDirection) * ((double)refreshRateInMilliseconds)/(1000.0);
+		altChangeD = ((double)getProperSlewSpeedForTrace(altTrace)) * ((double)altDirection) * ((double)refreshRateInMilliseconds)/(1000.0);
 				
-		azmChange = (long) azmChangeD;
-		altChange = (long) altChangeD;
+		azmChange = (long) Math.ceil(azmChangeD);
+		altChange = (long) Math.ceil(altChangeD);
 				
 		if(noiseOn){
 			noisyAzmChange = azmChange + getNoise(azmChange, altChange, telescope.getAzmAxis(), telescope.getAltAxis());
@@ -411,14 +426,14 @@ public class Nexstar4PositionControl implements Runnable{
 		altNewPosition = (telescope.getAltAxis() + noisyAltChange) % Nexstar4State.maxAltAxis;
 		
 		if(azmNewPosition < 0l)
-			azmNewPosition = Nexstar4State.maxAzmAxis - gotoAzmDestination;
-		if(azmNewPosition < 0l)
-			azmNewPosition = Nexstar4State.maxAltAxis - gotoAltDestination;
+			azmNewPosition = Nexstar4State.maxAzmAxis + azmNewPosition;
+		if(altNewPosition < 0l)
+			altNewPosition = Nexstar4State.maxAltAxis + altNewPosition;
 		
 		telescope.setAzmAxis(azmNewPosition);
 		telescope.setAltAxis(altNewPosition);
 		
-/*		System.out.println("Direction in Azm: "+ azmDirection);
+		System.out.println("Direction in Azm: "+ azmDirection);
 		System.out.println("Direction in Alt: "+ altDirection);
 		System.out.println("Trace in Azm: "+ azmTrace);
 		System.out.println("Trace in Alt: "+ altTrace);
@@ -430,17 +445,23 @@ public class Nexstar4PositionControl implements Runnable{
 		System.out.println("Noisy Change in Alt: "+ noisyAltChange);
 		System.out.println("Azm new position: "+ azmNewPosition);
 		System.out.println("Alt new position: "+ altNewPosition);
-*/		
+		
+		azmTrace = determinateTrace(gotoAzmDestination,telescope.getAzmAxis(),Nexstar4State.maxAzmAxis);
+		altTrace = determinateTrace(gotoAltDestination,telescope.getAltAxis(),Nexstar4State.maxAltAxis);
+		
+		System.out.println("New Trace in Azm: "+ azmTrace);
+		System.out.println("New Trace in Alt: "+ altTrace);
+		
 		if(	( gotoPrecise ) &&
-			( Math.abs(gotoAzmDestination - telescope.getAzmAxis()) <= precisePrecision ) &&
-			( Math.abs(gotoAltDestination - telescope.getAltAxis()) <= precisePrecision )){
+			( azmTrace <= precisePrecision ) &&
+			( altTrace <= precisePrecision )){
 			actionInProgress = action_noActionInProgress;
 			gotoAzmDestination = telescope.getAzmAxis();
 			gotoAltDestination = telescope.getAltAxis();
 //			System.out.println("Goto not in progress");
-		} else if(	( gotoPrecise ) &&
-					( Math.abs(gotoAzmDestination - telescope.getAzmAxis()) <= standardPrecision ) &&
-					( Math.abs(gotoAltDestination - telescope.getAltAxis()) <= standardPrecision )){
+		} else if(	( !gotoPrecise ) &&
+					( azmTrace <= standardPrecision ) &&
+					( altTrace <= standardPrecision )){
 			actionInProgress = action_noActionInProgress;
 			gotoAzmDestination = telescope.getAzmAxis();
 			gotoAltDestination = telescope.getAltAxis();
@@ -454,10 +475,14 @@ public class Nexstar4PositionControl implements Runnable{
 				+ Math.round(0.05 * prng.nextGaussian()*Math.abs(secondaryAxisChange)/((double) Nexstar4State.maxAltAxis));
 		return noise;
 	}
-	private short setDirection(long destination, long actualPosition, long maxPosition){
+	private short determinateDirection(long destination, long actualPosition, long maxPosition){
 		long positiveTrace, negativeTrace;
-		if(destination > maxPosition)
+		
+		if(Math.abs(destination) >= maxPosition)
 			destination = destination % maxPosition;
+		if(destination < 0l)
+			destination = maxPosition + destination;
+		
 		if(actualPosition < destination){
 			positiveTrace = destination - actualPosition;
 			negativeTrace = actualPosition + maxPosition - destination;
@@ -470,24 +495,48 @@ public class Nexstar4PositionControl implements Runnable{
 			return 1;
 		return -1;
 	}
+	private long determinateTrace(long destination, long actualPosition, long maxPosition){
+		long positiveTrace, negativeTrace;
+		
+		if(Math.abs(destination) >= maxPosition)
+			destination = destination % maxPosition;
+		if(destination < 0l)
+			destination = maxPosition + destination;
+		
+		if(actualPosition < destination){
+			positiveTrace = destination - actualPosition;
+			negativeTrace = actualPosition + maxPosition - destination;
+		}
+		else{
+			positiveTrace = actualPosition - destination;
+			negativeTrace = destination + maxPosition - actualPosition;
+		}
+		if(positiveTrace < negativeTrace)
+			return positiveTrace;
+		return negativeTrace;
+	}	
 	private long getProperSlewSpeedForTrace(long trace){
-		if(trace > slewSpeed_4DegreesPerSec){
+		long deltaTrace;
+		
+		deltaTrace = (long) ( 1.25 * ((double) trace) *1000.0/((double) refreshRateInMilliseconds) );
+		
+		if(deltaTrace > slewSpeed_4DegreesPerSec){
 			return slewSpeed_4DegreesPerSec;
-		}else if(trace > slewSpeed_2DegreesPerSec){
+		}else if(deltaTrace > slewSpeed_2DegreesPerSec){
 			return slewSpeed_2DegreesPerSec;
-		}else if(trace > slewSpeed_1DegreesPerSec){
+		}else if(deltaTrace > slewSpeed_1DegreesPerSec){
 			return slewSpeed_1DegreesPerSec;
-		}else if(trace > slewSpeed_5MinutessPerSec){
+		}else if(deltaTrace > slewSpeed_5MinutessPerSec){
 			return slewSpeed_5MinutessPerSec;
-		}else if(trace > slewSpeed_32x){
+		}else if(deltaTrace > slewSpeed_32x){
 			return slewSpeed_32x;
-		}else if(trace > slewSpeed_16x){
+		}else if(deltaTrace > slewSpeed_16x){
 			return slewSpeed_16x;
-		}else if(trace > slewSpeed_8x){
+		}else if(deltaTrace > slewSpeed_8x){
 			return slewSpeed_8x;
-		}else if(trace > slewSpeed_4x){
+		}else if(deltaTrace > slewSpeed_4x){
 			return slewSpeed_4x;
-		}else if(trace > slewSpeed_2x){
+		}else if(deltaTrace > slewSpeed_2x){
 			return slewSpeed_2x;
 		}
 		return slewSpeed_0x;
@@ -501,7 +550,7 @@ public class Nexstar4PositionControl implements Runnable{
 		altChange = 0;
 		if(slewingInAzmAxis){
 			if(!variableSlewingInAzmAxis){
-				azmChange = (long) Math.ceil( ((double)slewRateInAzmAxis) * ((double)refreshRateInMilliseconds)/(1000.0) );
+				azmChange = (long) Math.ceil( ((double) slewRateInAzmAxis) * ((double)refreshRateInMilliseconds)/(1000.0) );
 			} else {
 				azmChange = (long) Math.ceil( ((double) getFixedSlewRateForVariableSlewRate(variableRateInAzmAxis, ((double)totalRateInAzmAxis)/((double)numberOfRatesInAzmAxis))) * ((double)refreshRateInMilliseconds)/(1000.0) );
 				numberOfRatesInAzmAxis++;
@@ -529,23 +578,23 @@ public class Nexstar4PositionControl implements Runnable{
 		altNewPosition = (telescope.getAltAxis() + noisyAltChange) % Nexstar4State.maxAltAxis;
 		
 		if(azmNewPosition < 0l)
-			azmNewPosition = Nexstar4State.maxAzmAxis - azmNewPosition;
+			azmNewPosition = Nexstar4State.maxAzmAxis + azmNewPosition;
 		if(altNewPosition < 0l)
-			altNewPosition = Nexstar4State.maxAltAxis - altNewPosition;
+			altNewPosition = Nexstar4State.maxAltAxis + altNewPosition;
 		
 		telescope.setAzmAxis(azmNewPosition);
 		telescope.setAltAxis(altNewPosition);
 		
 		if(variableSlewingInAzmAxis)
-			totalRateInAzmAxis += noisyAzmChange;
+			totalRateInAzmAxis += Math.abs(noisyAzmChange);
 		if(variableSlewingInAltAxis)
-			totalRateInAltAxis += noisyAltChange;
+			totalRateInAltAxis += Math.abs(noisyAltChange);
 		
 		//TODO: Reset tracking mode under certain slew speeds
 		
 		if (!slewingInAzmAxis && !slewingInAltAxis){
 			actionInProgress = action_noActionInProgress;
-			System.out.println("A: Slewing not in progress");
+//			System.out.println("A: Slewing not in progress");
 		}else if(	
 				(( variableSlewingInAzmAxis && variableRateInAzmAxis == 0l) || 
 				 (!variableSlewingInAzmAxis && slewRateInAzmAxis 	 == 0l)	  )	
@@ -555,61 +604,64 @@ public class Nexstar4PositionControl implements Runnable{
 		   	   )
 		{
 			   	   actionInProgress = action_noActionInProgress;
-			   	   System.out.println("B: Slewing not in progress");
+/*			   	   System.out.println("B: Slewing not in progress");
 			   	   System.out.println("variableSlewingInAzmAxis:"+variableSlewingInAzmAxis+" variableRateInAzmAxis:"+variableRateInAzmAxis+" slewRateInAzmAxis:"+slewRateInAzmAxis);
 			   	   System.out.println("variableSlewingInAltAxis:"+variableSlewingInAltAxis+" variableRateInAltAxis:"+variableRateInAltAxis+" slewRateInAltAxis:"+slewRateInAltAxis);
-		}
+*/		}
 	}
 	private long getFixedSlewRateForVariableSlewRate(long variableSlewRate, double meanSlewRate){
-		long upperSlewRate, lowerSlewRate, upperDistance, lowerDistance;
-		upperSlewRate = getUpperSlewRate(variableSlewRate);
-		lowerSlewRate = getLowerSlewRate(variableSlewRate);
+		long variableSlewRateAbs, upperSlewRate, lowerSlewRate, upperDistance, lowerDistance;
+		
+		variableSlewRateAbs = Math.abs(variableSlewRate);
+		
+		upperSlewRate = getUpperSlewRate(variableSlewRateAbs);
+		lowerSlewRate = getLowerSlewRate(variableSlewRateAbs);
 		upperDistance = Math.round( Math.abs((double)upperSlewRate - meanSlewRate) );
 		lowerDistance = Math.round( Math.abs((double)lowerSlewRate - meanSlewRate) );
 		if(lowerDistance < upperDistance)
-			return lowerSlewRate;
-		return upperSlewRate;
+			return lowerSlewRate* ( (long) Math.signum(variableSlewRate) );
+		return upperSlewRate*( (long) Math.signum(variableSlewRate) );
 	}
-	private long getLowerSlewRate(long variableSlewRate){
-		if(variableSlewRate > slewSpeed_0x){
+	private long getLowerSlewRate(long variableSlewRateAbs){
+		if(variableSlewRateAbs > slewSpeed_0x){
 			return slewSpeed_0x;
-		}else if(variableSlewRate > slewSpeed_2x){
+		}else if(variableSlewRateAbs > slewSpeed_2x){
 			return slewSpeed_2x;
-		}else if(variableSlewRate > slewSpeed_4x){
+		}else if(variableSlewRateAbs > slewSpeed_4x){
 			return slewSpeed_4x;
-		}else if(variableSlewRate > slewSpeed_8x){
+		}else if(variableSlewRateAbs > slewSpeed_8x){
 			return slewSpeed_8x;
-		}else if(variableSlewRate > slewSpeed_16x){
+		}else if(variableSlewRateAbs > slewSpeed_16x){
 			return slewSpeed_16x;
-		}else if(variableSlewRate > slewSpeed_32x){
+		}else if(variableSlewRateAbs > slewSpeed_32x){
 			return slewSpeed_32x;
-		}else if(variableSlewRate > slewSpeed_5MinutessPerSec){
+		}else if(variableSlewRateAbs > slewSpeed_5MinutessPerSec){
 			return slewSpeed_5MinutessPerSec;
-		}else if(variableSlewRate > slewSpeed_1DegreesPerSec){
+		}else if(variableSlewRateAbs > slewSpeed_1DegreesPerSec){
 			return slewSpeed_1DegreesPerSec;
-		}else if(variableSlewRate > slewSpeed_2DegreesPerSec){
+		}else if(variableSlewRateAbs > slewSpeed_2DegreesPerSec){
 			return slewSpeed_2DegreesPerSec;
 		}
 		return slewSpeed_4DegreesPerSec;
 	}
-	private long getUpperSlewRate(long trace){
-		if(trace <= slewSpeed_4DegreesPerSec){
+	private long getUpperSlewRate(long variableSlewRateAbs){
+		if(variableSlewRateAbs <= slewSpeed_4DegreesPerSec){
 			return slewSpeed_4DegreesPerSec;
-		}else if(trace <= slewSpeed_2DegreesPerSec){
+		}else if(variableSlewRateAbs <= slewSpeed_2DegreesPerSec){
 			return slewSpeed_2DegreesPerSec;
-		}else if(trace <= slewSpeed_1DegreesPerSec){
+		}else if(variableSlewRateAbs <= slewSpeed_1DegreesPerSec){
 			return slewSpeed_1DegreesPerSec;
-		}else if(trace <= slewSpeed_5MinutessPerSec){
+		}else if(variableSlewRateAbs <= slewSpeed_5MinutessPerSec){
 			return slewSpeed_5MinutessPerSec;
-		}else if(trace <= slewSpeed_32x){
+		}else if(variableSlewRateAbs <= slewSpeed_32x){
 			return slewSpeed_32x;
-		}else if(trace <= slewSpeed_16x){
+		}else if(variableSlewRateAbs <= slewSpeed_16x){
 			return slewSpeed_16x;
-		}else if(trace <= slewSpeed_8x){
+		}else if(variableSlewRateAbs <= slewSpeed_8x){
 			return slewSpeed_8x;
-		}else if(trace <= slewSpeed_4x){
+		}else if(variableSlewRateAbs <= slewSpeed_4x){
 			return slewSpeed_4x;
-		}else if(trace <= slewSpeed_2x){
+		}else if(variableSlewRateAbs <= slewSpeed_2x){
 			return slewSpeed_2x;
 		}
 		return slewSpeed_0x;

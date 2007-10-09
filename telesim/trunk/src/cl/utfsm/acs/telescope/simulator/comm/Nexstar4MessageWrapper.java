@@ -233,6 +233,8 @@ public class Nexstar4MessageWrapper {
 				trackRateLow = (int) message.charAt(5);
 				rate = (trackRateHigh*256/4) + (int)(Math.floor(((double)trackRateLow)/4.0));
 				
+				System.out.println("Variable Slew Rate in AZM axis: "+rate);
+				
 				if((int) message.charAt(2) == 16)
 					return telescope.setVariableRateAZM_RA(rate, direction);
 				else

@@ -188,10 +188,6 @@ public class Nexstar4State {
 		buffer.append(alt);
 		buffer.append('#');
 		response = buffer.toString().toUpperCase();
-		System.out.println("ALT axis position: "+altAxis);
-		System.out.println("Example: "+(0l-(maxAltAxis+44l)));
-		System.out.println("Example: "+((0l-(maxAltAxis+44l))%maxAltAxis));
-		System.out.println("Example: "+(maxAltAxis+(0l-(maxAltAxis+44l))%maxAltAxis));
 		return response;
 	}
 	/**

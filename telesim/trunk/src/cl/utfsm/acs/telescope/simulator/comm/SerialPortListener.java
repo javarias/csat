@@ -100,7 +100,7 @@ public class SerialPortListener implements Runnable {
                 			   +" "+(int)message.charAt(7));
                 	}
                 	if( message.length() == 1 && expectedLength == -2 )
-                		System.out.println(message+" - "+(int)message.charAt(0));
+                		System.out.println("Not recognized message: "+message+" - "+(int)message.charAt(0));
                 	//if(message.length() == expectedLength){
                 		reply = wrapper.executeAction(message);
                 		outBuffer = reply.getBytes("US-ASCII");
