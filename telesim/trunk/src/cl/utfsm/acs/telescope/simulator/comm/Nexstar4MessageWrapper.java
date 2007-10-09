@@ -116,69 +116,33 @@ public class Nexstar4MessageWrapper {
 			
 			firstChar = message.charAt(0);
 			if(firstChar == GetRADEC){
-				response =	telescope.getRaDec();
+				response =	getRaDec();
 			}else if(firstChar == GetPreciseRADEC){
-				response =	telescope.getPreciseRaDec();
+				response =	getPreciseRaDec();
 			}else if(firstChar == GetAZMALT){
-				response =	telescope.getAzmAlt();
+				response =	getAzmAlt();
 			}else if(firstChar == GetPreciseAZMALT){
-				response =	telescope.getPreciseAzmAlt();
+				response =	getPreciseAzmAlt();
 			}else if(firstChar == GotoRADEC ){
-				String ra, dec;
-				long ral, decl;
-				ra  = message.substring(1,  5);
-				dec = message.substring(6, 10);
-				ral = Long.parseLong( ra + "0000", 16);
-				decl= Long.parseLong(dec + "0000", 16);
-				response =	telescope.gotoRA_DEC(ral,decl);
+				response =	gotoRA_DEC(message);
 			}else if(firstChar == GotoPreciseRADEC ){
-				String ra, dec;
-				long ral, decl;
-				ra  = message.substring( 1,  9);
-				dec = message.substring(10, 18);
-				ral = Long.parseLong( ra, 16);
-				decl= Long.parseLong(dec, 16);
-				response =	telescope.gotoPreciseRA_DEC(ral,decl);
+				response =	gotoPreciseRA_DEC(message);
 			}else if(firstChar == GotoAZMALT ){
-				String azm, alt;
-				long azml, altl;
-				azm = message.substring(1,  5);
-				alt = message.substring(6, 10);
-				azml= Long.parseLong(azm + "0000", 16);
-				altl= Long.parseLong(alt + "0000", 16);
-				response =	telescope.gotoAZM_ALT(azml, altl);
+				response =	gotoAZM_ALT(message);
 				
-				System.out.println("Go to "+azml+","+altl);
+				System.out.println("Go to " + response);
 			}else if(firstChar == GotoPreciseAZMALT ){
-				String azm, alt;
-				long azml, altl;
-				azm = message.substring( 1,  9);
-				alt = message.substring(10, 18);
-				azml= Long.parseLong(azm, 16);
-				altl= Long.parseLong(alt, 16);
-				response =	telescope.gotoPreciseAZM_ALT(azml, altl);
+				response =	gotoPreciseAZM_ALT(message);
 				
-				System.out.println("Go to "+azml+","+altl);
+				System.out.println("Go to " + response);
 			}else if(firstChar == SyncRADEC ){
-				String ra, dec;
-				long ral, decl;
-				ra  = message.substring(1,  5);
-				dec = message.substring(7, 10);
-				ral = Long.parseLong( ra + "0000", 16);
-				decl= Long.parseLong(dec + "0000", 16);
-				response = telescope.syncRA_DEC(ral, decl);
+				response = syncRA_DEC(message);
 			}else if(firstChar == SyncPreciseRADEC ){
-				String ra, dec;
-				long ral, decl;
-				ra  = message.substring( 1,  9);
-				dec = message.substring(10, 18);
-				ral = Long.parseLong( ra, 16);
-				decl= Long.parseLong(dec, 16);
-				response = telescope.syncPreciseRA_DEC(ral, decl);
+				response = syncPreciseRA_DEC(message);
 			}else if(firstChar == GetTrackingMode ){
-				response = telescope.getTrackingMode();
+				response = getTrackingMode();
 			}else if(firstChar == SetTrackingMode ){
-				response = telescope.setTrackingMode(message.charAt(1));
+				response = setTrackingMode(message.charAt(1));
 			}else if(firstChar == PassThroughCommand ){
 				response = handlePassThroughCommand(message);
 			}else if(firstChar == GetLocation ){
@@ -190,17 +154,17 @@ public class Nexstar4MessageWrapper {
 			}else if(firstChar == SetTime ){
 			
 			}else if(firstChar == GetVersion){
-				response = telescope.getVersion();
+				response = getVersion();
 			}else if(firstChar == GetModel){
-				response = telescope.getModel();
+				response = getModel();
 			}else if(firstChar == Echo){
-				response = telescope.echo(message.charAt(1));
+				response = echo(message);
 			}else if(firstChar == IsAlignmentComplete){
-				response = telescope.isAlignmentComplete();
+				response = isAlignmentComplete();
 			}else if(firstChar == IsGotoInProgress){
-				response = telescope.isGotoInProgress();
+				response = isGotoInProgress();
 			}else if(firstChar == CancelGoto){
-				response = telescope.cancelGoto();
+				response = cancelGoto();
 			}
 		}catch (NumberFormatException e) {
 			// bad hexadecimal format in goto or sync call
@@ -221,24 +185,7 @@ public class Nexstar4MessageWrapper {
 					(int) message.charAt(6) ==  0 && 
 					(int) message.charAt(7) ==  0){
 				
-				boolean direction;
-				int trackRateHigh, trackRateLow, rate;
-				
-				if((int) message.charAt(3) ==  6)
-					direction = Nexstar4State.positiveDirection;
-				else
-					direction = Nexstar4State.negativeDirection;
-				
-				trackRateHigh = (int) message.charAt(4);
-				trackRateLow = (int) message.charAt(5);
-				rate = (trackRateHigh*256/4) + (int)(Math.floor(((double)trackRateLow)/4.0));
-				
-				System.out.println("Variable Slew Rate in AZM axis: "+rate);
-				
-				if((int) message.charAt(2) == 16)
-					return telescope.setVariableRateAZM_RA(rate, direction);
-				else
-					return telescope.setVariableRateALT_DEC(rate, direction);
+				return setVariableRate(message);
 			}
 			// Set Date or Year on the CGE mount
 			else if((int) message.charAt(2) == 178 && 
@@ -261,20 +208,7 @@ public class Nexstar4MessageWrapper {
 					(int) message.charAt(6) == 0 && 
 					(int) message.charAt(7) == 0){
 			
-				boolean direction;
-				char rate;
-				
-				if((int) message.charAt(3) == 36)
-					direction = Nexstar4State.positiveDirection;
-				else
-					direction = Nexstar4State.negativeDirection;
-				
-				rate = message.charAt(4);
-				
-				if((int) message.charAt(2) == 16)
-					return telescope.setFixedRateAZM_RA(direction, rate);
-				else
-					return telescope.setFixedRateALT_DEC(direction, rate);
+				return setFixedRate(message);
 			}
 			// Bad Message
 			else{
@@ -412,5 +346,265 @@ public class Nexstar4MessageWrapper {
 			}
 		}
 		return badMessageResponse;		
+	}
+	
+	/* **************************************/
+	/* ********************Interface Comands*/
+	
+	/**
+	 * @param trackingMode
+	 */
+	protected String setTrackingMode(char trackingMode) {
+		telescope.setTrackingMode(trackingMode);
+		return defaultResponse;
+	}
+	/**
+	 * @return
+	 */
+	protected String isCalibrated() {
+		String response;
+		if(telescope.isCalibrated())
+			response = Character.toString((char) 1) + defaultResponse;
+		else
+			response = Character.toString((char) 0) + defaultResponse;		
+		return response;
+	}
+	/**
+	 * @return
+	 */
+	protected String isGotoInProgress() {
+		String response; 
+		if(telescope.isGotoInProgress())
+			response = "1" + defaultResponse;
+		else
+			response = "0" + defaultResponse;
+
+		return response;
+	}
+	/**
+	 * @return
+	 */
+	protected String isGpsLinked() {
+		String response; 
+		if(telescope.isGpsLinked())
+			response = Character.toString((char) 1) + defaultResponse;
+		else
+			response = Character.toString((char) 0) + defaultResponse;
+
+		return response;
+	}
+	/**
+	 * @return
+	 */
+	protected String getModel() {
+		return Character.toString(telescope.getModel()) +defaultResponse;
+	}
+	/**
+	 * @return
+	 */
+	protected String getTrackingMode() {
+		return Character.toString(telescope.getTrackingMode()) + defaultResponse;
+	}
+	/**
+	 * @return
+	 */
+	protected String getVersion() {
+		return	telescope.getVersion() + defaultResponse;
+	}
+	/**
+	 * 
+	 * @param message The character to echo
+	 * @return The return string
+	 */
+	protected String echo(String message){
+		return telescope.echo(message.charAt(1)) + defaultResponse;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	protected String getAzmAlt(){
+		String response, preciseResponse;
+		
+		preciseResponse = getPreciseAzmAlt();
+		response = 	preciseResponse.substring(0,  4) +","+ 
+					preciseResponse.substring(9, 13) +"#";
+		return response;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	protected String getPreciseAzmAlt(){
+		String azm, alt, response;
+		StringBuffer buffer = new StringBuffer(18);
+		azm = Long.toHexString(telescope.getAzmAxis());
+		for(int i = 0; i<8-azm.length(); i++)
+			buffer.append('0');
+		buffer.append(azm);
+		buffer.append(',');
+		alt = Long.toHexString(telescope.getAltAxis());
+		for(int i = 0; i<8-alt.length(); i++)
+			buffer.append('0');
+		buffer.append(alt);
+		buffer.append('#');
+		response = buffer.toString().toUpperCase();
+		return response;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	protected String getRaDec(){
+		String response, preciseResponse;
+		
+		preciseResponse = getPreciseRaDec();
+		response = 	preciseResponse.substring(0,  4) +","+ 
+					preciseResponse.substring(9, 13) +"#";
+		return response;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	protected String getPreciseRaDec(){
+		String azm, alt, response;
+		StringBuffer buffer = new StringBuffer(18);
+		azm = Long.toHexString(telescope.getRa());
+		for(int i = 0; i<8-azm.length(); i++)
+			buffer.append('0');
+		buffer.append(azm);
+		buffer.append(',');
+		alt = Long.toHexString(telescope.getDec());
+		for(int i = 0; i<8-alt.length(); i++)
+			buffer.append('0');
+		buffer.append(alt);
+		buffer.append('#');
+		response = buffer.toString().toUpperCase();
+		return response;
+	}
+	/**
+	 * @return
+	 */
+	protected String isAlignmentComplete(){
+		String response;
+		if(telescope.isAlignmentComplete())
+			response = Character.toString((char) 1) + defaultResponse;
+		else
+			response = Character.toString((char) 0) + defaultResponse;
+		return response;
+	}
+	
+	/**
+	 * @return
+	 */
+	protected String getDeviceVersion(String message) {
+		String response;
+		response = telescope.getDeviceVersion(message.charAt(2)) + defaultResponse;
+		return response;
+	}
+	protected String gotoRA_DEC(String message){
+		String raString, decString;
+		long ra, dec;
+		raString  = message.substring(1,  5);
+		decString = message.substring(6, 10);
+		ra = Long.parseLong( raString + "0000", 16);
+		dec= Long.parseLong(decString + "0000", 16);
+		telescope.gotoRA_DEC(ra, dec);
+		return defaultResponse;
+	}
+	protected String gotoPreciseRA_DEC(String message){
+		String raString, decString;
+		long ra, dec;
+		raString  = message.substring( 1,  9);
+		decString = message.substring(10, 18);
+		ra = Long.parseLong( raString, 16);
+		dec= Long.parseLong(decString, 16);
+		telescope.gotoPreciseRA_DEC(ra, dec);
+		return defaultResponse;
+	}
+	protected String gotoAZM_ALT(String message){
+		String azmString, altString;
+		long azm, alt;
+		azmString = message.substring(1,  5);
+		altString = message.substring(6, 10);
+		azm = Long.parseLong(azmString + "0000", 16);
+		alt = Long.parseLong(altString + "0000", 16);
+		telescope.gotoAZM_ALT(azm, alt);
+		return defaultResponse;
+	}
+	protected String gotoPreciseAZM_ALT(String message){
+		String azmString, altString;
+		long azm , alt;
+		azmString = message.substring( 1,  9);
+		altString = message.substring(10, 18);
+		azm = Long.parseLong(azmString, 16);
+		alt = Long.parseLong(altString, 16);
+		telescope.gotoPreciseAZM_ALT(azm, alt);
+		return defaultResponse;
+	}
+	protected String cancelGoto(){
+		telescope.cancelGoto();
+		return defaultResponse;
+	}
+	protected String setVariableRate(String message){
+		
+		boolean direction;
+		int trackRateHigh, trackRateLow, rate;
+		
+		if((int) message.charAt(3) ==  6)
+			direction = Nexstar4State.positiveDirection;
+		else
+			direction = Nexstar4State.negativeDirection;
+		
+		trackRateHigh = (int) message.charAt(4);
+		trackRateLow = (int) message.charAt(5);
+		rate = (trackRateHigh*256/4) + (int)(Math.floor(((double)trackRateLow)/4.0));
+		
+		System.out.println("Variable Slew Rate in AZM axis: "+rate);
+		
+		if((int) message.charAt(2) == 16)
+			telescope.setVariableRateAZM_RA(rate, direction);
+		else
+			telescope.setVariableRateALT_DEC(rate, direction);
+		return defaultResponse;
+	}
+	protected String setFixedRate(String message){
+		boolean direction;
+		char rate;
+		
+		if((int) message.charAt(3) == 36)
+			direction = Nexstar4State.positiveDirection;
+		else
+			direction = Nexstar4State.negativeDirection;
+		
+		rate = message.charAt(4);
+		
+		if((int) message.charAt(2) == 16)
+			telescope.setFixedRateAZM_RA(direction, rate);
+		else
+			telescope.setFixedRateALT_DEC(direction, rate);
+		
+		return defaultResponse;
+	}
+	protected String syncRA_DEC(String message){
+		String raString, decString;
+		long ra, dec;
+		raString  = message.substring(1,  5);
+		decString = message.substring(7, 10);
+		ra = Long.parseLong( raString + "0000", 16);
+		dec= Long.parseLong(decString + "0000", 16);
+		telescope.syncRA_DEC(ra, dec);
+		return defaultResponse;
+	}
+	protected String syncPreciseRA_DEC(String message){
+		String raString, decString;
+		long ra, dec;
+		raString  = message.substring( 1,  9);
+		decString = message.substring(10, 18);
+		ra = Long.parseLong( raString, 16);
+		dec= Long.parseLong(decString, 16);
+		telescope.syncPreciseRA_DEC(ra, dec);
+		return defaultResponse;
 	}
 }

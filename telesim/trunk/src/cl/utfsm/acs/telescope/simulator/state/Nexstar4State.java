@@ -10,10 +10,21 @@ public class Nexstar4State {
 	public static final long maxAzmAxis = 4294967296l; 
 	public static final long maxAltAxis = 4294967296l;
 	
+	protected static final String version = Character.toString((char) 4) + Character.toString((char) 12);
+	protected static final char model = ((char) 11);
+	
 	public static final char device_AzmRaMotor = (char) 16; 	// AZM/RA Motor
 	public static final char device_AltDecMotor = (char) 17; 	// ALT/DEC Motor
 	public static final char device_GpsUnit = (char) 176; 		// GPS Unit
 	public static final char device_Rtc = (char) 178; 			// RTC (CGE only)
+	
+	/*
+	 * TODO: assign the proper character sequence for every device.
+	 */
+	public static final String deviceVersion_AzmRaMotor = 	Character.toString((char)  16) + Character.toString((char) 12); 	// AZM/RA Motor
+	public static final String deviceVersion_AltDecMotor = 	Character.toString((char)  17) + Character.toString((char) 12); 	// ALT/DEC Motor
+	public static final String deviceVersion_GpsUnit = 		Character.toString((char) 176) + Character.toString((char) 12); 		// GPS Unit
+	public static final String deviceVersion_Rtc = 			Character.toString((char) 178) + Character.toString((char) 12); 			// RTC (CGE only)
 	
 	public static final boolean positiveDirection = Nexstar4PositionControl.positiveDirection;
 	public static final boolean negativeDirection = Nexstar4PositionControl.negativeDirection;
@@ -36,16 +47,20 @@ public class Nexstar4State {
 	protected boolean west;
 	
 	protected boolean calibrated;
+	protected boolean alignmentComplete;
 	protected boolean gpsLinked;
-	
-	protected short version;
-	protected short deviceVersion;
-	protected short model;
-	
+		
 	protected Thread positionControlThread;
 	
+	/**
+	 * 
+	 *
+	 */
 	public Nexstar4State( ) {
 		super();
+		calibrated = false;
+		alignmentComplete = true;
+		gpsLinked = true;
 		positionControl = new Nexstar4PositionControl(this);
 		positionControlThread = new Thread(positionControl);
 		positionControlThread.start();
@@ -55,6 +70,13 @@ public class Nexstar4State {
 	 */
 	void setCalibrated(boolean calibrated) {
 		this.calibrated = calibrated;
+	}
+	/**
+	 * 
+	 * @param alignmentComplete
+	 */
+	void setAlignmentComplete(boolean alignmentComplete) {
+		this.alignmentComplete = alignmentComplete;
 	}
 	/**
 	 * @param gpsLinked
@@ -74,95 +96,147 @@ public class Nexstar4State {
 	void setAltAxis(long axis) {
 		altAxis = axis;
 	}
+	/* **************************************/
+	/* ********************Interface Comands*/
 	/**
 	 * @return
 	 */
-	long getAzmAxis() {
+	public long getAzmAxis() {
 		return azmAxis;
 	}
 	/**
 	 * @return
 	 */
-	long getAltAxis() {
+	public long getAltAxis() {
 		return altAxis;
 	}
-	
-	/* **************************************/
-	/* ********************Interface Comands*/
+	/**
+	 * @return
+	 */
+	public long getRa() {
+		//TODO: transform AzmAlt coordinates to RaDec coordinates
+		return azmAxis;
+	}
+	/**
+	 * @return
+	 */
+	public long getDec() {
+		//TODO: transform AzmAlt coordinates to RaDec coordinates
+		return altAxis;
+	}
 	/**
 	 * @param trackingMode
 	 */
-	public String setTrackingMode(char trackingMode) {
+	public void setTrackingMode(char trackingMode) {
 		positionControl.setTrackingMode(trackingMode);
-		return defaultResponse;
 	}
 	/**
 	 * @return
 	 */
-	public String isCalibrated() {
-		String response;
-		if(calibrated)
-			response = Character.toString((char) 1) + defaultResponse;
-		else
-			response = Character.toString((char) 0) + defaultResponse;		
-		return response;
+	public boolean isCalibrated() {
+		return calibrated;
 	}
 	/**
 	 * @return
 	 */
-	public String isGotoInProgress() {
-		String response; 
+	public boolean isGotoInProgress() {
 		if(positionControl.actionInProgress == Nexstar4PositionControl.action_gotoInProgress)
-			response = "1" + defaultResponse;
+			return true;
 		else
-			response = "0" + defaultResponse;
-
-		return response;
+			return false;
 	}
 	/**
 	 * @return
 	 */
-	public String isGpsLinked() {
-		String response; 
-		if(gpsLinked)
-			response = Character.toString((char) 1) + defaultResponse;
-		else
-			response = Character.toString((char) 0) + defaultResponse;
-
-		return response;
+	public boolean isGpsLinked() {
+		return gpsLinked;
 	}
 	/**
 	 * @return
 	 */
-	public String getModel() {
-		return Character.toString((char) 11) +defaultResponse;
+	public char getModel() {
+		return model;
 	}
 	/**
 	 * @return
 	 */
-	public String getTrackingMode() {
-		return Character.toString(positionControl.getTrackingMode()) + defaultResponse;
+	public char getTrackingMode() {
+		return positionControl.getTrackingMode();
 	}
 	/**
 	 * @return
 	 */
 	public String getVersion() {
-		return	Character.toString((char)  4) +
-				Character.toString((char) 12) + defaultResponse;
+		return version;
 	}
 	/**
 	 * 
 	 * @param message The character to echo
-	 * @return The return string
+	 * @return The return character (same as the argument character).
 	 */
-	public String echo(char character){
-		return character + "#";
+	public char echo(char character){
+		return character;
 	}
 	/**
-	 * 
 	 * @return
 	 */
-	public String getAzmAlt(){
+	public boolean isAlignmentComplete(){
+		return alignmentComplete;
+	}
+	/**
+	 * @return
+	 */
+	public String getDeviceVersion(char device) {
+		if		(device == device_AzmRaMotor){  //of the AZM/RA Motor
+			return deviceVersion_AzmRaMotor;
+		}
+		else if	(device == device_AltDecMotor){ //of the ALT/DEC Motor
+			return deviceVersion_AltDecMotor;
+		}
+		else if (device == device_GpsUnit){ //of the GPS Unit
+			return deviceVersion_GpsUnit;
+		}
+		else if	(device == device_Rtc){ //of the RTC (CGE only)
+			return deviceVersion_Rtc;
+		}
+		return Character.toString((char) -2); //not recognized device
+	}
+	/* PositionControl  Commands: */
+	public void gotoRA_DEC(long ra, long dec){
+		positionControl.gotoRA_DEC(ra, dec);
+	}
+	public void gotoPreciseRA_DEC(long ra, long dec){
+		positionControl.gotoPreciseRA_DEC(ra, dec);
+	}
+	public void gotoAZM_ALT(long azm, long alt){
+		positionControl.gotoAZM_ALT(azm, alt);
+	}
+	public void gotoPreciseAZM_ALT(long azm, long alt){
+		positionControl.gotoPreciseAZM_ALT(azm, alt);
+	}
+	public void cancelGoto(){
+		positionControl.cancelGoto();
+	}
+	public void setVariableRateAZM_RA(long arcsecondsPerSecond, boolean direction){
+		positionControl.variableRateAZM_RA(arcsecondsPerSecond, direction);
+	}
+	public void setVariableRateALT_DEC(long arcsecondsPerSecond, boolean direction){
+		positionControl.variableRateALT_DEC(arcsecondsPerSecond, direction);
+	}
+	public void setFixedRateAZM_RA(boolean direction, char slewSpeedSymbol){
+		positionControl.fixedRateAZM_RA(slewSpeedSymbol, direction);
+	}
+	public void setFixedRateALT_DEC(boolean direction, char slewSpeedSymbol){
+		positionControl.fixedRateALT_DEC(slewSpeedSymbol, direction);
+	}
+	public void syncRA_DEC(long ra, long dec){
+		positionControl.syncRA_DEC(ra, dec);
+	}
+	public void syncPreciseRA_DEC(long ra, long dec){
+		positionControl.syncPreciseRA_DEC(ra, dec);
+	}
+	/* Deprecated methods:
+	String getAzmAlt(){
 		String response, preciseResponse;
 		
 		preciseResponse = getPreciseAzmAlt();
@@ -170,11 +244,7 @@ public class Nexstar4State {
 					preciseResponse.substring(9, 13) +"#";
 		return response;
 	}
-	/**
-	 * 
-	 * @return
-	 */
-	public String getPreciseAzmAlt(){
+	String getPreciseAzmAlt(){
 		String azm, alt, response;
 		StringBuffer buffer = new StringBuffer(18);
 		azm = Long.toHexString(azmAxis);
@@ -190,11 +260,7 @@ public class Nexstar4State {
 		response = buffer.toString().toUpperCase();
 		return response;
 	}
-	/**
-	 * 
-	 * @return
-	 */
-	public String getRaDec(){
+	String getRaDec(){
 		String response, preciseResponse;
 		
 		preciseResponse = getPreciseRaDec();
@@ -202,11 +268,7 @@ public class Nexstar4State {
 					preciseResponse.substring(9, 13) +"#";
 		return response;
 	}
-	/**
-	 * 
-	 * @return
-	 */
-	public String getPreciseRaDec(){
+	String getPreciseRaDec(){
 		String azm, alt, response;
 		StringBuffer buffer = new StringBuffer(18);
 		azm = Long.toHexString(azmAxis);
@@ -221,8 +283,9 @@ public class Nexstar4State {
 		buffer.append('#');
 		response = buffer.toString().toUpperCase();
 		return response;
-	}
-	/* TODO
+	}*/
+	
+	/* TODO:
 	 * get/set	Location
 	 * get/set	Time
 	 *
@@ -234,75 +297,4 @@ public class Nexstar4State {
 	 * get/set	date/year/time
 	 * 
 	 */
-	
-	public String isAlignmentComplete(){
-		//TODO: isAlignmentComplete()
-		String response; 
-		response = Character.toString((char) 1) + defaultResponse;
-		return response;
-	}
-	/**
-	 * @return
-	 */
-	public String getDeviceVersion(String message) {
-		//TODO: getDeviceVersion(String message) change to getDeviceVersion(char deviceChat)
-		String response = defaultResponse;
-		if		((int) message.charAt(2) == 16){  //of the AZM/RA Motor
-			
-		}
-		else if	((int) message.charAt(2) == 17){ //of the ALT/DEC Motor
-			
-		}
-		else if ((int) message.charAt(2) == 176){ //of the GPS Unit
-			
-		}
-		else if	((int) message.charAt(2) == 178){ //of the RTC (CGE only)
-			
-		}
-		return response;
-	}
-	public String gotoRA_DEC(long ra, long dec){
-		positionControl.gotoRA_DEC(ra, dec);
-		return defaultResponse;
-	}
-	public String gotoPreciseRA_DEC(long ra, long dec){
-		positionControl.gotoPreciseRA_DEC(ra, dec);
-		return defaultResponse;
-	}
-	public String gotoAZM_ALT(long azm, long alt){
-		positionControl.gotoAZM_ALT(azm, alt);
-		return defaultResponse;
-	}
-	public String gotoPreciseAZM_ALT(long azm, long alt){
-		positionControl.gotoPreciseAZM_ALT(azm, alt);
-		return defaultResponse;
-	}
-	public String cancelGoto(){
-		positionControl.cancelGoto();
-		return defaultResponse;
-	}
-	public String setVariableRateAZM_RA(long arcsecondsPerSecond, boolean direction){
-		positionControl.variableRateAZM_RA(arcsecondsPerSecond, direction);
-		return defaultResponse;
-	}
-	public String setVariableRateALT_DEC(long arcsecondsPerSecond, boolean direction){
-		positionControl.variableRateALT_DEC(arcsecondsPerSecond, direction);
-		return defaultResponse;
-	}
-	public String setFixedRateAZM_RA(boolean direction, char slewSpeedSymbol){
-		positionControl.fixedRateAZM_RA(slewSpeedSymbol, direction);
-		return defaultResponse;
-	}
-	public String setFixedRateALT_DEC(boolean direction, char slewSpeedSymbol){
-		positionControl.fixedRateALT_DEC(slewSpeedSymbol, direction);
-		return defaultResponse;
-	}
-	public String syncRA_DEC(long ra, long dec){
-		positionControl.syncRA_DEC(ra, dec);
-		return defaultResponse;
-	}
-	public String syncPreciseRA_DEC(long ra, long dec){
-		positionControl.syncPreciseRA_DEC(ra, dec);
-		return defaultResponse;
-	}
 }
