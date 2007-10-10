@@ -60,11 +60,59 @@
 \newpage
 \section{El Producto: \textit{Hevelius}}
 %    *  Presentación breve pero completa del producto
-%    * ¿Qué problema soluciona?
-%    * ¿A qué cliente responde y cómo es el tipo de usuario?
-%    * ¿Qué es lo innovador que lo diferencia de la competencia (distintivo)?
-%    * Hacer una breve referencia a productos similares existentes en el mercado global (mundial).
+Hevelius es un software dedicado al control de diversos telescopios a trav\.es de una interfaz gr\.afica, mediante la cual se quiere dar los primeros pasos para un control gen\.erico de telescopios con flexibilidad en su estructura como software, es decir, que se pueda ser reconocido por cualquier telescopio.
+Hevelius esta dise\~nado principalmente para un manejo a nivel profesional de telescopio, para ello esta compuesto por una serie de componentes para cumplir con estos requerimientos como son:
+\begin{itemize}
+\item Telescopio a escala que muestra la ubicaci\.on actual en que se encuentra el telescopio.
+\item Imagen de lo que actualmente esta observando el telescopio. 
+\item Control de accesibilidad de lo que se quiera observar
+\item Presetting, capacidad de moverse desde cierta ubicaci\.on a otra de manera segura
+\item Tracking, capacidad del telescopio de seguir cierto objeto en el cielo, contrarrestando el movimiento de la Tierra.
+\item Poiting Manual, capacidad del telescopio de seguir cierto objeto en el cielo, contrarrestando el movimiento de la Tierra.
+\item Catalogo de Estrellas para observaci\.on directa de estrellas conocidas
+\item Limitantes que puedan da\~nar el telescopio, como la luz directa de la luna
+\item Informaci\.on detallada del clima que se vive actualmente en el lugar donde se encuentra el telescopio.
+\item Bot\.on de emergencia para detener la observaci\.on inmediatamente por posibles problemas u errores de observaci\.on.
+\end{itemize}
+Una visi\.on de c\.omo se encuentra actualmente Hevelius es la siguiente:
+%\begin{figure}[h!]
+% \centering
+% \includegraphics[scale=0.5]{hevelius.eps}
+% \caption{Interfaz de un telescopio}
+ %\label{fig:yeti}
+%\end{figure}
 
+%    * ¿Qué problema soluciona?
+Controlar un telescopio no es una tarea f\.acil, ya que no basta con encontrar una adecuada ubicaci\.on para que sea m\.as propicia la observaci\.on, sino que tambi\.en son instrumentos que requieren un estudio previo antes de ser usados con la finalidad de no da\~narlos, sin contar que cada tipo de telescopio tiene una manera distinta de operarlo. De acuerdo a su dise\~nador o lugar en que fue creado, var\.ia la forma en que est\.a implementada, lo que hace que tanto los astr\.onomos como gente aficionada que trabaja con estos instrumentos tiene que implementar gran parte de su tiempo en aprender como trabajar con cada equipo de adquieren, lo que hace la tarea m\.as engorrosa a medida que se tienen m\.as equipos, ya que no hay una forma eficiente para evitar utilizar interfaces distintas para cada telescopio lo que se convierte en un problema.
+
+Adem\.as existe el problema de que no existe una interfaz que pueda direccionar el telescopio de acuerdo a coordenadas que el operador de telescopio pueda ingresar o, a la vez, consultar la ubicaci\.on de alg\.un cuerpo. Tampoco existe alguna interfaz amigable para el operador de telescopio, ya que en la actualidad, estas son muy engorrosas y poco claras para el uso r\.apido y eficaz, considerando aspectos tan importantes como la luminosidad de la Luna con tal de prevenir da\~nos en los equipos.
+
+Es por eso imperante la necesidad de crear un software que sea capaz de cumplir con los puntos mencionados anteriormente, permitiendo que el manejo de los telescopios quede en forma gen\.erica y sea capaz de prevenir un posible da\~no por coordenadas que puedan estar muy cerca de la luna.
+
+%    * ¿A qué cliente responde y cómo es el tipo de usuario?
+Actualmente .Software development for ALMA-CONICYT: Building up expertise to meet ALMA-CONICYT software requirements within a Chilean University., es un proyecto en desarrollo en la Universidad T\.ecnica Federico Santa Mar\.ia en conjunto con ALMA-CONICYT, quienes solicitaron un software, el cual maneje de forma gen\.erica distintos tipos de telescopios para profesionales con la finalidad de poder realizar investigaciones en diversos tipos de telescopios, evitando la necesidad de tener que aprender las distintas interfaces de cada uno de estos instrumentos y para ellos se esta desarrollando Hevelius.
+
+Hevelius como ya se ha mencionado anteriormente esta destinado principalmente para operadores de telescopios y astr\.onomos, pero puedo ser usado tambi\.en por observadores amateur. Las funciones principales de estas personas constan en la observaci\.on de cuerpos celestes y b\.usqueda de ellos para investigaciones o estudios, mientras que los operadores de telescopio necesitan ajustar el telescopio y mantenerlo seguro de los sucesos que puedan da\~narlo como la luz solar, condiciones clim\.aticas, entre otras cosas.
+
+%    * ¿Qué es lo innovador que lo diferencia de la competencia (distintivo)?
+La innovaci\.on que presenta Hevelius frente a otro tipo de software esta relacionado directamente en como actualmente la astronom\.ia ocupa un n\.umero inimaginable de nuevas tecnolog\.ias, haciendo de \.esta una ciencia que crece tecnol\.ogicamente muy r\.apido. Es por ello que en Hevelius, se trabaja con un framework denominado ACS (ALMA Common Software), basado en CORBA y desarrollado especialmente para el proyecto ALMA. Donde el objetivo principal de esta plataforma es proveer una infraestructura com\.un para simplificar el desarrollo de aplicaciones distribuidas.
+
+El proyecto Hevelius no pretende ser s\.olo un software de control de telescopios, sino que un primer avance en la creaci\.on de un sistema que permita controlar cualquier telescopio que se conecte y pueda mostrar informaci\.on que en la actualidad est\.a disponible en otros softwares (no de control), por lo que se integrar\.ian varios aspectos que son relevantes para un operador de telescopio.
+Adem\.as tiene la ventaja que este software puede utilizarse en cualquier lugar, no necesariamente tiene que estar conectado al telescopio, es decir puedo estar ubicado a millas de donde se encuentra el telescopio y se puede manejar sin ning\.un problema.
+
+%    * Hacer una breve referencia a productos similares existentes en el mercado global (mundial).
+En la actualidad existen diversos tipos de telescopios, los cuales est\.an implementados de manera diferente dependiendo de su dise\~nador o de d\.onde fueron creados. Junto con esto, aparece el problema de que cada telescopio posee una aplicaci\.on diferente para su control.
+Sin olvidar que el control de los telescopios se debe hacer de forma local, es decir, los operadores de telescopios y astr\.onomos deben estar en el observatorio para realizar sus investigaciones, pudiendo hacerse \.este de forma remota, mejorando la situaci\.on para los astr\.onomos, especialmente para los que se encuentran lejos de los sitios de observaci\.on.
+
+Adem\.as  que muchos de los programas utilizados actualmente para control de telescopios son bastante complicados de usar, obligando a gastar una considerable cantidad de tiempo aprendiendo a usarlos y, tambi\.en, a usarlos frecuentemente para no olvidar c\.omo es su funcionamiento.
+
+Un ejemplo de interfaz de telescopio actualmente es la siguiente:
+\begin{figure}[h!]
+ \centering
+ \includegraphics[scale=0.5]{tele.eps}
+ \caption{Interfaz de un telescopio}
+ %\label{fig:yeti}
+\end{figure}
 
 
 \newpage
@@ -118,6 +166,21 @@ se pueda usar esta experiencia como prueba fiel de \'exito.
 \section{Precio del Producto}
 %    *  ¿Cuál es el costo real de los desarrolladores (horas de trabajo por tipo de trabajo)?
 %    * ¿Cuál es la inversión y cuánto es la inversión en Hardware y Software necesario?
+\begin{itemize}
+\item Especificaciones del Software
+La plataforma en la que se desarrolla actualmente Hevelius  consiste en el Sistema Operativo Linux, el software ACS 6.0, Java version "1.5.0\_04" y jogl-1\_0\_0-linux-i586.
+Estos software todos de distribuci\.on gratuita, por lo que no hay un costo implicito en estos elementos
+\item Especificaci\.on de Hardware
+Los equipos con los cuales se desarrolla Hevelius poseen de las siguientes caracteríicas:
+\begin{itemize}
+\item Procesador Pentium IV 3.0 Ghz de 32 bits.
+\item 1Gb RAM
+\item Telescopio NEXSTAR 4 SE que posee computador manual de 16 caracteres con pantalla LCD y 19 botones. Algunas de sus caracteríicas: apertura de 102 mm, largo focal de 1325 mm, radio focal de 12.99 mm, entre otras cosas.
+\item Adjunto al telescopio un CCS para la obtenci\.on de im\.agenes.
+\item GPS para la obtenci\.on de ubicaci\.on de ubicaci\.on del telescopio.
+\end{itemize}
+\end{itemize}
+
 %    * Identificar cuáles son los costos que existen antes de la puesta en marcha del producto. (arriendo, teléfono, traslados, etc.).
 %    * Identificar cuáles son los costos de explotación (de venta, mantenedores del producto, aparatos, etc.)
 %    * Identificar cuáles son los impuestos y los gastos financieros que existen.
