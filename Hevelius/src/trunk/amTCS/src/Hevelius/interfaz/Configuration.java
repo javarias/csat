@@ -15,7 +15,7 @@ public class Configuration extends Properties{
 	static final public String configurationFile = configurationDir + "/" + "hevelius.properties";
 
 	static File dir = new File(configurationDir);
-	static File file = new File(configurationFile)
+	static File file = new File(configurationFile);
 	
 	public Configuration(){
 		
