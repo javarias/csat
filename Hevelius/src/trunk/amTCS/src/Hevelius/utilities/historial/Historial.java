@@ -7,48 +7,61 @@ import alma.TYPES.*;
 
 public class Historial //implements Runnable
 {
-	private RadecPosHolder r; 
-	private AltazPosHolder a;
-	private double ST;
+	static final public String logDir  = System.getProperty("user.home") + "/.hevelius/logs";
+	static final public String logFile = configurationDir + "/" + "user.log";
+
+	static File dir = new File(logDir);
+	static File file = new File(logFile);
 
 	public Historial(){
-		r = new RadecPosHolder();
-		a = new AltazPosHolder();
+
+		if(!dir.exists()){
+			dir.mkdir();
+		}
+
+		if(!file.exists()){
+			try{
+				PrintWriter archivo = new PrintWriter(
+						new FileWriter(logFile,true));
+
+				archivo.close();
+
+			}
+			catch(IOException e)
+			{
+				System.out.println("Error al crear el archivo de Logs");
+			}
+		}
+
+
+	}
+
+	//Preset, Zennith, Park, Catalogue
+	public void addLogPreset(double Ra, double Dec){
+		
+	}
+
+	//Catalogue
+	public void addLogCatalogue(double Ra, double Dec){
+		
+	}
+
+	//Tracking
+	public void addLogTracking(boolean status){
+		
+	}
+
+	//Zennith
+	public void addLogZennith(double Ra, double Dec){
+		
+	}
+
+	//Park
+	public void addLogPark(double Ra, double Dec){
+		
 	}
 
 
-	/*public void run()
-	{
-		while (true)
-		{
-			try
-			{
-//				interfaz.getDrawingPanel().repaint();
-				if(interfaz.getDrawingPanel().getCSATStatus()!=null)
-				{
-					try
-					{
-						interfaz.getDrawingPanel().getCSATStatus().getPos(r,a);
-						ST = interfaz.getDrawingPanel().getCSATStatus().getSiderealTime();
-						interfaz.getDrawingPanel().getCoordinatesPanel().setRa(r.value.ra);
-						interfaz.getDrawingPanel().getCoordinatesPanel().setDec(r.value.dec);
-						interfaz.getDrawingPanel().getCoordinatesPanel().setAlt(a.value.alt);
-						interfaz.getDrawingPanel().getCoordinatesPanel().setAz(a.value.az);
-						interfaz.getDrawingPanel().setSideralTime(ST);
-						interfaz.getDrawingPanel().getVirtualTelescopePanel().getListener().setAltAzDest((float)a.value.alt, (float)a.value.az);
 
-					}
-					catch(Exception e)
-					{
-						e.printStackTrace();
-					}
-				}
-				Thread.sleep(1000);
-			}
-			catch(InterruptedException e)
-			{
-				System.out.println("The thread updating information died.");
-			}
-		}
-	}*/
+
 }
