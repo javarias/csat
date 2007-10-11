@@ -1,0 +1,77 @@
+/* IDL for Telescope component */
+
+#ifndef _TELESCOPE_IDL_
+#define _TELESCOPE_IDL_
+
+#include <baci.idl>
+#include <Types.idl>
+
+#pragma prefix "alma"
+
+/**
+ * @file Telescope.idl
+ * IDL specification for the Telescope module interface.
+ * This interface is the principal control loop for the telescope's movement
+ */
+module TELESCOPE_MODULE {
+
+	/** @interface Telescope
+	 * Defines all the methods that are going to be used to control the
+	 * telescope's moving. This component is in charge of controling the
+	 * telescope's movements, and so will have a loop control where, by
+	 * reading the DevTelescope's properties, and by receiving the
+	 * different orders from external components, will command certain
+	 * velocity to the DevTelescope component, that will finally move the
+	 * telescope to a certain position.
+	 */
+	interface Telescope : ACS::ACSComponent
+	{
+
+		/** Holds the commanded position, in Alt/Az coordinates */
+		readonly attribute TYPES::AltazPos commandedPos;
+
+		/**
+		 * Presets the telescope to a defined position, in Ra/Dec
+		 * coordinates. 
+		 * @param position The position to preset to
+		 */
+		void preseting(in TYPES::RadecPos position);
+
+		/**
+		 * Gets the current Ra/Dec position
+		 */
+		TYPES::RadecPos getRadec();
+
+		/**
+		 * Adds an offset over the commanded position
+		 * @param offset The offset to be added
+		 */
+		void offSet(in TYPES::AltazPos offset);
+
+		/**
+		 * Sends the telescope to an specific Alt/Az position
+		 * @param position The positin to go to
+		 */
+		void gotoAltAz(in TYPES::AltazPos position);
+
+		/**
+		 * Stops the telescope
+		 */
+		void stop();
+
+		/**
+		 * Returns the current position, in Alt/Az coordinates
+		 */
+		TYPES::AltazPos getAltAz();
+
+		/**
+		 * Sets the commanded position to an specific Alt/Az position
+		 * (useful when calibrating the telescope, for example).
+		 * @param position The position to be set as commanded
+		 */
+		void setCurrentAltAz(in TYPES::AltazPos position);
+	};
+
+};
+
+#endif /* _TELESCOPE_IDL_ */
