@@ -2,7 +2,9 @@
 static char *rcsId="@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
-#include <lpiImpl.h>
+#include <stdlib.h>
+#include "lpiImageDevIO.h"
+#include "lpiImpl.h"
 
 using namespace baci;
 
@@ -26,9 +28,8 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 {
 	ACS_TRACE("lpiImpl::initialize");
 	if( getComponent() != 0){
-		m_frame_sp = new ROlongSeq( (component_name
-		                             + std::string(":frame")).c_str(),
-		                             getComponent());
+		m_frame_sp = new ROlongSeq( (component_name + std::string(":frame")).c_str(),
+		                             getComponent(), new lpiImageDevIO(m_device));
 	}
 }
 

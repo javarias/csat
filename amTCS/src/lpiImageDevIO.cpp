@@ -1,6 +1,8 @@
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <errno.h>
 #include <unistd.h>
 #include <linux/videodev2.h>
-#include <sys/stat.h>
 
 #include "lpiImageDevIO.h"
 
@@ -9,7 +11,7 @@ lpiImageDevIO::lpiImageDevIO(char *deviceName) {
 	int flag = O_RDWR; //read write flag, is the accesmode you have to put in open
 	struct stat st;
 
-	//we see if the dev_name device exist
+	//we see if the deviceName device exist
 	if (-1 == stat (deviceName, &st)) {
 		fprintf (stderr, "Cannot identify '%s': %d, %s\n", deviceName, errno, strerror (errno));
 	}
@@ -17,22 +19,20 @@ lpiImageDevIO::lpiImageDevIO(char *deviceName) {
 
 	//if it is a character device
 	if (!S_ISCHR (st.st_mode)) {
-		fprintf (stderr, "%s is no device\n", dev_name);
+		fprintf (stderr, "%s is no device\n", deviceName);
 	}
 
 	fd = open(deviceName, flag);
 
 	//if it cannot open
 	if(fd==-1) {
-		fprintf (stderr, "Cannot open '%s': %d, %s\n", dev_name, errno, strerror (errno));
+		fprintf (stderr, "Cannot open '%s': %d, %s\n", deviceName, errno, strerror (errno));
 	}
 	ACS_SHORT_LOG((LM_INFO,"lpiImageDevIO::lpiImageDevIO: Video device opened!"));
 
-	struct v4l2_capability cap;
 	struct v4l2_cropcap cropcap;
 	struct v4l2_crop crop;
 	struct v4l2_format fmt;
-	unsigned int min;
 
    	CLEAR (cropcap);
 	cropcap.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
@@ -50,14 +50,14 @@ lpiImageDevIO::lpiImageDevIO(char *deviceName) {
 		if (-1 == ioctl (fd, VIDIOC_S_CROP, &crop))
 		{
 			if(errno == EINVAL)
-				fprintf (stderr, "Cropping not supported for the %s\n", dev_name);
+				fprintf (stderr, "Cropping not supported for the %s\n", deviceName);
 			else
-				fprintf (stderr, "There is a problem setting the cropping limits of the %s\n", dev_name);
+				fprintf (stderr, "There is a problem setting the cropping limits of the %s\n", deviceName);
 		}
 	}
 	else
 	{
-		fprintf (stderr, "There is a problem quering the cropping limits of the %s\n", dev_name);
+		fprintf (stderr, "There is a problem quering the cropping limits of the %s\n", deviceName);
 	}
 
 	//to set the format
@@ -70,10 +70,9 @@ lpiImageDevIO::lpiImageDevIO(char *deviceName) {
 	fmt.fmt.pix.field       = V4L2_FIELD_INTERLACED;
 
 	//to negotiate the format
-	if (-1 == ioctl (fd, VIDIOC_S_FMT, &fmt))
-		errno_exit ("VIDIOC_S_FMT");
+	if (-1 == ioctl (fd, VIDIOC_S_FMT, &fmt));
 
-	buffers = calloc (1, sizeof (*buffers));
+	buffers = (buffer *)calloc (1, sizeof (*buffers));
 
 	if (!buffers) {
 		fprintf (stderr, "Out of memory\n");
@@ -105,17 +104,15 @@ bool lpiImageDevIO::initializeValue() {
 	return true;
 }
 
-ACS::ROlongSeq_ptr lpiImageDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl) {
+CORBA::LongSeq lpiImageDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl) {
 
 	unsigned char *d = (unsigned char *) malloc (640 * 480 * 3);
 	unsigned char *s = (unsigned char *) malloc (640 * 480);
 
-	if (-1 == read (fd, buffers[0].start, buffers[0].length))
+	if (-1 == ::read (fd, buffers[0].start, buffers[0].length))
 	{
 		if( errno == EAGAIN )
 			return 0;
-		else
-			errno_exit("read");
 	}
 
 	ACS_SHORT_LOG((LM_INFO,"lpiImageDevIO::read: Obtained a frame"));
@@ -123,10 +120,11 @@ ACS::ROlongSeq_ptr lpiImageDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSb
 	sonix_decompress(640,480,(unsigned char *)buffers[0].start,s);
 	bayer2rgb24(d,s,640,480);
 
-	return NULL;
+	CORBA::LongSeq ret = CORBA::LongSeq((CORBA::ULong)640*480*3,(CORBA::ULong)640*480*3,(CORBA::Long *)d);
+	return ret;
 }
 
-void lpiImageDevIO::write(const ACS::ROlongSeq_ptr &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl){
+void lpiImageDevIO::write(const CORBA::LongSeq &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl){
 	ACS_SHORT_LOG((LM_ERROR, "lpiImageDevIO::write: This method should never be called!"));
 	return;
 }

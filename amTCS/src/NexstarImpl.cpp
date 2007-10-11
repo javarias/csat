@@ -2,8 +2,6 @@
 static char *rcsId="@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
-#include <stdlib.h>
-
 #include "NexstarImpl.h"
 #include "SerialRS232.h"
 #include "NexstarAltDevIO.h"

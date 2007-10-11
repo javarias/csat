@@ -1,11 +1,11 @@
 #ifndef _LPI_IMAGE_DEVIO_H_
 #define _LPI_IMAGE_DEVIO_H_
 
-#define CLEAR(x) memset (&(x), 0, sizeof (x))
-#define CLAMP(x)  ((x)<0?0:((x)>255)?255:(x))
-
 #include <baciDevIO.h>
 #include <acstime.h>
+
+#define CLEAR(x) memset (&(x), 0, sizeof (x))
+#define CLAMP(x)  ((x)<0?0:((x)>255)?255:(x))
 
 struct buffer
 {
@@ -24,20 +24,21 @@ typedef struct
 
 /* local storage */
 
-class lpiImageDevIO: public DevIO<ACS::ROlongSeq_ptr>
+class lpiImageDevIO: public DevIO<CORBA::LongSeq>
 {
 
 	public:
 
 	lpiImageDevIO(char *deviceName);
+	lpiImageDevIO(void *data);
 	virtual ~lpiImageDevIO();
 
 	virtual bool initializeValue();
 
-	ACS::ROlongSeq_ptr read(ACS::Time &timestamp)
+	CORBA::LongSeq read(ACS::Time &timestamp)
 	              throw (ACSErr::ACSbaseExImpl);
 
-	void write(const ACS::ROlongSeq_ptr &value, ACS::Time &timestap)
+	void write(const CORBA::LongSeq &value, ACS::Time &timestap)
 	              throw (ACSErr::ACSbaseExImpl);
 
 	private:
