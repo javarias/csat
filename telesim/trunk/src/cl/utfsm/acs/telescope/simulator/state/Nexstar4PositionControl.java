@@ -21,10 +21,10 @@ public class Nexstar4PositionControl implements Runnable{
 	public static final char slewSpeedSymbol_2x = (char) 1;
 	public static final char slewSpeedSymbol_0x = (char) 0;
 	
-	public static final long slewSpeed_4DegreesPerSec =  Nexstar4State.maxAzmAxis * 4l / (60l);
-	public static final long slewSpeed_2DegreesPerSec =  Nexstar4State.maxAzmAxis * 2l / (60l);
-	public static final long slewSpeed_1DegreesPerSec =  Nexstar4State.maxAzmAxis * 1l / (60l);
-	public static final long slewSpeed_5MinutessPerSec = Nexstar4State.maxAzmAxis * 5l / (60l * 60l);
+	public static final long slewSpeed_4DegreesPerSec =  Nexstar4State.maxAzmAxis * 4l / (360l);
+	public static final long slewSpeed_2DegreesPerSec =  Nexstar4State.maxAzmAxis * 2l / (360l);
+	public static final long slewSpeed_1DegreesPerSec =  Nexstar4State.maxAzmAxis * 1l / (360l);
+	public static final long slewSpeed_5MinutessPerSec = Nexstar4State.maxAzmAxis * 5l / (360l * 60l);
 	
 	public static final long slewSpeed_32x = Nexstar4State.maxAzmAxis * 32l / (360l * 60l * 60l);
 	public static final long slewSpeed_16x = Nexstar4State.maxAzmAxis * 16l / (360l * 60l * 60l);
