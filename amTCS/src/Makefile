@@ -63,7 +63,7 @@ LIBRARIES_L     =
 # <brief description of lllll library>
 NexstarImpl_OBJECTS   = NexstarImpl NexstarAltDevIO NexstarAzmDevIO SerialRS232
 NexstarImpl_LIBS      = TypesStubs DevTelescopeStubs
-lpiImpl_OBJECTS       = lpiImpl
+lpiImpl_OBJECTS       = lpiImpl lpiImageDevIO
 lpiImpl_LIBS          = TypesStubs DevCCDStubs
 eTrexImpl_OBJECTS     = eTrexImpl
 eTrexImpl_LIBS        = TypesStubs DevGPSStubs
