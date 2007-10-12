@@ -98,6 +98,7 @@ lpiFrameDevIO::~lpiFrameDevIO() {
 	free(buffers);
 
 	close(fd);
+	ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::~lpiFrameDevIO: Device closed :Device closed :D"));
 }
 
 bool lpiFrameDevIO::initializeValue() {

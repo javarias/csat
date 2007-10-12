@@ -15,7 +15,6 @@ lpiImpl::lpiImpl(const ACE_CString& name, maci::ContainerServices *containerServ
       ,m_frame_sp(this)
 {
 	component_name = name.c_str();
-	ACS_TRACE("lpiImpl::lpiImpl");
 	m_device = "/dev/video0";
 	m_locking = true;
 }
@@ -30,19 +29,25 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 	ACS_TRACE("lpiImpl::initialize");
 	if( getComponent() != 0){
 		m_frame_sp = new ROlongSeq( (component_name + std::string(":frame")).c_str(),
-		                             getComponent(), new lpiFrameDevIO(m_device));
+		                             getComponent(), new lpiFrameDevIO("/dev/video0"),true);
 	}
 }
-
 
 /* IDL implementation */
 
 TYPES::Image* lpiImpl::image(CORBA::Double exposure) throw (CORBA::SystemException){
 	
 	ACSErr::Completion *comp = new ACSErr::Completion();
-//	TYPES::Image image = new TYPES::Image(m_frame_sp->get_sync(comp));
-//	return image;
-	return new TYPES::Image();
+	CORBA::Long length = 640*480*3;
+
+	ACS::longSeq *frame = m_frame_sp->get_sync(comp);
+
+	TYPES::Image *image = new TYPES::Image(length);
+	image->length(length);
+	for(int i=0;i!=length;i++)
+		image[i] = frame[0][i];
+	
+	return image;
 }
 
 void lpiImpl::lock() throw (CORBA::SystemException){
