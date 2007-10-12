@@ -1,5 +1,5 @@
-#ifndef _LPI_IMAGE_DEVIO_H_
-#define _LPI_IMAGE_DEVIO_H_
+#ifndef _LPI_FRAME_DEVIO_H_
+#define _LPI_FRAME_DEVIO_H_
 
 #include <baciDevIO.h>
 #include <acstime.h>
@@ -24,28 +24,28 @@ typedef struct
 
 /* local storage */
 
-class lpiImageDevIO: public DevIO<CORBA::LongSeq>
+class lpiFrameDevIO: public DevIO<ACS::longSeq>
 {
 
 	public:
 
-	lpiImageDevIO(char *deviceName);
-	lpiImageDevIO(void *data);
-	virtual ~lpiImageDevIO();
+	lpiFrameDevIO(char *deviceName);
+	lpiFrameDevIO(void *data);
+	virtual ~lpiFrameDevIO();
 
 	virtual bool initializeValue();
 
-	CORBA::LongSeq read(ACS::Time &timestamp)
-	              throw (ACSErr::ACSbaseExImpl);
+	ACS::longSeq read(ACS::Time &timestamp)
+	      throw (ACSErr::ACSbaseExImpl);
 
-	void write(const CORBA::LongSeq &value, ACS::Time &timestap)
+	void write(const ACS::longSeq &value, ACS::Time &timestap)
 	              throw (ACSErr::ACSbaseExImpl);
 
 	private:
 	int fd;
 	int sonix_unknown;
-	static int init_done;
-	static code_table_t table[256];
+	int init_done;
+	code_table_t table[256];
 	struct buffer *buffers;
 
 	void sonix_decompress_init();

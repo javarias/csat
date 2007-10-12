@@ -3,7 +3,8 @@ static char *rcsId="@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
 #include <stdlib.h>
-#include "lpiImageDevIO.h"
+#include "lpiFrameDevIO.h"
+#include "NexstarAltDevIO.h"
 #include "lpiImpl.h"
 
 using namespace baci;
@@ -29,7 +30,7 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 	ACS_TRACE("lpiImpl::initialize");
 	if( getComponent() != 0){
 		m_frame_sp = new ROlongSeq( (component_name + std::string(":frame")).c_str(),
-		                             getComponent(), new lpiImageDevIO(m_device));
+		                             getComponent(), new lpiFrameDevIO(m_device));
 	}
 }
 
@@ -37,6 +38,10 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 /* IDL implementation */
 
 TYPES::Image* lpiImpl::image(CORBA::Double exposure) throw (CORBA::SystemException){
+	
+	ACSErr::Completion *comp = new ACSErr::Completion();
+//	TYPES::Image image = new TYPES::Image(m_frame_sp->get_sync(comp));
+//	return image;
 	return new TYPES::Image();
 }
 

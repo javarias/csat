@@ -19,10 +19,10 @@ class NexstarAltDevIO: public DevIO<CORBA::Double>
 
 	virtual bool initializeValue();
 
-	CORBA::Double read(ACS::Time &timestamp)
+	virtual CORBA::Double read(ACS::Time &timestamp)
 	              throw (ACSErr::ACSbaseExImpl);
 
-	void write(const CORBA::Double &value, ACS::Time &timestap)
+	virtual void write(const CORBA::Double &value, ACS::Time &timestap)
 	              throw (ACSErr::ACSbaseExImpl);
 
 	private:
