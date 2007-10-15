@@ -577,7 +577,7 @@ public class interfaz {
 		}
 		});
 
-		switch(Integer.parseInt(test.getOption("background"))){
+		/*switch(Integer.parseInt(test.getOption("background"))){
 			case 0: pane.setBackground(Color.BLACK); break;
 			case 1: pane.setBackground(Color.BLUE); break;
 			case 2: pane.setBackground(Color.CYAN); break;
@@ -591,7 +591,8 @@ public class interfaz {
 			case 10: pane.setBackground(Color.RED); break;
 			case 11: pane.setBackground(Color.YELLOW); break;
 			default: pane.setBackground(Color.BLACK); break;
-		}
+		}*/
+		pane.setBackground(Color.BLACK);
 
 		//frame.setResizable(false);
 

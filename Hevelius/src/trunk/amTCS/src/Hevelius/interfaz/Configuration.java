@@ -32,20 +32,21 @@ public class Configuration extends Properties{
 				
 				archivo.println("### Hevelius Configuration File ###");
 				archivo.println("");
-				archivo.println("#SYSTEM");
+				//archivo.println("#SYSTEM");
 				archivo.println("coordinate = 0");
 				archivo.println("location = (none)");
 				archivo.println("city = (none)");
 				archivo.println("tracking = 1");
 				archivo.println("");
-				archivo.println("#INTERFACE");
-				archivo.println("#Modules");
-				archivo.println("weather = 1");
+				//archivo.println("#INTERFACE");
+				//archivo.println("#Modules");
+				/*archivo.println("weather = 1");
 				archivo.println("opengl = 1");
 				archivo.println("compass = 1");
 				archivo.println("background = 0");
-				archivo.println("");
-				
+				archivo.println("");*/
+				archivo.println("user = ");
+
 				archivo.close();
 								
 			}

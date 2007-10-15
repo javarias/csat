@@ -357,7 +357,7 @@ public class DrawingPanel extends JPanel
 	}
 	public void updateWindow(boolean init){
 		//Cambiar Background
-		switch(Integer.parseInt(test.getOption("background"))){
+		/*switch(Integer.parseInt(test.getOption("background"))){
 			case 0: setBackground(Color.BLACK); break;
 			case 1: setBackground(Color.BLUE); break;
 			case 2: setBackground(Color.CYAN); break;
@@ -371,7 +371,8 @@ public class DrawingPanel extends JPanel
 			case 10: setBackground(Color.RED); break;
 			case 11: setBackground(Color.YELLOW); break;
 			default: setBackground(Color.BLACK); break;
-		}
+		}*/
+		setBackground(Color.BLACK);
 
 		//Modificar Tipos de Coordenadas
 		if(!init){
@@ -391,13 +392,15 @@ public class DrawingPanel extends JPanel
 
 		//Weather
 		
-		   wpane.reloadWeather();
+		wpane.reloadWeather();
 
-		   switch(Integer.parseInt(test.getOption("weather"))){
+		   /*switch(Integer.parseInt(test.getOption("weather"))){
 		   case 0: wpane.setVisible(false); break;
 		   case 1: wpane.setVisible(true); break;
 		   default:wpane.setVisible(true); break;
-		   }
+		   }*/
+
+		wpane.setVisible(true);
 		
 		//Compass
 		/*switch(Integer.parseInt(test.getOption("compass"))){
@@ -407,14 +410,18 @@ public class DrawingPanel extends JPanel
 		  }*/
 
 		//OpenGL
-		switch(Integer.parseInt(test.getOption("opengl"))){
+		/*switch(Integer.parseInt(test.getOption("opengl"))){
 			case 0: VTelescope = false;
 				vtpane.setVisible(false); break;
 			case 1: VTelescope = true;
 				vtpane.setVisible(true); break;
 			default:VTelescope = true; 
 				vtpane.setVisible(true); break;
-		}		
+		}*/
+
+		VTelescope = true;
+                vtpane.setVisible(true);
+		
 		paintImmediately(0,0,getSize().width,getSize().height);
 
 		//Tracking

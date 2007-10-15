@@ -353,7 +353,7 @@ menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
 		panel1.add(activate_track);
 		panel1.add(desactivate_track);
 
-
+/*
 		panel2 = new JPanel();
 		tabbedPane.addTab("Interface",panel2);
 		//tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
@@ -426,7 +426,7 @@ menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
 		panel2.add(color);	
 
 
-
+*/
 		config.add(tabbedPane);
 
 		JButton close = new JButton("Close");
@@ -457,7 +457,7 @@ menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
 				if(altaz.isSelected())
 				test.setOption("coordinate","1");
 
-				if(weather.isSelected())
+/*				if(weather.isSelected())
 				test.setOption("weather","1");
 				else
 				test.setOption("weather","0");
@@ -466,19 +466,19 @@ menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
 				test.setOption("opengl","1");
 				else
 				test.setOption("opengl","0");
-
+*/
 				if(activate_track.isSelected())
 				test.setOption("tracking","1");
 				if(desactivate_track.isSelected())
 					test.setOption("tracking","0");
 
-				if(compass.isSelected())
+/*				if(compass.isSelected())
 					test.setOption("compass","1");
 				else
 					test.setOption("compass","0");
 
 				test.setOption("background", String.valueOf(color.getSelectedIndex()));
-
+*/
 				if(String.valueOf(location.getSelectedItem()).compareTo("(none)") != 0){				
 					test.setOption("location",String.valueOf(vector_city.get(
 									location.getSelectedIndex()).getId()));
@@ -522,7 +522,7 @@ menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
 		if(altaz.isSelected())
 			test.setOption("coordinate","1");
 
-		if(weather.isSelected())
+/*		if(weather.isSelected())
 			test.setOption("weather","1");
 		else
 			test.setOption("weather","0");
@@ -531,19 +531,19 @@ menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
 			test.setOption("opengl","1");
 		else
 			test.setOption("opengl","0");
-
+*/
 		if(activate_track.isSelected())
 			test.setOption("tracking","1");
 		if(desactivate_track.isSelected())
 			test.setOption("tracking","0");
 
-		if(compass.isSelected())
+/*		if(compass.isSelected())
 			test.setOption("compass","1");
 		else
 			test.setOption("compass","0");
 
 		test.setOption("background", String.valueOf(color.getSelectedIndex()));
-
+*/
 		if(String.valueOf(location.getSelectedItem()).compareTo("(none)") != 0){				
 			test.setOption("location",String.valueOf(vector_city.get(
 							location.getSelectedIndex()).getId()));
@@ -574,7 +574,7 @@ menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
 		if(Integer.parseInt(test.getOption("tracking"))==1)
 			activate_track.setSelected(true);
 
-		if(Integer.parseInt(test.getOption("weather"))==1)
+		/*if(Integer.parseInt(test.getOption("weather"))==1)
 			weather.setSelected(true);
 		else
 			weather.setSelected(false);
@@ -589,7 +589,7 @@ menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
 		else
 			compass.setSelected(false);
 
-		color.setSelectedIndex(Integer.parseInt(test.getOption("background")));
+		color.setSelectedIndex(Integer.parseInt(test.getOption("background")));*/
 	}	
 
 
