@@ -660,4 +660,9 @@ menu_config.setSize(dy-dy*12/40,dy-dy*12/40);
 		return imag;
 	}
 
+	public WindowLogin getWindowLogin(){
+		return wl;
+	}
+
+
 }

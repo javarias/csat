@@ -474,6 +474,11 @@ public class DrawingPanel extends JPanel
 	{
 		return vtpane;
 	}
+	
+	public MenuPanel getMenuPanel()
+        {
+                return mpane;
+        }
 
 	public CSATControlClient getCSATControl()
 	{

@@ -6,6 +6,10 @@ import java.awt.event.*;
 
 import java.util.*;
 import Hevelius.weather.*;
+import Hevelius.utilities.historial.*;
+
+import Hevelius.acsmodules.*;
+import alma.acs.component.ComponentLifecycleException;
 
 public class WindowLogin extends JDialog 
 {
@@ -16,7 +20,8 @@ public class WindowLogin extends JDialog
 	private int dx = 0;
 	private int dy = 0;
 	
-	private static Configuration conf = new Configuration();		
+	private static Configuration conf = new Configuration();
+	private static Historial hist = new Historial();		
 
 	public WindowLogin(JFrame f, String s)
 	{
@@ -58,6 +63,27 @@ public class WindowLogin extends JDialog
                                         conf.store();
 					hist.addHistoryLogin(jTextField1.getText());
 					setVisible(false);
+
+					if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null){
+						try
+		                                {
+		                                        interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
+		                                        interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
+		
+		                                        if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+		                                                interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
+		                                                interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
+		                                                interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+		                                        }
+		                                }
+		                                catch(Exception err)
+		                                {
+		                                        err.printStackTrace();
+		                                }
+					}
+
+
+
                                 }
 
                                 });
@@ -75,6 +101,25 @@ public class WindowLogin extends JDialog
 					conf.store();
 					hist.addHistoryLogin(jTextField1.getText());
 					setVisible(false);	
+
+
+					try
+                                        {
+                                                interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
+                                                interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
+
+                                                if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+                                                        interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
+                                                        interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
+                                                        interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+                                                }
+                                        }
+                                        catch(Exception err)
+                                        {
+                                                err.printStackTrace();
+                                        }
+
+
 				//jTextField1_actionPerformed(e);
 				}
 				});

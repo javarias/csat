@@ -36,7 +36,14 @@ public class SystemPanel extends JPanel
 		add(start);
 		start.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
-				try
+				interfaz.getDrawingPanel().getMenuPanel().getWindowLogin().init();
+//				interfaz.getDrawingPanel().getMenuPanel().getWindowLogin().setVisible(true);
+//			if(interfaz.getDrawingPanel().getMenuPanel().getWindowLogin().isVisible())
+//				private static Configuration conf = new Configuration();
+				
+				
+
+/*				try
 				{
 					interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
 					interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
@@ -50,7 +57,8 @@ public class SystemPanel extends JPanel
 				catch(Exception err)
 				{
 					err.printStackTrace();
-				}
+				}*/
+//				System.out.println("vincler la mazca");
                         }
                 });
 
