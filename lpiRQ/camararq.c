@@ -22,6 +22,7 @@
 #include <sys/ioctl.h>		//ioctl()
 #include <asm/types.h>  	//for videodev2.h
 #include <linux/videodev2.h>	//VIDIOC_QUERYCAP
+#include "bayer.h"
 
 #define CLEAR(x) memset (&(x), 0, sizeof (x))  //fills the memory area pointed to by x with the constant byte 0
 
@@ -188,8 +189,9 @@ void init_device()
    fmt.type                = V4L2_BUF_TYPE_VIDEO_CAPTURE;
    fmt.fmt.pix.width       = 640; 
    fmt.fmt.pix.height      = 480;
-   fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_YUYV;
-   fmt.fmt.pix.field       = V4L2_FIELD_INTERLACED;
+   fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_SBGGR8;
+   //fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_YUYV;
+   //fmt.fmt.pix.field       = V4L2_FIELD_INTERLACED;
 
    //to negotiate the format
    if (-1 == ioctl (fd, VIDIOC_S_FMT, &fmt))
@@ -218,12 +220,17 @@ static void uninit_device(void)
 
 void process_image(const void *p)
 {
+	unsigned char *dst;
 	FILE *image;
-
-	image = fopen("image", "w");
+	dst=(unsigned char*)malloc(640*480*3);
+	image = fopen("image.rgb", "w");
+	bayer2rgb24(dst, (unsigned char *)p, 640,480);
+	fwrite(dst, 640*480*3, 1, image);
+	fclose(image);
+	/*
         //printf("\n%s\n\n", (char *)p);
 	fprintf (image, "%s", (char *)p);
-        fclose(image);
+        fclose(image);*/
 }
 
 int read_frame(void)
