@@ -72,30 +72,15 @@ lpiFrameDevIO::lpiFrameDevIO(char *deviceName) {
 	//to negotiate the format
 	if (-1 == ioctl (fd, VIDIOC_S_FMT, &fmt));
 
-	buffers = (buffer *)calloc (1, sizeof (*buffers));
-
-	if (!buffers) {
-		fprintf (stderr, "Out of memory\n");
-		exit (EXIT_FAILURE);
-	}
-
-	buffers[0].length = fmt.fmt.pix.sizeimage;
-	buffers[0].start = malloc (fmt.fmt.pix.sizeimage);
-
-	if (!buffers[0].start) {
-		fprintf (stderr, "Out of memory\n");
-		exit (EXIT_FAILURE);
-	}
 	else ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::lpiFrameDevIO: Video device ready"));
 
+	framesize = fmt.fmt.pix.sizeimage;
 	sonix_unknown = 0;
 	init_done = 0;
 }
 
 lpiFrameDevIO::~lpiFrameDevIO() {
 
-	free(buffers[0].start);
-	free(buffers);
 
 	close(fd);
 	ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::~lpiFrameDevIO: Device closed :Device closed :D"));
@@ -107,10 +92,15 @@ bool lpiFrameDevIO::initializeValue() {
 
 ACS::longSeq lpiFrameDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl) {
 
-	unsigned char *d = (unsigned char *) malloc (640 * 480 * 3);
-	unsigned char *s = (unsigned char *) malloc (640 * 480);
+	unsigned char *d      = new unsigned char[640 * 480 * 3];
+	unsigned char *s      = new unsigned char[640 * 480];
+	unsigned char *buffer = new unsigned char[framesize];
 
-	if (-1 == ::read (fd, buffers[0].start, buffers[0].length))
+	if (!buffer || !d || !s) {
+		ACS_SHORT_LOG((LM_ERROR,"lpiFrameDevIO::read: Out of memory!"));
+	}
+
+	if (-1 == ::read (fd, buffer, framesize))
 	{
 		if( errno == EAGAIN )
 			return 0;
@@ -118,9 +108,8 @@ ACS::longSeq lpiFrameDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExI
 
 	ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::read: Obtained a frame"));
 	sonix_decompress_init();
-	sonix_decompress(640,480,(unsigned char *)buffers[0].start,s);
+	sonix_decompress(640,480,buffer,s);
 	bayer2rgb24(d,s,640,480);
-	delete s;
 	ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::read: Decompressed frame"));
 
 	ACS::longSeq ret;
@@ -128,6 +117,8 @@ ACS::longSeq lpiFrameDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExI
 	for(int i=0; i!=(640*480*3); i++)
 		ret[i] = (int)d[i];
 
+	delete buffer;
+	delete s;
 	delete d;
 	return ret;
 }
@@ -148,7 +139,7 @@ int lpiFrameDevIO::sonix_decompress (int width, int height, unsigned char *inp, 
 	if (!init_done)
 	{
 		 /* do sonix_decompress_init first! */
-		 return -1;
+		 sonix_decompress_init();
 	}
 
 	bitpos = 0;

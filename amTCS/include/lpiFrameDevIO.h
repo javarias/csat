@@ -7,12 +7,6 @@
 #define CLEAR(x) memset (&(x), 0, sizeof (x))
 #define CLAMP(x)  ((x)<0?0:((x)>255)?255:(x))
 
-struct buffer
-{
-	void * start;
-	size_t length;
-};
-
 typedef struct
 {
   int is_abs;
@@ -45,8 +39,8 @@ class lpiFrameDevIO: public DevIO<ACS::longSeq>
 	int fd;
 	int sonix_unknown;
 	int init_done;
+	unsigned int framesize;
 	code_table_t table[256];
-	struct buffer *buffers;
 
 	void sonix_decompress_init();
 	int sonix_decompress (int width, int height, unsigned char *inp, unsigned char *outp);
