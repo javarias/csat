@@ -108,8 +108,11 @@ public class Historial //implements Runnable
 
 
 	//Preset
-	public void addHistoryPreset(double Ra, double Dec){
-		saveFile("Preset to RA: "+Ra+" ,Dec: "+Dec+" at "+time());
+	public void addHistoryPreset(double c1, double c2, int i){
+		if(i==0)
+			saveFile("Preset to RA: "+c1+" ,Dec: "+c2+" at "+time());
+		else
+			saveFile("Preset to Alt: "+c1+" ,Az: "+c2+" at "+time());
 	}
 
 	public void addHistoryStop(){
@@ -132,17 +135,17 @@ public class Historial //implements Runnable
 	}
 
 	//Zennith
-	public void addHistoryZennith(double Ra, double Dec){
+	public void addHistoryZennith(){
 		saveFile("Go to Zennith at "+time());
 	}
 
 	//Park
-	public void addHistoryPark(double Ra, double Dec){
+	public void addHistoryPark(){
 		saveFile("Go to Park at "+time());
 	}
 
 	public void addHistoryLogin(String name){
-		saveFile("\n\n"+name+" is Log In at"+time());
+		saveFile("\n\n"+name+" is Log In at "+time());
 	}
 
 

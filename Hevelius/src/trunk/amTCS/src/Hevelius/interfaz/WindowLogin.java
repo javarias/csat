@@ -59,12 +59,18 @@ public class WindowLogin extends JDialog
                                 public void actionPerformed(ActionEvent e)
                                 {
                                 //jTextField1_actionPerformed(e);
-					conf.setOption("user",jTextField1.getText());
+/*					conf.setOption("user",jTextField1.getText());
                                         conf.store();
 					hist.addHistoryLogin(jTextField1.getText());
 					setVisible(false);
-
+*/
 					if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null){
+					conf.setOption("user",jTextField1.getText());
+                                        conf.store();
+                                        hist.addHistoryLogin(jTextField1.getText());
+//                                        setVisible(false);
+
+
 						try
 		                                {
 		                                        interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
@@ -82,6 +88,7 @@ public class WindowLogin extends JDialog
 		                                }
 					}
 
+					setVisible(false);
 
 
                                 }
@@ -97,29 +104,38 @@ public class WindowLogin extends JDialog
 		set.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent event) {
 					
-					conf.setOption("user",jTextField1.getText());
+/*					conf.setOption("user",jTextField1.getText());
 					conf.store();
 					hist.addHistoryLogin(jTextField1.getText());
 					setVisible(false);	
+*/
+
+                                        if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null){
+
+                                        conf.setOption("user",jTextField1.getText());
+                                        conf.store();
+                                        hist.addHistoryLogin(jTextField1.getText());
+//                                        setVisible(false);
 
 
-					try
-                                        {
-                                                interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
-                                                interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
+                                                try
+                                                {
+                                                        interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
+                                                        interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
 
-                                                if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
-                                                        interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
-                                                        interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
-                                                        interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+                                                        if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+                                                                interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
+                                                                interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
+                                                                interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+                                                        }
+                                                }
+                                                catch(Exception err)
+                                                {
+                                                        err.printStackTrace();
                                                 }
                                         }
-                                        catch(Exception err)
-                                        {
-                                                err.printStackTrace();
-                                        }
 
-
+					setVisible(false);
 				//jTextField1_actionPerformed(e);
 				}
 				});

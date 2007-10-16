@@ -6,6 +6,7 @@ import Hevelius.acsmodules.*;
 import Hevelius.heveliusmodules.*;
 import Hevelius.interfaz.*;
 import Hevelius.utilities.converter.*;
+import Hevelius.utilities.historial.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -61,6 +62,8 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 	private int dx = 0;
 	private int dy = 0;
+
+	private static Historial hist = new Historial();
 
 	float osize = 0;
 	
@@ -140,6 +143,8 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 				Presetting.preset(c1,c2,Integer.parseInt(test.getOption("coordinate")));
 				//list.setAltAzDest(tmp1,tmp2);		
+				if(interfaz.getDrawingPanel().getCSATControl()!=null)
+					hist.addHistoryPreset(c1,c2,Integer.parseInt(test.getOption("coordinate")));
 				}
 				});
 
@@ -294,6 +299,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
                                 public void actionPerformed(ActionEvent e){
                                 if(interfaz.getDrawingPanel().getCSATControl()!=null)
                                 interfaz.getDrawingPanel().getCSATControl().stopTelescope();
+                                hist.addHistoryStop();
                                 }
                                 });
 
@@ -308,6 +314,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 				{
 				interfaz.getDrawingPanel().getCSATControl().setTrackingStatus(
 					!interfaz.getDrawingPanel().getCSATStatus().getTrackingStatus());
+                                hist.addHistoryTracking(!interfaz.getDrawingPanel().getCSATStatus().getTrackingStatus());
 				}
 				}
 				});
@@ -324,6 +331,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 				p.az = 0;
 				if(interfaz.getDrawingPanel().getCSATControl()!=null)
 					interfaz.getDrawingPanel().getCSATControl().goToAltAz(p, new AltazVel());
+					hist.addHistoryZennith();
 				}
 				});
 
