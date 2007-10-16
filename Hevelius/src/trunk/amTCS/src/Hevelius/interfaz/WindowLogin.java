@@ -15,6 +15,8 @@ public class WindowLogin extends JDialog
 
 	private int dx = 0;
 	private int dy = 0;
+	
+	private static Configuration conf = new Configuration();		
 
 	public WindowLogin(JFrame f, String s)
 	{
@@ -52,6 +54,10 @@ public class WindowLogin extends JDialog
                                 public void actionPerformed(ActionEvent e)
                                 {
                                 //jTextField1_actionPerformed(e);
+					conf.setOption("user",jTextField1.getText());
+                                        conf.store();
+					hist.addHistoryLogin(jTextField1.getText());
+					setVisible(false);
                                 }
 
                                 });
@@ -65,6 +71,10 @@ public class WindowLogin extends JDialog
 		set.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent event) {
 					
+					conf.setOption("user",jTextField1.getText());
+					conf.store();
+					hist.addHistoryLogin(jTextField1.getText());
+					setVisible(false);	
 				//jTextField1_actionPerformed(e);
 				}
 				});
