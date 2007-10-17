@@ -32,6 +32,7 @@ public class MenuPanel extends JPanel //implements Runnable
 
 	private static JDialog config;
 	private static JDialog about;
+	private static JDialog history;
 	private static Configuration test = new Configuration();
 
 	private static JTabbedPane tabbedPane;
@@ -57,12 +58,20 @@ public class MenuPanel extends JPanel //implements Runnable
 	private static JLabel background;
 	private static JComboBox color;
 
+   	//private static JTextArea text_hist;
+   	//private static Color B, F1, F2, F3;
+	private static JComboBox jtfInput;
+        private static JTextArea jtAreaOutput;
+	private static JLabel jtText;
+
+
 	private static Vector<WeatherCityId> vector_city = new Vector<WeatherCityId>();
 
 	//private static JButton menu_config;
 	private static JLabel menu_config;
 	private static JLabel menu_help;
-	private static JLabel login;
+	private static JLabel menu_login;
+	private static JLabel menu_history;
 	private WindowLogin wl = new WindowLogin(interfaz.getMainFrame(), "Hevelius - Login");
 	//private static JButton menu_about;
 
@@ -82,6 +91,7 @@ public class MenuPanel extends JPanel //implements Runnable
 		setBackground(Color.BLACK);
 		aboutWindow();
 		configWindow();
+		historyWindow();
 
 		menu_config = new JLabel(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/conf.png")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		menu_config.setBackground(Color.BLACK);
@@ -96,10 +106,15 @@ public class MenuPanel extends JPanel //implements Runnable
 		menu_help.setSize(50,50);
 		add(menu_help);
 
-		login = new JLabel(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login.png")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
-                login.setBackground(Color.BLACK);
-                login.setSize(50,50);
-                add(login);
+		menu_history = new JLabel(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/history.png")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+                menu_history.setBackground(Color.BLACK);
+                menu_history.setSize(50,50);
+                add(menu_history);
+
+		menu_login = new JLabel(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login.png")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
+                menu_login.setBackground(Color.BLACK);
+                menu_login.setSize(50,50);
+                add(menu_login);
 
 	}
 
@@ -185,39 +200,76 @@ public class MenuPanel extends JPanel //implements Runnable
 			menu_help.setLocation(4*dx/6 + 2*(dy-dy*12/40 + dx/40),dy*6/40);
 
 
-login.setSize(dy-dy*12/40,dy-dy*12/40);
-                        login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+
+			menu_history.setSize(dy-dy*12/40,dy-dy*12/40);
+                        menu_history.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/history.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
 
 
-
-                        login.addMouseListener(new MouseListener(){
+                        menu_history.addMouseListener(new MouseListener(){
 
                                         public void mouseExited(MouseEvent event){
-                                        login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                                        menu_history.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/history.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseEntered(MouseEvent event){
-                                        login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                                        menu_history.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/history-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseReleased(MouseEvent event){
-                                        login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                                        menu_history.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/history.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseClicked(MouseEvent event){
-                                       login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
-					//WindowLogin wl = new WindowLogin(interfaz.getMainFrame(), "A");
-                                        wl.init();
+                                       menu_history.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/history-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                                        //WindowLogin wl = new WindowLogin(interfaz.getMainFrame(), "A");
+                                        history.setVisible(true);
+					setHistoryWindow();
                                         }
 
                                         public void mousePressed(MouseEvent event){
-                                                login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login-click.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                                                menu_history.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/history-click.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
                                         }
 
                         });
 
 
-                        login.setLocation(4*dx/6,dy*6/40);
+                        menu_history.setLocation(4*dx/6,dy*6/40);
+
+
+
+
+                        menu_login.setSize(dy-dy*12/40,dy-dy*12/40);
+                        menu_login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+
+
+                        menu_login.addMouseListener(new MouseListener(){
+
+                                        public void mouseExited(MouseEvent event){
+                                        menu_login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                                        }
+
+                                        public void mouseEntered(MouseEvent event){
+                                        menu_login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                                        }
+
+                                        public void mouseReleased(MouseEvent event){
+                                        menu_login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                                        }
+
+                                        public void mouseClicked(MouseEvent event){
+                                       menu_login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					//WindowLogin wl = new WindowLogin(interfaz.getMainFrame(), "A");
+                                        wl.init();
+                                        }
+
+                                        public void mousePressed(MouseEvent event){
+                                                menu_login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login-click.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+                                        }
+
+                        });
+
+
+                        menu_login.setLocation(4*dx/6 - dy-dy*12/40 + dx/40,dy*6/40);
 
 
 		}
@@ -649,6 +701,91 @@ login.setSize(dy-dy*12/40,dy-dy*12/40);
 
 	public WindowLogin getWindowLogin(){
 		return wl;
+	}
+
+	public static void historyWindow() {
+		history = new JDialog(frame,"Hevelius - History");
+                history.pack();
+
+                history.addWindowListener(new WindowAdapter() {
+                                public void windowClosing(WindowEvent e) {
+                                history.setVisible(false);
+                                }
+
+                                public void windowClosed(WindowEvent e) {
+                                history.setVisible(false);
+                                }
+                                });
+
+                history.setSize(500,600);
+                history.setLocationRelativeTo(null);
+                history.setLayout(null);
+                history.setResizable(false);
+		history.getContentPane().setBackground(Color.BLACK);
+
+/*		JComboBox jtfInput;
+		JTextArea jtAreaOutput;
+*/
+		
+		jtText = new JLabel("User:");
+		jtText.setForeground(Color.WHITE);
+		jtText.setSize(100,20);
+		jtText.setLocation(10,10);
+		history.add(jtText);
+		
+		
+		jtfInput = new JComboBox();
+
+		jtAreaOutput = new JTextArea(30, 40);
+		jtAreaOutput.setCaretPosition(jtAreaOutput.getDocument().getLength());
+		jtAreaOutput.setEditable(false);
+		jtAreaOutput.setBackground(Color.LIGHT_GRAY);
+		jtAreaOutput.setForeground(Color.BLACK);
+		JScrollPane scrollPane = new JScrollPane(jtAreaOutput,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+/*		GridBagConstraints gridCons1 = new GridBagConstraints();
+       		gridCons1.gridwidth = GridBagConstraints.REMAINDER;
+        	gridCons1.fill = GridBagConstraints.HORIZONTAL;*/
+
+		jtfInput.setModel(new DefaultComboBoxModel(new String[]{
+                                        "(none)"}));
+                jtfInput.setSize(200,20);
+		jtfInput.setLocation(100,10);
+                jtfInput.setSelectedIndex(0);
+
+        	history.add(jtfInput);
+        	
+        	GridBagConstraints gridCons2 = new GridBagConstraints();
+        	gridCons2.weightx = 1.0;
+        	gridCons2.weighty = 1.0;
+		scrollPane.setSize(470,520);
+		scrollPane.setLocation(10,40);
+        	history.add(scrollPane);
+
+
+	}
+
+
+	public static void setHistoryWindow(){
+		jtAreaOutput.setText("");
+		try{
+		File f = new File( "/home/cguajard/.hevelius/history/history.log" );
+		BufferedReader entrada = new BufferedReader( new FileReader( f ) );
+    		if ( f.exists() ){
+			String s;
+			s = entrada.readLine();
+			while(s.equals(null)){
+				jtAreaOutput.append(s);
+				s = entrada.readLine();	
+			}
+		}
+		}
+		catch(Exception e){
+			jtAreaOutput.setText("ERROR: "+e.toString());
+		}
+
 	}
 
 

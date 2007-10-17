@@ -520,7 +520,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 			//Pointing buttons
 			rbutton.setLocation((int)(145*osize),(int)(260*osize));
 			rbutton.setSize((int)(50*osize),(int)(50*osize));
-			//rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rArrow.jpg")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+			rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rigth.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
 
 			rbutton.addMouseListener(new MouseListener(){
 
@@ -556,7 +556,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 			lbutton.setLocation((int)(25*osize),(int)(260*osize));
 			lbutton.setSize((int)(50*osize),(int)(50*osize));
-			//lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/lArrow.jpg")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+			lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/left.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
 
 			lbutton.addMouseListener(new MouseListener(){
 
@@ -593,7 +593,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 			tbutton.setLocation((int)(85*osize),(int)(200*osize));
 			tbutton.setSize((int)(50*osize),(int)(50*osize));
-			//tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/tArrow.jpg")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+			tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/up.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
 
 			tbutton.addMouseListener(new MouseListener(){
 
@@ -631,7 +631,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 			bbutton.setLocation((int)(85*osize),(int)(320*osize));
 			bbutton.setSize((int)(50*osize),(int)(50*osize));
-			//bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/bArrow.jpg")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+			bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/down.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
 
 			bbutton.addMouseListener(new MouseListener(){
 
@@ -702,7 +702,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 
 			stopbutton.setLocation((int)(340*osize),(int)(300*osize));
 			stopbutton.setSize((int)(85*osize),(int)(85*osize));
-			//stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop.png")).getImage().getScaledInstance((int)(80*osize),(int)(80*osize),Image.SCALE_SMOOTH)));
+			stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop.png")).getImage().getScaledInstance((int)(85*osize),(int)(85*osize),Image.SCALE_SMOOTH)));
 
 			stopbutton.addMouseListener(new MouseListener(){
 
