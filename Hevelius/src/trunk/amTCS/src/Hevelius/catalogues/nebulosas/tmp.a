@@ -1,0 +1,2358 @@
+%%<SIMBAD> rsimbad (130.79.128.4)		Mon Dec 16 21:43:50 1996
+%%Args: -Ucds_fo -P -1 precoo='4' astrotypes='J I'
+
+>Sh 2- 17	!=1=
+=1/1	! @ C J I.0 I B
+%J 266.2932617 -28.8532503 (2) = 17 45.2       -28 51       
+%I SH 2-17
+
+>Sh 2- 19	!=1=
+=1/1	! @ C J I.0 I B
+%J 267.0201728 -29.1330644 (2) = 17 48.1       -29 08       
+%I SH 2-19
+
+>Sh 2- 20	!=1=
+=1/1	! @ C J S I.0 I O.GCRV O.IRAS B
+%J 266.7882811 -28.7750167 (4) = 17 47 09.2    -28 46 30    
+%I PK 000-00 1
+%I RCW 141
+%I SH 2-20
+%I SH 1-15
+%I PN Sa 3-74
+%I ESO 455- 39
+%I PN Bl 3-4
+%I IRAS 17439-2845
+
+>Sh 2- 21	!=1=
+=1/1	! @ C J I.0 I B
+%J 267.5936622 -28.8802789 (2) = 17 50.4       -28 53       
+%I SH 2-21
+
+>DG 144	!***  This identifier is not present in the database: DG 144
+
+
+>Sh 2- 14	!***  This identifier is not present in the database: Sh 2- 14
+
+
+>Sh 2- 22	!=1=
+=1/1	! @ C J I.0 I B
+%J 268.5720911 -25.3421442 (2) = 17 54.3       -25 21       
+%I SH 2-22
+
+>Sh 2- 24	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J 242.7525722  -7.0266564 (4) = 16 11 00.6    -07 01 36    
+%I SH 2-24
+%I IRAS 16083-0653
+%I IRAS 16086-0656
+%I [RHK93] 11617
+
+>Sh 2- 27	!=1=
+=1/1	! @ C J I.0 I B
+%J 248.9861239 -12.7180594 (4) = 16 35 56.7    -12 43 05    
+%I SH 2-27
+
+>NGC 6523	!=1=
+=1/1	! @ C J I.0 I B
+%J 270.9040514 -24.3874703 (3) = 18 03 37      -24 23.2     
+%I M 8
+%I NAME LAGOON
+%I NGC 6523
+%I GRS 006.20 -01.20
+%I W 29
+%I CTB 46
+%I SH 2-25
+%I GRS 006.00 -01.20
+%I NAME LAGOON NEBULA
+%I C 1800-243
+%I OCl 18.0
+%I NRL 11
+%I OCISM 1
+%I com see also NGC 6530
+%I com M8 = NGC 6523-30
+
+>NGC 6514	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J 270.5836981 -23.0323408 (2) = 18 02.3       -23 02       
+%I CTB 45
+%I CSI-23-17593 1
+%I NGC 6514
+%I M 20
+%I GRS 007.00 -00.30
+%I C 1759-230
+%I Cl Collinder 360
+%I com assoc to NAME TRIFID NEBULA
+%I OCl 23.0
+%I NRL 10
+%I OCISM 2
+%I [SC95] M 208
+%I [SC95] M 215
+
+>NGC 6559	!=1=
+=1/1	! @ I.0 I B
+%I NGC 6559
+
+>Sh 2- 29	!=1=
+=1/1	! @ C J I.0 I B
+%J 272.4646608 -24.0732200 (2) = 18 09.9       -24 04       
+%I SH 2-29
+
+>IC 4681	!***  This identifier is not present in the database: IC 4681
+
+
+>IC 1274	!=1=
+=1/1	! @ I.0 I B
+%I IC 1274
+
+>IC 4684	!=1=
+=1/1	! @ I.0 I B
+%I IC 4684
+
+>Sh 2- 33	!=1=
+=1/1	! @ C J I.0 I B
+%J 239.8474986  -1.7745014 (2) = 15 59.4       -01 46       
+%I SH 2-33
+
+>Sh 2- 34	!=1=
+=1/1	! @ C J I.0 I B
+%J 271.5760864 -21.6941683 (2) = 18 06.3       -21 42       
+%I SH 2-34
+
+>Sh 2- 35	!=1=
+=1/1	! @ C J I.0 I B
+%J 273.9678886 -20.2492069 (2) = 18 15.9       -20 15       
+%I SH 2-35
+
+>NGC 6590	!=1=
+=1/1	! @ M.B S I.0 I B
+%I NGC 6590
+
+>Sh 2- 36	!=1=
+=1/1	! @ C J I.0 I B
+%J 241.3634528  +0.3819133 (2) = 16 05.5       +00 23       
+%I SH 2-36
+
+>NGC 6589	!=1=
+=1/1	! @ J M.B S I.0 I B
+%J 274.2491708 -19.8811719 (3) = 18 17 00      -19 52.9     
+%I NGC 6589
+
+>IC 1283	!***  This identifier is not present in the database: IC 1283
+
+
+>Sh 2- 38	!=1=
+=1/1	! @ C J I.0 I B
+%J 272.2130081 -18.2599183 (4) = 18 08 51.1    -18 15 36    
+%I SH 2-38
+%I RAFGL 2074
+
+>Sh 2- 40	!=1=
+=1/1	! @ C J I.0 I B
+%J 273.0442011 -17.7133764 (4) = 18 12 10.6    -17 42 48    
+%I SH 2-40
+
+>Sh 2- 41	!=1=
+=1/1	! @ C J I.0 I B
+%J 273.9569181 -18.2325669 (2) = 18 15.8       -18 14       
+%I SH 2-41
+
+>IC 4701	!=1=
+=1/1	! @ C J I.0 I B
+%J 274.2241578 -16.7812528 (1) = 18 17         -16.8        
+%I IC 4701
+%I NRL 18
+
+>Sh 2- 42	!=1=
+=1/1	! @ C J I.0 I B
+%J 272.2993250 -16.7905914 (2) = 18 09.2       -16 47       
+%I SH 2-42
+
+>Sh 2- 46	!=1=
+=1/1	! @ C J I.0 I B
+%J 271.5355050 -14.1442669 (2) = 18 06.1       -14 09       
+%I SH 2-46
+
+>Sh 2- 47	!=1=
+=1/1	! @ C J M.B M.V S I.0 I O.MK O.UBV B
+%J 274.5599033 -15.5807214 (4) = 18 18 14.4    -15 34 51    
+%I BD-15 4913
+%I GEN# -0.01504913
+%I LS 4895
+%I SH 2-47
+
+>NGC 6618	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J 275.1083894 -16.1769614 (3) = 18 20 26      -16 10.6     
+%I NGC 6618
+%I M 17
+%I W 38
+%I NAME OMEGA NEBULA
+%I GRS 015.03 -00.67
+%I CTB 52
+%I C 1817-162
+%I com V: 87.2703
+%I GRS 015.00 -00.70
+%I 1E 1818.0-1610
+%I OCl 44.0
+%I NRL 4
+%I [PT56] 41
+%I OCISM 9
+%I OCl 44
+
+>Sh 2- 50	!=1=
+=1/1	! @ C J I.0 I B
+%J 276.3385997 -14.8043269 (2) = 18 25.4       -14 48       
+%I SH 2-50
+
+>Sh 2- 48	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J 275.5897900 -14.5346108 (4) = 18 22 21.5    -14 32 05    
+%I SH 2-48
+%I IRAS 18195-1433
+
+>Sh 2- 51	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J 280.1612364 -16.5651233 (4) = 18 40 38.7    -16 33 54    
+%I SH 2-51
+%I IRAS 18377-1636
+
+>NGC 6611	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J 274.7084775 -13.7788678 (2) = 18 18.8       -13 47       
+%I NGC 6611
+%I M 16
+%I CTB 51
+%I C 1816-138
+%I GRS 017.00 +00.30
+%I NRL 14
+%I OCISM 10
+%I OCl 54
+%I NAME EAGLE NEBULA
+
+>Sh 2- 54	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J 274.4730567 -11.7299833 (2) = 18 17.9       -11 44       
+%I SH 2-54
+%I IRAS 18150-1142
+%I com contains NGC 6604
+
+>Sh 2- 55	!=1=
+=1/1	! @ C J I.0 I B
+%J 278.0478092 -11.7460453 (2) = 18 32.2       -11 45       
+%I SH 2-55
+
+>IC 1287	!=1=
+=1/1	! @ C M.B S I.0 I B
+%I IC 1287
+
+>Sh 2- 56	!=1=
+=1/1	! @ C J I.0 I B
+%J 277.7627006  -9.7140606 (2) = 18 31.1       -09 43       
+%I SH 2-56
+%I com ass. RAFGL 2174
+
+>Sh 2- 57	!=1=
+=1/1	! @ C J I.0 I B
+%J 277.6323586  -8.6313422 (2) = 18 30.5       -08 38       
+%I SH 2-57
+
+>Sh 2- 58	!=1=
+=1/1	! @ C J I.0 I B
+%J 277.8565136  -8.4635939 (2) = 18 31.4       -08 28       
+%I SH 2-58
+
+>Sh 2- 59	!=1=
+=1/1	! @ C J I.0 I B
+%J 279.2271128  -7.5903264 (2) = 18 36.9       -07 35       
+%I SH 2-59
+
+>Sh 2- 60	!=1=
+=1/1	! @ C J I.0 I B
+%J 279.1757414  -6.6244506 (4) = 18 36 42.2    -06 37 28    
+%I SH 2-60
+
+>Sh 2- 61	!=1=
+=1/1	! @ C J M.B M.V S I.0 I O.GCRV O.IRAS O.UBV B
+%J 278.3394150  -4.9678950 (3) = 18 33 21      -04 58.1     
+%I HBC 284
+%I GEN# +6.20078284J
+%I PK 026+01 1
+%I EM* AS 310
+%I MHA 375-17
+%I PN VV' 425
+%I PN Sa 3-139
+%I SH 2-61
+%I PN V-V 1-8
+%I IRAS 18306-0500
+%I NSV 11014
+%I SYHG 50
+%I FMC 41
+%I PN MA 18
+%I [M82] 18
+
+>Sh 2- 62	!=1=
+=1/1	! @ C J I.0 I B
+%J 276.9089739  -3.8347744 (2) = 18 27.6       -03 50       
+%I SH 2-62
+
+>Sh 2- 63	!=1=
+=1/1	! @ C I.0 I B
+%I SH 2-63
+
+>DG 146	!***  This identifier is not present in the database: DG 146
+
+
+>Sh 2- 64	!=1=
+=1/1	! @ C J I.0 I B
+%J 277.8713542  -2.0901144 (3) = 18 31 29      -02 05.4     
+%I RCW 174
+%I SNR 028.8+03.5
+%I W 40
+%I SH 2-64
+%I com ass. RAFGL 2177
+
+>Sh 2- 65	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J 281.7644539  -3.8012061 (4) = 18 47 03.5    -03 48 04    
+%I SH 2-65
+
+>Sh 2- 66	!=1=
+=1/1	! @ C J I.0 I B
+%J 281.3750136  -1.9966522 (2) = 18 45.5       -02 00       
+%I SH 2-66
+
+>Sh 2- 68	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J 276.2433564  +0.8606772 (4) = 18 24 58.4    +00 51 38    
+%I PK 030+06 1
+%I PN YM 15
+%I SH 2-68
+%I EQ 1822.4+0050
+%I com see NAME SERPENS
+%I PN HDW 9
+%I PN G030.6+06.2
+%I DG 152
+
+>Sh 2- 67	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J 282.3408903  -2.3606700 (4) = 18 49 21.8    -02 21 38    
+%I SH 2-67
+%I IRAS 18467-0225
+
+>DG 152	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J 276.2433564  +0.8606772 (4) = 18 24 58.4    +00 51 38    
+%I PK 030+06 1
+%I PN YM 15
+%I SH 2-68
+%I EQ 1822.4+0050
+%I com see NAME SERPENS
+%I PN HDW 9
+%I PN G030.6+06.2
+%I DG 152
+
+>DG 153	!=1=
+=1/1	! @ C I.0 I B
+%I DG 153
+
+>Sh 2- 69	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J 281.0586636  -0.3164756 (3) = 18 44 14      -00 19.0     
+%I SH 2-69
+
+>Sh 2- 70	!=1=
+=1/1	! @ C J I.0 I B
+%J 273.6809597  +7.0664003 (2) = 18 14.7       +07 04       
+%I SH 2-70
+
+>Sh 2- 71	!=1=
+=1/1	! @ C J S I.0 I O.IRAS B
+%J 285.4970917  +2.1551144 (4) = 19 01 59.3    +02 09 18    
+%I PK 036-01 1
+%I PN VV' 473
+%I PN ARO 31
+%I PN V-V 1-9
+%I SH 2-71
+%I IRAS 18594+0204
+%I PN G035.9-01.1
+
+>Sh 2- 73	!=1=
+=1/1	! @ C J I.0 I B
+%J 242.5582214 +21.8688967 (4) = 16 10 14.0    +21 52 08    
+%I SH 2-73
+
+>Sh 2- 74	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J 287.1286067  +5.5974925 (4) = 19 08 30.9    +05 35 51    
+%I SH 2-74
+%I RCW 182
+
+>Sh 2- 76	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J 284.1034967  +7.7997344 (2) = 18 56.4       +07 48       
+%I SH 2-76
+
+>Sh 2- 80	!=1=
+=1/1	! @ C J M.B M.V S I.0 I O.GCRV O.IRAS O.MK O.PLX B
+%J 287.8797592 +16.8588819 (4) = 19 11 31.1    +16 51 32    
+%I PK 050+03 1
+%I PN M 1-67
+%I PN VV' 481
+%I Hen 2-427
+%I PN ARO 10
+%I PN VV 220
+%I SH 2-80
+%I LS II +16 4
+%I CSI+16-19093
+%I WR 124
+%I NSV 11797
+%I NAME BAC 209
+%I NAME MERRILL's star
+%I IRAS 19092+1646
+%I HIC 94289
+%I PN G050.1+03.3
+%I PLX 4471
+%I GCRV 11638
+%I CSI+16-19092
+
+>Ced 168	!***  This identifier is not present in the database: Ced 168
+
+
+>DG 159	!***  This identifier is not present in the database: DG 159
+
+
+>DG 157	!***  This identifier is not present in the database: DG 157
+
+
+>Sh 2- 84	!=1=
+=1/1	! @ C J M.B M.V I.0 I O.IRAS B
+%J 297.2815758 +18.3847069 (4) = 19 49 07.6    +18 23 05    
+%I SH 2-84
+%I IRAS 19468+1815
+
+>DG 155	!***  This identifier is not present in the database: DG 155
+
+
+>Ced 167	!=1=
+=1/1	! @ C J I.0 I B
+%J 291.5318567 +22.7509525 (2) = 19 26.1       +22 45       
+%I Ced 167
+
+>NGC 6823	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J 295.8904486 +23.3920394 (3) = 19 43 34      +23 23.5     
+%I NGC 6823
+%I SH 2-86
+%I CTB 76
+%I C 1941+231
+%I OCl 124.0
+%I W 55
+%I [HC69] 44
+%I OCl 124
+%I OCISM 23
+%I com neb+cluster
+
+>Sh 2- 87	!=1=
+=1/1	! @ C J S I.0 I O.GCRV O.IRAS B
+%J 296.5848519 +24.5900844 (3) = 19 46 20      +24 35.4     
+%I SH 2-87
+%I GRS 060.90 -00.10
+%I IRAS 19442+2427
+
+>Sh 2- 88	!=1=
+=1/1	! @ C J I.0 I B
+%J 296.6899875 +25.2155489 (4) = 19 46 45.6    +25 12 56    
+%I SH 2-88
+
+>Sh 2- 90	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J 297.3233681 +26.8866481 (3) = 19 49 18      +26 53.2     
+%I SH 2-90
+%I GRS 063.20 +00.40
+
+>Sh 2- 92	!=1=
+=1/1	! @ C J I.0 I B
+%J 296.6653803 +28.1993661 (4) = 19 46 39.7    +28 11 58    
+%I SH 2-92
+
+>Sh 2- 93	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J 298.7566056 +27.2128081 (3) = 19 55 02      +27 12.8     
+%I SH 2-93
+
+>Sh 2- 91	!=1=
+=1/1	! @ C J I.0 I B
+%J 294.8448861 +29.9491889 (2) = 19 39.4       +29 57       
+%I SH 2-91
+
+>Sh 2- 94	!=1=
+=1/1	! @ C J I.0 I B
+%J 292.0658917 +31.4651436 (3) = 19 28 16      +31 27.9     
+%I SH 2-94
+
+>Sh 2- 95	!=1=
+=1/1	! @ C J M.B M.V S I.0 I O.IRAS O.PLX B
+%J 298.7597881 +29.2892347 (4) = 19 55 02.3    +29 17 21    
+%I PLX 4708
+%I CSI+29-19529
+%I NGC 6842
+%I PK 065+00 1
+%I SH 2-95
+%I SH 1-72
+%I PN VV 245
+%I PN ARO 106
+%I Hen 2-451
+%I PN VV' 518
+%I LAN 47
+%I GT 1953+291
+%I PN G065.9+00.5
+%I 1P 19
+%I IRAS 19530+2909
+
+>Sh 2- 96	!=1=
+=1/1	! @ C J I.0 I B
+%J 292.1750222 +32.6873192 (2) = 19 28.7       +32 41       
+%I SH 2-96
+
+>Sh 2- 97	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J 299.0370250 +30.2134825 (4) = 19 56 08.9    +30 12 49    
+%I SH 2-97
+
+>IC 4954	!***  This identifier is not present in the database: IC 4954
+
+
+>Sh 2- 98	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J 299.7555433 +31.3754319 (3) = 19 59 01      +31 22.5     
+%I SH 2-98
+
+>Sh 2- 99	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J 300.2250000 +33.4933333 (3) = 20 00 54      +33 29.6     
+%I PK 069+01 1
+%I PN Kj 1-2
+%I SH 2-99
+%I com is not PN
+%I GSC 02674-02056
+
+>Ced 173	!***  This identifier is not present in the database: Ced 173
+
+
+>Sh 2- 102	!=1=
+=1/1	! @ C J I.0 I B
+%J 307.9355083 +30.6034689 (2) = 20 31.7       +30 36       
+%I SH 2-102
+
+>IC 1310	!***  This identifier is not present in the database: IC 1310
+
+
+>NGC 6960	!=1=
+=1/1	! @ I.0 I B
+%I NGC 6960
+%I NAME VEIL NEBULA
+
+>Sh 2- 104	!=1=
+=1/1	! @ C J I.0 I B
+%J 304.4439778 +36.7481542 (4) = 20 17 46.6    +36 44 53    
+%I SH 2-104
+%I SIM 59
+
+>NGC 6888	!=1=
+=1/1	! @ C J M.B S I.0 I B
+%J 303.1305242 +38.4178644 (2) = 20 12.5       +38 25       
+%I NGC 6888
+%I NAME CRESCENT NEBULA
+%I com : WR + Ring neb.
+
+>Sh 2- 107	!=1=
+=1/1	! @ C J I.0 I B
+%J 310.6599442 +36.3471281 (2) = 20 42.6       +36 21       
+%I SH 2-107
+
+>Sh 2- 108	!=1=
+=1/1	! @ C J I.0 I B
+%J 305.6489350 +40.2446667 (2) = 20 22.6       +40 15       
+%I SH 2-108
+
+>IC 1318B	!=1=
+=1/1	! @ I.0 I B
+%I IC 1318B
+
+>IC 1318A	!***  This identifier is not present in the database: IC 1318A
+
+
+>Sh 2- 110	!=1=
+=1/1	! @ C J I.0 I B
+%J 320.2018664 +32.4630272 (2) = 21 20.8       +32 28       
+%I SH 2-110
+
+>NGC 6914	!=1=
+=1/1	! @ S I.0 I B
+%I NGC 6914
+
+>NGC 6914	!=1=
+=1/1	! @ S I.0 I B
+%I NGC 6914
+
+>Sh 2- 111	!=1=
+=1/1	! @ C J I.0 I B
+%J 325.4736569 +30.1118886 (2) = 21 41.9       +30 07       
+%I SH 2-111
+
+>IC 5068	!=1=
+=1/1	! @ I.0 I B
+%I IC 5068
+
+>Sh 2- 113	!=1=
+=1/1	! @ C J I.0 I B
+%J 320.2004869 +38.0963975 (2) = 21 20.8       +38 06       
+%I SH 2-113
+
+>Ced 181	!***  This identifier is not present in the database: Ced 181
+
+
+>Sh 2- 114	!***  This identifier is not present in the database: Sh 2- 114
+
+
+>IC 5070	!=1=
+=1/1	! @ C J I.0 I B
+%J 312.7403264 +44.3714483 (2) = 20 51.0       +44 22       
+%I IC 5070
+%I NAME PELICAN NEBULA
+%I NAME PELICAN
+%I com see IC 5067
+
+>IC 5067	!=1=
+=1/1	! @ J S I.0 I B
+%J 311.9628694 +44.3686519 (2) = 20 47.9       +44 22       
+%I IC 5067
+%I com see NAME PELICAN
+
+>Sh 2- 115	!=1=
+=1/1	! @ C J I.0 I B
+%J 308.7573225 +47.0401406 (3) = 20 35 02      +47 02.4     
+%I SH 2-115
+%I 3C 416.1
+
+>NGC 7000	!=1=
+=1/1	! @ C J I.0 I B
+%J 314.6969981 +44.3299983 (3) = 20 58 47      +44 19.8     
+%I NGC 7000
+%I GRS 084.70 -01.00
+%I NAME NORTH AMER NEB
+%I SH 2-117
+%I CTB 100
+%I com size 240'
+%I NAME NORTH AMERICA
+%I NRL 21
+
+>Sh 2- 119	!=1=
+=1/1	! @ C J I.0 I B
+%J 319.6164650 +43.9279481 (2) = 21 18.5       +43 56       
+%I SH 2-119
+%I [GS55] 240
+
+>IC 5076	!=1=
+=1/1	! @ S I.0 I B
+%I IC 5076
+
+>DG 166	!***  This identifier is not present in the database: DG 166
+
+
+>Sh 2- 118	!=1=
+=1/1	! @ C J I.0 I B
+%J 324.2526200 +40.2085175 (2) = 21 37.0       +40 13       
+%I SH 2-118
+
+>DG 170	!***  This identifier is not present in the database: DG 170
+
+
+>DG 169	!***  This identifier is not present in the database: DG 169
+
+
+>DG 171	!***  This identifier is not present in the database: DG 171
+
+
+>Sh 2- 123	!=1=
+=1/1	! @ C J I.0 I B
+%J 325.5851925 +44.5456186 (2) = 21 42.3       +44 33       
+%I SH 2-123
+
+>Ced 184	!***  This identifier is not present in the database: Ced 184
+
+
+>IC 5146	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J 328.3819861 +47.2680733 (3) = 21 53 32      +47 16.1     
+%I IC 5146
+%I C 2151+470
+%I OCl 213.0
+%I OCl 213
+%I OCISM 43
+
+>Sh 2- 124	!=1=
+=1/1	! @ C J S I.0 I B
+%J 324.5705300 +50.3295028 (3) = 21 38 17      +50 19.8     
+%I SH 2-124
+%I KR 7
+
+>Sh 2- 126	!=1=
+=1/1	! @ C J I.0 I B
+%J 338.6576636 +40.6665367 (4) = 22 34 37.8    +40 40 00    
+%I SH 2-126
+
+>Sh 2- 127	!=1=
+=1/1	! @ C J I.0 I B
+%J 322.1584417 +54.5858761 (3) = 21 28 38      +54 35.2     
+%I SH 2-127
+%I KR 17
+
+>DG 168	!***  This identifier is not present in the database: DG 168
+
+
+>Sh 2- 128	!=1=
+=1/1	! @ C J M.B S I.0 I B
+%J 323.0424461 +55.8810064 (4) = 21 32 10.2    +55 52 52    
+%I PK 097+03 1
+%I PN ARO 363
+%I PN A55 63
+%I PN VV' 551
+%I PN A66 77
+%I SH 2-128
+%I KR 23A
+%I GAL 097.5+03.2
+%I PN G097.5+03.1
+
+>Ced 191	!***  This identifier is not present in the database: Ced 191
+
+
+>Ced 190	!***  This identifier is not present in the database: Ced 190
+
+
+>IC 1396B	!=1=
+=1/1	! @ I.0 I B
+%I IC 1396B
+
+>IC 1396A	!=1=
+=1/1	! @ I.0 I B
+%I IC 1396A
+
+>DG 174	!=1=
+=1/1	! @ C J M.B M.V S P I.0 I O.CEL O.GCRV O.GEN O.IRAS O.MK O.PLX O.PM O.pos O.ROT O.SAO O.UBV O.uvby B
+%J 319.8420658 +64.8717378 (5) = 21 19 22.1    +64 52 18    
+%I HD 203467
+%I GEN# +1.00203467
+%I SKY# 40603
+%I SAO 19313
+%I AG+64 1042
+%I UBV M 25641
+%I GC 29875
+%I N30 4715
+%I TD1 27995
+%I BD+64 1527
+%I PLX 5149
+%I * 6 Cep
+%I EM* MWC 367
+%I CEL 5299
+%I FK4 3703
+%I GCRV 13420
+%I HR 8171
+%I ROT 3113
+%I UBV 18437
+%I IRAS 21183+6439
+%I PPM 22770
+%I HIC 105268
+%I DG 174
+
+>Sh 2- 132	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J 334.8381206 +56.1681133 (3) = 22 19 21      +56 10.1     
+%I SH 2-132
+%I IRAS 22172+5549
+%I WB89 170
+
+>Sh 2- 133	!=1=
+=1/1	! @ C J I.0 I B
+%J 322.2380433 +64.2196156 (2) = 21 29.0       +64 13       
+%I SH 2-133
+
+>NGC 7023	!=1=
+=1/1	! @ C J M.B S I.0 I O.IRAS B
+%J 315.1270622 +68.1636586 (2) = 21 00.5       +68 10       
+%I NGC 7023
+%I C 2059+679
+%I IRAS 20599+6755
+%I OCl 235
+%I OCISM 50
+%I Cl VDB 139
+
+>Sh 2- 134	!=1=
+=1/1	! @ C J I.0 I B
+%J 333.1842031 +58.9990436 (4) = 22 12 44.2    +58 59 57    
+%I SH 2-134
+
+>Sh 2- 135	!=1=
+=1/1	! @ C J S I.0 I O.IRAS B
+%J 335.5222367 +58.7348119 (4) = 22 22 05.3    +58 44 05    
+%I SH 2-135
+%I KR 47
+%I IRAS 22174+5813
+
+>DG 172	!***  This identifier is not present in the database: DG 172
+
+
+>DG 180	!=1=
+=1/1	! @ C I.0 I B
+%I DG 180
+
+>NGC 7129	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J 325.3338219 +66.0952025 (2) = 21 41.3       +66 06       
+%I NGC 7129
+%I C 2140+658
+
+>Sh 2- 137	!=1=
+=1/1	! @ C J I.0 I B
+%J 329.2899233 +64.6888828 (2) = 21 57.2       +64 41       
+%I SH 2-137
+
+>Sh 2- 139	!=1=
+=1/1	! @ C J I.0 I B
+%J 338.7517017 +58.2089947 (2) = 22 35.0       +58 13       
+%I SH 2-139
+%I KR 55
+%I 24P 177A
+
+>Ced 194	!***  This identifier is not present in the database: Ced 194
+
+
+>Sh 2- 140	!=1=
+=1/1	! @ C J S I.0 I O.IRAS B
+%J 334.8251681 +63.3137033 (4) = 22 19 18.0    +63 18 49    
+%I SH 2-140
+%I IRAS 22176+6303
+%I RAFGL 2884
+%I WB89 171
+%I OCISM 53
+%I com neb.+cluster
+
+>DG 183	!***  This identifier is not present in the database: DG 183
+
+
+>Sh 2- 141	!=1=
+=1/1	! @ C J I.0 I B
+%J 337.1693247 +61.5661156 (3) = 22 28 41      +61 34.0     
+%I SH 2-141
+%I KR 57
+%I 24P 144A
+
+>NGC 7380	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J 341.7492111 +58.0972875 (2) = 22 47.0       +58 06       
+%I NGC 7380
+%I C 2245+578
+%I OCl 244.0
+%I OCl 244
+%I OCISM 54
+
+>Sh 2- 144	!=1=
+=1/1	! @ C I.0 I B
+%I SH 2-144
+
+>Sh 2- 146	!=1=
+=1/1	! @ C J S I.0 I B
+%J 342.3855389 +59.8999228 (3) = 22 49 33      +59 54.0     
+%I SH 2-146
+%I KR 61
+%I GT 2247+596
+%I 24P 211
+%I BG 2247+59
+
+>Sh 2- 149	!=1=
+=1/1	! @ C J I.0 I B
+%J 344.0138922 +58.5172281 (2) = 22 56.1       +58 31       
+%I SH 2-149
+%I GRS 108.20 -01.10
+
+>Sh 2- 151	!=1=
+=1/1	! @ C J I.0 I B
+%J 345.8600236 +57.2248633 (4) = 23 03 26.4    +57 13 30    
+%I SH 2-151
+
+>Sh 2- 153	!=1=
+=1/1	! @ C J I.0 I B
+%J 344.6549881 +58.7797467 (3) = 22 58 37      +58 46.8     
+%I SH 2-153
+
+>Sh 2- 152	!=1=
+=1/1	! @ C J I.0 I B
+%J 344.6717697 +58.7825464 (4) = 22 58 41.2    +58 46 57    
+%I SH 2-152
+%I KR 67
+%I GAL 108.76-00.95
+
+>Sh 2- 150	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J 337.3156647 +64.8522539 (4) = 22 29 15.8    +64 51 08    
+%I SH 2-150
+%I IRAS 22276+6435
+%I IRAS 22277+6433
+
+>Sh 2- 154	!=1=
+=1/1	! @ C J I.0 I B
+%J 342.4889044 +60.8650800 (1) = 22 50         +60.9        
+%I SH 2-154
+
+>DG 186	!***  This identifier is not present in the database: DG 186
+
+
+>DG 188	!***  This identifier is not present in the database: DG 188
+
+
+>Sh 2- 155	!=1=
+=1/1	! @ C J I.0 I B
+%J 344.4749042 +62.5178578 (3) = 22 57 54      +62 31.1     
+%I SH 2-155
+%I [KCW94] 110.209+2.630
+
+>DG 179	!***  This identifier is not present in the database: DG 179
+
+
+>DG 191	!***  This identifier is not present in the database: DG 191
+
+
+>Sh 2- 157	!=1=
+=1/1	! @ C J I.0 I B
+%J 349.0174803 +60.0346511 (3) = 23 16 04      +60 02.1     
+%I SH 2-157
+%I GRS 111.20 -00.50
+%I com voir aussi SIM 13
+%I SH 1-109
+
+>DG 177	!***  This identifier is not present in the database: DG 177
+
+
+>NGC 7538	!=1=
+=1/1	! @ C J S I.0 I O.IRAS B
+%J 348.4401658 +61.4724286 (4) = 23 13 45.6    +61 28 21    
+%I NGC 7538
+%I SH 2-158
+%I GRS 111.50 +00.80
+%I IRAS 23113+6113
+%I 2E 2311.3+6113
+%I 2E 4700
+
+>Sh 2- 158	!=1=
+=1/1	! @ C J S I.0 I O.IRAS B
+%J 348.4401658 +61.4724286 (4) = 23 13 45.6    +61 28 21    
+%I NGC 7538
+%I SH 2-158
+%I GRS 111.50 +00.80
+%I IRAS 23113+6113
+%I 2E 2311.3+6113
+%I 2E 4700
+
+>DG 178	!***  This identifier is not present in the database: DG 178
+
+
+>Sh 2- 161	!=2=
+=1/1	! @ C J I.0 I B
+%J 348.8630497 +61.8561744 (2) = 23 15.5       +61 51       
+%I SH 2-161 A
+
+>NGC 7635	!=1=
+=1/1	! @ C J M.B M.V S I.0 I O.GCRV O.GEN O.HGAM O.IRAS O.JP11 O.PLX O.SAO O.UBV O.uvby B
+%J 350.1849214 +61.1946711 (5) = 23 20 44.4    +61 11 41    
+%I NGC 7654 270
+%I GEN# +2.76540270
+%I BD+60 2522
+%I GEN# +0.06002522
+%I AG+60 1555
+%I UBV M 38280
+%I PLX 5652
+%I EM* CDS 1459
+%I GCRV 14652
+%I HGAM 1134
+%I JP11 4444
+%I LS III +60 68
+%I NGC 7635
+%I SAO 20575
+%I UBV 20020
+%I NAME BUBBLE NEBULA
+%I Hilt 1213
+%I BSD 19-1033
+%I IRAS 23185+6055
+%I GRS 112.22 +00.22
+%I PPM 24384
+
+>Sh 2- 160	!=1=
+=1/1	! @ C J I.0 I B
+%J 345.7459578 +64.3694700 (1) = 23 03         +64.4        
+%I SH 2-160
+
+>Sh 2- 164	!=1=
+=1/1	! @ C J I.0 I B
+%J 354.5423431 +59.9769358 (2) = 23 38.2       +59 59       
+%I SH 2-164
+
+>Sh 2- 163	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J 353.2408392 +60.8004011 (4) = 23 32 57.8    +60 48 01    
+%I SH 2-163
+%I IRAS 23306+6031
+%I IRAS 23312+6028
+
+>Sh 2- 165	!=1=
+=1/1	! @ C J I.0 I B
+%J 354.9419486 +61.9271239 (2) = 23 39.8       +61 56       
+%I SH 2-165
+
+>Sh 2- 166	!=1=
+=1/1	! @ C J I.0 I B
+%J 355.0447283 +60.9605025 (3) = 23 40 11      +60 57.6     
+%I SH 2-166
+
+>Sh 2- 168	!=1=
+=1/1	! @ C J I.0 I B
+%J 358.2688242 +60.4081611 (3) = 23 53 05      +60 24.5     
+%I SH 2-168
+
+>Sh 2- 170	!=1=
+=1/1	! @ C J I.0 I B
+%J   0.3910800 +64.6116711 (3) = 00 01 34      +64 36.7     
+%I SH 2-170
+
+>Ced 214	!***  This identifier is not present in the database: Ced 214
+
+
+>DG   2	!***  This identifier is not present in the database: DG 2
+
+
+>NGC 7822	!=1=
+=1/1	! @ C J S I.0 I B
+%J   0.7705469 +67.3783297 (2) = 00 03.1       +67 23       
+%I NGC 7822
+%I SH 2-171
+%I CTB 2
+%I SNR 118.3+04.8
+%I com size 180'
+
+>DG   3	!***  This identifier is not present in the database: DG 3
+
+
+>Sh 2- 173	!=1=
+=1/1	! @ C J I.0 I B
+%J   5.3183208 +61.7256225 (3) = 00 21 16      +61 43.5     
+%I SH 2-173
+
+>Sh 2- 175	!=1=
+=1/1	! @ C J I.0 I B
+%J   6.8200375 +64.7060117 (4) = 00 27 16.8    +64 42 22    
+%I SH 2-175
+%I [NS84] 1
+
+>Sh 2- 176	!=1=
+=1/1	! @ C J M.B I.0 I B
+%J   7.9221875 +57.2925767 (2) = 00 31.7       +57 18       
+%I SH 2-176
+%I PK 120-05 1
+%I PN G120.2-05.3
+
+>Sh 2- 174	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J 357.0437069 +80.9278967 (2) = 23 48.2       +80 56       
+%I SH 2-174
+%I PN G120.3+18.3
+
+>DG   4	!***  This identifier is not present in the database: DG 4
+
+
+>Ced 24	!***  This identifier is not present in the database: Ced 24
+
+
+>DG   5	!***  This identifier is not present in the database: DG 5
+
+
+>DG   7	!***  This identifier is not present in the database: DG 7
+
+
+>Sh 2- 181	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J  12.3414172 +65.2603528 (4) = 00 49 21.9    +65 15 37    
+%I SH 2-181
+%I IRAS 00463+6459
+
+>NGC  281	!=1=
+=1/1	! @ C J M.B S I.0 I B
+%J  13.1040847 +56.5650994 (4) = 00 52 25.0    +56 33 54    
+%I NGC 281
+%I SH 2-184
+%I CTB 7
+%I C 0049+563
+%I OCl 313.0
+%I OCl 313
+%I OCISM 68
+%I com cluster+neb
+
+>Sh 2- 178	!=1=
+=1/1	! @ C I.0 I B
+%I SH 2-178
+
+>IC   59	!=1=
+=1/1	! @ J I.0 I B
+%J  14.4263419 +61.0832950 (5) = 00 57 42.3    +61 05 00    
+%I IC 59
+
+>DG   6	!***  This identifier is not present in the database: DG 6
+
+
+>IC   63	!=1=
+=1/1	! @ C J M.B S I.0 I B
+%J  14.7553836 +60.8882925 (5) = 00 59 01.3    +60 53 18    
+%I IC 63
+
+>Sh 2- 185	!=1=
+=1/1	! @ C J I.0 I B
+%J  14.0050333 +60.3705025 (1) = 00 56         +60.4        
+%I SH 2-185
+%I com size 120'
+
+>Sh 2- 187	!=1=
+=1/1	! @ C J S I.0 I B
+%J  20.8121022 +61.8131008 (4) = 01 23 14.9    +61 48 47    
+%I SH 2-187
+%I com see also 4C 61.02
+
+>Sh 2- 188	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J  22.6648253 +58.3659294 (3) = 01 30 40      +58 22.0     
+%I PK 128-04 1
+%I SH 2-188
+%I SIM 22
+%I PN G128.0-04.1
+
+>DG   9	!=1=
+=1/1	! @ C J I.0 I B
+%J  37.3055308 +72.9897897 (2) = 02 29.2       +72 59       
+%I DG 9
+
+>DG  10	!***  This identifier is not present in the database: DG 10
+
+
+>IC 1795	!=1=
+=1/1	! @ C J S I.0 I B
+%J  36.4267150 +62.1003156 (3) = 02 25 42      +62 06.0     
+%I IC 1795
+%I W 3A
+%I CTB 9
+
+>IC 1805	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J  38.1768275 +61.4535594 (2) = 02 32.7       +61 27       
+%I IC 1805
+%I RAFGL 333
+%I C 0228+612
+%I SH 2-190
+%I Cl Melotte 15
+%I com size 150'
+%I OCl 352
+%I Cl Collinder 26
+%I com see also W 4
+%I Raab 11
+%I NRL 15
+%I OCISM 85
+
+>Sh 2- 193	!=1=
+=1/1	! @ C J I.0 I B
+%J  41.9097925 +61.9753964 (2) = 02 47.6       +61 59       
+%I SH 2-193
+
+>Sh 2- 192	!=1=
+=1/1	! @ C J I.0 I B
+%J  41.8342811 +61.9756381 (2) = 02 47.3       +61 59       
+%I SH 2-192
+
+>Sh 2- 191	!=1=
+=1/1	! @ C J M.B T D I.0 I O.IRAS O.RVel B
+%J  39.1478900 +59.6550636 (4) = 02 36 35.5    +59 39 18    
+%I UGCA 34
+%I 2E 0232.8+5926
+%I 2E 595
+%I PGC 9892
+%I [VDD93] 19
+%I IRAS 02329+5926
+%I GSC 03699-02055
+%I com :GSC=galaxy's nucleus
+%I com :behind Czernik 11
+%I SH 2-191
+%I Maffei 1
+%I ZOAG 135.83-00.57
+
+>Sh 2- 196	!=1=
+=1/1	! @ C J I.0 I B
+%J  42.8738869 +62.2056183 (3) = 02 51 30      +62 12.3     
+%I SH 2-196
+
+>Sh 2- 195	!=1=
+=1/1	! @ C J I.0 I B
+%J  40.4271064 +59.6033600 (3) = 02 41 43      +59 36.2     
+%I SH 2-195
+
+>IC 1848	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J  42.3373525 +60.6342689 (4) = 02 49 21.0    +60 38 03    
+%I W 5
+%I IC 1848
+%I CTB 11
+%I C 0247+602
+%I SH 2-199
+%I OCl 364.0
+%I com Size 120'
+%I OCl 364
+%I Cl Collinder 32
+%I OCISM 93
+%I com cluster+neb.
+
+>Sh 2- 200	!=1=
+=1/1	! @ C J I.0 I B
+%J  47.7615083 +62.8056283 (2) = 03 11.0       +62 48       
+%I PK 138+04 1
+%I PN HDW 2
+%I PN HaWe 2
+%I SH 2-200
+
+>IC 1871	!***  This identifier is not present in the database: IC 1871
+
+
+>Sh 2- 202	!=1=
+=1/1	! @ C J I.0 I B
+%J  49.2412722 +59.2835381 (1) = 03 17         +59.3        
+%I SH 2-202
+
+>DG  13	!***  This identifier is not present in the database: DG 13
+
+
+>DG  12	!***  This identifier is not present in the database: DG 12
+
+
+>DG  17	!***  This identifier is not present in the database: DG 17
+
+
+>Sh 2- 203	!=1=
+=1/1	! @ C J I.0 I B
+%J  50.7473194 +54.8278850 (3) = 03 22 59      +54 49.7     
+%I SH 2-203
+
+>DG   8	!***  This identifier is not present in the database: DG 8
+
+
+>Sh 2- 204	!=1=
+=1/1	! @ C J I.0 I B
+%J  58.9355536 +57.4290544 (2) = 03 55.7       +57 26       
+%I SH 2-204
+
+>Sh 2- 205	!=1=
+=1/1	! @ C J I.0 I B
+%J  58.0560494 +53.4158986 (3) = 03 52 13      +53 25.0     
+%I SH 2-205
+
+>NGC 1491	!=1=
+=1/1	! @ C J M.B S I.0 I B
+%J  61.2101536 +51.3710519 (3) = 04 04 50      +51 22.3     
+%I SH 2-206
+%I NRAO 156
+%I NGC 1491
+%I GRS 150.59 -00.95
+%I RAFGL 5111
+
+>Sh 2- 206	!=1=
+=1/1	! @ C J M.B S I.0 I B
+%J  61.2101536 +51.3710519 (3) = 04 04 50      +51 22.3     
+%I SH 2-206
+%I NRAO 156
+%I NGC 1491
+%I GRS 150.59 -00.95
+%I RAFGL 5111
+
+>Sh 2- 207	!=1=
+=1/1	! @ C J S I.0 I O.IRAS B
+%J  64.9999147 +53.1531072 (2) = 04 20.0       +53 09       
+%I PK 151+02 1
+%I SH 2-207
+%I PN V-V 1-2
+%I PN VV' 26
+%I PN ARO 212
+%I IRAS 04159+5300
+
+>Sh 2- 210	!=1=
+=1/1	! @ C J I.0 I B
+%J  67.7825647 +52.4907669 (3) = 04 31 08      +52 29.4     
+%I SH 2-210
+
+>Sh 2- 211	!=1=
+=1/1	! @ C J I.0 I B
+%J  69.2379281 +50.8775089 (3) = 04 36 57      +50 52.7     
+%I SH 2-211
+%I RAFGL 5125
+
+>DG  19	!***  This identifier is not present in the database: DG 19
+
+
+>NGC 1624	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J  70.1057544 +50.4468947 (2) = 04 40.4       +50 27       
+%I NGC 1624
+%I C 0436+503
+%I OCl 403.0
+%I com assoc. to Sh2-212
+%I OCl 403
+%I OCISM 96
+
+>Sh 2- 213	!=1=
+=1/1	! @ C J I.0 I B
+%J  65.1659603 +44.9355272 (2) = 04 20.7       +44 56       
+%I SH 2-213
+
+>DG  14	!***  This identifier is not present in the database: DG 14
+
+
+>Sh 2- 214	!=1=
+=1/1	! @ C J I.0 I B
+%J  65.4365958 +44.3676608 (2) = 04 21.7       +44 22       
+%I SH 2-214
+
+>DG  45	!***  This identifier is not present in the database: DG 45
+
+
+>NGC 1333	!=1=
+=1/1	! @ C J M.B S I.0 I B
+%J  52.2566206 +31.3485264 (3) = 03 29 02      +31 20.9     
+%I NGC 1333
+%I GRS 158.30 -20.50
+
+>Sh 2- 216	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J  71.2450469 +46.8249386 (2) = 04 45.0       +46 49       
+%I SH 2-216
+%I PK 158+00 1
+%I PN G158.6+00.7
+
+>Sh 2- 217	!=1=
+=1/1	! @ C J S I.0 I B
+%J  74.6874844 +48.0040322 (3) = 04 58 45      +48 00.2     
+%I SH 2-217
+
+>DG  16	!***  This identifier is not present in the database: DG 16
+
+
+>Sh 2- 219	!=1=
+=1/1	! @ C J S I.0 I B
+%J  74.0300706 +47.3787497 (3) = 04 56 07      +47 22.7     
+%I SH 2-219
+
+>Sh 2- 218	!=1=
+=1/1	! @ C I.0 I B
+%I SH 2-218
+
+>Sh 2- 221	!=1=
+=1/1	! @ C J I.0 I B
+%J  75.9172706 +45.8198853 (2) = 05 03.7       +45 49       
+%I SH 2-221
+
+>NGC 1499	!=1=
+=1/1	! @ C J M.B S I.0 I B
+%J  60.8226794 +36.4224267 (3) = 04 03 17      +36 25.3     
+%I NGC 1499
+%I NAME CALIFORNIA NEBULA
+%I SH 2-220
+
+>IC  348	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J  56.1352994 +32.2900133 (2) = 03 44.5       +32 17       
+%I IC 348
+%I C 0341+321
+%I OCl 409.0
+%I OCl 409
+%I OCISM 99
+
+>NGC 1579	!=1=
+=1/1	! @ C J I.0 I B
+%J  67.5393094 +35.2720692 (4) = 04 30 09.4    +35 16 19    
+%I NGC 1579
+%I SH 2-222
+%I com see also HBC 40
+
+>Sh 2- 223	!=1=
+=1/1	! @ C J I.0 I B
+%J  79.2877756 +42.2038539 (2) = 05 17.2       +42 12       
+%I SH 2-223
+
+>Sh 2- 224	!=1=
+=1/1	! @ C J S I.0 I B
+%J  81.5204750 +42.8765264 (2) = 05 26.1       +42 53       
+%I SH 2-224
+
+>NGC 1432	!=1=
+=1/1	! @ I.0 I B
+%I NGC 1432
+
+>DG  20	!***  This identifier is not present in the database: DG 20
+
+
+>DG  26	!***  This identifier is not present in the database: DG 26
+
+
+>Sh 2- 225	!=1=
+=1/1	! @ C J S I.0 I B
+%J  81.7929194 +40.6251722 (3) = 05 27 10      +40 37.5     
+%I SH 2-225
+
+>Sh 2- 226	!=1=
+=1/1	! @ C J I.0 I B
+%J  77.7771439 +37.9776167 (3) = 05 11 07      +37 58.7     
+%I SH 2-226
+
+>Sh 2- 227	!=1=
+=1/1	! @ C J I.0 I B
+%J  79.8614761 +38.9677208 (2) = 05 19.4       +38 58       
+%I SH 2-227
+
+>IC  359	!=1=
+=1/1	! @ C J M.B T D I.0 I B
+%J  63.1199667 +27.7108422 (2) = 04 12.5       +27 43       
+%I Z 0409.4+2735
+%I IC 359
+%I Z 508 - 8
+%I UGC 2980
+%I MCG+05-10-009
+
+>Sh 2- 228	!=1=
+=1/1	! @ C J S I.0 I O.GCRV O.IRAS B
+%J  78.3235344 +37.4416819 (2) = 05 13.3       +37 27       
+%I SH 2-228
+%I RAFGL 5137
+%I IRAS 05100+3723
+%I WB89 614
+
+>DG  30	!***  This identifier is not present in the database: DG 30
+
+
+>IC  360	!=1=
+=1/1	! @ I.0 I B
+%I IC 360
+
+>Ced 33	!***  This identifier is not present in the database: Ced 33
+
+
+>IC  405	!=1=
+=1/1	! @ C J S I.0 I B
+%J  78.8397775 +33.8575003 (3) = 05 15 22      +33 51.5     
+%I IC 405
+%I CTB 16
+
+>DG  48	!***  This identifier is not present in the database: DG 48
+
+
+>Sh 2- 233	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J  85.1246992 +35.8512447 (4) = 05 40 29.9    +35 51 04    
+%I SH 2-233
+%I IRAS 05371+3549
+
+>IC  417	!=1=
+=1/1	! @ C J I.0 I B
+%J  81.9038744 +34.4245253 (2) = 05 27.6       +34 25       
+%I SH 2-234
+%I IC 417
+
+>Sh 2- 232	!=1=
+=1/1	! @ C J I.0 I B
+%J  85.6181992 +36.1899742 (2) = 05 42.5       +36 11       
+%I SH 2-232
+
+>DG  42	!***  This identifier is not present in the database: DG 42
+
+
+>IC  410	!=1=
+=1/1	! @ C J S I.0 I B
+%J  80.4965461 +33.4812561 (2) = 05 22.0       +33 29       
+%I IC 410
+%I CTB 17
+%I C 0519+334
+%I OCl 438.0
+
+>Sh 2- 231	!=1=
+=1/1	! @ C J I.0 I B
+%J  84.8398878 +35.7770647 (3) = 05 39 22      +35 46.6     
+%I SH 2-231
+
+>DG  50	!***  This identifier is not present in the database: DG 50
+
+
+>NGC 1931	!=1=
+=1/1	! @ C J M.B M.V S I.0 I O.IRAS B
+%J  82.8531231 +34.2532908 (2) = 05 31.4       +34 15       
+%I NGC 1931
+%I SH 2-237
+%I C 0528+342
+%I RAFGL 5144
+%I IRAS 05281+3412
+%I OCl 441.0
+%I WB89 653
+%I Ced 49
+%I OCl 441
+%I OCISM 102
+
+>DG  37	!***  This identifier is not present in the database: DG 37
+
+
+>IC 2087	!=1=
+=1/1	! @ C J S I.0 I B
+%J  69.9817608 +25.7506378 (4) = 04 39 55.6    +25 45 02    
+%I IC 2087
+%I ELIA 3-18
+%I [GKH94] 4
+%I [TNS87] 11
+
+>Ced 34	!***  This identifier is not present in the database: Ced 34
+
+
+>DG  40	!***  This identifier is not present in the database: DG 40
+
+
+>NGC 1554	!=1=
+=1/1	! @ I.0 I B
+%I NGC 1554
+
+>DG  66	!***  This identifier is not present in the database: DG 66
+
+
+>Sh 2- 239	!=1=
+=1/1	! @ C J I.0 I B
+%J  67.8242408 +18.1233525 (2) = 04 31.3       +18 07       
+%I SH 2-239
+
+>Sh 2- 240	!=1=
+=1/1	! @ C J I.0 I B
+%J  85.7896103 +28.2890144 (2) = 05 43.2       +28 17       
+%I SH 2-240
+
+>Ced 61	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J  91.1427208 +30.5111250 (4) = 06 04 34.3    +30 30 40    
+%I IRAS 06013+3030
+%I WB89 735
+%I Ced 61
+%I DG 86
+
+>DG  85	!***  This identifier is not present in the database: DG 85
+
+
+>Sh 2- 242	!=1=
+=1/1	! @ C J I.0 I B
+%J  87.9697250 +27.0334261 (3) = 05 51 53      +27 02.0     
+%I SH 2-242
+
+>DG  84	!***  This identifier is not present in the database: DG 84
+
+
+>DG  28	!***  This identifier is not present in the database: DG 28
+
+
+>Sh 2- 243	!=1=
+=1/1	! @ C J I.0 I B
+%J  83.5842958 +23.2996008 (2) = 05 34.3       +23 18       
+%I SH 2-243
+
+>NGC 1952	!=1=
+=1/1	! @ C J S I.0 I O.IRAS O.PLX O.V* B
+%J  83.6328844 +22.0144572 (6) = 05 34 31.9    +22 00 52    
+%I NAME CRAB NEBULA
+%I NGC 1952
+%I PLX 1266
+%I CSI+21-05315
+%I M 1
+%I SNR 184.6-05.8
+%I NAME CRABE
+%I GRS 184.60 -05.80
+%I V* CM Tau
+%I NAME CRAB PULSAR
+%I NOVA Tau 1054
+%I SN 1054
+%I SN 1054A
+%I X Tau X-1
+%I CTB 18
+%I IRAS 05314+2200
+%I 2CG 184 -05
+%I 1CG 185 -05
+%I 2U 0531+22
+%I 3U 0531+21
+%I 4U 0531+21
+%I NAME CRAB
+%I PSR 0531+21
+%I PSR 0531
+%I PSR 0531+21.9
+%I PSR 0532
+%I PSR J0534+2200
+%I 3A 0531+219
+%I 1M 0531+219
+%I 1H 0531+219
+%I H 0531+219
+%I H 0534+21
+%I NAME CRAB PSR
+%I 3C 144
+%I NAME TAURUS A
+%I 4C 21.19
+%I NAME TAU A
+%I PKS 0531+219
+%I 2E 0531.5+2159
+%I 2E 1309
+%I 1ES 0532+21.5
+%I NRL 2
+%I [PT56] 5
+%I Mills 05+2A
+%I 2EG J0534+2158
+
+>Sh 2- 246	!=1=
+=1/1	! @ C J I.0 I B
+%J  75.5327122 +14.0878667 (2) = 05 02.1       +14 05       
+%I SH 2-246
+
+>Sh 2- 245	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J  60.3353178  +3.2246892 (4) = 04 01 20.5    +03 13 29    
+%I SH 2-245
+%I IRAS 03587+0305
+
+>IC  444	!=1=
+=1/1	! @ J M.B S I.0 I B
+%J  94.6433678 +23.3126414 (3) = 06 18 34      +23 18.8     
+%I IC 444
+
+>Sh 2- 249	!=1=
+=1/1	! @ C J I.0 I B
+%J  95.6329414 +22.9745125 (3) = 06 22 32      +22 58.5     
+%I SH 2-249
+%I com size 80'
+
+>Sh 2- 247	!=1=
+=1/1	! @ C J S I.0 I B
+%J  92.2256692 +21.6243461 (2) = 06 08.9       +21 37       
+%I SH 2-247
+%I [KCW94] 188.949+0.915
+
+>IC  443	!=1=
+=1/1	! @ C J S I.0 I B
+%J  94.0049003 +22.3990567 (2) = 06 16.0       +22 24       
+%I SNR 189.0+03.0
+%I IC 443
+%I 3C 157
+%I GRS 189.10 +03.00
+%I SH 2-248
+%I CTB 20
+%I SNR 189.1+03.0
+%I 3U 0620+23
+%I 4U 0617+23
+%I 3A 0614+224
+%I 1M 0614+225
+%I 1H 0612+226
+%I H 0620+22
+%I 1ES 0613+22.7
+%I NRL 22
+%I [PT56] 11
+%I Mills 06+2A
+%I 2EG J0618+2234
+%I 1ES 0614+22.7
+%I GRO J0617+22
+
+>DG 101	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J  95.7823403 +22.8737883 (2) = 06 23.1       +22 52       
+%I IRAS 06201+2254
+%I WB89 802
+%I DG 101
+
+>Sh 2- 250	!=1=
+=1/1	! @ C J I.0 I B
+%J  70.0488758  +7.3631781 (2) = 04 40.2       +07 22       
+%I SH 2-250
+
+>Sh 2- 251	!=1=
+=1/1	! @ C J I.0 I B
+%J  68.2165658  +5.8547931 (2) = 04 32.9       +05 51       
+%I SH 2-251
+
+>NGC 2175	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J  92.4194275 +20.5067236 (2) = 06 09.7       +20 30       
+%I NGC 2175
+%I SH 2-252
+%I C 0606+203
+%I W 13
+%I OCl 476.0
+%I [KCW94] 189.876+0.516
+%I com see also 3C 153.1
+%I OCl 476
+%I OCISM 106
+%I com Cluster + neb.
+
+>Ced 62	!=1=
+=1/1	! @ C J I.0 I B
+%J  91.9559967 +18.6575606 (4) = 06 07 49.4    +18 39 27    
+%I NGC 2163
+%I DG 87
+%I GN 06.04.9
+%I com ass. to HBC 193
+%I Ced 62
+
+>Sh 2- 254	!=1=
+=1/1	! @ C J S I.0 I B
+%J  92.9935378 +18.0555711 (3) = 06 11 58      +18 03.3     
+%I SH 2-254
+%I GRS 192.51 -00.15
+%I 4P 1
+
+>IC 2162	!=1=
+=1/1	! @ C J S I.0 I O.IRAS B
+%J  93.2248367 +17.9897536 (5) = 06 12 54.0    +17 59 23    
+%I IC 2162
+%I GRS 192.63 -00.02
+%I SH 2-255
+%I IRAS 06095+1800
+%I IRAS 06099+1800
+%I NAME SH 2-255 IRS 1
+%I 4P 2
+%I WB89 774
+%I [BBW79] S 255 IRS 1
+
+>Sh 2- 260	!=1=
+=1/1	! @ C J I.0 I B
+%J  73.7916325  +5.6625800 (2) = 04 55.2       +05 40       
+%I SH 2-260
+
+>Sh 2- 261	!=1=
+=1/1	! @ C J I.0 I B
+%J  91.9690731 +15.7921822 (1) = 06 08         +15.8        
+%I SH 2-261
+%I SIM 34
+%I 4P 7
+
+>Ced 54	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J  83.7844933  +9.9234644 (3) = 05 35 08      +09 55.4     
+%I IRAS 0532+098P10
+%I IRAS 05323+0953
+%I Ced 54
+
+>Ced 44	!***  This identifier is not present in the database: Ced 44
+
+
+>Sh 2- 263	!=1=
+=1/1	! @ C J I.0 I B
+%J  80.2972939  +8.3818722 (3) = 05 21 11      +08 22.9     
+%I SH 2-263
+
+>Sh 2- 262	!=1=
+=1/1	! @ C J I.0 I B
+%J  76.7699125  +6.2652842 (2) = 05 07.1       +06 16       
+%I SH 2-262
+
+>Sh 2- 265	!=1=
+=1/1	! @ C J I.0 I B
+%J  79.6509300  +7.4349497 (2) = 05 18.6       +07 26       
+%I SH 2-265
+
+>Sh 2- 268	!=1=
+=1/1	! @ C J I.0 I B
+%J  92.4128883 +12.9899919 (3) = 06 09 39      +12 59.4     
+%I SH 2-268
+
+>Sh 2- 268	!=1=
+=1/1	! @ C J I.0 I B
+%J  92.4128883 +12.9899919 (3) = 06 09 39      +12 59.4     
+%I SH 2-268
+
+>Sh 2- 267	!=1=
+=1/1	! @ C J S I.0 I O.IRAS B
+%J  93.9610386 +14.2658297 (3) = 06 15 51      +14 15.9     
+%I PK 196-01 1
+%I PN ARO 78
+%I SH 2-267
+%I PN V-V 1-5
+%I PN VV' 41
+%I IRAS 06130+1418
+
+>Sh 2- 269	!=1=
+=1/1	! @ C J S I.0 I B
+%J  93.6517072 +13.8259353 (4) = 06 14 36.4    +13 49 33    
+%I SH 2-269
+%I RAFGL 902
+%I GRS 196.45 -01.67
+
+>Sh 2- 270	!=1=
+=1/1	! @ C J I.0 I O.GCRV O.IRAS B
+%J  92.5515617 +12.8126500 (4) = 06 10 12.4    +12 48 46    
+%I RAFGL 5185
+%I IRAS 06073+1249
+%I SH 2-270
+%I [NS84] 8
+%I WB89 765
+
+>Ced 59	!***  This identifier is not present in the database: Ced 59
+
+
+>DG  70	!***  This identifier is not present in the database: DG 70
+
+
+>IC  446	!=1=
+=1/1	! @ C J M.B S I.0 I O.IRAS B
+%J  97.7662619 +10.4307186 (2) = 06 31.1       +10 26       
+%I IC 446
+%I IRAS 06283+1028
+
+>NGC 2247	!=1=
+=1/1	! @ C J M.B I.0 I O.IRAS B
+%J  98.2681694 +10.3224675 (4) = 06 33 04.4    +10 19 21    
+%I NGC 2247
+%I IRAS 06303+1021
+%I Ced 81
+%I WB89 827
+
+>IC 2169	!=1=
+=1/1	! @ C S I.0 I B
+%I IC 2169
+
+>NGC 2245	!=1=
+=1/1	! @ C J M.B S I.0 I O.IRAS B
+%J  98.1719525 +10.1593175 (4) = 06 32 41.3    +10 09 34    
+%I NGC 2245
+%I IRAS 06299+1011
+%I RAFGL 5198
+%I Ced 80
+%I WB89 825
+
+>NGC 2264	!=1=
+=1/1	! @ C J M.B M.V S I.0 I B
+%J 100.2632606  +9.8853875 (2) = 06 41.1       +09 53       
+%I NGC 2264
+%I C 0638+099
+%I SH 2-273
+%I GRS 203.20 +02.00
+%I com size 250'
+%I OCl 495.0
+%I OCl 495
+%I OCISM 108
+
+>IC  423	!=1=
+=1/1	! @ C J I.0 I B
+%J  83.3372294  -0.6328353 (3) = 05 33 21      -00 38.0     
+%I IC 423
+%I [CB88] 31
+
+>DG  59	!***  This identifier is not present in the database: DG 59
+
+
+>NGC 1788	!=1=
+=1/1	! @ C J M.B S I.0 I B
+%J  76.6992092  -3.3844897 (2) = 05 06.8       -03 23       
+%I NGC 1788
+%I Ced 40
+%I com : see also NSV 1832
+
+>NGC 2261	!=1=
+=1/1	! @ C J I.0 I B
+%J  99.8077528  +8.7542222 (2) = 06 39.2       +08 45       
+%I NGC 2261
+%I NAME HUBBLE'S NEBULA
+%I NAME HUBBLE'S VAR NEB
+%I com see V* R Mon
+%I GSC 00746-00435
+
+>IC  426	!=1=
+=1/1	! @ C J I.0 I B
+%J  84.1181208  -0.2765997 (3) = 05 36 28      -00 16.6     
+%I IC 426
+%I [CB88] 32
+
+>DG  71	!***  This identifier is not present in the database: DG 71
+
+
+>DG  73	!***  This identifier is not present in the database: DG 73
+
+
+>DG  67	!***  This identifier is not present in the database: DG 67
+
+
+>IC  448	!***  This identifier is not present in the database: IC 448
+
+
+>DG  82	!=1=
+=1/1	! @ C J I.0 I B
+%J  86.8437981  +0.7168861 (2) = 05 47.4       +00 43       
+%I DG 82
+
+>NGC 2071	!=1=
+=1/1	! @ C J D I.0 I B
+%J  86.7695758  +0.3619642 (4) = 05 47 04.7    +00 21 43    
+%I NGC 2071
+%I RAFGL 818
+
+>NGC 2064	!=1=
+=1/1	! @ J I.0 I B
+%J  86.6489250  +0.0561564 (3) = 05 46 36      +00 03.4     
+%I NGC 2064
+
+>NGC 1990	!=1=
+=1/1	! @ S I.0 I B
+%I NGC 1990
+
+>IC  431	!=1=
+=1/1	! @ S I.0 I B
+%I IC 431
+
+>IC  432	!=1=
+=1/1	! @ S I.0 I B
+%I IC 432
+
+>NGC 2238	!***  This identifier is not present in the database: NGC 2238
+
+
+>IC  434	!=1=
+=1/1	! @ C J S I.0 I B
+%J  85.4310828  -1.9046336 (4) = 05 41 43.5    -01 54 17    
+%I NGC 2024
+%I NAME ORI B
+%I W 12
+%I SNR 206.5-16.4
+%I IC 434
+%I RAFGL 807
+%I NAME ORION B
+
+>NGC 2023	!=1=
+=1/1	! @ C J S I.0 I O.IRAS B
+%J  85.4043306  -2.2661750 (3) = 05 41 37      -02 16.0     
+%I NGC 2023
+%I RAFGL 806
+%I [XT95] 6
+%I IRAS 05391-0217
+
+>Sh 2- 278	!=1=
+=1/1	! @ C J I.0 I B
+%J  79.9380750  -5.6665717 (2) = 05 19.8       -05 40       
+%I SH 2-278
+
+>IC 2118	!***  This identifier is not present in the database: IC 2118
+
+
+>DG  56	!***  This identifier is not present in the database: DG 56
+
+
+>DG  49	!***  This identifier is not present in the database: DG 49
+
+
+>Sh 2- 280	!=1=
+=1/1	! @ C J I.0 I B
+%J  98.5898328  +2.4683283 (3) = 06 34 22      +02 28.1     
+%I SH 2-280
+
+>NGC 1976	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J  83.8100983  -5.3751719 (3) = 05 35 14      -05 22.5     
+%I NGC 1976
+%I M 42
+%I NAME ORI A
+%I NAME ORION NEBULA
+%I NAME ORION A
+%I NAME ORI NEBULA
+%I NRL 6
+%I [PT56] 6
+%I Mills 05+0A
+%I 3C 145
+%I PKS 0532-054
+%I com see also ORION CLUSTER
+
+>NGC 1980	!=1=
+=1/1	! @ C J M.B M.V I.0 I B
+%J  83.8365336  -5.9353061 (2) = 05 35.3       -05 56       
+%I NGC 1980
+%I C 0532-059
+%I OCl 529.0
+
+>Sh 2- 282	!=1=
+=1/1	! @ C J I.0 I B
+%J  99.5347825  +1.4204456 (3) = 06 38 08      +01 25.2     
+%I SH 2-282
+
+>NGC 1999	!=1=
+=1/1	! @ C J M.B S I.0 I B
+%J  84.1118433  -6.7216447 (3) = 05 36 27      -06 43.3     
+%I NGC 1999
+%I PP 34
+
+>Sh 2- 284	!=1=
+=1/1	! @ C J S I.0 I B
+%J 101.3669044  +0.2966714 (3) = 06 45 28      +00 17.8     
+%I SH 2-284
+
+>DG  91	!***  This identifier is not present in the database: DG 91
+
+
+>DG  75	!***  This identifier is not present in the database: DG 75
+
+
+>Ced 65	!***  This identifier is not present in the database: Ced 65
+
+
+>NGC 2170	!=1=
+=1/1	! @ C J I.0 I B
+%J  91.9509167  -6.3846631 (3) = 06 07 48      -06 23.1     
+%I NGC 2170
+%I RAFGL 877
+
+>Ced 66	!***  This identifier is not present in the database: Ced 66
+
+
+>NGC 2183	!=1=
+=1/1	! @ C J S I.0 I O.IRAS B
+%J  92.7122722  -6.1983569 (4) = 06 10 50.9    -06 11 54    
+%I RAFGL 890
+%I IRAS 06084-0611
+%I NGC 2183
+%I NSV 2860
+
+>NGC 2185	!=1=
+=1/1	! @ M.B S I.0 I B
+%I NGC 2185
+
+>NGC 2182	!=1=
+=1/1	! @ C J M.B S I.0 I O.IRAS B
+%J  92.3749583  -6.3278322 (4) = 06 09 30.0    -06 19 40    
+%I NGC 2182
+%I IRAS 06070-0619
+
+>DG  92	!***  This identifier is not present in the database: DG 92
+
+
+>Ced 71	!***  This identifier is not present in the database: Ced 71
+
+
+>DG  97	!***  This identifier is not present in the database: DG 97
+
+
+>DG  98	!***  This identifier is not present in the database: DG 98
+
+
+>Sh 2- 287	!=1=
+=1/1	! @ C J S I.0 I B
+%J 104.8719786  -4.8199869 (3) = 06 59 29      -04 49.2     
+%I SH 2-287
+
+>Sh 2- 288	!=1=
+=1/1	! @ C J S I.0 I B
+%J 107.1537886  -4.3139844 (3) = 07 08 37      -04 18.8     
+%I SH 2-288
+
+>Sh 2- 289	!=1=
+=1/1	! @ C J S I.0 I B
+%J 101.4804944  -7.3039567 (2) = 06 45.9       -07 18       
+%I SH 2-289
+
+>DG 104	!***  This identifier is not present in the database: DG 104
+
+
+>Sh 2- 291	!=1=
+=1/1	! @ C J I.0 I B
+%J 103.8732539  -8.0153169 (3) = 06 55 30      -08 00.9     
+%I SH 2-291
+
+>DG 113	!***  This identifier is not present in the database: DG 113
+
+
+>DG 114	!***  This identifier is not present in the database: DG 114
+
+
+>IC 2177	!=1=
+=1/1	! @ C J M.B M.V S P I.0 I O.CEL O.GCRV O.Hbet O.IRAS O.JP11 O.MK O.SAO O.UBV B
+%J 106.1060881 -10.4546408 (5) = 07 04 25.5    -10 27 17    
+%I YZC 11 2361
+%I HD 53367
+%I GEN# +1.00053367J
+%I SAO 152320
+%I SKY# 12692
+%I UBV M 12819
+%I SRS 7485
+%I BD-10 1848
+%I TD1 9019
+%I EM* MWC 166
+%I CEL 1550
+%I GCRV 4649
+%I IDS 06597-1018 AB
+%I JP11 1485
+%I LS 140
+%I UBV 6945
+%I Hilt 613
+%I VDB 93
+%I GUM 1
+%I IC 2177
+%I IRAS 07020-1022
+%I SYHG 37
+%I PPM 218092
+%I FMC 24
+%I ** RST 3489
+%I HRW 20
+%I com also RfN VDB 93
+%I CCDM J07044-1027AB
+%I ** RST 3489AB
+%I HIC 34116
+%I com HIC 34116 incl CCDM J07044-1027AB
+
+>Sh 2- 293	!=1=
+=1/1	! @ C J I.0 I B
+%J 105.4368242 -11.3060453 (2) = 07 01.7       -11 18       
+%I SH 2-293
+
+>Sh 2- 294	!=1=
+=1/1	! @ C J S I.0 I B
+%J 109.1259639  -9.4348256 (3) = 07 16 30      -09 26.1     
+%I SH 2-294
+
+>Sh 2- 296	!=1=
+=1/1	! @ C J I.0 I B
+%J 108.8901450 -10.8220892 (2) = 07 15.6       -10 49       
+%I SH 2-296
+%I com size 200'
+
+>Sh 2- 295	!=1=
+=1/1	! @ C J I.0 I B
+%J 105.6611481 -11.4570983 (3) = 07 02 39      -11 27.4     
+%I SH 2-295
+
+>DG 116	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J 106.3203906 -12.3338019 (4) = 07 05 16.9    -12 20 02    
+%I RAFGL 5234
+%I IRAS 07029-1215
+%I RAFGL 5222
+%I WB89 947
+%I DG 116
+
+>Ced 90	!=1=
+=1/1	! @ C J I.0 I B
+%J 106.3029683 -12.3167761 (3) = 07 05 13      -12 19.0     
+%I SH 2-297
+%I Ced 90
+
+>IC  468	!***  This identifier is not present in the database: IC 468
+
+
+>NGC 2359	!=1=
+=1/1	! @ C J I.0 I B
+%J 109.6246697 -13.2304897 (3) = 07 18 30      -13 13.8     
+%I NGC 2359
+%I GUM 4
+%I RCW 5
+%I GRS 227.80 -00.20
+%I SH 2-298
+
+>Sh 2- 302	!=1=
+=1/1	! @ C J I.0 I B
+%J 112.8829650 -16.9861392 (4) = 07 31 31.9    -16 59 10    
+%I SH 2-302
+%I BRAN 41
+
+>Sh 2- 303	!=1=
+=1/1	! @ C J I.0 I B
+%J 103.5808147 -22.4307761 (4) = 06 54 19.4    -22 25 51    
+%I SH 2-303
+%I BRAN 3
+
+>Sh 2- 305	!=1=
+=1/1	! @ C J S I.0 I B
+%J 112.5167383 -18.5370125 (4) = 07 30 04.0    -18 32 13    
+%I SH 2-305
+%I BRAN 32
+
+>Sh 2- 304	!=1=
+=1/1	! @ C I.0 I B
+%I SH 2-304
+
+>Sh 2- 306	!=1=
+=1/1	! @ C J S I.0 I B
+%J 112.7596311 -19.1547769 (4) = 07 31 02.3    -19 09 17    
+%I SH 2-306
+%I BRAN 39
+
+>Sh 2- 307	!=1=
+=1/1	! @ C J S I.0 I B
+%J 113.8873511 -18.7595342 (4) = 07 35 33.0    -18 45 34    
+%I SH 2-307
+%I BRAN 50
+
+>Sh 2- 308	!=1=
+=1/1	! @ C J M.B M.V S P I.0 I O.CEL O.GCRV O.Hbet O.IRAS O.JP11 O.MK O.PM O.pos O.SAO O.UBV O.uvby O.V* B
+%J 103.5540542 -23.9283361 (5) = 06 54 13.0    -23 55 42    
+%I HD 50896
+%I SKY# 12250
+%I SAO 172546
+%I UBV M 40625
+%I Cl Collinder 121 4
+%I UBV M 12581
+%I CPD-23 1588
+%I CD-23 4553
+%I GC 9061
+%I N30 1504
+%I TD1 8528
+%I V* EZ CMa
+%I CEL 1426
+%I GCRV 4522
+%I HR 2583
+%I JP11 4532
+%I LS 98
+%I UBV 6842
+%I WR 6
+%I YZ 113 4156
+%I CSV 6527
+%I Hen 3-20
+%I MR 6
+%I SH 2-308
+%I BRAN 2
+%I IRAS 06521-2351
+%I PPM 251223
+%I HIC 33165
+%I 2E 0652.1-2351
+%I 2E 1743
+%I RCW 11
+
+>Sh 2- 309	!=1=
+=1/1	! @ C J S I.0 I B
+%J 112.9500153 -19.4348006 (4) = 07 31 48.0    -19 26 05    
+%I SH 2-309
+%I BRAN 42A
+
+>Ced 96	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J 110.0425392 -24.0400286 (4) = 07 20 10.2    -24 02 24    
+%I HH 72
+%I IRAS 07180-2356
+%I NAME HH 72 IRS
+%I WB89 977
+%I com ass to LDN 1660
+%I Ced 96
+
+>Sh 2- 310	!=1=
+=1/1	! @ C J I.0 I B
+%J 111.0196983 -25.9708931 (4) = 07 24 04.7    -25 58 15    
+%I SH 2-310
+
+>Ced 101	!***  This identifier is not present in the database: Ced 101
+
+
+>NGC 2467	!=1=
+=1/1	! @ C J S I.0 I B
+%J 118.0803739 -26.4415711 (4) = 07 52 19.3    -26 26 30    
+%I NGC 2467
+%I SH 2-311
+%I CTB 23
+%I C 0750-263
+%I BRAN 80A
+%I OCl 668.0
+%I OCl 668
+%I OCISM 128
+%I com cluster + neb.
+
+>Sh 2- 311	!=1=
+=1/1	! @ C J S I.0 I B
+%J 118.0803739 -26.4415711 (4) = 07 52 19.3    -26 26 30    
+%I NGC 2467
+%I SH 2-311
+%I CTB 23
+%I C 0750-263
+%I BRAN 80A
+%I OCl 668.0
+%I OCl 668
+%I OCISM 128
+%I com cluster + neb.
+
+>Sh 2- 312	!=1=
+=1/1	! @ C J I.0 I B
+%J 135.4697058 -26.0974917 (2) = 09 01.9       -26 06       
+%I SH 2-312
+
+>DG 125	!***  This identifier is not present in the database: DG 125
+
+
+>Sh 2- 1	!=1=
+=1/1	! @ C J I.0 I B
+%J 239.7592869 -26.4751044 (2) = 15 59.0       -26 29       
+%I SH 2-1
+
+>DG 130	!***  This identifier is not present in the database: DG 130
+
+
+>IC 4591	!***  This identifier is not present in the database: IC 4591
+
+
+>Sh 2- 7	!=1=
+=1/1	! @ C J I.0 I B
+%J 240.0917503 -22.9403419 (2) = 16 00.4       -22 56       
+%I SH 2-7
+
+>Sh 2- 9	!=1=
+=1/1	! @ C J I.0 I B
+%J 245.2856406 -25.5680478 (2) = 16 21.1       -25 34       
+%I SH 2-9
+%I [CTR95] 12
+
+>Ced 130	!***  This identifier is not present in the database: Ced 130
+
+
+>IC 4606	!***  This identifier is not present in the database: IC 4606
+
+
+>DG 141	!=1=
+=1/1	! @ C I.0 I B
+%I DG 141
+
+>IC 4603	!=1=
+=1/1	! @ C S I.0 I B
+%I IC 4603
+
+>IC 4605	!=1=
+=1/1	! @ C M.B S I.0 I B
+%I IC 4605
+
+>IC 4604	!=1=
+=1/1	! @ C M.B S I.0 I B
+%I IC 4604
+
+>IC 4592	!=1=
+=1/1	! @ C M.B S I.0 I B
+%I IC 4592
+
+>Ced 129	!***  This identifier is not present in the database: Ced 129
+
+
+>Sh 2- 12	!=1=
+=1/1	! @ C J I.0 I O.IRAS B
+%J 263.9370228 -32.5847047 (4) = 17 35 44.9    -32 35 05    
+%I SH 2-12
+%I IRAS 17324-3233
+%I IRAS 17328-3234
+
+>Sh 2- 15	!=1=
+=1/1	! @ C J I.0 I B
+%J 267.2335025 -31.1820622 (2) = 17 48.9       -31 11       
+%I SH 2-15
+
+>Sh 2- 16	!=1=
+=1/1	! @ C J I.0 I B
+%J 266.6546292 -29.3853961 (4) = 17 46 37.1    -29 23 07    
+%I SH 2-16
+
+>Sh 2- 18	!=1=
+=1/1	! @ C J I.0 I B
+%J 266.9456919 -29.2167603 (2) = 17 47.8       -29 13       
+%I SH 2-18
+
+>(End)			Mon Dec 16 21:43:56 1996

@@ -5,14 +5,16 @@ import alma.TYPES.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import alma.ACS.CBvoid;
-import alma.ACS.CBDescIn;
+//import alma.ACS.CBvoid;
+import alma.ACS.*;
 import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
 import alma.acs.component.client.ComponentClient;
 
 import Hevelius.interfaz.*;
 import alma.acs.callbacks.RequesterUtil;
 import alma.acs.callbacks.ResponseReceiver;
+import alma.acs.container.ContainerServices;
+
 
 public class CSATControlClient extends ComponentClient
 {
@@ -86,8 +88,29 @@ public class CSATControlClient extends ComponentClient
 //					System.out.println("Responding failed: "+x);}
 //
 //			};
-			CBDescIn desc = new CBDescIn(2000, 2000, 1);
-			cscontrol.preset(p, null, desc);
+/*			CBvoid cb = new CBvoid() {
+				public void working(alma.ACSErr.Completion c, CBDescOut desc){
+					System.out.println("A");
+				}
+				public void done(alma.ACSErr.Completion c, CBDescOut desc){
+					System.out.println("B");
+				}
+				public boolean negotiate(long time, CBDescOut desc){
+					System.out.println("C");
+				}
+				public org.omg.CORBA.Object _set_policy_override(org.omg.CORBA.Policy[] p, org.omg.CORBA.SetOverrideType oType){
+					System.out.println("D");
+				}
+				public org.omg.CORBA.DomainManager[] _get_domain_managers(){
+					System.out.println("E");
+				}
+
+			};
+*/
+			//ContainerServices cs = cscontrol.giveContainerServices();
+			MovementCB cb = new MovementCB();
+			//cscontrol.preset(p, null, desc);
+			cscontrol.preset(p, /*RequesterUtil.giveCBvoid(cs, cb)*/ null, RequesterUtil.giveDescIn());
 		}
 	}
 

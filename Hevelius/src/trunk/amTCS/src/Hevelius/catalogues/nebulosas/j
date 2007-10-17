@@ -1,0 +1,16 @@
+BEGIN {
+  r = "tmp.a"	# Resultats SIMBAD
+}
+
+{  while (substr(t,1,1) != ">") getline t < r ;
+   if (index(t, "***") != 0) add = 1 ; else add = 0 ;
+   getline t < r ;
+   print $0 ;
+   getline ; print "a i" substr($0,2) ;
+   getline ; 
+   while ($0 != "v") {
+	print ;
+	getline ;
+   }
+   print ;
+}

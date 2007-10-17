@@ -61,6 +61,7 @@ public class DrawingPanel extends JPanel
 	private VirtualTelescopePanel vtpane = null;
 	private MenuPanel mpane = null;
 	private SiderealPanel stpane = null;
+	private CataloguePanel catpane = null;
 
 	private Tracking trck = null;
 	private SideralUpdate sdrl = null;
@@ -173,6 +174,11 @@ public class DrawingPanel extends JPanel
 		mpane = new MenuPanel(null);
 		mpane.init();
 		add(mpane);
+
+		//CataloguePanel
+		catpane = new CataloguePanel(null);
+		catpane.init();
+		add(catpane);
 
 		//SideralUpdate
 		sdrl = new SideralUpdate();
@@ -327,6 +333,11 @@ public class DrawingPanel extends JPanel
 			stpane.setSize(dx*2/7-dx*2/30,(dy/3-dy*2/40)/4);
 			Border stBorder = BorderFactory.createTitledBorder(line, "SIDEREAL TIME");
                         stpane.setBorder(stBorder);
+
+			catpane.setLocation(dx*3/7+dx/30,dy*3/6+dy/12+2*dy/40);
+			catpane.setSize(300,300);
+			Border catBorder = BorderFactory.createTitledBorder(line, "STARS CATALOGUE");
+			catpane.setBorder(catBorder);
 		}
 	}
 	public Dimension getDim()
@@ -354,6 +365,8 @@ public class DrawingPanel extends JPanel
 			mpane.setBackground(c);
 		if(stpane!=null)
 			stpane.setBackground(c);
+		if(catpane!=null)
+			catpane.setBackground(c);
 	}
 	public void updateWindow(boolean init){
 		//Cambiar Background
