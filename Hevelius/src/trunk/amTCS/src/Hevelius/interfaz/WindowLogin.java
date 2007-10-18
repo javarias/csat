@@ -133,7 +133,7 @@ public class WindowLogin extends JDialog
 	                                        conf.store();
 	                                        hist.addHistoryLogin(jTextField1.getText());
                                         }
-
+					jTextField1.setText("");
 					setVisible(false);
 				}
 				});
