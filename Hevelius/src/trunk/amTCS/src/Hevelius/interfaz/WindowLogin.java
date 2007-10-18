@@ -132,6 +132,7 @@ public class WindowLogin extends JDialog
 	                                        conf.setOption("user",jTextField1.getText());
 	                                        conf.store();
 	                                        hist.addHistoryLogin(jTextField1.getText());
+						System.out.println(jTextField1.getText());
                                         }
 					jTextField1.setText("");
 					setVisible(false);
