@@ -17,6 +17,7 @@ import javax.imageio.*;
 import java.util.*;
 import java.awt.Image;
 import javax.swing.border.BevelBorder;
+import java.util.regex.*;
 
 public class MenuPanel extends JPanel //implements Runnable
 {
@@ -223,7 +224,7 @@ public class MenuPanel extends JPanel //implements Runnable
                                        menu_history.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/history-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
                                         //WindowLogin wl = new WindowLogin(interfaz.getMainFrame(), "A");
                                         history.setVisible(true);
-					setHistoryWindow();
+					setHistoryWindow(test.getOption("user"));
                                         }
 
                                         public void mousePressed(MouseEvent event){
@@ -749,8 +750,50 @@ public class MenuPanel extends JPanel //implements Runnable
        		gridCons1.gridwidth = GridBagConstraints.REMAINDER;
         	gridCons1.fill = GridBagConstraints.HORIZONTAL;*/
 
-		jtfInput.setModel(new DefaultComboBoxModel(new String[]{
-                                        "(none)"}));
+		//jtfInput.setModel(new DefaultComboBoxModel(new String[]{
+                //                        "(none)"}));
+
+
+                String[] children;
+		File dir = new File(System.getProperty("user.home") + "/.hevelius/history");
+
+
+                FilenameFilter filter = new FilenameFilter()
+                {
+                        public boolean accept(File dir, String name)
+                        {
+                                Pattern pat;
+                                Matcher mat;
+                                pat = Pattern.compile("(.*)\\.log$");
+                                File cat;
+                                mat = pat.matcher(name);
+                                if(mat.find())
+                                {
+                                        return true;
+                                }
+                                else
+                                {
+                                        return false;
+                                }
+                        }
+                };
+                children = dir.list(filter);
+		for(int i = 0; i < children.length; i++){
+			children[i] = children[i].substring(0,children[i].length()-4);
+		}
+
+
+                jtfInput.setModel(new DefaultComboBoxModel(children));
+
+                jtfInput.addActionListener(new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                //object.getSelectedIndex()
+                                setHistoryWindow(String.valueOf(jtfInput.getSelectedItem()));
+                                }
+                                });
+
+
+
                 jtfInput.setSize(200,20);
 		jtfInput.setLocation(100,10);
                 jtfInput.setSelectedIndex(0);
@@ -768,22 +811,60 @@ public class MenuPanel extends JPanel //implements Runnable
 	}
 
 
-	public static void setHistoryWindow(){
+	public static void setHistoryWindow(String user){
+
+
+/*                String[] children;
+                File dir = new File(System.getProperty("user.home") + "/.hevelius/history");
+
+
+                FilenameFilter filter = new FilenameFilter()
+                {
+                        public boolean accept(File dir, String name)
+                        {
+                                Pattern pat;
+                                Matcher mat;
+                                pat = Pattern.compile("(.*)\\.log$");
+                                File cat;
+                                mat = pat.matcher(name);
+                                if(mat.find())
+                                {
+                                        return true;
+                                }
+                                else
+                                {
+                                        return false;
+                                }
+                        }
+                };
+                children = dir.list(filter);
+                for(int i = 0; i < children.length; i++){
+                        children[i] = children[i].substring(0,children[i].length()-4);
+                }
+
+
+                jtfInput.setModel(new DefaultComboBoxModel(children));
+*/
+
+
 		jtAreaOutput.setText("");
 		try{
-		File f = new File( "/home/cguajard/.hevelius/history/history.log" );
-		BufferedReader entrada = new BufferedReader( new FileReader( f ) );
-    		if ( f.exists() ){
-			String s;
-			s = entrada.readLine();
-			while(s.equals(null)){
-				jtAreaOutput.append(s);
-				s = entrada.readLine();	
-			}
-		}
+			
+				File f = new File( System.getProperty("user.home") + "/.hevelius/history/"+user+".log" );
+				BufferedReader entrada = new BufferedReader( new FileReader( f ) );
+		    		if ( f.exists() ){
+					String s;
+					//s = entrada.readLine();
+					//while(!s.equals(null)){
+					while((s=entrada.readLine()) != null){
+					//	System.out.println(s);
+						jtAreaOutput.append(s+"\n");
+					//	s = entrada.readLine();	
+					}
+				}
 		}
 		catch(Exception e){
-			jtAreaOutput.setText("ERROR: "+e.toString());
+			jtAreaOutput.setText("Historial No Disponible");
 		}
 
 	}

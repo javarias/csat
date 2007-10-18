@@ -225,19 +225,19 @@ public class CataloguePanel extends JPanel
 				switch(cat)
 				{
 					case 0:	pathl = new File(getClass().getClassLoader().getResource("Hevelius/catalogues/stars/").getFile());
-						pathc = new File("~/.hevelius/catalogues/stars/");
+						pathc = new File(System.getProperty("user.home")+"/.hevelius/catalogues/stars/");
 						break;
 					case 1:	pathl = new File(getClass().getClassLoader().getResource("Hevelius/catalogues/galaxies/").getFile());
-						pathc = new File("~/.hevelius/catalogues/galaxies/"); 
+						pathc = new File(System.getProperty("user.home")+"/.hevelius/catalogues/galaxies/"); 
 						break;
 					case 2: pathl = new File(getClass().getClassLoader().getResource("Hevelius/catalogues/nebulas/").getFile()); 
-						pathc = new File("~/.hevelius/catalogues/nebulas/");
+						pathc = new File(System.getProperty("user.home")+"/.hevelius/catalogues/nebulas/");
 						break;
 					case 3: pathl = new File(getClass().getClassLoader().getResource("Hevelius/catalogues/pulsars/").getFile());
-						pathc = new File("~/.hevelius/catalogues/pulsars/");
+						pathc = new File(System.getProperty("user.home")+"/.hevelius/catalogues/pulsars/");
 						break;
 					case 4: pathl = new File(getClass().getClassLoader().getResource("Hevelius/catalogues/custom/").getFile());
-						pathc = new File("~/.hevelius/catalogues/custom/");
+						pathc = new File(System.getProperty("user.home")+"/.hevelius/catalogues/custom/");
 						break;
 					default: break;
 				}

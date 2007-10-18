@@ -9,7 +9,7 @@ import alma.TYPES.*;
 public class Historial //implements Runnable
 {
 	static final public String logDir  = System.getProperty("user.home") + "/.hevelius/history";
-	static final public String logFile = logDir + "/" + "history.log";
+	static public String logFile = logDir + "/" + "history.log";
 
 	static File dir = new File(logDir);
 	static File file = new File(logFile);
@@ -22,6 +22,7 @@ public class Historial //implements Runnable
 	//private static Configuration conf = new Configuration();
 
 	public Historial(){
+		static public String logFile = logDir + "/" +   +".log";
 
 		if(!dir.exists()){
 			dir.mkdir();
