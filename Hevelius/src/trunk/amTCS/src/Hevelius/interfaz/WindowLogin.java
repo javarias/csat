@@ -40,6 +40,7 @@ public class WindowLogin extends JDialog
 
                 setSize(335,141);
                 setLocationRelativeTo(null);
+		setBackground(Color.BLACK);
 
                 setResizable(false);
 
