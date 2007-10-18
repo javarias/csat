@@ -5,11 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.util.*;
+import java.io.*;
 import Hevelius.acsmodules.*;
 import Hevelius.heveliusmodules.*;
 import Hevelius.interfaz.*;
 import javax.swing.table.AbstractTableModel;
 import alma.TYPES.*;
+import Hevelius.catalogues.*;
 
 public class CataloguePanel extends JPanel
 {
@@ -34,7 +36,7 @@ public class CataloguePanel extends JPanel
 		catType.setSize(120,20);
 		add(catType);
 
-		String[] types = {"Stars", "Galaxies", "Nebulas", "Custom"};
+		String[] types = {"Stars", "Galaxies", "Nebulas", "Pulsars", "Custom"};
 		object = new JComboBox();
 		object.setModel(new DefaultComboBoxModel(types));
 		object.setSelectedIndex(0);
@@ -58,7 +60,7 @@ public class CataloguePanel extends JPanel
 		//		catalogue.setFillsViewportHeight(true);
 
 		JScrollPane catScroll = new JScrollPane(catalogue);
-		catScroll.setSize(260,140);
+		catScroll.setSize(280,140);
 		catScroll.setLocation(10,60);
 		catScroll.setBackground(Color.BLACK);
 		add(catScroll);
@@ -103,6 +105,8 @@ public class CataloguePanel extends JPanel
 			"Dec",
 			"Epoch",
 			"A"};
+
+		CatalogueInfo[] catData = null;
 
 		private Object[][] data = {{"none","none","none","none","none"}};
 
@@ -171,23 +175,113 @@ public class CataloguePanel extends JPanel
 
 		public void setDataSource(int cat)
 		{
-			data = new String[getCatRows()][5];
-			readCatalogue();
+			readCatalogues(cat);
+			if(catData!=null)
+			{
+				data = new String[getCatRows()][5];
+				writeData();
+			}
+			else
+			{
+				data = new String[1][5];
+				data[0][0]= "none";
+				data[0][1]= "none";
+				data[0][2]= "none";
+				data[0][3]= "none";
+				data[0][4]= "none";
+			}
+			//System.out.println(data[0][0]);
 			fireTableStructureChanged();
 		}
 
-		private void readCatalogue()
+		private void readCatalogues(int cat)
 		{
-			data[0][0] = "a";
-                        data[0][1] = "a";
-                        data[0][2] = "a";
-                        data[0][3] = "a";
-                        data[0][4] = "a";
+			String[] list = null;
+                        String[] custom = null;
+			int j = 0;
+			int objs = 0;
+			File pathl = null;
+			File pathc = null;
+			switch(cat)
+			{
+				case 0:	pathl = new File(getClass().getClassLoader().getResource("Hevelius/catalogues/stars/").getFile());
+                                        pathc = new File("~/.hevelius/catalogues/stars/");
+					break;
+				case 1:	pathl = new File(getClass().getClassLoader().getResource("Hevelius/catalogues/galaxies/").getFile());
+                                        pathc = new File("~/.hevelius/catalogues/galaxies/"); 
+					break;
+                                case 2: pathl = new File(getClass().getClassLoader().getResource("Hevelius/catalogues/nebulas/").getFile()); 
+					pathc = new File("~/.hevelius/catalogues/nebulas/");
+					break;
+                                case 3: pathl = new File(getClass().getClassLoader().getResource("Hevelius/catalogues/pulsars/").getFile());
+                                        pathc = new File("~/.hevelius/catalogues/pulsars/");
+					break;
+                                case 4: pathl = new File(getClass().getClassLoader().getResource("Hevelius/catalogues/custom/").getFile());
+                                        pathc = new File("~/.hevelius/catalogues/custom/");
+					break;
+				default: break;
+			}
+			list = ReadCatalogue.searchCatalogues(pathl);
+			custom = ReadCatalogue.searchCatalogues(pathc);
+			if(list!=null)
+                                objs = list.length;
+                        if(custom!=null)
+                                objs += custom.length;
+			if(objs>0)
+				catData = new CatalogueInfo[objs];
+			else
+				catData = null;
+			if(list!=null)
+                        {
+                                for (int i=0; i<list.length; i++)
+                                {
+                                        // Get filename of file or directory
+                                        String filename = list[i];
+                                        catData[j] = ReadCatalogue.parseCatalogue(pathl+"/"+filename);
+                                        j++;
+                                }
+                        }
+
+			if(custom!=null)
+                        {
+                                for (int i=0; i<custom.length; i++)
+                                {
+                                        // Get filename of file or directory
+                                        String filename = custom[i];
+                                        catData[j] = ReadCatalogue.parseCatalogue(pathc+"/"+filename);
+                                        j++;
+                                }
+                        }
 		}
 
 		private int getCatRows()
 		{
-			return 1;
+			int rows = 0;
+			if(catData!=null)
+			{
+			for(int i=0; i<catData.length; i++)
+				rows += catData[i].getLength();
+			}
+			return rows;
 		}
-}
+
+		private void writeData()
+		{
+			int k = 0;
+			ObjectInfo temp = null;
+			for(int i=0; i<catData.length; i++)
+			{
+				for(int j=0; j<catData[i].getLength(); j++)
+				{
+					temp = catData[i].get(j);
+                                data[k][0]= Integer.toString(temp.getSeq());
+				data[k][1]= Double.toString(temp.getRa());
+				data[k][2]= Double.toString(temp.getDec());
+				data[k][3]= "1950";
+				data[k][4]= "none";
+					k++;
+				}
+			}
+		}
+	}
 }
