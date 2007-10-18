@@ -31,6 +31,7 @@ public class WindowLogin extends JDialog
 	public void init()
 	{
 
+		System.out.println("LOGIN COOL");
 		//JDialog window = new JDialog(interfaz.getMainFrame(),"Hevelius - Login");
                 setLayout(null);
                 pack();
