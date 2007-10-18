@@ -22,7 +22,7 @@ public class Historial //implements Runnable
 	//private static Configuration conf = new Configuration();
 
 	public Historial(){
-		static public String logFile = logDir + "/" +   +".log";
+		static public String logFile = logDir + "/history.log";
 
 		if(!dir.exists()){
 			dir.mkdir();
