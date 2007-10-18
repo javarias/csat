@@ -103,39 +103,37 @@ public class WindowLogin extends JDialog
 		set.setMargin(new Insets(0,0,0,0));
 		set.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent event) {
-					
-                                        if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null){
 
-	                                       /* conf.setOption("user",jTextField1.getText());
-	                                        conf.store();
-	                                        hist.addHistoryLogin(jTextField1.getText());*/
+				if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null){
 
-                                                try
-                                                {
-                                                        interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
-                                                        interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
+				/* conf.setOption("user",jTextField1.getText());
+				   conf.store();
+				   hist.addHistoryLogin(jTextField1.getText());*/
 
-                                                        if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
-                                                                interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
-                                                                interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
-                                                                interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
-                                                        }
-                                                }
-                                                catch(Exception err)
-                                                {
-                                                        err.printStackTrace();
-                                                }
-                                        }
+					try
+					{
+						interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
+						interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
 
-//					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+						if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+							interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
+							interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
+							interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+						}
+					}
+					catch(Exception err)
+					{
+						err.printStackTrace();
+					}
+				}
 
-	                                        conf.setOption("user",jTextField1.getText());
-	                                        conf.store();
-	                                        hist.addHistoryLogin(jTextField1.getText());
-						System.out.println(jTextField1.getText());
-  //                                      }
-					jTextField1.setText("");
-					setVisible(false);
+
+				conf.setOption("user",jTextField1.getText());
+				conf.store();
+				hist.addHistoryLogin(jTextField1.getText());
+				System.out.println(jTextField1.getText());
+				jTextField1.setText(" ");
+				setVisible(false);
 				}
 				});
 		add(set);
