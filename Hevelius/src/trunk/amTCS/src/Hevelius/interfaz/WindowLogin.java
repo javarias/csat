@@ -106,9 +106,9 @@ public class WindowLogin extends JDialog
 					
                                         if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null){
 
-	                                        conf.setOption("user",jTextField1.getText());
+	                                       /* conf.setOption("user",jTextField1.getText());
 	                                        conf.store();
-	                                        hist.addHistoryLogin(jTextField1.getText());
+	                                        hist.addHistoryLogin(jTextField1.getText());*/
 
                                                 try
                                                 {
@@ -127,13 +127,13 @@ public class WindowLogin extends JDialog
                                                 }
                                         }
 
-					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+//					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
 
 	                                        conf.setOption("user",jTextField1.getText());
 	                                        conf.store();
 	                                        hist.addHistoryLogin(jTextField1.getText());
 						System.out.println(jTextField1.getText());
-                                        }
+  //                                      }
 					jTextField1.setText("");
 					setVisible(false);
 				}
