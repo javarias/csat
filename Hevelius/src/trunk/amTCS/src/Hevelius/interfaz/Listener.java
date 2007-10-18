@@ -370,7 +370,7 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glPushMatrix();
 		gl.glRotatef(0,0,0,1);
 		gl.glRotatef(angle2,0,1,0);
-		gl.glRotatef(-angle+90,-1,0,0);
+		gl.glRotatef(-angle,-1,0,0);
 		gl.glCallList(TelescopeDisplayList);
 		gl.glPopMatrix();
 
@@ -392,8 +392,8 @@ public class Listener implements GLEventListener, MouseListener {
 	public void setAltAzDest(float Alt, float Az)
 	{
 
-		az= 180 - Az;
-		alt = 90 - Alt;
+		az= 0 - Az;
+		alt = 0 - Alt;
 		if(alt < 0)
 			alt += 360;
 		if(az < 0)
