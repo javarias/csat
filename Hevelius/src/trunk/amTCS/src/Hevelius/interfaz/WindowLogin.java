@@ -36,11 +36,11 @@ public class WindowLogin extends JDialog
                 setLayout(null);
                 pack();
 
-                getContentPane().setBackground(interfaz.getDrawingPanel().getBackground());
+                getContentPane().setBackground(Color.BLACK);
 
                 setSize(335,141);
                 setLocationRelativeTo(null);
-		setBackground(Color.BLACK);
+		//setBackground(Color.BLACK);
 
                 setResizable(false);
 
