@@ -334,8 +334,8 @@ public class DrawingPanel extends JPanel
 			Border stBorder = BorderFactory.createTitledBorder(line, "SIDEREAL TIME");
                         stpane.setBorder(stBorder);
 
-			catpane.setLocation(dx*3/7+dx/30,dy*3/6+dy/12+2*dy/40);
-			catpane.setSize(300,300);
+			catpane.setLocation(dx*3/7+dx/90,dy*3/6+dy/12+2*dy/40);
+			catpane.setSize(dx*2/7-dx/45,dy*3/6 - dy/12 -dy*3/40);
 			Border catBorder = BorderFactory.createTitledBorder(line, "STARS CATALOGUE");
 			catpane.setBorder(catBorder);
 		}

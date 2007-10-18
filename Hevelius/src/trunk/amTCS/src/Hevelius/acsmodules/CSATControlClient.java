@@ -111,6 +111,7 @@ public class CSATControlClient extends ComponentClient
 			MovementCB cb = new MovementCB();
 			//cscontrol.preset(p, null, desc);
 			cscontrol.preset(p, /*RequesterUtil.giveCBvoid(cs, cb)*/ null, RequesterUtil.giveDescIn());
+			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
 		}
 	}
 
@@ -119,6 +120,10 @@ public class CSATControlClient extends ComponentClient
 		if(cscontrol!=null)
 		{
 			cscontrol.setTrackingStatus(s);
+			if(s)
+				interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(2);
+			else
+				interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
 		}
 	}
 

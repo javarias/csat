@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 
 import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
 import alma.acs.component.client.ComponentClient;
+
+import Hevelius.interfaz.*;
 //import alma.demo.HelloDemo;
 
 public class CSATStatusClient extends ComponentClient
@@ -122,7 +124,14 @@ public class CSATStatusClient extends ComponentClient
 	public boolean getTrackingStatus()
 	{
 		if(csstatus!=null)
+		{
+			if(csstatus.getTrackingStatus())
+                                interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(2);
+                        else
+                                interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
 			return csstatus.getTrackingStatus();
+		}
+		interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(0);
 		return false;
 	}
 

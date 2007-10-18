@@ -592,9 +592,9 @@ public class SafetyImpl implements SafetyOperations, ComponentLifecycle {
                         londiff = Math.tan(-(gLonR-lambda))*gRad;
                 else if (gLonR-lambda >= 0 && gLonR-lambda < Math.PI/2)
                         londiff = Math.tan(gLonR-lambda)*gRad;
-                else if (gLonR-lambda > 3/2*Math.PI)
+                else if (gLonR-lambda > 3.0d/2.0d*Math.PI)
                         londiff = Math.tan(2*Math.PI-(gLonR-lambda))*gRad;
-                else if (gLonR-lambda < -3/2*Math.PI)
+                else if (gLonR-lambda < -3.0d/2.0d*Math.PI)
                         londiff = Math.tan(2*Math.PI+(gLonR-lambda))*gRad;
                 else
                         londiff = 10*mR;
@@ -603,9 +603,9 @@ public class SafetyImpl implements SafetyOperations, ComponentLifecycle {
                         latdiff = Math.tan(-(gLatR-beta))*gRad;
                 else if (gLatR-beta >= 0 && gLatR-beta < Math.PI/2)
                         latdiff = Math.tan(gLatR-beta)*gRad;
-                else if (gLatR-beta > 3/2*Math.PI)
+                else if (gLatR-beta > 3.0d/2.0d*Math.PI)
                         latdiff = Math.tan(2*Math.PI-(gLatR-beta))*gRad;
-                else if (gLatR-beta < -3/2*Math.PI)
+                else if (gLatR-beta < -3.0d/2.0d*Math.PI)
                         latdiff = Math.tan(2*Math.PI+(gLatR-beta))*gRad;
                 else
                         latdiff = 10*mR;
@@ -619,17 +619,17 @@ public class SafetyImpl implements SafetyOperations, ComponentLifecycle {
 		lonDanger = 1;
 		if(londiff < 4*mR)
 			lonDanger = 2;
-		if(londiff < 5/2*mR)
+		if(londiff < 5.0d/2.0d*mR)
 			lonDanger = 3;
-		if(londiff < 3/2*mR)
+		if(londiff < 3.0d/2.0d*mR)
 			lonDanger = 4;
 
 		latDanger = 1;
                 if(latdiff < 4*mR)
                         latDanger = 2;
-                if(latdiff < 5/2*mR)
+                if(latdiff < 5.0d/2.0d*mR)
                         latDanger = 3;
-                if(latdiff < 3/2*mR)
+                if(latdiff < 3.0d/2.0d*mR)
                         latDanger = 4;
 
 		System.out.println("LonD "+lonDanger+" LatD "+latDanger);
