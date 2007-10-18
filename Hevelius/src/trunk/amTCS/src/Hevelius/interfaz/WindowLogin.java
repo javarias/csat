@@ -104,19 +104,11 @@ public class WindowLogin extends JDialog
 		set.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent event) {
 					
-/*					conf.setOption("user",jTextField1.getText());
-					conf.store();
-					hist.addHistoryLogin(jTextField1.getText());
-					setVisible(false);	
-*/
-
                                         if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null){
 
-                                        conf.setOption("user",jTextField1.getText());
-                                        conf.store();
-                                        hist.addHistoryLogin(jTextField1.getText());
-//                                        setVisible(false);
-
+	                                        conf.setOption("user",jTextField1.getText());
+	                                        conf.store();
+	                                        hist.addHistoryLogin(jTextField1.getText());
 
                                                 try
                                                 {
@@ -135,8 +127,14 @@ public class WindowLogin extends JDialog
                                                 }
                                         }
 
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() 1= null){
+
+	                                        conf.setOption("user",jTextField1.getText());
+	                                        conf.store();
+	                                        hist.addHistoryLogin(jTextField1.getText());
+                                        }
+
 					setVisible(false);
-				//jTextField1_actionPerformed(e);
 				}
 				});
 		add(set);

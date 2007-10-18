@@ -124,7 +124,7 @@ public class Historial //implements Runnable
 	}
 
 	public void addHistoryStop(){
-		saveFile("Preset STOPED at "+time());
+		saveFile("Preset STOPPED at "+time());
 	}
 
 	//Catalogue
@@ -135,10 +135,10 @@ public class Historial //implements Runnable
 	//Tracking
 	public void addHistoryTracking(boolean status){
 		if(status){
-			saveFile("Tracking ENABLE at "+time());
+			saveFile("Tracking DISABLE at "+time());
 		}
 		else{
-			saveFile("Tracking DISABLE at "+time());
+			saveFile("Tracking ENABLE at "+time());
 		}	
 	}
 
