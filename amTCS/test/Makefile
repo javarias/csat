@@ -82,7 +82,7 @@ lllll_OBJECTS   =
 # Scripts (public and local)
 # ----------------------------
 SCRIPTS         =
-SCRIPTS_L       = TATPrologue TATEpilogue
+SCRIPTS_L       = TATPrologue TATEpilogue pointingJavaTest.sh
 
 #
 # TCL scripts (public and local)
@@ -133,8 +133,8 @@ USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES= 
-jjj_DIRS=
+JARFILES=PointingTest
+PointingTest_DIRS=alma/POINTING_MODULE
 jjj_EXTRAS= 
 #
 # java sources in Jarfile on/off

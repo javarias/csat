@@ -32,5 +32,6 @@ SOURCE TATEnvironment
 PROLOGUE TATPrologue
 1 pointingTest     pointingTestClient.py
 2 localeTest       localeTestClient.py
-3 devTelescopeTest devTelescopeTestClient.py
+3 pointingJavaTest pointingJavaTest.sh
+4 devTelescopeTest devTelescopeTestClient.py
 EPILOGUE TATEpilogue

@@ -1,0 +1,15 @@
+1 -  -- junit.textui.TestRunner alma.POINTING_MODULE.PointingTest
+1 - INFO - Starting Java/abeans application: junit.textui.TestRunner alma.POINTING_MODULE.PointingTest
+1 - .FINER: Logging configuration has been initialized, but not from CDB settings.
+1 - [jacorb.poa] INFO : oid: 
+1 - 00 15 1A 3F 4B 47 06 28 35 24                               ...?KG.(5$
+1 - object is activated
+1 - [jacorb.poa] INFO : Using server ID (4861551981) for transient POA
+1 - [jacorb.orb] ERROR : no adapter activator exists for ComponentPOA
+1 - 2007-10-18T16:34:47.756 INFO [Pointing Test Client] client 'Pointing Test Client' has successfully released  a component with curl=POINTING
+1 - [jacorb.poa] INFO : POA RootPOA destroyed
+1 - 
+1 - Time: 0.836
+1 - 
+1 - OK (1 test)
+1 - 
