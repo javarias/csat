@@ -9,10 +9,13 @@ import alma.TYPES.*;
 public class Historial //implements Runnable
 {
 	static final public String logDir  = System.getProperty("user.home") + "/.hevelius/history";
-	static public String logFile = logDir + "/" + "history.log";
+	//static public String logFile = logDir + "/" + "history.log";
+
+	private static Configuration test = new Configuration();
+
 
 	static File dir = new File(logDir);
-	static File file = new File(logFile);
+	//static File file = new File(logFile);
 	
 	static Calendar calendario = new GregorianCalendar();
 /*	int hora;
@@ -22,8 +25,8 @@ public class Historial //implements Runnable
 	//private static Configuration conf = new Configuration();
 
 	public Historial(){
-	//	String logFile = logDir + "/history.log";
-		
+		String logFile = logDir + "/" + test.getOption("user") + ".log";
+		File file = new File(logFile);	
 
 		if(!dir.exists()){
 			dir.mkdir();
@@ -83,6 +86,9 @@ public class Historial //implements Runnable
 			 * archivo o, en caso contrario, reemplazar la informaciòn ya
 			 * existente.
 			 */
+			
+			String logFile = logDir + "/" + test.getOption("user") + ".log";
+
 			FileWriter fw = new FileWriter(logFile, true);
 
 			/**

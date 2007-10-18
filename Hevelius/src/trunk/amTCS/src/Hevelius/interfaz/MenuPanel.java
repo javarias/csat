@@ -778,8 +778,14 @@ public class MenuPanel extends JPanel //implements Runnable
                         }
                 };
                 children = dir.list(filter);
+		
+		int op = 0;
+
 		for(int i = 0; i < children.length; i++){
 			children[i] = children[i].substring(0,children[i].length()-4);
+			if(children[i].compareTo(test.getOption("user")) == 0){
+				op = i;
+			}
 		}
 
 
@@ -796,7 +802,8 @@ public class MenuPanel extends JPanel //implements Runnable
 
                 jtfInput.setSize(200,20);
 		jtfInput.setLocation(100,10);
-                jtfInput.setSelectedIndex(0);
+
+		jtfInput.setSelectedIndex(op);
 
         	history.add(jtfInput);
         	
@@ -814,38 +821,16 @@ public class MenuPanel extends JPanel //implements Runnable
 	public static void setHistoryWindow(String user){
 
 
-/*                String[] children;
-                File dir = new File(System.getProperty("user.home") + "/.hevelius/history");
-
-
-                FilenameFilter filter = new FilenameFilter()
-                {
-                        public boolean accept(File dir, String name)
-                        {
-                                Pattern pat;
-                                Matcher mat;
-                                pat = Pattern.compile("(.*)\\.log$");
-                                File cat;
-                                mat = pat.matcher(name);
-                                if(mat.find())
-                                {
-                                        return true;
-                                }
-                                else
-                                {
-                                        return false;
-                                }
-                        }
-                };
-                children = dir.list(filter);
-                for(int i = 0; i < children.length; i++){
-                        children[i] = children[i].substring(0,children[i].length()-4);
-                }
-
-
-                jtfInput.setModel(new DefaultComboBoxModel(children));
-*/
-
+		ComboBoxModel list;
+		list = jtfInput.getModel();
+		int op = 0;
+		for(int i = 0; i < list.getSize(); i++){
+			if(String.valueOf(list.getElementAt(i)).compareTo(user) == 0){
+				op = i;
+			}
+		}
+		
+		jtfInput.setSelectedIndex(op);
 
 		jtAreaOutput.setText("");
 		try{
