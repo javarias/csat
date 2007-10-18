@@ -873,7 +873,7 @@ public class MenuPanel extends JPanel //implements Runnable
 
                 jtfInput.setModel(new DefaultComboBoxModel(children));
 
-
+		jtfInput.setSelectedIndex(op);
 
 		jtAreaOutput.setText("");
 		try{

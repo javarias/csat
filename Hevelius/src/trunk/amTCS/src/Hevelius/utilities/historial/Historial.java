@@ -153,7 +153,7 @@ public class Historial //implements Runnable
 	}
 
 	public void addHistoryLogin(String name){
-		saveFile("\n\n"+name+" is Log In at "+time());
+		saveFile("\n"+name+" is Log In at "+time());
 	}
 
 
