@@ -93,6 +93,7 @@ public class MenuPanel extends JPanel //implements Runnable
 		aboutWindow();
 		configWindow();
 		historyWindow();
+		wl.init();
 
 		menu_config = new JLabel(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/conf.png")).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH)));
 		menu_config.setBackground(Color.BLACK);
@@ -260,7 +261,7 @@ public class MenuPanel extends JPanel //implements Runnable
                                         public void mouseClicked(MouseEvent event){
                                        menu_login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
 					//WindowLogin wl = new WindowLogin(interfaz.getMainFrame(), "A");
-                                        wl.init();
+                                        //wl.init();
 					wl.setLoginWindow();
                                         }
 

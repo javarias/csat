@@ -157,6 +157,7 @@ public class WindowLogin extends JDialog
 	}
 
 	public void setLoginWindow(){
+		setVisible(true);
 		jTextField1.setText("");
 	}
 
