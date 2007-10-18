@@ -102,6 +102,8 @@ public class WindowLogin extends JDialog
 		set = new JButton("Login");
 		set.setSize(50,15);
 		set.setMargin(new Insets(0,0,0,0));
+		add(set);
+		jTextField1.setText("");
 		set.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent event) {
 
@@ -133,11 +135,11 @@ public class WindowLogin extends JDialog
 				conf.store();
 				hist.addHistoryLogin(jTextField1.getText());
 				System.out.println(jTextField1.getText());
-				jTextField1.setText(" ");
+				//jTextField1.setText(" ");
 				setVisible(false);
 				}
 				});
-		add(set);
+		//add(set);
 		
 
 
