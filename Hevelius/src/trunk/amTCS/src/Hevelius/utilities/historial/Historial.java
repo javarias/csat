@@ -78,6 +78,7 @@ public class Historial //implements Runnable
 	 * @param append boolean
 	 */
 	public void saveFile(/*String filename, */String dataToWrite/*, boolean append*/) {
+		String logFile = logDir + "/" + test.getOption("user") + ".log";
 		try {
 			/**
 			 * Creaciòn del objeto FileWriter dado un nombre de archivo determinado
@@ -87,7 +88,7 @@ public class Historial //implements Runnable
 			 * existente.
 			 */
 			
-			String logFile = logDir + "/" + test.getOption("user") + ".log";
+		//	String logFile = logDir + "/" + test.getOption("user") + ".log";
 
 			FileWriter fw = new FileWriter(logFile, true);
 
@@ -104,8 +105,7 @@ public class Historial //implements Runnable
 			/**
 			 * Se ha producido un error durante la lectura/escritura del archivo
 			 */
-			System.out.println(
-					"Se ha producido un error durante la lectura del archivo " + logFile);
+			System.out.println("Se ha producido un error durante la lectura del archivo " + logFile);
 		}
 	}
 

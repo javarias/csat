@@ -127,7 +127,7 @@ public class WindowLogin extends JDialog
                                                 }
                                         }
 
-					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() 1= null){
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
 
 	                                        conf.setOption("user",jTextField1.getText());
 	                                        conf.store();

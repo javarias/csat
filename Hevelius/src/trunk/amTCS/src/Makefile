@@ -123,7 +123,7 @@ USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl Hevelius
+JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl Hevelius callbacks
 TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
 CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
 LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
@@ -135,6 +135,7 @@ CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
 Hevelius_DIRS=Hevelius/
 Hevelius_EXTRAS=Hevelius/images/
+callbacks_DIRS=alma/acs/callbacks
 jjj_EXTRAS= 
 #
 # java sources in Jarfile on/off

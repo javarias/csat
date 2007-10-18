@@ -55,7 +55,8 @@ public class CataloguePanel extends JPanel
 
 		catalogue = new JTable(m);
 		catalogue.setPreferredScrollableViewportSize(new Dimension(500, 70));
-		//		catalogue.setBackground(Color.BLACK);
+		catalogue.setBackground(Color.LIGHT_GRAY);
+		catalogue.setForeground(Color.BLACK);
 		//		catalogue.setSize(100,100);
 		//		catalogue.setLocation(0,0);
 		//		catalogue.setFillsViewportHeight(true);
@@ -78,7 +79,7 @@ public class CataloguePanel extends JPanel
 		catScroll = new JScrollPane(catalogue);
 		catScroll.setSize(280,140);
 		catScroll.setLocation(10,60);
-		catScroll.setBackground(Color.BLACK);
+		//catScroll.setBackground(Color.LIGHT_GRAY);
 		add(catScroll);
 		}
 		public void paintComponent(Graphics g)

@@ -11,10 +11,9 @@ import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
 import alma.acs.component.client.ComponentClient;
 
 import Hevelius.interfaz.*;
-import alma.acs.callbacks.RequesterUtil;
-import alma.acs.callbacks.ResponseReceiver;
 import alma.acs.container.ContainerServices;
 
+import alma.acs.callbacks.*;
 
 public class CSATControlClient extends ComponentClient
 {
@@ -80,38 +79,32 @@ public class CSATControlClient extends ComponentClient
 		if(cscontrol!=null)
 		{
 			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(2);
-//			ResponseReceiver rere  =  new ResponseReceiver() {
-//				public void incomingResponse(Object x) {
-//					System.out.println("Incoming Response: "+x);
-//				}
-//				public void incomingException(Exception x) {
-//					System.out.println("Responding failed: "+x);}
-//
-//			};
-/*			CBvoid cb = new CBvoid() {
-				public void working(alma.ACSErr.Completion c, CBDescOut desc){
-					System.out.println("A");
+			MyResponseReceiver rere  =  new MyResponseReceiver() {
+				public void incomingResponse(Object x) {
+					System.out.println("Incoming Response: "+x);
 				}
-				public void done(alma.ACSErr.Completion c, CBDescOut desc){
-					System.out.println("B");
+				public void incomingResponse() {
+					interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
 				}
-				public boolean negotiate(long time, CBDescOut desc){
-					System.out.println("C");
-				}
-				public org.omg.CORBA.Object _set_policy_override(org.omg.CORBA.Policy[] p, org.omg.CORBA.SetOverrideType oType){
-					System.out.println("D");
-				}
-				public org.omg.CORBA.DomainManager[] _get_domain_managers(){
-					System.out.println("E");
-				}
+				public void incomingException(Exception e) {
+					System.out.println("Responding failed: "+e);}
 
 			};
-*/
-			//ContainerServices cs = cscontrol.giveContainerServices();
-			MovementCB cb = new MovementCB();
+
+			ContainerServices cs = getContainerServices();
+			//MovementCB cb = new MovementCB();
 			//cscontrol.preset(p, null, desc);
-			cscontrol.preset(p, /*RequesterUtil.giveCBvoid(cs, cb)*/ null, RequesterUtil.giveDescIn());
-			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+			CBstring cbs = null;
+			CBvoid cb = null;
+			try
+			{
+				cb = MyRequesterUtil.giveCBVoid(cs, rere);;
+			}
+			catch(AcsJContainerServicesEx e)
+			{
+			}
+			cscontrol.preset(p, cb, MyRequesterUtil.giveDescIn());
+//			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
 		}
 	}
 
@@ -150,8 +143,32 @@ public class CSATControlClient extends ComponentClient
 		if(cscontrol!=null)
 		{
 			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(2);
-			CBDescIn desc = new CBDescIn(2000, 2000, 1);
-			cscontrol.goToAltAz(p,v, null, desc);
+                        MyResponseReceiver rere  =  new MyResponseReceiver() {
+                                public void incomingResponse(Object x) {
+                                        System.out.println("Incoming Response: "+x);
+                                }
+                                public void incomingResponse() {
+                                        interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+                                }
+                                public void incomingException(Exception e) {
+                                        System.out.println("Responding failed: "+e);}
+
+                        };
+
+                        ContainerServices cs = getContainerServices();
+                        //MovementCB cb = new MovementCB();
+                        //cscontrol.preset(p, null, desc);
+                        CBstring cbs = null;
+                        CBvoid cb = null;
+                        try
+                        {
+                                cb = MyRequesterUtil.giveCBVoid(cs, rere);;
+                        }
+                        catch(AcsJContainerServicesEx e)
+                        {
+                        }
+
+			cscontrol.goToAltAz(p,v, cb, MyRequesterUtil.giveDescIn());
 		}
 	}
 
@@ -159,7 +176,14 @@ public class CSATControlClient extends ComponentClient
 	{
 		if(cscontrol!=null)
 		{
+			//long time1 = System.currentTimeMillis();
+			//long time2 = System.currentTimeMillis();
+			interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(2);
 			cscontrol.AltitudeOffSet(degree);
+			interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
+			//while(time2-time1<3000)
+                        //	time2 = System.currentTimeMillis();
+			//interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
 		}
 	}
 
@@ -167,7 +191,14 @@ public class CSATControlClient extends ComponentClient
 	{
 		if(cscontrol!=null)
 		{
+			//long time1 = System.currentTimeMillis();
+                        //long time2 = System.currentTimeMillis();
+                        interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(2);
 			cscontrol.AzimuthOffSet(degree);
+			interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
+			//while(time2-time1<3000)
+                        //        time2 = System.currentTimeMillis();
+                        //interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
 		}
 	}
 
@@ -184,6 +215,7 @@ public class CSATControlClient extends ComponentClient
 		if(cscontrol!=null)
 		{
 			cscontrol.stopTelescope();
+			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
 		}
 	}
 

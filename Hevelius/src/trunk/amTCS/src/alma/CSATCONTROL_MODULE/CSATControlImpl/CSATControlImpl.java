@@ -29,10 +29,13 @@ import alma.TYPES.*;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
+import alma.acs.callbacks.ResponderUtil;
 //import alma.acs.callbacks.ResponseReceiver;
 //import alma.ACS.CBDescIn;
 import alma.CSATCONTROL_MODULE.CSATControlOperations;
 import alma.CSATCONTROL_MODULE.CSATControlImpl.CSATControlImpl;
+
+import alma.acs.callbacks.MyResponderUtil;
 
 public class CSATControlImpl implements CSATControlOperations, ComponentLifecycle {
 
@@ -114,23 +117,8 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	/////////////////////////////////////////////////////////////
 
 	public void preset(alma.TYPES.RadecPos p, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
-		/*	ResponseReceiver cb  =  new ResponseReceiver() {
-
-			public void incomingResponse(Object x) {
-			System.out.println("Incoming Response: "+x);
-			}
-			public void incomingException(Exception x) {
-			System.out.println("Responding failed: "+x);}
-
-			};	
-
-			CBDescIn desc = new CBDescIn();	*/
-
-		//telescope.presetting(p,cb,desc);
-		//cb.working(new alma.ACSErr.Completion(0,0,0,null), new alma.ACS.CBDescOut(2000,2));
-		telescope.preseting(p);
-		//cb.done(new alma.ACSErr.Completion(0,0,0,null), new alma.ACS.CBDescOut(2000,2));
-		//pointing.resetOffset();
+		telescope.preseting(p, cb, desc);
+		//MyResponderUtil.respond(cb, desc);
 	}
 
 	public void setTrackingStatus(boolean s){
@@ -144,7 +132,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 
 	public void goToAltAz(alma.TYPES.AltazPos p, alma.TYPES.AltazVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
-		telescope.gotoAltAz(p);
+		telescope.gotoAltAz(p, cb, desc);
 	}
 
 	public void AltitudeOffSet(double degrees){

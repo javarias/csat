@@ -30,12 +30,14 @@ import alma.acs.component.ComponentLifecycle;
 import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
 import alma.ACSErr.CompletionHolder;
+import alma.acs.callbacks.*;
+import alma.ACS.CBDescIn;
 
 import alma.TELESCOPE_MODULE.TelescopeOperations;
 
 public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, Runnable {
 
-	private static final double PRESITION = 0.01;
+	private static final double PRESITION = 0.1;
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
 
@@ -166,7 +168,24 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 	// Implementation of TelescopeOperations
 	/////////////////////////////////////////////////////////////
 
-	public void preseting(RadecPos position){
+	private alma.ACS.CBvoid cb = null;
+	private alma.ACS.CBDescIn descIn = null;
+
+        private void preseting(RadecPos position){
+                doControl = true;
+
+                if( controlThread == null ){
+                        controlThread = m_containerServices.getThreadFactory().newThread(this);
+                        controlThread.start();
+                }
+
+                m_resultPos = new RadecPos();
+                m_resultPos.ra = position.ra;
+                m_resultPos.dec = position.dec;
+                m_commandedPos = calculations_comp.Radec2Altaz(position);
+        }
+
+	public void preseting(RadecPos position, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
 		doControl = true;
 
 		if( controlThread == null ){
@@ -178,6 +197,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 		m_resultPos.ra = position.ra;
 		m_resultPos.dec = position.dec;
 		m_commandedPos = calculations_comp.Radec2Altaz(position);
+		this.cb = cb;
+		descIn = desc;
 	}
 
 	public RadecPos getRadec(){
@@ -192,7 +213,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 		m_commandedPos.az += offset.az;
 	}
 
-	public void gotoAltAz(AltazPos position){
+	public void gotoAltAz(AltazPos position, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
 		m_commandedPos.alt = position.alt;
 		m_commandedPos.az  = position.az;
 
@@ -204,6 +225,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 			controlThread = m_containerServices.getThreadFactory().newThread(this);
 			controlThread.start();
 		}
+		this.cb = cb;
+                descIn = desc;
 	}
 
 	public void stop(){
@@ -337,13 +360,31 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 				/* Send the velocity to the telescope */
 				devTelescope_comp.setVel(altazVel);
 
-				if(altazVel.azVel == 0 && tracking_comp.status())
+				if(altazVel.azVel == 0 && altazVel.altVel == 0 && tracking_comp.status())
 				{
-					preseting(m_resultPos);
+					//m_logger.info("azVel = 0 y tracking=true");
+					//preseting(m_resultPos);
+					m_commandedPos = calculations_comp.Radec2Altaz(m_resultPos);
+					m_logger.info(m_commandedPos.alt + "_" + m_commandedPos.az);
+					if(cb!=null && descIn != null)
+					{
+						m_logger.info("azVel = 0 y tracking=true enviando callback");
+						MyResponderUtil.respond(cb, descIn);
+						cb=null;
+						descIn = null;
+					}
 				}
-				else if (altazVel.azVel == 0)
+				else if (altazVel.azVel == 0 && altazVel.altVel == 0)
 				{
+					//m_logger.info("azVel = 0 y tracking=false");
 					m_resultPos = calculations_comp.Altaz2Radec(m_softRealPos);
+					if(cb!=null && descIn != null)
+                                        {
+						m_logger.info("azVel = 0 y tracking=false enviando callback");
+                                                MyResponderUtil.respond(cb, descIn);
+                                                cb=null;
+                                                descIn = null;
+                                        }
 				}
 
 				try {
