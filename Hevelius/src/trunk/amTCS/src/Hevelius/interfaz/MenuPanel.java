@@ -261,6 +261,7 @@ public class MenuPanel extends JPanel //implements Runnable
                                        menu_login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
 					//WindowLogin wl = new WindowLogin(interfaz.getMainFrame(), "A");
                                         wl.init();
+					wl.setLoginWindow();
                                         }
 
                                         public void mousePressed(MouseEvent event){
