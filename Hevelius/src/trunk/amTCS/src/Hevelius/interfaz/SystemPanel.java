@@ -36,7 +36,7 @@ public class SystemPanel extends JPanel
 		add(start);
 		start.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
-				interfaz.getDrawingPanel().getMenuPanel().getWindowLogin().setVisible();
+				interfaz.getDrawingPanel().getMenuPanel().getWindowLogin().setLoginWindow();
 //				interfaz.getDrawingPanel().getMenuPanel().getWindowLogin().setVisible(true);
 //			if(interfaz.getDrawingPanel().getMenuPanel().getWindowLogin().isVisible())
 //				private static Configuration conf = new Configuration();
