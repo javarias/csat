@@ -865,7 +865,7 @@ public class MenuPanel extends JPanel //implements Runnable
 
                 for(int i = 0; i < children.length; i++){
                         children[i] = children[i].substring(0,children[i].length()-4);
-                        if(children[i].compareTo(test.getOption("user")) == 0){
+                        if(children[i].compareTo(user) == 0){
                                 op = i;
                         }
                 }
