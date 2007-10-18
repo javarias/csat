@@ -102,7 +102,7 @@ public class WindowLogin extends JDialog
 		set = new JButton("Login");
 		set.setSize(50,15);
 		set.setMargin(new Insets(0,0,0,0));
-		add(set);
+		//add(set);
 		jTextField1.setText("");
 		set.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent event) {
@@ -139,7 +139,7 @@ public class WindowLogin extends JDialog
 				setVisible(false);
 				}
 				});
-		//add(set);
+		add(set);
 		
 
 
@@ -152,7 +152,7 @@ public class WindowLogin extends JDialog
               	set.setLocation(150,70);
 
 
-		setVisible(true);
+		//setVisible(true);
 
 	}
 
