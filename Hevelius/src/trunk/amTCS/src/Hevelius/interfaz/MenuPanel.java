@@ -821,7 +821,7 @@ public class MenuPanel extends JPanel //implements Runnable
 	public static void setHistoryWindow(String user){
 
 
-		ComboBoxModel list;
+/*		ComboBoxModel list;
 		list = jtfInput.getModel();
 		int op = 0;
 		for(int i = 0; i < list.getSize(); i++){
@@ -831,6 +831,49 @@ public class MenuPanel extends JPanel //implements Runnable
 		}
 		
 		jtfInput.setSelectedIndex(op);
+*/
+
+
+
+
+		String[] children;
+                File dir = new File(System.getProperty("user.home") + "/.hevelius/history");
+
+
+                FilenameFilter filter = new FilenameFilter()
+                {
+                        public boolean accept(File dir, String name)
+                        {
+                                Pattern pat;
+                                Matcher mat;
+                                pat = Pattern.compile("(.*)\\.log$");
+                                File cat;
+                                mat = pat.matcher(name);
+                                if(mat.find())
+                                {
+                                        return true;
+                                }
+                                else
+                                {
+                                        return false;
+                                }
+                        }
+                };
+                children = dir.list(filter);
+
+                int op = 0;
+
+                for(int i = 0; i < children.length; i++){
+                        children[i] = children[i].substring(0,children[i].length()-4);
+                        if(children[i].compareTo(test.getOption("user")) == 0){
+                                op = i;
+                        }
+                }
+
+
+                jtfInput.setModel(new DefaultComboBoxModel(children));
+
+
 
 		jtAreaOutput.setText("");
 		try{
