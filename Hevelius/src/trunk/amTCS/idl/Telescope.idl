@@ -35,7 +35,7 @@ module TELESCOPE_MODULE {
 		 * coordinates. 
 		 * @param position The position to preset to
 		 */
-		void preseting(in TYPES::RadecPos position);
+		void preseting(in TYPES::RadecPos position, in ACS::CBvoid cb, in ACS::CBDescIn desc);
 
 		/**
 		 * Gets the current Ra/Dec position
@@ -52,7 +52,7 @@ module TELESCOPE_MODULE {
 		 * Sends the telescope to an specific Alt/Az position
 		 * @param position The positin to go to
 		 */
-		void gotoAltAz(in TYPES::AltazPos position);
+		void gotoAltAz(in TYPES::AltazPos position, in ACS::CBvoid cb, in ACS::CBDescIn desc);
 
 		/**
 		 * Stops the telescope
