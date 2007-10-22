@@ -37,18 +37,20 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 
 TYPES::Image* lpiImpl::image(CORBA::Double exposure) throw (CORBA::SystemException){
 	
-	ACSErr::Completion *comp = new ACSErr::Completion();
-	CORBA::Long length = 640*480*3;
+	ACSErr::Completion_var comp;
+	unsigned int length = 640*480*3;
 
-	ACS::longSeq *frame = m_frame_sp->get_sync(comp);
+	ACS::longSeq *frame = m_frame_sp->get_sync(comp.out());
 
-	TYPES::Image *image = new TYPES::Image(length);
-	image->length(length);
-	for(int i=0;i!=length;i++)
+//	TYPES::Image image = new TYPES::Image(length);
+//	image->length(length);
+	TYPES::Image_var image = TYPES::Image(length);
+	image->length((CORBA::ULong)length);
+	for(unsigned int i=0;i!=length;i++)
 		image[i] = frame[0][i];
 	
 	ACS_SHORT_LOG((LM_INFO,"lpiImpl::image: Obtained the Image"));
-	return image;
+	return image._retn();
 }
 
 void lpiImpl::lock() throw (CORBA::SystemException){
