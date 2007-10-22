@@ -25,13 +25,13 @@ public class WindowLogin extends JDialog
 
 	public WindowLogin(JFrame f, String s)
 	{
-		super(f, s);
+		super(f, s, true);
 	}
 
 	public void init()
 	{
 
-		System.out.println("LOGIN COOL");
+		//System.out.println("LOGIN COOL");
 		//JDialog window = new JDialog(interfaz.getMainFrame(),"Hevelius - Login");
                 setLayout(null);
                 pack();
@@ -160,6 +160,7 @@ public class WindowLogin extends JDialog
 	public void setLoginWindow(){
 		setVisible(true);
 		jTextField1.setText("");
+		
 	}
 
 }

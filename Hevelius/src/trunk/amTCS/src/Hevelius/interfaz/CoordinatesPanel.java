@@ -525,19 +525,23 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 			rbutton.addMouseListener(new MouseListener(){
 
                                         public void mouseExited(MouseEvent event){
-                                        rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rigth.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rigth.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseEntered(MouseEvent event){
-                                        rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rigth-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+                                        if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+						rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rigth-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseReleased(MouseEvent event){
-                                        rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rigth.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rigth.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseClicked(MouseEvent event){
-                                        rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rigth-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rigth-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         //config.setVisible(true);
                                         //setConfigWindow();
 					if(interfaz.getDrawingPanel().getCSATControl()!=null){
@@ -547,7 +551,8 @@ public class CoordinatesPanel extends JPanel //implements Runnable
                                         }
 
                                         public void mousePressed(MouseEvent event){
-                                        rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rigth-click.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        rbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/rigth-click.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                         });
@@ -561,19 +566,23 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 			lbutton.addMouseListener(new MouseListener(){
 
                                         public void mouseExited(MouseEvent event){
-                                        lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/left.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/left.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseEntered(MouseEvent event){
-                                        lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/left-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/left-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseReleased(MouseEvent event){
-                                        lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/left.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/left.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseClicked(MouseEvent event){
-                                        lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/left-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/left-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         //config.setVisible(true);
                                         //setConfigWindow();
 					if(interfaz.getDrawingPanel().getCSATControl()!=null){
@@ -583,7 +592,8 @@ public class CoordinatesPanel extends JPanel //implements Runnable
                                         }
 
                                         public void mousePressed(MouseEvent event){
-                                        lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/left-click.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        lbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/left-click.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                         });
@@ -598,19 +608,23 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 			tbutton.addMouseListener(new MouseListener(){
 
                                         public void mouseExited(MouseEvent event){
-                                        tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/up.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/up.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseEntered(MouseEvent event){
-                                        tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/up-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/up-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseReleased(MouseEvent event){
-                                        tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/up.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/up.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseClicked(MouseEvent event){
-                                        tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/up-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/up-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         //config.setVisible(true);
                                         //setConfigWindow();
 					if(interfaz.getDrawingPanel().getCSATControl()!=null){
@@ -620,7 +634,8 @@ public class CoordinatesPanel extends JPanel //implements Runnable
                                         }
 
                                         public void mousePressed(MouseEvent event){
-                                        tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/up-click.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        tbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/up-click.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                         });
@@ -636,19 +651,23 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 			bbutton.addMouseListener(new MouseListener(){
 
                                         public void mouseExited(MouseEvent event){
-                                        bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/down.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/down.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseEntered(MouseEvent event){
-                                        bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/down-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/down-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseReleased(MouseEvent event){
-                                        bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/down.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/down.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseClicked(MouseEvent event){
-                                        bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/down-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/down-encima.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         //config.setVisible(true);
                                         //setConfigWindow();
 					if(interfaz.getDrawingPanel().getCSATControl()!=null){
@@ -658,7 +677,8 @@ public class CoordinatesPanel extends JPanel //implements Runnable
                                         }
 
                                         public void mousePressed(MouseEvent event){
-                                        bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/down-click.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        bbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/down-click.png")).getImage().getScaledInstance((int)(50*osize),(int)(50*osize),Image.SCALE_SMOOTH)));
                                         }
 
                         });
@@ -707,19 +727,23 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 			stopbutton.addMouseListener(new MouseListener(){
 
                                         public void mouseExited(MouseEvent event){
-                                        stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop.png")).getImage().getScaledInstance((int)(85*osize),(int)(85*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop.png")).getImage().getScaledInstance((int)(85*osize),(int)(85*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseEntered(MouseEvent event){
-                                        stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop-encima.png")).getImage().getScaledInstance((int)(85*osize),(int)(85*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop-encima.png")).getImage().getScaledInstance((int)(85*osize),(int)(85*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseReleased(MouseEvent event){
-                                        stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop.png")).getImage().getScaledInstance((int)(85*osize),(int)(85*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop.png")).getImage().getScaledInstance((int)(85*osize),(int)(85*osize),Image.SCALE_SMOOTH)));
                                         }
 
                                         public void mouseClicked(MouseEvent event){
-                                        stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop-encima.png")).getImage().getScaledInstance((int)(85*osize),(int)(85*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop-encima.png")).getImage().getScaledInstance((int)(85*osize),(int)(85*osize),Image.SCALE_SMOOTH)));
                                         //config.setVisible(true);
                                         //setConfigWindow();
                                 	if(interfaz.getDrawingPanel().getCSATControl()!=null){
@@ -729,7 +753,8 @@ public class CoordinatesPanel extends JPanel //implements Runnable
                                         }
 
                                         public void mousePressed(MouseEvent event){
-                                        stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop-click.png")).getImage().getScaledInstance((int)(85*osize),(int)(85*osize),Image.SCALE_SMOOTH)));
+					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+	                                        stopbutton.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/stop-click.png")).getImage().getScaledInstance((int)(85*osize),(int)(85*osize),Image.SCALE_SMOOTH)));
                                         }
 
                         });
@@ -842,4 +867,5 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		DecimalFormat df = new DecimalFormat("#.###");
 		azoffset.setText(df.format(deg));
 	}
+
 }

@@ -126,7 +126,9 @@ public class DrawingPanel extends JPanel
 		//SiderealPanel
 		stpane = new SiderealPanel(null);
 		stpane.init();
+		//stpane.setModal(true);
 		add(stpane);
+		disablePanel(stpane);
 
 		//CoordinatesPanel
 		coorpane = new CoordinatesPanel(null);
@@ -137,6 +139,16 @@ public class DrawingPanel extends JPanel
 			default:coorpane.initCoorType(false); break;
 		}
 		add(coorpane);
+		disablePanel(coorpane);
+		//coorpane.enableInputMethods(false);
+
+		/*Component[] c = coorpane.getComponents();
+		//System.out.println(c.getHeight()+" "+c.getWidth());
+		for(int i=0;i<c.length;i++){
+     			c[i].setEnabled(false);
+			//c[i].disableEvent(1000);
+		}*/
+		//coorpane.disableEvent();
 
 		//CompassPanel
 		//cpane = new CompassPanel(null);
@@ -153,22 +165,26 @@ public class DrawingPanel extends JPanel
 		wpane.init();
 		add(wpane);
 		new Thread(wpane).start();
+		disablePanel(wpane);		
 
 		//Telescope Status Panel
 		tspane = new TelStatusPanel(null);
 		tspane.init();
 		add(tspane);
+		disablePanel(tspane);
 
 		//ScreenPanel
 		scpane = new ScreenPanel(null);
 		scpane.init();
 		add(scpane);
 		new Thread(scpane).start();
+		disablePanel(scpane);
 
 		//VirtualTelescopePanel
 		vtpane = new VirtualTelescopePanel(null);
 		vtpane.init();
 		add(vtpane);
+		disablePanel(vtpane);
 		
 		//MenuPanel
 		mpane = new MenuPanel(null);
@@ -179,6 +195,7 @@ public class DrawingPanel extends JPanel
 		catpane = new CataloguePanel(null);
 		catpane.init();
 		add(catpane);
+		disablePanel(catpane);
 
 		//SideralUpdate
 		sdrl = new SideralUpdate();
@@ -258,7 +275,7 @@ public class DrawingPanel extends JPanel
 
 		if(updatePanel)
 		{
-			Border line = BorderFactory.createLineBorder(Color.DARK_GRAY);
+			Border line = BorderFactory.createLineBorder(Color.GRAY);
 		
 			
 
@@ -554,4 +571,24 @@ public class DrawingPanel extends JPanel
 			sec = new String(""+secs);
 		stpane.setTime(hour+":"+min+":"+sec,df.format(TMP));
 	}
+
+	public void disablePanel(JPanel panel){
+		Component[] c = panel.getComponents();
+                //System.out.println(c.getHeight()+" "+c.getWidth());
+                for(int i=0;i<c.length;i++){
+                        c[i].setEnabled(false);
+                        //c[i].disableEvent(1000);
+                }
+	}
+
+	public void enablePanel(JPanel panel){
+                Component[] c = panel.getComponents();
+                //System.out.println(c.getHeight()+" "+c.getWidth());
+                for(int i=0;i<c.length;i++){
+                        c[i].setEnabled(true);
+                        //c[i].disableEvent(1000);
+                }
+        }
+
+
 }

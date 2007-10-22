@@ -37,6 +37,13 @@ public class SystemPanel extends JPanel
 		start.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
 				interfaz.getDrawingPanel().getMenuPanel().getWindowLogin().setLoginWindow();
+				interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getWeatherPanel());
+                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getTelStatusPanel());
+                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getScreenPanel());
+                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getCoordinatesPanel());
+                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getVirtualTelescopePanel());
+/*                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getWeatherPanel());
+                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getWeatherPanel());*/
 //				interfaz.getDrawingPanel().getMenuPanel().getWindowLogin().setVisible(true);
 //			if(interfaz.getDrawingPanel().getMenuPanel().getWindowLogin().isVisible())
 //				private static Configuration conf = new Configuration();
@@ -71,6 +78,11 @@ public class SystemPanel extends JPanel
 				stopTCS();
 				interfaz.getDrawingPanel().getCoordinatesPanel().setAltOffset(0.0);
 				interfaz.getDrawingPanel().getCoordinatesPanel().setAzOffset(0.0);
+                                interfaz.getDrawingPanel().disablePanel(interfaz.getDrawingPanel().getWeatherPanel());
+                                interfaz.getDrawingPanel().disablePanel(interfaz.getDrawingPanel().getTelStatusPanel());
+                                interfaz.getDrawingPanel().disablePanel(interfaz.getDrawingPanel().getScreenPanel());
+                                interfaz.getDrawingPanel().disablePanel(interfaz.getDrawingPanel().getCoordinatesPanel());
+                                interfaz.getDrawingPanel().disablePanel(interfaz.getDrawingPanel().getVirtualTelescopePanel());
                         }
                 });
 

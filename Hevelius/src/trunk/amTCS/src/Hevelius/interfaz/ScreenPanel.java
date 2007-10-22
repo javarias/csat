@@ -42,7 +42,8 @@ public class ScreenPanel extends JPanel implements Runnable
 		{
 			try
 			{
-				setScreen();
+				if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null)
+					setScreen();
 				Thread.sleep(3000);
 			}
 			catch(InterruptedException e)
