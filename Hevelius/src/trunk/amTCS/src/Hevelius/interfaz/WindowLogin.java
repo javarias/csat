@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import javax.swing.JComponent.*;
+import javax.swing.JOptionPane;
 
 import java.util.*;
 import java.util.regex.*;
@@ -26,6 +28,7 @@ public class WindowLogin extends JDialog
 	private int dx = 0;
 	private int dy = 0;
 	private String name;
+	private String message = "ussername no puede contener espacios, ingerese un usuario valido !";
 	private static Configuration conf = new Configuration();
 	private static Historial hist = new Historial();		
 
@@ -65,59 +68,76 @@ public class WindowLogin extends JDialog
 		jTextField1.setSize(130,20);
 		//jTextField1.setText("");
 		jTextField1.addActionListener(new ActionListener() {
+
+
 				public void actionPerformed(ActionEvent e)
 				{
-				//jTextField1_actionPerformed(e);
-				/*					conf.setOption("user",jTextField1.getText());
-									conf.store();
-									hist.addHistoryLogin(jTextField1.getText());
-									setVisible(false);
-				 */					
 				name = jTextField1.getText();
 				name = name.trim();
-				pat = Pattern.compile("(\\S*)(\\s*)(\\S)");
-				System.out.println("NAME ="+name);
+				//pat = Pattern.compile("(\\S+)(\\s+)(\\S+)");
+				pat = Pattern.compile("(.+)(\\s)(.+)");
 				mat = pat.matcher(name);
-				System.out.println("Matcher ="+mat.find());
-				if(!mat.find()){
-
-				System.out.println("Nombre de Login =" + name);
-				if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null ){
-				conf.setOption("user",jTextField1.getText());
-				conf.store();
-				hist.addHistoryLogin(jTextField1.getText());
-				//                                        		setVisible(false);
-
-
-				try
+				System.out.println("NAME ="+name);
+				if( name.equals(""))
 				{
-					interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
-					interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
+				JOptionPane.showMessageDialog(interfaz.getMainFrame(), "Ingrese un usuario valido !","Login - Error", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else
+				{
 
-					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
-						interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
-						interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
-						interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+				mat = pat.matcher(name);
+				if( mat.find() )
+				{
+					JOptionPane.showMessageDialog(interfaz.getMainFrame(), message,"Login - Error", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+
+
+					if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null){
+
+						/* conf.setOption("user",jTextField1.getText());
+						   conf.store();
+						   hist.addHistoryLogin(jTextField1.getText());*/
+
+						try
+						{
+							interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
+							interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
+
+							if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+								interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
+								interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
+								interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+							}
+						}
+						catch(Exception err)
+						{
+							err.printStackTrace();
+						}
 					}
-				}
-				catch(Exception err)
-				{
-					err.printStackTrace();
-				}
-				}
-				}
-				else{
-					System.out.println("NO CARGO ACS CTM !!");
 
-					//init();
 
+					conf.setOption("user",jTextField1.getText());
+					conf.store();
+					hist.addHistoryLogin(jTextField1.getText());
+					System.out.println(jTextField1.getText());
+					//jTextField1.setText(" ");
+				}
 				}
 				setVisible(false);
-
-
 				}
-
 		});
+
+
+
+
+
+
+
+
+
+
+
 
 		add(jTextField1);
 
@@ -128,62 +148,65 @@ public class WindowLogin extends JDialog
 		//add(set);
 		jTextField1.setText("");
 		set.addActionListener(new ActionListener(  ) {
-				public void actionPerformed(ActionEvent event) {
-
-
-
+				public void actionPerformed(ActionEvent e)
+				{
 				name = jTextField1.getText();
 				name = name.trim();
-				pat = Pattern.compile("(\\S*)(\\s*)(\\S)");
-				System.out.println("NAME ="+name);
+				//pat = Pattern.compile("(\\S+)(\\s+)(\\S+)");
+				pat = Pattern.compile("(.+)(\\s)(.+)");
 				mat = pat.matcher(name);
-				System.out.println("Matcher ="+mat.find());
-				if(!mat.find()){
-
-				if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null){
-
-				/* conf.setOption("user",jTextField1.getText());
-				   conf.store();
-				   hist.addHistoryLogin(jTextField1.getText());*/
-
-				try
+				System.out.println("NAME ="+name);
+				if( name.equals(""))
 				{
-					interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
-					interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
+				JOptionPane.showMessageDialog(interfaz.getMainFrame(), "Ingrese un usuario valido !","Login - Error", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else
+				{
 
-					if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
-						interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
-						interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
-						interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+				mat = pat.matcher(name);
+				if( mat.find() )
+				{
+				JOptionPane.showMessageDialog(interfaz.getMainFrame(), message,"Login - Error", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+
+
+					if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null){
+
+						/* conf.setOption("user",jTextField1.getText());
+						   conf.store();
+						   hist.addHistoryLogin(jTextField1.getText());*/
+
+						try
+						{
+							interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
+							interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
+
+							if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+								interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
+								interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
+								interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+							}
+						}
+						catch(Exception err)
+						{
+							err.printStackTrace();
+						}
 					}
+
+
+					conf.setOption("user",jTextField1.getText());
+					conf.store();
+					hist.addHistoryLogin(jTextField1.getText());
+					System.out.println(jTextField1.getText());
+					//jTextField1.setText(" ");
 				}
-		catch(Exception err)
-		{
-			err.printStackTrace();
-		}
 				}
-
-
-				conf.setOption("user",jTextField1.getText());
-				conf.store();
-				hist.addHistoryLogin(jTextField1.getText());
-				System.out.println(jTextField1.getText());
-				//jTextField1.setText(" ");
-				}
-				else{
-					System.out.println("NO CARGO ACS CTM !!");
-
-					//init();
-
-				}
-
-				setVisible(false);
+		setVisible(false);
 				}
 		});
+
 		add(set);
-
-
-
 
 
 		usser.setLocation(50,20);
@@ -200,7 +223,7 @@ public class WindowLogin extends JDialog
 	public void setLoginWindow(){
 		setVisible(true);
 		jTextField1.setText("");
-		
+
 	}
 
 }
