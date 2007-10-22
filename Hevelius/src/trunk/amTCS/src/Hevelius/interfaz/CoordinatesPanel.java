@@ -139,20 +139,29 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		go.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 				Double c1, c2;
+				c1 = 0.0;
+				c2 = 0.0;
 				//float tmp1, tmp2;
 				Configuration test = new Configuration();
 				//Listener list = new Listener();
+				boolean cond = true;
 
-				c1 = Double.parseDouble(coor1.getText());
-				c2 = Double.parseDouble(coor2.getText());
+				try{
+					c1 = Double.parseDouble(coor1.getText());
+					c2 = Double.parseDouble(coor2.getText());
+				}
+				catch(Exception exc){
+					cond = false;
+				}
 				
 				//tmp1=Float.parseFloat(coor1.getText());
 				//tmp2=Float.parseFloat(coor2.getText());
-
-				Presetting.preset(c1,c2,Integer.parseInt(test.getOption("coordinate")));
-				//list.setAltAzDest(tmp1,tmp2);		
-				if(interfaz.getDrawingPanel().getCSATControl()!=null)
-					hist.addHistoryPreset(c1,c2,Integer.parseInt(test.getOption("coordinate")));
+				if(cond){
+					Presetting.preset(c1,c2,Integer.parseInt(test.getOption("coordinate")));
+					//list.setAltAzDest(tmp1,tmp2);		
+					if(interfaz.getDrawingPanel().getCSATControl()!=null)
+						hist.addHistoryPreset(c1,c2,Integer.parseInt(test.getOption("coordinate")));
+					}
 				}
 				});
 
@@ -224,10 +233,26 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		add(ccoorAz);
 
 		//Catalogue Button
-		catalogue = new JButton("Sel. from Catalogue");
+		catalogue = new JButton("Change Coordinates");
 		catalogue.setSize(130,20);
 		catalogue.setMargin(new Insets(0,0,0,0));
 		add(catalogue);
+		catalogue.addActionListener(new ActionListener(){
+                                public void actionPerformed(ActionEvent e){
+                                	Configuration test = new Configuration();
+					switch(Integer.parseInt(test.getOption("coordinate"))){
+	                	                case 0: test.setOption("coordinate","1");
+							test.store();
+							setCoorType(true);
+							break;
+
+						case 1: test.setOption("coordinate","0");
+                                                	test.store();
+                                                	setCoorType(false);
+							break;
+					}
+				}
+                                });
 
 		//Agregando...
 		//Go to R Button
@@ -386,6 +411,16 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		park = new JButton("Park");
 		park.setSize(100,20);
 		add(park);
+		park.addActionListener(new ActionListener(){
+                                public void actionPerformed(ActionEvent e){
+                                AltazPos p = new AltazPos();
+                                p.alt = 0;
+                                p.az = 0;
+                                if(interfaz.getDrawingPanel().getCSATControl()!=null)
+                                        interfaz.getDrawingPanel().getCSATControl().goToAltAz(p, new AltazVel());
+                                        hist.addHistoryPark();
+                                }
+                                });
 
 		//Offset Label
 		offsetL = new JLabel("Offset");
@@ -472,43 +507,43 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 			ccoor.setFont(ccoor.getFont().deriveFont(fsize));
 			ccoor.setSize((int)(150*osize),(int)(20*osize));
 
-			radec.setLocation((int)(240*osize),(int)(80*osize));
+			radec.setLocation((int)(240*osize),(int)(65*osize));
 			radec.setFont(radec.getFont().deriveFont(fsize));
 			radec.setSize((int)(80*osize),(int)(20*osize));
 
-			horizontal.setLocation((int)(350*osize), (int)(80*osize));
+			horizontal.setLocation((int)(345*osize), (int)(65*osize));
 			horizontal.setFont(horizontal.getFont().deriveFont(fsize));
 			horizontal.setSize((int)((int)(80*osize)*osize),(int)((int)(20*osize)*osize));
 
-			ccoorRL.setLocation((int)(220*osize),(int)(110*osize));
+			ccoorRL.setLocation((int)(220*osize),(int)(90*osize));
 			ccoorRL.setFont(ccoorRL.getFont().deriveFont(fsize));
 			ccoorRL.setSize((int)(30*osize),(int)(20*osize));
 
-			ccoorR.setLocation((int)(260*osize),(int)(110*osize));
+			ccoorR.setLocation((int)(260*osize),(int)(90*osize));
 			ccoorR.setFont(ccoorR.getFont().deriveFont(fsize));
 			ccoorR.setSize((int)(80*osize),(int)(20*osize));
 
-			ccoorDL.setLocation((int)(220*osize), (int)(130*osize));
+			ccoorDL.setLocation((int)(220*osize), (int)(110*osize));
 			ccoorDL.setFont(ccoorDL.getFont().deriveFont(fsize));
 			ccoorDL.setSize((int)(30*osize),(int)(20*osize));
 
-			ccoorD.setLocation((int)(260*osize),(int)(130*osize));
+			ccoorD.setLocation((int)(260*osize),(int)(110*osize));
 			ccoorD.setFont(ccoorD.getFont().deriveFont(fsize));
 			ccoorD.setSize((int)(80*osize),(int)(20*osize));
 
-			ccoorAlL.setLocation((int)(340*osize),(int)(110*osize));
+			ccoorAlL.setLocation((int)(340*osize),(int)(90*osize));
 			ccoorAlL.setFont(ccoorAlL.getFont().deriveFont(fsize));
 			ccoorAlL.setSize((int)(30*osize),(int)(20*osize));
 
-			ccoorAl.setLocation((int)(380*osize),(int)(110*osize));
+			ccoorAl.setLocation((int)(380*osize),(int)(90*osize));
 			ccoorAl.setFont(ccoorAl.getFont().deriveFont(fsize));
 			ccoorAl.setSize((int)(80*osize),(int)(20*osize));
 
-			ccoorAzL.setLocation((int)(340*osize),(int)(130*osize));
+			ccoorAzL.setLocation((int)(340*osize),(int)(110*osize));
 			ccoorAzL.setFont(ccoorAzL.getFont().deriveFont(fsize));
 			ccoorAzL.setSize((int)(30*osize),(int)(20*osize));
 
-			ccoorAz.setLocation((int)(380*osize),(int)(130*osize));
+			ccoorAz.setLocation((int)(380*osize),(int)(110*osize));
 			ccoorAz.setFont(ccoorAz.getFont().deriveFont(fsize));
 			ccoorAz.setSize((int)(80*osize),(int)(20*osize));
 

@@ -155,7 +155,7 @@ public class WindowLogin extends JDialog
 				//pat = Pattern.compile("(\\S+)(\\s+)(\\S+)");
 				pat = Pattern.compile("(.+)(\\s)(.+)");
 				mat = pat.matcher(name);
-				System.out.println("NAME ="+name);
+				//System.out.println("NAME ="+name);
 				if( name.equals(""))
 				{
 				JOptionPane.showMessageDialog(interfaz.getMainFrame(), "Ingrese un usuario valido !","Login - Error", JOptionPane.INFORMATION_MESSAGE);
@@ -190,7 +190,7 @@ public class WindowLogin extends JDialog
 						}
 						catch(Exception err)
 						{
-							err.printStackTrace();
+							//err.printStackTrace();
 						}
 					}
 

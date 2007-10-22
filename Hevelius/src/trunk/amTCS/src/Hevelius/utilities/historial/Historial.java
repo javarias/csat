@@ -17,7 +17,7 @@ public class Historial //implements Runnable
 	static File dir = new File(logDir);
 	//static File file = new File(logFile);
 	
-	static Calendar calendario = new GregorianCalendar();
+//	static Calendar calendario = new GregorianCalendar();
 /*	int hora;
 	int minuto;
 	int segundo;*/
@@ -51,6 +51,7 @@ public class Historial //implements Runnable
 
 
 	public String time(){
+		Calendar calendario = new GregorianCalendar();
 		int hora = calendario.get(Calendar.HOUR_OF_DAY);
 		int minutos = calendario.get(Calendar.MINUTE);
 		int segundos = calendario.get(Calendar.SECOND);

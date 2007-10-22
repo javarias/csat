@@ -22,11 +22,17 @@ public class VirtualTelescopePanel extends JPanel
 	public void init()
 	{
 		GLCapabilities capabilities = new GLCapabilities();
-		canvas = new GLCanvas(capabilities);
+		canvas = new GLCanvas(capabilities){
+			public void setEnabled(boolean cond){
+                		super.setEnabled(cond);
+		                setVisible(cond);
+		        }
+		};
 		list = new Listener();
 		canvas.addGLEventListener(list);
 		canvas.setLocation(0,0);
 		canvas.setSize(100,100);
+		//canvas.setVisible(false);
 		add(canvas);
 
 		dialog = new JDialog(interfaz.getMainFrame(),"Telescopio");
@@ -100,4 +106,9 @@ public class VirtualTelescopePanel extends JPanel
 	public Listener getListener(){
 		return this.list;
 	}	
+
+/*	public void setEnabled(boolean cond){
+		super.setEnabled(cond);
+		canvas.setVisible(cond);
+	}*/
 }

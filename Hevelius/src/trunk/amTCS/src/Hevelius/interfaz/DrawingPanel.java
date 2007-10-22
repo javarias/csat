@@ -510,6 +510,11 @@ public class DrawingPanel extends JPanel
                 return mpane;
         }
 
+        public CataloguePanel getCataloguePanel()
+        {
+                return catpane;
+        }
+
 	public CSATControlClient getCSATControl()
 	{
 		return csatc;

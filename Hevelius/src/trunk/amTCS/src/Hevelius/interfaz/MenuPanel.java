@@ -168,7 +168,7 @@ public class MenuPanel extends JPanel //implements Runnable
 
 			menu_config.setLocation(4*dx/6 + dy-dy*12/40 + dx/40,dy*6/40);
 
-			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy-dy*12/40),dy-dy*12/40));
+			hevelius = setImage("Hevelius/images/heveliusi.png",new Dimension(2*(dy-dy*20/40),dy-dy*12/40));
 
 			menu_help.setSize(dy-dy*12/40,dy-dy*12/40);
 			menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/help.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));

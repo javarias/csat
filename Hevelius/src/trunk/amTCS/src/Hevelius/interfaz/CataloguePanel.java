@@ -12,6 +12,7 @@ import Hevelius.interfaz.*;
 import javax.swing.table.AbstractTableModel;
 import alma.TYPES.*;
 import Hevelius.catalogues.*;
+import Hevelius.utilities.historial.*;
 
 public class CataloguePanel extends JPanel
 {
@@ -24,6 +25,7 @@ public class CataloguePanel extends JPanel
 
 	private int dx = 0;
 	private int dy = 0;
+	private static Historial hist = new Historial();
 
 	public CataloguePanel(LayoutManager l)
 	{
@@ -70,8 +72,10 @@ public class CataloguePanel extends JPanel
 					RadecPos rd = new RadecPos();
 					rd.ra = Double.parseDouble((String)m.getValueAt(catalogue.getSelectedRow(),1));
 					rd.dec = Double.parseDouble((String)m.getValueAt(catalogue.getSelectedRow(),2));
-					if(interfaz.getDrawingPanel().getCSATControl()!=null)
+					if(interfaz.getDrawingPanel().getCSATControl()!=null){
                                         	interfaz.getDrawingPanel().getCSATControl().preset(rd);
+						hist.addHistoryCatalogue(rd.ra,rd.dec);
+					}
 				}
 			}
 		});

@@ -544,6 +544,7 @@ public class interfaz {
 		//Intro
 		JFrame intro = new JFrame("Hevelius");
 		IntroPanel in = new IntroPanel(null);
+		in.init();
 		intro.setContentPane(in);
 		intro.setUndecorated(true);
 		intro.pack();

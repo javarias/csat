@@ -82,9 +82,9 @@ public class WeatherPanel extends JPanel implements Runnable
 
 		Icon image;
 		if(vector.get(0).getIconWt().compareTo("N/A")==0)
-			image = new ImageIcon("Hevelius/images/weather_images/na.png");
+			image = new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/weather_images/na.png"));
 		else
-			image = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
+			image = new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png"));
 
 		wStatB = new JLabel(vector.get(0).getWt(),image,JLabel.LEFT);
 		wStatB.setSize(200,32);
@@ -231,9 +231,9 @@ public class WeatherPanel extends JPanel implements Runnable
 			tempB.setText(vector.get(0).getTm()+"°C");
 			Icon image;
 			if(vector.get(0).getIconWt().compareTo("N/A")==0)
-				image = new ImageIcon("Hevelius/images/weather_images/na.png");
+				image = new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/weather_images/na.png"));
 			else
-				image = new ImageIcon("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png");
+				image = new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/weather_images/"+vector.get(0).getIconWt()+".png"));
 
 			wStatB.setIcon(image);
 			wStatB.setText(vector.get(0).getWt());
@@ -251,7 +251,7 @@ public class WeatherPanel extends JPanel implements Runnable
 		}catch(ArrayIndexOutOfBoundsException e){
 			wLabel.setText("Weather Conditions at N/A");
 			tempB.setText("N/A°C");
-			Icon image = new ImageIcon("Hevelius/images/weather_images/na.png");
+			Icon image = new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/weather_images/na.png"));
 			wStatB.setIcon(image);
 			wStatB.setText("N/A");
 			windB.setText("N/A");
