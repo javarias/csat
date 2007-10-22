@@ -1,58 +1,103 @@
+/**
+ * ReadCatalogue is a class for retrieveing data from star catalogues
+ * that are placed on default directories. The first place where it 
+ * looks for catalogues is the relative path "Hevelius/catalogues/*".
+ * This path is relative to the package so it has some built in 
+ * catalogues. After that it looks for catalogues on a user folder 
+ * to allow customization of catalogues. The path it will look in 
+ * is "/home/userloign/.hevelius/catalogues/*". It will only consider 
+ * files with ".cat" extension and only if there is a file with the 
+ * same name but ".par" extension. Those files are the catalogue data 
+ * and the parsing information for that particular catalogue.
+ * <p>
+ * Parsing information is as follows:
+ * ra_i|ra_f,ram_i|ram_f,ras_i|ras_f,dec_sign,decg_i|decg_f,decm_i|decm_f,decs_i|decs_f,Type,Format
+ * <table>
+ * <tr><td>ra_i|ra_f</td><td>Those are the bytes where ra resides on file, either on hour or degree.</td></td></tr>
+ * <tr><td>ram_i|ram_f</td><td>Those are the bytes where ra/60 resides on file, either on hour/60 or degree/60.</td><td></tr>
+ * <tr><td>ras_i|ras_f</td><td>Those are the bytes where ram/60 resides on file, either on hour/3600 or degree/3600.</td><td></tr>
+ * <tr><td>dec_sign</td><td>This is the position of the declination sign.</td></tr>
+ * <tr><td>decg_i|decg_f</td><td>Those are the bytes where dec resides on file as degree.</td></tr>
+ * <tr><td>decm_i|decm_f</td><td>Those are the bytes where dec/60 resides on file as degree/60.</td></tr>
+ * <tr><td>decs_i|decs_f</td><td>Those are the bytes where decm/60 resides on file as degree/3600.</td></tr>
+ * <tr><td>Type</td><td>This is the byte where the more precise coordinate is decided. 0.- Hr/Deg 1.- Min 2.- Sec.</td></tr>
+ * <tr><td>Format</td><td>This is the format of ra coordinate. 0.- Hour 1.- Degree.</td></tr>
+ * </table>
+ */
+
 package Hevelius.catalogues;
 
 import java.util.regex.*;
 import java.io.*;
+public class ReadCatalogue {
+	/**
+	 * Looks for catalogues within specified directory. It returns a
+	 * string array with all the catalogues satisfying the filter. The filter 
+	 * looks for files with extension ".cat" and makes sure that a file 
+	 * with same name but extension ".par" also exists.
+	 * @param dir	The directory to look for catalogues.
+	 * @return	String[] with all catalogues available in that dir.
+	 */
+	public static String[] searchCatalogues(File dir)
+	{
+		String[] children;
 
-	public class ReadCatalogue {
-		public static String[] searchCatalogues(File dir)
+		FilenameFilter filter = new FilenameFilter() 
 		{
-			//File dir = new File("directoryName");
-			String[] children;
-
-			FilenameFilter filter = new FilenameFilter() 
+			public boolean accept(File dir, String name) 
 			{
-				public boolean accept(File dir, String name) 
+				Pattern pat;
+				Matcher mat;
+				pat = Pattern.compile("(.*)\\.cat$");
+				File cat;
+				mat = pat.matcher(name);
+				if(mat.find())
 				{
-					Pattern pat;
-					Matcher mat;
-					pat = Pattern.compile("(.*)\\.cat$");
-					File cat;
-					mat = pat.matcher(name);
-					if(mat.find())
+					cat = new File(dir+"/"+mat.group(1)+".par");
+					if(cat.exists())
 					{
-						cat = new File(dir+"/"+mat.group(1)+".par");
-						if(cat.exists())
-						{
-							return true;
-						}
-						else return false;
+						return true;
 					}
-					else
-						return false;
+					else return false;
 				}
-			};
-			children = dir.list(filter);
-			return children;
-		}
+				else
+					return false;
+			}
+		};
+		children = dir.list(filter);
+		return children;
+	}
 
-		public static CatalogueInfo parseCatalogue(String name)
-		{
-			CatalogueInfo cat = null;
-			Pattern pat;
-                        Matcher mat;
-                        pat = Pattern.compile("(.*)\\.cat$");
-			mat = pat.matcher(name);
-			File catf, parf;
-			FileInputStream fis = null;
-			BufferedInputStream bis = null;
-			DataInputStream dis = null;
+	/**
+	 * This methos id used to parse a given catalogue using its parser file 
+	 * to know how to read it. It returns a CatalogueInfo which has a ObjectInfo vector
+	 * ObjectInfo with each celestial object and its information.
+	 * @param name				The name of the catalogue to parse.
+	 * @return				CatalogueInfo that contains Celestial ObjectInfo of the catalogue.
+	 * @throws FileNotFoundException		Exception that is thrown if File is not found.
+	 * @throws IOException			Exception that is thrown if there is a Input/Output problem.
+	 *
+	 * @see	CatalogueInfo
+	 * @see	ObjectInfo
+	 */
+	public static CatalogueInfo parseCatalogue(String name)
+	{
+		CatalogueInfo cat = null;
+		Pattern pat;
+		Matcher mat;
+		pat = Pattern.compile("(.*)\\.cat$");
+		mat = pat.matcher(name);
+		File catf, parf;
+		FileInputStream fis = null;
+		BufferedInputStream bis = null;
+		DataInputStream dis = null;
 
-			int seq_i, seq_f;
-			int rah_i, rah_f, ram_i, ram_f, ras_i, ras_f;
-			int decsign, decg_i, decg_f, decm_i, decm_f, decs_i, decs_f;
-			int type, format;
-			seq_i = 0;
-			seq_f = 0;
+		int seq_i, seq_f;
+		int rah_i, rah_f, ram_i, ram_f, ras_i, ras_f;
+		int decsign, decg_i, decg_f, decm_i, decm_f, decs_i, decs_f;
+		int type, format;
+		seq_i = 0;
+		seq_f = 0;
 			rah_i = 0;
 			rah_f = 0;
 			ram_i = 0;
@@ -186,53 +231,4 @@ import java.io.*;
 			}
 			return cat;
 		}
-/*
-		public static void main(String[] args)
-		{
-			String[] list;
-			String[] custom;
-			int j = 0;
-			custom = searchCatalogues(new File("~/.hevelius/catalogues/"));
-			list = searchCatalogues(new File("."));
-			int objs = 0;
-			if(list!=null)
-				objs = list.length;
-			if(custom!=null)
-				objs += custom.length;
-			CatalogueInfo[] catData = new CatalogueInfo[objs];
-			if (list == null) 
-			{
-				// Either dir does not exist or is not a directory
-				System.out.println("No match");
-			} 
-			else 
-			{
-				for (int i=0; i<list.length; i++) 
-				{
-					// Get filename of file or directory
-					String filename = list[i];
-					System.out.println(filename);
-					parseCatalogue(catData[j], filename);
-					j++;
-				}
-			}
-
-			if (custom == null)
-			{
-				// Either dir does not exist or is not a directory
-				System.out.println("No match");
-			}
-			else
-			{
-				for (int i=0; i<custom.length; i++)
-				{
-					// Get filename of file or directory
-					String filename = custom[i];
-					System.out.println(filename);
-					parseCatalogue(catData[j], filename);
-					j++;
-				}
-			}
-		}
-*/
 	}
