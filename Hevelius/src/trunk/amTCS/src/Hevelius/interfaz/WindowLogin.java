@@ -109,6 +109,15 @@ public class WindowLogin extends JDialog
 								interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
 								interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
 							}
+							if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+                                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getWeatherPanel());
+                                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getTelStatusPanel());
+                                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getScreenPanel());
+                                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getCoordinatesPanel());
+                                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getVirtualTelescopePanel());
+                                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getCataloguePanel());
+                                                        }
+
 						}
 						catch(Exception err)
 						{
@@ -187,6 +196,16 @@ public class WindowLogin extends JDialog
 								interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
 								interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
 							}
+							if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+                       				                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getWeatherPanel());
+                       				                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getTelStatusPanel());
+                       				                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getScreenPanel());
+                       				                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getCoordinatesPanel());
+                       				                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getVirtualTelescopePanel());
+                       			        	        interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getCataloguePanel());
+			                                }
+
+
 						}
 						catch(Exception err)
 						{
