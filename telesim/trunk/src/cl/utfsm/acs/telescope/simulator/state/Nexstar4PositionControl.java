@@ -9,34 +9,121 @@ import ec.util.MersenneTwisterFast;
  * @author   dcontard
  */
 public class Nexstar4PositionControl implements Runnable{
+	/**
+	 * The maximum resolution that can be achieved by the azimuth axis of 
+	 * the <code>{@link Nexstar4PositionControl}</code>, so the percentage of a 
+	 * revolution of the azimuth axis can go from <code>0/maxAzmAxis</code>
+	 * to <code>maxAzmAxis-1/maxAzmAxis</code>
+	 */
+	public static final long maxAzmAxis = 4294967296l; 
+	/**
+	 * The maximum resolution that can be achieved by the altitude axis of 
+	 * the <code>{@link Nexstar4PositionControl}</code>, so the percentage of a 
+	 * revolution of the altitude axis can go from <code>0/maxAltAxis</code>
+	 * to <code>maxAltAxis-1/maxAltAxis</code>
+	 */
+	public static final long maxAltAxis = 4294967296l;
+	
+	/**
+	 * Character encoding for the 4 degrees/sec slew speed, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 */
 	public static final char slewSpeedSymbol_4DegreesPerSec = (char) 9;
+	/**
+	 * Character encoding for the 2 degrees/sec slew speed, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 */
 	public static final char slewSpeedSymbol_2DegreesPerSec = (char) 8;
+	/**
+	 * Character encoding for the 1 degrees/sec slew speed, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 */
 	public static final char slewSpeedSymbol_1DegreesPerSec = (char) 7;
+	/**
+	 * Character encoding for the 5 minutes/sec slew speed, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 */
 	public static final char slewSpeedSymbol_5MinutessPerSec = (char) 6;
 	
+	/**
+	 * Character encoding for the 32 arcseconds/sec slew speed, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 */
 	public static final char slewSpeedSymbol_32x = (char) 5;
+	/**
+	 * Character encoding for the 16 arcseconds/sec slew speed, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 */
 	public static final char slewSpeedSymbol_16x = (char) 4;
+	/**
+	 * Character encoding for the 8 arcseconds/sec slew speed, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 */
 	public static final char slewSpeedSymbol_8x = (char) 3;
+	/**
+	 * Character encoding for the 4 arcseconds/sec slew speed, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 */
 	public static final char slewSpeedSymbol_4x = (char) 2;
+	/**
+	 * Character encoding for the 2 arcseconds/sec slew speed, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 */
 	public static final char slewSpeedSymbol_2x = (char) 1;
+	/**
+	 * Character encoding for the zero slew speed, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 */
 	public static final char slewSpeedSymbol_0x = (char) 0;
 	
-	public static final long slewSpeed_4DegreesPerSec =  Nexstar4State.maxAzmAxis * 4l / (360l);
-	public static final long slewSpeed_2DegreesPerSec =  Nexstar4State.maxAzmAxis * 2l / (360l);
-	public static final long slewSpeed_1DegreesPerSec =  Nexstar4State.maxAzmAxis * 1l / (360l);
-	public static final long slewSpeed_5MinutessPerSec = Nexstar4State.maxAzmAxis * 5l / (360l * 60l);
+	public static final long slewSpeed_4DegreesPerSec =  maxAzmAxis * 4l / (360l);
+	public static final long slewSpeed_2DegreesPerSec =  maxAzmAxis * 2l / (360l);
+	public static final long slewSpeed_1DegreesPerSec =  maxAzmAxis * 1l / (360l);
+	public static final long slewSpeed_5MinutessPerSec = maxAzmAxis * 5l / (360l * 60l);
 	
-	public static final long slewSpeed_32x = Nexstar4State.maxAzmAxis * 32l / (360l * 60l * 60l);
-	public static final long slewSpeed_16x = Nexstar4State.maxAzmAxis * 16l / (360l * 60l * 60l);
-	public static final long slewSpeed_8x =  Nexstar4State.maxAzmAxis *  8l / (360l * 60l * 60l);
-	public static final long slewSpeed_4x =  Nexstar4State.maxAzmAxis *  4l / (360l * 60l * 60l);
-	public static final long slewSpeed_2x =  Nexstar4State.maxAzmAxis *  2l / (360l * 60l * 60l);
-	public static final long slewSpeed_0x =  Nexstar4State.maxAzmAxis *  0l / (360l * 60l * 60l);
+	public static final long slewSpeed_32x = maxAzmAxis * 32l / (360l * 60l * 60l);
+	public static final long slewSpeed_16x = maxAzmAxis * 16l / (360l * 60l * 60l);
+	public static final long slewSpeed_8x =  maxAzmAxis *  8l / (360l * 60l * 60l);
+	public static final long slewSpeed_4x =  maxAzmAxis *  4l / (360l * 60l * 60l);
+	public static final long slewSpeed_2x =  maxAzmAxis *  2l / (360l * 60l * 60l);
+	public static final long slewSpeed_0x =  maxAzmAxis *  0l / (360l * 60l * 60l);
 	
+	/**
+	 * The maximum precision achieved by the standard goto commands 
+	 * that the Nexstar 4 Telescope supports, according to Nexstar SE 
+	 * Communication Protocol specifications. It is messured as the 
+	 * the numerator of a percentage of a revolution of the azimuth or 
+	 * the altitude axis, <code>standardPrecision/maxAzmAxis</code>
+	 * or <code>standardPrecision/maxAltAxis</code>
+	 * 
+	 * @see Nexstar4PositionControl#maxAzmAxis
+	 * @see Nexstar4PositionControl#maxAltAxis
+	 * @see Nexstar4PositionControl#gotoAZM_ALT(long, long)
+	 * @see Nexstar4PositionControl#gotoRA_DEC(long, long)
+	 */
 	public static final long standardPrecision = 65536l;
+	/**
+	 * The maximum precision achieved by the precise goto commands 
+	 * that the Nexstar 4 Telescope supports, according to Nexstar SE 
+	 * Communication Protocol specifications. It is messured as the 
+	 * the numerator of a percentage of a revolution of the azimuth or 
+	 * the altitude axis, <code>standardPrecision/maxAzmAxis</code>
+	 * or <code>standardPrecision/maxAltAxis</code>
+	 * 
+	 * @see Nexstar4PositionControl#maxAzmAxis
+	 * @see Nexstar4PositionControl#maxAltAxis
+	 * @see Nexstar4PositionControl#gotoPreciseAZM_ALT(long, long)
+	 * @see Nexstar4PositionControl#gotoPreciseRA_DEC(long, long)
+	 */
 	public static final long precisePrecision = 265l;
 	
+	/**
+	 * Convention boolean value for determining the positive direction of the motors.
+	 */
 	public static final boolean positiveDirection = true;
+	/**
+	 * Convention boolean value for determining the negative direction of the motors.
+	 */
 	public static final boolean negativeDirection = false;
 	
 	public static final short action_noActionInProgress = 0;
@@ -45,8 +132,33 @@ public class Nexstar4PositionControl implements Runnable{
 	public static final short action_syncInProgress = 3;
 	public static final short action_aligmentInProgress = 4;
 	
+	/**
+	 * Character encoding for the Off tracking mode, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 * <p>
+	 * This is the only tracking mode that does not alter the
+	 * <code>{@link Nexstar4State}</code> orientation, and is the
+	 * tracking mode that the <code>{@link Nexstar4PositionControl}</code>
+	 * sets at its creation.
+	 */
 	public static final char trackingMode_Off = (char) 0;
+	/**
+	 * Character encoding for the Altitude-Azimuth tracking mode, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 * <p>
+	 * This is the default tracking rate and is used when a real Nexstar4 
+	 * Telescope is placed on a flat surface or tripod without the use of 
+	 * an equatorial wedge.
+	 */
 	public static final char trackingMode_AltAz = (char) 1;
+	/**
+	 * Character encoding for the Altitude-Azimuth tracking mode, 
+	 * according to Nexstar SE Communication Protocol specifications.
+	 * <p>
+	 * This is the default tracking rate and is used when a real Nexstar4 
+	 * Telescope is placed on a flat surface or tripod without the use of 
+	 * an equatorial wedge.
+	 */
 	public static final char trackingMode_EQNorth = (char) 2;
 	public static final char trackingMode_EQSouth = (char) 3;
 	
@@ -341,6 +453,21 @@ public class Nexstar4PositionControl implements Runnable{
 		slewingInAltAxis = true;
 		actionInProgress = action_slewingInProgress;
 	}
+	/**
+	 * Sets the way in witch the <code>{@link Nexstar4PositionControl}</code> will change 
+	 * its coordinates to emulate the way a real telescope would follow the sky 
+	 * for specific location conditions (north or south hemisphere) or for other
+	 * purposes.
+	 * <p> 
+	 * There are four tracking modes that can be used: 
+	 * <code>{@link Nexstar4PositionControl#trackingMode_Off}</code>, 
+	 * <code>{@link Nexstar4PositionControl#trackingMode_AltAz}</code>, 
+	 * <code>{@link Nexstar4PositionControl#trackingMode_EQNorth}</code> and 
+	 * <code>{@link Nexstar4PositionControl#trackingMode_EQSouth}</code>.
+	 * 
+	 * @param trackingMode	tracking mode symbol that determines the tracking mode 
+	 * 						that will be adopted by the <code>{@link Nexstar4PositionControl}</code>
+	 */
 	public void setTrackingMode(char trackingMode){
 		if(		(trackingMode != trackingMode_AltAz)	&&
 				(trackingMode != trackingMode_EQNorth)	&&
@@ -350,6 +477,19 @@ public class Nexstar4PositionControl implements Runnable{
 		else
 			this.trackingMode = trackingMode;
 	}
+	/**
+	 * Returns the tracking mode that is taking place in the
+	 * <code>{@link Nexstar4PositionControl}</code>.
+	 * 
+	 * @return	a character corresponding to one of the four 
+	 * 			posible tracking modes.
+	 * @see Nexstar4PositionControl#trackingMode_Off
+	 * @see Nexstar4PositionControl#trackingMode_AltAz
+	 * @see Nexstar4PositionControl#trackingMode_EQNorth
+	 * @see Nexstar4PositionControl#trackingMode_EQSouth
+	 * @see	Nexstar4PositionControl#setTrackingMode(char)
+	 * @see	Nexstar4PositionControl#getTrackingMode()
+	 */
 	public char getTrackingMode(){
 		return trackingMode;
 	}

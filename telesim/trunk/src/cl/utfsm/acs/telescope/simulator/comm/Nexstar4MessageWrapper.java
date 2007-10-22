@@ -7,38 +7,38 @@ import cl.utfsm.acs.telescope.simulator.state.Nexstar4State;
  *
  */
 public class Nexstar4MessageWrapper {
-	public static final char GetRADEC = 'E';
-	public static final char GetPreciseRADEC = 'e';
-	public static final char GetAZMALT = 'Z';
-	public static final char GetPreciseAZMALT = 'z';
+	protected static final char GetRADEC = 'E';
+	protected static final char GetPreciseRADEC = 'e';
+	protected static final char GetAZMALT = 'Z';
+	protected static final char GetPreciseAZMALT = 'z';
 	
-	public static final char GotoRADEC = 'R';
-	public static final char GotoPreciseRADEC = 'r';
-	public static final char GotoAZMALT = 'B';
-	public static final char GotoPreciseAZMALT = 'b';
+	protected static final char GotoRADEC = 'R';
+	protected static final char GotoPreciseRADEC = 'r';
+	protected static final char GotoAZMALT = 'B';
+	protected static final char GotoPreciseAZMALT = 'b';
 	
-	public static final char SyncRADEC = 'S';
-	public static final char SyncPreciseRADEC = 's';
+	protected static final char SyncRADEC = 'S';
+	protected static final char SyncPreciseRADEC = 's';
 	
-	public static final char GetTrackingMode = 't';
-	public static final char SetTrackingMode = 'T';
+	protected static final char GetTrackingMode = 't';
+	protected static final char SetTrackingMode = 'T';
 		
-	public static final char PassThroughCommand = 'P';
+	protected static final char PassThroughCommand = 'P';
 	
-	public static final char GetLocation = 'w';
-	public static final char SetLocation = 'W';
+	protected static final char GetLocation = 'w';
+	protected static final char SetLocation = 'W';
 	
-	public static final char GetTime = 'h';
-	public static final char SetTime = 'H';
+	protected static final char GetTime = 'h';
+	protected static final char SetTime = 'H';
 	
-	public static final char GetVersion = 'v';
-	public static final char GetModel = 'm';
+	protected static final char GetVersion = 'v';
+	protected static final char GetModel = 'm';
 	
-	public static final char Echo = 'K';
+	protected static final char Echo = 'K';
 	
-	public static final char IsAlignmentComplete = 'J';
-	public static final char IsGotoInProgress = 'L';
-	public static final char CancelGoto = 'M';
+	protected static final char IsAlignmentComplete = 'J';
+	protected static final char IsGotoInProgress = 'L';
+	protected static final char CancelGoto = 'M';
 	
 	protected static final String defaultResponse = "#";
 	protected static final String badMessageResponse = "#";
@@ -49,10 +49,40 @@ public class Nexstar4MessageWrapper {
 		super();
 		telescope = new Nexstar4State();
 	}
-	int expectedMessageLength(String partialMessage){
+	/**
+	 * Tries to identifie the type of a message by knowing
+	 * only a part of it, and returns the expected length
+	 * that should have the complete message.
+	 * <p>
+	 * It is important to enphatize that the partial part of 
+	 * the message must be a substring starting at the beginning 
+	 * of the original message. If the provided string is a 
+	 * substring of the middle or the tail of the message, the
+	 * message won't be properly identified, and wrong message
+	 * length could be returned.
+	 * <p>
+	 * Usually, only the first character of the message is
+	 * needed to identify its type, but if there are available 
+	 * more than one character, the more complete the message
+	 * string is, the better.
+	 * <p>
+	 * This method is realy useful for stream listeners to know
+	 * how many characters they need to read before delivering
+	 * the complete message to the {@link Nexstar4MessageWrapper}.
+	 * 
+	 * @param partialMessage	the string containing a initial substring
+	 * 							of the message that needs to be identified
+	 * @return					if the partial message is identified, its 
+	 * 							expected length is returned as an integer;
+	 * 							if the <code>partialMessage</code> parameter 
+	 * 							is an empty	string or a <code>null</code> 
+	 * 							object, -1 is returned; if the message is 
+	 * 							not identified, -2 is returned
+	 */
+	public int expectedMessageLength(String partialMessage){
 		char firstChar;
 		
-		if (partialMessage.length() == 0)
+		if (partialMessage == null || partialMessage.length() == 0)
 			return -1; //no message to identify
 		
 		firstChar = partialMessage.charAt(0);
@@ -106,6 +136,16 @@ public class Nexstar4MessageWrapper {
 		}
 		return -2; //not recognized message
 	}
+	/**
+	 * Excecutes a message codified in a <code>{@link String}</code> object, according to
+	 * Nexstar SE Communication Protocol specifications.
+	 * 
+	 * @param message	message that contains the action to be excecuted
+	 * @return			a <code>{@link String}</code> object containing 
+	 * 					the proper response for the action excecuted, 
+	 * 					according to Nexstar SE Communication Protocol 
+	 * 					specifications
+	 */
 	public String executeAction(String message){
 		String response = defaultResponse;
 		try{
@@ -146,9 +186,9 @@ public class Nexstar4MessageWrapper {
 			}else if(firstChar == PassThroughCommand ){
 				response = handlePassThroughCommand(message);
 			}else if(firstChar == GetLocation ){
-				
+				response = getLocation(message);
 			}else if(firstChar == SetLocation ){
-			
+				response = setLocation(message);
 			}else if(firstChar == GetTime ){
 				
 			}else if(firstChar == SetTime ){
@@ -171,7 +211,6 @@ public class Nexstar4MessageWrapper {
 		}
 		return response;
 	}
-	
 	protected String handlePassThroughCommand(String message){
 		
 		if(message.length() < 8)
@@ -241,8 +280,8 @@ public class Nexstar4MessageWrapper {
 					(int) message.charAt(5) ==  0 && 
 					(int) message.charAt(6) ==  0 && 
 					(int) message.charAt(7) ==  1){
-					//TODO telescope.isGPSLinked
-					return defaultResponse;
+					
+					return isGPSLinked();
 				}
 				// Get Latitude 
 				else if((int) message.charAt(3) == 1 && 
@@ -250,8 +289,8 @@ public class Nexstar4MessageWrapper {
 						(int) message.charAt(5) == 0 && 
 						(int) message.charAt(6) == 0 && 
 						(int) message.charAt(7) == 3){
-						//TODO telescope.getLatitude
-						return defaultResponse;
+						
+						return getLatitude();
 				}
 				// Get Longitude 
 				else if((int) message.charAt(3) == 2 && 
@@ -259,8 +298,8 @@ public class Nexstar4MessageWrapper {
 						(int) message.charAt(5) == 0 && 
 						(int) message.charAt(6) == 0 && 
 						(int) message.charAt(7) == 3){
-						//TODO telescope.getLongitude
-						return defaultResponse;
+						
+						return getLongitude();
 				}
 				// Get Date
 				else if((int) message.charAt(3) == 3 && 
@@ -347,31 +386,107 @@ public class Nexstar4MessageWrapper {
 		}
 		return badMessageResponse;		
 	}
-	
+	protected String getLatitude() {
+		long lat65536, lat256, lat;
+		double latitude;
+		StringBuffer buffer;
+		if(telescope.isWest()){
+			latitude = 	    (double)(90 - telescope.getDegreesOfLatitude())
+						+ ( (double)(60 - telescope.getMinutesOfLatitude()) )/(60.0) 
+						+ ( (double)(60 - telescope.getSecondsOfLatitude()) )/(60.0*60.0);
+		} else {
+			latitude = 	    (double)(90 + telescope.getDegreesOfLatitude())
+						+ ( (double) 	  telescope.getMinutesOfLatitude()  )/(60.0) 
+						+ ( (double)	  telescope.getSecondsOfLatitude()  )/(60.0*60.0);
+		}
+		latitude = latitude*Math.pow(2, 24);
+		latitude = latitude/180.0;
+		
+		lat65536 =  ((long)latitude)/65536;
+		lat256	 = (((long)latitude)%65536)/256;
+		lat		 = (((long)latitude)%65536)%256;
+		
+		buffer = new StringBuffer(4);
+		buffer.append((char)lat65536);
+		buffer.append((char)lat256);
+		buffer.append((char)lat);
+		buffer.append(defaultResponse);
+		
+		return buffer.toString();
+	}
+	protected String getLongitude() {
+		long longitude65536, longitude256, longitude1;
+		double longitude;
+		StringBuffer buffer;
+		if(telescope.isSouth()){
+			longitude   = 	(double)(180 - telescope.getDegreesOfLatitude())
+						+ ( (double)( 60 - telescope.getMinutesOfLatitude()) )/(60.0) 
+						+ ( (double)( 60 - telescope.getSecondsOfLatitude()) )/(60.0*60.0);
+		} else {
+			longitude   = 	(double)(180 + telescope.getDegreesOfLatitude())
+						+ ( (double) 	   telescope.getMinutesOfLatitude()  )/(60.0) 
+						+ ( (double)	   telescope.getSecondsOfLatitude()  )/(60.0*60.0);
+		}
+		longitude = longitude*Math.pow(2, 24);
+		longitude = longitude/360.0;
+		
+		longitude65536 =  ((long)longitude)/65536;
+		longitude256	 = (((long)longitude)%65536)/256;
+		longitude1		 = (((long)longitude)%65536)%256;
+		
+		buffer = new StringBuffer(4);
+		buffer.append((char)longitude65536);
+		buffer.append((char)longitude256);
+		buffer.append((char)longitude1);
+		buffer.append(defaultResponse);
+		
+		return buffer.toString();
+	}
 	/* **************************************/
 	/* ********************Interface Comands*/
-	
-	/**
-	 * @param trackingMode
-	 */
+	protected String setLocation(String message) {
+		boolean south, west;
+		
+		if(message.charAt(4) > 0)
+			south = true;
+		else
+			south = false;
+		if(message.charAt(8) > 0)
+			west = true;
+		else
+			west = false;
+		
+		telescope.setLocation((int)message.charAt(1), (int)message.charAt(2), (int)message.charAt(3), south, (int)message.charAt(5), (int)message.charAt(6), (int)message.charAt(7), west);
+		return defaultResponse;
+	}
+	protected String getLocation(String message) {
+		StringBuffer buffer = new StringBuffer(9);
+		buffer.append((char)telescope.getDegreesOfLatitude());
+		buffer.append((char)telescope.getMinutesOfLatitude());
+		buffer.append((char)telescope.getSecondsOfLatitude());
+		if(telescope.isSouth())
+			buffer.append((char) 1);
+		else
+			buffer.append((char) 0);
+		buffer.append((char)telescope.getDegreesOfLongitude());
+		buffer.append((char)telescope.getMinutesOfLongitude());
+		buffer.append((char)telescope.getSecondsOfLongitude());
+		if(telescope.isWest())
+			buffer.append((char) 1);
+		else
+			buffer.append((char) 0);
+		buffer.append(defaultResponse);
+		return buffer.toString();
+	}
+	protected String isGPSLinked() {
+		if(telescope.isGpsLinked())
+			return (char)1 + defaultResponse;
+		return (char)0 + defaultResponse;
+	}
 	protected String setTrackingMode(char trackingMode) {
 		telescope.setTrackingMode(trackingMode);
 		return defaultResponse;
 	}
-	/**
-	 * @return
-	 */
-	protected String isCalibrated() {
-		String response;
-		if(telescope.isCalibrated())
-			response = Character.toString((char) 1) + defaultResponse;
-		else
-			response = Character.toString((char) 0) + defaultResponse;		
-		return response;
-	}
-	/**
-	 * @return
-	 */
 	protected String isGotoInProgress() {
 		String response; 
 		if(telescope.isGotoInProgress())
@@ -381,9 +496,6 @@ public class Nexstar4MessageWrapper {
 
 		return response;
 	}
-	/**
-	 * @return
-	 */
 	protected String isGpsLinked() {
 		String response; 
 		if(telescope.isGpsLinked())
@@ -393,36 +505,18 @@ public class Nexstar4MessageWrapper {
 
 		return response;
 	}
-	/**
-	 * @return
-	 */
 	protected String getModel() {
 		return Character.toString(telescope.getModel()) +defaultResponse;
 	}
-	/**
-	 * @return
-	 */
 	protected String getTrackingMode() {
 		return Character.toString(telescope.getTrackingMode()) + defaultResponse;
 	}
-	/**
-	 * @return
-	 */
 	protected String getVersion() {
 		return	telescope.getVersion() + defaultResponse;
 	}
-	/**
-	 * 
-	 * @param message The character to echo
-	 * @return The return string
-	 */
 	protected String echo(String message){
 		return telescope.echo(message.charAt(1)) + defaultResponse;
 	}
-	/**
-	 * 
-	 * @return
-	 */
 	protected String getAzmAlt(){
 		String response, preciseResponse;
 		
@@ -431,10 +525,6 @@ public class Nexstar4MessageWrapper {
 					preciseResponse.substring(9, 13) +"#";
 		return response;
 	}
-	/**
-	 * 
-	 * @return
-	 */
 	protected String getPreciseAzmAlt(){
 		String azm, alt, response;
 		StringBuffer buffer = new StringBuffer(18);
@@ -451,10 +541,6 @@ public class Nexstar4MessageWrapper {
 		response = buffer.toString().toUpperCase();
 		return response;
 	}
-	/**
-	 * 
-	 * @return
-	 */
 	protected String getRaDec(){
 		String response, preciseResponse;
 		
@@ -463,10 +549,6 @@ public class Nexstar4MessageWrapper {
 					preciseResponse.substring(9, 13) +"#";
 		return response;
 	}
-	/**
-	 * 
-	 * @return
-	 */
 	protected String getPreciseRaDec(){
 		String azm, alt, response;
 		StringBuffer buffer = new StringBuffer(18);
@@ -483,9 +565,6 @@ public class Nexstar4MessageWrapper {
 		response = buffer.toString().toUpperCase();
 		return response;
 	}
-	/**
-	 * @return
-	 */
 	protected String isAlignmentComplete(){
 		String response;
 		if(telescope.isAlignmentComplete())
@@ -494,10 +573,6 @@ public class Nexstar4MessageWrapper {
 			response = Character.toString((char) 0) + defaultResponse;
 		return response;
 	}
-	
-	/**
-	 * @return
-	 */
 	protected String getDeviceVersion(String message) {
 		String response;
 		response = telescope.getDeviceVersion(message.charAt(2)) + defaultResponse;
