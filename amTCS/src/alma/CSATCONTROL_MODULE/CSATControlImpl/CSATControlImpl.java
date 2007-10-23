@@ -41,6 +41,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	private alma.POINTING_MODULE.Pointing pointing;
 	private alma.TELESCOPE_MODULE.Telescope telescope;
 	private alma.TRACKING_MODULE.Tracking tracking;
+	private alma.CCD_MODULE.CCD ccd;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -81,6 +82,14 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 			throw new ComponentLifecycleException("Failed to get Tracking component reference");
 		}
 		
+		try {
+		 	obj = m_containerServices.getDefaultComponent("IDL:alma/CCD_MODULE/CCD:1.0");
+			ccd = alma.CCD_MODULE.CCDHelper.narrow(obj);
+		}
+			catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get CCD component reference " + e);
+			throw new ComponentLifecycleException("Failed to get CCD component reference");
+		}
 	}
 
 	public void execute() {
@@ -154,6 +163,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 
 	public void getPreviewImage(alma.TYPES.ImageHolder img, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
+		ccd.getPreview(img,cb,desc);
 	}
 
 	public void stopTelescope(){
