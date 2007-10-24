@@ -1,8 +1,10 @@
 #!/bin/bash
 
 acsutilTATPrologue
-export ACS_INSTANCE=$(cat $ACS_TMP/acs_instance)
+
+export ACS_CDB=$PWD
 
 acsStartContainer -java amContainer    &> $ACS_TMP/containerJava.log &
+sleep 7
 acsStartContainer -cpp  amContainerCpp &> $ACS_TMP/containerCpp.log  &
-sleep 10
+sleep 7
