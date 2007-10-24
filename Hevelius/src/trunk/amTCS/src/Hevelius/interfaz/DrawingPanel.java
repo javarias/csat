@@ -63,7 +63,7 @@ public class DrawingPanel extends JPanel
 	private SiderealPanel stpane = null;
 	private CataloguePanel catpane = null;
 
-	private Tracking trck = null;
+	//private Tracking trck = null;
 	private SideralUpdate sdrl = null;
 	private Safety sfty = null;
 

@@ -1,3 +1,9 @@
+/**
+* SystemPanel is a JPanel class that is used to group general system control as is connecting 
+* to ACS, disconnecting and shutting down the application.
+*/
+
+
 package Hevelius.interfaz;
 
 import javax.swing.*;
@@ -18,10 +24,22 @@ public class SystemPanel extends JPanel
 	private int dx = 0;
 	private int dy = 0;
 
+	/**
+	* Constructor which extends JPanel constructor in 
+	* order to allow giving a LayoutManager to instantiate 
+	* the panel.
+	* @param l	LayoutManager
+	*/
 	public SystemPanel(LayoutManager l)
 	{
 		super(l);
 	}
+
+	/**
+	* Method used to initialize variables and graphical states.
+	* It instantiate, set and add to panel all necessary widgets.
+	* It also adds actionListeners to some widgets.
+	*/
 	public void init()
 	{
 		//System Label
@@ -102,6 +120,12 @@ public class SystemPanel extends JPanel
 			}
 		});
 	}
+
+	/**
+	* This method is extended in order to allow autoresizing 
+	* of widgets whenever window's size changes.
+	* @param g	Graphics
+	*/
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
@@ -144,6 +168,10 @@ public class SystemPanel extends JPanel
 		}
 	}
 
+	/**
+	* This is a method that disconnects froma ACS created to give flexibility 
+	* as to where will be called.
+	*/
 	public void stopTCS()
 	{
 			CSATControlClient temp1;

@@ -1,3 +1,9 @@
+/**
+* Presetting class is meant to help with presetting 
+* actions, specially with the decition of going to 
+* radec position or altaz.
+*/
+
 package Hevelius.heveliusmodules;
 
 import java.io.*;
@@ -22,7 +28,13 @@ public class Presetting {
 	//CBDescIn reference;
 	//CDvoid callback;
 
-
+	/**
+	* Static method that selects what type of coordinates to 
+	* look and make appropiate calls.
+	* @param c1	Double with first coordinate ra/alt.
+	* @param c2	Double with second coordinate dec/az.
+	* @param type	Int with coordinates type selection: 0.-radec, 1.-altaz.
+	*/
 	public static void preset(double c1, double c2, int type){
 		
 		RadecPos p_rd;
@@ -77,6 +89,12 @@ public class Presetting {
 
 	}
 
+	/**
+	* Static Method to create a RadecPos instance.
+	* @param ra	Double with Right Ascension coordinate.
+	* @param dec	Double with Declination coordinate.
+	* @return	RadecPos with ra and dec information.
+	*/
 	public static RadecPos createRadecType(double ra, double dec){
 		RadecPos tmp = new RadecPos();
 		tmp.ra = ra;

@@ -1,3 +1,9 @@
+/**
+* Safety class is used to refresh periodically
+* danger state calling CSATStatus component to
+* retrieve state and setting it to TelStatusPanel.
+*/
+
 package Hevelius.heveliusmodules;
 
 import Hevelius.interfaz.*;
@@ -11,6 +17,10 @@ import alma.TYPES.*;
 
 public class Safety implements Runnable
 {
+	/**
+	* Method that is executed independently with each thread that 
+	* is created from the class.
+	*/
 	public void run(){
 		while(true){
 			try{
