@@ -9,7 +9,7 @@ public class CatalogueInfo {
 	{
 		catalogue = cat;
 	}
-	public void add(int seq, int rah, int ram, double ras, int decg, int decm, double decs)
+	public void add(String name, int rah, int ram, double ras, int decg, int decm, double decs)
 	{
 		//System.out.println(seq+" "+rah+" "+ram+" "+decg+" "+decm);
 		//System.out.println();
@@ -17,7 +17,7 @@ public class CatalogueInfo {
 		//System.out.println("DEC:__"+decg+"_"+decm+"_"+decs);
 		//System.out.println(seq+"__"+ ((double)rah+ram/60.0d+ras/3600.0d) + "__" + ((double)decg+decm/60.0d+decs/3600.0d));
 		ObjectInfo temp;
-		temp = new ObjectInfo(seq, rah, ram, ras, decg, decm, decs);
+		temp = new ObjectInfo(name, rah, ram, ras, decg, decm, decs);
 		objects.add(temp);
 		elements++;
 	}

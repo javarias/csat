@@ -5,8 +5,8 @@
 package Hevelius.catalogues;
 
 public class ObjectInfo {
-	int seq;
-	double ra, dec;
+	private String name;
+	private double ra, dec;
 	/**
 	* This is a constructor for an ObjectInfo instance. It receives 
 	* information about a celestial object and calculates the correct 
@@ -19,9 +19,9 @@ public class ObjectInfo {
 	* @param decm	Declination Arcmins.
 	* @param decs	Declination Arcsecs.
 	*/
-	public ObjectInfo(int seq, int rah, int ram, double ras, int decg, int decm, double decs)
+	public ObjectInfo(String name, int rah, int ram, double ras, int decg, int decm, double decs)
 	{
-		this.seq = seq;
+		this.name = name;
 		ra = (double)rah + ram/60.0d + ras/3600;
 		if(decg > 0)
 			dec = (double)decg + decm/60.0d + decs/3600;
@@ -33,9 +33,9 @@ public class ObjectInfo {
 	* Returns the value of the private variable seq.
 	* @return	Int with sequential number of object in catalogue.
 	*/
-	public int getSeq()
+	public String getName()
 	{
-		return seq;
+		return name;
 	}
 
 	/**

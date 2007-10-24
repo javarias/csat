@@ -299,7 +299,7 @@ public class CataloguePanel extends JPanel
 					for(int j=0; j<catData[i].getLength(); j++)
 					{
 						temp = catData[i].get(j);
-						data[k][0]= Integer.toString(temp.getSeq());
+						data[k][0]= temp.getName();
 						data[k][1]= Double.toString(temp.getRa());
 						data[k][2]= Double.toString(temp.getDec());
 						data[k][3]= "1950";

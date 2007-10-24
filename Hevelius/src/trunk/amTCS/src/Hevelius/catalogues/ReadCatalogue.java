@@ -91,6 +91,7 @@ public class ReadCatalogue {
 		FileInputStream fis = null;
 		BufferedInputStream bis = null;
 		DataInputStream dis = null;
+		BufferedReader br = null;
 
 		int seq_i, seq_f;
 		int rah_i, rah_f, ram_i, ram_f, ras_i, ras_f;
@@ -114,7 +115,7 @@ public class ReadCatalogue {
 			type = 0;
 			format = 0;
 
-			int seq;
+			String objname;
 			int rah, ram;
 			double ras;
 			int decg, decm;
@@ -125,6 +126,7 @@ public class ReadCatalogue {
 			{
 				if(mat.find())
 				{
+
 					cat = new CatalogueInfo(mat.group(1));
 					catf = new File(mat.group(1)+".cat");
 					parf = new File(mat.group(1)+".par");
@@ -135,12 +137,14 @@ public class ReadCatalogue {
 					fis = new FileInputStream(parf);
 					bis = new BufferedInputStream(fis);
 					dis = new DataInputStream(bis);
+					br = new BufferedReader(new InputStreamReader(dis));
+
 					while (dis.available() != 0) 
 					{
 						// this statement reads the line from the file and print it to
 						// the console.
 						mat = null;
-						mat = pat.matcher(dis.readLine());
+						mat = pat.matcher(br.readLine());
 						//System.out.println(mat.group());
 						if(mat.find())
 						{
@@ -164,17 +168,17 @@ public class ReadCatalogue {
 						}
 						//System.out.println(dis.readLine());
 					}
-
 					fis = new FileInputStream(catf);
 					bis = new BufferedInputStream(fis);
 					dis = new DataInputStream(bis);
+					br = new BufferedReader(new InputStreamReader(dis));
 
 					while (dis.available() != 0)
 					{
 						// this statement reads the line from the file and print it to
 						// the console.
-						String temp = dis.readLine();
-						seq = Integer.parseInt(temp.substring(seq_i, seq_f).trim());
+						String temp = br.readLine();
+						objname = temp.substring(seq_i, seq_f).trim();
 						if(type==0)
 						{
 							tempdeg = Double.parseDouble(temp.substring(rah_i, rah_f).trim());
@@ -217,7 +221,7 @@ public class ReadCatalogue {
 							ram *= 15;
 							ras *= 15;
 						}
-						cat.add(seq, rah, ram, ras, decg, decm, decs);
+						cat.add(objname, rah, ram, ras, decg, decm, decs);
 					}
 				}
 			}
