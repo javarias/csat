@@ -1,0 +1,21 @@
+/* IDL for Nexstar Simulator Component */
+
+#ifndef _NEXSIM_IDL_
+#define _NEXSIM_IDL_
+
+#include <baci.idl>
+
+#pragma prefix "alma"
+
+module NEXSIM_MODULE {
+
+	interface NexSim : ACS::ACSComponent
+	{
+		void on();
+		void off();
+	};
+
+
+};
+
+#endif

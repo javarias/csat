@@ -79,6 +79,7 @@ void listen_serial(const char *device) {
 	newtio.c_iflag = IGNPAR | ICRNL;
 	newtio.c_oflag = 0;
 	newtio.c_lflag = ICANON;
+	newtio.c_cflag &= ~(PARENB | PARODD);
 
 	tcsetattr(fd,TCSANOW,&newtio);
 
