@@ -1,3 +1,14 @@
+/**
+* CSATControlClient is a class that is used to connect with ACS component CSATControl.
+* For this purpose it extends ComponentClient which implements most of the necessary methods
+* to connect with an ACS component. Still is needed to implement some methods for this task
+* because they are particular for each component. Also there is the need to implement most
+* methods from CSATControlOperations interface which where generated from IDL interface. This
+* is made in order to allow the use of component's methods by making calls to methods of
+* objects of this client.
+*/
+
+
 package Hevelius.acsmodules;
 
 import java.io.*;
@@ -19,15 +30,32 @@ public class CSATControlClient extends ComponentClient
 {
 	private alma.CSATCONTROL_MODULE.CSATControl cscontrol;
 
+	/**
+        * This is a constructor for CSATSControlClient instance.
+        * @param logger         Logger is a reference to a ACS Logger.
+        * @param managerLoc     String System's managerLoc.
+        * @param clientName     String clientName for ACS.
+        * @throws Exception     Throws any exception that may ocurr.
+        */
 	public CSATControlClient(Logger logger, String managerLoc, String clientName)
 		throws Exception {
 			super(logger, managerLoc, clientName);
 		}
 
+	/**
+        * This method is intended to retrieve component from ACS, as of now it retrieves
+        * default CSATControl component.
+        * @throws AcsJContainerServicesEx
+        */
 	public void loadComponent() throws AcsJContainerServicesEx {
 		cscontrol = alma.CSATCONTROL_MODULE.CSATControlHelper.narrow(getContainerServices().getDefaultComponent("IDL:alma/CSATCONTROL_MODULE/CSATControl:1.0"));
 	}
 
+	/**
+        * This static method is used to start the client and to create an instance of
+        * this class if possible.
+        * @return       CSATControlClient an instance of this class if possible, null in other case.
+        */
 	public static CSATControlClient start()
 	{
 		String managerLoc = System.getProperty("ACS.manager");
@@ -58,6 +86,11 @@ public class CSATControlClient extends ComponentClient
 		return null;
 	}
 
+	/**
+        * This static method is used to stop the client and is recommended to destroy
+        * instance reference when calling this method. Otherwise problems may arise.
+        * @param csatcc         CSATControlClient instance to be destroyed.
+        */
 	public static void stop(CSATControlClient csatcc)
 	{
 		if (csatcc != null) 
