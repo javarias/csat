@@ -654,10 +654,10 @@ public class MenuPanel extends JPanel //implements Runnable
 		about.setLocationRelativeTo(null);
 		about.setLayout(null);
 		about.setResizable(false);
-		about.getContentPane().setBackground(Color.WHITE);
+		about.getContentPane().setBackground(Color.GRAY);
 
 
-		JLabel about1 = new JLabel("Hevelius v. ALFA rc1");
+/*		JLabel about1 = new JLabel("Hevelius v. ALFA rc1");
 		JLabel about2 = new JLabel("DevNull Enterprise");
 		JLabel about3 = new JLabel("2007");
 
@@ -683,7 +683,13 @@ public class MenuPanel extends JPanel //implements Runnable
 		logo.setLocation(10,70);
 		logo.setSize(300,250);
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
-		about.add(logo);
+		about.add(logo);*/
+
+		JEditorPane htmlPane = new JEditorPane(initialURL);
+		htmlPane.setEditable(false);
+		htmlPane.addHyperlinkListener(this);
+		JScrollPane scrollPane = new JScrollPane(htmlPane);
+		about.getContentPane().add(scrollPane, BorderLayout.CENTER);
 
 	}
 
