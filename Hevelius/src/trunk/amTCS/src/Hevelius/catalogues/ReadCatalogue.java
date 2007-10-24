@@ -178,7 +178,15 @@ public class ReadCatalogue {
 						// this statement reads the line from the file and print it to
 						// the console.
 						String temp = br.readLine();
-						objname = temp.substring(seq_i, seq_f).trim();
+						if(temp.length() < seq_i)
+							objname = "";
+						else
+						{
+							if(temp.length() < seq_f)
+								objname = temp.substring(seq_i, temp.length()).trim();
+							else
+								objname = temp.substring(seq_i, seq_f).trim();
+						}
 						if(type==0)
 						{
 							tempdeg = Double.parseDouble(temp.substring(rah_i, rah_f).trim());

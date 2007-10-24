@@ -11,7 +11,7 @@ public class ObjectInfo {
 	* This is a constructor for an ObjectInfo instance. It receives 
 	* information about a celestial object and calculates the correct 
 	* coordinates from them.
-	* @param seq	Sequence number of the object.
+	* @param name	String with object's name in catalogue.
 	* @param rah	Right Ascension Degrees.
 	* @param ram	Right Ascension Arcmins.
 	* @param ras	Right Ascension Arcsecs.
@@ -31,7 +31,7 @@ public class ObjectInfo {
 
 	/**
 	* Returns the value of the private variable seq.
-	* @return	Int with sequential number of object in catalogue.
+	* @return	String with name of object in catalogue, if any.
 	*/
 	public String getName()
 	{
