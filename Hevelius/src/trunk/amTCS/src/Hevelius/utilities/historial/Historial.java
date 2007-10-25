@@ -55,8 +55,28 @@ public class Historial //implements Runnable
 		int hora = calendario.get(Calendar.HOUR_OF_DAY);
 		int minutos = calendario.get(Calendar.MINUTE);
 		int segundos = calendario.get(Calendar.SECOND);
-		
-		return hora+":"+minutos+":"+segundos;
+		String hrs;
+		String min;
+		String sec;
+	
+
+		if(hora < 10)
+                        hrs = new String("0"+hora);
+		else
+			hrs = new String(""+hora);
+
+                if(minutos < 10)
+                        min = new String("0"+minutos);
+		else
+			min = new String(""+minutos);
+
+                if(segundos < 10)
+                        sec = new String("0"+segundos);
+		else
+			sec = new String(""+segundos);
+
+	
+		return hrs+":"+min+":"+sec;
 	}
 	
 

@@ -495,6 +495,11 @@ public class DrawingPanel extends JPanel
 		return scpane;
 	}
 
+        public SiderealPanel getSiderealPanel()
+        {
+                return stpane;
+	}        
+
 	public CoordinatesPanel getCoordinatesPanel()
 	{
 		return coorpane;

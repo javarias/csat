@@ -105,6 +105,7 @@ public class SystemPanel extends JPanel
                                 interfaz.getDrawingPanel().disablePanel(interfaz.getDrawingPanel().getCoordinatesPanel());
                                 interfaz.getDrawingPanel().disablePanel(interfaz.getDrawingPanel().getVirtualTelescopePanel());
 				interfaz.getDrawingPanel().disablePanel(interfaz.getDrawingPanel().getCataloguePanel());
+				interfaz.getDrawingPanel().disablePanel(interfaz.getDrawingPanel().getSiderealPanel());
                         }
                 });
 

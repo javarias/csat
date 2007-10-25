@@ -6,6 +6,7 @@ import Hevelius.heveliusmodules.*;
 import Hevelius.interfaz.*;
 import Hevelius.utilities.converter.*;
 import javax.swing.*;
+import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 //import java.awt.event.MouseEvent.*;
@@ -637,7 +638,7 @@ public class MenuPanel extends JPanel //implements Runnable
 
 
 	public static void aboutWindow() {
-		about = new JDialog(frame,"Hevelius - About");
+		about = new JDialog(frame,"Hevelius - Help");
 		about.pack();	
 
 		about.addWindowListener(new WindowAdapter() {
@@ -650,46 +651,358 @@ public class MenuPanel extends JPanel //implements Runnable
 				}
 				});
 
-		about.setSize(340,300);
+		about.setSize(800,600);
 		about.setLocationRelativeTo(null);
-		about.setLayout(null);
+//		about.setLayout(null);
 		about.setResizable(false);
-		about.getContentPane().setBackground(Color.GRAY);
+//		about.getContentPane().setBackground(Color.GRAY);
 
 
-/*		JLabel about1 = new JLabel("Hevelius v. ALFA rc1");
-		JLabel about2 = new JLabel("DevNull Enterprise");
-		JLabel about3 = new JLabel("2007");
+		final JEditorPane htmlPane = new JEditorPane();
 
-		Icon logoImagen = new ImageIcon(ClassLoader.getSystemClassLoader().getResource("Hevelius/images/logo.png"));
-		JLabel logo = new JLabel(logoImagen);
+		JPanel sidebar = new JPanel();
+		sidebar.setBackground(Color.LIGHT_GRAY);
+		final JLabel intr = new JLabel("Introduction");
+		final JLabel req = new JLabel("Requirements");
+		final JLabel conn = new JLabel("Connection");
+		//final JLabel inst = new JLabel("Install");
+		final JLabel comp = new JLabel("Interface");
+		final JLabel obs = new JLabel("Observation");
+		final JLabel cat = new JLabel("Catalogues");
+		final JLabel faq = new JLabel("FAQ's");
+		final JLabel ref = new JLabel("References");
+		final JLabel abo = new JLabel("About Hevelius");
 
-		about1.setLocation(50,15);
-		about1.setFont(new Font("DejaVu Sans",1,18));
-		about1.setSize(250,20);
-		about1.setHorizontalAlignment(SwingConstants.CENTER);
-		about.add(about1);
+		JLabel line1 = new JLabel("|");
+                JLabel line2 = new JLabel("|");
+                JLabel line3 = new JLabel("|");
+                JLabel line4 = new JLabel("|");
+                JLabel line5 = new JLabel("|");
+                JLabel line6 = new JLabel("|");
+                JLabel line7 = new JLabel("|");
+                JLabel line8 = new JLabel("|");
+                JLabel line9 = new JLabel("|");
 
-		about2.setLocation(95,30);
-		about2.setSize(150,20);
-		about2.setHorizontalAlignment(SwingConstants.CENTER);
-		about.add(about2);
+		intr.addMouseListener(new MouseListener(){
 
-		about3.setLocation(95,50);
-		about3.setSize(150,20);
-		about3.setHorizontalAlignment(SwingConstants.CENTER);
-		about.add(about3);
+                                        public void mouseExited(MouseEvent event){
+                                        intr.setForeground(Color.BLACK);
+                                        }
 
-		logo.setLocation(10,70);
-		logo.setSize(300,250);
-		logo.setHorizontalAlignment(SwingConstants.CENTER);
-		about.add(logo);*/
+                                        public void mouseEntered(MouseEvent event){
+                                        intr.setForeground(Color.BLUE);
+                                        }
 
-		JEditorPane htmlPane = new JEditorPane(initialURL);
+                                        public void mouseReleased(MouseEvent event){
+                                        intr.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseClicked(MouseEvent event){
+                                        intr.setForeground(Color.BLUE);
+					try{
+                                        	htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#intr"));
+					}
+					catch(IOException err){
+						System.out.println("ERROR DEL HELP");
+					}
+                                        }
+
+                                        public void mousePressed(MouseEvent event){
+					intr.setForeground(Color.DARK_GRAY);
+                                        }
+
+                        });
+
+                req.addMouseListener(new MouseListener(){
+
+                                        public void mouseExited(MouseEvent event){
+                                        req.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseEntered(MouseEvent event){
+                                        req.setForeground(Color.BLUE);
+                                        }
+
+                                        public void mouseReleased(MouseEvent event){
+                                        req.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseClicked(MouseEvent event){
+                                        req.setForeground(Color.BLUE);
+                                        try{
+                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#req"));
+                                        }
+                                        catch(IOException err){
+                                                System.out.println("ERROR DEL HELP");
+                                        }
+                                        }
+
+                                        public void mousePressed(MouseEvent event){
+                                        req.setForeground(Color.DARK_GRAY);
+                                        }
+
+                        });
+
+                conn.addMouseListener(new MouseListener(){
+
+                                        public void mouseExited(MouseEvent event){
+                                        conn.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseEntered(MouseEvent event){
+                                        conn.setForeground(Color.BLUE);
+                                        }
+
+                                        public void mouseReleased(MouseEvent event){
+                                        conn.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseClicked(MouseEvent event){
+                                        conn.setForeground(Color.BLUE);
+                                        try{
+                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#conn"));
+                                        }
+                                        catch(IOException err){
+                                                System.out.println("ERROR DEL HELP");
+                                        }
+                                        }
+
+                                        public void mousePressed(MouseEvent event){
+                                        conn.setForeground(Color.DARK_GRAY);
+                                        }
+
+                        });
+
+                comp.addMouseListener(new MouseListener(){
+
+                                        public void mouseExited(MouseEvent event){
+                                        comp.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseEntered(MouseEvent event){
+                                        comp.setForeground(Color.BLUE);
+                                        }
+
+                                        public void mouseReleased(MouseEvent event){
+                                        comp.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseClicked(MouseEvent event){
+                                        comp.setForeground(Color.BLUE);
+                                        try{
+                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#comp"));
+                                        }
+                                        catch(IOException err){
+                                                System.out.println("ERROR DEL HELP");
+                                        }
+                                        }
+
+                                        public void mousePressed(MouseEvent event){
+                                        comp.setForeground(Color.DARK_GRAY);
+                                        }
+
+                        });
+
+                obs.addMouseListener(new MouseListener(){
+
+                                        public void mouseExited(MouseEvent event){
+                                        obs.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseEntered(MouseEvent event){
+                                        obs.setForeground(Color.BLUE);
+                                        }
+
+                                        public void mouseReleased(MouseEvent event){
+                                        obs.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseClicked(MouseEvent event){
+                                        obs.setForeground(Color.BLUE);
+                                        try{
+                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#obs"));
+                                        }
+                                        catch(IOException err){
+                                                System.out.println("ERROR DEL HELP");
+                                        }
+                                        }
+
+                                        public void mousePressed(MouseEvent event){
+                                        obs.setForeground(Color.DARK_GRAY);
+                                        }
+
+                        });
+
+                cat.addMouseListener(new MouseListener(){
+
+                                        public void mouseExited(MouseEvent event){
+                                        cat.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseEntered(MouseEvent event){
+                                        cat.setForeground(Color.BLUE);
+                                        }
+
+                                        public void mouseReleased(MouseEvent event){
+                                        cat.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseClicked(MouseEvent event){
+                                        cat.setForeground(Color.BLUE);
+                                        try{
+                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#cat"));
+                                        }
+                                        catch(IOException err){
+                                                System.out.println("ERROR DEL HELP");
+                                        }
+                                        }
+
+                                        public void mousePressed(MouseEvent event){
+                                        cat.setForeground(Color.DARK_GRAY);
+                                        }
+
+                        });
+
+                faq.addMouseListener(new MouseListener(){
+
+                                        public void mouseExited(MouseEvent event){
+                                        faq.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseEntered(MouseEvent event){
+                                        faq.setForeground(Color.BLUE);
+                                        }
+
+                                        public void mouseReleased(MouseEvent event){
+                                        faq.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseClicked(MouseEvent event){
+                                        faq.setForeground(Color.BLUE);
+                                        try{
+                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#faq"));
+                                        }
+                                        catch(IOException err){
+                                                System.out.println("ERROR DEL HELP");
+                                        }
+                                        }
+
+                                        public void mousePressed(MouseEvent event){
+                                        faq.setForeground(Color.DARK_GRAY);
+                                        }
+
+                        });
+
+                ref.addMouseListener(new MouseListener(){
+
+                                        public void mouseExited(MouseEvent event){
+                                        ref.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseEntered(MouseEvent event){
+                                        ref.setForeground(Color.BLUE);
+                                        }
+
+                                        public void mouseReleased(MouseEvent event){
+                                        ref.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseClicked(MouseEvent event){
+                                        ref.setForeground(Color.BLUE);
+                                        try{
+                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#ref"));
+                                        }
+                                        catch(IOException err){
+                                                System.out.println("ERROR DEL HELP");
+                                        }
+                                        }
+
+                                        public void mousePressed(MouseEvent event){
+                                        ref.setForeground(Color.DARK_GRAY);
+                                        }
+
+                        });
+
+                abo.addMouseListener(new MouseListener(){
+
+                                        public void mouseExited(MouseEvent event){
+                                        abo.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseEntered(MouseEvent event){
+                                        abo.setForeground(Color.BLUE);
+                                        }
+
+                                        public void mouseReleased(MouseEvent event){
+                                        abo.setForeground(Color.BLACK);
+                                        }
+
+                                        public void mouseClicked(MouseEvent event){
+                                        abo.setForeground(Color.BLUE);
+                                        try{
+                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#abo"));
+                                        }
+                                        catch(IOException err){
+                                                System.out.println("ERROR DEL HELP");
+                                        }
+                                        }
+
+                                        public void mousePressed(MouseEvent event){
+                                        abo.setForeground(Color.DARK_GRAY);
+                                        }
+
+                        });
+
+		
+		sidebar.add(intr);
+                sidebar.add(line1);
+                sidebar.add(req);
+                sidebar.add(line2);
+                sidebar.add(conn);
+                //sidebar.add(line3);
+                //sidebar.add(inst);
+                sidebar.add(line4);
+                sidebar.add(comp);
+                sidebar.add(line5);
+                sidebar.add(obs);
+                sidebar.add(line6);
+                sidebar.add(cat);
+                sidebar.add(line7);
+                sidebar.add(faq);
+                sidebar.add(line8);
+                sidebar.add(ref);
+                sidebar.add(line9);
+                sidebar.add(abo);
+		
+
+		about.getContentPane().add(sidebar, BorderLayout.NORTH);
+
+
+		try{
+		//htmlPane = new JEditorPane("http://www.google.cl");
 		htmlPane.setEditable(false);
-		htmlPane.addHyperlinkListener(this);
+		htmlPane.addHyperlinkListener(new HyperlinkListener(){
+				public void hyperlinkUpdate(HyperlinkEvent event){
+					if(event.getEventType() == HyperlinkEvent.EventType.ACTIVATED){
+						try{
+							htmlPane.setPage(event.getURL());
+						}
+						catch(IOException ioe){
+							System.out.println("ERROR DEL HELP");
+						}
+					}
+				}
+			}
+		);		
+
 		JScrollPane scrollPane = new JScrollPane(htmlPane);
 		about.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html"));
+		}
+		catch(IOException e){
+			System.out.println("ERROR DEL HELP");
+		}
+		
 
 	}
 
@@ -905,5 +1218,9 @@ public class MenuPanel extends JPanel //implements Runnable
 
 	}
 
+/*	public String getURLManual(){
+		return getClass().getClassLoader().getResource("Hevelius/manual/manual.html");
+	}
+*/
 
 }

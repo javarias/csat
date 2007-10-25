@@ -116,6 +116,7 @@ public class WindowLogin extends JDialog
                                                                 interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getCoordinatesPanel());
                                                                 interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getVirtualTelescopePanel());
                                                                 interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getCataloguePanel());
+								interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getSiderealPanel());
                                                         }
 
 						}
