@@ -19,6 +19,7 @@ import java.util.*;
 import java.awt.Image;
 import javax.swing.border.BevelBorder;
 import java.util.regex.*;
+import java.net.*;
 
 public class MenuPanel extends JPanel //implements Runnable
 {
@@ -700,9 +701,11 @@ public class MenuPanel extends JPanel //implements Runnable
                                         public void mouseClicked(MouseEvent event){
                                         intr.setForeground(Color.BLUE);
 					try{
-                                        	htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#intr"));
+						//L url = new URL(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#intr"));
+                                        	//htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/intr.php"));
+						htmlPane.scrollToReference("intr");
 					}
-					catch(IOException err){
+					catch(Exception err){
 						System.out.println("ERROR DEL HELP");
 					}
                                         }
@@ -730,9 +733,10 @@ public class MenuPanel extends JPanel //implements Runnable
                                         public void mouseClicked(MouseEvent event){
                                         req.setForeground(Color.BLUE);
                                         try{
-                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#req"));
+                                                //htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#req"));
+						htmlPane.scrollToReference("req");
                                         }
-                                        catch(IOException err){
+                                        catch(Exception err){
                                                 System.out.println("ERROR DEL HELP");
                                         }
                                         }
@@ -760,9 +764,10 @@ public class MenuPanel extends JPanel //implements Runnable
                                         public void mouseClicked(MouseEvent event){
                                         conn.setForeground(Color.BLUE);
                                         try{
-                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#conn"));
+                                                //htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#conn"));
+						htmlPane.scrollToReference("conn");
                                         }
-                                        catch(IOException err){
+                                        catch(Exception err){
                                                 System.out.println("ERROR DEL HELP");
                                         }
                                         }
@@ -790,9 +795,10 @@ public class MenuPanel extends JPanel //implements Runnable
                                         public void mouseClicked(MouseEvent event){
                                         comp.setForeground(Color.BLUE);
                                         try{
-                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#comp"));
+                                                //htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#comp"));
+						htmlPane.scrollToReference("comp");
                                         }
-                                        catch(IOException err){
+                                        catch(Exception err){
                                                 System.out.println("ERROR DEL HELP");
                                         }
                                         }
@@ -820,9 +826,10 @@ public class MenuPanel extends JPanel //implements Runnable
                                         public void mouseClicked(MouseEvent event){
                                         obs.setForeground(Color.BLUE);
                                         try{
-                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#obs"));
+                                                //htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#obs"));
+						htmlPane.scrollToReference("obs");
                                         }
-                                        catch(IOException err){
+                                        catch(Exception err){
                                                 System.out.println("ERROR DEL HELP");
                                         }
                                         }
@@ -850,9 +857,10 @@ public class MenuPanel extends JPanel //implements Runnable
                                         public void mouseClicked(MouseEvent event){
                                         cat.setForeground(Color.BLUE);
                                         try{
-                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#cat"));
+                                                //htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#cat"));
+						htmlPane.scrollToReference("cat");
                                         }
-                                        catch(IOException err){
+                                        catch(Exception err){
                                                 System.out.println("ERROR DEL HELP");
                                         }
                                         }
@@ -880,9 +888,10 @@ public class MenuPanel extends JPanel //implements Runnable
                                         public void mouseClicked(MouseEvent event){
                                         faq.setForeground(Color.BLUE);
                                         try{
-                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#faq"));
+                                                //htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#faq"));
+						htmlPane.scrollToReference("faq");
                                         }
-                                        catch(IOException err){
+                                        catch(Exception err){
                                                 System.out.println("ERROR DEL HELP");
                                         }
                                         }
@@ -910,9 +919,10 @@ public class MenuPanel extends JPanel //implements Runnable
                                         public void mouseClicked(MouseEvent event){
                                         ref.setForeground(Color.BLUE);
                                         try{
-                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#ref"));
+                                                //htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#ref"));
+						htmlPane.scrollToReference("ref");
                                         }
-                                        catch(IOException err){
+                                        catch(Exception err){
                                                 System.out.println("ERROR DEL HELP");
                                         }
                                         }
@@ -940,9 +950,10 @@ public class MenuPanel extends JPanel //implements Runnable
                                         public void mouseClicked(MouseEvent event){
                                         abo.setForeground(Color.BLUE);
                                         try{
-                                                htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#abo"));
+                                                //htmlPane.setPage(MenuPanel.class.getClassLoader().getResource("Hevelius/manual/manual.html#abo"));
+						htmlPane.scrollToReference("abo");
                                         }
-                                        catch(IOException err){
+                                        catch(Exception err){
                                                 System.out.println("ERROR DEL HELP");
                                         }
                                         }

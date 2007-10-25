@@ -55,9 +55,15 @@ public class Historial //implements Runnable
 		int hora = calendario.get(Calendar.HOUR_OF_DAY);
 		int minutos = calendario.get(Calendar.MINUTE);
 		int segundos = calendario.get(Calendar.SECOND);
+		int dia = calendario.get(Calendar.DAY_OF_MONTH);
+		int mes = calendario.get(Calendar.MONTH);
+		int ano = calendario.get(Calendar.YEAR);
 		String hrs;
 		String min;
 		String sec;
+		String d;
+		String m;
+		String a;
 	
 
 		if(hora < 10)
@@ -75,8 +81,18 @@ public class Historial //implements Runnable
 		else
 			sec = new String(""+segundos);
 
+		if(dia < 10)
+                        d = new String("0"+dia);
+                else
+                        d = new String(""+dia);
+
+		if(mes < 10)
+                        m = new String("0"+mes);
+                else
+                        m = new String(""+mes);
+
 	
-		return hrs+":"+min+":"+sec;
+		return d+"-"+m+"-"+ano+" "+hrs+":"+min+":"+sec;
 	}
 	
 
@@ -139,42 +155,42 @@ public class Historial //implements Runnable
 	//Preset
 	public void addHistoryPreset(double c1, double c2, int i){
 		if(i==0)
-			saveFile("Preset to RA: "+c1+" ,Dec: "+c2+" at "+time());
+			saveFile("["+time()+"] Preset to RA: "+c1+" ,Dec: "+c2);
 		else
-			saveFile("Preset to Alt: "+c1+" ,Az: "+c2+" at "+time());
+			saveFile("["+time()+"] Preset to Alt: "+c1+" ,Az: "+c2);
 	}
 
 	public void addHistoryStop(){
-		saveFile("Preset STOPPED at "+time());
+		saveFile("["+time()+"] Preset STOPPED");
 	}
 
 	//Catalogue
 	public void addHistoryCatalogue(double Ra, double Dec){
-		saveFile("Go to RA: "+Ra+" ,Dec: "+Dec+" from Catalogue at "+time());
+		saveFile("["+time()+"] Go to RA: "+Ra+" ,Dec: "+Dec+" from Catalogue");
 	}
 
 	//Tracking
 	public void addHistoryTracking(boolean status){
 		if(status){
-			saveFile("Tracking DISABLE at "+time());
+			saveFile("["+time()+"] Tracking DISABLE");
 		}
 		else{
-			saveFile("Tracking ENABLE at "+time());
+			saveFile("["+time()+"] Tracking ENABLE");
 		}	
 	}
 
 	//Zennith
 	public void addHistoryZennith(){
-		saveFile("Go to Zennith at "+time());
+		saveFile("["+time()+"] Go to Zennith");
 	}
 
 	//Park
 	public void addHistoryPark(){
-		saveFile("Go to Park at "+time());
+		saveFile("["+time()+"] Go to Park");
 	}
 
 	public void addHistoryLogin(String name){
-		saveFile("\n"+name+" is Log In at "+time());
+		saveFile("------------------------------------------------\n["+time()+"] "+name+" is Log In");
 	}
 
 
