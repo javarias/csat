@@ -106,11 +106,7 @@ public class CCDImpl implements CCDOperations, ComponentLifecycle {
 		{
 		if( devCCD_comp != null ){
 			int image[] = devCCD_comp.image(0);
-			img.value = new int[921600];
-			if(image!=null)
-				for(int i=0;i<img.value.length;i++)
-					img.value[i]=image[i];
-			//img.value = image;
+			img.value = image;
 			m_logger.info("Got preview image. Size: " + image.length);
 			MyResponderUtil.respond(cb, desc);
 		}
