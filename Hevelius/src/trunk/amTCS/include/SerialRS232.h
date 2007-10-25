@@ -106,7 +106,7 @@ public:
 	 * Writes a buffer to the port.
 	 * @param s buffer to be written (char *)
 	 */
-	void write_RS232(const char * s, int lenght) throw (SerialRS232Exception &);
+	void write_RS232(const char * s,unsigned int lenght) throw (SerialRS232Exception &);
 	
 	/**
 	 * Flushes the serial port.
