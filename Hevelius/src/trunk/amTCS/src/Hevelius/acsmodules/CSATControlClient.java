@@ -131,7 +131,7 @@ public class CSATControlClient extends ComponentClient
 			CBvoid cb = null;
 			try
 			{
-				cb = MyRequesterUtil.giveCBVoid(cs, rere);;
+				cb = MyRequesterUtil.giveCBVoid(cs, rere);
 			}
 			catch(AcsJContainerServicesEx e)
 			{
@@ -195,7 +195,7 @@ public class CSATControlClient extends ComponentClient
                         CBvoid cb = null;
                         try
                         {
-                                cb = MyRequesterUtil.giveCBVoid(cs, rere);;
+                                cb = MyRequesterUtil.giveCBVoid(cs, rere);
                         }
                         catch(AcsJContainerServicesEx e)
                         {
@@ -239,7 +239,36 @@ public class CSATControlClient extends ComponentClient
 	{
 		if(cscontrol!=null)
 		{
-			cscontrol.getPreviewImage(img, null, null);
+
+			MyResponseReceiver rere  =  new MyResponseReceiver() {
+                                public void incomingResponse(Object x) {
+                                        System.out.println("Incoming Response: "+x);
+                                }
+                                public void incomingResponse() {
+					System.out.println("Image received");
+                                }
+                                public void incomingException(Exception e) {
+                                        System.out.println("Responding failed: "+e);}
+
+                        };
+
+			ContainerServices cs = getContainerServices();
+                        //MovementCB cb = new MovementCB();
+                        //cscontrol.preset(p, null, desc);
+                        CBstring cbs = null;
+                        CBvoid cb = null;
+
+                        try
+                        {
+                                cb = MyRequesterUtil.giveCBVoid(cs, rere);
+                        }
+                        catch(AcsJContainerServicesEx e)
+                        {
+                        }
+
+			if(img==null)
+				img = new ImageHolder();
+			cscontrol.getPreviewImage(img, cb, MyRequesterUtil.giveDescIn());
 		}
 	}
 

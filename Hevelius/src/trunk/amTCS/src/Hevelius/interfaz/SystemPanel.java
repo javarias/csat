@@ -179,6 +179,16 @@ public class SystemPanel extends JPanel
 			CSATStatusClient temp2;
 			if(interfaz.getDrawingPanel().getCSATControl()!=null)
 				interfaz.getDrawingPanel().getCSATControl().stopTelescope();
+			boolean w1,w2,w3;
+			w1 = interfaz.getDrawingPanel().getScreenPanel().getThreadState();
+			w2 = interfaz.getDrawingPanel().getSafetyInstance().getThreadState();
+                        w3 = interfaz.getDrawingPanel().getSideralUpdateInstance().getThreadState();
+			while(w1 || w2 || w3)
+			{
+				w1 = interfaz.getDrawingPanel().getScreenPanel().getThreadState();
+	                        w2 = interfaz.getDrawingPanel().getSafetyInstance().getThreadState();
+        	                w3 = interfaz.getDrawingPanel().getSideralUpdateInstance().getThreadState();
+			}
 			temp1 = interfaz.getDrawingPanel().getCSATControl();
 			temp2 = interfaz.getDrawingPanel().getCSATStatus();
 			interfaz.getDrawingPanel().setCSATControl(null);

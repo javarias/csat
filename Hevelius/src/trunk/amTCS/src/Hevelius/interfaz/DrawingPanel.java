@@ -530,6 +530,16 @@ public class DrawingPanel extends JPanel
 		return csats;
 	}
 
+	public Safety getSafetyInstance()
+	{
+		return sfty;
+	}
+
+	public SideralUpdate getSideralUpdateInstance()
+	{
+		return sdrl;
+	}
+
 	public int getDx()
 	{
 		return this.dx;

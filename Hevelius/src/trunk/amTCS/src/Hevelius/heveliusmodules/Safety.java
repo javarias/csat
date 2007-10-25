@@ -17,6 +17,7 @@ import alma.TYPES.*;
 
 public class Safety implements Runnable
 {
+	private boolean working = false;
 	/**
 	* Method that is executed independently with each thread that 
 	* is created from the class.
@@ -24,10 +25,9 @@ public class Safety implements Runnable
 	public void run(){
 		while(true){
 			try{
-				//interfaz.getDrawingPanel().getCSATStatus().getSafety()
-
 				if(interfaz.getDrawingPanel().getCSATStatus()!=null)
                                 {
+					working = true;
                                         try
                                         {
 						RadecPos rd = new RadecPos();
@@ -39,6 +39,7 @@ public class Safety implements Runnable
                                         {
                                                 e.printStackTrace();
                                         }
+					working = false;
                                 }
                                 //Thread.sleep(300000);
 				Thread.sleep(20000);
@@ -50,5 +51,12 @@ public class Safety implements Runnable
 			}
 		}
 	}
-
+	/**
+	* Method used to retrieve information about Thread status, to know 
+	* if it is secure to stop the ACS components.
+	*/
+	public boolean getThreadState()
+	{
+		return working;
+	}
 }

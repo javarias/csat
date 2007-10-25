@@ -2,7 +2,10 @@
 static char *rcsId="@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
-#include <lpiImpl.h>
+#include <stdlib.h>
+#include "lpiFrameDevIO.h"
+#include "NexstarAltDevIO.h"
+#include "lpiImpl.h"
 
 using namespace baci;
 
@@ -12,7 +15,6 @@ lpiImpl::lpiImpl(const ACE_CString& name, maci::ContainerServices *containerServ
       ,m_frame_sp(this)
 {
 	component_name = name.c_str();
-	ACS_TRACE("lpiImpl::lpiImpl");
 	m_device = "/dev/video0";
 	m_locking = true;
 }
@@ -26,17 +28,29 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 {
 	ACS_TRACE("lpiImpl::initialize");
 	if( getComponent() != 0){
-		m_frame_sp = new ROlongSeq( (component_name
-		                             + std::string(":frame")).c_str(),
-		                             getComponent());
+		m_frame_sp = new ROlongSeq( (component_name + std::string(":frame")).c_str(),
+		                             getComponent(), new lpiFrameDevIO("/dev/video0"),true);
 	}
 }
-
 
 /* IDL implementation */
 
 TYPES::Image* lpiImpl::image(CORBA::Double exposure) throw (CORBA::SystemException){
-	return new TYPES::Image();
+	
+	ACSErr::Completion_var comp;
+	unsigned int length = 640*480*3;
+
+	ACS::longSeq *frame = m_frame_sp->get_sync(comp.out());
+
+//	TYPES::Image image = new TYPES::Image(length);
+//	image->length(length);
+	TYPES::Image_var image = TYPES::Image(length);
+	image->length((CORBA::ULong)length);
+	for(unsigned int i=0;i!=length;i++)
+		image[i] = frame[0][i];
+	
+	ACS_SHORT_LOG((LM_INFO,"lpiImpl::image: Obtained the Image"));
+	return image._retn();
 }
 
 void lpiImpl::lock() throw (CORBA::SystemException){

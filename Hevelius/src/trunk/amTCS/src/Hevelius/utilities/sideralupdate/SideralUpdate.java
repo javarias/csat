@@ -10,6 +10,7 @@ public class SideralUpdate implements Runnable
 	private RadecPosHolder r; 
 	private AltazPosHolder a;
 	private double ST;
+	private boolean working = false;
 
 	public SideralUpdate(){
 		r = new RadecPosHolder();
@@ -22,9 +23,9 @@ public class SideralUpdate implements Runnable
 		{
 			try
 			{
-//				interfaz.getDrawingPanel().repaint();
 				if(interfaz.getDrawingPanel().getCSATStatus()!=null)
 				{
+					working = true;
 					try
 					{
 						interfaz.getDrawingPanel().getCSATStatus().getPos(r,a);
@@ -41,6 +42,7 @@ public class SideralUpdate implements Runnable
 					{
 						e.printStackTrace();
 					}
+					working = false;
 				}
 				Thread.sleep(1000);
 			}
@@ -50,4 +52,8 @@ public class SideralUpdate implements Runnable
 			}
 		}
 	}
+	public boolean getThreadState()
+        {
+                return working;
+        }
 }

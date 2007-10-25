@@ -63,7 +63,7 @@ LIBRARIES_L     =
 # <brief description of lllll library>
 NexstarImpl_OBJECTS   = NexstarImpl NexstarAltDevIO NexstarAzmDevIO SerialRS232
 NexstarImpl_LIBS      = TypesStubs DevTelescopeStubs
-lpiImpl_OBJECTS       = lpiImpl
+lpiImpl_OBJECTS       = lpiFrameDevIO lpiImpl
 lpiImpl_LIBS          = TypesStubs DevCCDStubs
 eTrexImpl_OBJECTS     = eTrexImpl
 eTrexImpl_LIBS        = TypesStubs DevGPSStubs
@@ -134,7 +134,7 @@ SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
 Hevelius_DIRS=Hevelius/
-Hevelius_EXTRAS=Hevelius/images/
+Hevelius_EXTRAS=Hevelius/images/ Hevelius/catalogues/
 callbacks_DIRS=alma/acs/callbacks
 jjj_EXTRAS= 
 #
