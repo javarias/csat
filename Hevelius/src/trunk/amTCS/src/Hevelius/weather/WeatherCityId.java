@@ -1,3 +1,10 @@
+/**
+* Esta clase se encarga de setear el nombre de la ciudad 
+* a buscar y de setear el Id correspondiente.
+* Tambien posee sus respectivos get's para poder
+* tener acceso a ellos.
+*/
+
 package Hevelius.weather;
 import java.net.*;
 import java.io.*;

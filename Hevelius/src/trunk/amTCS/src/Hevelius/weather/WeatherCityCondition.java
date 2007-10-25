@@ -1,3 +1,11 @@
+/**
+* Esta clase corresponde al tipo del cual se genera
+* un vector posteriormente, y contiene todos los datos
+* climaticos correspondiente a una ciudad.
+* Contiene los metodos get y set para setear los valores
+* y tambien para obtenerlos posteriormente.
+*/
+
 package Hevelius.weather;
 
 import java.net.*;

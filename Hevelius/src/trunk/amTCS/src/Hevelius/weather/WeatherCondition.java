@@ -1,3 +1,8 @@
+/**
+* Clase encargada de obtener todos los datos correspondientes
+* a la ciudad seleccionada
+*/
+
 package Hevelius.weather;
 
 import java.io.*;
@@ -11,10 +16,21 @@ public class WeatherCondition
 	Matcher mat;
 	public static Vector<WeatherCityCondition> vector_condition;
 	private String id;
+	/**
+	* Este contructor se encarga de resibir el Id de la ciudad elejida 
+	* y lo setea en las variables locales para luego ser utilizadas.
+	* @param id String que contiene el Id de la ciudad elejida.
+	*/
 	public WeatherCondition(String id)
 	{
 		this.id = id;
 	}
+	/**
+	* Esta funcion parsea los datos obtenidos de la URL weather.com
+	* y obtiene los datos meteorologicos de la ciudad correspondiente
+	* @return	Vector vector_conditon es un vector que contiene datos del tipo WeatherCityCondition
+	* el cual contiene los datos atmosfericos de la ciudad seleccionada.
+	*/
 	public Vector ListCityCondition()
 	{
 		try
