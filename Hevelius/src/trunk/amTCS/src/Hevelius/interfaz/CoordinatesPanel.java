@@ -246,7 +246,7 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 		add(ccoorAz);
 
 		//Catalogue Button
-		catalogue = new JButton("Change Coordinates");
+		catalogue = new JButton("Coordinate Type");
 		catalogue.setSize(130,20);
 		catalogue.setMargin(new Insets(0,0,0,0));
 		add(catalogue);

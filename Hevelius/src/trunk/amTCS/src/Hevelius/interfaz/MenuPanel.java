@@ -149,6 +149,7 @@ public class MenuPanel extends JPanel //implements Runnable
 
 					public void mouseEntered(MouseEvent event){
 					menu_config.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/conf-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					menu_config.setToolTipText("Configuration");
 					}
 
 					public void mouseReleased(MouseEvent event){
@@ -183,6 +184,7 @@ public class MenuPanel extends JPanel //implements Runnable
 
 					public void mouseEntered(MouseEvent event){
 					menu_help.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/help-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					menu_help.setToolTipText("Help");
 					}
 
 					public void mouseReleased(MouseEvent event){
@@ -217,6 +219,7 @@ public class MenuPanel extends JPanel //implements Runnable
 
                                         public void mouseEntered(MouseEvent event){
                                         menu_history.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/history-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					menu_history.setToolTipText("History");
                                         }
 
                                         public void mouseReleased(MouseEvent event){
@@ -254,6 +257,7 @@ public class MenuPanel extends JPanel //implements Runnable
 
                                         public void mouseEntered(MouseEvent event){
                                         menu_login.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("Hevelius/images/login-encima.png")).getImage().getScaledInstance(dy-dy*12/40,dy-dy*12/40,Image.SCALE_SMOOTH)));
+					menu_login.setToolTipText("Login/Start TCS");
                                         }
 
                                         public void mouseReleased(MouseEvent event){

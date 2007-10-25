@@ -50,7 +50,7 @@ public class SystemPanel extends JPanel
 
 		//TCS Start Button
 		start = new JButton("Start TCS");
-		start.setSize(100,20);
+		start.setSize(150,30);
 		add(start);
 		start.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
@@ -92,7 +92,7 @@ public class SystemPanel extends JPanel
 
 		//TCS Stop Button
 		stop = new JButton("Stop TCS");
-		stop.setSize(100,20);
+		stop.setSize(150,30);
 		add(stop);
 		stop.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
@@ -111,7 +111,7 @@ public class SystemPanel extends JPanel
 
 		//Shutdown Button
 		shutdown = new JButton("Shutdown");
-		shutdown.setSize(100,20);
+		shutdown.setSize(150,30);
 		add(shutdown);
 
 		shutdown.addActionListener(new ActionListener(){
@@ -155,17 +155,17 @@ public class SystemPanel extends JPanel
 			system.setFont(system.getFont().deriveFont(fsize));
 			system.setSize((int)(100*osize),(int)(20*osize));*/
 
-			start.setLocation((int)(100*osize),(int)(30*osize));
+			start.setLocation((int)(75*osize),(int)(30*osize));
 			start.setFont(start.getFont().deriveFont(fsize));
-			start.setSize((int)(100*osize),(int)(20*osize));
+			start.setSize((int)(150*osize),(int)(30*osize));
 
-			stop.setLocation((int)(100*osize),(int)(55*osize));
+			stop.setLocation((int)(75*osize),(int)(75*osize));
 			stop.setFont(stop.getFont().deriveFont(fsize));
-			stop.setSize((int)(100*osize),(int)(20*osize));
+			stop.setSize((int)(150*osize),(int)(30*osize));
 
-			shutdown.setLocation((int)(100*osize),(int)(80*osize));
+			shutdown.setLocation((int)(75*osize),(int)(120*osize));
 			shutdown.setFont(shutdown.getFont().deriveFont(fsize));
-			shutdown.setSize((int)(100*osize),(int)(20*osize));
+			shutdown.setSize((int)(150*osize),(int)(30*osize));
 		}
 	}
 

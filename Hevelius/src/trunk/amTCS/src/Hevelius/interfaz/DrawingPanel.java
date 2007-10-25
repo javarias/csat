@@ -275,7 +275,7 @@ public class DrawingPanel extends JPanel
 
 		if(updatePanel)
 		{
-			Border line = BorderFactory.createLineBorder(Color.GRAY);
+			Border line = BorderFactory.createLineBorder(Color.DARK_GRAY);
 		
 			
 
@@ -291,8 +291,8 @@ public class DrawingPanel extends JPanel
 			//spane.setLocation(dx-120,dy-160);
 			//spane.setSize(120,120);
 			//spane.setLocation(dx-140,dy-170);
-			spane.setLocation(dx*5/7+dx/30,dy*5/6);
-			spane.setSize(dx*2/7-dx*2/30,dy*1/6-dy/40);
+			spane.setLocation(dx*5/7+dx/30,dy*5/6-dy*2/40);
+			spane.setSize(dx*2/7-dx*2/30,dy*1/6+dy/40);
 			Border sBorder = BorderFactory.createTitledBorder(line, "SYSTEM");
                         spane.setBorder(sBorder);
 
@@ -309,7 +309,7 @@ public class DrawingPanel extends JPanel
 			//tspane.setLocation(0,230);
 			//tspane.setSize(180,200);
 			//tspane.setLocation(dx-200,dy/2+10);
-			tspane.setLocation(dx*5/7+dx/30,dy/2+dy*2/40);
+			tspane.setLocation(dx*5/7+dx/30,dy/2+dy*3/40);
 			tspane.setSize(dx*2/7-dx*2/30,dy/6);
 			//Border line = BorderFactory.createLineBorder(Color.DARK_GRAY);
                         Border tsBorder = BorderFactory.createTitledBorder(line, "TELESCOPE STATUS");
