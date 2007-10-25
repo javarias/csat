@@ -78,10 +78,10 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glLoadIdentity();
 		glu.gluLookAt(0, 0, 5, 0, 0, 0, 0, 1, 0);
 
-		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient,1);
-		gl.glMaterialfv(GL.GL_FRONT, GL.GL_DIFFUSE, mat_diffuse,1);
-		gl.glMaterialfv(GL.GL_FRONT, GL.GL_SPECULAR, mat_specular,1);
-		gl.glMaterialfv(GL.GL_FRONT, GL.GL_SHININESS, mat_shininess,1);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_AMBIENT, mat_ambient,0);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_DIFFUSE, mat_diffuse,0);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_SPECULAR, mat_specular,0);
+		gl.glMaterialfv(GL.GL_FRONT, GL.GL_SHININESS, mat_shininess,0);
 		//if(interfaz.getDrawingPanel().getCSATControl()!=null && interfaz.getDrawingPanel().getCSATStatus()!=null){
 			prepare_scene();
 			render_scene(drawable);

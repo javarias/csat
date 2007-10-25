@@ -78,66 +78,60 @@ public class WindowLogin extends JDialog
 				pat = Pattern.compile("(.+)(\\s)(.+)");
 				mat = pat.matcher(name);
 				System.out.println("NAME ="+name);
-				if( name.equals(""))
-				{
-				JOptionPane.showMessageDialog(interfaz.getMainFrame(), "Ingrese un usuario valido !","Login - Error", JOptionPane.INFORMATION_MESSAGE);
+				if( name.equals("")){
+					JOptionPane.showMessageDialog(interfaz.getMainFrame(), "Ingrese un usuario valido !","Login - Error", JOptionPane.INFORMATION_MESSAGE);
 				}
-				else
-				{
+				else{
 
-				mat = pat.matcher(name);
-				if( mat.find() )
-				{
-					JOptionPane.showMessageDialog(interfaz.getMainFrame(), message,"Login - Error", JOptionPane.INFORMATION_MESSAGE);
-				}
-				else {
-
-
-					if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null){
+					mat = pat.matcher(name);
+					if( mat.find() ){
+						JOptionPane.showMessageDialog(interfaz.getMainFrame(), message,"Login - Error", JOptionPane.INFORMATION_MESSAGE);
+					}
+					else {
+						if(interfaz.getDrawingPanel().getCSATControl() == null && interfaz.getDrawingPanel().getCSATStatus() == null){
 
 						/* conf.setOption("user",jTextField1.getText());
 						   conf.store();
 						   hist.addHistoryLogin(jTextField1.getText());*/
 
-						try
-						{
-							interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
-							interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
-
-							if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
-								interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
-								interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
-								interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+							try
+							{
+								interfaz.getDrawingPanel().setCSATControl(CSATControlClient.start());
+								interfaz.getDrawingPanel().setCSATStatus(CSATStatusClient.start());
+	
+								if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+									interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(1);
+									interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
+									interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
+								}
+								if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
+        	                                                        interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getWeatherPanel());
+                	                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getTelStatusPanel());
+                        	                                        interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getScreenPanel());
+                                	                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getCoordinatesPanel());
+                                        	                        interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getVirtualTelescopePanel());
+                                                	                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getCataloguePanel());
+									interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getSiderealPanel());
+	                                                        }
+	
 							}
-							if(interfaz.getDrawingPanel().getCSATControl() != null && interfaz.getDrawingPanel().getCSATStatus() != null){
-                                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getWeatherPanel());
-                                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getTelStatusPanel());
-                                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getScreenPanel());
-                                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getCoordinatesPanel());
-                                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getVirtualTelescopePanel());
-                                                                interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getCataloguePanel());
-								interfaz.getDrawingPanel().enablePanel(interfaz.getDrawingPanel().getSiderealPanel());
-                                                        }
+							catch(Exception err){
+								err.printStackTrace();
+							}
+						}	
 
-						}
-						catch(Exception err)
-						{
-							err.printStackTrace();
-						}
+
+						conf.setOption("user",jTextField1.getText());
+						conf.store();
+						hist.addHistoryLogin(jTextField1.getText());
+						System.out.println(jTextField1.getText());
+						//jTextField1.setText(" ");
 					}
-
-
-					conf.setOption("user",jTextField1.getText());
-					conf.store();
-					hist.addHistoryLogin(jTextField1.getText());
-					System.out.println(jTextField1.getText());
-					//jTextField1.setText(" ");
-				}
 				}
 				setVisible(false);
 				}
 		});
-
+		
 
 
 
