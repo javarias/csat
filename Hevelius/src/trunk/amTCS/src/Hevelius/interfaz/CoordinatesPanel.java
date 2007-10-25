@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
 import alma.TYPES.*;
-
+import javax.swing.JOptionPane;
 import java.io.*;
 import javax.imageio.*;
 
@@ -147,13 +147,24 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 				boolean cond = true;
 
 				try{
-					c1 = Double.parseDouble(coor1.getText());
-					c2 = Double.parseDouble(coor2.getText());
+					 if(test.getOption("coordinate")==1 &&  Double.parseDouble(coor1.getText())>=0 &&  Double.parseDouble(coor1.getText()) <=360 &&  Double.parseDouble(coor1.getText())<=-180 &&  Double.parseDouble(coor2.getText()) >=180){
+						c1 = Double.parseDouble(coor1.getText());
+						c2 = Double.parseDouble(coor2.getText());
+					}
+					else
+						 JOptionPane.showMessageDialog(interfaz.getMainFrame(), "values Alt 0 - 90 and Az 0 - 360 ","Coordinates - Error", JOptionPane.INFORMATION_MESSAGE);	
+					 if(test.getOption("coordinate")==0 &&  Double.parseDouble(coor1.getText())>=0 &&  Double.parseDouble(coor1.getText()) <=90 &&  Double.parseDouble(coor2.getText())<=0 &&  Double.parseDouble(coor2.getText()) >=360){
+                                                c1 = Double.parseDouble(coor1.getText());
+                                                c2 = Double.parseDouble(coor2.getText());
+                                        }
+                                        else
+                                                 JOptionPane.showMessageDialog(interfaz.getMainFrame(), "values Ra 0 - 360 and Dec -180 - 180 ","Coordinates - Error", JOptionPane.INFORMATION_MESSAGE);
 				}
+
 				catch(Exception exc){
 					cond = false;
 				}
-				
+				 JOptionPane.showMessageDialog(interfaz.getMainFrame(), "values 0 - 90","Login - Error", JOptionPane.INFORMATION_MESSAGE);
 				//tmp1=Float.parseFloat(coor1.getText());
 				//tmp2=Float.parseFloat(coor2.getText());
 				if(cond){
