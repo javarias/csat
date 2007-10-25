@@ -128,12 +128,11 @@ public class CataloguePanel extends JPanel
 			private String[] columnNames = {"Name",
 				"Ra",
 				"Dec",
-				"Epoch",
-				"A"};
+				"Epoch"};
 
 			CatalogueInfo[] catData = null;
 
-			private Object[][] data = {{"none","none","none","none","none"}};
+			private Object[][] data = {{"none","none","none","none"}};
 
 			public int getColumnCount() {
 				return columnNames.length;
@@ -208,12 +207,12 @@ public class CataloguePanel extends JPanel
 				}
 				else
 				{
-					data = new String[1][5];
+					data = new String[1][4];
 					data[0][0]= "none";
 					data[0][1]= "none";
 					data[0][2]= "none";
 					data[0][3]= "none";
-					data[0][4]= "none";
+					//data[0][4]= "none";
 				}
 				//System.out.println(data[0][0]);
 				fireTableStructureChanged();
@@ -303,7 +302,7 @@ public class CataloguePanel extends JPanel
 						data[k][1]= Double.toString(temp.getRa());
 						data[k][2]= Double.toString(temp.getDec());
 						data[k][3]= "1950";
-						data[k][4]= "none";
+						//data[k][4]= "none";
 						k++;
 					}
 				}

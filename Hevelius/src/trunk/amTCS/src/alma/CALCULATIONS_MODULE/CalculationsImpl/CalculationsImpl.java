@@ -130,7 +130,7 @@ public class CalculationsImpl implements CalculationsOperations, ComponentLifecy
 		AZ = Math.sin(LAT*Math.PI/180)*Math.cos(HA*Math.PI/180);
 		AZ -= Math.tan(DEC*Math.PI/180)*Math.cos(LAT*Math.PI/180);
 		AZ = Math.atan2(Math.sin(HA*Math.PI/180), AZ)*180/Math.PI;
-		AZ += 180;
+		//AZ += 180;
 
 /*
 		AZ = Math.sin(DEC*Math.PI/180) -Math.sin(ALT*Math.PI/180)*Math.sin(LAT*Math.PI/180);
@@ -177,7 +177,7 @@ public class CalculationsImpl implements CalculationsOperations, ComponentLifecy
 		HA = (180/Math.PI)*Math.acos((Math.sin(Math.PI*ALT/180) - (Math.sin(Math.PI*DEC/180)*Math.sin(Math.PI*LAT/180))) / (Math.cos(Math.PI*DEC/180)*Math.cos(Math.PI*LAT/180)));
 */
 
-		AZ = AZ-180;
+		//AZ = AZ-180;
 		HA = Math.cos(Math.PI*AZ/180)*Math.sin(Math.PI*LAT/180);
 		HA += Math.tan(Math.PI*ALT/180)*Math.cos(Math.PI*LAT/180);
 		HA = Math.atan2(Math.sin(Math.PI*AZ/180),HA)*180/Math.PI;
