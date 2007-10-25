@@ -16,7 +16,7 @@ module DEVGPS_MODULE {
 
 	/**
 	 * @interface DevGPS
-	 * The DecGPS interface defines a DevGPS-like ACS component that will
+	 * The DevGPS interface defines a DevGPS-like ACS component that will
 	 * be the one in charge of communicate with the hardware itself. The
 	 * main purpose of this interface is to get from the hardware (a GPS)
 	 * the data that interests us (position and time)
