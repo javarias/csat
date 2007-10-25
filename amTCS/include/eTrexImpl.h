@@ -9,6 +9,7 @@
 #include <baciSmartPropertyPointer.h>
 
 #include <baciROdouble.h>
+#include <baciROlongLong.h>
 
 #include <DevGPSS.h>
 #include <TypesC.h>
@@ -39,7 +40,7 @@ public:
 
 	virtual bool locking() throw (CORBA::SystemException);
 
-	virtual ACS::ROdouble_ptr time() throw (CORBA::SystemException);
+	virtual ACS::ROlongLong_ptr time() throw (CORBA::SystemException);
 
 	virtual ACS::ROdouble_ptr latitude() throw (CORBA::SystemException);
 
@@ -48,7 +49,7 @@ public:
 private:
 
 	// Properties
-	SmartPropertyPointer<ROdouble>  m_time_sp;
+	SmartPropertyPointer<ROlongLong>  m_time_sp;
 	SmartPropertyPointer<ROdouble>  m_latitude_sp;
 	SmartPropertyPointer<ROdouble>  m_longitude_sp;
 

@@ -31,8 +31,11 @@ module DEVGPS_MODULE {
 		 */
 		readonly attribute boolean locking;
 
-		/** Property for reading the time from the GPS */
-		readonly attribute ACS::ROdouble time;
+		/** Property for reading the time from the GPS. This time will be
+		 * translated to the one that corresponds to the Epoch ((00:00:00 UTC,
+		 * January 1, 1970
+		 */
+		readonly attribute ACS::ROlongLong time;
 
 		/** Property for reading the latitude from the GPS */
 		readonly attribute ACS::ROdouble latitude;
