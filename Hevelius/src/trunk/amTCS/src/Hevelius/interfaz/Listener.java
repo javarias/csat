@@ -1,3 +1,7 @@
+/**
+* Esta clase es la encargada de dibujar el modelo virtual del telescopio
+* en OpenGL.
+*/
 package Hevelius.interfaz;
 
 import javax.swing.*;
@@ -89,7 +93,7 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glFlush();
 
 	}
-
+	
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 		GL gl = drawable.getGL();
 		GLU glu = new GLU();
@@ -137,6 +141,10 @@ public class Listener implements GLEventListener, MouseListener {
 		dialog = diag;
 		animator = a;
 	}
+	/**
+	* Metodo encargado  de dibujar el modelo virtual
+	* del telescopio, parte por parte.
+	*/
 	public void init_scene(GLAutoDrawable drawable)
         {
                 GL gl =drawable.getGL();
@@ -298,7 +306,10 @@ public class Listener implements GLEventListener, MouseListener {
 		glu.gluDeleteQuadric(quadric);
 		gl.glEndList();
 	}
-
+	/**
+	* Metodo encargado de buscar el camino mas corto para el movimiento
+	* del telescopio virtual. 
+	*/
 	public void prepare_scene()
 	{
 		if(Math.abs(alt -angle) >= 1f || Math.abs(az-angle2) >= 1f )
@@ -343,28 +354,43 @@ public class Listener implements GLEventListener, MouseListener {
 
 		}
 	}
-
+	/**
+	* Metodo encargado de realizar la llama a los metodos MoveToAlt y MoveToAz.
+	*/
 	public void render_scene(GLAutoDrawable drawable)
 	{
 		MoveToAlt(drawable);
 		MoveToAz(drawable);
 	}
-
+	/**
+	* Metodo encargado de invcrementar el angulo de azimuth del telescopio virtual.
+	*/
 	public void IncreaseAngleAz(){
 			angle2 = angle2 + vel;
 	}
+	/**
+	* Metodo encargado de incrementar el angulo de altitud del telescopio virtual.
+	*/
 	public void IncreaseAngleAlt(){
 			angle = angle + vel;
 	}
-
+	/**
+        * Metodo encargado de decreser el angulo de azimuth del telescopio virtual.
+        */
 	public void DecreaseAngleAz(){
 			angle2 = angle2 - vel;
 	}
+	/**
+        * Metodo encargado de decreser el angulo de altitud del telescopio virtual.
+        */
 	public void DecreaseAngleAlt(){
 			angle = angle - vel;
 	}
 
-
+	/**
+        * Metodo encargado de dibujar el movimiento en altitud 
+	* del telescopio virtual.
+        */
 	public void MoveToAlt(GLAutoDrawable drawable)
 	{
 		GL gl = drawable.getGL();
@@ -378,6 +404,11 @@ public class Listener implements GLEventListener, MouseListener {
 
 
 	}
+	/**
+        * Metodo encargado de dibujar el movimiento en azimuth 
+        * del telescopio virtual.
+        */
+
 	public void MoveToAz(GLAutoDrawable drawable)
 	{
 		GL gl = drawable.getGL();
@@ -390,7 +421,12 @@ public class Listener implements GLEventListener, MouseListener {
 		gl.glCallList(BaseDisplayList);
 		gl.glPopMatrix();
 	}
-
+	/**
+	* Metodo encargado de setear las coordenadas finales
+	* a las que se debe llegar con el telescopio virtual
+	* @param Alt Float que contiene la coordenada destino de la altitud.
+	* @param Az Float que contiene la coordenada destino del azimuth
+	*/
 	public void setAltAzDest(float Alt, float Az)
 	{
 
