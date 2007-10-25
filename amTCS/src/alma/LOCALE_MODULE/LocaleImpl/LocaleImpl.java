@@ -24,33 +24,45 @@ package alma.LOCALE_MODULE.LocaleImpl;
 
 import java.util.logging.Logger;
 import java.util.Calendar;
+import java.util.Date;
 
 import alma.ACS.*;
 import alma.TYPES.*;
 import alma.acs.component.ComponentLifecycle;
+import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
+import alma.ACSErr.CompletionHolder;
+
 import alma.LOCALE_MODULE.LocaleOperations;
+import alma.DEVGPS_MODULE.DevGPS;
 
 public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
 
-	private double longitude;
-	private double latitude;
+	private DevGPS devGPS_comp;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
 	/////////////////////////////////////////////////////////////
 	
-	public void initialize(ContainerServices containerServices) {
+	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException {
 		m_containerServices = containerServices;
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
 
-		//longitude = -71.53;
-		longitude = 0;
-		latitude = -32.78;
+		org.omg.CORBA.Object obj = null;
+
+		/* We get the DevTelescope reference */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/DEVGPS_MODULE/DevGPS:1.0");
+			devGPS_comp = alma.DEVGPS_MODULE.DevGPSHelper.narrow(obj);
+		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get DevGPS default component reference");
+			throw new ComponentLifecycleException("Failed to get DevGPS component reference");
+		}
+		
 	}
     
 	public void execute() {
@@ -94,13 +106,28 @@ public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 		double  MST;
 		double LMST;
 
+		//Calendar calendario = Calendar.getInstance();
+		//hora =calendario.get(Calendar.HOUR_OF_DAY);
+		//min = calendario.get(Calendar.MINUTE);
+		//sec = calendario.get(Calendar.SECOND);
+		//an_o = calendario.get(Calendar.YEAR);
+		//dia = calendario.get(Calendar.DAY_OF_MONTH);
+		//mes = calendario.get(Calendar.MONTH)+ 1;
+
+		CompletionHolder completionHolder = new CompletionHolder();
+		Date myDate = new Date(devGPS_comp.time().get_sync(completionHolder)*1000);
 		Calendar calendario = Calendar.getInstance();
-		hora =calendario.get(Calendar.HOUR_OF_DAY);
-		min = calendario.get(Calendar.MINUTE);
-		sec = calendario.get(Calendar.SECOND);
+		calendario.setTime(myDate);
+
+		hora = calendario.get(Calendar.HOUR_OF_DAY);
+		min  = calendario.get(Calendar.MINUTE);
+		sec  = calendario.get(Calendar.SECOND);
 		an_o = calendario.get(Calendar.YEAR);
-		dia = calendario.get(Calendar.DAY_OF_MONTH);
-		mes = calendario.get(Calendar.MONTH)+ 1;
+		dia  = calendario.get(Calendar.DAY_OF_MONTH);
+		mes  = calendario.get(Calendar.MONTH)+ 1;
+
+		m_logger.info("Obtained date: " + hora + " hours, " + min + " minutes and " + sec + " seconds. (UTC)");
+		m_logger.info("Today is the " + dia + "/" + mes + "/" + an_o + " (UTC)");
 
 		if((mes == 1) || (mes == 2))
 		{
@@ -131,7 +158,7 @@ public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 		while(MST<0)
 			MST += 360;
 
-		LMST = MST + longitude; //Se centra el MST en el punto de observacion.
+		LMST = MST + devGPS_comp.longitude().get_sync(completionHolder); //Se centra el MST en el punto de observacion.
 
 		while(LMST>360)
 			LMST -= 360;
@@ -142,9 +169,10 @@ public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 	}
 
 	public EarthPos localPos(){
-		EarthPos earthPos = new EarthPos();
-		earthPos.latitude = latitude;
-		earthPos.longitude = longitude;
+		CompletionHolder completionHolder = new CompletionHolder();
+		EarthPos earthPos  = new EarthPos();
+		earthPos.latitude  = devGPS_comp.latitude().get_sync(completionHolder);
+		earthPos.longitude = devGPS_comp.longitude().get_sync(completionHolder);
 		return earthPos;
 	}
 

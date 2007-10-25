@@ -2,7 +2,8 @@
 static char *rcsId="@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
-#include <eTrexImpl.h>
+#include "eTrexImpl.h"
+#include "eTrexTimeDevIO.h"
 
 using namespace baci;
 
@@ -36,9 +37,9 @@ void eTrexImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 		                             + std::string(":longitude")).c_str(),
 		                             getComponent());
 
-		m_time_sp = new ROdouble( (component_name
+		m_time_sp = new ROlongLong( (component_name
 		                          + std::string(":time")).c_str(),
-		                          getComponent());
+		                          getComponent(), new eTrexTimeDevIO());
 	}
 }
 
@@ -63,11 +64,11 @@ bool eTrexImpl::locking() throw (CORBA::SystemException){
 }
 
 /* Properties returning */
-ACS::ROdouble_ptr eTrexImpl::time() throw (CORBA::SystemException){
+ACS::ROlongLong_ptr eTrexImpl::time() throw (CORBA::SystemException){
 	if( m_time_sp == 0 ){
-		return ACS::ROdouble::_nil();
+		return ACS::ROlongLong::_nil();
 	}
-	ACS::ROdouble_var prop = ACS::ROdouble::_narrow(m_time_sp->getCORBAReference());
+	ACS::ROlongLong_var prop = ACS::ROlongLong::_narrow(m_time_sp->getCORBAReference());
 	return prop._retn();
 }
 

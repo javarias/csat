@@ -65,7 +65,7 @@ NexstarImpl_OBJECTS   = NexstarImpl NexstarAltDevIO NexstarAzmDevIO SerialRS232
 NexstarImpl_LIBS      = TypesStubs DevTelescopeStubs
 lpiImpl_OBJECTS       = lpiFrameDevIO lpiImpl
 lpiImpl_LIBS          = TypesStubs DevCCDStubs
-eTrexImpl_OBJECTS     = eTrexImpl
+eTrexImpl_OBJECTS     = eTrexTimeDevIO eTrexImpl
 eTrexImpl_LIBS        = TypesStubs DevGPSStubs
 
 #
