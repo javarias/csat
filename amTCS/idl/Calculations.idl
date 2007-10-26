@@ -45,7 +45,7 @@ module CALCULATIONS_MODULE {
 		 * @param month The Gregorian month (January=1, February=2, ...)
 		 * @param day   The month's day, with decimals if neccesary
 		 */
-		double greg2Jul(in long year, in long month, in double day);
+		double greg2JD(in long year, in long month, in double day);
 	};
 
 };

@@ -4,7 +4,6 @@ static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
 #include <stdlib.h>
 #include "lpiFrameDevIO.h"
-#include "NexstarAltDevIO.h"
 #include "lpiImpl.h"
 
 using namespace baci;
