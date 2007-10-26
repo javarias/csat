@@ -119,8 +119,7 @@ USER_IDL =
 # Jarfiles and their directories
 #
 JARFILES= NexSimImpl
-NexSimImpl_DIRS=alma/NEXSIM_MODULE/NexSimImpl
-jjj_EXTRAS= 
+NexSimImpl_DIRS=alma/NEXSIM_MODULE/NexSimImpl cl/utfsm/acs/telescope/simulator ec/util/
 #
 # java sources in Jarfile on/off
 DEBUG= 

@@ -29,10 +29,13 @@ import alma.acs.component.ComponentLifecycle;
 import alma.acs.container.ContainerServices;
 import alma.NEXSIM_MODULE.NexSimOperations;
 
+import cl.utfsm.acs.telescope.simulator.comm.Nexstar4MessageWrapper;
+
 public class NexSimImpl implements NexSimOperations, ComponentLifecycle {
 
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
+	private Nexstar4MessageWrapper m_messageWrapper;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -73,10 +76,17 @@ public class NexSimImpl implements NexSimOperations, ComponentLifecycle {
 	/////////////////////////////////////////////////////////////
 
 	public void on(){
+		m_messageWrapper = new Nexstar4MessageWrapper();
 		return;
 	}
 
 	public void off(){
+		m_messageWrapper = null;
 		return;
+	}
+
+	public String echo(String str){
+		String res = m_messageWrapper.executeAction("K" + str.charAt(0));
+		return res;
 	}
 }

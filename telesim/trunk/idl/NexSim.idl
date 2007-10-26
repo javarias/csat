@@ -13,6 +13,7 @@ module NEXSIM_MODULE {
 	{
 		void on();
 		void off();
+		string echo(in string msg);
 	};
 
 
