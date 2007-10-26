@@ -55,8 +55,14 @@
       <_ Name="CALCULATIONS"
          Code="alma.CALCULATIONS_MODULE.CalculationsImpl.CalculationsHelper"
          Type="IDL:alma/CALCULATIONS_MODULE/Calculations:1.0"
-         Default="true"
+         Default="false"
          Container="amContainer"/>
+
+      <_ Name="CALCULATIONS_CPP"
+         Code="CalculationsImpl"
+         Type="IDL:alma/CALCULATIONS_MODULE/Calculations:1.0"
+         Default="true"
+         Container="amContainerCpp"/>
 
       <_ Name="LOCALE"
          Code="alma.LOCALE_MODULE.LocaleImpl.LocaleHelper"

@@ -56,17 +56,19 @@ INCLUDES        = NexstarImpl.h lpiImpl.h eTrexImpl.h
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = NexstarImpl lpiImpl eTrexImpl
+LIBRARIES       = NexstarImpl lpiImpl eTrexImpl CalculationsImpl
 LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-NexstarImpl_OBJECTS   = NexstarImpl NexstarAltDevIO NexstarAzmDevIO SerialRS232
-NexstarImpl_LIBS      = TypesStubs DevTelescopeStubs
-lpiImpl_OBJECTS       = lpiFrameDevIO lpiImpl
-lpiImpl_LIBS          = TypesStubs DevCCDStubs
-eTrexImpl_OBJECTS     = eTrexTimeDevIO eTrexImpl
-eTrexImpl_LIBS        = TypesStubs DevGPSStubs
+NexstarImpl_OBJECTS      = NexstarImpl NexstarAltDevIO NexstarAzmDevIO SerialRS232
+NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs
+lpiImpl_OBJECTS          = lpiFrameDevIO lpiImpl
+lpiImpl_LIBS             = TypesStubs DevCCDStubs
+eTrexImpl_OBJECTS        = eTrexTimeDevIO eTrexImpl
+eTrexImpl_LIBS           = TypesStubs DevGPSStubs
+CalculationsImpl_OBJECTS = CalculationsImpl
+CalculationsImpl_LIBS    = TypesStubs CalculationsStubs m
 
 #
 # Scripts (public and local)
