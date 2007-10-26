@@ -65,8 +65,8 @@ lpiFrameDevIO::lpiFrameDevIO(char *deviceName) {
 	fmt.type                = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	fmt.fmt.pix.width       = 640;
 	fmt.fmt.pix.height      = 480;
-	//fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_SN9C10X;
-	fmt.fmt.pix.pixelformat =  V4L2_PIX_FMT_SBGGR8;
+	fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_SN9C10X;
+	//fmt.fmt.pix.pixelformat =  V4L2_PIX_FMT_SBGGR8;
 	fmt.fmt.pix.field       = V4L2_FIELD_INTERLACED;
 
 	//to negotiate the format
@@ -107,8 +107,8 @@ ACS::longSeq lpiFrameDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExI
 	}
 
 	ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::read: Obtained a frame"));
-	//sonix_decompress_init();
-	//sonix_decompress(640,480,buffer,s);
+	sonix_decompress_init();
+	sonix_decompress(640,480,buffer,s);
 	bayer2rgb24(d,buffer,640,480);
 	ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::read: Decompressed frame"));
 
