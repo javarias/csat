@@ -51,13 +51,13 @@
 # C programs (public and local)
 # -----------------------------
 EXECUTABLES     =
-EXECUTABLES_L   = 
+EXECUTABLES_L   = calculationsTest 
 
 #
 # <brief description of xxxxx program>
-xxxxx_OBJECTS   =	
+calculationsTest_OBJECTS   = JDCalculationsTest calculationsTest
 xxxxx_LDFLAGS   =
-xxxxx_LIBS      =
+calculationsTest_LIBS      = CalculationsStubs
 
 #
 # special compilation flags for single c sources
