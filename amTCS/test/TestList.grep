@@ -2,3 +2,6 @@
 \[jacorb\.orb\]
 Java/abeans application
 Logging configuration has been initialized, but not from CDB settings.
+\[GlobalLogger\]
+Local file logger: Cache saved to 
+^\.$

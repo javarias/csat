@@ -6,7 +6,11 @@
 
 #include "JDCalculationsTest.h"
 
+char **args;
+
 int main (int argc, char *argv[]){
+
+	args = argv;
 
 	CPPUNIT_NS::TestResult result;
 
@@ -17,7 +21,7 @@ int main (int argc, char *argv[]){
 	//result.addListener(&progress);
 
 	CPPUNIT_NS::TextTestRunner runner;
-	runner.addTest( JDcalculationsTest::suite() );
+	runner.addTest( JDCalculationsTest::suite() );
 	runner.run();
 	//runner.run(result);
 

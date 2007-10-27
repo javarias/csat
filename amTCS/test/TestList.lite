@@ -34,4 +34,5 @@ PROLOGUE TATPrologue
 2 pointingTest     pointingTestClient.py
 3 pointingJavaTest pointingJavaTest.sh
 4 devTelescopeTest devTelescopeTestClient.py
+5 calculationsTest calculationsTest
 EPILOGUE TATEpilogue

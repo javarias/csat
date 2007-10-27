@@ -10,15 +10,15 @@
 
 using namespace maci;
 
+
 class JDCalculationsTest: public CppUnit::TestFixture{
 
 	CPPUNIT_TEST_SUITE( JDCalculationsTest );
-	CPPUNIT_TEST( testGregorian );
 	CPPUNIT_TEST( testJulian );
-	CPPUNIT_TEST_SUITE_END();
+	//CPPUNIT_TEST( testGregorian );
+	CPPUNIT_TEST_SUITE_END( );
 
 	public:
-	JDCalculationsTest();
 	void setUp();
 	void tearDown();
 
@@ -29,7 +29,7 @@ class JDCalculationsTest: public CppUnit::TestFixture{
 	private:
 	SimpleClient client;
 	CALCULATIONS_MODULE::Calculations_var calc_comp;
-	static char *comp_name;
+	char *comp_name;
 };
 
 #endif
