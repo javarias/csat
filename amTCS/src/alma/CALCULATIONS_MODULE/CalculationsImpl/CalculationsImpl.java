@@ -174,4 +174,8 @@ public class CalculationsImpl implements CalculationsOperations, ComponentLifecy
 
 		return radecPos;
 	}
+
+	public double date2JD(int year, int month, double day){
+		return 0;
+	}
 }

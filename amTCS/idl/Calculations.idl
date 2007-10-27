@@ -37,15 +37,15 @@ module CALCULATIONS_MODULE {
 		TYPES::RadecPos Altaz2Radec(in TYPES::AltazPos position);
 
 		/**
-		 * Calculates the JD (Julian Day) for a given date of the Gregorian
-		 * Calendar and returns it. An example of a Gregorian Calendar Date is:
-		 * 1957, October 4th, at 19:26:24, corresponding to year 1957, month 10,
-		 * day 4.81 .
-		 * @param year  The Gregorian year
-		 * @param month The Gregorian month (January=1, February=2, ...)
+		 * Calculates the JD (Julian Day) for a given date of the Gregorian or
+		 * the Julian Calendar and returns it. The day must have decimals to
+		 * represent the hours, minutes and seconds elapsed since the start of
+		 * the day.
+		 * @param year  The year
+		 * @param month The month (January=1, February=2, ...)
 		 * @param day   The month's day, with decimals if neccesary
 		 */
-		double greg2JD(in long year, in long month, in double day);
+		double date2JD(in long year, in long month, in double day);
 	};
 
 };

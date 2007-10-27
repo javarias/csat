@@ -66,13 +66,20 @@ TYPES::AltazPos CalculationsImpl::Radec2Altaz(const TYPES::RadecPos & pos) throw
 }
 
 /**
- * Returns the Julian Day for a given Gregorian Calendar Date.
+ * Returns the Julian Day for a given date.
  * (Astronomical Algorithms, second edition, Jean Meeus, 2005)
  */
-CORBA::Double CalculationsImpl::greg2JD(CORBA::Long year, CORBA::Long month, CORBA::Double day) throw(CORBA::SystemException){
+CORBA::Double CalculationsImpl::date2JD(CORBA::Long year, CORBA::Long month, CORBA::Double day) throw(CORBA::SystemException){
 	
 	int A, B;
 	CORBA::Double jd;
+	bool isJulian = false; /* The date is from Gregorian or Julian Calendar */
+	
+	/* The last day of the Julian Calendar is on 1582, October 4th */
+	if( year < 1582 || 
+	   (year == 1582 && month < 10) ||
+	   (year == 1582 && month == 10 && day < 5) )
+		isJulian = true;
 
 	if( month <= 2 ){
 		year--;
@@ -80,7 +87,10 @@ CORBA::Double CalculationsImpl::greg2JD(CORBA::Long year, CORBA::Long month, COR
 	}
 
 	A = INT(year/100);
-	B = 2 - A + INT(A/4);
+	if( isJulian )
+		B = 0;
+	else
+		B = 2 - A + INT(A/4);
 
 	jd = INT(365.25 * (year + 4716)) + INT(30.6001 * (month + 1)) + day + B - 1524.5;
 	return jd;
