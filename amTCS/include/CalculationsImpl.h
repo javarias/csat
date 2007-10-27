@@ -34,6 +34,7 @@
 #define INT(X) (int)floor((double)X)
 
 #include <CalculationsS.h>
+#include <csatErrors.h>
 #include <TypesC.h>
 using namespace acscomponent;
 
@@ -50,7 +51,7 @@ class CalculationsImpl: public virtual ACSComponentImpl,
   virtual ~CalculationsImpl();
   virtual TYPES::RadecPos Altaz2Radec(const TYPES::AltazPos & pos) throw(CORBA::SystemException);
   virtual TYPES::AltazPos Radec2Altaz(const TYPES::RadecPos & pos) throw(CORBA::SystemException);
-  virtual CORBA::Double date2JD(CORBA::Long year, CORBA::Long month, CORBA::Double day) throw(CORBA::SystemException);
+  virtual CORBA::Double date2JD(CORBA::Long year, CORBA::Long month, CORBA::Double day) throw(CORBA::SystemException,csatErrors::DateOutOfRangeEx);
  
   /**
    * ALMA C++ coding standards state copy operators should be disabled.

@@ -35,6 +35,7 @@
 #include <math.h>
 
 #include "CalculationsImpl.h"
+#include "csatErrors.h"
 
 using namespace acscomponent;
 
@@ -69,12 +70,21 @@ TYPES::AltazPos CalculationsImpl::Radec2Altaz(const TYPES::RadecPos & pos) throw
  * Returns the Julian Day for a given date.
  * (Astronomical Algorithms, second edition, Jean Meeus, 2005)
  */
-CORBA::Double CalculationsImpl::date2JD(CORBA::Long year, CORBA::Long month, CORBA::Double day) throw(CORBA::SystemException){
+CORBA::Double CalculationsImpl::date2JD(CORBA::Long year, CORBA::Long month, CORBA::Double day) throw(CORBA::SystemException,csatErrors::DateOutOfRangeEx){
 	
+	char *_METHOD_="CalculationsImpl::date2JD";
 	int A, B;
 	CORBA::Double jd;
 	bool isJulian = false; /* The date is from Gregorian or Julian Calendar */
 	
+	if( month < 1  ||
+	    month > 12 ||
+	    day   < 1  ||
+	    day   > 31 ){
+		csatErrors::DateOutOfRangeExImpl ex(__FILE__,__LINE__,_METHOD_);
+		ex.addData("Reason","Month or day is out of limits");
+		throw ex.getDateOutOfRangeEx();
+	}
 	/* The last day of the Julian Calendar is on 1582, October 4th */
 	if( year < 1582 || 
 	   (year == 1582 && month < 10) ||

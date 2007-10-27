@@ -68,7 +68,7 @@ lpiImpl_LIBS             = TypesStubs DevCCDStubs
 eTrexImpl_OBJECTS        = eTrexTimeDevIO eTrexImpl
 eTrexImpl_LIBS           = TypesStubs DevGPSStubs
 CalculationsImpl_OBJECTS = CalculationsImpl
-CalculationsImpl_LIBS    = TypesStubs CalculationsStubs m
+CalculationsImpl_LIBS    = TypesStubs CalculationsStubs csatErrors m
 
 #
 # Scripts (public and local)
@@ -122,7 +122,12 @@ CDB_SCHEMAS = DevTelescope DevCCD DevGPS
 IDL_FILES = Types DevTelescope DevCCD DevGPS Telescope CCD Locale Pointing Tracking Calculations Safety CSATControl CSATStatus
 IDL_TAO_FLAGS =
 USER_IDL =
+
 #
+# Error definition files for exceptions and completions
+# -----------------------------------------------------
+ACSERRDEF = csatErrors
+
 # Jarfiles and their directories
 #
 JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl Hevelius

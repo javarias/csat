@@ -5,6 +5,7 @@
 
 #include <baci.idl>
 #include <Types.idl>
+#include <csatErrors.idl>
 
 #pragma prefix "alma"
 
@@ -45,7 +46,8 @@ module CALCULATIONS_MODULE {
 		 * @param month The month (January=1, February=2, ...)
 		 * @param day   The month's day, with decimals if neccesary
 		 */
-		double date2JD(in long year, in long month, in double day);
+		double date2JD(in long year, in long month, in double day)
+		  raises(csatErrors::DateOutOfRangeEx);
 	};
 
 };

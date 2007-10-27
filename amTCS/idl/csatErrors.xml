@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Type _prefix="alma" name="csatErrors" type="900907"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ACSError.xsd">
+    <ErrorCode
+        name="DateOutOfRange" 
+        description="The given year/month/day date is out of range"
+        shortDescription="Date outranged"/>
+</Type>
