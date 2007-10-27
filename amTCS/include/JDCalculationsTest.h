@@ -25,6 +25,7 @@ class JDCalculationsTest: public CppUnit::TestFixture{
 	protected:
 	void testGregorian();
 	void testJulian();
+	void testExceptions();
 
 	private:
 	SimpleClient client;

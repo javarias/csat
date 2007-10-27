@@ -57,7 +57,7 @@ EXECUTABLES_L   = calculationsTest
 # <brief description of xxxxx program>
 calculationsTest_OBJECTS   = JDCalculationsTest calculationsTest
 xxxx_LDFLAGS   = 
-calculationsTest_LIBS      = CalculationsStubs TypesStubs maciClient C++ cppunit acserr maciErrType maci
+calculationsTest_LIBS      = CalculationsStubs csatErrors TypesStubs maciClient C++ cppunit acserr maciErrType maci
 
 #
 # special compilation flags for single c sources

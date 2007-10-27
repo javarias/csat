@@ -2,6 +2,7 @@
 #include <acsutil.h>
 
 #include "CalculationsC.h"
+#include "csatErrors.h"
 #include "JDCalculationsTest.h"
 
 using namespace maci;
@@ -27,6 +28,7 @@ void JDCalculationsTest::testJulian() {
 	CPPUNIT_ASSERT( calc_comp->date2JD(-4712,1,1.5) == (double)0.0        );
 
 	testGregorian();
+	testExceptions();
 }
 
 void JDCalculationsTest::testGregorian() {
@@ -37,7 +39,15 @@ void JDCalculationsTest::testGregorian() {
 	CPPUNIT_ASSERT( calc_comp->date2JD(1600,12,31) == (double)2305812.5    );
 }
 
+void JDCalculationsTest::testExceptions() {
+	CPPUNIT_ASSERT_THROW( calc_comp->date2JD(1600,0 ,23.3) , csatErrors::DateOutOfRangeEx );
+	CPPUNIT_ASSERT_THROW( calc_comp->date2JD(1600,14,23.3) , csatErrors::DateOutOfRangeEx );
+	CPPUNIT_ASSERT_THROW( calc_comp->date2JD(1600,11,-3)   , csatErrors::DateOutOfRangeEx );
+	CPPUNIT_ASSERT_THROW( calc_comp->date2JD(1600,11,34)   , csatErrors::DateOutOfRangeEx );
+}
+
 void JDCalculationsTest::tearDown() {
 	client.releaseComponent(comp_name);
 	client.disconnect();
+	client.logout();
 }
