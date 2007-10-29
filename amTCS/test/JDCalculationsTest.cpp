@@ -9,10 +9,6 @@ using namespace maci;
 
 extern CALCULATIONS_MODULE::Calculations_var calc_comp;
 
-JDCalculationsTest::JDCalculationsTest(){
-//	this->calc_comp = calc_comp;
-}
-
 void JDCalculationsTest::testJulian() {
 	CPPUNIT_ASSERT( calc_comp->date2JD(837,4,10.3) == (double)2026871.8   );
 	CPPUNIT_ASSERT( calc_comp->date2JD(-123,12,31) == (double)1676496.5   );
