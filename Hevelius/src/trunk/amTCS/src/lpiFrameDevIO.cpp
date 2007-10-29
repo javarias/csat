@@ -107,8 +107,8 @@ ACS::longSeq lpiFrameDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExI
 	}
 
 	ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::read: Obtained a frame"));
-	//sonix_decompress_init();
-	//sonix_decompress(640,480,buffer,s);
+	sonix_decompress_init();
+	sonix_decompress(640,480,buffer,s);
 	bayer2rgb24(d,buffer,640,480);
 	ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::read: Decompressed frame"));
 

@@ -18,8 +18,9 @@ import java.awt.image.WritableRaster;
 
 public class ScreenPanel extends JPanel implements Runnable
 {
-	private Image screen, buf;
-	private boolean telescopeState = false;
+	private Image screen, buf, test;
+	private Graphics2D backbuf;
+	private boolean telescopeState = true;
 	private boolean working = false;
 	private int dx, dy;
 	public ScreenPanel(LayoutManager l)
@@ -30,12 +31,15 @@ public class ScreenPanel extends JPanel implements Runnable
 	{
 		buf = null;
 		screen = null;
+		test = null;
+		backbuf = null;
+		//backbuf = (Graphics2D) test.getGraphics();
 	}
 	public void paintComponent(Graphics g)
 	{
 		boolean update = false;
 		super.paintComponent(g);
-		if(dx == getSize().width || dy == getSize().height)
+		if(dx != getSize().width || dy != getSize().height)
 			update = true;
 		dx = getSize().width;
 		dy = getSize().height;
@@ -43,18 +47,30 @@ public class ScreenPanel extends JPanel implements Runnable
 		g.fillRect(0,0,dx,dy);
 		g.setColor(Color.BLACK);
 		g.fillRect(2,2,dx-4,dy-4);
-		if(buf!=null)
+		if(update)
+		{
+			test = createImage(dx-4,dy-4);
+			backbuf = (Graphics2D) test.getGraphics();
+			if(screen!=null)
+			{
+				screen = screen.getScaledInstance(dx-4,dy-4,Image.SCALE_SMOOTH);
+				backbuf.drawImage(screen,0,0,this);
+			}
+		}
+		else if(buf!=null)
 		{
 			buf = buf.getScaledInstance(dx-4,dy-4,Image.SCALE_SMOOTH);
 			screen = buf;
+			backbuf.drawImage(buf,0,0,this);
 			buf = null;
 		}
-		if(screen != null)
-		{
+		//if(screen != null)
+		//{
 			//if(update)
 			//	screen = screen.getScaledInstance(dx-4,dy-4,Image.SCALE_SMOOTH);
-			g.drawImage(screen,2,2,this);
-		}
+			//g.drawImage(screen,2,2,this);
+		g.drawImage(test,2,2,this);
+		//}
 	}
 	public void run()
 	{
@@ -68,7 +84,7 @@ public class ScreenPanel extends JPanel implements Runnable
 					setScreen();
 					working = false;
 				}
-				Thread.sleep(15000);
+				Thread.sleep(2000);
 			}
 			catch(InterruptedException e)
 			{
@@ -86,7 +102,20 @@ public class ScreenPanel extends JPanel implements Runnable
 				buf = getScreenFromWeb();
 		}
 		if(getGraphics()!=null)
-			paintComponent(getGraphics());
+		{
+			if(buf!=null)
+			{
+				getGraphics().setColor(Color.BLACK);
+				//getGraphics().fillRect(2,2,dx-4,dy-4);
+				buf = buf.getScaledInstance(dx-4,dy-4,Image.SCALE_SMOOTH);
+				screen = buf;
+				backbuf.clearRect(0,0,dx-4,dy-4);
+				backbuf.drawImage(buf,0,0,this);
+				buf = null;
+				getGraphics().drawImage(test,2,2,this);
+			}
+			//paintComponent(getGraphics());
+		}
 		else
 			setScreen();
 	}
@@ -136,6 +165,7 @@ public class ScreenPanel extends JPanel implements Runnable
 			}
 			catch(Exception e)
 			{
+				e.printStackTrace();
 			}
 			if(imgh.value!=null)
 			{

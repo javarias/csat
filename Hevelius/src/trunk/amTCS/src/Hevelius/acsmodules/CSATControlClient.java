@@ -264,6 +264,8 @@ public class CSATControlClient extends ComponentClient
                         }
                         catch(AcsJContainerServicesEx e)
                         {
+				System.out.println("A");
+				e.printStackTrace();
                         }
 
 			if(img==null)
