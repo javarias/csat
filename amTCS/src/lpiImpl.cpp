@@ -47,6 +47,8 @@ TYPES::Image* lpiImpl::image(CORBA::Double exposure) throw (CORBA::SystemExcepti
 	image->length((CORBA::ULong)length);
 	for(unsigned int i=0;i!=length;i++)
 		image[i] = frame[0][i];
+
+	delete frame;
 	
 	ACS_SHORT_LOG((LM_INFO,"lpiImpl::image: Obtained the Image"));
 	return image._retn();
