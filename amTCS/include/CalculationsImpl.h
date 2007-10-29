@@ -30,14 +30,26 @@
 #endif
 
 #include <acscomponentImpl.h>
-
-#define INT(X) (int)floor((double)X)
-
 #include <CalculationsS.h>
 #include <csatErrors.h>
 #include <TypesC.h>
-using namespace acscomponent;
+#include <math.h>
 
+#ifndef PI
+#define PI 3.141592653589793
+#endif
+
+#define raddeg(X)   ((X)*180/PI)
+#define degrad(X)   ((X)*PI/180)
+
+#define DCOS(X)     cos(degrad(X))
+#define DSIN(X)     sin(degrad(X))
+#define DATAN2(X,Y) raddeg(atan2(X,Y))
+#define DASIN(X)    raddeg(asin(X))
+
+#define INT(X) (int)floor((double)X)
+
+using namespace acscomponent;
 
 class CalculationsImpl: public virtual ACSComponentImpl,
 		     public virtual POA_CALCULATIONS_MODULE::Calculations
@@ -52,6 +64,7 @@ class CalculationsImpl: public virtual ACSComponentImpl,
   virtual TYPES::RadecPos Altaz2Radec(const TYPES::AltazPos & pos) throw(CORBA::SystemException);
   virtual TYPES::AltazPos Radec2Altaz(const TYPES::RadecPos & pos) throw(CORBA::SystemException);
   virtual CORBA::Double date2JD(CORBA::Long year, CORBA::Long month, CORBA::Double day) throw(CORBA::SystemException,csatErrors::DateOutOfRangeEx);
+  virtual TYPES::RadecPos precessionHR(const TYPES::RadecPos& pos, CORBA::Double jd1, CORBA::Double jd2) throw(CORBA::SystemException);
  
   /**
    * ALMA C++ coding standards state copy operators should be disabled.

@@ -55,7 +55,7 @@ EXECUTABLES_L   = calculationsTest
 
 #
 # <brief description of xxxxx program>
-calculationsTest_OBJECTS   = JDCalculationsTest calculationsTest
+calculationsTest_OBJECTS   = JDCalculationsTest PrecessionTest calculationsTest
 xxxx_LDFLAGS   = 
 calculationsTest_LIBS      = CalculationsStubs csatErrors TypesStubs maciClient C++ cppunit acserr maciErrType maci
 

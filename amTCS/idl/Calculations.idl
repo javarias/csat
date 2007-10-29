@@ -48,6 +48,15 @@ module CALCULATIONS_MODULE {
 		 */
 		double date2JD(in long year, in long month, in double day)
 		  raises(csatErrors::DateOutOfRangeEx);
+
+		/**
+		 * Calculates new coordinates for a given Ra/Dec object by calculating
+		 * the precession effect.
+		 * @param pos The initial position of the object, in Ra/Dec coordinates
+		 * @param jd1 Initial Julian Day associated with the initial position
+		 * @param jd2 Final Julian Day to calculate the new coordinates
+		 */
+		TYPES::RadecPos precessionHR(in TYPES::RadecPos pos, in double jd1, in double jd2);
 	};
 
 };

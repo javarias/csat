@@ -178,4 +178,8 @@ public class CalculationsImpl implements CalculationsOperations, ComponentLifecy
 	public double date2JD(int year, int month, double day){
 		return 0;
 	}
+
+	public RadecPos precessionHR(alma.TYPES.RadecPos pos, double jd1, double jd2){
+		return new RadecPos();
+	}
 }

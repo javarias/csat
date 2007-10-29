@@ -3,6 +3,7 @@
 #include <cppunit/ui/text/TextTestRunner.h>
 
 #include "JDCalculationsTest.h"
+#include "PrecessionTest.h"
 
 CALCULATIONS_MODULE::Calculations_var calc_comp;
 
@@ -23,6 +24,7 @@ int main (int argc, char *argv[]){
 	calc_comp = client.get_object<CALCULATIONS_MODULE::Calculations>(comp_name,0,true);
 
 	runner.addTest( JDCalculationsTest::suite() );
+	runner.addTest( PrecessionTest::suite() );
 	runner.run();
 
 	client.releaseComponent(comp_name);

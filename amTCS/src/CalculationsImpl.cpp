@@ -106,6 +106,30 @@ CORBA::Double CalculationsImpl::date2JD(CORBA::Long year, CORBA::Long month, COR
 	return jd;
 }
 
+TYPES::RadecPos CalculationsImpl::precessionHR(const TYPES::RadecPos & pos, CORBA::Double jd0, CORBA::Double jd1) throw (CORBA::SystemException){
+
+	double T, t;
+	double zeta, z, theta;
+	double A, B, C;
+	TYPES::RadecPos newPos;
+
+	T = (jd0 - date2JD(2000,1,1.5))/36525;
+	t = (jd1 - jd0)/36525;
+
+	zeta  = (2306.2181/3600 + 1.39656/3600*T - 0.000139/3600*T*T)*t + (0.30188/3600 - 0.000344/3600*T)*t*t + 0.017998/3600*t*t*t;
+	z     = (2306.2181/3600 + 1.39656/3600*T - 0.000139/3600*T*T)*t + (1.09468/3600 + 0.000066/3600*T)*t*t + 0.018203/3600*t*t*t;
+	theta = (2004.3109/3600 - 0.85330/3600*T - 0.000217/3600*T*T)*t - (0.42665/3600 + 0.000217/3600*T)*t*t - 0.041833/3600*t*t*t;
+
+	A = DCOS(pos.dec)*DSIN(pos.ra + zeta);
+	B = DCOS(theta)*DCOS(pos.dec)*DCOS(pos.ra + zeta) - DSIN(theta)*DSIN(pos.dec);
+	C = DSIN(theta)*DCOS(pos.dec)*DCOS(pos.ra + zeta) + DCOS(theta)*DSIN(pos.dec);
+
+	newPos.ra  = DATAN2(A,B) + z;
+	newPos.dec = DASIN(C);
+
+	return newPos;
+}
+
 /* --------------- [ MACI DLL support functions ] -----------------*/
 #include <maciACSComponentDefines.h>
 MACI_DLL_SUPPORT_FUNCTIONS(CalculationsImpl)
