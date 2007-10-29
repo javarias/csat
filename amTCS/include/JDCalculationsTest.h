@@ -15,22 +15,20 @@ class JDCalculationsTest: public CppUnit::TestFixture{
 
 	CPPUNIT_TEST_SUITE( JDCalculationsTest );
 	CPPUNIT_TEST( testJulian );
-	//CPPUNIT_TEST( testGregorian );
+	CPPUNIT_TEST( testGregorian );
+	CPPUNIT_TEST( testExceptions );
 	CPPUNIT_TEST_SUITE_END( );
 
 	public:
-	void setUp();
-	void tearDown();
+	JDCalculationsTest();
 
 	protected:
-	void testGregorian();
 	void testJulian();
+	void testGregorian();
 	void testExceptions();
 
-	private:
-	SimpleClient client;
-	CALCULATIONS_MODULE::Calculations_var calc_comp;
-	char *comp_name;
+	//private:
+	//CALCULATIONS_MODULE::Calculations_var calc_comp;
 };
 
 #endif

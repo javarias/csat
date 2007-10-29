@@ -7,17 +7,10 @@
 
 using namespace maci;
 
-extern char **args;
+extern CALCULATIONS_MODULE::Calculations_var calc_comp;
 
-void JDCalculationsTest::setUp(){
-	comp_name =  "CALCULATIONS_CPP";
-	if( client.init(0,args) == 0 ){
-		ACS_SHORT_LOG((LM_ERROR,"Cannot init client"));
-		return;
-	}
-
-	client.login();
-	calc_comp = client.get_object<CALCULATIONS_MODULE::Calculations>(comp_name,0,true);
+JDCalculationsTest::JDCalculationsTest(){
+//	this->calc_comp = calc_comp;
 }
 
 void JDCalculationsTest::testJulian() {
@@ -26,9 +19,6 @@ void JDCalculationsTest::testJulian() {
 	CPPUNIT_ASSERT( calc_comp->date2JD(-1000,7,12.5) == (double)1356001.0 );
 	CPPUNIT_ASSERT( calc_comp->date2JD(-1001,8,17.9) == (double)1355671.4 );
 	CPPUNIT_ASSERT( calc_comp->date2JD(-4712,1,1.5) == (double)0.0        );
-
-	testGregorian();
-	testExceptions();
 }
 
 void JDCalculationsTest::testGregorian() {
@@ -44,10 +34,4 @@ void JDCalculationsTest::testExceptions() {
 	CPPUNIT_ASSERT_THROW( calc_comp->date2JD(1600,14,23.3) , csatErrors::DateOutOfRangeEx );
 	CPPUNIT_ASSERT_THROW( calc_comp->date2JD(1600,11,-3)   , csatErrors::DateOutOfRangeEx );
 	CPPUNIT_ASSERT_THROW( calc_comp->date2JD(1600,11,34)   , csatErrors::DateOutOfRangeEx );
-}
-
-void JDCalculationsTest::tearDown() {
-	client.releaseComponent(comp_name);
-	client.disconnect();
-	client.logout();
 }

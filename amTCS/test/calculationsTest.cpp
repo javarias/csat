@@ -1,30 +1,32 @@
 #include <cppunit/TestResult.h>
-//#include <cppunit/TestResultCollector.h>
 #include <cppunit/TestRunner.h>
 #include <cppunit/ui/text/TextTestRunner.h>
-//#include <cppunit/BriefTestProgressListener.h>
 
 #include "JDCalculationsTest.h"
 
-char **args;
+CALCULATIONS_MODULE::Calculations_var calc_comp;
 
 int main (int argc, char *argv[]){
 
-	args = argv;
-
 	CPPUNIT_NS::TestResult result;
-
-	//CPPUNIT_NS::TestResultCollector collectedResults;
-	//result.addListener(&collectedResults);
-
-	//CPPUNIT_NS::BriefTestProgressListener progress;
-	//result.addListener(&progress);
-
 	CPPUNIT_NS::TextTestRunner runner;
+
+	char *comp_name = "CALCULATIONS_CPP";
+	SimpleClient client;
+
+	if( client.init(0,argv) == 0 ){
+		ACS_SHORT_LOG((LM_ERROR,"Cannot init client"));
+		return -1;
+	}
+
+	client.login();
+	calc_comp = client.get_object<CALCULATIONS_MODULE::Calculations>(comp_name,0,true);
+
 	runner.addTest( JDCalculationsTest::suite() );
 	runner.run();
-	//runner.run(result);
 
-	//return (collectedResults.wasSuccessful() ? 0 : 1);
+	client.releaseComponent(comp_name);
+	client.disconnect();
+	client.logout();
 	return 0;
 }
