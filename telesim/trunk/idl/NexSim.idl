@@ -12,8 +12,9 @@ module NEXSIM_MODULE {
 	interface NexSim : ACS::ACSComponent
 	{
 		void on();
+		boolean onInPortDev(in string portDeviceName);
 		void off();
-		string echo(in string msg);
+		string excecuteAction(in string msg);
 	};
 
 
