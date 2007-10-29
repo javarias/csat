@@ -68,7 +68,7 @@ public class ScreenPanel extends JPanel implements Runnable
 					setScreen();
 					working = false;
 				}
-				Thread.sleep(2000);
+				Thread.sleep(15000);
 			}
 			catch(InterruptedException e)
 			{
