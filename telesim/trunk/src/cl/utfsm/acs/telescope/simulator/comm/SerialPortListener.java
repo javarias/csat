@@ -23,6 +23,7 @@ public class SerialPortListener implements Runnable {
 	protected InputStream in;
 	protected OutputStream out;
 	protected boolean connected;
+	protected boolean telescopeOn;
     byte[] buffer;
 	byte[] outBuffer;
 	int bufferSizes;
@@ -36,6 +37,7 @@ public class SerialPortListener implements Runnable {
         super();
         this.wrapper = wrapper;
         connected = false;
+        telescopeOn = false;
         bufferSizes = 1024;
         buffer = new byte[bufferSizes];
     	outBuffer = new byte[bufferSizes];
@@ -140,6 +142,7 @@ public class SerialPortListener implements Runnable {
         
         if (connected) try
         {
+            telescopeOn = true;
         	while(true) {
         		if ( ( length = this.in.read(buffer,0,1)) > -1 ) {
         			message += new String(buffer,0,length,"US-ASCII");
@@ -163,7 +166,12 @@ public class SerialPortListener implements Runnable {
         			if( message.length() == 1 && expectedLength == -2 )
         				System.out.println("Not recognized message: "+message+" - "+(int)message.charAt(0));
         			//if(message.length() == expectedLength){
-        			reply = wrapper.executeAction(message);
+        			
+        			if(telescopeOn)
+        				reply = wrapper.executeAction(message);
+        			else
+        				reply = "";
+        			
         			outBuffer = reply.getBytes("US-ASCII");
         			out.write(outBuffer);
         			out.flush();
@@ -186,6 +194,7 @@ public class SerialPortListener implements Runnable {
         	System.err.println("The SerialPortListener is not connected to any port.");
         	System.err.println("The SerialPortListener will shut down now.");
         }
+        telescopeOn = false;
     }
 	
 	/**
@@ -209,5 +218,11 @@ public class SerialPortListener implements Runnable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public boolean isTelescopeOn() {
+		return telescopeOn;
+	}
+	public void setTelescopeOn(boolean telescopeOn) {
+		this.telescopeOn = telescopeOn;
 	}
 }
