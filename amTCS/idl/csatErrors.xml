@@ -3,6 +3,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ACSError.xsd">
     <ErrorCode
         name="DateOutOfRange" 
-        description="The given year/month/day date is out of range"
+        description="The given year/month/day date is out of range. The month must be in the range [1,12] and the day must be in the range [1,32["
         shortDescription="Date outranged"/>
 </Type>

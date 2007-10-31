@@ -77,10 +77,8 @@ CORBA::Double CalculationsImpl::date2JD(CORBA::Long year, CORBA::Long month, COR
 	CORBA::Double jd;
 	bool isJulian = false; /* The date is from Gregorian or Julian Calendar */
 	
-	if( month < 1  ||
-	    month > 12 ||
-	    day   < 1  ||
-	    day   > 31 ){
+	if( month < 1  || 12 < month ||
+	    day   < 1  || 32 < day){
 		csatErrors::DateOutOfRangeExImpl ex(__FILE__,__LINE__,_METHOD_);
 		ex.addData("Reason","Month or day is out of limits");
 		throw ex.getDateOutOfRangeEx();
