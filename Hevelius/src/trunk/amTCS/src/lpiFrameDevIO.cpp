@@ -6,7 +6,7 @@
 
 #include "lpiFrameDevIO.h"
 
-lpiFrameDevIO::lpiFrameDevIO(char *deviceName) throw (CORBA::SystemException){
+lpiFrameDevIO::lpiFrameDevIO(char *deviceName) {
 
 	int flag = O_RDWR; //read write flag, is the accesmode you have to put in open
 	struct stat st;
@@ -65,8 +65,8 @@ lpiFrameDevIO::lpiFrameDevIO(char *deviceName) throw (CORBA::SystemException){
 	fmt.type                = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	fmt.fmt.pix.width       = 640;
 	fmt.fmt.pix.height      = 480;
-	//fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_SN9C10X;
-	fmt.fmt.pix.pixelformat =  V4L2_PIX_FMT_SBGGR8;
+	fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_SN9C10X;
+	//fmt.fmt.pix.pixelformat =  V4L2_PIX_FMT_SBGGR8;
 	fmt.fmt.pix.field       = V4L2_FIELD_INTERLACED;
 
 	//to negotiate the format
@@ -79,14 +79,14 @@ lpiFrameDevIO::lpiFrameDevIO(char *deviceName) throw (CORBA::SystemException){
 	init_done = 0;
 }
 
-lpiFrameDevIO::~lpiFrameDevIO() throw (CORBA::SystemException){
+lpiFrameDevIO::~lpiFrameDevIO() {
 
 
 	close(fd);
 	ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::~lpiFrameDevIO: Device closed :Device closed :D"));
 }
 
-bool lpiFrameDevIO::initializeValue() throw (CORBA::SystemException){
+bool lpiFrameDevIO::initializeValue() {
 	return true;
 }
 
@@ -128,7 +128,7 @@ void lpiFrameDevIO::write(const ACS::longSeq &value, ACS::Time &timestamp) throw
 	return;
 }
 
-int lpiFrameDevIO::sonix_decompress (int width, int height, unsigned char *inp, unsigned char *outp) throw (CORBA::SystemException)
+int lpiFrameDevIO::sonix_decompress (int width, int height, unsigned char *inp, unsigned char *outp)
 {
 	int row, col;
 	int val;
@@ -208,7 +208,7 @@ int lpiFrameDevIO::sonix_decompress (int width, int height, unsigned char *inp, 
 	return 0;
 }
 
-void lpiFrameDevIO::sonix_decompress_init (void) throw (CORBA::SystemException)
+void lpiFrameDevIO::sonix_decompress_init (void)
 {
 	int i;
 	int is_abs, val, len, unk;
@@ -277,7 +277,7 @@ void lpiFrameDevIO::sonix_decompress_init (void) throw (CORBA::SystemException)
 }
 
 void lpiFrameDevIO::bayer2rgb24 (unsigned char *dst, unsigned char *src, long int WIDTH,
-	     long int HEIGHT) throw (CORBA::SystemException)
+	     long int HEIGHT)
 {
   long int i;
   unsigned char *rawpt, *scanpt;
