@@ -23,11 +23,11 @@ class lpiFrameDevIO: public DevIO<ACS::longSeq>
 
 	public:
 
-	lpiFrameDevIO(char *deviceName) throw (CORBA::SystemException);
-	lpiFrameDevIO(void *data) throw (CORBA::SystemException);
-	virtual ~lpiFrameDevIO() throw (CORBA::SystemException);
+	lpiFrameDevIO(char *deviceName);
+	lpiFrameDevIO(void *data);
+	virtual ~lpiFrameDevIO();
 
-	virtual bool initializeValue() throw (CORBA::SystemException);
+	virtual bool initializeValue();
 
 	ACS::longSeq read(ACS::Time &timestamp)
 	      throw (ACSErr::ACSbaseExImpl);
@@ -42,9 +42,12 @@ class lpiFrameDevIO: public DevIO<ACS::longSeq>
 	unsigned int framesize;
 	code_table_t table[256];
 
-	void sonix_decompress_init() throw (CORBA::SystemException);
-	int sonix_decompress (int width, int height, unsigned char *inp, unsigned char *outp) throw (CORBA::SystemException);
-	void bayer2rgb24 (unsigned char *dst, unsigned char *src, long int WIDTH, long int HEIGHT) throw (CORBA::SystemException);
+	void sonix_decompress_init();
+	int sonix_decompress (int width, int height, unsigned char *inp, unsigned char *outp);
+	void bayer2rgb24 (unsigned char *dst, unsigned char *src, long int WIDTH, long int HEIGHT);
+	void bayer2rgb24alt (unsigned char *dst, unsigned char *src, long int WIDTH, long int HEIGHT);
+	unsigned char lpiFrameDevIO::kr (long int i, unsigned char *src, long int WIDTH);
+	unsigned char lpiFrameDevIO::kb (long int i, unsigned char *src, long int WIDTH);
 };
 
 #endif /* _LPI_IMAGE_DEVIO_H_ */
