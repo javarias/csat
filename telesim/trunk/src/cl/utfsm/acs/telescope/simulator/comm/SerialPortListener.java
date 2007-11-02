@@ -15,6 +15,16 @@ import gnu.io.SerialPort;
 import gnu.io.UnsupportedCommOperationException;
 
 /**
+ * <code>SerialPortListener</code> is in charge of reading 
+ * incoming messages from (and writing outgoing responses 
+ * to) a serial port. The message are readed as strings that
+ * are delivered to a <code>{@link Nexstar4MessageWrapper}</code>
+ * and the responses are writen byte by byte in the port.
+ * <p>
+ * This class also sets the communication parameters of the 
+ * serial port to complain with the specifications stated by 
+ * the Nexstar Communication Protocol.
+ * 
  * @author dcontard
  *
  */
@@ -28,9 +38,11 @@ public class SerialPortListener implements Runnable {
 	byte[] outBuffer;
 	int bufferSizes;
 	/**
-	 * 
+	 * Class constructor that specifies which <code>{@link Nexstar4MessageWrapper}</code>
+	 * wants to use.
 	 * 
 	 * @param wrapper
+	 * @see Nexstar4MessageWrapper
 	 */
 	public SerialPortListener(Nexstar4MessageWrapper wrapper) 
     {
@@ -43,7 +55,7 @@ public class SerialPortListener implements Runnable {
     	outBuffer = new byte[bufferSizes];
     }
 	/**
-	 * 
+	 * Class constructor
 	 *
 	 */
 	public SerialPortListener() 

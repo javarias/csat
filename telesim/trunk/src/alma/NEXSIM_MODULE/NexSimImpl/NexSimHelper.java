@@ -24,8 +24,8 @@ package alma.NEXSIM_MODULE.NexSimImpl;
 
 import java.util.logging.Logger;
 
-import org.omg.PortableServer.Servant;
-import alma.ACS.ACSComponentOperations;
+//import org.omg.PortableServer.Servant;
+//import alma.ACS.ACSComponentOperations;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.container.ComponentHelper;
 import alma.NEXSIM_MODULE.NexSimOperations;
@@ -67,7 +67,7 @@ public class NexSimHelper extends ComponentHelper
 	/**
 	* @see alma.acs.container.ComponentHelper#_getPOATieClass()
 	*/
-	protected Class<? extends Servant> _getPOATieClass()
+	protected Class/*<? extends Servant>*/ _getPOATieClass()
 	{
 		return NexSimPOATie.class;
 	}
@@ -75,7 +75,7 @@ public class NexSimHelper extends ComponentHelper
 	/**
 	* @see alma.acs.container.ComponentHelper#getOperationsInterface()
 	*/
-	protected Class<? extends ACSComponentOperations> _getOperationsInterface()
+	protected Class/*<? extends ACSComponentOperations> */_getOperationsInterface()
 	{
 		return NexSimOperations.class;
 	}

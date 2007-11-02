@@ -3,6 +3,12 @@ package cl.utfsm.acs.telescope.simulator.comm;
 import cl.utfsm.acs.telescope.simulator.state.Nexstar4State;
 
 /**
+ * <code>Nexstar4MessageWrapper</code> recives messages
+ * from a stream listener, every message wrapped in a string, 
+ * identifies the message type and the parameters values that 
+ * are contained in the string, and delivers the proper actions 
+ * to be taked by a <code>{@link Nexstar4State}</code>
+ * 
  * @author dcontard
  *
  */
