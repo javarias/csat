@@ -194,6 +194,91 @@ void init_device(struct ccd *cam)
 }
 
 
+void enumerate_menu(struct ccd *cam, struct v4l2_querymenu *querymenu,struct v4l2_queryctrl *queryctrl){
+        printf ("  Menu items:\n");
+        memset (querymenu, 0, sizeof (*querymenu));
+        querymenu->id = queryctrl->id;
+        for (querymenu->index = queryctrl->minimum;
+                        querymenu->index <= queryctrl->maximum;
+                        querymenu->index++) {
+                if (0 == ioctl (cam->fd, VIDIOC_QUERYMENU, querymenu)) {
+                        printf ("  %s\n", querymenu->name);
+                } else {
+                        perror ("VIDIOC_QUERYMENU");
+                        exit (EXIT_FAILURE);
+                }
+        }
+}
+
+void change_control(struct ccd *cam,int control_id,int value){
+        struct v4l2_queryctrl queryctrl;
+        struct v4l2_control control;
+
+        memset (&queryctrl, 0, sizeof (queryctrl));
+        queryctrl.id = control_id;
+
+        if (-1 == ioctl (cam->fd, VIDIOC_QUERYCTRL, &queryctrl)) {
+                if (errno != EINVAL) {
+                        perror ("VIDIOC_QUERYCTRL");
+                        exit (EXIT_FAILURE);
+                } else {
+                        printf ("The control id %d is not supported\n",control_id);
+                }
+        } else if (queryctrl.flags & V4L2_CTRL_FLAG_DISABLED) {
+                        printf ("The control id %d is not supported\n",control_id);
+        } else {
+                memset (&control, 0, sizeof (control));
+                control.id = control_id;
+                control.value = value;
+                if (-1 == ioctl (cam->fd, VIDIOC_S_CTRL, &control)) {
+                        perror ("VIDIOC_S_CTRL");
+                        exit (EXIT_FAILURE);
+                }
+        }
+}
+
+// Check Controls
+void check_controls(struct ccd *cam){
+        struct v4l2_queryctrl queryctrl;
+        struct v4l2_querymenu querymenu;
+        memset (&queryctrl, 0, sizeof (queryctrl));
+        for (queryctrl.id = V4L2_CID_BASE;queryctrl.id < V4L2_CID_LASTP1;queryctrl.id++) {
+                if (0 == ioctl (cam->fd, VIDIOC_QUERYCTRL, &queryctrl)) {
+                        if (queryctrl.flags & V4L2_CTRL_FLAG_DISABLED)
+                                continue;
+
+                        printf ("Standard Control %s = %x\n", queryctrl.name,queryctrl.default_value);
+
+                        if (queryctrl.type == V4L2_CTRL_TYPE_MENU)
+                                enumerate_menu (cam,&querymenu,&queryctrl);
+                } else {
+                        if (errno == EINVAL)
+                                continue;
+
+                        perror ("VIDIOC_QUERYCTRL");
+                        exit (EXIT_FAILURE);
+                }
+        }
+        for (queryctrl.id = V4L2_CID_PRIVATE_BASE;queryctrl.id < V4L2_CID_PRIVATE_BASE + 7;
+                        queryctrl.id++) {
+                if (0 == ioctl (cam->fd, VIDIOC_QUERYCTRL, &queryctrl)) {
+                        if (queryctrl.flags & V4L2_CTRL_FLAG_DISABLED)
+                                continue;
+                        printf ("Private Control %s = %x\n", queryctrl.name,queryctrl.default_value);
+
+                        if (queryctrl.type == V4L2_CTRL_TYPE_MENU)
+                                enumerate_menu (cam,&querymenu,&queryctrl);
+                } else {
+                        if (errno == EINVAL)
+                                continue;
+
+                        perror ("VIDIOC_QUERYCTRL");
+                        exit (EXIT_FAILURE);
+                }
+        }
+
+}
+
 
 void process_image(const void *p,const char *filename)
 {
@@ -246,22 +331,43 @@ int main(int argc,char *argv[])
                 fprintf(stdout,"USAGE: %s device output.rgb\n",argv[0]);
                 exit(0);
         }
+
         fprintf(stdout,"Initialiting CCD...\t");
         fflush(stdout);
         init_ccd(&cam,argv[1]);
         fprintf(stdout,"[OK]\n");
+        check_controls(&cam);
+        //Defaults
+        change_control(&cam,V4L2_CID_EXPOSURE,0x0250);
+        change_control(&cam,SN9C102_V4L2_CID_GREEN_BALANCE,0x1e);
+        change_control(&cam,V4L2_CID_RED_BALANCE,0x00);
+        change_control(&cam,V4L2_CID_BLUE_BALANCE,0x20);
+        change_control(&cam,SN9C102_V4L2_CID_RESET_LEVEL,0x30);
+        change_control(&cam,SN9C102_V4L2_CID_PIXEL_BIAS_VOLTAGE,0x02);
+
+        change_control(&cam,SN9C102_V4L2_CID_GREEN_BALANCE,0x1e);
+        change_control(&cam,V4L2_CID_RED_BALANCE,0x1e);
+        change_control(&cam,V4L2_CID_BLUE_BALANCE,0x1e);
+        change_control(&cam,SN9C102_V4L2_CID_RESET_LEVEL,0x38);
+        change_control(&cam,SN9C102_V4L2_CID_PIXEL_BIAS_VOLTAGE,0x02);
+        change_control(&cam,V4L2_CID_EXPOSURE,0xf401);
+        //change_control(&cam,SN9C102_V4L2_CID_RESET_LEVEL,0x3f);
+        //change_control(&cam,SN9C102_V4L2_CID_PIXEL_BIAS_VOLTAGE,0x07);
         fprintf(stdout,"Grabbing Frame...\t");
         fflush(stdout);
         read_frame(&cam);
         fprintf(stdout,"[OK]\n");
+
         fprintf(stdout,"Saving to '%s'file...\t",argv[2]);
         fflush(stdout);
         process_image (cam.buffers[0].start,argv[2]);
         fprintf(stdout,"[OK]\n");
+
         fprintf(stdout,"Freeing CCD...\t");
         fflush(stdout);
         free_ccd(&cam);
         fprintf(stdout,"[OK]\n");
+
         exit (EXIT_SUCCESS);
         return 0;
 }

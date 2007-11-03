@@ -19,6 +19,16 @@
 #include <asm/types.h>  	//for videodev2.h
 #include <linux/videodev2.h>	//VIDIOC_QUERYCAP
 
+/* Private ioctl's for control settings supported by some image sensors */
+#define SN9C102_V4L2_CID_DAC_MAGNITUDE (V4L2_CID_PRIVATE_BASE + 0)
+#define SN9C102_V4L2_CID_GREEN_BALANCE (V4L2_CID_PRIVATE_BASE + 1)
+#define SN9C102_V4L2_CID_RESET_LEVEL (V4L2_CID_PRIVATE_BASE + 2)
+#define SN9C102_V4L2_CID_PIXEL_BIAS_VOLTAGE (V4L2_CID_PRIVATE_BASE + 3)
+#define SN9C102_V4L2_CID_GAMMA (V4L2_CID_PRIVATE_BASE + 4)
+#define SN9C102_V4L2_CID_BAND_FILTER (V4L2_CID_PRIVATE_BASE + 5)
+#define SN9C102_V4L2_CID_BRIGHT_LEVEL (V4L2_CID_PRIVATE_BASE + 6)
+
+
 #define CLEAR(x) memset (&(x), 0, sizeof (x))  //fills the memory area pointed to by x with the constant byte 0
 
 struct buffer
