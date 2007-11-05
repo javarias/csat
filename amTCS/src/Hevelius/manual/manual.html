@@ -1,0 +1,431 @@
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!--
+
+Generated from manual.tex by tex2page, v 20050501
+(running on MzScheme 370, unix), 
+(c) Dorai Sitaram, 
+http://www.ccs.neu.edu/~dorai/tex2page/tex2page-doc.html
+
+-->
+<head>
+<title>
+Manual Hevelius
+</title>
+<link rel="stylesheet" type="text/css" href="manual-Z-S.css" title=default>
+<meta name=robots content="noindex,follow">
+</head>
+<body>
+<div id=content>
+<!--<div align=right class=navigation><i>[Go to <span><a href="manual.html">first</a>, <a href="manual.html">previous</a></span><span>, <a href="manual-Z-H-2.html">next</a></span> page]</i></div>-->
+<p></p>
+<p>
+</p>
+<a name="intr"></a>
+<h1>1&nbsp;&nbsp;Introducci&oacute;n</h1>
+<p>Hevelius, es un  sistema de control de telescopios, el cual tiene como caracter&iacute;stica principal el car&aacute;cter gen&eacute;rico. </p>
+<p>
+En la actualidad cada software para controlar  telescopios es de car&aacute;cter individual, vale decir, existe una determinada interfaz y sistema de control espec&iacute;fico para cada distinto telescopio, transformando as&iacute; la tarea de los operadores de &eacute;stos un trabajo tedioso, puesto que deben aprender a utilizar distintas interfaces y sistemas para cada uno de los instrumentos.</p>
+<p>
+Esta aplicaci&oacute;n, como se mencion&oacute; anteriormente, pretende eliminar esta complicaci&oacute;n y hacer m&aacute;s sencilla la tarea de los operadores, esto mediante una interfaz gen&eacute;rica que permita ser aplicable  a cada telescopio sin  importar el tipo de &eacute;ste, con lo cual los operadores ya no tendr&aacute;n que aprender dos o m&aacute;s tipos de interfaces y sistemas, si no que bastar&aacute; s&oacute;lo con una.</p>
+<p>
+Este manual explica como es el funcionamiento  de Hevelius,  sus  componentes,  como manejarlo, instalarlo,  t&eacute;rminos relacionados con el tema para que cualquier persona  que no sea docta con el tema,  pueda  manejar  Hevelius  sin ning&uacute;n problema. </p>
+<p>
+</p>
+<a name="glo"></a>
+<h1>2&nbsp;&nbsp;Glosario</h1>
+<p></p>
+<dl><dt></dt><dd>
+</dd><dt><b>ACS</b></dt><dd> ALMA COMMON SOFTWARE, Framework de aplicaciones y modelo de programaci&oacute;n com&uacute;n.<p>
+</p>
+</dd><dt><b>Altitude</b></dt><dd> Se mide desde el horizonte hasta la posici&oacute;n del astro, siguiendo una l&iacute;nea imaginaria que lo conduzca hasta el Zenith.<p>
+</p>
+</dd><dt><b>Azimuth</b></dt><dd> Se mide siguiendo la l&iacute;nea del horizonte en sentido horario, desde el punto cardinal Sur, hasta el lugar situado debajo del astro que se desea observar.<p>
+</p>
+</dd><dt><b>Cat&aacute;logo de Estrellas</b></dt><dd> Documento o archivo en el cual se encuentra distinto tipo de informaci&oacute;n  como ubicaci&oacute;n y luminosidad de estrellas, galaxias, planetas, nebulosas, etc.<p>
+</p>
+</dd><dt><b>Coordenadas Ecuatoriales</b></dt><dd> Tipo de coordenadas celestes que determinan la posici&oacute;n de un objeto en la esfera celeste respecto al ecuador celeste y al equinoccio vernal. Se denominan Declinaci&oacute;n (DEC) y Ascensi&oacute;n Recta (RA) y son equivalentes a la latitud y longitud geogr&aacute;ficas<p>
+</p>
+</dd><dt><b>Coordenadas Horizontales</b></dt><dd> Sistema de coordenadas celestes referidas al horizonte del observador y a su vertical. Posee dos tipos de coordenadas Azimuth y Altitude.<p>
+</p>
+</dd><dt><b>Declination</b></dt><dd> Angulo que forman el ecuador celeste y el objeto. Para objetos situados entre el ecuador y el polo norte, la declinaci&oacute;n es positiva y, en caso contrario, negativa. Equivale a la latitud geogr&aacute;fica.<p>
+</p>
+</dd><dt><b>Epoch</b></dt><dd> Fecha asociada a una posici&oacute;n en coordenadas ecuatoriales, la cual es valida por per&iacute;odos peque&ntilde;os de tiempo.<p>
+</p>
+</dd><dt><b>Hevelius</b></dt><dd> Apellido en espa&ntilde;ol de astr&oacute;nomo polaco.<p>
+</p>
+</dd><dt><b>Offset</b></dt><dd> Correcci&oacute;n que se hace a las coordenadas horizontales cuando se quiere ''precisar`` la observaci&oacute;n<p>
+</p>
+</dd><dt><b>Park</b></dt><dd> Posici&oacute;n Pre-Establecida, en este software la ubicaci&oacute;n es en las coordenadas horizontales (0,0).<p>
+</p>
+</dd><dt><b>Pointing Manual</b></dt><dd> Capacidad de reconocer si el objeto, que se est&aacute; observando te&oacute;ricamente, realmente est&aacute; siendo apuntado.<p>
+</p>
+</dd><dt><b>Presetting</b></dt><dd> Capacidad de moverse desde cierta ubicaci&oacute;n a otra de manera segura.<p>
+</p>
+</dd><dt><b>Right Ascention</b></dt><dd> &Aacute;ngulo medido sobre el ecuador celeste, abarcado entre el Punto Aries (equinoccio vernal) y el c&iacute;rculo horario o meridiano que pasa por el objeto observado. Equivale a la longitud geogr&aacute;fica. Su sentido positivo es el directo o antihorario, el mismo de la rotaci&oacute;n terrestre vista desde el polo Norte. Sus unidades son las angulares, expresadas en horas: 24 horas se corresponden a 360º, 1 hora a 15º, etc&eacute;tera.<p>
+</p>
+</dd><dt><b>Telescopio</b></dt><dd> Herramienta o instrumento que permite ver objetos lejanos. Es la herramienta fundamental de la astronom&iacute;a, y cada desarrollo o perfeccionamiento del telescopio ha sido seguido de avances en nuestra compresi&oacute;n del Universo.<p>
+</p>
+</dd><dt><b>TCS</b></dt><dd> Sigla en ingl&eacute;s de Sistema de Control de Telescopios<p>
+</p>
+</dd><dt><b>Tiempo Sideral</b></dt><dd> Tiempo medido por el movimiento diurno aparente del equinoccio vernal, que se aproxima, aunque sin ser id&eacute;ntico, al movimiento de las estrellas. Se diferencia en la precesi&oacute;n del equinoccio vernal con respecto a las estrellas.<p>
+</p>
+</dd><dt><b>Tracking</b></dt><dd> Capacidad del telescopio de seguir cierto objeto en el cielo, contrarrestando el movimiento de la Tierra.<p>
+</p>
+</dd><dt><b>Zenith</b></dt><dd> Punto exacto en que la vertical de un observador u observadora corta la esfera celeste, por encima del horizonte. Es t&eacute;cnicamente justo lo que tenemos encima de nuestra cabeza, en un &aacute;ngulo de 90°. El punto diametralmente opuesto se llama Nadir.<p>
+</p>
+</dd></dl><p></p>
+<p>
+</p>
+<a name="req"></a>
+<h1>3&nbsp;&nbsp;Requerimientos de sistemas</h1>
+<p></p>
+<a name="node_sec_3.1"></a>
+<h2>3.1&nbsp;&nbsp;Requerimientos de software</h2>
+<p>Para la instalaci&oacute;n de Hevelius es necesario contar con los siguientes componentes previamente instalados:</p>
+<p>
+</p>
+<ul>
+<li><p>Sistema Operativo Linux
+</p>
+<li><p>Software ACS 6.0 
+</p>
+<li><p>Java versi&oacute;n 1.5.0 04 2 
+</p>
+<li><p>Jogl-1 0 0-linux-i586.
+</p>
+</ul><p></p>
+<p>
+</p>
+<a name="node_sec_3.2"></a>
+<h2>3.2&nbsp;&nbsp;Requerimientos de Hardware</h2>
+<p>Para el funcionamiento de Hevelius es necesario un computador con acceso  a Internet o a trav&eacute;s de una m&aacute;quina virtual.</p>
+<p>
+</p>
+<a name="conn"></a>
+<h1>4&nbsp;&nbsp;Conectar un Telescopio</h1>
+<p></p>
+<a name="node_sec_4.1"></a>
+<h2>4.1&nbsp;&nbsp;Conexi&oacute;n Telescopio</h2>
+<p>Para la conexi&oacute;n del telescopio, todo lo que se debe hacer es conectar su telescopio al computador que servir&aacute; de contenedor y al cual todos los dem&aacute;s equipos se conectar&aacute;n para poder comenzar con el manejo de este.</p>
+<p>
+</p>
+<!--<a name="node_sec_5"></a>
+<h1>5&nbsp;&nbsp;Instalaci&oacute;n de Hevelius</h1>
+<p>Para la instalaci&oacute;n de Hevelius siga los siguientes pasos:</p>
+<p>
+</p>
+<ul>
+<li><p>Inserte el cd-room de Hevelius 
+</p>
+<li><p>Vaya a la carpeta HeveliusTCS
+</p>
+<li><p>Ejecute el instalador
+</p>
+</ul><p></p>
+<p>
+<img height="203" width="482" src="images/install.png" ></p>
+<p>
+Seleccione el idioma en el cual quiere leer el instalador</p>
+<p>
+<img height="139" width="230" src="images/install01.png" ></p>
+<p>
+Se cargar&aacute; la siguiente imagen en donde puede elegir que es lo que desea instalar.</p>
+<p>
+<img height="478" width="637" src="images/install02.png" ></p>
+<p>
+Y contin&uacute;e hasta terminar la instalaci&oacute;n.</p>
+<p>
+Luego se debe configurar el .bash_profile</p>
+<p>
+<img height="347" width="493" src="images/install03.png" ></p>
+<p>
+Ejec&uacute;telo</p>
+<p>
+<img height="207" width="481" src="images/install04.png" ></p>
+<p>
+</p>-->
+<a name="comp"></a>
+<h1>6&nbsp;&nbsp;Componente de Interfaz de Usuario</h1>
+<p></p>
+<a name="node_sec_6.1"></a>
+<h2>6.1&nbsp;&nbsp;Hevelius</h2>
+<p>En su fase inicial, antes de realizar el ingreso ya sea a trav&eacute;s de Login o Stara tcs.
+En este estado no se permite hacer ning&uacute;n tipo de movimiento.</p>
+<p>
+<img height="421" width="560" src="images/interface.png" ></p>
+<p>
+</p>
+<a name="node_sec_6.2"></a>
+<h2>6.2&nbsp;&nbsp;Men&uacute;</h2>
+<p><img height="73" width="500" src="images/interface01.png" ></p>
+<p>
+</p>
+<ol>
+<li><p>Login</p>
+<p>
+Para poder tener un control de aquellos que manejan el equipo conectado al software, en esta parte se registra en el programa para posterior uso del historial. La ubicaci&oacute;n del login es la siguiente:</p>
+<p>
+<img height="139" width="333" src="images/interface02.png" ></p>
+<p>
+</p>
+<li><p>Historial</p>
+<p>
+Para tener un registro de las observaciones y estudios realizados durante su sesi&oacute;n, solo debe hacer clic en esta secci&oacute;n y seleccionar su login como se muestran en las siguientes im&aacute;genes:</p>
+<p>
+<img height="600" width="501" src="images/interface03.png" ></p>
+<p>
+<img height="600" width="502" src="images/interface04.png" ></p>
+<p>
+</p>
+<li><p>Configuraci&oacute;n</p>
+<p>
+<img height="601" width="499" src="images/interface05.png" ></p>
+<p>
+En esta parte podemos decidir como vamos a trabajar:</p>
+<p>
+</p>
+<ol>
+<li><p><i>Tipo de Coordenada:</i> Aqu&iacute; podemos seleccionar que tipo de coordenada en la cual queremos trabajar.</p>
+<p>
+</p>
+<li><p><i>Ubicaci&oacute;n:</i> Como se muestra en la siguiente foto, pones la ubicaci&oacute;n en la cual se encuentra el telescopio y presionamos ''find``, y seleccionamos la ciudad y posteriormente ''save``.</p>
+<p>
+</p>
+<li><p><i>Tracking:</i> Podemos activar para que comience dicha funci&oacute;n.
+</p>
+</ol><p></p>
+<p>
+</p>
+<li><p>Help</p>
+<p>
+Secci&oacute;n donde se puede encontrar ayuda sobre el software.</p>
+<p>
+<img height="599" width="799" src="images/interface06.png" ></p>
+<p>
+</p>
+</ol><p></p>
+<p>
+</p>
+<a name="node_sec_6.3"></a>
+<h2>6.3&nbsp;&nbsp;Condiciones del Clima </h2>
+<p>Para las observaciones es muy importante las condiciones en donde se encuentra el telescopio, es por ello que se muestra una secci&oacute;n en la cual esta la informaci&oacute;n m&aacute;s relevante. A dem&aacute;s, presionando en ''more`` podemos acceder a informaci&oacute;n m&aacute;s detallada como se muestra en las siguientes figuras:</p>
+<p>
+<img height="317" width="337" src="images/interface07.png" ></p>
+<p>
+<img height="348" width="500" src="images/interface08.png" ></p>
+<p>
+</p>
+<a name="node_sec_6.4"></a>
+<h2>6.4&nbsp;&nbsp;Tiempo Sideral</h2>
+<p>Dato importante para los astr&oacute;nomos. Para ver su significado revisar el <a href="#glo">glosario</a>.</p>
+<p>
+<img height="105" width="324" src="images/interface09.png" ></p>
+<p>
+</p>
+<a name="node_sec_6.5"></a>
+<h2>6.5&nbsp;&nbsp;Cat&aacute;logo de Estrellas</h2>
+<p>En esta secci&oacute;n, haciendo un clic en la estrella que queremos observar, se carga autom&aacute;ticamente sus coordenadas y se mueve a dicha ubicaci&oacute;n. Tal y como se observa en la imagen, vemos que posee el nombre, su ubicaci&oacute;n en coordenadas ecuatoriales (ver <a href="#glo">glosario</a>), el epoch (ver <a href="#glo">glosario</a>) y la luminosidad.</p>
+<p>
+Para saber que es un catalogo de estrella ver el <a href="#glo">glosario</a>.</p>
+<p>
+<img height="358" width="350" src="images/interface10.png" ></p>
+<p>
+<img height="355" width="353" src="images/interface11.png" ></p>
+<p>
+</p>
+<a name="node_sec_6.6"></a>
+<h2>6.6&nbsp;&nbsp;Control del Telescopio</h2>
+<p>En esta secci&oacute;n se encuentran los distintos componentes para el manejo del telescopio.</p>
+<p>
+<img height="471" width="528" src="images/interface12.png" ></p>
+<p>
+</p>
+<ol>
+<li><p><i>Indicaci&oacute;n de las coordenadas:</i> Aqu&iacute; se dan las coordenadas a las cual queremos dirigir el telescopio en el tipo de coordenadas indicado en la configuraci&oacute;n. Para ir a la posici&oacute;n deseada, solo debemos presionar ''GO``.</p>
+<p>
+</p>
+<li><p><i>Coordenadas Actuales:</i> En esta parte se muestra las coordenadas que actualmente estamos utilizando y su equivalencia en el otro tipo de coordenadas que posee el programa.</p>
+<p>
+</p>
+<li><p><i>Control:</i> En esta parte podemos ver el control de offset (ver <a href="#glo">glosario</a>) en donde a trav&eacute;s de las flechas podemos mover en altitud (arriba y hacia abajo) y azimuth (izquierda o derecha) tan solo haciendo clic sobre ellas. Cada clic equivale a un grado.</p>
+<p>
+</p>
+<li><p>Si es que se desea mover a Park, Zenith o activar el Tracking, tan solo se debe hacer un clic sobre ellos y se activaran dichas funciones. Para ver sus significados revisar el <a href="#glo">glosario</a>.</p>
+<p>
+</p>
+<li><p><i>Bot&oacute;n Stop:</i> Si estamos en medio de una observaci&oacute;n y nos dimos cuenta que nos hemos equivocado o esta movi&eacute;ndose a un lugar peligroso, apretando este bot&oacute;n el telescopio se detiene autom&aacute;ticamente en la posici&oacute;n en que se encontraba en el momento en dicho instante.
+</p>
+</ol><p></p>
+<p>
+</p>
+<a name="node_sec_6.7"></a>
+<h2>6.7&nbsp;&nbsp;Estados del Telescopio</h2>
+<p>En esta secci&oacute;n encontramos los datos referentes al estado del telescopio:</p>
+<p>
+<img height="169" width="297" src="images/interface13.png" ></p>
+<p>
+</p>
+<ol>
+<li><p><i>Global State:</i> Nos indica si es que estamos conectado o no al telescopio.</p>
+<p>
+</p>
+<li><p><i>Presetting:</i> Nos dice si esta activado o no.</p>
+<p>
+</p>
+<li><p><i>Tracking:</i> Nos dice si esta activado o no</p>
+<p>
+</p>
+<li><p><i>Pointting:</i> Muestra el estado en el que se encuentra.</p>
+<p>
+</p>
+<li><p><i>Danger:</i> Nos indica que tan peligroso es la coordenada a la cual estamos apuntando. Esto esta basado por la luminosidad de la luna que se encuentra cerca del telescopio, teniendo tres niveles: bajo, moderado y alto.
+</p>
+</ol><p></p>
+<p>
+</p>
+<a name="node_sec_6.8"></a>
+<h2>6.8&nbsp;&nbsp;Sistema</h2>
+<p>En esta secci&oacute;n se encuentra las conexiones.</p>
+<p>
+<img height="151" width="304" src="images/interface14.png" ></p>
+<p>
+</p>
+<ol>
+<li><p><i>Start TCS:</i> Al hacer clic en este bot&oacute;n se inicia la conexi&oacute;n con el framework ACS  (ver <a href="#glo">glosario</a>) necesario para el manejo del telescopio.</p>
+<p>
+</p>
+<li><p><i>Stop TCS:</i> Se detiene la conexi&oacute;n a ACS y no se puede seguir moviendo el telescopio</p>
+<p>
+</p>
+<li><p><i>Shutdown:</i> Se detiene la conexi&oacute;n a ACS y se sale del programa. 
+</p>
+</ol><p></p>
+<p>
+</p>
+<a name="node_sec_6.9"></a>
+<h2>6.9&nbsp;&nbsp;CCD</h2>
+<p>En esta secci&oacute;n se muestra la imagen de lo que esta observando el telescopio, la cual se va actualizando cada 5 segundos.</p>
+<p>
+<img height="292" width="496" src="images/interface15.png" ></p>
+<p>
+</p>
+<a name="node_sec_6.10"></a>
+<h2>6.10&nbsp;&nbsp;Telescopio Virtual</h2>
+<p><img height="327" width="334" src="images/interface16.png" ></p>
+<p>
+Telescopio virtual que simula la posici&oacute;n en la que se encuentra el telescopio real, puesto que este programa esta dise&ntilde;ado para manejo de telescopios remotos.</p>
+<p>
+<img height="613" width="587" src="images/interface17.png" ></p>
+<p>
+Para tener una visi&oacute;n m&aacute;s amplia de la Posici&oacute;n del telescopio podemos hacer doble clic en ''Virtual Telescope`` y se abre una ventana con el mismo modelo en un tama&ntilde;o mas grande.</p>
+<p>
+</p>
+<a name="obs"></a>
+<h1>7&nbsp;&nbsp;Realizar una Observaci&oacute;n</h1>
+<p></p>
+<ol>
+<li><p>Iniciar el programa Hevelius</p>
+<p>
+</p>
+<li><p>Iniciar sesi&oacute;n.</p>
+<p>
+</p>
+<li><p>Iniciar conexi&oacute;n a ACS. En este paso el telescopio virtual se mover&aacute; a la posici&oacute;n actual en la que se encuentra el telescopio real.</p>
+<p>
+</p>
+<li><p>Ir a configuraci&oacute;n y:
+</p>
+<ul>
+<li><p>Ubicar la ciudad en la cual est&aacute; el telescopio
+</p>
+<li><p>Elegir en tipo de coordenadas en las que vamos a trabajar.
+</p>
+<li><p>Activar o Desactivar tracking de acuerdo a lo que se desea y poner ''save`` y cerrar. Se cambiar&aacute; la secci&oacute;n del Clima con los datos de esa ciudad.
+</p>
+</ul><p></p>
+<p>
+</p>
+<li><p>Luego en Control ponemos la direcci&oacute;n que deseamos y apretamos GO y la imagen de la coordenada a observar aparecer&aacute; en la secci&oacute;n CCD.</p>
+<p>
+</p>
+<li><p>(Opcional) Si queremos centrar la imagen o movernos un poco, con las flechas hacemos esto mostrandonos en offset cuanto es lo que hemos movido.</p>
+<p>
+</p>
+<li><p>(Opcional). Si queremos ubicar una estrella conocida, podemos utilizar el catalogo de estrellas. Apretando en la que deseamos ver.
+</p>
+</ol><p></p>
+<p>
+</p>
+<a name="cat"></a>
+<h1>8&nbsp;&nbsp;Agregar otros Cat&aacute;logos</h1>
+<p>Para agregar un cat&aacute;logo a los ya existentes, vas al directorio .hevelius/catalogues  ubicado en el home de tu cuenta, donde  debes ubicar el nuevo cat&aacute;logo con extensi&oacute;n .dat, siguiendo ciertos est&aacute;ndares, los cuales se puede ver en los otros archivos .dat, para que le programa pueda leerlo. </p>
+<p>
+</p>
+<a name="faq"></a>
+<h1>9&nbsp;&nbsp;Preguntas frecuentes</h1>
+<p></p>
+<dl><dt></dt><dd>
+</dd><dt><b>¿Para que sirve Hevelius?</b></dt><dd> Hevelius sirve para la observaci&oacute;n y estudio de cuerpos celestes.<p>
+</p>
+</dd><dt><b>¿D&oacute;nde reportar bugs?</b></dt><dd> A una de las siguientes direcciones:<p>
+</p>
+<ul>
+<li><p>tstaig@csrg.inf.utfsm.cl
+</p>
+<li><p>eespinoz@csrg.inf.utfsm.cl
+</p>
+<li><p>cguajard@csrg.inf.utfsm.cl
+</p>
+<li><p>mpilar@csrg.inf.utfsm.cl
+</p>
+</ul><p></p>
+<p>
+</p>
+</dd><dt><b>El programa no funciona, ¿Qu&eacute; puede estar pasando?</b></dt><dd> <p>
+</p>
+<ul>
+<li><p>No tiene acceso a internet
+</p>
+<li><p>No posee el framework ACS
+</p>
+<li><p>el telescopio no esta conectado correctamente o configurado
+</p>
+</ul><p>
+</p>
+</dd></dl><p></p>
+<p>
+</p>
+<a name="ref"></a>
+<h1>10&nbsp;&nbsp;Referencias</h1>
+<p></p>
+<dl><dt></dt><dd>
+</dd><dt><b>ACS: ALMA COMMON SOFTWARE</b></dt><dd> http://www.eso.org/~almamgr/AlmaAcs<p>
+</p>
+</dd><dt><b>UTFSM CSRG: UTFSM Computer Systems Research Group</b></dt><dd> http://csrg.inf.utfsm.cl/<p>
+</p>
+</dd><dt><b>ESO: European Southern Observatory</b></dt><dd> http://www.eso.org<p>
+</p>
+</dd><dt><b>HEVELIUS</b></dt><dd> http://www.feriadesoftware.cl/2007/hevelius/ <p>
+</p>
+</dd><dt><b>ALMA: The Atacama Large Millimeter Array</b></dt><dd> http://www.eso.org <p>
+</p>
+</dd></dl><p></p>
+<p>
+</p>
+<a name="abo"></a>
+<h1>11&nbsp;&nbsp;About</h1>
+
+<div align=center><table><tr><td>
+<img height="312" width="400" src="images/about.png" >
+</td></tr>
+<tr><td>
+Versi&oacute;n 1.0
+</td></tr></table></div>
+<p>
+</p>
+<!--<div align=right class=navigation><i>[Go to <span><a href="manual.html">first</a>, <a href="manual.html">previous</a></span><span class=disable>, next</span> page]</i></div>-->
+<p></p>
+</div>
+</body>
+</html>

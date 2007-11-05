@@ -136,7 +136,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 			CBDescIn desc = new CBDescIn();	*/
 
 		//telescope.presetting(p,cb,desc);
-		telescope.preseting(p);
+		telescope.presetting(p,cb,desc);
 		//pointing.resetOffset();
 	}
 
@@ -151,7 +151,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 
 	public void goToAltAz(alma.TYPES.AltazPos p, alma.TYPES.AltazVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
-		telescope.gotoAltAz(p);
+		telescope.gotoAltAz(p,cb,desc);
 	}
 
 	public void AltitudeOffSet(double degrees){
@@ -163,7 +163,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 
 	public void getPreviewImage(alma.TYPES.ImageHolder img, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
-		ccd.getPreview(img,cb,desc);
+			ccd.getPreview(img,cb,desc);
 	}
 
 	public void stopTelescope(){

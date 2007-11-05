@@ -31,6 +31,7 @@ import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
 import alma.ACSErr.CompletionHolder;
 
+import alma.acs.callbacks.*;
 import alma.TELESCOPE_MODULE.TelescopeOperations;
 
 public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, Runnable {
@@ -150,7 +151,10 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 	// Implementation of TelescopeOperations
 	/////////////////////////////////////////////////////////////
 
-	public void preseting(RadecPos position){
+	private alma.ACS.CBvoid cb = null;
+	private alma.ACS.CBDescIn descIn = null;
+
+	public void presetting(RadecPos position, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
 		doControl = true;
 
 		if( controlThread == null ){
@@ -159,6 +163,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 		}
 
 		m_commandedPos = calculations_comp.Radec2Altaz(position);
+		this.cb = cb;
+		descIn = desc;
 	}
 
 	public RadecPos getRadec(){
@@ -170,7 +176,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 		m_commandedPos.az += offset.az;
 	}
 
-	public void gotoAltAz(AltazPos position){
+	public void gotoAltAz(AltazPos position, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
 		m_commandedPos.alt = position.alt;
 		m_commandedPos.az  = position.az;
 
@@ -180,6 +186,9 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 			controlThread = m_containerServices.getThreadFactory().newThread(this);
 			controlThread.start();
 		}
+
+		this.cb = cb;
+		descIn = desc;
 	}
 
 	public void stop(){
@@ -311,6 +320,17 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 
 				/* Send the velocity to the telescope */
 				devTelescope_comp.setVel(altazVel);
+
+				if(altazVel.azVel == 0 && altazVel.altVel == 0)
+				{
+					if(cb!=null && descIn != null)
+					{
+						m_logger.info("Presetting done");
+						MyResponderUtil.respond(cb, descIn);
+						cb=null;
+						descIn = null;
+					}
+				}
 				
 				try {
 					Thread.sleep(100);
