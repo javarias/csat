@@ -41,9 +41,9 @@ public class NexSimImpl implements NexSimOperations, ComponentLifecycle {
 
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
-	private Nexstar4MessageWrapper m_messageWrapper;
-	private SerialPortListener m_serialPortListener;
-	private Thread m_serialPortThread;
+	private Nexstar4MessageWrapper m_messageWrapper = null;
+	private SerialPortListener m_serialPortListener = null;
+	private Thread m_serialPortThread = null;
 	private boolean telescopeOn = false;
 
 	/////////////////////////////////////////////////////////////
@@ -93,25 +93,29 @@ public class NexSimImpl implements NexSimOperations, ComponentLifecycle {
 	}
 
 	public void off(){
-		m_serialPortListener.setTelescopeOn(false);
-		m_messageWrapper.executeAction("M");
-		m_messageWrapper.executeAction("P"+(char)2+(char)16+(char)36+(char)0+(char)0+(char)0+(char)0);
-		m_messageWrapper.executeAction("P"+(char)2+(char)17+(char)36+(char)0+(char)0+(char)0+(char)0);
-		m_messageWrapper.executeAction("T"+(char)0);		
+		if(m_serialPortListener!=null)
+			m_serialPortListener.setTelescopeOn(false);
+		if(m_serialPortListener!=null){
+			m_messageWrapper.executeAction("M");
+			m_messageWrapper.executeAction("P"+(char)2+(char)16+(char)36+(char)0+(char)0+(char)0+(char)0);
+			m_messageWrapper.executeAction("P"+(char)2+(char)17+(char)36+(char)0+(char)0+(char)0+(char)0);
+			m_messageWrapper.executeAction("T"+(char)0);		
+		}
 		m_logger.info("Nexstar4 Simulator is off...");
 		telescopeOn = false;
 		return;
 	}
 
 	public String excecuteAction(String message) {
+		String response = "";
 		if(telescopeOn){
-			m_messageWrapper.executeAction(message);
+			response = m_messageWrapper.executeAction(message);
 			m_logger.info("message delivered to Nexstar4 Simulator: "+message);
 		}
 		else{
 			m_logger.info("message not delivered to Nexstar4 Simulator because simulator is off; message: "+message);
 		}
-		return null;
+		return response;
 	}
 
 	public boolean onInPortDev(String portName) {
