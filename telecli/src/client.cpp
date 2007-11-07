@@ -60,6 +60,11 @@ Communication *com = NULL;
 void leave(int sig);
 
 /**
+ * Enables verbosity
+ */
+int verbose = 0;
+
+/**
  * Main routine. Starts the serial port, passing it the device
  * file received as argument or the default serial port device file
  * defined as DEFAULT_PORT.
@@ -78,7 +83,7 @@ int main(int args, char *argv[]) {
 
 	/* Set the serial port to use */
 	if( args < 2 ){
-		printf("\nUsage: %s var [value]\n\n",argv[0]);
+		printf("\nUsage: %s [-v] var [value]\n\n",argv[0]);
 		printf("Variables supported are:\n");
 		printf("      [slal | slaz] rate    (slew in altitud and azimuth direction)\n");
 		printf("      echo char             (to test connection to telescope)\n");
@@ -90,6 +95,11 @@ int main(int args, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
+	if(argv[1][0] == '-' && argv[1][1] == 'v'){
+		verbose = 1;
+		argv++;
+	}
+
 //	if( args < 4 ){
 	printf("Using default port %s.\n", DEFAULT_PORT);
 	strcpy(serialPort,DEFAULT_PORT);
@@ -98,7 +108,7 @@ int main(int args, char *argv[]) {
 //		argv++;
 //	}
 
-	com = new Communication(serialPort);
+	com = new Communication(serialPort,verbose);
 
 	/* With Ctrl-C restore the old terminal parameters */
 	signal(SIGINT,leave);

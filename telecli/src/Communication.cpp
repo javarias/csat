@@ -10,13 +10,21 @@
  * \author Rodrigo Tobar <rtobar@csrg.inf.utfsm.cl>
  */
 
-#include <Communication.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "Communication.h"
+#include "verbosity.h"
 
 Communication::Communication(char *deviceName){
 	this->sp = new SerialRS232(deviceName);
 	this->sp->flush_RS232();
+}
+
+Communication::Communication(char *deviceName, int verbose){
+	this->sp = new SerialRS232(deviceName);
+	this->sp->flush_RS232();
+	this->verbose = verbose;
 }
 
 Communication::~Communication(){
@@ -132,6 +140,7 @@ double Communication::getAlt(){
 
 	this->sp->write_RS232("z",1);
 	msg = this->sp->read_RS232();
+	VERBOSITY( printf("Received from the telescope: %s\n",msg); );
 	sscanf(msg,"%08lX,%08lX#",&read_azm,&read_alt);
 
 	alt = read_alt / MAX_PRECISE_ROTATION;
@@ -147,6 +156,7 @@ double Communication::getAzm(){
 
 	this->sp->write_RS232("z",1);
 	msg = this->sp->read_RS232();
+	VERBOSITY( printf("Received from the telescope: %s\n",msg); );
 	sscanf(msg,"%08lX,%08lX#",&read_azm,&read_alt);
 
 	azm = (double)read_azm / MAX_PRECISE_ROTATION;
