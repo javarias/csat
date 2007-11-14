@@ -74,7 +74,7 @@ public class ReadCatalogue {
 	 * ObjectInfo with each celestial object and its information.
 	 * @param name				The name of the catalogue to parse.
 	 * @return				CatalogueInfo that contains Celestial ObjectInfo of the catalogue.
-	 * @throws FileNotFoundException		Exception that is thrown if File is not found.
+	 * @throws FileNotFoundException	Exception that is thrown if File is not found.
 	 * @throws IOException			Exception that is thrown if there is a Input/Output problem.
 	 *
 	 * @see	CatalogueInfo

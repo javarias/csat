@@ -140,12 +140,22 @@ public class CSATStatusClient extends ComponentClient
 			csstatus.initialize(null, null);
 	}
 
+	/**
+	* This method is used to retrieve Radec and/or Altaz current coordinates. If only 
+	* one is desired the other Holder is set to null.
+	* @param r	RadecPosHolder that will store current Ra and Dec coordinates.
+	* @param a	AltazPosHolder that will store current Alt and Az coordinates.
+	*/
 	public void getPos(RadecPosHolder r, AltazPosHolder a)
 	{
 		if(csstatus!=null)
 			csstatus.getPos(r, a);
 	}
 
+	/**
+	* This method is used to retrieve TCS's current status.
+	* return	int with TCS's current status.
+	*/
 	public int getState()
 	{
 		if(csstatus!=null)
@@ -153,6 +163,11 @@ public class CSATStatusClient extends ComponentClient
 		return -1;
 	}
 
+	/**
+        * This method is used to retrieve actual tracking status of the system. It 
+        * also sets the Tracking status to On/Off accordingly.
+        * @return 	boolean with Tracking actual status.
+        */
 	public boolean getTrackingStatus()
 	{
 		if(csstatus!=null)
@@ -167,6 +182,10 @@ public class CSATStatusClient extends ComponentClient
 		return false;
 	}
 
+	/**
+        * This method is used to retrieve actual tracking velocity of the system.
+        * @return       RadecVel with actual Tracking velocity.
+        */
 	public RadecVel getTrackingRate()
 	{
 		if(csstatus!=null)
@@ -174,6 +193,13 @@ public class CSATStatusClient extends ComponentClient
 		return null;
 	}
 
+	/**
+	* This method is used to retrieve actual danger that telescope has when observing 
+	* RadecPos coordinate. This danger could be from Moon, Sun, Weather or others factors.
+	* @param p	RadecPos with position to test danger.
+	* @return	int with danger asociated to RadecPos. This is form 1 to 4. Being the 
+	* most dangerous 4.
+	*/
 	public int getSafety(RadecPos p)
 	{
 		if(csstatus!=null)
@@ -181,16 +207,29 @@ public class CSATStatusClient extends ComponentClient
 		return -1;
 	}
 
+	/**
+	* This method is used to stop system immedately to prevent damage on any part of the hardware.
+	*/
 	public void EmergencyStop()
 	{
 		if(csstatus!=null)
 			csstatus.EmergencyStop();
 	}
+
+	/**
+	* This method is used to set System mode on Automatic or Manual.
+	* @param s	int describing Mode desired to set.
+	*/
 	public void setMode(int s)
 	{
 		if(csstatus!=null)
 			csstatus.setMode(s);
 	}
+
+	/**
+	* This method is used to get actual Local Mean Sidereal Time of Telescope's geographic position.
+	* return	double with Local Mean Sidereal Time of the Telescope.
+	*/
 	public double getSiderealTime()
 	{
 		if(csstatus!=null)

@@ -107,27 +107,25 @@ public class CSATControlClient extends ComponentClient
 		}
 	}
 
+	/**
+        * This method is used to move the telescope to desired position, giving a RadecPos structure 
+        * with RA and Dec coordinates. This class also sets the presetting status to Presetting and 
+	* creates a callback that will sets this status to Idle when the movement is done.
+        * @param p         RadecPos with the direction where you'd like to move the telescope.
+        */
 	public void preset(RadecPos p)
 	{
 		if(cscontrol!=null)
 		{
 			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(2);
 			MyResponseReceiver rere  =  new MyResponseReceiver() {
-				public void incomingResponse(Object x) {
-					System.out.println("Incoming Response: "+x);
-				}
 				public void incomingResponse() {
 					interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
 				}
-				public void incomingException(Exception e) {
-					System.out.println("Responding failed: "+e);}
 
 			};
 
 			ContainerServices cs = getContainerServices();
-			//MovementCB cb = new MovementCB();
-			//cscontrol.preset(p, null, desc);
-			CBstring cbs = null;
 			CBvoid cb = null;
 			try
 			{
@@ -137,10 +135,14 @@ public class CSATControlClient extends ComponentClient
 			{
 			}
 			cscontrol.preset(p, cb, MyRequesterUtil.giveDescIn());
-//			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
 		}
 	}
 
+	/**
+	* This method is used to activate/deactivate the tracking status of the system. It 
+	* also sets the Tracking status to On/Off accordingly.
+	* @param s	boolean with desired status for tracking.
+	*/
 	public void setTrackingStatus(boolean s)
 	{
 		if(cscontrol!=null)
@@ -153,6 +155,11 @@ public class CSATControlClient extends ComponentClient
 		}
 	}
 
+	/**
+	* This method sets the Tracking velocity receiving a RadecVel structure which is 
+	* a vector with Alt and Az velocities.
+	* @param v	RadecVel whith the desired velocities for Alt and Az tracking.
+	*/
 	public void setTrackingRate(RadecVel v)
 	{
 		if(cscontrol!=null)
@@ -161,6 +168,13 @@ public class CSATControlClient extends ComponentClient
 		}
 	}
 
+	/**
+        * This method is used to move the telescope to desired position, giving a RadecPos structure 
+        * with RA and Dec coordinates and a RadecVel structure. This class also sets the presetting status 
+	* to Presetting and creates a callback that will sets this status to Idle when the movement is done.
+        * @param p      RadecPos with the direction where you'd like to move the telescope.
+	* @param v	RadecVel whith the desired velocities for Alt and Az movement.
+        */
 	public void goToRadec(RadecPos p, RadecVel v)
 	{
 		if(cscontrol!=null)
@@ -171,27 +185,26 @@ public class CSATControlClient extends ComponentClient
 		}
 	}
 
+	/**
+        * This method is used to move the telescope to desired position, giving a AltAzPos structure 
+        * with Alt and Az coordinates and a RadecVel structure. This class also sets the presetting status 
+        * to Presetting and creates a callback that will sets this status to Idle when the movement is done.
+        * @param p      RadecPos with the direction where you'd like to move the telescope.
+        * @param v      RadecVel whith the desired velocities for Alt and Az movement.
+        */
 	public void goToAltAz(AltazPos p, AltazVel v)
 	{
 		if(cscontrol!=null)
 		{
 			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(2);
                         MyResponseReceiver rere  =  new MyResponseReceiver() {
-                                public void incomingResponse(Object x) {
-                                        System.out.println("Incoming Response: "+x);
-                                }
                                 public void incomingResponse() {
                                         interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
                                 }
-                                public void incomingException(Exception e) {
-                                        System.out.println("Responding failed: "+e);}
 
                         };
 
                         ContainerServices cs = getContainerServices();
-                        //MovementCB cb = new MovementCB();
-                        //cscontrol.preset(p, null, desc);
-                        CBstring cbs = null;
                         CBvoid cb = null;
                         try
                         {
@@ -205,66 +218,60 @@ public class CSATControlClient extends ComponentClient
 		}
 	}
 
+	/**
+	* This method is used to set an Offset in the Alt coordinate, to correct errors 
+	* in the direction that telescope is pointing.
+	* @param degree		double that sets Altitude offset.
+	*/
 	public void AltitudeOffSet(double degree)
 	{
 		if(cscontrol!=null)
 		{
-			//long time1 = System.currentTimeMillis();
-			//long time2 = System.currentTimeMillis();
 			interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(2);
 			cscontrol.AltitudeOffSet(degree);
 			interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
-			//while(time2-time1<3000)
-                        //	time2 = System.currentTimeMillis();
-			//interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
 		}
 	}
 
+	/**
+        * This method is used to set an Offset in the Az coordinate, to correct errors 
+        * in the direction that telescope is pointing.
+        * @param degree         double that sets Azimuth offset.
+        */
 	public void AzimuthOffSet(double degree)
 	{
 		if(cscontrol!=null)
 		{
-			//long time1 = System.currentTimeMillis();
-                        //long time2 = System.currentTimeMillis();
                         interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(2);
 			cscontrol.AzimuthOffSet(degree);
 			interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
-			//while(time2-time1<3000)
-                        //        time2 = System.currentTimeMillis();
-                        //interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(1);
 		}
 	}
 
+	/**
+        * This method is used to get an Image of what CCD camera and Telescope are observing. It
+	* just returns an "instant" image with no exposure time.
+	* @param img		ImageHolder is a structure that stores image data.
+	*/
 	public void getPreviewImage(ImageHolder img)
 	{
 		if(cscontrol!=null)
 		{
 
 			MyResponseReceiver rere  =  new MyResponseReceiver() {
-                                public void incomingResponse(Object x) {
-                                        System.out.println("Incoming Response: "+x);
-                                }
                                 public void incomingResponse() {
 					System.out.println("Image received");
                                 }
-                                public void incomingException(Exception e) {
-                                        System.out.println("Responding failed: "+e);}
-
                         };
 
 			ContainerServices cs = getContainerServices();
-                        //MovementCB cb = new MovementCB();
-                        //cscontrol.preset(p, null, desc);
-                        CBstring cbs = null;
                         CBvoid cb = null;
-
                         try
                         {
                                 cb = MyRequesterUtil.giveCBVoid(cs, rere);
                         }
                         catch(AcsJContainerServicesEx e)
                         {
-				System.out.println("A");
 				e.printStackTrace();
                         }
 
@@ -274,6 +281,9 @@ public class CSATControlClient extends ComponentClient
 		}
 	}
 
+	/**
+	* This method is used to stop telescope movement when desired.
+	*/
 	public void stopTelescope()
 	{
 		if(cscontrol!=null)
@@ -283,6 +293,13 @@ public class CSATControlClient extends ComponentClient
 		}
 	}
 
+	/**
+        * This method is used to get an Image of what CCD camera and Telescope are observing. This 
+        * image is obtained using exposure time and an Id.
+        * @param img            ImageHolder is a structure that stores image data.
+	* @param id		Int
+	* @param exptime	double is the time that exposure will lasts.
+        */
 	public void getProImage(ImageHolder img, int id, double exptime)
 	{
 		if(cscontrol!=null)
