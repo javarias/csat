@@ -17,6 +17,7 @@ NexstarAzmDevIO::NexstarAzmDevIO(char *deviceName) throw (csatErrors::CannotOpen
 	/* Test if the telescope is connected */
 	try{
 		this->sp->write_RS232("Kx",2);
+		this->sp->read_RS232();
 	} catch(SerialRS232::SerialRS232Exception serialEx) {
 		csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
 		ex.addData("Reason",serialEx.what());
