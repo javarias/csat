@@ -5,13 +5,23 @@ NexstarAzmDevIO::NexstarAzmDevIO(char *deviceName) throw (csatErrors::CannotOpen
 	char *_METHOD_="NexstarAltDevIO::NexstarAltDevIO";
 
 	try{
+		ACS_TRACE("Creating SeriaRS232 device");
 		this->sp = new SerialRS232(deviceName);
+	} catch(SerialRS232::SerialRS232Exception serialEx) {
+		ACS_LOG( LM_ERROR , _METHOD_ , (LM_ERROR, "CannotOpenDeviceEx: %s", serialEx.what()) );
+		csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
+		throw ex.getCannotOpenDeviceEx();
+	}
+	this->sp->flush_RS232();
+
+	/* Test if the telescope is connected */
+	try{
+		this->sp->write_RS232("Kx",2);
 	} catch(SerialRS232::SerialRS232Exception serialEx) {
 		csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
 		ex.addData("Reason",serialEx.what());
 		throw ex.getCannotOpenDeviceEx();
 	}
-	this->sp->flush_RS232();
 }
 
 NexstarAzmDevIO::NexstarAzmDevIO(void *data) {

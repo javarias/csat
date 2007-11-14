@@ -30,25 +30,24 @@ void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,cs
 	const char * _METHOD_ = "NexstarImpl::initialize";
 	ACS_TRACE("NexstarImpl::initialize");
 	if( getComponent() != 0){
-			try{
-				m_realAzm_sp = new ROdouble( (component_name + std::string(":realAzm")).c_str(),
-				                             getComponent(), new NexstarAzmDevIO("/dev/ttyS0"));
-			} catch (csatErrors::CannotOpenDeviceExImpl ex){
-				ACS_LOG( LM_ERROR , _METHOD_ , (LM_ERROR, "CannotOpenDeviceEx: %s", ex.getShortDescription()) );
-				acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(__FILE__,__LINE__,_METHOD_);
-				lifeEx.addData("Reason",ex.getShortDescription());
-				throw lifeEx.getLifeCycleEx();
-			}
+		ACS_TRACE("Getting components :D");
 
-			try{
-			m_realAlt_sp = new ROdouble( ( component_name + std::string(":realAlt")).c_str(),
-		   	                          getComponent(), new NexstarAltDevIO("/dev/ttyS0"));
-			} catch (csatErrors::CannotOpenDeviceExImpl ex){
-				ACS_LOG( LM_ERROR , _METHOD_ , (LM_ERROR, "CannotOpenDeviceEx: %s", ex.getShortDescription()) );
-				acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(__FILE__,__LINE__,_METHOD_);
-				lifeEx.addData("Reason",ex.getShortDescription());
-				throw lifeEx.getLifeCycleEx();
-			}
+		NexstarAzmDevIO *azmDevIO = NULL;
+		NexstarAltDevIO *altDevIO = NULL;
+
+		try{
+			azmDevIO = new NexstarAzmDevIO("/dev/ttyS0");
+			altDevIO = new NexstarAltDevIO("/dev/ttyS0");
+		} catch (csatErrors::CannotOpenDeviceEx &ex){
+			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
+			lifeEx.addData("Reason","Cannot create DevIOs");
+			throw lifeEx;
+		}
+
+		m_realAzm_sp = new ROdouble( (component_name + std::string(":realAzm")).c_str(),
+			                             getComponent(), azmDevIO);
+		m_realAlt_sp = new ROdouble( ( component_name + std::string(":realAlt")).c_str(),
+	   	                          getComponent(), altDevIO);
 	}
 }
 
