@@ -1,3 +1,9 @@
+/**
+* SideralUpdate class is used to update periodically information about position 
+* and time CSATStatus component to retrieve current information and then it 
+* sends information to GUI.
+*/
+
 package Hevelius.utilities.sideralupdate;
 
 import java.util.*;
@@ -17,6 +23,9 @@ public class SideralUpdate implements Runnable
 		a = new AltazPosHolder();
 	}
 
+	/**
+	* This method is thread's action that will be executed periodically.
+	*/
 	public void run()
 	{
 		while (true)
@@ -52,6 +61,12 @@ public class SideralUpdate implements Runnable
 			}
 		}
 	}
+
+	/**
+	* This methos is used to return current state of Thread, so if it is interacting with TCS 
+	* the program cannot terminate, it will have to wait for this thread to end.
+	* @return	boolean that informs if thread is currently interacting with TCS.
+	*/
 	public boolean getThreadState()
         {
                 return working;

@@ -1,5 +1,5 @@
 /**
-* Safety class is used to refresh periodically
+* Safety class is used to update periodically
 * danger state calling CSATStatus component to
 * retrieve state and setting it to TelStatusPanel.
 */
