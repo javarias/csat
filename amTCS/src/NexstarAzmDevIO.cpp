@@ -1,7 +1,16 @@
 #include "NexstarAzmDevIO.h"
 
-NexstarAzmDevIO::NexstarAzmDevIO(char *deviceName) {
-	this->sp = new SerialRS232(deviceName);
+NexstarAzmDevIO::NexstarAzmDevIO(char *deviceName) throw (csatErrors::CannotOpenDeviceEx){
+
+	char *_METHOD_="NexstarAltDevIO::NexstarAltDevIO";
+
+	try{
+		this->sp = new SerialRS232(deviceName);
+	} catch(SerialRS232::SerialRS232Exception serialEx) {
+		csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
+		ex.addData("Reason",serialEx.what());
+		throw ex.getCannotOpenDeviceEx();
+	}
 	this->sp->flush_RS232();
 }
 

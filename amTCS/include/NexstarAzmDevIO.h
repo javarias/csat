@@ -5,6 +5,7 @@
 #include <acstime.h>
 
 #include "SerialRS232.h"
+#include "csatErrors.h"
 
 #define MAX_PRECISE_ROTATION   4294967296.0
 
@@ -13,7 +14,7 @@ class NexstarAzmDevIO: public DevIO<CORBA::Double>
 
 	public:
 
-	NexstarAzmDevIO(char *deviceName);
+	NexstarAzmDevIO(char *deviceName) throw (csatErrors::CannotOpenDeviceEx);
 	NexstarAzmDevIO(void *data);
 	virtual ~NexstarAzmDevIO();
 
