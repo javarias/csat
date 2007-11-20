@@ -51,7 +51,7 @@ xxxxx_LIBS      =
 #
 # Includes (.h) files (public only)
 # ---------------------------------
-INCLUDES        = NexstarImpl.h lpiImpl.h eTrexImpl.h
+INCLUDES        = 
 
 #
 # Libraries (public and local)
@@ -143,6 +143,8 @@ CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
 Hevelius_DIRS=Hevelius/
 Hevelius_EXTRAS=Hevelius/images Hevelius/catalogues
 Callbacks_DIRS=alma/acs/callbacks
+
+USER_JFLAGS=-Xlint:unchecked
 
 #
 # java sources in Jarfile on/off
