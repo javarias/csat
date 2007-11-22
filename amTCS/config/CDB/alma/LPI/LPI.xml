@@ -6,8 +6,8 @@
    xmlns:baci="urn:schemas-cosylab-com:BACI:1.0"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-   <frame description="frame"/>
-   <device>/dev/video0</device>
+   <frame/>
+   <device default_value="/dev/tty6"/>
    <locking>true</locking>
    <powered>false</powered>
 

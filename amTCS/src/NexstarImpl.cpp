@@ -6,6 +6,7 @@ static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 #include "SerialRS232.h"
 #include "NexstarAltDevIO.h"
 #include "NexstarAzmDevIO.h"
+#include "csatErrors.h"
 
 using namespace baci;
 
@@ -30,7 +31,6 @@ void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,cs
 	const char * _METHOD_ = "NexstarImpl::initialize";
 	ACS_TRACE("NexstarImpl::initialize");
 	if( getComponent() != 0){
-		ACS_TRACE("Getting components :D");
 
 		NexstarAzmDevIO *azmDevIO = NULL;
 		NexstarAltDevIO *altDevIO = NULL;

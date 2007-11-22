@@ -9,6 +9,7 @@ NexstarAltDevIO::NexstarAltDevIO(char *deviceName) throw (csatErrors::CannotOpen
 	} catch(SerialRS232::SerialRS232Exception serialEx) {
 		ACS_LOG( LM_ERROR , _METHOD_ , (LM_ERROR, "CannotOpenDeviceEx: %s", serialEx.what()) );
 		csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
+		ex.addData("Reason",serialEx.what());
 		throw ex.getCannotOpenDeviceEx();
 	}
 	this->sp->flush_RS232();

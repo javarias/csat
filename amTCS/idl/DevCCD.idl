@@ -29,7 +29,7 @@ module DEVCCD_MODULE {
 		readonly attribute ACS::ROlongSeq frame;
 
 		/** Holds the device name that should be accesed */
-		readonly attribute string device;
+		readonly attribute ACS::RWstring device;
 
 		/** Locking status of the component. For further information,
 		 * look at the DevTelescope component documentation

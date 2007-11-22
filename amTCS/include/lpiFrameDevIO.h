@@ -4,6 +4,8 @@
 #include <baciDevIO.h>
 #include <acstime.h>
 
+#include "csatErrors.h"
+
 #define CLEAR(x) memset (&(x), 0, sizeof (x))
 #define CLAMP(x)  ((x)<0?0:((x)>255)?255:(x))
 
@@ -23,7 +25,7 @@ class lpiFrameDevIO: public DevIO<ACS::longSeq>
 
 	public:
 
-	lpiFrameDevIO(char *deviceName);
+	lpiFrameDevIO(char *deviceName) throw (csatErrors::CannotOpenDeviceEx);
 	lpiFrameDevIO(void *data);
 	virtual ~lpiFrameDevIO();
 

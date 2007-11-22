@@ -12,7 +12,7 @@
 <xs:complexType name="DevCCDType">
    <xs:sequence>
       <xs:element name="frame" type="baci:ROlongSeq"/>
-      <xs:element name="device" type="xs:string"/>
+      <xs:element name="device" type="baci:RWstring"/>
       <xs:element name="locking" type="xs:boolean"/>
       <xs:element name="powered" type="xs:boolean"/>
    </xs:sequence>

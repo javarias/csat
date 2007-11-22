@@ -9,6 +9,7 @@
 #include <baciSmartPropertyPointer.h>
 
 #include <baciROlongSeq.h>
+#include <baciRWstring.h>
 
 #include <DevCCDS.h>
 #include <TypesC.h>
@@ -41,21 +42,21 @@ public:
 
 	virtual void unlock() throw (CORBA::SystemException);
 
-	virtual char* device() throw (CORBA::SystemException);
-
 	virtual bool locking() throw (CORBA::SystemException);
 
 	virtual bool powered() throw (CORBA::SystemException);
 
-	virtual ACS::ROlongSeq_ptr frame() throw (CORBA::SystemException);
+	virtual ACS::ROlongSeq_ptr frame()  throw (CORBA::SystemException);
+
+	virtual ACS::RWstring_ptr  device() throw (CORBA::SystemException);
 
 private:
 
 	// Properties
 	SmartPropertyPointer<ROlongSeq> m_frame_sp;
+	SmartPropertyPointer<RWstring>  m_device_sp;
 
 	// Private attributes (IDL)
-	char* m_device;
 	bool m_locking;
 	bool m_powered;
 

@@ -3,31 +3,58 @@
 #include <errno.h>
 #include <unistd.h>
 #include <linux/videodev2.h>
+#include <string.h>
 
 #include "lpiFrameDevIO.h"
 
-lpiFrameDevIO::lpiFrameDevIO(char *deviceName) {
+lpiFrameDevIO::lpiFrameDevIO(char *deviceName) throw (csatErrors::CannotOpenDeviceEx){
 
 	int flag = O_RDWR; //read write flag, is the accesmode you have to put in open
 	struct stat st;
+	static char * _METHOD_ = "lpiFrameDevIO::lpiFrameDevIO";
 
 	//we see if the deviceName device exist
 	if (-1 == stat (deviceName, &st)) {
-		fprintf (stderr, "Cannot identify '%s': %d, %s\n", deviceName, errno, strerror (errno));
+
+		char *buffer = new char[strlen("Cannot stat device ''") + strlen(deviceName) + 1];
+		sprintf(buffer,"Cannot stat device '%s'",deviceName);
+
+		ACS_LOG( LM_ERROR , _METHOD_ , (LM_ERROR, "CannotOpenDeviceEx: %s",buffer) );
+		csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
+		ex.addData("Reason",buffer);
+
+		throw ex.getCannotOpenDeviceEx();
 	}
 
 
 	//if it is a character device
 	if (!S_ISCHR (st.st_mode)) {
-		fprintf (stderr, "%s is no device\n", deviceName);
+
+		char *buffer = new char[strlen("File '' is not a char device") + strlen(deviceName) + 1];
+		sprintf(buffer,"File '%s' is not a char device",deviceName);
+
+		ACS_LOG( LM_ERROR , _METHOD_ , (LM_ERROR, "CannotOpenDeviceEx: %s",buffer) );
+		csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
+		ex.addData("Reason",buffer);
+
+		throw ex.getCannotOpenDeviceEx();
 	}
 
 	fd = open(deviceName, flag);
 
 	//if it cannot open
 	if(fd==-1) {
-		fprintf (stderr, "Cannot open '%s': %d, %s\n", deviceName, errno, strerror (errno));
+
+		char *buffer = new char[strlen("Cannot open device '' for writing: ") + strlen(deviceName) + strlen(strerror(errno))+ 1];
+		sprintf(buffer,"Cannot open device '%s' for writing: %s",deviceName,strerror(errno));
+
+		ACS_LOG( LM_ERROR , _METHOD_ , (LM_ERROR, "CannotOpenDeviceEx: %s",buffer) );
+		csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
+		ex.addData("Reason",buffer);
+
+		throw ex.getCannotOpenDeviceEx();
 	}
+
 	ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::lpiFrameDevIO: Video device opened!"));
 
 	struct v4l2_cropcap cropcap;

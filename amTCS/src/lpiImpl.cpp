@@ -5,6 +5,7 @@ static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 #include <stdlib.h>
 #include "lpiFrameDevIO.h"
 #include "lpiImpl.h"
+#include "csatErrors.h"
 
 using namespace baci;
 
@@ -12,10 +13,10 @@ using namespace baci;
 lpiImpl::lpiImpl(const ACE_CString& name, maci::ContainerServices *containerServices) :
        CharacteristicComponentImpl(name,containerServices)
       ,m_frame_sp(this)
+		,m_device_sp(this)
 {
 	component_name = name.c_str();
-	m_device = "/dev/video0";
-	m_locking = true;
+	m_device_sp = new RWstring(name+":device", getComponent());
 }
 
 /* Destructor */
@@ -25,10 +26,27 @@ lpiImpl::~lpiImpl(){
 /* Component Lifecycle */
 void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 {
+
+	static char * _METHOD_ = "lpiImpl::initialize";
+
+	ACSErr::Completion_var completion;
+	char *device_name = m_device_sp->get_sync(completion.out());
+
 	ACS_TRACE("lpiImpl::initialize");
 	if( getComponent() != 0){
+
+		lpiFrameDevIO *frameDevIO = NULL;
+
+		try{
+			frameDevIO = new lpiFrameDevIO(device_name);
+		} catch (csatErrors::CannotOpenDeviceEx &ex){
+			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
+			lifeEx.addData("Reason","Cannot create DevIOs");
+			throw lifeEx;
+		}
+
 		m_frame_sp = new ROlongSeq( (component_name + std::string(":frame")).c_str(),
-		                             getComponent(), new lpiFrameDevIO("/dev/video0"),true);
+		                             getComponent(), frameDevIO ,true);
 	}
 }
 
@@ -71,10 +89,6 @@ void lpiImpl::off() throw (CORBA::SystemException){
 }
 
 /* Attributes returning */
-char* lpiImpl::device() throw (CORBA::SystemException){
-	return m_device;
-}
-
 bool lpiImpl::locking() throw (CORBA::SystemException){
 	return m_locking;
 }
@@ -84,6 +98,14 @@ bool lpiImpl::powered() throw (CORBA::SystemException){
 }
 
 /* Properties returning */
+ACS::RWstring_ptr lpiImpl::device() throw (CORBA::SystemException){
+	if( m_device_sp == 0 ){
+		return ACS::RWstring::_nil();
+	}
+	ACS::RWstring_var prop = ACS::RWstring::_narrow(m_device_sp->getCORBAReference());
+	return prop._retn();
+}
+
 ACS::ROlongSeq_ptr lpiImpl::frame() throw (CORBA::SystemException){
 	if( m_frame_sp == 0 ){
 		return ACS::ROlongSeq::_nil();

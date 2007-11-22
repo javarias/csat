@@ -12,7 +12,6 @@
 
 #include "DevTelescopeS.h"
 #include "TypesC.h"
-#include "csatErrors.h"
 
 using namespace baci;
 
@@ -40,7 +39,7 @@ public:
 	/**
 	 * Override component lifecycles method
 	 */
-	virtual void initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl);//,csatErrors::CannotOpenDeviceEx);
+	virtual void initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl);
 	
 	/* IDL operations */
 	virtual void setCurrentAltAz(const TYPES::AltazPos &p) throw (CORBA::SystemException);

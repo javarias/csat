@@ -64,11 +64,11 @@ LIBRARIES_L     =
 NexstarImpl_OBJECTS      = NexstarImpl NexstarAltDevIO NexstarAzmDevIO SerialRS232
 NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors
 lpiImpl_OBJECTS          = lpiFrameDevIO lpiImpl
-lpiImpl_LIBS             = TypesStubs DevCCDStubs
+lpiImpl_LIBS             = TypesStubs DevCCDStubs csatErrors
 eTrexImpl_OBJECTS        = eTrexTimeDevIO eTrexImpl
 eTrexImpl_LIBS           = TypesStubs DevGPSStubs
 CalculationsImpl_OBJECTS = CalculationsImpl
-CalculationsImpl_LIBS    = TypesStubs CalculationsStubs csatErrors m
+CalculationsImpl_LIBS    = TypesStubs CalculationsStubs csatErrors
 
 #
 # Scripts (public and local)
