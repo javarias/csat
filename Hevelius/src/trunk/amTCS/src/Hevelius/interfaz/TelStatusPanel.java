@@ -32,10 +32,16 @@ public class TelStatusPanel extends JPanel
 	private int presetting = 0;
 	private int pointing = 0;
 
+	/**
+	* Constructor de la clase
+	*/
 	public TelStatusPanel(LayoutManager l)
 	{
 		super(l);
 	}
+	/**
+	* Metodo encargado de dibujar los label y botones
+	*/
 	public void init()
 	{
 		/*telstate = new JLabel("TELESCOPE STATE");
@@ -94,6 +100,12 @@ public class TelStatusPanel extends JPanel
                 add(safety);
 
 	}
+	 /**
+        * This method is extended in order to allow autoresizing
+        * of widgets whenever window's size changes.
+        * @param g      Graphics
+        */
+
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
@@ -163,7 +175,12 @@ public class TelStatusPanel extends JPanel
 
 		}
 	}
-
+	/**
+	* Metodo encargado de setar el tipo de estado en que se encuentra
+	* alguna funcion
+	* @param state	Int que contiene un numero correspondiente al estado
+	*/
+	
 	public void setGlobalState(int state)
 	{
 		this.state = state;
@@ -177,7 +194,11 @@ public class TelStatusPanel extends JPanel
 			case 5: glstate.setText("Error"); break;
 		}
 	}
-
+	/**
+	* Metodo que setea el estado actual del tracking
+	* @param state	Int contiene el numero correspondiente al estado.
+	*/
+	
 	public void setTrackingState(int state)
 	{
 		this.tracking = state;
@@ -190,6 +211,12 @@ public class TelStatusPanel extends JPanel
 		}
 		setState();
 	}
+	
+	
+	/**
+        * Metodo que setea el estado actual del pointing
+        * @param state  Int contiene el numero correspondiente al estado.
+        */
 
 	public void setPointingState(int state)
 	{
@@ -203,6 +230,11 @@ public class TelStatusPanel extends JPanel
 		}
 		setState();
 	}
+	
+	/**
+        * Metodo que setea el estado actual del Presetting
+        * @param state  Int contiene el numero correspondiente al estado.
+        */
 
 	public void setPresettingState(int state)
 	{
@@ -247,7 +279,13 @@ public class TelStatusPanel extends JPanel
 			setGlobalState(2);
                 }
 	}
-
+	
+	/**
+	* Metodo encargado de setear el nivel de peligrosidad
+	* segun el estado.
+	* @param state	Int que contiene el estado
+	*/
+	
 	public void setDangerState(int state)
 	{
 		switch(state)

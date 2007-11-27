@@ -43,6 +43,7 @@ public class Listener implements GLEventListener, MouseListener {
 	private int BaseDisplayList;
 	private int TelescopeDisplayList;
 
+	
 	public synchronized void initializeDisplayList(GLAutoDrawable drawable) {
 		GL gl =drawable.getGL();
 		BaseDisplayList = gl.glGenLists(1);
@@ -51,6 +52,11 @@ public class Listener implements GLEventListener, MouseListener {
 
 		
 	}
+
+	/**
+	* Metodo que instancia el telescopio y le da las propiedaes de color.
+	* @param drawable	GLAutoDrawable
+	*/
 
 	public void init(GLAutoDrawable drawable) {
 		GL gl = drawable.getGL();
@@ -73,6 +79,10 @@ public class Listener implements GLEventListener, MouseListener {
 		reshape(drawable, 0, 0, drawable.getWidth(), drawable.getHeight());
 		drawable.addMouseListener(this);
 	}
+	/**
+	* Metodo encargado de dibujar el telescopio
+	* @param drawable       GLAutoDrawable
+	*/
 
 	public void display(GLAutoDrawable drawable) {
 		GL gl = drawable.getGL();
@@ -94,6 +104,15 @@ public class Listener implements GLEventListener, MouseListener {
 
 	}
 	
+	/**
+	* Metodo que redibuja el telescopio segun el tamano de la pantalla
+	* @param drawable	GLAutoDrawable
+	* @param x		Int
+	* @param y		Int
+	* @param width		Int
+	* @param height		Int
+	*/
+
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 		GL gl = drawable.getGL();
 		GLU glu = new GLU();
@@ -108,7 +127,10 @@ public class Listener implements GLEventListener, MouseListener {
 		glu.gluPerspective(45, (double)width/(double)height, 1, 10);
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 	}
-
+	/**
+	* Metodo que se encarga de eliminar el dibujo del telescopio
+	* @param drawable       GLAutoDrawable
+	*/
 	public void destroy(GLAutoDrawable drawable) {
 		System.out.println("Listener.destroy()");
 		GL gl = drawable.getGL();
@@ -118,6 +140,7 @@ public class Listener implements GLEventListener, MouseListener {
 		TelescopeDisplayList = 0;
 	}
 
+	
 	// Unused routines
 	public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {}
 

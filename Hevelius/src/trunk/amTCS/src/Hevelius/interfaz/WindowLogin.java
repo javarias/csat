@@ -1,3 +1,7 @@
+/**
+* Clase encargada de dibujar la ventana de login del programa
+*/
+
 package Hevelius.interfaz;
 
 import javax.swing.*;
@@ -32,11 +36,18 @@ public class WindowLogin extends JDialog
 	private static Configuration conf = new Configuration();
 	private static Historial hist = new Historial();		
 
+	/**
+	* Constructor de la clase
+	*/
 	public WindowLogin(JFrame f, String s)
 	{
 		super(f, s, true);
 	}
 
+	/**
+	* Metodo qu dibuja los label y botones de la ventana
+	*/
+	
 	public void init()
 	{
 
@@ -234,6 +245,9 @@ public class WindowLogin extends JDialog
 
 	}
 
+	/**
+	* Metodo que hace visible la ventana y borra el field text.
+	*/
 	public void setLoginWindow(){
 		setVisible(true);
 		jTextField1.setText("");

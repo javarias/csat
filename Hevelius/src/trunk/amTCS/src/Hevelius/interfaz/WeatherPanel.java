@@ -1,3 +1,7 @@
+/** 
+* Clase que contiene el panel correspondiente a las condiciones del clima
+*/
+
 package Hevelius.interfaz;
 
 import javax.swing.*;
@@ -29,10 +33,16 @@ public class WeatherPanel extends JPanel implements Runnable
 	private int dx = 0;
 	private int dy = 0;
 
+	/**
+	* Constructor de la clase
+	*/
 	public WeatherPanel(LayoutManager l)
 	{
 		super(l);
 	}
+	/**
+	* Metodo que dibuja los labels y botones del panel.
+	*/
 	public void init()
 	{
 		//Weather Status Label
@@ -131,6 +141,13 @@ public class WeatherPanel extends JPanel implements Runnable
 		add(more);
 
 	}
+	
+	 /**
+        * This method is extended in order to allow autoresizing
+        * of widgets whenever window's size changes.
+        * @param g      Graphics
+        */
+	
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
@@ -205,6 +222,9 @@ public class WeatherPanel extends JPanel implements Runnable
 		}
 	}
 
+	/**
+	* Metodo encargado de llamar al metodo de refresco de los datos del clima
+	*/
 	public void run(){
 		long time1 = System.currentTimeMillis();
 		long time2 = System.currentTimeMillis();
@@ -220,7 +240,11 @@ public class WeatherPanel extends JPanel implements Runnable
 			}
 		}
 	}
-
+	
+	/**
+	* Metodo encargado de refrescar los datos del clima
+	*/
+	
 	public void reloadWeather(){
 		try{
 			vector.removeAllElements();		
@@ -258,6 +282,10 @@ public class WeatherPanel extends JPanel implements Runnable
 		}
 
 	}
+	
+	/**
+	* Metodo que dibuja en una nueva ventana los datos del clima
+	*/
 	
 	public void fullWeatherWindow(){
 		JDialog window = new JDialog(interfaz.getMainFrame(),"Hevelius - Weather");

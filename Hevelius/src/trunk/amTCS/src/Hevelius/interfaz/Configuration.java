@@ -1,3 +1,8 @@
+/**
+* Clase encargada de escribir el archivo de configuracion
+* del programa
+*/
+
 package Hevelius.interfaz;
 
 import java.util.Properties;
@@ -16,6 +21,10 @@ public class Configuration extends Properties{
 
 	static File dir = new File(configurationDir);
 	static File file = new File(configurationFile);
+	
+	/**
+	* Constructor de la clase
+	*/
 	
 	public Configuration(){
 		
