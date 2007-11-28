@@ -29,3 +29,12 @@
 
 void bayer2rgb24 (unsigned char *dst, unsigned char *src, long int WIDTH,
 		  long int HEIGHT);
+
+void bayer2rgb24alt (unsigned char *dst, unsigned char *src, long int WIDTH,
+                  long int HEIGHT);
+
+void bayer2rgb24raw (unsigned char *dst, unsigned char *src, long int WIDTH, 
+		  long int HEIGHT);
+
+unsigned char kb (long int i, unsigned char *src, long int WIDTH);
+unsigned char kr (long int i, unsigned char *src, long int WIDTH);

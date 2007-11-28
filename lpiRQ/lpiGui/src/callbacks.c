@@ -192,7 +192,7 @@ on_PixelScale_value_changed            (GtkRange        *range,
 	struct ccd *cam;
         cam = user_data;
         GtkWidget *entry = lookup_widget(GTK_WIDGET(range), "pixelEntry");
-        //num = gtk_range_get_value(GTK_RANGE(range));
+        num = gtk_range_get_value(GTK_RANGE(range));
         //sprintf(number, "%f", num);
 	//number[3]='\0';
         //gtk_entry_set_text(GTK_ENTRY(entry), number);
@@ -251,7 +251,7 @@ on_redScale_value_changed              (GtkRange        *range,
 	struct ccd *cam;
         cam = user_data;
         GtkWidget *entry = lookup_widget(GTK_WIDGET(range), "redEntry");
-        //num = gtk_range_get_value(GTK_RANGE(range));
+        num = gtk_range_get_value(GTK_RANGE(range));
         //sprintf(number, "%f", num);
         //number[3]='\0';
         //gtk_entry_set_text(GTK_ENTRY(entry), number);
