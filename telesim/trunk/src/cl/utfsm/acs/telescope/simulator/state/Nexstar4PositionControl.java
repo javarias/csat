@@ -151,14 +151,6 @@ public class Nexstar4PositionControl implements Runnable{
 	 * an equatorial wedge.
 	 */
 	public static final char trackingMode_AltAz = (char) 1;
-	/**
-	 * Character encoding for the Altitude-Azimuth tracking mode, 
-	 * according to Nexstar SE Communication Protocol specifications.
-	 * <p>
-	 * This is the default tracking rate and is used when a real Nexstar4 
-	 * Telescope is placed on a flat surface or tripod without the use of 
-	 * an equatorial wedge.
-	 */
 	public static final char trackingMode_EQNorth = (char) 2;
 	public static final char trackingMode_EQSouth = (char) 3;
 	
