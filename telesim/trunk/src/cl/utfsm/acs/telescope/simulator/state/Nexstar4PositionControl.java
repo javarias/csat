@@ -318,9 +318,9 @@ public class Nexstar4PositionControl implements Runnable{
 		
 		if(actionInProgress != action_slewingInProgress)
 			actionInProgress = action_noActionInProgress;
-		slewingInAltAxis = false;
 		
-		unitsPerSecond = Nexstar4State.maxAzmAxis * arcsecondsPerSecond / (60l);
+		slewingInAltAxis = false;
+		unitsPerSecond = Nexstar4State.maxAzmAxis * arcsecondsPerSecond / (360l * 60l * 60l);
 		if(direction == negativeDirection)
 			unitsPerSecond = (-1l)*unitsPerSecond;
 		slewRateInAltAxis = 0l;
@@ -676,7 +676,9 @@ public class Nexstar4PositionControl implements Runnable{
 	protected void actionSlewingInProgress(){
 		long 	azmChange, altChange, 
 				noisyAzmChange, noisyAltChange,
-				azmNewPosition, altNewPosition;
+				azmNewPosition, altNewPosition,
+				auxFixedSlewRate;
+		double meanRate;
 		
 		azmChange = 0;
 		altChange = 0;
@@ -684,7 +686,14 @@ public class Nexstar4PositionControl implements Runnable{
 			if(!variableSlewingInAzmAxis){
 				azmChange = (long) Math.ceil( ((double) slewRateInAzmAxis) * ((double)refreshRateInMilliseconds)/(1000.0) );
 			} else {
-				azmChange = (long) Math.ceil( ((double) getFixedSlewRateForVariableSlewRate(variableRateInAzmAxis, ((double)totalRateInAzmAxis)/((double)numberOfRatesInAzmAxis))) * ((double)refreshRateInMilliseconds)/(1000.0) );
+				if(numberOfRatesInAzmAxis == 0)
+					meanRate = 0.0;
+				else
+					meanRate = ( ((double)totalRateInAzmAxis)/((double)numberOfRatesInAzmAxis) )*1000.0/((double)refreshRateInMilliseconds);
+					
+				auxFixedSlewRate = getFixedSlewRateForVariableSlewRate(variableRateInAzmAxis, meanRate);
+				azmChange = (long) Math.ceil( ((double) auxFixedSlewRate) * ((double)refreshRateInMilliseconds)/(1000.0) );
+				totalRateInAzmAxis += azmChange;
 				numberOfRatesInAzmAxis++;
 			}
 		}
@@ -692,8 +701,23 @@ public class Nexstar4PositionControl implements Runnable{
 			if(!variableSlewingInAltAxis){
 				altChange = (long) Math.ceil( ((double)slewRateInAltAxis) * ((double)refreshRateInMilliseconds)/(1000.0) );
 			} else {
-				altChange = (long) Math.ceil( ((double) getFixedSlewRateForVariableSlewRate(variableRateInAltAxis, ((double)totalRateInAltAxis)/((double)numberOfRatesInAzmAxis))) * ((double)refreshRateInMilliseconds)/(1000.0) );
+				if(numberOfRatesInAltAxis == 0)
+					meanRate = 0.0;
+				else
+					meanRate = ( ((double)totalRateInAltAxis)/((double)numberOfRatesInAltAxis) )*1000.0/((double)refreshRateInMilliseconds);
+				
+				auxFixedSlewRate = getFixedSlewRateForVariableSlewRate(variableRateInAltAxis, meanRate);
+				altChange = (long) Math.ceil( ((double) auxFixedSlewRate) * ((double)refreshRateInMilliseconds)/(1000.0) );
+				totalRateInAltAxis += altChange;
 				numberOfRatesInAltAxis++;
+				
+/*				System.out.println("totalRateInAltAxis: "+totalRateInAltAxis);
+				System.out.println("numberOfRatesInAltAxis: "+numberOfRatesInAltAxis);
+				System.out.println("meanRateInAltAxis: "+((long) meanRate) );
+				System.out.println("variableRateInAltAxis: "+variableRateInAltAxis);
+				System.out.println("(var - mean)RateInAltAxis: "+( variableRateInAltAxis - ((long) meanRate) ));
+				System.out.println("auxFixedSlewRate: "+auxFixedSlewRate);
+*/				
 			}
 		}
 		
@@ -742,67 +766,98 @@ public class Nexstar4PositionControl implements Runnable{
 */		}
 	}
 	private long getFixedSlewRateForVariableSlewRate(long variableSlewRate, double meanSlewRate){
-		long variableSlewRateAbs, upperSlewRate, lowerSlewRate, upperDistance, lowerDistance;
+		long variableSlewRateAbs, upperSlewRate, lowerSlewRate;
 		
 		variableSlewRateAbs = Math.abs(variableSlewRate);
 		
 		upperSlewRate = getUpperSlewRate(variableSlewRateAbs);
 		lowerSlewRate = getLowerSlewRate(variableSlewRateAbs);
-		upperDistance = Math.round( Math.abs((double)upperSlewRate - meanSlewRate) );
-		lowerDistance = Math.round( Math.abs((double)lowerSlewRate - meanSlewRate) );
-		if(lowerDistance < upperDistance)
+		if(variableSlewRateAbs < Math.abs(meanSlewRate)){
+//			System.out.println("returned lowerSlewRate");
 			return lowerSlewRate* ( (long) Math.signum(variableSlewRate) );
+		}
+//		System.out.println("returned upperSlewRate");
 		return upperSlewRate*( (long) Math.signum(variableSlewRate) );
 	}
-	private long getLowerSlewRate(long variableSlewRateAbs){
-		if(variableSlewRateAbs > slewSpeed_0x){
-			return slewSpeed_0x;
-		}else if(variableSlewRateAbs > slewSpeed_2x){
-			return slewSpeed_2x;
-		}else if(variableSlewRateAbs > slewSpeed_4x){
-			return slewSpeed_4x;
-		}else if(variableSlewRateAbs > slewSpeed_8x){
-			return slewSpeed_8x;
-		}else if(variableSlewRateAbs > slewSpeed_16x){
-			return slewSpeed_16x;
-		}else if(variableSlewRateAbs > slewSpeed_32x){
-			return slewSpeed_32x;
-		}else if(variableSlewRateAbs > slewSpeed_5MinutessPerSec){
-			return slewSpeed_5MinutessPerSec;
-		}else if(variableSlewRateAbs > slewSpeed_1DegreesPerSec){
-			return slewSpeed_1DegreesPerSec;
+	protected long getLowerSlewRate(long variableSlewRateAbs){
+		long returnSpeed;
+		
+		if(variableSlewRateAbs > slewSpeed_4DegreesPerSec){
+//			System.out.println("lowerSlewRate: 4D");
+			returnSpeed = slewSpeed_4DegreesPerSec;
 		}else if(variableSlewRateAbs > slewSpeed_2DegreesPerSec){
-			return slewSpeed_2DegreesPerSec;
+//			System.out.println("lowerSlewRate: 2D");
+			returnSpeed = slewSpeed_2DegreesPerSec;
+		}else if(variableSlewRateAbs > slewSpeed_1DegreesPerSec){
+//			System.out.println("lowerSlewRate: 1D");
+			returnSpeed = slewSpeed_1DegreesPerSec;
+		}else if(variableSlewRateAbs > slewSpeed_5MinutessPerSec){
+//			System.out.println("lowerSlewRate: 5M");
+			returnSpeed = slewSpeed_5MinutessPerSec;
+		}else if(variableSlewRateAbs > slewSpeed_32x){
+//			System.out.println("lowerSlewRate: 32x");
+			returnSpeed = slewSpeed_32x;
+		}else if(variableSlewRateAbs > slewSpeed_16x){
+//			System.out.println("lowerSlewRate: 16x");
+			returnSpeed = slewSpeed_16x;
+		}else if(variableSlewRateAbs > slewSpeed_8x){
+//			System.out.println("lowerSlewRate: 8x");
+			returnSpeed = slewSpeed_8x;
+		}else if(variableSlewRateAbs > slewSpeed_4x){
+//			System.out.println("lowerSlewRate: 4x");
+			returnSpeed = slewSpeed_4x;
+		}else if(variableSlewRateAbs > slewSpeed_2x){
+//			System.out.println("lowerSlewRate: 2x");
+			returnSpeed = slewSpeed_2x;
+		}else{
+//			System.out.println("lowerSlewRate: 0x");
+			returnSpeed = slewSpeed_0x;
 		}
-		return slewSpeed_4DegreesPerSec;
+		
+		return returnSpeed;
 	}
-	private long getUpperSlewRate(long variableSlewRateAbs){
-		if(variableSlewRateAbs <= slewSpeed_4DegreesPerSec){
-			return slewSpeed_4DegreesPerSec;
-		}else if(variableSlewRateAbs <= slewSpeed_2DegreesPerSec){
-			return slewSpeed_2DegreesPerSec;
-		}else if(variableSlewRateAbs <= slewSpeed_1DegreesPerSec){
-			return slewSpeed_1DegreesPerSec;
-		}else if(variableSlewRateAbs <= slewSpeed_5MinutessPerSec){
-			return slewSpeed_5MinutessPerSec;
-		}else if(variableSlewRateAbs <= slewSpeed_32x){
-			return slewSpeed_32x;
-		}else if(variableSlewRateAbs <= slewSpeed_16x){
-			return slewSpeed_16x;
-		}else if(variableSlewRateAbs <= slewSpeed_8x){
-			return slewSpeed_8x;
-		}else if(variableSlewRateAbs <= slewSpeed_4x){
-			return slewSpeed_4x;
+	protected long getUpperSlewRate(long variableSlewRateAbs){
+		long upperSlewRate;
+		
+		if(variableSlewRateAbs == slewSpeed_0x){
+//			System.out.println("upperSlewRate: 0x");
+			upperSlewRate = slewSpeed_0x;
 		}else if(variableSlewRateAbs <= slewSpeed_2x){
-			return slewSpeed_2x;
+//			System.out.println("upperSlewRate: 2x");
+			upperSlewRate = slewSpeed_2x;
+		}else if(variableSlewRateAbs <= slewSpeed_4x){
+//			System.out.println("upperSlewRate: 4x");
+			upperSlewRate = slewSpeed_4x;
+		}else if(variableSlewRateAbs <= slewSpeed_8x){
+//			System.out.println("upperSlewRate: 8x");
+			upperSlewRate = slewSpeed_8x;
+		}else if(variableSlewRateAbs <= slewSpeed_16x){
+//			System.out.println("upperSlewRate: 16x");
+			upperSlewRate = slewSpeed_16x;
+		}else if(variableSlewRateAbs <= slewSpeed_32x){
+//			System.out.println("upperSlewRate: 32x");
+			upperSlewRate = slewSpeed_32x;
+		}else if(variableSlewRateAbs <= slewSpeed_5MinutessPerSec){
+//			System.out.println("upperSlewRate: 5M");
+			upperSlewRate = slewSpeed_5MinutessPerSec;
+		}else if(variableSlewRateAbs <= slewSpeed_1DegreesPerSec){
+//			System.out.println("upperSlewRate: 1D");
+			upperSlewRate = slewSpeed_1DegreesPerSec;
+		}else if(variableSlewRateAbs <= slewSpeed_2DegreesPerSec){
+//			System.out.println("upperSlewRate: 2D");
+			upperSlewRate = slewSpeed_2DegreesPerSec;
+		}else{
+//			System.out.println("upperSlewRate: 4D");
+			upperSlewRate = slewSpeed_4DegreesPerSec;
 		}
-		return slewSpeed_0x;
+		
+		return upperSlewRate;
 	}
 	protected void actionSyncInProgress(){
-		
+		//TODO: Implement actionSyncInProgress method.
 	}
 
 	protected void actionAligmentInProgress(){
-		
+		//TODO: Implement actionAligmentInProgress method.
 	}
 }

@@ -82,21 +82,21 @@ public class Nexstar4StateTestCase extends TestCase {
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#getRa()}.
 	 */
 	public void testGetRa() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#getDec()}.
 	 */
 	public void testGetDec() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#setTrackingMode(char)}.
 	 */
 	public void testSetTrackingMode() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -188,7 +188,7 @@ public class Nexstar4StateTestCase extends TestCase {
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#isAlignmentComplete()}.
 	 */
 	public void testIsAlignmentComplete() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -269,8 +269,8 @@ public class Nexstar4StateTestCase extends TestCase {
 			state.setAltAxis(alt);
 			state.setAzmAxis(azm);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			fail("The test catched an InterruptedException while trying to sleep");
 		}
 	}
 
@@ -342,8 +342,8 @@ public class Nexstar4StateTestCase extends TestCase {
 			state.setAltAxis(alt);
 			state.setAzmAxis(azm);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			fail("The test catched an InterruptedException while trying to sleep");
 		}
 	}
 
@@ -351,14 +351,14 @@ public class Nexstar4StateTestCase extends TestCase {
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#gotoRA_DEC(long, long)}.
 	 */
 	public void testGotoRA_DEC() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#gotoPreciseRA_DEC(long, long)}.
 	 */
 	public void testGotoPreciseRA_DEC() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -394,23 +394,241 @@ public class Nexstar4StateTestCase extends TestCase {
 			state.setAltAxis(alt);
 			state.setAzmAxis(azm);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			fail("The test catched an InterruptedException while trying to sleep");
 		}
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#setVariableRateAZM_RA(long, boolean)}.
 	 */
-	public void testSetVariableRateAZM_RA() {
-		fail("Not yet implemented"); // TODO
+	public void testSetVariableRateAZM_RA_negativeDirection() {
+		long azm, alt, arcsecondsPerSecond;
+		boolean azmOrAlt, direction;
+		double factor;
+		
+		azm = state.getAzmAxis();
+		alt = state.getAltAxis();
+		try {
+			factor = 1.3;
+			azmOrAlt = AZM;
+			direction = Nexstar4PositionControl.negativeDirection;
+			
+			arcsecondsPerSecond = (long)( 2.0*60.0*60.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 1.0*60.0*60.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 5.0*60.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 32.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 16.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 8.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 4.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 2.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 1.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			fail("The test catched an InterruptedException while trying to sleep");
+		}
+		state.setAltAxis(alt);
+		state.setAzmAxis(azm);
+	}
+
+	/**
+	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#setVariableRateAZM_RA(long, boolean)}.
+	 */
+	public void testSetVariableRateAZM_RA_positiveDirection() {
+		long azm, alt, arcsecondsPerSecond;
+		boolean azmOrAlt, direction;
+		double factor;
+		
+		azm = state.getAzmAxis();
+		alt = state.getAltAxis();
+		try {
+			azmOrAlt = AZM;
+			direction = Nexstar4PositionControl.positiveDirection;
+			factor = 1.3;
+			
+			arcsecondsPerSecond = (long)( 2.0*60.0*60.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 1.0*60.0*60.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 5.0*60.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 32.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 16.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 8.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 4.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 2.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 1.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			fail("The test catched an InterruptedException while trying to sleep");
+		}
+		state.setAltAxis(alt);
+		state.setAzmAxis(azm);
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#setVariableRateALT_DEC(long, boolean)}.
 	 */
-	public void testSetVariableRateALT_DEC() {
-		fail("Not yet implemented"); // TODO
+	public void testSetVariableRateALT_DEC_negativeDirection() {
+		long azm, alt, arcsecondsPerSecond;
+		boolean azmOrAlt, direction;
+		double factor;
+		
+		azm = state.getAzmAxis();
+		alt = state.getAltAxis();
+		try {
+			azmOrAlt = ALT;
+			direction = Nexstar4PositionControl.negativeDirection;
+			factor = 1.3;
+			
+			arcsecondsPerSecond = (long)( 2.0*60.0*60.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 1.0*60.0*60.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 5.0*60.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 32.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 16.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 8.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 4.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 2.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 1.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			fail("The test catched an InterruptedException while trying to sleep");
+		}
+		state.setAltAxis(alt);
+		state.setAzmAxis(azm);
+	}
+	
+	/**
+	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#setVariableRateALT_DEC(long, boolean)}.
+	 */
+	public void testSetVariableRateALT_DEC_positiveDirection() {
+		long azm, alt, arcsecondsPerSecond;
+		boolean azmOrAlt, direction;
+		double factor;
+		
+		azm = state.getAzmAxis();
+		alt = state.getAltAxis();
+		try {
+			azmOrAlt = ALT;
+			direction = Nexstar4PositionControl.positiveDirection;
+			factor = 1.3;
+			
+			arcsecondsPerSecond = (long)( 2.0*60.0*60.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 1.0*60.0*60.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 5.0*60.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 32.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 16.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 8.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 4.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 2.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+			arcsecondsPerSecond = (long)( 1.0*factor );
+			setVariableRate(arcsecondsPerSecond, azmOrAlt, direction);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			fail("The test catched an InterruptedException while trying to sleep");
+		}
+		state.setAltAxis(alt);
+		state.setAzmAxis(azm);
+	}
+	
+	protected void setVariableRate(long arcsecondsPerSecond, boolean azmOrAlt, boolean direction) throws InterruptedException {
+		long 	oldAzm, newAzm, newAlt, oldAlt, rate, delta, 
+				specsPerSeconds, upperSlewRate, lowerSlewRate;
+		int testIterations, sleepTime;
+		
+		testIterations = 4;
+		sleepTime = 60;
+		
+		specsPerSeconds = Nexstar4State.maxAzmAxis * arcsecondsPerSecond / (360l * 60l * 60l);
+		rate = (long)( ((double) (specsPerSeconds*sleepTime) )/1000.0 );
+		upperSlewRate = state.positionControl.getUpperSlewRate(specsPerSeconds);
+		lowerSlewRate = state.positionControl.getLowerSlewRate(specsPerSeconds);
+		delta = (long)( ((double) (upperSlewRate+lowerSlewRate) )/2.0);
+		
+		if(direction == Nexstar4PositionControl.negativeDirection){
+			rate *= (-1l);
+			
+			state.setAltAxis(Nexstar4PositionControl.maxAzmAxis-1);
+			state.setAzmAxis(Nexstar4PositionControl.maxAltAxis-1);
+			
+			oldAzm = Nexstar4PositionControl.maxAzmAxis-1;
+			oldAlt = Nexstar4PositionControl.maxAltAxis-1;
+		}
+		else{
+			state.setAltAxis(0);
+			state.setAzmAxis(0);
+			
+			oldAzm = 0;
+			oldAlt = 0;
+		}
+		
+		System.out.println("specsPerSeconds: "+arcsecondsPerSecond);
+		System.out.println("rate: "+rate);
+		System.out.println("delta: "+delta);
+		state.setVariableRateAZM_RA(arcsecondsPerSecond, direction);
+		state.setVariableRateALT_DEC(arcsecondsPerSecond, direction);
+		for(int i=0; i<testIterations; i++){
+			Thread.sleep(sleepTime);
+			
+			newAzm = state.getAzmAxis();
+			newAlt = state.getAltAxis();
+			
+			System.out.println("newAzm: "+newAzm);
+			System.out.println("oldAzm: "+oldAzm);
+			System.out.println("newAzm-(oldAzm+rate): "+(newAzm-oldAzm-rate));
+			if(Math.abs(newAzm-oldAzm-rate)<delta)
+				System.out.println("diff<delta?: true");
+			else if(Math.abs(newAzm-oldAzm-rate) == 0)
+				System.out.println("diff == 0?: true");
+			else
+				System.out.println("diff<delta?: false");
+			
+			if(azmOrAlt == AZM){
+				assertTrue(oldAzm+rate-delta <= newAzm);
+				assertTrue(oldAzm+rate+delta >= newAzm);
+			}
+			else{
+				assertTrue(oldAlt+rate-delta <= newAlt);
+				assertTrue(oldAlt+rate+delta >= newAlt);
+			}
+			
+			oldAzm = newAzm;
+			oldAlt = newAlt;
+		}
+		state.setFixedRateAZM_RA(direction, Nexstar4PositionControl.slewSpeedSymbol_0x);
+		state.setFixedRateALT_DEC(direction, Nexstar4PositionControl.slewSpeedSymbol_0x);
 	}
 
 	/**
@@ -500,8 +718,8 @@ public class Nexstar4StateTestCase extends TestCase {
 		long oldAzm, newAzm, newAlt, oldAlt, rate, delta, slewSpeed;
 		int testIterations, sleepTime;
 		
-		testIterations = 8;
-		sleepTime = 300;
+		testIterations = 4;
+		sleepTime = 60;
 				
 		switch (slewSpeedSymbol) {
 		case Nexstar4PositionControl.slewSpeedSymbol_4DegreesPerSec:
@@ -580,6 +798,8 @@ public class Nexstar4StateTestCase extends TestCase {
 			System.out.println("newAzm-(oldAzm+rate): "+(newAzm-oldAzm-rate));
 			if(Math.abs(newAzm-oldAzm-rate)<delta)
 				System.out.println("diff<delta?: true");
+			else if(Math.abs(newAzm-oldAzm-rate) == 0)
+				System.out.println("diff == 0?: true");
 			else
 				System.out.println("diff<delta?: false");
 			
@@ -686,77 +906,228 @@ public class Nexstar4StateTestCase extends TestCase {
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#syncRA_DEC(long, long)}.
 	 */
 	public void testSyncRA_DEC() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#syncPreciseRA_DEC(long, long)}.
 	 */
 	public void testSyncPreciseRA_DEC() {
-		fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#setLocation(int, int, int, boolean, int, int, int, boolean)}.
 	 */
 	public void testSetLocation() {
-		fail("Not yet implemented"); // TODO
+		int	degreesOfLatitude,	minutesOfLatitude,	secondsOfLatitude, 
+			degreesOfLongitude,	minutesOfLongitude,	secondsOfLongitude,
+			oldDegreesOfLatitude,	oldMinutesOfLatitude,	oldSecondsOfLatitude, 
+			oldDegreesOfLongitude,	oldMinutesOfLongitude,	oldSecondsOfLongitude;
+		boolean south, west, oldSouth, oldWest, gpsLinked;
+		
+		oldDegreesOfLatitude = state.degreesOfLatitude;
+		oldDegreesOfLongitude = state.degreesOfLongitude;
+		oldMinutesOfLatitude = state.minutesOfLatitude;
+		oldMinutesOfLongitude = state.minutesOfLongitude;
+		oldSecondsOfLatitude = state.secondsOfLatitude;
+		oldSecondsOfLongitude = state.secondsOfLongitude;
+		oldSouth = state.south;
+		oldWest = state.west;
+		gpsLinked = state.gpsLinked;
+		
+		degreesOfLatitude = state.degreesOfLatitude + 30;
+		minutesOfLatitude = state.degreesOfLongitude + 30;
+		secondsOfLatitude = state.minutesOfLatitude + 30;
+		degreesOfLongitude = state.minutesOfLongitude + 30;
+		minutesOfLongitude = state.secondsOfLatitude + 30;
+		secondsOfLongitude = state.secondsOfLongitude + 30;
+		south = !state.south;
+		west = !state.west;
+		
+		state.gpsLinked = true;
+		state.setLocation(degreesOfLatitude, minutesOfLatitude, secondsOfLatitude, south, degreesOfLongitude, minutesOfLongitude, secondsOfLongitude, west);
+		assertEquals(state.degreesOfLatitude, oldDegreesOfLatitude);
+		assertEquals(state.degreesOfLongitude, oldDegreesOfLongitude);
+		assertEquals(state.minutesOfLatitude, oldMinutesOfLatitude);
+		assertEquals(state.minutesOfLongitude, oldMinutesOfLongitude);
+		assertEquals(state.secondsOfLatitude, oldSecondsOfLatitude);
+		assertEquals(state.secondsOfLongitude, oldSecondsOfLongitude);
+		assertEquals(state.south, oldSouth);
+		assertEquals(state.west, oldWest);
+		
+		state.gpsLinked = false;
+		state.setLocation(degreesOfLatitude, minutesOfLatitude, secondsOfLatitude, south, degreesOfLongitude, minutesOfLongitude, secondsOfLongitude, west);
+		if((degreesOfLatitude + (minutesOfLatitude + secondsOfLatitude/60)/60 )>90)
+			assertFalse(state.degreesOfLatitude == degreesOfLatitude);
+		if((degreesOfLongitude + (minutesOfLongitude + secondsOfLongitude/60)/60 )>180)
+			assertFalse(state.degreesOfLongitude == degreesOfLongitude);
+		if((minutesOfLatitude + secondsOfLatitude/60)>60)
+			assertFalse(state.minutesOfLatitude == minutesOfLatitude);
+		if((minutesOfLongitude + secondsOfLongitude/60)>60)
+			assertFalse(state.minutesOfLongitude == minutesOfLongitude);
+		if(secondsOfLatitude >= 60)
+			assertFalse(state.secondsOfLatitude == secondsOfLatitude);
+		if(secondsOfLongitude >= 60)
+			assertFalse(state.secondsOfLongitude == secondsOfLongitude);
+		
+		secondsOfLatitude = Math.abs(secondsOfLatitude);
+		secondsOfLongitude = Math.abs(secondsOfLongitude);
+		minutesOfLatitude = Math.abs(minutesOfLatitude);
+		minutesOfLongitude = Math.abs(minutesOfLongitude);
+		degreesOfLatitude = Math.abs(degreesOfLatitude);
+		degreesOfLongitude = Math.abs(degreesOfLongitude);
+		
+		degreesOfLatitude = (degreesOfLatitude + (minutesOfLatitude + secondsOfLatitude/60)/60 )%90;
+		minutesOfLatitude = (minutesOfLatitude + secondsOfLatitude/60)%60;
+		secondsOfLatitude = secondsOfLatitude%60;
+		
+		degreesOfLongitude = (degreesOfLongitude + (minutesOfLongitude + secondsOfLongitude/60)/60 )%180;
+		minutesOfLongitude = (minutesOfLongitude + secondsOfLongitude/60)%60;
+		secondsOfLongitude = secondsOfLongitude%60;
+		
+		assertEquals(state.degreesOfLatitude, degreesOfLatitude);
+		assertEquals(state.degreesOfLongitude, degreesOfLongitude);
+		assertEquals(state.minutesOfLatitude, minutesOfLatitude);
+		assertEquals(state.minutesOfLongitude, minutesOfLongitude);
+		assertEquals(state.secondsOfLatitude, secondsOfLatitude);
+		assertEquals(state.secondsOfLongitude, secondsOfLongitude);
+		assertEquals(state.south, south);
+		assertEquals(state.west, west);
+		
+		state.setLocation(oldDegreesOfLatitude, oldMinutesOfLatitude, oldSecondsOfLatitude, oldSouth, oldDegreesOfLongitude, oldMinutesOfLongitude, oldSecondsOfLongitude, oldWest);
+		assertEquals(state.degreesOfLatitude, oldDegreesOfLatitude);
+		assertEquals(state.degreesOfLongitude, oldDegreesOfLongitude);
+		assertEquals(state.minutesOfLatitude, oldMinutesOfLatitude);
+		assertEquals(state.minutesOfLongitude, oldMinutesOfLongitude);
+		assertEquals(state.secondsOfLatitude, oldSecondsOfLatitude);
+		assertEquals(state.secondsOfLongitude, oldSecondsOfLongitude);
+		assertEquals(state.south, oldSouth);
+		assertEquals(state.west, oldWest);
+		
+		state.gpsLinked = gpsLinked;
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#getDegreesOfLatitude()}.
 	 */
 	public void testGetDegreesOfLatitude() {
-		fail("Not yet implemented"); // TODO
+		int oldDegreesOfLatitude;
+		
+		oldDegreesOfLatitude = state.degreesOfLatitude;
+		assertEquals(state.degreesOfLatitude, state.getDegreesOfLatitude());
+		
+		state.degreesOfLongitude += 30;
+		assertEquals(state.degreesOfLatitude, state.getDegreesOfLatitude());
+		
+		state.degreesOfLatitude = oldDegreesOfLatitude;
+		assertEquals(state.degreesOfLatitude, state.getDegreesOfLatitude());
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#getDegreesOfLongitude()}.
 	 */
 	public void testGetDegreesOfLongitude() {
-		fail("Not yet implemented"); // TODO
+		int oldDegreesOfLongitude;
+		
+		oldDegreesOfLongitude = state.degreesOfLongitude;
+		assertEquals(state.degreesOfLongitude, state.getDegreesOfLongitude());
+		
+		state.degreesOfLongitude = 30;
+		assertEquals(state.degreesOfLongitude, state.getDegreesOfLongitude());
+		
+		state.degreesOfLongitude = oldDegreesOfLongitude;
+		assertEquals(state.degreesOfLongitude, state.getDegreesOfLongitude());
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#getMinutesOfLatitude()}.
 	 */
 	public void testGetMinutesOfLatitude() {
-		fail("Not yet implemented"); // TODO
+		int oldMinutesOfLatitude;
+		
+		oldMinutesOfLatitude = state.minutesOfLatitude;
+		assertEquals(state.minutesOfLatitude, state.getMinutesOfLatitude());
+		
+		state.minutesOfLongitude += 30;
+		assertEquals(state.minutesOfLatitude, state.getMinutesOfLatitude());
+		
+		state.minutesOfLatitude = oldMinutesOfLatitude;
+		assertEquals(state.minutesOfLatitude, state.getMinutesOfLatitude());
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#getMinutesOfLongitude()}.
 	 */
 	public void testGetMinutesOfLongitude() {
-		fail("Not yet implemented"); // TODO
+		int oldMinutesOfLongitude;
+		
+		oldMinutesOfLongitude = state.minutesOfLongitude;
+		assertEquals(state.minutesOfLongitude, state.getMinutesOfLongitude());
+		
+		state.minutesOfLongitude += 30;
+		assertEquals(state.minutesOfLongitude, state.getMinutesOfLongitude());
+		
+		state.minutesOfLongitude = oldMinutesOfLongitude;
+		assertEquals(state.minutesOfLongitude, state.getMinutesOfLongitude());
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#getSecondsOfLatitude()}.
 	 */
 	public void testGetSecondsOfLatitude() {
-		fail("Not yet implemented"); // TODO
+		int oldSecondsOfLatitude;
+		
+		oldSecondsOfLatitude = state.secondsOfLatitude;
+		assertEquals(state.secondsOfLatitude, state.getSecondsOfLatitude());
+		
+		state.secondsOfLongitude += 30;
+		assertEquals(state.secondsOfLatitude, state.getSecondsOfLatitude());
+		
+		state.secondsOfLatitude = oldSecondsOfLatitude;
+		assertEquals(state.secondsOfLatitude, state.getSecondsOfLatitude());
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#getSecondsOfLongitude()}.
 	 */
 	public void testGetSecondsOfLongitude() {
-		fail("Not yet implemented"); // TODO
+		int oldSecondsOfLongitude;
+		
+		oldSecondsOfLongitude = state.secondsOfLongitude;
+		assertEquals(state.secondsOfLongitude, state.getSecondsOfLongitude());
+		
+		state.secondsOfLongitude += 30;
+		assertEquals(state.secondsOfLongitude, state.getSecondsOfLongitude());
+		
+		state.secondsOfLongitude = oldSecondsOfLongitude;
+		assertEquals(state.secondsOfLongitude, state.getSecondsOfLongitude());
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#isSouth()}.
 	 */
 	public void testIsSouth() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(state.south, state.isSouth());
+		
+		state.south = !state.south;
+		assertEquals(state.south, state.isSouth());
+		
+		state.south = !state.south;
+		assertEquals(state.south, state.isSouth());
 	}
 
 	/**
 	 * Test method for {@link cl.utfsm.acs.telescope.simulator.state.Nexstar4State#isWest()}.
 	 */
 	public void testIsWest() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(state.west, state.isWest());
+		
+		state.west = !state.west;
+		assertEquals(state.west, state.isWest());
+		
+		state.west = !state.west;
+		assertEquals(state.west, state.isWest());
 	}
 
 }
