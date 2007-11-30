@@ -1,0 +1,116 @@
+                               CSAT Project
+                               ============
+
+                                  README
+                                  ======
+
+
+Introduction
+============
+
+First of all, CSAT stands for Control System for an Amateur Telescope. To, the
+main idea of CSAT is the developing of a TCS (Telescope Control System) for
+amateur telescopes, in general, as a first exercise for the construction of,
+later, a gTCS, a generic TCS, which would be a framework that could be used as
+a base for any TCS that you may want to write for a particular telescope. The
+main information resource is the twiki page that is mantained with the last
+information about the development of CSAT, and can be found in:
+
+  * https://csrg.inf.utfsm.cl/twiki4/bin/view/ACS/ControlAmateurTelescope
+
+
+CSAT is developed over ACS, the ALMA Common Software, a distributed system
+framework provided by the ALMA project. So if you want to use CSAT for any
+specific purpose, you must have ACS installed on your PC first. Actually ACS
+runs over Scientific Linux 4.1 officially, but there is a version for newer
+Linux distributions patched by the UTFSM ACS Team. Further information can be
+found in:
+
+ * https://csrg.inf.utfsm.cl/twiki4/bin/view/ACS/RepackagingAcs
+
+The CSAT project has been under development since March, 2007, and since then is
+has been growing and growing, so at the time it has several separated modules,
+some of them depending on other ones, so here you can find an explanation about
+each one of these modules, and the dependencies over them.
+
+
+
+The modules
+===========
+
+The modules available on the CSAT project are:
+
+ * telecli: The telecli module consists in a simple C-written application that
+   allows you to control a Celestron Nexstar 4 SE telescope via command line. It
+   supports several commands to be sent to the telescope, and more can be added.
+   It works only as a stand-alone application. This module was developed
+	initially with the purpose of learning how to connect to the telescope, so
+	there is not any ACS component in this module.
+
+ * lpiRQ: The lpiRQ (LPI Research Quest) module includes two applications that
+   connects to a Meade LPI CCD. One of them is a command line application that
+   grabs a frame from the CCD and stores it in a file, and the other one
+   consists on a GUI that shows the image that is coming from the CCD, and where
+   you can change the different parameters of this device on a easy way. There
+	is no ACS component on this module because of the same reason that the
+	telecli don't have either: the main idea of this module was to learn how to
+   connect to the CCD and obtain information from it.
+
+ * telesim: The telesim module, as it name says, is a telescope simulator. It
+   currently simulates the Celestron Nexstar 4 SE telescope, and is written in
+   Java (an older version was written in C, but was thrown away). The class
+   design of the simulator allows you to include more telescopes to the
+	simulator. Currently there are plans to include the Meade LX200 telescope to
+   this simulator.
+   Also, this module includes a ACS component for connecting to the simulator
+   via ACS, so you can use the simulator connecting to it with your personal
+   component.
+
+ * amTCS: This module (amateur TCS) is the main one. It consists on a TCS that,
+   with the information coming from the telescope, the CCD and a GPS, and some
+   logic and calculations written on it, it controls the telescope's movement
+   for observing some objective. It includes many ACS components, and all their
+   configuration and testing, among other things. There are many improvements
+   that have to be done over the amTCS, because it is the main module of the
+   CSAT project, so they will be. At the moment of writing, the GPS is still not
+   connected to the amTCS, so a PC clock and fixed ubication values are being
+   used.
+
+ * Hevelius: Finally, Hevelius is a GUI client for the amTCS components. It is
+   written in Java, and was developed initially for the "Feria de Software
+   2007", but now (that this event has passed away) it is being mantained to
+   satisfy the requirements of the CSAT project.
+
+
+The authors of each module, and the contributors, are listed on the AUTHORS and
+CREDITS files, respectively, so look at them if you want to know more about
+them.
+
+
+
+The dependencies
+================
+
+The dependecies between the modules are as follows:
+
+                      -------------
+                      |  Hevelius |
+                      -------------
+                            |
+                            |
+                            V
+                      -------------
+                      |   amTCS   |
+                      -------------
+                            |
+                            |
+                            V
+  -------------       -------------      -------------
+  |  telecli  |       |  telesim  |      |   lpiRQ   |
+  -------------       -------------      -------------
+
+
+The arrow pointing from Hevelius to amTCS represents that Hevelius depends on
+amTCS to compile and work correctly. The same for amTCS and telesim. Since
+telecli and lpiRQ are modules with only stand-alone applications, they don't
+depend on any module, and none modules depend on them.
