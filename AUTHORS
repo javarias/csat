@@ -1,0 +1,64 @@
+                               AUTHORS                                    
+                               =======
+
+Here you can find the authors for the different modules that are present on the
+CSAT project:
+
+
+telecli
+=======
+
+  Rodrigo Tobar Carrizo        (initial developer and actual maintainer)
+
+
+
+telesim
+=======
+
+  Diego Candel Contardo        (actual maintainer)
+  Rodrigo Tobar Carrizo        (initial developer)
+  Jorge Valencia Formas        (initial developer)
+
+
+
+lpiRQ
+=====
+
+  Tomas Staig Fernandez        (GUI actual maintainer)
+  Mauricio Araya Lopez         (GUi initial developer)
+  Daniel Winkler Rosa          (command line tool initial developer,
+                               both tools actual maintainer)
+
+
+
+Hevelius
+========
+
+  Tomas Staig Fernandez        (initial developer and actual maintainer)
+  Carlos Guajardo Miranda      (initial developer and actual maintainer)
+  Marina Pilar Daza            (initial developer and actual maintainer)
+  Esteban Espinoza Martinez    (initial developer and actual maintainer)
+
+
+
+amTCS
+=====
+
+  Rodrigo Tobar Carrizo        (initial developer and actual maintainer)
+  Joao Lopez Silva             (actual maintainer)
+
+
+The contact information for every person that is listed on this file is as
+follows:
+
+
+  Rodrigo Tobar Carrizo        <rtobar@csrg.inf.utfsm.cl> 
+  Diego Candel Contardo        <dcontard@csrg.inf.utfsm.cl>
+  Jorge Valencia Formas        <jorjazo@csrg.inf.utfsm.cl>
+  Tomas Staig Fernandez        <tstaig@csrg.inf.utfsm.cl>
+  Mauricio Araya Lopez         <maray@csrg.inf.utfsm.cl>
+  Daniel Winkler Rosa          <dwinkler@csrg.inf.utfsm.cl>
+  Carlos Guajardo Miranda      <cguajard@csrg.inf.utfsm.cl>
+  Marina Pilar Daza            <mpilar@csrg.inf.utfsm.cl>
+  Esteban Espinoza Martinez    <eespinoz@csrg.inf.utfsm.cl>
+  Joao Lopez Silva             <jslopez@csrg.inf.utfsm.cl>
