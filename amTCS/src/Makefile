@@ -73,7 +73,7 @@ CalculationsImpl_LIBS    = TypesStubs CalculationsStubs csatErrors
 #
 # Scripts (public and local)
 # ----------------------------
-SCRIPTS         = HeveliusTCS
+SCRIPTS         = 
 SCRIPTS_L       =
 
 #
@@ -130,7 +130,7 @@ ACSERRDEF = csatErrors
 
 # Jarfiles and their directories
 #
-JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl Hevelius Callbacks
+JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl
 TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
 CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
 LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
@@ -140,9 +140,6 @@ CalculationsImpl_DIRS=alma/CALCULATIONS_MODULE/CalculationsImpl
 SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
-Hevelius_DIRS=Hevelius/
-Hevelius_EXTRAS=Hevelius/images Hevelius/catalogues
-Callbacks_DIRS=alma/acs/callbacks
 
 USER_JFLAGS=-Xlint:unchecked
 
