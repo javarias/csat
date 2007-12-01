@@ -40,11 +40,10 @@ EXECUTABLES_L   =
 
 #
 # <brief description of xxxxx program>
-cli_nex4_OBJECTS    = SerialRS232 Communication client
-test_nex4_OBJECTS   = SerialRS232 Communication test
-xxxxx_LDFLAGS   =
-xxxxx_LIBS      =
-
+cli_nex4_OBJECTS    = client
+test_nex4_OBJECTS   = test
+cli_nex4_LIBS       = SerialCommunication C++
+test_nex4_LIBS      = SerialCommunication C++
 #
 # special compilation flags for single c sources
 #yyyyy_CFLAGS   = 
@@ -52,18 +51,18 @@ xxxxx_LIBS      =
 #
 # Includes (.h) files (public only)
 # ---------------------------------
-INCLUDES        = 
+INCLUDES        = Communication.h SerialRS232.h
 
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = 
-LIBRARIES_L     =
+LIBRARIES       = SerialCommunication
+LIBRARIES_L     = 
 
 #
 # <brief description of lllll library>
-xxx_OBJECTS = 
-xxx_LIBS    = 
+SerialCommunication_OBJECTS = SerialRS232 Communication
+SerialCommunication_LIBS    = 
 
 #
 # Scripts (public and local)
