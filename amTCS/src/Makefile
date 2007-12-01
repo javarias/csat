@@ -56,7 +56,7 @@ INCLUDES        =
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = NexstarImpl lpiImpl eTrexImpl CalculationsImpl
+LIBRARIES       = NexstarImpl NexsimImpl lpiImpl eTrexImpl CalculationsImpl
 LIBRARIES_L     =
 
 #
