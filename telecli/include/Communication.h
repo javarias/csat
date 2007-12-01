@@ -24,9 +24,11 @@ class Communication{
 
 	private:
 	SerialRS232 *sp;
+	int verbose;
 
 	public:
 	Communication(char *deviceName);
+	Communication(char *deviceName, int verbose);
 	~Communication();
 	char *echo(char c);
 	char trackingMode();
