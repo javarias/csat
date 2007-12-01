@@ -100,11 +100,11 @@ The dependecies between the modules are as follows:
                             |
                             V
                       -------------
-                      |   amTCS   |
-                      -------------
-                            |
-                            |
-                            V
+         ------------ |   amTCS   |
+        /             -------------
+        |                   |
+        |                   |
+        V                   V
   -------------       -------------      -------------
   |  telecli  |       |  telesim  |      |   lpiRQ   |
   -------------       -------------      -------------
