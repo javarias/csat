@@ -61,8 +61,10 @@ LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-NexstarImpl_OBJECTS      = NexstarImpl NexstarAltDevIO NexstarAzmDevIO SerialRS232
-NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors
+NexstarImpl_OBJECTS      = NexstarImpl NexstarAltDevIO NexstarAzmDevIO
+NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors SerialCommunication #generated on telecli
+NexsimImpl_OBJECTS       = NexsimImpl NexsimAltDevIO NexsimAzmDevIO
+NexsimImpl_LIBS          = TypesStubs DevTelescopeStubs csatErrors 
 lpiImpl_OBJECTS          = lpiFrameDevIO lpiImpl
 lpiImpl_LIBS             = TypesStubs DevCCDStubs csatErrors
 eTrexImpl_OBJECTS        = eTrexTimeDevIO eTrexImpl

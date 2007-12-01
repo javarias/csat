@@ -28,10 +28,10 @@ module DEVTELESCOPE_MODULE{
 	 */
 	interface DevTelescope : ACS::CharacteristicComponent {
 
-		/** This property is the position of the azimuth axe in degrees */
+		/** This property is the position of the azimuth axe in degrees. */
 		readonly attribute ACS::ROdouble realAlt;
 
-		/** This property is the position of the altitude axe in degrees */
+		/** This property is the position of the altitude axe in degrees. */
 		readonly attribute ACS::ROdouble realAzm;
 
 		/** Locking status of the component. The idea is that, when
@@ -39,15 +39,19 @@ module DEVTELESCOPE_MODULE{
 		 * CSATControl and CSATStatus, in certain conditions). It will
 		 * be used, for example, for an emergency stop, and for
 		 * preventing any malfunctioning while still not in the Ready
-		 * status
+		 * status.
 		 */
 		readonly attribute boolean locking;
 
-		readonly attribute TYPES::AltazVel velocity;
+		/** The velocity of the azimuth axis of the telescope (on degrees) */
+		readonly attribute ACS::RWdouble azmVel;
+
+		/** The velocity of the altitude axis of the telescope (on degrees) */
+		readonly attribute ACS::RWdouble altVel;
 
 		/**
 		 * This method is used to synchronize the telescope, so we tell
-		 * it that it is positioned in a fixed coordinate
+		 * it that it is positioned in a fixed coordinate.
 		 *
 		 * @param p The Alt/Az position
 		 */
@@ -56,13 +60,13 @@ module DEVTELESCOPE_MODULE{
 		/**
 		 * This method locks the component, so any order received from
 		 * any other component that is not CSATStatus or CSATControl
-		 * will be ignored
+		 * will be ignored.
 		 */
 		void lock();
 
 		/**
 		 * Unlocks the component, so the component will follow any
-		 * order that an external component may give it
+		 * order that an external component may give it.
 		 */
 		void unlock();
 
@@ -70,6 +74,11 @@ module DEVTELESCOPE_MODULE{
 		 * Sets a two-axes velocity for the telescope to move.
 		 */
 		void setVel(in TYPES::AltazVel vel);
+
+		/**
+		 * Returns the actual velocity of the telescope.
+		 */
+		TYPES::AltazVel getVel();
 	};
 
 };

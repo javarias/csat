@@ -1,5 +1,5 @@
-#ifndef _NEXSIMIMPL_H_
-#define _NEXSIMIMPL_H_
+#ifndef _NEXSTARIMPL_H_
+#define _NEXSTARIMPL_H_
 
 #ifndef __cplusplus
 #error This is a C++ include file and cannot be used from plain C
@@ -9,6 +9,7 @@
 #include <baciSmartPropertyPointer.h>
 
 #include <baciROdouble.h>
+#include <baciRWdouble.h>
 
 #include "DevTelescopeS.h"
 #include "TypesC.h"
@@ -16,11 +17,12 @@
 using namespace baci;
 
 /**
- * The class NexsimImpl implements 
+ * The class DevTelescope implements 
  */
 
-class NexsimImpl : public virtual CharacteristicComponentImpl,
-                   public virtual POA_DEVTELESCOPE_MODULE::DevTelescope
+class NexstarImpl : public virtual CharacteristicComponentImpl,
+                    public virtual POA_DEVTELESCOPE_MODULE::DevTelescope
+//                         public ActionImplementator
 {
 
 public:
@@ -29,11 +31,11 @@ public:
 	 * @param poa POA which will activate this and also all other COBs
 	 * @param name Component name
 	 */
-	NexsimImpl(const ACE_CString& name, maci::ContainerServices* containerServices);
+	NexstarImpl(const ACE_CString& name, maci::ContainerServices* containerServices);
 	/**
 	 * Destructor
 	 */
-	virtual ~NexsimImpl();
+	virtual ~NexstarImpl();
 
 	/**
 	 * Override component lifecycles method
@@ -49,7 +51,7 @@ public:
 
 	virtual void unlock() throw (CORBA::SystemException);
 
-	virtual TYPES::AltazVel velocity() throw (CORBA::SystemException);
+	virtual TYPES::AltazVel getVel() throw (CORBA::SystemException);
 
 	virtual bool locking() throw (CORBA::SystemException);
 
@@ -57,15 +59,20 @@ public:
 
 	virtual ACS::ROdouble_ptr realAzm() throw (CORBA::SystemException);
 
+	virtual ACS::RWdouble_ptr azmVel() throw (CORBA::SystemException);
+
+	virtual ACS::RWdouble_ptr altVel() throw (CORBA::SystemException);
+
 private:
 
 	// Properties
 	SmartPropertyPointer<ROdouble> m_realAzm_sp;
 	SmartPropertyPointer<ROdouble> m_realAlt_sp;
+	SmartPropertyPointer<RWdouble> m_altVel_sp;
+	SmartPropertyPointer<RWdouble> m_azmVel_sp;
 
 	// Private attributes (IDL)
 	bool m_locking;
-	TYPES::AltazVel m_velocity;
 
 	// Private attributes (others)
 	
@@ -74,7 +81,7 @@ private:
 	/**
 	 * ALMA C++ coding standards state copy operators should be disabled.
 	 */
-	void operator=(const NexsimImpl&);
+	void operator=(const NexstarImpl&);
 };
 
-#endif /* _NEXSIMIMPL_H_ */
+#endif /* _NEXSTARIMPL_H_ */

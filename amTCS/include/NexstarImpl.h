@@ -9,6 +9,7 @@
 #include <baciSmartPropertyPointer.h>
 
 #include <baciROdouble.h>
+#include <baciRWdouble.h>
 
 #include "DevTelescopeS.h"
 #include "TypesC.h"
@@ -50,7 +51,7 @@ public:
 
 	virtual void unlock() throw (CORBA::SystemException);
 
-	virtual TYPES::AltazVel velocity() throw (CORBA::SystemException);
+	virtual TYPES::AltazVel getVel() throw (CORBA::SystemException);
 
 	virtual bool locking() throw (CORBA::SystemException);
 
@@ -58,15 +59,20 @@ public:
 
 	virtual ACS::ROdouble_ptr realAzm() throw (CORBA::SystemException);
 
+	virtual ACS::RWdouble_ptr azmVel() throw (CORBA::SystemException);
+
+	virtual ACS::RWdouble_ptr altVel() throw (CORBA::SystemException);
+
 private:
 
 	// Properties
 	SmartPropertyPointer<ROdouble> m_realAzm_sp;
 	SmartPropertyPointer<ROdouble> m_realAlt_sp;
+	SmartPropertyPointer<RWdouble> m_altVel_sp;
+	SmartPropertyPointer<RWdouble> m_azmVel_sp;
 
 	// Private attributes (IDL)
 	bool m_locking;
-	TYPES::AltazVel m_velocity;
 
 	// Private attributes (others)
 	

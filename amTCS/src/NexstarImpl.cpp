@@ -15,6 +15,8 @@ NexstarImpl::NexstarImpl(const ACE_CString& name, maci::ContainerServices *conta
        CharacteristicComponentImpl(name,containerServices)
       ,m_realAzm_sp(this)
       ,m_realAlt_sp(this)
+      ,m_altVel_sp(this)
+      ,m_azmVel_sp(this)
 {
 	component_name = name.c_str();
 	ACS_TRACE("NexstarImpl::NexstarImpl");
@@ -48,6 +50,11 @@ void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,cs
 			                             getComponent(), azmDevIO);
 		m_realAlt_sp = new ROdouble( ( component_name + std::string(":realAlt")).c_str(),
 	   	                          getComponent(), altDevIO);
+
+		m_altVel_sp  = new RWdouble( ( component_name + std::string(":altVel")).c_str(),
+	   	                          getComponent());
+		m_azmVel_sp  = new RWdouble( ( component_name + std::string(":azmVel")).c_str(),
+	   	                          getComponent());
 	}
 }
 
@@ -112,8 +119,13 @@ void NexstarImpl::unlock() throw (CORBA::SystemException){
 
 
 /* Attributes returning */
-TYPES::AltazVel NexstarImpl::velocity() throw (CORBA::SystemException){
-	return m_velocity;
+TYPES::AltazVel NexstarImpl::getVel() throw (CORBA::SystemException){
+	TYPES::AltazVel velocity;
+
+	ACSErr::Completion_var completion;
+	velocity.azVel  = azmVel()->get_sync(completion.out());
+	velocity.altVel = altVel()->get_sync(completion.out());
+	return velocity;
 }
 
 bool NexstarImpl::locking() throw (CORBA::SystemException){
@@ -135,6 +147,22 @@ ACS::ROdouble_ptr NexstarImpl::realAlt() throw (CORBA::SystemException){
 		return ACS::ROdouble::_nil();
 	}
 	ACS::ROdouble_var prop = ACS::ROdouble::_narrow(m_realAlt_sp->getCORBAReference());
+	return prop._retn();
+}
+
+ACS::RWdouble_ptr NexstarImpl::azmVel() throw (CORBA::SystemException){
+	if( m_azmVel_sp == 0 ){
+		return ACS::RWdouble::_nil();
+	}
+	ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_azmVel_sp->getCORBAReference());
+	return prop._retn();
+}
+
+ACS::RWdouble_ptr NexstarImpl::altVel() throw (CORBA::SystemException){
+	if( m_altVel_sp == 0 ){
+		return ACS::RWdouble::_nil();
+	}
+	ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_altVel_sp->getCORBAReference());
 	return prop._retn();
 }
 
