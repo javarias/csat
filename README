@@ -34,6 +34,16 @@ some of them depending on other ones, so here you can find an explanation about
 each one of these modules, and the dependencies over them.
 
 
+Compiling
+=========
+
+For compilation, just type:
+
+$> make clean build
+
+This will clean all the modules (if anything is compiled), then will build and
+install each module by separated, in the proper order that they must be done.
+
 
 The modules
 ===========
@@ -111,6 +121,10 @@ The dependecies between the modules are as follows:
 
 
 The arrow pointing from Hevelius to amTCS represents that Hevelius depends on
-amTCS to compile and work correctly. The same for amTCS and telesim. Since
-telecli and lpiRQ are modules with only stand-alone applications, they don't
-depend on any module, and none modules depend on them.
+amTCS to compile and work correctly. The same for amTCS and telesim/telecli. 
+Also, since telecli and lpiRQ are modules with only stand-alone applications,
+they don't depend on any module, and no module depends on them. telecli has a
+stand-alone application, but also a ACS Component that is necessary for amTCS,
+since it's used by this last one. telecli, by its side, compiles a shared
+library neccesary by one of the amTCS components (the one that access the
+telescope).
