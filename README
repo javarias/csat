@@ -104,27 +104,27 @@ The dependencies
 The dependecies between the modules are as follows:
 
                       -------------
-                      |  Hevelius |
-                      -------------
-                            |
-                            |
-                            V
-                      -------------
-         ------------ |   amTCS   |
-        /             -------------
+                      |  Hevelius |------------\
+                      -------------             |
+                            |                   |
+                            |                   |
+                            V                   V
+                      -------------      ------------------
+         ------------ |   amTCS   |      | EXTERNALS/jogl |
+        /             -------------      ------------------
         |                   |
         |                   |
         V                   V
-  -------------       -------------      -------------
-  |  telecli  |       |  telesim  |      |   lpiRQ   |
-  -------------       -------------      -------------
+  -------------       -------------         -------------
+  |  telecli  |       |  telesim  |         |   lpiRQ   |
+  -------------       -------------         -------------
 
 
 The arrow pointing from Hevelius to amTCS represents that Hevelius depends on
-amTCS to compile and work correctly. The same for amTCS and telesim/telecli. 
-Also, since telecli and lpiRQ are modules with only stand-alone applications,
-they don't depend on any module, and no module depends on them. telecli has a
-stand-alone application, but also a ACS Component that is necessary for amTCS,
-since it's used by this last one. telecli, by its side, compiles a shared
-library neccesary by one of the amTCS components (the one that access the
-telescope).
+amTCS to compile and work correctly. The same for Hevelius-EXTERNALS/jogl, and
+the same for amTCS and telesim/telecli.  Also, since telecli and lpiRQ are
+modules with only stand-alone applications, they don't depend on any module,
+and no module depends on them. telesim has a stand-alone application, but also
+a ACS Component that is necessary for amTCS, since it's used by this last one.
+telecli, by its side, compiles a shared library neccesary by one of the amTCS
+components (the one that access the telescope).
