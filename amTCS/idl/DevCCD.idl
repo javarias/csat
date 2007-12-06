@@ -31,6 +31,24 @@ module DEVCCD_MODULE {
 		/** Holds the device name that should be accesed */
 		readonly attribute ACS::RWstring device;
 
+		/** Set and get the red balance value */
+		readonly attribute ACS::RWlong red;
+
+		/** Set and get the blue balance value */
+		readonly attribute ACS::RWlong blue;
+
+		/** Set and get the green balance value */
+		readonly attribute ACS::RWlong green;
+
+		/** Set and get the size of the pixels */
+		readonly attribute ACS::RWlong pixelBias;
+
+		/** Set and get the reset level (black balance) */
+		readonly attribute ACS::RWlong resetLevel;
+
+		/** Set and get the exposure time */
+		readonly attribute ACS::RWlong exposure;
+
 		/** Locking status of the component. For further information,
 		 * look at the DevTelescope component documentation
 		 */

@@ -7,7 +7,13 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
    <frame/>
-   <device default_value="/dev/tty6"/>
+   <device default_value="/dev/video0"/>
+   <red/>
+   <blue/>
+   <green/>
+   <pixelBias/>
+   <resetLevel/>
+   <exposure/>
    <locking>true</locking>
    <powered>false</powered>
 

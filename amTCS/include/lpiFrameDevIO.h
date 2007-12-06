@@ -25,7 +25,7 @@ class lpiFrameDevIO: public DevIO<ACS::longSeq>
 
 	public:
 
-	lpiFrameDevIO(char *deviceName) throw (csatErrors::CannotOpenDeviceEx);
+	lpiFrameDevIO(int fd, char *deviceName) throw (csatErrors::CannotOpenDeviceEx);
 	lpiFrameDevIO(void *data);
 	virtual ~lpiFrameDevIO();
 

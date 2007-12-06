@@ -5,11 +5,17 @@
 #error This is a C++ include file and cannot be used from plain C
 #endif
 
+#define SN9C102_V4L2_CID_GREEN_BALANCE (V4L2_CID_PRIVATE_BASE + 1)
+#define SN9C102_V4L2_CID_RESET_LEVEL (V4L2_CID_PRIVATE_BASE + 2)
+#define SN9C102_V4L2_CID_PIXEL_BIAS_VOLTAGE (V4L2_CID_PRIVATE_BASE + 3)
+
 #include <baciCharacteristicComponentImpl.h>
 #include <baciSmartPropertyPointer.h>
 
 #include <baciROlongSeq.h>
 #include <baciRWstring.h>
+#include <baciRWlong.h>
+#include <baciRWdouble.h>
 
 #include <DevCCDS.h>
 #include <TypesC.h>
@@ -50,11 +56,30 @@ public:
 
 	virtual ACS::RWstring_ptr  device() throw (CORBA::SystemException);
 
+	virtual ACS::RWlong_ptr  red() throw (CORBA::SystemException);
+
+	virtual ACS::RWlong_ptr  blue() throw (CORBA::SystemException);
+
+	virtual ACS::RWlong_ptr  green() throw (CORBA::SystemException);
+
+	virtual ACS::RWlong_ptr  pixelBias() throw (CORBA::SystemException);
+
+	virtual ACS::RWlong_ptr    resetLevel() throw (CORBA::SystemException);
+
+	virtual ACS::RWlong_ptr    exposure() throw (CORBA::SystemException);
+
+
 private:
 
 	// Properties
 	SmartPropertyPointer<ROlongSeq> m_frame_sp;
 	SmartPropertyPointer<RWstring>  m_device_sp;
+	SmartPropertyPointer<RWlong>    m_red_sp;
+	SmartPropertyPointer<RWlong>    m_blue_sp;
+	SmartPropertyPointer<RWlong>    m_green_sp;
+	SmartPropertyPointer<RWlong>    m_pixelBias_sp;
+	SmartPropertyPointer<RWlong>    m_resetLevel_sp;
+	SmartPropertyPointer<RWlong>    m_exposure_sp;
 
 	// Private attributes (IDL)
 	bool m_locking;

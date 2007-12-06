@@ -13,6 +13,12 @@
    <xs:sequence>
       <xs:element name="frame" type="baci:ROlongSeq"/>
       <xs:element name="device" type="baci:RWstring"/>
+      <xs:element name="red" type="baci:RWlong"/>
+      <xs:element name="blue" type="baci:RWlong"/>
+      <xs:element name="green" type="baci:RWlong"/>
+      <xs:element name="pixelBias" type="baci:RWlong"/>
+      <xs:element name="resetLevel" type="baci:RWlong"/>
+      <xs:element name="exposure" type="baci:RWlong"/>
       <xs:element name="locking" type="xs:boolean"/>
       <xs:element name="powered" type="xs:boolean"/>
    </xs:sequence>
