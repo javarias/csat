@@ -118,6 +118,12 @@ The dependecies between the modules are as follows:
   -------------       -------------         -------------
   |  telecli  |       |  telesim  |         |   lpiRQ   |
   -------------       -------------         -------------
+                            |
+                            |
+                            V
+                   ------------------
+                   | EXTERNALS/rxtx |
+                   ------------------
 
 
 The arrow pointing from Hevelius to amTCS represents that Hevelius depends on
@@ -128,3 +134,5 @@ and no module depends on them. telesim has a stand-alone application, but also
 a ACS Component that is necessary for amTCS, since it's used by this last one.
 telecli, by its side, compiles a shared library neccesary by one of the amTCS
 components (the one that access the telescope).
+
+Finally, the telesim module depends on the rxtx libs to work.
