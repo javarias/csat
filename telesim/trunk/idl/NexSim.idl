@@ -14,7 +14,7 @@ module NEXSIM_MODULE {
 		void on();
 		boolean onInPortDev(in string portDeviceName);
 		void off();
-		string excecuteAction(in string msg);
+		string executeAction(in string msg);
 	};
 
 

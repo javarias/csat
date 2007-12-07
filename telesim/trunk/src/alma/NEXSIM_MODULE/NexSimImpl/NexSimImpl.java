@@ -106,7 +106,7 @@ public class NexSimImpl implements NexSimOperations, ComponentLifecycle {
 		return;
 	}
 
-	public String excecuteAction(String message) {
+	public String executeAction(String message) {
 		String response = "";
 		if(telescopeOn){
 			response = m_messageWrapper.executeAction(message);
