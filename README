@@ -115,20 +115,20 @@ The dependecies between the modules are as follows:
         |                   |
         |                   |
         V                   V
-  -------------       -------------         -------------
-  |  telecli  |       |  telesim  |         |   lpiRQ   |
-  -------------       -------------         -------------
+  -------------       -------------         
+  |  telecli  |       |  telesim  |         
+  -------------       -------------         
                             |
                             |
                             V
-                   ------------------
-                   | EXTERNALS/rxtx |
-                   ------------------
+  -------------    ------------------     ----------------
+  | lpiRQ/lpi |    | EXTERNALS/rxtx |     | lpiRQ/lpiGui |
+  -------------    ------------------     ----------------
 
 
 The arrow pointing from Hevelius to amTCS represents that Hevelius depends on
 amTCS to compile and work correctly. The same for Hevelius-EXTERNALS/jogl, and
-the same for amTCS and telesim/telecli.  Also, since telecli and lpiRQ are
+the same for amTCS and telesim/telecli.  Also, since telecli and lpiRQ/* are
 modules with only stand-alone applications, they don't depend on any module,
 and no module depends on them. telesim has a stand-alone application, but also
 a ACS Component that is necessary for amTCS, since it's used by this last one.
