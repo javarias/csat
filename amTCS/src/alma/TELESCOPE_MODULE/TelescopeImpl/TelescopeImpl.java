@@ -285,12 +285,12 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 						diffAlt        *= (-1);
 					}
 
-					     if( diffAlt <  0.1 )                  altazVel.altVel *= 2;
-					else if( diffAlt >= 0.1 && diffAlt < 0.5 ) altazVel.altVel *= 3;
-					else if( diffAlt >= 0.5 && diffAlt < 3 )   altazVel.altVel *= 6;
-					else if( diffAlt >= 3   && diffAlt < 7 )   altazVel.altVel *= 7;
-					else if( diffAlt >= 7   && diffAlt < 10)   altazVel.altVel *= 8;
-					else if( diffAlt >= 10)                    altazVel.altVel *= 9;					     
+					     if( diffAlt <  0.1 )                  altazVel.altVel *= 0.05;
+					else if( diffAlt >= 0.1 && diffAlt < 0.5 ) altazVel.altVel *= 0.1;
+					else if( diffAlt >= 0.5 && diffAlt < 3 )   altazVel.altVel *= 0.5;
+					else if( diffAlt >= 3   && diffAlt < 7 )   altazVel.altVel *= 1;
+					else if( diffAlt >= 7   && diffAlt < 10)   altazVel.altVel *= 2;
+					else if( diffAlt >= 10)                    altazVel.altVel *= 4;					     
 
 					
 				} else {
@@ -307,12 +307,12 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 						diffAzm       *= (-1);
 					}
 
-					     if( diffAzm <  0.1 )                  altazVel.azVel *= 2;
-					else if( diffAzm >= 0.1 && diffAzm < 0.5 ) altazVel.azVel *= 3;
-					else if( diffAzm >= 0.5 && diffAzm < 3 )   altazVel.azVel *= 6;
-					else if( diffAzm >= 3   && diffAzm < 7 )   altazVel.azVel *= 7;
-					else if( diffAzm >= 7   && diffAzm < 10)   altazVel.azVel *= 8;
-					else if( diffAzm >= 10)                    altazVel.azVel *= 9;
+					     if( diffAzm <  0.1 )                  altazVel.azVel *= 0.05;
+					else if( diffAzm >= 0.1 && diffAzm < 0.5 ) altazVel.azVel *= 0.1;
+					else if( diffAzm >= 0.5 && diffAzm < 3 )   altazVel.azVel *= 0.5;
+					else if( diffAzm >= 3   && diffAzm < 7 )   altazVel.azVel *= 1;
+					else if( diffAzm >= 7   && diffAzm < 10)   altazVel.azVel *= 2;
+					else if( diffAzm >= 10)                    altazVel.azVel *= 4;
 
 				} else {
 					altazVel.azVel = 0;

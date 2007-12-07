@@ -1,8 +1,8 @@
-#include "NexstarAltDevIO.h"
+#include "NexstarCoordDevIO.h"
 
-NexstarAltDevIO::NexstarAltDevIO(char *deviceName) throw (csatErrors::CannotOpenDeviceEx){
+NexstarCoordDevIO::NexstarCoordDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx){
 
-	char *_METHOD_="NexstarAltDevIO::NexstarAltDevIO";
+	char *_METHOD_="NexstarCoordDevIO::NexstarCoordDevIO";
 
 	try{
 		this->sp = new SerialRS232(deviceName);
@@ -23,34 +23,32 @@ NexstarAltDevIO::NexstarAltDevIO(char *deviceName) throw (csatErrors::CannotOpen
 		ex.addData("Reason",serialEx.what());
 		throw ex.getCannotOpenDeviceEx();
 	}
+
+	this->axis = axis;
 }
 
-NexstarAltDevIO::~NexstarAltDevIO() {
+NexstarCoordDevIO::~NexstarCoordDevIO() {
 	delete this->sp;
 }
 
-bool NexstarAltDevIO::initializeValue() {
-	return true;
-}
+CORBA::Double NexstarCoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl) {
 
-CORBA::Double NexstarAltDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl) {
-
-	CORBA::Double alt(0.0);
-	char *msg;
+	CORBA::Double value(0.0);
 	unsigned long read_alt, read_azm;
+	char *msg;
 
 	/* Send the message to the telescope */
 	this->sp->write_RS232("z",1);
 	msg = this->sp->read_RS232();
 	sscanf(msg,"%08lX,%08lX#",&read_azm, &read_alt);
-	alt = read_alt / MAX_PRECISE_ROTATION;
-	alt *= 360.0;
+	value = ( this->axis == axisAltitude ) ? read_alt/MAX_PRECISE_ROTATION : read_azm/MAX_PRECISE_ROTATION ;
+	value *= 360.0;
 
-	return alt;
+	return value;
 }
 
-void NexstarAltDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl){
-	ACS_SHORT_LOG((LM_ERROR, "NexstarAltDevIO::write: This method should never be called!"));
+void NexstarCoordDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl){
+	ACS_SHORT_LOG((LM_ERROR, "NexstarCoordDevIO::write: This method should never be called!"));
 	return;
 }
 

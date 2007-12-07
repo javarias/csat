@@ -2,16 +2,18 @@
 static char *rcsId="@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
-#include "NexstarImpl.h"
-#include "SerialRS232.h"
-#include "NexstarAltDevIO.h"
-#include "NexstarAzmDevIO.h"
+#include <SerialRS232.h>
+
+#include "NexsimImpl.h"
+#include "NexsimCoordDevIO.h"
+#include "NexsimVelDevIO.h"
+
 #include "csatErrors.h"
 
 using namespace baci;
 
 /* Constructor */
-NexstarImpl::NexstarImpl(const ACE_CString& name, maci::ContainerServices *containerServices) :
+NexsimImpl::NexsimImpl(const ACE_CString& name, maci::ContainerServices *containerServices) :
        CharacteristicComponentImpl(name,containerServices)
       ,m_realAzm_sp(this)
       ,m_realAlt_sp(this)
@@ -19,107 +21,70 @@ NexstarImpl::NexstarImpl(const ACE_CString& name, maci::ContainerServices *conta
       ,m_azmVel_sp(this)
 {
 	component_name = name.c_str();
-	ACS_TRACE("NexstarImpl::NexstarImpl");
+	ACS_TRACE("NexsimImpl::NexsimImpl");
 	m_locking = true;
 }
 
 /* Destructor */
-NexstarImpl::~NexstarImpl(){
+NexsimImpl::~NexsimImpl(){
+	m_simulator->off();
 }
 
 /* Component Lifecycle */
-void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,csatErrors::CannotOpenDeviceEx)
+void NexsimImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,csatErrors::CannotOpenDeviceEx)
 {
-	const char * _METHOD_ = "NexstarImpl::initialize";
-	ACS_TRACE("NexstarImpl::initialize");
+	const char * _METHOD_ = "NexsimImpl::initialize";
+	ACS_TRACE("NexsimImpl::initialize");
+
+	// We get the simulator component
+	m_simulator = NEXSIM_MODULE::NexSim::_nil();
+	m_simulator = getContainerServices()->getDefaultComponent<NEXSIM_MODULE::NexSim>("IDL:alma/NEXSIM_MODULE/NexSim:1.0");
+
+	// And we put power it up
+	m_simulator->on();
+
+	if( CORBA::is_nil(m_simulator.in()) ){
+		throw acsErrTypeLifeCycle::LifeCycleExImpl(__FILE__,__LINE__,_METHOD_);
+	}
+	
 	if( getComponent() != 0){
 
-		NexstarAzmDevIO *azmDevIO = NULL;
-		NexstarAltDevIO *altDevIO = NULL;
-
-		try{
-			azmDevIO = new NexstarAzmDevIO("/dev/ttyS0");
-			altDevIO = new NexstarAltDevIO("/dev/ttyS0");
-		} catch (csatErrors::CannotOpenDeviceEx &ex){
-			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
-			lifeEx.addData("Reason","Cannot create DevIOs");
-			throw lifeEx;
-		}
-
-		m_realAzm_sp = new ROdouble( (component_name + std::string(":realAzm")).c_str(),
-			                             getComponent(), azmDevIO);
+		// Initialize the DevIOs
 		m_realAlt_sp = new ROdouble( ( component_name + std::string(":realAlt")).c_str(),
-	   	                          getComponent(), altDevIO);
+	   	                          getComponent(), new NexsimCoordDevIO(m_simulator, NexsimCoordDevIO::axisAltitude));
+		m_realAzm_sp = new ROdouble( (component_name + std::string(":realAzm")).c_str(),
+			                          getComponent(), new NexsimCoordDevIO(m_simulator, NexsimCoordDevIO::axisAzimuth));
 
 		m_altVel_sp  = new RWdouble( ( component_name + std::string(":altVel")).c_str(),
-	   	                          getComponent());
+	   	                          getComponent(), new NexsimVelDevIO(m_simulator, NexsimVelDevIO::axisAltitude));
 		m_azmVel_sp  = new RWdouble( ( component_name + std::string(":azmVel")).c_str(),
-	   	                          getComponent());
+	   	                          getComponent(), new NexsimVelDevIO(m_simulator, NexsimVelDevIO::axisAzimuth));
 	}
 }
 
 
 /* IDL implementation */
-void NexstarImpl::setCurrentAltAz(const TYPES::AltazPos &p) throw (CORBA::SystemException){
-	ACS_TRACE("NexstarImpl::setCurrentAlzAz");
+void NexsimImpl::setCurrentAltAz(const TYPES::AltazPos &p) throw (CORBA::SystemException){
+	ACS_TRACE("NexsimImpl::setCurrentAlzAz");
 }
 
-void NexstarImpl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemException){
+void NexsimImpl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemException){
 
-	char command[8];
-	int movement;
-
-	SerialRS232 *sp = new SerialRS232("/dev/ttyS0");
-
-	/* Setting the Altitude velocity */
-	if( vel.azVel > 0 )
-		movement = 0x24;
-	else
-		movement = 0x25;
-
-	command[0] = 'P';
-	command[1] = 2;
-	command[2] = 0x10;
-	command[3] = movement;
-	command[4] = labs((long int)vel.azVel);
-	command[5] = 0;
-	command[6] = 0;
-	command[7] = 0;
-
-	sp->write_RS232(command,8);
-	sp->read_RS232();
-
-	/* Setting the azimuth velocity */
-	if( vel.altVel > 0 )
-		movement = 0x24;
-	else
-		movement = 0x25;
-
-	command[0] = 'P';
-	command[1] = 2;
-	command[2] = 0x11;
-	command[3] = movement;
-	command[4] = labs((long int)vel.altVel);
-	command[5] = 0;
-	command[6] = 0;
-	command[7] = 0;
-
-	sp->write_RS232(command,8);
-	sp->read_RS232();
-	delete sp;
+	azmVel()->set_sync(vel.azVel);
+	altVel()->set_sync(vel.altVel);
+	return;
 }
 
-void NexstarImpl::lock() throw (CORBA::SystemException){
+void NexsimImpl::lock() throw (CORBA::SystemException){
 	m_locking = true;
 }
 
-void NexstarImpl::unlock() throw (CORBA::SystemException){
+void NexsimImpl::unlock() throw (CORBA::SystemException){
 	m_locking = false;
 }
 
 
-/* Attributes returning */
-TYPES::AltazVel NexstarImpl::getVel() throw (CORBA::SystemException){
+TYPES::AltazVel NexsimImpl::getVel() throw (CORBA::SystemException){
 	TYPES::AltazVel velocity;
 
 	ACSErr::Completion_var completion;
@@ -128,13 +93,12 @@ TYPES::AltazVel NexstarImpl::getVel() throw (CORBA::SystemException){
 	return velocity;
 }
 
-bool NexstarImpl::locking() throw (CORBA::SystemException){
+bool NexsimImpl::locking() throw (CORBA::SystemException){
 	return m_locking;
 }
 
 /* Properties returning */
-
-ACS::ROdouble_ptr NexstarImpl::realAzm() throw (CORBA::SystemException){
+ACS::ROdouble_ptr NexsimImpl::realAzm() throw (CORBA::SystemException){
 	if( m_realAzm_sp == 0 ){
 		return ACS::ROdouble::_nil();
 	}
@@ -142,7 +106,7 @@ ACS::ROdouble_ptr NexstarImpl::realAzm() throw (CORBA::SystemException){
 	return prop._retn();
 }
 
-ACS::ROdouble_ptr NexstarImpl::realAlt() throw (CORBA::SystemException){
+ACS::ROdouble_ptr NexsimImpl::realAlt() throw (CORBA::SystemException){
 	if( m_realAlt_sp == 0 ){
 		return ACS::ROdouble::_nil();
 	}
@@ -150,7 +114,7 @@ ACS::ROdouble_ptr NexstarImpl::realAlt() throw (CORBA::SystemException){
 	return prop._retn();
 }
 
-ACS::RWdouble_ptr NexstarImpl::azmVel() throw (CORBA::SystemException){
+ACS::RWdouble_ptr NexsimImpl::azmVel() throw (CORBA::SystemException){
 	if( m_azmVel_sp == 0 ){
 		return ACS::RWdouble::_nil();
 	}
@@ -158,7 +122,7 @@ ACS::RWdouble_ptr NexstarImpl::azmVel() throw (CORBA::SystemException){
 	return prop._retn();
 }
 
-ACS::RWdouble_ptr NexstarImpl::altVel() throw (CORBA::SystemException){
+ACS::RWdouble_ptr NexsimImpl::altVel() throw (CORBA::SystemException){
 	if( m_altVel_sp == 0 ){
 		return ACS::RWdouble::_nil();
 	}
@@ -168,7 +132,7 @@ ACS::RWdouble_ptr NexstarImpl::altVel() throw (CORBA::SystemException){
 
 /* --------------- [ MACI DLL support functions ] -----------------*/
 #include <maciACSComponentDefines.h>
-MACI_DLL_SUPPORT_FUNCTIONS(NexstarImpl)
+MACI_DLL_SUPPORT_FUNCTIONS(NexsimImpl)
 /* ----------------------------------------------------------------*/
 
 /*___oOo___*/

@@ -4,8 +4,8 @@ static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
 #include "NexstarImpl.h"
 #include "SerialRS232.h"
-#include "NexstarAltDevIO.h"
-#include "NexstarAzmDevIO.h"
+#include "NexstarCoordDevIO.h"
+#include "NexstarVelDevIO.h"
 #include "csatErrors.h"
 
 using namespace baci;
@@ -34,12 +34,16 @@ void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,cs
 	ACS_TRACE("NexstarImpl::initialize");
 	if( getComponent() != 0){
 
-		NexstarAzmDevIO *azmDevIO = NULL;
-		NexstarAltDevIO *altDevIO = NULL;
+		NexstarCoordDevIO *azmDevIO = NULL;
+		NexstarCoordDevIO *altDevIO = NULL;
+		NexstarVelDevIO   *altVelDevIO = NULL;
+		NexstarVelDevIO   *azmVelDevIO = NULL;
 
 		try{
-			azmDevIO = new NexstarAzmDevIO("/dev/ttyS0");
-			altDevIO = new NexstarAltDevIO("/dev/ttyS0");
+			azmDevIO = new NexstarCoordDevIO("/dev/ttyS0", NexstarCoordDevIO::axisAzimuth);
+			altDevIO = new NexstarCoordDevIO("/dev/ttyS0", NexstarCoordDevIO::axisAltitude);
+			azmVelDevIO = new NexstarVelDevIO("/dev/ttyS0", NexstarVelDevIO::axisAzimuth);
+			altVelDevIO = new NexstarVelDevIO("/dev/ttyS0", NexstarVelDevIO::axisAltitude);
 		} catch (csatErrors::CannotOpenDeviceEx &ex){
 			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
 			lifeEx.addData("Reason","Cannot create DevIOs");
@@ -52,9 +56,9 @@ void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,cs
 	   	                          getComponent(), altDevIO);
 
 		m_altVel_sp  = new RWdouble( ( component_name + std::string(":altVel")).c_str(),
-	   	                          getComponent());
+	   	                          getComponent(), azmVelDevIO);
 		m_azmVel_sp  = new RWdouble( ( component_name + std::string(":azmVel")).c_str(),
-	   	                          getComponent());
+	   	                          getComponent(), altVelDevIO);
 	}
 }
 
@@ -66,47 +70,9 @@ void NexstarImpl::setCurrentAltAz(const TYPES::AltazPos &p) throw (CORBA::System
 
 void NexstarImpl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemException){
 
-	char command[8];
-	int movement;
-
-	SerialRS232 *sp = new SerialRS232("/dev/ttyS0");
-
-	/* Setting the Altitude velocity */
-	if( vel.azVel > 0 )
-		movement = 0x24;
-	else
-		movement = 0x25;
-
-	command[0] = 'P';
-	command[1] = 2;
-	command[2] = 0x10;
-	command[3] = movement;
-	command[4] = labs((long int)vel.azVel);
-	command[5] = 0;
-	command[6] = 0;
-	command[7] = 0;
-
-	sp->write_RS232(command,8);
-	sp->read_RS232();
-
-	/* Setting the azimuth velocity */
-	if( vel.altVel > 0 )
-		movement = 0x24;
-	else
-		movement = 0x25;
-
-	command[0] = 'P';
-	command[1] = 2;
-	command[2] = 0x11;
-	command[3] = movement;
-	command[4] = labs((long int)vel.altVel);
-	command[5] = 0;
-	command[6] = 0;
-	command[7] = 0;
-
-	sp->write_RS232(command,8);
-	sp->read_RS232();
-	delete sp;
+	azmVel()->set_sync(vel.azVel );
+	altVel()->set_sync(vel.altVel);
+	return;
 }
 
 void NexstarImpl::lock() throw (CORBA::SystemException){

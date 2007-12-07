@@ -1,5 +1,5 @@
-#ifndef _NEXSIM_AZM_DEVIO_H_
-#define _NEXSIM_AZM_DEVIO_H_
+#ifndef _NEXSTAR_VEL_DEVIO_H_
+#define _NEXSTAR_VEL_DEVIO_H_
 
 #include <baciDevIO.h>
 #include <acstime.h>
@@ -9,14 +9,14 @@
 
 #define MAX_PRECISE_ROTATION   4294967296.0
 
-class NexsimAzmDevIO: public DevIO<CORBA::Double>
+class NexstarVelDevIO: public DevIO<CORBA::Double>
 {
 
 	public:
 
-	NexsimAzmDevIO(char *deviceName) throw (csatErrors::CannotOpenDeviceEx);
-	NexsimAzmDevIO(void *data);
-	virtual ~NexsimAzmDevIO();
+	NexstarVelDevIO(char *deviceName, int axist) throw (csatErrors::CannotOpenDeviceEx);
+	NexstarVelDevIO(void *data);
+	virtual ~NexstarVelDevIO();
 
 	virtual bool initializeValue();
 
@@ -26,8 +26,12 @@ class NexsimAzmDevIO: public DevIO<CORBA::Double>
 	void write(const CORBA::Double &value, ACS::Time &timestap)
 	              throw (ACSErr::ACSbaseExImpl);
 
+	static const int axisAzimuth  = 0;
+	static const int axisAltitude = 1;
+
 	private:
 	SerialRS232 *sp;
+	int axis;
 };
 
-#endif /* _NEXSIM_AZM_DEVIO_H_ */
+#endif /* _NEXSTAR_VEL_DEVIO_H_ */

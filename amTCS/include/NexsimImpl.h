@@ -1,5 +1,5 @@
-#ifndef _NEXSTARIMPL_H_
-#define _NEXSTARIMPL_H_
+#ifndef _NEXSIMIMPL_H_
+#define _NEXSIMIMPL_H_
 
 #ifndef __cplusplus
 #error This is a C++ include file and cannot be used from plain C
@@ -13,6 +13,7 @@
 
 #include "DevTelescopeS.h"
 #include "TypesC.h"
+#include "NexSimS.h"
 
 using namespace baci;
 
@@ -20,7 +21,7 @@ using namespace baci;
  * The class DevTelescope implements 
  */
 
-class NexstarImpl : public virtual CharacteristicComponentImpl,
+class NexsimImpl : public virtual CharacteristicComponentImpl,
                     public virtual POA_DEVTELESCOPE_MODULE::DevTelescope
 //                         public ActionImplementator
 {
@@ -31,11 +32,11 @@ public:
 	 * @param poa POA which will activate this and also all other COBs
 	 * @param name Component name
 	 */
-	NexstarImpl(const ACE_CString& name, maci::ContainerServices* containerServices);
+	NexsimImpl(const ACE_CString& name, maci::ContainerServices* containerServices);
 	/**
 	 * Destructor
 	 */
-	virtual ~NexstarImpl();
+	virtual ~NexsimImpl();
 
 	/**
 	 * Override component lifecycles method
@@ -75,13 +76,13 @@ private:
 	bool m_locking;
 
 	// Private attributes (others)
-	
 	std::string  component_name;	
+	NEXSIM_MODULE::NexSim_var m_simulator;
 
 	/**
 	 * ALMA C++ coding standards state copy operators should be disabled.
 	 */
-	void operator=(const NexstarImpl&);
+	void operator=(const NexsimImpl&);
 };
 
 #endif /* _NEXSTARIMPL_H_ */
