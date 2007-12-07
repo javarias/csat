@@ -51,22 +51,16 @@ xxxxx_LIBS      =
 #
 # Includes (.h) files (public only)
 # ---------------------------------
-INCLUDES        = NexstarImpl.h lpiImpl.h eTrexImpl.h
+INCLUDES        =
 
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = NexstarImpl lpiImpl eTrexImpl
+LIBRARIES       =
 LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-NexstarImpl_OBJECTS   = NexstarImpl NexstarAltDevIO NexstarAzmDevIO SerialRS232
-NexstarImpl_LIBS      = TypesStubs DevTelescopeStubs
-lpiImpl_OBJECTS       = lpiFrameDevIO lpiImpl
-lpiImpl_LIBS          = TypesStubs DevCCDStubs
-eTrexImpl_OBJECTS     = eTrexImpl
-eTrexImpl_LIBS        = TypesStubs DevGPSStubs
 
 #
 # Scripts (public and local)
@@ -112,31 +106,21 @@ tttlll_OBJECTS  =
 #
 # Configuration Database Files
 # ----------------------------
-CDB_SCHEMAS = DevTelescope DevCCD DevGPS
+CDB_SCHEMAS = 
 
 # 
 # IDL Files and flags
 # 
-IDL_FILES = Types DevTelescope DevCCD DevGPS Telescope CCD Locale Pointing Tracking Calculations Safety CSATControl CSATStatus
+IDL_FILES = 
 IDL_TAO_FLAGS =
 USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl Hevelius callbacks
-TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
-CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
-LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
-PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
-TrackingImpl_DIRS=alma/TRACKING_MODULE/TrackingImpl
-CalculationsImpl_DIRS=alma/CALCULATIONS_MODULE/CalculationsImpl
-SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
-CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
-CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
+JARFILES= Hevelius callbacks
 Hevelius_DIRS=Hevelius/
 Hevelius_EXTRAS=Hevelius/images/ Hevelius/catalogues/
 callbacks_DIRS=alma/acs/callbacks
-jjj_EXTRAS= 
 #
 # java sources in Jarfile on/off
 DEBUG= 
