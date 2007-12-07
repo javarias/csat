@@ -61,9 +61,9 @@ LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-NexstarImpl_OBJECTS      = NexstarImpl NexstarCoordDevIO NexstarVelDevIO
+NexstarImpl_OBJECTS      = NexstarCoordDevIO NexstarVelDevIO NexstarImpl
 NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors SerialCommunication #generated on telecli
-NexsimImpl_OBJECTS       = NexsimImpl NexsimCoordDevIO NexsimVelDevIO
+NexsimImpl_OBJECTS       = NexsimCoordDevIO NexsimVelDevIO NexsimImpl
 NexsimImpl_LIBS          = TypesStubs DevTelescopeStubs csatErrors NexSimStubs
 lpiImpl_OBJECTS          = lpiFrameDevIO lpiPropsDevIO lpiImpl
 lpiImpl_LIBS             = TypesStubs DevCCDStubs csatErrors

@@ -41,7 +41,7 @@ CORBA::Double NexstarCoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSba
 	this->sp->write_RS232("z",1);
 	msg = this->sp->read_RS232();
 	sscanf(msg,"%08lX,%08lX#",&read_azm, &read_alt);
-	value = ( this->axis == axisAltitude ) ? read_alt/MAX_PRECISE_ROTATION : read_azm/MAX_PRECISE_ROTATION ;
+	value = ( this->axis == ALTITUDE_AXIS ) ? read_alt/MAX_PRECISE_ROTATION : read_azm/MAX_PRECISE_ROTATION ;
 	value *= 360.0;
 
 	return value;

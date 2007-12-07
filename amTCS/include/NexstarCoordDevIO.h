@@ -10,6 +10,13 @@
 
 #define MAX_PRECISE_ROTATION   4294967296.0
 
+#ifndef AZIMUTH_AXIS
+	#define AZIMUTH_AXIS 0
+#endif
+#ifndef ALTITUDE_AXIS
+	#define ALTITUDE_AXIS 1
+#endif
+
 class NexstarCoordDevIO: public DevIO<CORBA::Double>
 {
 
@@ -23,9 +30,6 @@ class NexstarCoordDevIO: public DevIO<CORBA::Double>
 
 	virtual void write(const CORBA::Double &value, ACS::Time &timestap)
 	              throw (ACSErr::ACSbaseExImpl);
-
-	static const int axisAzimuth  = 0;
-	static const int axisAltitude = 1;
 
 	private:
 	SerialRS232 *sp;

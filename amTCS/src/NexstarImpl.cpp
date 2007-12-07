@@ -40,10 +40,10 @@ void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,cs
 		NexstarVelDevIO   *azmVelDevIO = NULL;
 
 		try{
-			azmDevIO = new NexstarCoordDevIO("/dev/ttyS0", NexstarCoordDevIO::axisAzimuth);
-			altDevIO = new NexstarCoordDevIO("/dev/ttyS0", NexstarCoordDevIO::axisAltitude);
-			azmVelDevIO = new NexstarVelDevIO("/dev/ttyS0", NexstarVelDevIO::axisAzimuth);
-			altVelDevIO = new NexstarVelDevIO("/dev/ttyS0", NexstarVelDevIO::axisAltitude);
+			azmDevIO = new NexstarCoordDevIO("/dev/ttyS0", AZIMUTH_AXIS);
+			altDevIO = new NexstarCoordDevIO("/dev/ttyS0", ALTITUDE_AXIS);
+			azmVelDevIO = new NexstarVelDevIO("/dev/ttyS0", AZIMUTH_AXIS);
+			altVelDevIO = new NexstarVelDevIO("/dev/ttyS0", ALTITUDE_AXIS);
 		} catch (csatErrors::CannotOpenDeviceEx &ex){
 			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
 			lifeEx.addData("Reason","Cannot create DevIOs");

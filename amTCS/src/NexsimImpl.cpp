@@ -51,14 +51,14 @@ void NexsimImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,csa
 
 		// Initialize the DevIOs
 		m_realAlt_sp = new ROdouble( ( component_name + std::string(":realAlt")).c_str(),
-	   	                          getComponent(), new NexsimCoordDevIO(m_simulator, NexsimCoordDevIO::axisAltitude));
+	   	                          getComponent(), new NexsimCoordDevIO(m_simulator, ALTITUDE_AXIS));
 		m_realAzm_sp = new ROdouble( (component_name + std::string(":realAzm")).c_str(),
-			                          getComponent(), new NexsimCoordDevIO(m_simulator, NexsimCoordDevIO::axisAzimuth));
+			                          getComponent(), new NexsimCoordDevIO(m_simulator, AZIMUTH_AXIS));
 
 		m_altVel_sp  = new RWdouble( ( component_name + std::string(":altVel")).c_str(),
-	   	                          getComponent(), new NexsimVelDevIO(m_simulator, NexsimVelDevIO::axisAltitude));
+	   	                          getComponent(), new NexsimVelDevIO(m_simulator, ALTITUDE_AXIS));
 		m_azmVel_sp  = new RWdouble( ( component_name + std::string(":azmVel")).c_str(),
-	   	                          getComponent(), new NexsimVelDevIO(m_simulator, NexsimVelDevIO::axisAzimuth));
+	   	                          getComponent(), new NexsimVelDevIO(m_simulator, AZIMUTH_AXIS));
 	}
 }
 

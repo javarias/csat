@@ -71,7 +71,7 @@ void NexstarVelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) th
 
    command[0] = 'P';
    command[1] = 2;
-   command[2] = (this->axis == axisAltitude) ? 0x11 : 0x10 ;
+   command[2] = (this->axis == ALTITUDE_AXIS) ? 0x11 : 0x10 ;
    command[3] = ( vel > 0 ) ? 0x24 : 0x25 ;
    command[4] = labs((long int)vel);
    command[5] = 0;
