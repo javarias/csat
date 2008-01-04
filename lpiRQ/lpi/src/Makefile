@@ -34,7 +34,7 @@ distclean: clean
 	rm -rf $(DOCDIR)/html
 
 install:
-	cp bin/* $(INTROOT)/bin
+	cp ../bin/* $(INTROOT)/bin
 	
 .PHONY: dirs clean
 
