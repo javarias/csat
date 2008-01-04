@@ -11,9 +11,9 @@ Introduction
 First of all, CSAT stands for Control System for an Amateur Telescope. So, the
 main idea of CSAT is the developing of a TCS (Telescope Control System) for
 amateur telescopes, in general, as a first exercise for the construction of,
-later, a gTCS, a generic TCS, which would be a framework that could be used as
-a base for any TCS that you may want to write for a particular telescope. The
-main information resource is the twiki page that is mantained with the last
+later, a gTCS, a generic TCS, which would be a framework that could be used as a
+base for any TCS that you may want to write for a particular telescope. The main
+information resource is the twiki page that is mantained with the last
 information about the development of CSAT, and can be found in:
 
   * https://csrg.inf.utfsm.cl/twiki4/bin/view/ACS/ControlAmateurTelescope
@@ -54,27 +54,26 @@ The modules available on the CSAT project are:
    allows you to control a Celestron Nexstar 4 SE telescope via command line. It
    supports several commands to be sent to the telescope, and more can be added.
    It works only as a stand-alone application. This module was developed
-	initially with the purpose of learning how to connect to the telescope, so
-	there is not any ACS component in this module.
+   initially with the purpose of learning how to connect to the telescope, so
+   there is not any ACS component in this module.
 
  * lpiRQ: The lpiRQ (LPI Research Quest) module includes two applications that
    connects to a Meade LPI CCD. One of them is a command line application that
    grabs a frame from the CCD and stores it in a file, and the other one
    consists on a GUI that shows the image that is coming from the CCD, and where
    you can change the different parameters of this device on a easy way. There
-	is no ACS component on this module because of the same reason that the
-	telecli don't have either: the main idea of this module was to learn how to
+   is no ACS component on this module because of the same reason that the
+   telecli don't have either: the main idea of this module was to learn how to
    connect to the CCD and obtain information from it.
 
  * telesim: The telesim module, as it name says, is a telescope simulator. It
    currently simulates the Celestron Nexstar 4 SE telescope, and is written in
    Java (an older version was written in C, but was thrown away). The class
    design of the simulator allows you to include more telescopes to the
-	simulator. Currently there are plans to include the Meade LX200 telescope to
-   this simulator.
-   Also, this module includes a ACS component for connecting to the simulator
-   via ACS, so you can use the simulator connecting to it with your personal
-   component.
+   simulator. Currently there are plans to include the Meade LX200 telescope to
+   this simulator.  Also, this module includes a ACS component for connecting to
+   the simulator via ACS, so you can use the simulator connecting to it with
+   your personal component.
 
  * amTCS: This module (amateur TCS) is the main one. It consists on a TCS that,
    with the information coming from the telescope, the CCD and a GPS, and some
