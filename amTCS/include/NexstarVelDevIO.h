@@ -4,7 +4,7 @@
 #include <baciDevIO.h>
 #include <acstime.h>
 
-#include "SerialRS232.h"
+#include <SerialRS232.h>
 #include "csatErrors.h"
 
 #define MAX_PRECISE_ROTATION   4294967296.0

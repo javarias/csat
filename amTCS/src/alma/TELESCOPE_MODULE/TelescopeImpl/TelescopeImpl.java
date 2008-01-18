@@ -168,6 +168,12 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 	}
 
 	public RadecPos getRadec(){
+//		AltazPos p = new AltazPos();
+//		CompletionHolder completionHolder = new CompletionHolder();
+//		p.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
+//		p.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
+		
+//		return calculations_comp.Altaz2Radec(p);	
 		return new RadecPos();
 	}
 
@@ -245,6 +251,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 				realAltitude = devTelescope_comp.realAlt().get_sync(completionHolder);
 				realAzimuth  = devTelescope_comp.realAzm().get_sync(completionHolder);
 
+				//System.out.println("Estas son las coordenadas: " + realAltitude + " " + realAzimuth);
 				m_softRealPos.alt = realAltitude;
 				m_softRealPos.az  = realAzimuth;
 				
@@ -252,6 +259,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 				commandedAltitude = m_commandedPos.alt + pointing_comp.altOffset();
 				commandedAzimuth  = m_commandedPos.az + pointing_comp.azmOffset();
 				
+
 				/* We search which movement is shorter in azimuth (left or right) */
 				if( commandedAzimuth > realAzimuth ){
 					if( commandedAzimuth - realAzimuth > (realAzimuth + 360) - commandedAzimuth ){
@@ -285,11 +293,11 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 						diffAlt        *= (-1);
 					}
 
-					     if( diffAlt <  0.1 )                  altazVel.altVel *= 0.05;
-					else if( diffAlt >= 0.1 && diffAlt < 0.5 ) altazVel.altVel *= 0.1;
-					else if( diffAlt >= 0.5 && diffAlt < 3 )   altazVel.altVel *= 0.5;
-					else if( diffAlt >= 3   && diffAlt < 7 )   altazVel.altVel *= 1;
-					else if( diffAlt >= 7   && diffAlt < 10)   altazVel.altVel *= 2;
+					     if( diffAlt <  0.1 )                  altazVel.altVel *= 0.005;
+					else if( diffAlt >= 0.1 && diffAlt < 0.5 ) altazVel.altVel *= 0.01;
+					else if( diffAlt >= 0.5 && diffAlt < 3 )   altazVel.altVel *= 0.08;
+					else if( diffAlt >= 3   && diffAlt < 5 )   altazVel.altVel *= 0.4;
+					else if( diffAlt >= 5   && diffAlt < 10)   altazVel.altVel *= 1;
 					else if( diffAlt >= 10)                    altazVel.altVel *= 4;					     
 
 					
@@ -307,11 +315,11 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 						diffAzm       *= (-1);
 					}
 
-					     if( diffAzm <  0.1 )                  altazVel.azVel *= 0.05;
-					else if( diffAzm >= 0.1 && diffAzm < 0.5 ) altazVel.azVel *= 0.1;
-					else if( diffAzm >= 0.5 && diffAzm < 3 )   altazVel.azVel *= 0.5;
-					else if( diffAzm >= 3   && diffAzm < 7 )   altazVel.azVel *= 1;
-					else if( diffAzm >= 7   && diffAzm < 10)   altazVel.azVel *= 2;
+					     if( diffAzm <  0.1 )                  altazVel.azVel *= 0.005;
+					else if( diffAzm >= 0.1 && diffAzm < 0.5 ) altazVel.azVel *= 0.01;
+					else if( diffAzm >= 0.5 && diffAzm < 3 )   altazVel.azVel *= 0.08;
+					else if( diffAzm >= 3   && diffAzm < 5 )   altazVel.azVel *= 0.4;
+					else if( diffAzm >= 5   && diffAzm < 10)   altazVel.azVel *= 1;
 					else if( diffAzm >= 10)                    altazVel.azVel *= 4;
 
 				} else {

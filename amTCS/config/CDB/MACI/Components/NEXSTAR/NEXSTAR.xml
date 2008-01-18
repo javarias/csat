@@ -6,5 +6,5 @@
        Name="NEXSTAR"
          Code="NexstarImpl"
          Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
-         Default="false"
+         Default="true"
          Container="amContainerCpp"/>

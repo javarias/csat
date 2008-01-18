@@ -14,7 +14,7 @@
     <cdb:_ string="baci" />
   </Autoload>
 
-<!--<DeployInfo Type="java" Host="127.0.0.1" Instance="0" Flags="" KeepAliveTime="0"/>-->
+<DeployInfo Type="java" Host="127.0.0.1" Instance="0" Flags="" KeepAliveTime="0"/>
 
   <LoggingConfig 
           centralizedLogger="Log" 
