@@ -1,0 +1,87 @@
+/* IDL for DevTelescope component */
+
+#ifndef _DEV_TELESCOPE_IDL_
+#define _DEV_TELESCOPE_IDL_
+
+#include <baci.idl>
+#include <Types.idl>
+
+#pragma prefix "alma"
+
+/**
+ * @file DevTelescope.idl
+ * IDL specification for the DevTelescope module interface. This interface is
+ * the telescope device abstraction, and, thus, it should be a generalization
+ * of an amateur telescope.
+ */
+module DEVTELESCOPE_MODULE{
+
+	/**
+	 * @interface DevTelescope
+	 * The DevTelescope interface defines a DevTelescope-like ACS
+	 * component that will be the one in charge of communicate with the
+	 * hardware itself. The main idea of this component is to only move the
+	 * telescope at a certain two-axes velocity that shall be given. The
+	 * position will be tracked by the Telescope component, that then will
+	 * have the responsability to control the telescope's movement, and to
+	 * fix the velocities for that to happen.
+	 */
+	interface DevTelescope : ACS::CharacteristicComponent {
+
+		/** This property is the position of the azimuth axe in degrees. */
+		readonly attribute ACS::ROdouble realAlt;
+
+		/** This property is the position of the altitude axe in degrees. */
+		readonly attribute ACS::ROdouble realAzm;
+
+		/** Locking status of the component. The idea is that, when
+		 * locked, no components can give orders to this one (except by
+		 * CSATControl and CSATStatus, in certain conditions). It will
+		 * be used, for example, for an emergency stop, and for
+		 * preventing any malfunctioning while still not in the Ready
+		 * status.
+		 */
+		readonly attribute boolean locking;
+
+		/** The velocity of the azimuth axis of the telescope (on degrees) */
+		readonly attribute ACS::RWdouble azmVel;
+
+		/** The velocity of the altitude axis of the telescope (on degrees) */
+		readonly attribute ACS::RWdouble altVel;
+
+		/**
+		 * This method is used to synchronize the telescope, so we tell
+		 * it that it is positioned in a fixed coordinate.
+		 *
+		 * @param p The Alt/Az position
+		 */
+		void setCurrentAltAz(in TYPES::AltazPos p);
+
+		/**
+		 * This method locks the component, so any order received from
+		 * any other component that is not CSATStatus or CSATControl
+		 * will be ignored.
+		 */
+		void lock();
+
+		/**
+		 * Unlocks the component, so the component will follow any
+		 * order that an external component may give it.
+		 */
+		void unlock();
+
+		/**
+		 * Sets a two-axes velocity for the telescope to move.
+		 */
+		void setVel(in TYPES::AltazVel vel);
+
+		/**
+		 * Returns the actual velocity of the telescope.
+		 */
+		TYPES::AltazVel getVel();
+	};
+
+};
+
+
+#endif /* _DEVTELESCOPE_IDL_ */

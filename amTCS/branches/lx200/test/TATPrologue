@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# If the ACS_TMP dir doesn't exists, we create it
+if [ ! -d $ACS_TMP ]
+then
+	mkdir $ACS_TMP
+fi
+
+acsutilTATPrologue
+
+export ACS_CDB=$PWD
+
+# To start the containers for running the components on them
+#
+# NOTE: The containers must be started with a delay (5 sec in this case)
+#       This is because if you start them at the "same" time, they'll try
+#       to bind to the same port, and one of more of them will fail.
+acsStartContainer -cpp  amContainerCpp &> $ACS_TMP/containerCpp.log  &
+sleep 5
+acsStartContainer -java amContainer    &> $ACS_TMP/containerJava.log &
+sleep 5

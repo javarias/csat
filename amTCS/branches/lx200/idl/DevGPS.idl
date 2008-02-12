@@ -1,0 +1,62 @@
+#ifndef _DEVGPS_IDL_
+#define _DEVGPS_IDL_
+
+#include <baci.idl>
+#include <Types.idl>
+
+#pragma prefix "alma"
+
+/**
+ * @file DevGSP.idl
+ * IDL specification for the DevGPS module interface. This interface is a GPS
+ * device abstraction, and, thus, it should be a generalization of a simple GPS
+ */
+
+module DEVGPS_MODULE {
+
+	/**
+	 * @interface DevGPS
+	 * The DevGPS interface defines a DevGPS-like ACS component that will
+	 * be the one in charge of communicate with the hardware itself. The
+	 * main purpose of this interface is to get from the hardware (a GPS)
+	 * the data that interests us (position and time)
+	 */
+	interface DevGPS : ACS::CharacteristicComponent {
+
+		/** Holds the device name that should be accesed */
+		readonly attribute string device;
+
+		/** Locking status of the component. For further information,
+		 * look at the DevTelescope component documentation
+		 */
+		readonly attribute boolean locking;
+
+		/** Property for reading the time from the GPS. This time will be
+		 * translated to the one that corresponds to the Epoch ((00:00:00 UTC,
+		 * January 1, 1970
+		 */
+		readonly attribute ACS::ROlongLong time;
+
+		/** Property for reading the latitude from the GPS */
+		readonly attribute ACS::ROdouble latitude;
+
+		/** Property for reading the longitude from the GPS */
+		readonly attribute ACS::ROdouble longitude;
+
+		/**
+		 * This method locks the component, so any order received from
+		 * any other component that is not CSATStatus or CSATControl
+		 * will be ignored
+		 */
+		void lock();
+
+		/**
+		 * Unlocks the component, so the component will follow any
+		 * order that an external component may give it
+		 */
+		void unlock();
+	};
+
+};
+
+#endif /* _DEVGPS_IDL_ */
