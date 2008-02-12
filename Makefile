@@ -30,7 +30,7 @@
 SUBSYSTEM = CSAT
 
 MODULES = EXTERNALS/rxtx EXTERNALS/jogl lpiRQ/lpi lpiRQ/lpiGui\
-          telecli telesim/trunk amTCS Hevelius
+          telecli telesim/trunk amTCS/trunk Hevelius
 
 
 MAKE_FLAGS = "-k"
