@@ -10,7 +10,7 @@
  * --------  ----------  ----------------------------------------------
  * rbolano   2004/03/14  created
  * rtobar    2007/07/02  adapting to work with Celestron Nexstar 4 SE
- *                       (CSAT Poject)
+ *                       (CSAT Project)
  */
 
 #include "SerialRS232.h"

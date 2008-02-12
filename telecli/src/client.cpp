@@ -34,7 +34,7 @@
  */
 
 /**
- * \file main.cpp
+ * \file client.cpp
  * Main routine implementation. This procedure proccess command-line arguments (if any) and
  * calls the serial routine with the correct device filename string.
  * \author Rodrigo Tobar <rtobar@csrg.inf.utfsm.cl>

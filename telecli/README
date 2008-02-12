@@ -14,7 +14,7 @@ telescopes that supports most of the commands that this client sends trough
 the serial line.
 
 To use it just go to the 'src' directory and run "make". This should
-build the telescope clien into the 'bin' directory. You can run it with
+build the telescope client into the 'bin' directory. You can run it with
 default options running "./cli_nex4" into that directory. For a list
 of supported options run "./cli_nex4 --help".
 
