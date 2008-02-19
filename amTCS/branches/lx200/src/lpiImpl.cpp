@@ -3,11 +3,11 @@ static char *rcsId="@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
 #include <stdlib.h>
-#include "lpiFrameDevIO.h"
-#include "lpiPropsDevIO.h"
+//#include "lpiFrameDevIO.h"
+//#include "lpiPropsDevIO.h"
 #include "lpiImpl.h"
 #include "csatErrors.h"
-#include <linux/videodev2.h>
+//#include <linux/videodev2.h>
 
 
 using namespace baci;
@@ -45,7 +45,7 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 	ACS_TRACE("lpiImpl::initialize");
 	if( getComponent() != 0){
 
-		lpiFrameDevIO *frameDevIO = NULL;
+		//lpiFrameDevIO *frameDevIO = NULL;
 		try{
 			int flag = O_RDWR; //read write flag, is the accesmode you have to put in open
 			struct stat st;
@@ -95,7 +95,7 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 
 			ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::lpiFrameDevIO: Video device opened!"));
 
-			frameDevIO = new lpiFrameDevIO(fd, deviceName);
+			//frameDevIO = new lpiFrameDevIO(fd, deviceName);
 		} catch (csatErrors::CannotOpenDeviceEx &ex){
 			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
 			lifeEx.addData("Reason","Cannot create DevIOs");
@@ -103,20 +103,19 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 		}
 
 		m_frame_sp = new ROlongSeq( (component_name + std::string(":frame")).c_str(),
-				getComponent(), frameDevIO ,true);
-
+				getComponent());
 		m_red_sp = new RWlong( (component_name + std::string(":red")).c_str(),
-				getComponent(), new lpiPropsDevIO(fd,V4L2_CID_BLUE_BALANCE) ,true);
+				getComponent());
 		m_blue_sp = new RWlong( (component_name + std::string(":blue")).c_str(),
-				getComponent(), new lpiPropsDevIO(fd,V4L2_CID_RED_BALANCE) ,true);
+				getComponent());
 		m_green_sp = new RWlong( (component_name + std::string(":green")).c_str(),
-				getComponent(), new lpiPropsDevIO(fd,SN9C102_V4L2_CID_GREEN_BALANCE) ,true);
+				getComponent());
 		m_pixelBias_sp = new RWlong( (component_name + std::string(":pixelBias")).c_str(),
-				getComponent(), new lpiPropsDevIO(fd,SN9C102_V4L2_CID_PIXEL_BIAS_VOLTAGE) ,true);
+				getComponent());
 		m_resetLevel_sp = new RWlong( (component_name + std::string(":resetLevel")).c_str(),
-				getComponent(), new lpiPropsDevIO(fd,SN9C102_V4L2_CID_RESET_LEVEL) ,true);
+				getComponent());
 		m_exposure_sp = new RWlong( (component_name + std::string(":exposure")).c_str(),
-				getComponent(), new lpiPropsDevIO(fd,V4L2_CID_EXPOSURE) ,true);
+				getComponent());
 	}
 }
 
