@@ -77,9 +77,6 @@ CORBA::Double Lx200CoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbase
 	/* Format */
 	value = sexa2double(msg);
 
-	/* Temporal output */
-	printf("\n\n\nAXIS: %d\tVALUE: %s OR %f\n\n\n", axis, msg, value);
-
 	return value;
 }
 

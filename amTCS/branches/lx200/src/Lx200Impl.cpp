@@ -81,9 +81,6 @@ void Lx200Impl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemException
 	const char * _METHOD_ = "Lx200Impl::setVel";
 	ACS_TRACE(_METHOD_);
 
-	printf("\n\n\nGIVEN altVel: %f\n\n\n", vel.altVel);
-	printf("\n\n\nGIVEN azmVel: %f\n\n\n", vel.azVel);
-
 	azmVel()->set_sync(vel.azVel);
 	altVel()->set_sync(vel.altVel);
 }

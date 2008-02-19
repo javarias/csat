@@ -57,9 +57,9 @@ void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,cs
 	   	                          getComponent(), altDevIO);
 
 		m_altVel_sp  = new RWdouble( ( component_name + std::string(":altVel")).c_str(),
-	   	                          getComponent(), azmVelDevIO);
-		m_azmVel_sp  = new RWdouble( ( component_name + std::string(":azmVel")).c_str(),
 	   	                          getComponent(), altVelDevIO);
+		m_azmVel_sp  = new RWdouble( ( component_name + std::string(":azmVel")).c_str(),
+	   	                          getComponent(), azmVelDevIO);
 	}
 }
 
