@@ -71,7 +71,7 @@ void Lx200VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thro
 	negHaltCmd[3] = '#';
 
 	if(this->axis == ALTITUDE_AXIS) {
-		sprintf(slewRateCmd, ":RE%02d.%1d#", (int)floor(absValue), (int)((absValue-floor(absValue))*10));
+		sprintf(slewRateCmd, ":RE%.3f#", absValue);
 		this->slewRateElevation = value;
 		if(value > 0)
 			moveCmd[2] = 'n';
@@ -85,12 +85,12 @@ void Lx200VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thro
 			
 			
 	} else {
-		sprintf(slewRateCmd, ":RA%02d.%1d#", (int)floor(absValue), (int)((absValue-floor(absValue))*10));
+		sprintf(slewRateCmd, ":RA%.3f#", absValue);
 		this->slewRateAzimuth = value;
 		if(value > 0)
-			moveCmd[2] = 'w';
-		else if (value < 0)
 			moveCmd[2] = 'e';
+		else if (value < 0)
+			moveCmd[2] = 'w';
 		else {
 			moving = false;
 			posHaltCmd[2] = 'w';
@@ -98,7 +98,7 @@ void Lx200VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thro
 		}
 	}
 
-	this->sp->write_RS232(slewRateCmd, 8);
+	this->sp->write_RS232(slewRateCmd, 9);
 	this->sp->flush_RS232();
 	if(moving)
 		this->sp->write_RS232(moveCmd, 4);
