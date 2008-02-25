@@ -7,7 +7,7 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
    <frame/>
-   <device default_value="/dev/video0"/>
+   <device default_value="/dev/null"/>
    <red/>
    <blue/>
    <green/>
