@@ -42,6 +42,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	private alma.TELESCOPE_MODULE.Telescope telescope;
 	private alma.TRACKING_MODULE.Tracking tracking;
 	private alma.CCD_MODULE.CCD ccd;
+	private alma.CALCULATIONS_MODULE.Calculations calculations;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -89,6 +90,14 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 			catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
 			m_logger.fine("Failed to get CCD component reference " + e);
 			throw new ComponentLifecycleException("Failed to get CCD component reference");
+		}
+		try {
+		 	obj = m_containerServices.getDefaultComponent("IDL:alma/CALCULATIONS_MODULE/Calculations:1.0");
+			calculations = alma.CALCULATIONS_MODULE.CalculationsHelper.narrow(obj);
+		}
+			catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Calculations component reference " + e);
+			throw new ComponentLifecycleException("Failed to get Calculations component reference");
 		}
 	}
 
@@ -148,6 +157,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 
 	public void goToRadec(alma.TYPES.RadecPos p, alma.TYPES.RadecVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
+		telescope.gotoAltAz(calculations.Radec2Altaz(p),cb,desc);
 	}
 
 	public void goToAltAz(alma.TYPES.AltazPos p, alma.TYPES.AltazVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
@@ -163,7 +173,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 
 	public void getPreviewImage(alma.TYPES.ImageHolder img, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
-			ccd.getPreview(img,cb,desc);
+		ccd.getPreview(img,cb,desc);
 	}
 
 	public void stopTelescope(){
