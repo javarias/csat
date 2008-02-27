@@ -293,13 +293,15 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 						diffAlt        *= (-1);
 					}
 
-					     if( diffAlt <  0.1 )                  altazVel.altVel *= 0.005;
-					else if( diffAlt >= 0.1 && diffAlt < 0.5 ) altazVel.altVel *= 0.01;
-					else if( diffAlt >= 0.5 && diffAlt < 3 )   altazVel.altVel *= 0.08;
-					else if( diffAlt >= 3   && diffAlt < 5 )   altazVel.altVel *= 0.4;
-					else if( diffAlt >= 5   && diffAlt < 10)   altazVel.altVel *= 1;
-					else if( diffAlt >= 10)                    altazVel.altVel *= 4;					     
-
+					     if( diffAlt <  0.1 )                  altazVel.altVel *= 0.004;
+					else if( diffAlt >= 0.1 && diffAlt < 0.2 ) altazVel.altVel *= 0.008;
+					else if( diffAlt >= 0.2 && diffAlt < 0.5 ) altazVel.altVel *= 0.01;
+					else if( diffAlt >= 0.5 && diffAlt < 1 )   altazVel.altVel *= 0.5;
+					else if( diffAlt >= 1   && diffAlt < 3 )   altazVel.altVel *= 0.8;
+					else if( diffAlt >= 3   && diffAlt < 5 )   altazVel.altVel *= 1;
+					else if( diffAlt >= 5   && diffAlt < 10)   altazVel.altVel *= 2;
+					else if( diffAlt >= 10  && diffAlt < 15)   altazVel.altVel *= 3;
+					else if( diffAlt >= 15)                    altazVel.altVel *= 8;
 					
 				} else {
 					altazVel.altVel = 0;
@@ -315,12 +317,15 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 						diffAzm       *= (-1);
 					}
 
-					     if( diffAzm <  0.1 )                  altazVel.azVel *= 0.005;
-					else if( diffAzm >= 0.1 && diffAzm < 0.5 ) altazVel.azVel *= 0.01;
-					else if( diffAzm >= 0.5 && diffAzm < 3 )   altazVel.azVel *= 0.08;
-					else if( diffAzm >= 3   && diffAzm < 5 )   altazVel.azVel *= 0.4;
-					else if( diffAzm >= 5   && diffAzm < 10)   altazVel.azVel *= 1;
-					else if( diffAzm >= 10)                    altazVel.azVel *= 4;
+					     if( diffAzm <  0.1 )                  altazVel.azVel *= 0.004;
+					else if( diffAzm >= 0.1 && diffAzm < 0.2 ) altazVel.azVel *= 0.008;
+					else if( diffAzm >= 0.2 && diffAzm < 0.5 ) altazVel.azVel *= 0.01;
+					else if( diffAzm >= 0.5 && diffAzm < 1 )   altazVel.azVel *= 0.5;
+					else if( diffAzm >= 1   && diffAzm < 3 )   altazVel.azVel *= 0.8;
+					else if( diffAzm >= 3   && diffAzm < 5 )   altazVel.azVel *= 1;
+					else if( diffAzm >= 5   && diffAzm < 10)   altazVel.azVel *= 2;
+					else if( diffAzm >= 10  && diffAzm < 15)   altazVel.azVel *= 3;
+					else if( diffAzm >= 15)                    altazVel.azVel *= 8;
 
 				} else {
 					altazVel.azVel = 0;
