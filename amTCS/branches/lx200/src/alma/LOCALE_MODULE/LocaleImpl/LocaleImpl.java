@@ -117,7 +117,10 @@ public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 		CompletionHolder completionHolder = new CompletionHolder();
 		//Date myDate = new Date(devGPS_comp.time().get_sync(completionHolder)*1000);
 		TimeVal time = devGPS_comp.time();
-		Date myDate = new Date(time.sec*1000 + time.usec/1000);
+		m_logger.info("Obtained this time: " + time.sec + " sec, " + time.usec + " usec");
+		long milliTime = time.sec*1000L + time.usec/1000;
+		m_logger.info("The number of milliseconds since the epoch is " + milliTime );
+		Date myDate = new Date(milliTime);
 		Calendar calendario = Calendar.getInstance();
 		calendario.setTime(myDate);
 
@@ -145,6 +148,7 @@ public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 		jd += dia - 730550.5; //Se suman los dias y se resta una constante.
 		jd += (hora + min/60.0 + sec/3600.0)/24.0; //Se suman fracciones de dia.
 	
+		m_logger.info("Julian Date is " + jd);
 	
 		//Con esto se obtienen los Julian Days contando desde Epoch J2000.0
 		jt = jd/36525; //Se obtienen Julian Centuries.

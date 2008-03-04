@@ -32,8 +32,10 @@
 #include <acscomponentImpl.h>
 #include <CalculationsS.h>
 #include <csatErrors.h>
-#include <TypesC.h>
 #include <math.h>
+
+#include "LocaleS.h"
+#include "TypesC.h"
 
 #ifndef PI
 #define PI 3.141592653589793
@@ -46,6 +48,7 @@
 #define DSIN(X)     sin(degrad(X))
 #define DATAN2(X,Y) raddeg(atan2(X,Y))
 #define DASIN(X)    raddeg(asin(X))
+#define DTAN(X)     tan(degrad(X))
 
 #define INT(X) (int)floor((double)X)
 
@@ -61,6 +64,7 @@ class CalculationsImpl: public virtual ACSComponentImpl,
    * Destructor
    */
   virtual ~CalculationsImpl();
+  virtual void initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl);
   virtual TYPES::RadecPos Altaz2Radec(const TYPES::AltazPos & pos) throw(CORBA::SystemException);
   virtual TYPES::AltazPos Radec2Altaz(const TYPES::RadecPos & pos) throw(CORBA::SystemException);
   virtual CORBA::Double date2JD(CORBA::Long year, CORBA::Long month, CORBA::Double day) throw(CORBA::SystemException,csatErrors::DateOutOfRangeEx);
@@ -70,6 +74,9 @@ class CalculationsImpl: public virtual ACSComponentImpl,
    * ALMA C++ coding standards state copy operators should be disabled.
    */
   void operator=(const CalculationsImpl&);
+
+ private:
+  LOCALE_MODULE::Locale_var locale_comp;
 
 };
 

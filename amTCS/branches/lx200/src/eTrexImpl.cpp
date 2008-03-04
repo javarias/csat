@@ -65,7 +65,7 @@ TYPES::TimeVal eTrexImpl::time() throw (CORBA::SystemException){
 	gettimeofday(&tv, &tz);
 
 	TYPES::TimeVal time = TYPES::TimeVal();
-	time.sec = tv.tv_sec + tz.tz_minuteswest*60;
+	time.sec = tv.tv_sec;
 	time.usec = tv.tv_usec;
 	return time;
 }
