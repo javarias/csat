@@ -40,7 +40,7 @@ public:
 
 	virtual bool locking() throw (CORBA::SystemException);
 
-	virtual ACS::ROlongLong_ptr time() throw (CORBA::SystemException);
+	virtual TYPES::TimeVal time() throw (CORBA::SystemException);
 
 	virtual ACS::ROdouble_ptr latitude() throw (CORBA::SystemException);
 
@@ -49,7 +49,6 @@ public:
 private:
 
 	// Properties
-	SmartPropertyPointer<ROlongLong>  m_time_sp;
 	SmartPropertyPointer<ROdouble>  m_latitude_sp;
 	SmartPropertyPointer<ROdouble>  m_longitude_sp;
 

@@ -2,15 +2,14 @@
 static char *rcsId="@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
+#include <sys/time.h>
 #include "eTrexImpl.h"
-#include "eTrexTimeDevIO.h"
 
 using namespace baci;
 
 /* Constructor */
 eTrexImpl::eTrexImpl(const ACE_CString& name, maci::ContainerServices *containerServices) :
        CharacteristicComponentImpl(name,containerServices)
-      ,m_time_sp(this)
       ,m_latitude_sp(this)
       ,m_longitude_sp(this)
 {
@@ -36,10 +35,6 @@ void eTrexImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 		m_longitude_sp = new ROdouble( (component_name
 		                             + std::string(":longitude")).c_str(),
 		                             getComponent());
-
-		m_time_sp = new ROlongLong( (component_name
-		                          + std::string(":time")).c_str(),
-		                          getComponent(), new eTrexTimeDevIO());
 	}
 }
 
@@ -63,15 +58,19 @@ bool eTrexImpl::locking() throw (CORBA::SystemException){
 	return m_locking;
 }
 
-/* Properties returning */
-ACS::ROlongLong_ptr eTrexImpl::time() throw (CORBA::SystemException){
-	if( m_time_sp == 0 ){
-		return ACS::ROlongLong::_nil();
-	}
-	ACS::ROlongLong_var prop = ACS::ROlongLong::_narrow(m_time_sp->getCORBAReference());
-	return prop._retn();
+TYPES::TimeVal eTrexImpl::time() throw (CORBA::SystemException){
+	struct timeval tv;
+	struct timezone tz;
+
+	gettimeofday(&tv, &tz);
+
+	TYPES::TimeVal time = TYPES::TimeVal();
+	time.sec = tv.tv_sec + tz.tz_minuteswest*60;
+	time.usec = tv.tv_usec;
+	return time;
 }
 
+/* Properties returning */
 ACS::ROdouble_ptr eTrexImpl::latitude() throw (CORBA::SystemException){
 	if( m_latitude_sp == 0 ){
 		return ACS::ROdouble::_nil();

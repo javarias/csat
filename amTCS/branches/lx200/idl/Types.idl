@@ -51,6 +51,14 @@ module TYPES
 	};
 
 	/**
+	 * \struct TimeVal
+	 */
+	struct TimeVal{
+		long sec;
+		long usec;
+	};
+
+	/**
 	 * \typedef Image
 	 */
 	typedef sequence<long> Image;

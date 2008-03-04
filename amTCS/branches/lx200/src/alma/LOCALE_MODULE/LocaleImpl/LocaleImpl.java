@@ -115,7 +115,9 @@ public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 		//mes = calendario.get(Calendar.MONTH)+ 1;
 
 		CompletionHolder completionHolder = new CompletionHolder();
-		Date myDate = new Date(devGPS_comp.time().get_sync(completionHolder)*1000);
+		//Date myDate = new Date(devGPS_comp.time().get_sync(completionHolder)*1000);
+		TimeVal time = devGPS_comp.time();
+		Date myDate = new Date(time.sec*1000 + time.usec/1000);
 		Calendar calendario = Calendar.getInstance();
 		calendario.setTime(myDate);
 
