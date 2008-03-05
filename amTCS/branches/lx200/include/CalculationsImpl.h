@@ -69,7 +69,8 @@ class CalculationsImpl: public virtual ACSComponentImpl,
   virtual TYPES::AltazPos Radec2Altaz(const TYPES::RadecPos & pos) throw(CORBA::SystemException);
   virtual CORBA::Double date2JD(CORBA::Long year, CORBA::Long month, CORBA::Double day) throw(CORBA::SystemException,csatErrors::DateOutOfRangeEx);
   virtual TYPES::RadecPos precessionHR(const TYPES::RadecPos& pos, CORBA::Double jd1, CORBA::Double jd2) throw(CORBA::SystemException);
- 
+  virtual CORBA::Double siderealTime() throw(CORBA::SystemException);
+
   /**
    * ALMA C++ coding standards state copy operators should be disabled.
    */

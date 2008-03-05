@@ -11,7 +11,6 @@
 
 <xs:complexType name="DevGPSType">
    <xs:sequence>
-      <xs:element name="time" type="baci:ROdouble"/>
       <xs:element name="latitude" type="baci:ROdouble"/>
       <xs:element name="longitude" type="baci:ROdouble"/>
       <xs:element name="device" type="xs:string"/>

@@ -6,7 +6,6 @@
    xmlns:baci="urn:schemas-cosylab-com:BACI:1.0"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-   <time      description="time"/>
    <latitude  description="latitude"  default_value="-33.26958333333334" />
    <longitude description="longitude" default_value="-70.53461111111110" />
    <device>/dev/null</device>

@@ -21,18 +21,18 @@
  *
  *
  *
- * "@(#) $Id: CalculationsImpl.cpp,v 1.10 2007/07/11 21:09:13 wg3 Exp $"
+ * "@(#) $Id: CalculationsImpl.cpp,v 1.10 2007/11/14 19:02:53 csrg Exp $"
  * 
  * Implementation file developed by
- * Rodrigo Araya - rodrigo.araya@gmail.com
- * Sebastian Caro - carosebastian@gmail.com
- * Alejandro Barrientos - drlightspeed@msn.com
+ *
+ * Rodrigo Tobar - rtobar@csrg.inf.utfsm.cl
+ * Joao Lopez    - jslopez@csrg.inf.utfsm.cl
  *
  */
 
 #include <iostream>
 #include <unistd.h>
-#include <math.h>
+#include <time.h>
 
 #include "CalculationsImpl.h"
 #include "csatErrors.h"
@@ -88,8 +88,8 @@ TYPES::RadecPos CalculationsImpl::Altaz2Radec(const TYPES::AltazPos & pos) throw
 	ALT = pos.alt;
 	AZ  = pos.az;
                
+	LMST = siderealTime();
 	LAT  = locale_comp->localPos().latitude;
-	LMST = locale_comp->siderealTime();
 	
 	DEC = DASIN( DSIN(ALT) * DSIN(LAT) - DCOS(AZ)*DCOS(ALT)*DCOS(LAT) );
 
@@ -131,7 +131,7 @@ TYPES::AltazPos CalculationsImpl::Radec2Altaz(const TYPES::RadecPos & pos) throw
 	RA  = pos.ra;
 	DEC = pos.dec;
 
-	LMST = locale_comp->siderealTime();
+	LMST = siderealTime();
 	LAT  = locale_comp->localPos().latitude;
 
 	HA = LMST - RA;
@@ -223,6 +223,43 @@ TYPES::RadecPos CalculationsImpl::precessionHR(const TYPES::RadecPos & pos, CORB
 
 	return newPos;
 }
+
+CORBA::Double CalculationsImpl::siderealTime() throw(CORBA::SystemException){
+
+	double day;
+        double JD;
+	double T;
+        double  MST;
+        double LMST;
+	TYPES::TimeVal time;
+	struct tm *timeTm;
+
+	time  = locale_comp->time();
+	timeTm = gmtime((time_t*)&time.sec);
+
+
+	day = timeTm->tm_mday + timeTm->tm_hour/24. + timeTm->tm_min/1440. +  (timeTm->tm_sec + time.usec / 1000000.)/86400.;
+	timeTm->tm_mon += 1;
+	timeTm->tm_year += 1900;
+
+	JD = date2JD(timeTm->tm_year, timeTm->tm_mon, day);
+	T = (JD - 2451545.0) / 36525;
+
+	MST = 280.46061837 + 360.98564736629*(JD - 2451545.0) + 0.000387933*T*T - T*T*T/38710000;
+	while(MST>360)
+		MST -= 360;
+	while(MST<0)
+		MST += 360;
+
+	LMST = MST + locale_comp->localPos().longitude;
+	while(LMST>360)
+		LMST -= 360;
+	while(LMST<0)
+		LMST += 360;
+
+	return LMST;
+}
+
 
 /* --------------- [ MACI DLL support functions ] -----------------*/
 #include <maciACSComponentDefines.h>

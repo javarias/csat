@@ -72,7 +72,7 @@ lpiImpl_LIBS             = TypesStubs DevCCDStubs csatErrors
 eTrexImpl_OBJECTS        = eTrexImpl
 eTrexImpl_LIBS           = TypesStubs DevGPSStubs
 CalculationsImpl_OBJECTS = CalculationsImpl
-CalculationsImpl_LIBS    = TypesStubs CalculationsStubs csatErrors
+CalculationsImpl_LIBS    = TypesStubs LocaleStubs CalculationsStubs csatErrors
 
 #
 # Scripts (public and local)

@@ -57,6 +57,12 @@ module CALCULATIONS_MODULE {
 		 * @param jd2 Final Julian Day to calculate the new coordinates
 		 */
 		TYPES::RadecPos precessionHR(in TYPES::RadecPos pos, in double jd1, in double jd2);
+		
+		/**
+		 * Returns the sidereal time
+		 */
+		double siderealTime();
+
 	};
 
 };
