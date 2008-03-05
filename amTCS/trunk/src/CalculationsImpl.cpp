@@ -21,18 +21,18 @@
  *
  *
  *
- * "@(#) $Id: CalculationsImpl.cpp,v 1.10 2007/07/11 21:09:13 wg3 Exp $"
+ * "@(#) $Id: CalculationsImpl.cpp,v 1.10 2007/11/14 19:02:53 csrg Exp $"
  * 
  * Implementation file developed by
- * Rodrigo Araya - rodrigo.araya@gmail.com
- * Sebastian Caro - carosebastian@gmail.com
- * Alejandro Barrientos - drlightspeed@msn.com
+ *
+ * Rodrigo Tobar - rtobar@csrg.inf.utfsm.cl
+ * Joao Lopez    - jslopez@csrg.inf.utfsm.cl
  *
  */
 
 #include <iostream>
 #include <unistd.h>
-#include <math.h>
+#include <time.h>
 
 #include "CalculationsImpl.h"
 #include "csatErrors.h"
@@ -47,6 +47,7 @@ CalculationsImpl::CalculationsImpl(const ACE_CString &name, maci::ContainerServi
   // ACS_TRACE is used for debugging purposes
   ACS_TRACE(_METHOD_);
 }
+
 /* ----------------------------------------------------------------*/
 CalculationsImpl::~CalculationsImpl()
 {
@@ -57,13 +58,108 @@ CalculationsImpl::~CalculationsImpl()
 }
 
 
+void CalculationsImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl) {
+
+	const char* _METHOD_ = "CalculationsImpl::initialize()";
+	ACS_TRACE(_METHOD_);
+
+	locale_comp = LOCALE_MODULE::Locale::_nil();
+	locale_comp = getContainerServices()->getDefaultComponent<LOCALE_MODULE::Locale>("IDL:alma/LOCALE_MODULE/Locale:1.0");
+
+	if( CORBA::is_nil(locale_comp.in()) ) {
+		throw acsErrTypeLifeCycle::LifeCycleExImpl( __FILE__ , __LINE__ , _METHOD_ );
+	}
+
+}
+
 /* --------------------- [ CORBA interface ] ----------------------*/
 TYPES::RadecPos CalculationsImpl::Altaz2Radec(const TYPES::AltazPos & pos) throw(CORBA::SystemException){
-	return TYPES::RadecPos();
+
+	double DEC;
+	double HA;
+	double RA;
+	double LMST;
+	double LAT;
+	double ALT;
+	double AZ;
+	double tmp1;
+	double tmp2;
+            
+	ALT = pos.alt;
+	AZ  = pos.az;
+               
+	LMST = siderealTime();
+	LAT  = locale_comp->localPos().latitude;
+	
+	DEC = DASIN( DSIN(ALT) * DSIN(LAT) - DCOS(AZ)*DCOS(ALT)*DCOS(LAT) );
+
+	tmp1 = DSIN(AZ);
+	tmp2 = DCOS(AZ)*DSIN(ALT) + DTAN(ALT)*DCOS(LAT);
+	HA = DATAN2(tmp1,tmp2);
+
+	RA = LMST - HA;
+
+	while( RA < 0 )
+		RA += 360;
+	while( RA > 360 )
+		RA -= 360;
+
+	while( DEC < 0 )
+		DEC += 360;
+	while( DEC > 360 )
+		DEC -= 360;
+
+	TYPES::RadecPos returnPos = TYPES::RadecPos();
+	returnPos.ra  = RA;
+	returnPos.dec = DEC;
+
+	return returnPos;
 }
 
 TYPES::AltazPos CalculationsImpl::Radec2Altaz(const TYPES::RadecPos & pos) throw(CORBA::SystemException){
-	return TYPES::AltazPos();
+
+	double LAT;
+	double HA;
+	double LMST;
+	double DEC;
+	double RA;
+	double ALT;
+	double AZ;
+	double tmp1;
+	double tmp2;
+
+	RA  = pos.ra;
+	DEC = pos.dec;
+
+	LMST = siderealTime();
+	LAT  = locale_comp->localPos().latitude;
+
+	HA = LMST - RA;
+
+	//Se obtiene la altitud en grados.
+	ALT = DSIN(DEC)*DSIN(LAT);
+	ALT += DCOS(DEC)*DCOS(LAT)*DCOS(HA);
+	ALT = DASIN(ALT);
+
+	tmp1 = DSIN(HA);
+	tmp2 = (DCOS(HA)*DSIN(LAT) - DTAN(DEC)*DCOS(LAT));
+	AZ = DATAN2(tmp1,tmp2);
+
+	while(ALT>360)
+		ALT -= 360;
+	while(ALT<0)
+		ALT += 360;
+
+	while(AZ>360)
+		AZ -= 360;
+	while(AZ<0)
+		AZ += 360;
+
+	TYPES::AltazPos returnPos = TYPES::AltazPos();
+	returnPos.alt = ALT;
+	returnPos.az  = AZ;
+
+	return returnPos;
 }
 
 /**
@@ -127,6 +223,43 @@ TYPES::RadecPos CalculationsImpl::precessionHR(const TYPES::RadecPos & pos, CORB
 
 	return newPos;
 }
+
+CORBA::Double CalculationsImpl::siderealTime() throw(CORBA::SystemException){
+
+	double day;
+        double JD;
+	double T;
+        double  MST;
+        double LMST;
+	TYPES::TimeVal time;
+	struct tm *timeTm;
+
+	time  = locale_comp->time();
+	timeTm = gmtime((time_t*)&time.sec);
+
+
+	day = timeTm->tm_mday + timeTm->tm_hour/24. + timeTm->tm_min/1440. +  (timeTm->tm_sec + time.usec / 1000000.)/86400.;
+	timeTm->tm_mon += 1;
+	timeTm->tm_year += 1900;
+
+	JD = date2JD(timeTm->tm_year, timeTm->tm_mon, day);
+	T = (JD - 2451545.0) / 36525;
+
+	MST = 280.46061837 + 360.98564736629*(JD - 2451545.0) + 0.000387933*T*T - T*T*T/38710000;
+	while(MST>360)
+		MST -= 360;
+	while(MST<0)
+		MST += 360;
+
+	LMST = MST + locale_comp->localPos().longitude;
+	while(LMST>360)
+		LMST -= 360;
+	while(LMST<0)
+		LMST += 360;
+
+	return LMST;
+}
+
 
 /* --------------- [ MACI DLL support functions ] -----------------*/
 #include <maciACSComponentDefines.h>

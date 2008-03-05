@@ -26,14 +26,14 @@ module LOCALE_MODULE {
 	{
 
 		/**
-		 * Returns the sidereal time
-		 */
-		double siderealTime();
-
-		/**
 		 * Gets the local position in Earth coordinates (Latitude/Longitude)
 		 */
 		TYPES::EarthPos localPos();
+
+		/**
+		 * A wrapper for DevGPS#time()
+		 */
+		TYPES::TimeVal time();
 	};
 
 };

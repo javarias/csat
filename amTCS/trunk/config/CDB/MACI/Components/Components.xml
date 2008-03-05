@@ -59,12 +59,6 @@
          Container="amContainer"/>
 
       <_ Name="CALCULATIONS"
-         Code="alma.CALCULATIONS_MODULE.CalculationsImpl.CalculationsHelper"
-         Type="IDL:alma/CALCULATIONS_MODULE/Calculations:1.0"
-         Default="true"
-         Container="amContainer"/>
-
-      <_ Name="CALCULATIONS_CPP"
          Code="CalculationsImpl"
          Type="IDL:alma/CALCULATIONS_MODULE/Calculations:1.0"
          Default="false"
