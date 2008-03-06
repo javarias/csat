@@ -53,7 +53,6 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	private TCSStatus status;
 
 	private alma.TELESCOPE_MODULE.Telescope telescope_comp;
-	private alma.LOCALE_MODULE.Locale locale_comp;
 	private alma.CALCULATIONS_MODULE.Calculations calculations_comp;
 
 	/////////////////////////////////////////////////////////////
@@ -76,15 +75,6 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		} catch (AcsJContainerServicesEx e) {
 			m_logger.fine("Failed to get Telescope default component reference");
 			throw new ComponentLifecycleException("Failed to get Telescope component reference");
-		}
-
-		/* We get the Locale referece */
-		try{
-			obj = m_containerServices.getDefaultComponent("IDL:alma/LOCALE_MODULE/Locale:1.0");
-			locale_comp = alma.LOCALE_MODULE.LocaleHelper.narrow(obj);
-		} catch (AcsJContainerServicesEx e) {
-			m_logger.fine("Failed to get Locale default component reference");
-			throw new ComponentLifecycleException("Failed to get Locale component reference");
 		}
 
 		/* We get the Calculations referece */
@@ -188,8 +178,8 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public double getSiderealTime(){
-		if( locale_comp != null )
-			return locale_comp.siderealTime();
+		if( calculations_comp != null )
+			return calculations_comp.siderealTime();
 		return 0;
 	}
 

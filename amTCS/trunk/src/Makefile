@@ -67,10 +67,10 @@ NexsimImpl_OBJECTS       = NexsimCoordDevIO NexsimVelDevIO NexsimImpl
 NexsimImpl_LIBS          = TypesStubs DevTelescopeStubs csatErrors NexSimStubs
 lpiImpl_OBJECTS          = lpiFrameDevIO lpiPropsDevIO lpiImpl
 lpiImpl_LIBS             = TypesStubs DevCCDStubs csatErrors
-eTrexImpl_OBJECTS        = eTrexTimeDevIO eTrexImpl
+eTrexImpl_OBJECTS        = eTrexImpl
 eTrexImpl_LIBS           = TypesStubs DevGPSStubs
 CalculationsImpl_OBJECTS = CalculationsImpl
-CalculationsImpl_LIBS    = TypesStubs CalculationsStubs csatErrors
+CalculationsImpl_LIBS    = TypesStubs LocaleStubs CalculationsStubs csatErrors
 
 #
 # Scripts (public and local)
@@ -132,13 +132,12 @@ ACSERRDEF = csatErrors
 
 # Jarfiles and their directories
 #
-JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl CalculationsImpl SafetyImpl CSATControlImpl CSATStatusImpl
+JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl SafetyImpl CSATControlImpl CSATStatusImpl
 TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
 CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
 LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
 PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
 TrackingImpl_DIRS=alma/TRACKING_MODULE/TrackingImpl
-CalculationsImpl_DIRS=alma/CALCULATIONS_MODULE/CalculationsImpl
 SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
