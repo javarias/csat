@@ -175,28 +175,36 @@ public class SystemPanel extends JPanel
 	*/
 	public void stopTCS()
 	{
-			CSATControlClient temp1;
-			CSATStatusClient temp2;
-			if(interfaz.getDrawingPanel().getCSATControl()!=null)
-				interfaz.getDrawingPanel().getCSATControl().stopTelescope();
-			boolean w1,w2,w3;
+		CSATControlClient temp1;
+		CSATStatusClient temp2;
+		if(interfaz.getDrawingPanel().getCSATControl()!=null)
+			interfaz.getDrawingPanel().getCSATControl().stopTelescope();
+		/*
+		boolean w1,w2,w3;
+		w1 = interfaz.getDrawingPanel().getScreenPanel().getThreadState();
+		w2 = interfaz.getDrawingPanel().getSafetyInstance().getThreadState();
+		w3 = interfaz.getDrawingPanel().getSideralUpdateInstance().getThreadState();
+		while(w1 || w2 || w3)
+		{
 			w1 = interfaz.getDrawingPanel().getScreenPanel().getThreadState();
 			w2 = interfaz.getDrawingPanel().getSafetyInstance().getThreadState();
-                        w3 = interfaz.getDrawingPanel().getSideralUpdateInstance().getThreadState();
-			while(w1 || w2 || w3)
-			{
-				w1 = interfaz.getDrawingPanel().getScreenPanel().getThreadState();
-	                        w2 = interfaz.getDrawingPanel().getSafetyInstance().getThreadState();
-        	                w3 = interfaz.getDrawingPanel().getSideralUpdateInstance().getThreadState();
-			}
-			temp1 = interfaz.getDrawingPanel().getCSATControl();
-			temp2 = interfaz.getDrawingPanel().getCSATStatus();
-			interfaz.getDrawingPanel().setCSATControl(null);
-			interfaz.getDrawingPanel().setCSATStatus(null);
-			CSATControlClient.stop(temp1);
-			CSATStatusClient.stop(temp2);
-			interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(0);
-			interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(0);
-			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(0);
+			w3 = interfaz.getDrawingPanel().getSideralUpdateInstance().getThreadState();
+		}
+		*/
+		System.out.println("Shutting down!");
+		interfaz.getDrawingPanel().getScreenPanel().stopThread();
+		interfaz.getDrawingPanel().getSafetyInstance().stopThread();
+		interfaz.getDrawingPanel().getSideralUpdateInstance().stopThread();
+		interfaz.getDrawingPanel().getWeatherPanel().stopThread();
+		interfaz.getDrawingPanel().joinThreads();
+		temp1 = interfaz.getDrawingPanel().getCSATControl();
+		temp2 = interfaz.getDrawingPanel().getCSATStatus();
+		interfaz.getDrawingPanel().setCSATControl(null);
+		interfaz.getDrawingPanel().setCSATStatus(null);
+		CSATControlClient.stop(temp1);
+		CSATStatusClient.stop(temp2);
+		interfaz.getDrawingPanel().getTelStatusPanel().setTrackingState(0);
+		interfaz.getDrawingPanel().getTelStatusPanel().setPointingState(0);
+		interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(0);
 	}
 }

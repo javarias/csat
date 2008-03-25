@@ -18,12 +18,13 @@ import alma.TYPES.*;
 public class Safety implements Runnable
 {
 	private boolean working = false;
+	private boolean doControl = true;
 	/**
 	* Method that is executed independently with each thread that 
 	* is created from the class.
 	*/
 	public void run(){
-		while(true){
+		while(doControl){
 			try{
 				if(interfaz.getDrawingPanel().getCSATStatus()!=null)
                                 {
@@ -50,6 +51,7 @@ public class Safety implements Runnable
 				System.out.println("Error en Thread de Safety Class");
 			}
 		}
+		System.out.println("Safety Thread Ended without problems!");
 	}
 	/**
 	* Method used to retrieve information about Thread status, to know 
@@ -58,5 +60,10 @@ public class Safety implements Runnable
 	public boolean getThreadState()
 	{
 		return working;
+	}
+
+	public void stopThread()
+	{
+		doControl = false;
 	}
 }

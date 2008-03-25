@@ -17,6 +17,7 @@ public class SideralUpdate implements Runnable
 	private AltazPosHolder a;
 	private double ST;
 	private boolean working = false;
+	private boolean doControl = true;
 
 	public SideralUpdate(){
 		r = new RadecPosHolder();
@@ -28,7 +29,7 @@ public class SideralUpdate implements Runnable
 	*/
 	public void run()
 	{
-		while (true)
+		while (doControl)
 		{
 			try
 			{
@@ -60,6 +61,7 @@ public class SideralUpdate implements Runnable
 				System.out.println("The thread updating information died.");
 			}
 		}
+		System.out.println("Sideral Update Thread Ended without problems!");
 	}
 
 	/**
@@ -68,7 +70,12 @@ public class SideralUpdate implements Runnable
 	* @return	boolean that informs if thread is currently interacting with TCS.
 	*/
 	public boolean getThreadState()
-        {
-                return working;
-        }
+	{
+		return working;
+	}
+
+	public void stopThread()
+	{
+		doControl = false;
+	}
 }

@@ -20,8 +20,9 @@ public class ScreenPanel extends JPanel implements Runnable
 {
 	private Image screen, buf, test;
 	private Graphics2D backbuf;
-	private boolean telescopeState = true;
+	private boolean telescopeState = false;
 	private boolean working = false;
+	private boolean doControl = true;
 	private int dx, dy;
 	public ScreenPanel(LayoutManager l)
 	{
@@ -74,7 +75,7 @@ public class ScreenPanel extends JPanel implements Runnable
 	}
 	public void run()
 	{
-		while(true)
+		while(doControl)
 		{
 			try
 			{
@@ -91,6 +92,7 @@ public class ScreenPanel extends JPanel implements Runnable
 				System.out.println("Error in ScreenPanel's Thread");
 			}
 		}
+		System.out.println("Screen Panel Thread Ended without problems!");
 	}
 	private void setScreen()
 	{
@@ -186,5 +188,10 @@ public class ScreenPanel extends JPanel implements Runnable
 	public boolean getThreadState()
 	{
 		return working;
+	}
+
+	public void stopThread()
+	{
+		doControl = false;
 	}
 }

@@ -67,6 +67,11 @@ public class DrawingPanel extends JPanel
 	private SideralUpdate sdrl = null;
 	private Safety sfty = null;
 
+	private Thread wpaneT = null;
+	private Thread scpaneT = null;
+	private Thread sdrlT = null;
+	private Thread sftyT = null;
+
 	private CSATControlClient csatc = null;
 	private CSATStatusClient csats = null;
 
@@ -164,7 +169,8 @@ public class DrawingPanel extends JPanel
 		wpane = new WeatherPanel(null);
 		wpane.init();
 		add(wpane);
-		new Thread(wpane).start();
+		wpaneT = new Thread(wpane);
+		wpaneT.start();
 		disablePanel(wpane);		
 
 		//Telescope Status Panel
@@ -177,7 +183,8 @@ public class DrawingPanel extends JPanel
 		scpane = new ScreenPanel(null);
 		scpane.init();
 		add(scpane);
-		new Thread(scpane).start();
+		scpaneT = new Thread(scpane);
+		scpaneT.start();
 		disablePanel(scpane);
 
 		//VirtualTelescopePanel
@@ -200,11 +207,13 @@ public class DrawingPanel extends JPanel
 		//SideralUpdate
 		sdrl = new SideralUpdate();
 		//sdrl.init();
-		new Thread(sdrl).start();
+		sdrlT = new Thread(sdrl);
+		sdrlT.start();
 
 		//Safety
 		sfty = new Safety();
-		new Thread(sfty).start();
+		sftyT = new Thread(sfty);
+		sftyT.start();
 	}
 
 	public void paint(Graphics g)
@@ -540,9 +549,30 @@ public class DrawingPanel extends JPanel
 		return sdrl;
 	}
 
+	public void joinThreads()
+	{
+		try {
+			System.out.println("Entered joining Threads");
+			scpaneT.interrupt();
+			scpaneT.join();
+			System.out.println("1");
+			sftyT.interrupt();
+			sftyT.join();
+			System.out.println("2");
+			sdrlT.interrupt();
+			sdrlT.join();
+			System.out.println("3");
+			wpaneT.interrupt();
+			wpaneT.join();
+			System.out.println("4");
+		} catch (InterruptedException e) {
+			System.out.println("Cannot end Threads!");
+		}
+	}
+
 	public int getDx()
 	{
-		return this.dx;
+			  return this.dx;
 	}
 
 	public int getDy()

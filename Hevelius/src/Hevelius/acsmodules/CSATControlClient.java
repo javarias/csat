@@ -288,6 +288,7 @@ public class CSATControlClient extends ComponentClient
 	{
 		if(cscontrol!=null)
 		{
+			setTrackingStatus(false);
 			cscontrol.stopTelescope();
 			interfaz.getDrawingPanel().getTelStatusPanel().setPresettingState(1);
 		}

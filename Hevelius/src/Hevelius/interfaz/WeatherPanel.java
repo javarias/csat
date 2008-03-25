@@ -27,6 +27,8 @@ public class WeatherPanel extends JPanel implements Runnable
 	private JLabel humB;
 	private JButton more;
 
+	private boolean doControl = true;
+
 	private WeatherCondition clima = new WeatherCondition(test.getOption("location"));
 	private Vector<WeatherCityCondition> vector = clima.ListCityCondition();
 
@@ -228,7 +230,7 @@ public class WeatherPanel extends JPanel implements Runnable
 	public void run(){
 		long time1 = System.currentTimeMillis();
 		long time2 = System.currentTimeMillis();
-		while(true){
+		while(doControl){
 			//while(time2-time1<60000)
 			//	time2 = System.currentTimeMillis();
 
@@ -239,6 +241,11 @@ public class WeatherPanel extends JPanel implements Runnable
 				System.out.println("Error en Thread del Weather Panel");
 			}
 		}
+		System.out.println("Weather Panel Thread ended without problems!");
+	}
+
+	public void stopThread(){
+		doControl = false;
 	}
 	
 	/**

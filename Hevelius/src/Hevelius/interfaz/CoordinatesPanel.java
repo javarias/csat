@@ -15,6 +15,7 @@ import alma.TYPES.*;
 import javax.swing.JOptionPane;
 import java.io.*;
 import javax.imageio.*;
+import java.util.regex.*;
 
 public class CoordinatesPanel extends JPanel //implements Runnable
 {
@@ -145,8 +146,28 @@ public class CoordinatesPanel extends JPanel //implements Runnable
 				Configuration test = new Configuration();
 				//Listener list = new Listener();
 				boolean cond = true;
-				c1 = Double.parseDouble(coor1.getText());
-                                c2 = Double.parseDouble(coor2.getText());
+				String cadena;
+				Pattern pat;
+				Matcher mat;
+				cadena = coor1.getText();
+				pat = Pattern.compile("([0-9]*) ([0-9]*) ([0-9]*\\.{0,1}[0-9]*)");
+				mat = pat.matcher(cadena);
+				if(mat.find())
+					c1 = (Double.parseDouble(mat.group(1))+Double.parseDouble(mat.group(2))/60.+Double.parseDouble(mat.group(3))/3600.)*15.;
+				else
+					c1 = Double.parseDouble(coor1.getText());
+
+				cadena = coor2.getText();
+				pat = Pattern.compile("(-{0,1})([0-9]*) ([0-9]*) ([0-9]*\\.{0,1}[0-9]*)");
+				mat = pat.matcher(cadena);
+
+				if(mat.find()){
+					c2 = Double.parseDouble(mat.group(2))+Double.parseDouble(mat.group(3))/60.+Double.parseDouble(mat.group(4))/3600.;
+					if(mat.group(1).compareTo("-") == 0)
+						c2 = -c2;
+				}
+            else
+					c2 = Double.parseDouble(coor2.getText());
 
 				try{
 					if(Integer.parseInt(test.getOption("coordinate"))==0){
