@@ -54,6 +54,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 
 	private alma.TELESCOPE_MODULE.Telescope telescope_comp;
 	private alma.CALCULATIONS_MODULE.Calculations calculations_comp;
+	private alma.TRACKING_MODULE.Tracking tracking_comp;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -85,6 +86,15 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 			m_logger.fine("Failed to get Calculations default component reference");
 			throw new ComponentLifecycleException("Failed to get Calculations component reference");
 		}
+
+		/* We get the Tracking referece */
+      try{
+         obj = m_containerServices.getDefaultComponent("IDL:alma/TRACKING_MODULE/Tracking:1.0");
+         tracking_comp = alma.TRACKING_MODULE.TrackingHelper.narrow(obj);
+      } catch (AcsJContainerServicesEx e) {
+         m_logger.fine("Failed to get Tracking default component reference");
+         throw new ComponentLifecycleException("Failed to get Tracking component reference");
+      }
 
 	}
     
@@ -163,7 +173,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public boolean getTrackingStatus(){
-		return false;
+		return tracking_comp.status();
 	}
 
 	public RadecVel getTrackingRate(){
