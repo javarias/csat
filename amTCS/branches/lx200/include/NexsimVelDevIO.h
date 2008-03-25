@@ -33,6 +33,8 @@ class NexsimVelDevIO: public DevIO<CORBA::Double>
 	private:
 	NEXSIM_MODULE::NexSim_var m_simulator;
 	int axis;
+	double slewRateElevation;
+	double slewRateAzimuth;
 };
 
 #endif /* _NEXSIM_VEL_DEVIO_H_ */
