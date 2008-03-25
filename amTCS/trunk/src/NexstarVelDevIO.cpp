@@ -28,6 +28,10 @@ NexstarVelDevIO::NexstarVelDevIO(char *deviceName, int axis) throw (csatErrors::
 	}
 
 	this->axis = axis;
+	if(this->axis == ALTITUDE_AXIS)
+      this->slewRateElevation = 0;
+   else
+      this->slewRateAzimuth = 0;
 }
 
 NexstarVelDevIO::~NexstarVelDevIO() {
@@ -35,8 +39,12 @@ NexstarVelDevIO::~NexstarVelDevIO() {
 }
 
 CORBA::Double NexstarVelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl) {
-	CORBA::Double azm(0.0);
-	return azm;
+	//CORBA::Double azm(0.0);
+	//return azm;
+	if(this->axis == ALTITUDE_AXIS)
+      return this->slewRateElevation;
+   else
+      return this->slewRateAzimuth;
 }
 
 void NexstarVelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl){
@@ -77,6 +85,11 @@ void NexstarVelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) th
    command[5] = 0;
    command[6] = 0;
    command[7] = 0;
+
+	if(this->axis == ALTITUDE_AXIS)
+      this->slewRateElevation = vel;
+   else
+      this->slewRateAzimuth = vel;
 
 	this->sp->write_RS232(command,8);
 	this->sp->read_RS232();

@@ -90,11 +90,11 @@ TYPES::RadecPos CalculationsImpl::Altaz2Radec(const TYPES::AltazPos & pos) throw
                
 	LMST = siderealTime();
 	LAT  = locale_comp->localPos().latitude;
-	
+
 	DEC = DASIN( DSIN(ALT) * DSIN(LAT) - DCOS(AZ)*DCOS(ALT)*DCOS(LAT) );
 
 	tmp1 = DSIN(AZ);
-	tmp2 = DCOS(AZ)*DSIN(ALT) + DTAN(ALT)*DCOS(LAT);
+	tmp2 = DCOS(AZ)*DSIN(LAT) + DTAN(ALT)*DCOS(LAT);
 	HA = DATAN2(tmp1,tmp2);
 
 	RA = LMST - HA;

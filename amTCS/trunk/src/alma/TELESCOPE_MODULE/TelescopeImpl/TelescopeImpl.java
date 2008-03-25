@@ -42,6 +42,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 
 	private AltazPos m_commandedPos;
 	private AltazPos m_softRealPos;
+	private RadecPos m_commandedRadecPos;
 
 	private alma.DEVTELESCOPE_MODULE.DevTelescope devTelescope_comp;
 	private alma.POINTING_MODULE.Pointing pointing_comp;
@@ -93,12 +94,15 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 		CompletionHolder completionHolder = new CompletionHolder();
 		m_commandedPos = new AltazPos();
 		m_softRealPos  = new AltazPos();
+		m_commandedRadecPos = new RadecPos();
 
 		m_commandedPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
 		m_commandedPos.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
 
 		m_softRealPos.alt = m_commandedPos.alt;
 		m_softRealPos.az  = m_commandedPos.az;
+
+		m_commandedRadecPos = calculations_comp.Altaz2Radec(m_commandedPos);
 		
 		controlThread = m_containerServices.getThreadFactory().newThread(this);
 		controlThread.start();
@@ -163,6 +167,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 		}
 
 		m_commandedPos = calculations_comp.Radec2Altaz(position);
+		m_commandedRadecPos.ra = position.ra;
+		m_commandedRadecPos.dec = position.dec;
 		this.cb = cb;
 		descIn = desc;
 	}
@@ -174,7 +180,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 //		p.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
 		
 //		return calculations_comp.Altaz2Radec(p);	
-		return new RadecPos();
+		//return new RadecPos();
+		return m_commandedRadecPos;
 	}
 
 	public void offSet(AltazPos offset){
@@ -185,6 +192,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 	public void gotoAltAz(AltazPos position, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
 		m_commandedPos.alt = position.alt;
 		m_commandedPos.az  = position.az;
+
+		m_commandedRadecPos = calculations_comp.Altaz2Radec(m_commandedPos);
 
 		doControl = true;
 
@@ -226,6 +235,15 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 
 	public void setCurrentAltAz(AltazPos position){
 		m_commandedPos = position;
+		m_commandedRadecPos = calculations_comp.Altaz2Radec(m_commandedPos);
+	}
+
+	public AltazVel getAltAzVel(){
+		AltazVel altazVel = new AltazVel();
+		CompletionHolder completionHolder = new CompletionHolder();
+		altazVel.altVel = devTelescope_comp.altVel().get_sync(completionHolder);
+		altazVel.azVel = devTelescope_comp.azmVel().get_sync(completionHolder);
+		return altazVel;
 	}
 
 	public void run() {
@@ -258,8 +276,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 				/* We add to the commanded position the pointing corrections */
 				commandedAltitude = m_commandedPos.alt + pointing_comp.altOffset();
 				commandedAzimuth  = m_commandedPos.az + pointing_comp.azmOffset();
-				
-
+			
 				/* We search which movement is shorter in azimuth (left or right) */
 				if( commandedAzimuth > realAzimuth ){
 					if( commandedAzimuth - realAzimuth > (realAzimuth + 360) - commandedAzimuth ){

@@ -33,6 +33,8 @@ class NexstarVelDevIO: public DevIO<CORBA::Double>
 	private:
 	SerialRS232 *sp;
 	int axis;
+	double slewRateElevation;
+   double slewRateAzimuth;
 };
 
 #endif /* _NEXSTAR_VEL_DEVIO_H_ */
