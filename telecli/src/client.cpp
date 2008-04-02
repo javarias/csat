@@ -130,7 +130,7 @@ int main(int args, char *argv[]) {
 	}
 
 	else if( !strcmp("echo",argv[1]))
-		printf("echo: %s\n",com->echo(argv[2][0]));
+		printf("echo: %c\n",com->echo(argv[2][0])[0]);
 
 	else if( !strcmp("gtal",argv[1]))
 		com->goToAltAzm(atof(argv[2]),com->getAzm());
@@ -154,6 +154,7 @@ int main(int args, char *argv[]) {
 
 	else{
 		printf("Variable not supported: %s\n",argv[1]);
+		delete com;
 		exit(EXIT_FAILURE);
 	}
 

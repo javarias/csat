@@ -9,13 +9,13 @@
  * who       when        what
  * --------  ----------  ----------------------------------------------
  * rbolano   2004/03/14  created
+ * rtobar    2008/04/01  handling the end of the read with select()
  */
 
 #ifndef _SERIALPORT_RS232_H_
 #define _SERIALPORT_RS232_H_
 
 #include <exception>
-#include <sys/ioctl.h>
 using namespace std;
 
 class SerialRS232
@@ -31,7 +31,7 @@ public:
 	public:
 		/**
 		 * Exception constructor.
-		 * @param ex exception message (char *).
+		 * @param exception message (char *).
 		 */
 		SerialRS232Exception(const char * ex);
 
@@ -83,13 +83,14 @@ public:
 	 * @param timeout maximum time in centisecs for a reading operation 
 	 *        (int). Defaults to 300. If tout <= 0 this condition is ignored.
 	 */
-	SerialRS232(const char * dev, const baudrates & baudrate = b9600,
+	SerialRS232(const char * dev,
+			const long & millisecs = 50,
+			const baudrates & baudrate = b9600,
 			const parities & parity = noparity,
 			const databits & databitsnum = data8,
-			const stopbits & stopbitsnum = stop2,
-			const int & termc = '#',
+			const stopbits & stopbitsnum = stop1,
 			const unsigned int & buflen = 1024,
-			const int & timeout = 3000)
+			const int & timeout = 300)
 			throw (SerialRS232Exception &);
 
 	/**
@@ -105,9 +106,9 @@ public:
 	/**
 	 * Writes a buffer to the port.
 	 * @param s buffer to be written (char *)
-	 * @param int lenght of the string
+	 * @param l lenght of the buffer to be written (int)
 	 */
-	void write_RS232(const char * s, int lenght) throw (SerialRS232Exception &);
+	void write_RS232(const char * s, int l) throw (SerialRS232Exception &);
 	
 	/**
 	 * Flushes the serial port.
@@ -120,13 +121,17 @@ private:
 	parities m_parity;
 	databits m_databitsnum;
 	stopbits m_stopbitsnum;
-	int m_termc;
 	unsigned int m_buflen;
 	int m_port;
 	char * m_dev;
 	char * m_buf;
 	int m_timeout;
-	struct termio oldterm;
+	long m_millisecs;
+
+	/**
+	 * Checks if the buffer has something to read.
+	 */
+	int status_RS232() throw (SerialRS232Exception &);
 };
 
 #endif

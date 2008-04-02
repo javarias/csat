@@ -17,12 +17,12 @@
 #include "verbosity.h"
 
 Communication::Communication(char *deviceName){
-	this->sp = new SerialRS232(deviceName);
+	this->sp = new SerialRS232(deviceName,60);
 	this->sp->flush_RS232();
 }
 
 Communication::Communication(char *deviceName, int verbose){
-	this->sp = new SerialRS232(deviceName);
+	this->sp = new SerialRS232(deviceName,60);
 	this->sp->flush_RS232();
 	this->verbose = verbose;
 }
@@ -41,7 +41,7 @@ char Communication::trackingMode(){
 
 char *Communication::echo(char c){
 	char msg[3];
-	msg[0] = 'K'; 	msg[1] = c; msg[2] = '\0';
+	msg[0] = 'K'; 	msg[1] = c;
 	this->sp->write_RS232(msg,2);
 	return (this->sp->read_RS232());
 }
@@ -143,7 +143,7 @@ double Communication::getAlt(){
 	VERBOSITY( printf("Received from the telescope: %s\n",msg); );
 	sscanf(msg,"%08lX,%08lX#",&read_azm,&read_alt);
 
-	alt = read_alt / MAX_PRECISE_ROTATION;
+	alt = (double)(read_alt / MAX_PRECISE_ROTATION);
 	alt *= 360.0;
 
 	return alt;
@@ -159,7 +159,7 @@ double Communication::getAzm(){
 	VERBOSITY( printf("Received from the telescope: %s\n",msg); );
 	sscanf(msg,"%08lX,%08lX#",&read_azm,&read_alt);
 
-	azm = (double)read_azm / MAX_PRECISE_ROTATION;
+	azm = (double)(read_azm / MAX_PRECISE_ROTATION);
 	azm *= 360.0;
 
 	return azm;

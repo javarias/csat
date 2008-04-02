@@ -40,8 +40,8 @@ EXECUTABLES_L   =
 
 #
 # <brief description of xxxxx program>
-cli_nex4_OBJECTS    = client
-test_nex4_OBJECTS   = test
+cli_nex4_OBJECTS    = client Communication
+test_nex4_OBJECTS   = test Communication
 cli_nex4_LIBS       = SerialCommunication C++
 test_nex4_LIBS      = SerialCommunication C++
 #
@@ -51,7 +51,7 @@ test_nex4_LIBS      = SerialCommunication C++
 #
 # Includes (.h) files (public only)
 # ---------------------------------
-INCLUDES        = Communication.h SerialRS232.h
+INCLUDES        = SerialRS232.h
 
 #
 # Libraries (public and local)
@@ -61,7 +61,7 @@ LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-SerialCommunication_OBJECTS = SerialRS232 Communication
+SerialCommunication_OBJECTS = SerialRS232
 SerialCommunication_LIBS    = 
 
 #
