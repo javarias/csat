@@ -29,7 +29,7 @@
 
 SUBSYSTEM = CSAT
 
-MODULES = EXTERNALS/rxtx EXTERNALS/jogl lpiRQ/lpi lpiRQ/lpiGui\
+MODULES = EXTERNALS/rxtx EXTERNALS/jogl EXTERNALS/serialRS232 lpiRQ/lpi lpiRQ/lpiGui\
           telecli telesim/trunk amTCS/trunk Hevelius
 
 

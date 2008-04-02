@@ -51,18 +51,13 @@ test_nex4_LIBS      = SerialCommunication C++
 #
 # Includes (.h) files (public only)
 # ---------------------------------
-INCLUDES        = SerialRS232.h
+INCLUDES        = 
 
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = SerialCommunication
+LIBRARIES       = 
 LIBRARIES_L     = 
-
-#
-# <brief description of lllll library>
-SerialCommunication_OBJECTS = SerialRS232
-SerialCommunication_LIBS    = 
 
 #
 # Scripts (public and local)
