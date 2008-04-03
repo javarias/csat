@@ -9,17 +9,19 @@
  *
  * \author Rodrigo Tobar <rtobar@csrg.inf.utfsm.cl>
  */
+#include <iostream>
+#include <math.h>
 
 #include "Communication.h"
 #include "verbosity.h"
 
 Communication::Communication(char *deviceName){
-	this->sp = new SerialRS232(deviceName, 0x00);
+	this->sp = new SerialRS232(deviceName,300);
 	this->sp->flush_RS232();
 }
 
 Communication::Communication(char *deviceName, bool verbose){
-	this->sp = new SerialRS232(deviceName, 0x00);
+	this->sp = new SerialRS232(deviceName,300);
 	this->sp->flush_RS232();
 	this->verbose = verbose;
 }
@@ -28,31 +30,33 @@ Communication::~Communication(){
 	delete this->sp;
 }
 
-string Communication::getTrackPoint() {
+string Communication::getPosition() {
 
 	char *msg;
-	msg = this->sp->read_RS232();
-	printf("OK :D\n");
 
-	if( msg[0] != SOM || msg[17] != EOM_0 || msg[18] != EOM_1 )
+	msg = this->sp->read_RS232();
+
+	if( msg[0] != SOM || msg[29] != EOM_0 || msg[30] != EOM_1 )
 		return string(MSG_ERR);
 
-	if( checksum(msg,19) )
+	strncpy(msg,(msg+8),23);
+
+	if( checksum(msg,23) )
 		return string(MSG_ERR);
 
 	return string(msg);
 }
 
-void Communication::requestTrackPoint() {
+void Communication::requestPosition() {
 
 	char message[8];
 
 	message[0] = SOM;
-	message[1] = ACK_MSG;
+	message[1] = 0x0a;
 	message[2] = 0x02;    /* number of data bytes */
-	message[3] = TRACK_MSG;
+	message[3] = 0x02;
 	message[4] = EMPTY_BYTE;
-	message[5] = 0xD6;  /* Checksum = 100 */
+	message[5] = 0xF2;  /* Checksum = 100 */
 	message[6] = EOM_0;
 	message[7] = EOM_1;
 
@@ -64,8 +68,13 @@ int Communication::checksum(char *msg, int size) {
 	int i;
 	int checksum = 0;
 
-	for(i=1; i!=size-1; i++)
-		checksum += msg[i];
+	/* If there's a SOM byte, then will be another next to it
+	 * which mustn't be counted in the checksum */
+	for(i=1; i<size-2; i++) {
+		checksum += (unsigned char)msg[i];
+		if( (unsigned char)msg[i] == SOM )
+			i++;
+	}
 
 	if( checksum % 0x100 )
 		return 1;
@@ -75,25 +84,36 @@ int Communication::checksum(char *msg, int size) {
 
 double Communication::getLatitude() {
 
-	int i;
-	double latitude;
-	long tmp = 0;
+	double latitude = 0;
 
-	requestTrackPoint();
-	string msg = getTrackPoint();
+	requestPosition();
+	string msg = getPosition();
 
 	if( msg == MSG_ERR )	{
-		VERBOSITY( fprintf(stderr,"Couldn't get a track point from the GPS") );
+		VERBOSITY( fprintf(stderr,"Couldn't get a track point from the GPS\n") );
 		return ERR_VALUE;
 	}
 
-	for(i=0 ;i!=4; i++) {
-		tmp += msg[3 + i] << i;
+	const char *tmp = msg.substr(4,8).c_str();
+	memcpy(&latitude,tmp,8);
+
+	return (latitude*180)/PI;
+}
+
+double Communication::getLongitude() {
+
+	double longitude = 0;
+
+	requestPosition();
+	string msg = getPosition();
+
+	if( msg == MSG_ERR )	{
+		VERBOSITY( fprintf(stderr,"Couldn't get a track point from the GPS\n") );
+		return ERR_VALUE;
 	}
 
-	VERBOSITY( printf("%ld",tmp) );
+	const char *tmp = msg.substr(12,8).c_str();
+	memcpy(&longitude,tmp,8);
 
-	latitude = (180/MAX_DEGREE)*tmp;
-
-	return latitude;
+	return (longitude*180)/PI;
 }

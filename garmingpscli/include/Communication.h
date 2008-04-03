@@ -17,6 +17,7 @@
 #define ERR_VALUE   -1000.0
 #define MSG_ERR     "ERROR"
 #define MAX_DEGREE  0x7FFFFFFF
+#define PI (3.141592653589793)
 
 using namespace std;
 
@@ -26,8 +27,8 @@ class Communication{
 	SerialRS232 *sp;
 	bool verbose;
 
-	void   requestTrackPoint();
-	string getTrackPoint();
+	void   requestPosition();
+	string getPosition();
 	int    checksum(char *, int);
 
 	public:
