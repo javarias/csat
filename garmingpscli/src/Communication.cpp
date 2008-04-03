@@ -90,7 +90,7 @@ double Communication::getLatitude() {
 	string msg = getPosition();
 
 	if( msg == MSG_ERR )	{
-		VERBOSITY( fprintf(stderr,"Couldn't get a track point from the GPS\n") );
+		VERBOSITY( fprintf(stderr,"Couldn't get the position from the GPS\n") );
 		return ERR_VALUE;
 	}
 
@@ -108,7 +108,7 @@ double Communication::getLongitude() {
 	string msg = getPosition();
 
 	if( msg == MSG_ERR )	{
-		VERBOSITY( fprintf(stderr,"Couldn't get a track point from the GPS\n") );
+		VERBOSITY( fprintf(stderr,"Couldn't get the position from the GPS\n") );
 		return ERR_VALUE;
 	}
 
