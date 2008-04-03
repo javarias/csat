@@ -90,7 +90,7 @@ public:
 			const databits & databitsnum = data8,
 			const stopbits & stopbitsnum = stop1,
 			const unsigned int & buflen = 1024,
-			const int & timeout = 300)
+			const int & timeout = 900)
 			throw (SerialRS232Exception &);
 
 	/**

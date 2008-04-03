@@ -240,15 +240,13 @@ char * SerialRS232::read_RS232() throw (SerialRS232Exception &)
 
 void SerialRS232::write_RS232(const char * s, int length) throw (SerialRS232Exception &)
 {
-	if (index(s, '\0') == NULL)
-		throw SerialRS232Exception("[SerialRS232::write_RS232] String to be written must be null terminated");
+
 	if ((unsigned int)length > (m_buflen - 1))
 		throw SerialRS232Exception("[SerialRS232::write_RS232] Too large string");
 
-	strncpy(m_buf, s, length+1);
-
-	if (write(m_port, m_buf, length) != (int)(length))
+	if (write(m_port, s, length) != (int)(length)) {
 		throw SerialRS232Exception("[SerialRS232::write_RS232] Error writing");
+	}
 
 }
 
