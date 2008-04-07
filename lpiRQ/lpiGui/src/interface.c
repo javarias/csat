@@ -85,11 +85,11 @@ create_LpiShow (struct ccd *cam)
   GtkWidget *label8;
   GtkAccelGroup *accel_group;
   //to restore the saved values
-  FILE *archConf;
+  //FILE *archConf;
   int num;
   float value;
 
-  archConf=fopen("/tmp/values.tdm", "r");
+  //archConf=fopen("/tmp/values.tdm", "r");
 
   accel_group = gtk_accel_group_new ();
 
@@ -194,7 +194,7 @@ create_LpiShow (struct ccd *cam)
   gtk_widget_show (exposureScale);
   gtk_box_pack_start (GTK_BOX (vbox2), exposureScale, TRUE, TRUE, 0);
   gtk_scale_set_digits (GTK_SCALE (exposureScale), 0);
-  fscanf(archConf, "exposure: %d\n", &num);
+//  fscanf(archConf, "exposure: %d\n", &num);
   gtk_range_set_value(GTK_RANGE(exposureScale),num);
 
   exposureEntry = gtk_entry_new ();
@@ -214,7 +214,7 @@ create_LpiShow (struct ccd *cam)
   gtk_widget_show (resetScale);
   gtk_box_pack_start (GTK_BOX (vbox3), resetScale, TRUE, TRUE, 0);
   gtk_scale_set_digits (GTK_SCALE (resetScale), 0);
-  fscanf(archConf, "reset: %d\n", &num);
+//  fscanf(archConf, "reset: %d\n", &num);
   gtk_range_set_value(GTK_RANGE(resetScale),num);
 
   resetEntry = gtk_entry_new ();
@@ -233,7 +233,7 @@ create_LpiShow (struct ccd *cam)
   PixelScale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0, 0)));
   gtk_widget_show (PixelScale);
   gtk_box_pack_start (GTK_BOX (vbox4), PixelScale, TRUE, TRUE, 0);
-  fscanf(archConf, "pixel: %f\n", &value);
+//  fscanf(archConf, "pixel: %f\n", &value);
   gtk_range_set_value(GTK_RANGE(PixelScale),value);
 
   pixelEntry = gtk_entry_new ();
@@ -252,7 +252,7 @@ create_LpiShow (struct ccd *cam)
   contrastScale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0, 0)));
   gtk_widget_show (contrastScale);
   gtk_box_pack_start (GTK_BOX (vbox5), contrastScale, TRUE, TRUE, 0);
-  fscanf(archConf, "contrast: %f\n", &value);
+//  fscanf(archConf, "contrast: %f\n", &value);
   gtk_range_set_value(GTK_RANGE(contrastScale),value);
 
   contrastEntry = gtk_entry_new ();
@@ -282,7 +282,7 @@ create_LpiShow (struct ccd *cam)
   redScale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0, 0)));
   gtk_widget_show (redScale);
   gtk_box_pack_start (GTK_BOX (vbox6), redScale, TRUE, TRUE, 0);
-  fscanf(archConf, "red: %f\n", &value);
+//  fscanf(archConf, "red: %f\n", &value);
   gtk_range_set_value(GTK_RANGE(redScale),value);
 
   redEntry = gtk_entry_new ();
@@ -301,7 +301,7 @@ create_LpiShow (struct ccd *cam)
   greenScale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0, 0)));
   gtk_widget_show (greenScale);
   gtk_box_pack_start (GTK_BOX (vbox7), greenScale, TRUE, TRUE, 0);
-  fscanf(archConf, "green: %f\n", &value);
+//  fscanf(archConf, "green: %f\n", &value);
   gtk_range_set_value(GTK_RANGE(greenScale),value);
 
   greenEntry = gtk_entry_new ();
@@ -320,7 +320,7 @@ create_LpiShow (struct ccd *cam)
   blueScale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0, 0)));
   gtk_widget_show (blueScale);
   gtk_box_pack_start (GTK_BOX (vbox8), blueScale, TRUE, TRUE, 0);
-  fscanf(archConf, "blue: %f\n", &value);
+//  fscanf(archConf, "blue: %f\n", &value);
   gtk_range_set_value(GTK_RANGE(blueScale),value);
 
   blueEntry = gtk_entry_new ();
@@ -332,7 +332,7 @@ create_LpiShow (struct ccd *cam)
   gtk_widget_show (label8);
   gtk_box_pack_start (GTK_BOX (vbox1), label8, FALSE, FALSE, 0);
 
-  fclose(archConf);
+//  fclose(archConf);
 
 
   gtk_idle_add((GtkFunction) update_image, (gpointer)cam);
