@@ -39,7 +39,7 @@ Compiling
 
 For compilation, just type:
 
-$> make clean build
+$> make build
 
 This will clean all the modules (if anything is compiled), then will build and
 install each module by separated, in the proper order that they must be done.
@@ -50,12 +50,31 @@ The modules
 
 The modules available on the CSAT project are:
 
+ * EXTERNALS/jogl: This module contains the neccessary java classes for using
+   the OpenGL API in Java.
+
+ * EXTERNALS/rxtx: This module contains java classes and shared libraries for
+   the use of the serial port in the Java language.
+
+ * EXTERNALS/serialRS232: This module contains the SerialRS232 C++ class used
+   for communicate with the serial port. It provides an easy way to handle this
+   communication with a class abstraction layer. The original code was written
+   by Pablo de Vicente, but it has been modified to make it more generic and
+   efficient.
+
  * telecli: The telecli module consists in a simple C-written application that
    allows you to control a Celestron Nexstar 4 SE telescope via command line. It
    supports several commands to be sent to the telescope, and more can be added.
    It works only as a stand-alone application. This module was developed
    initially with the purpose of learning how to connect to the telescope, so
    there is not any ACS component in this module.
+
+ * garmingpscli: The garmingpscli module consists in a simple C-written program
+   that allows you to access a Garmin eTrex Legend GPS through the serial port.
+   This application is very simple, but more complexity can be added to it.
+   Anyways, this only intends to be a little example on how to access the GPS,
+   in order to write an ACS component that can do so, so the application will
+   stay simple.
 
  * lpiRQ: The lpiRQ (LPI Research Quest) module includes two applications that
    connects to a Meade LPI CCD. One of them is a command line application that
