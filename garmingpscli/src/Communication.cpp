@@ -17,12 +17,10 @@
 
 Communication::Communication(char *deviceName){
 	this->sp = new SerialRS232(deviceName,300);
-	this->sp->flush_RS232();
 }
 
 Communication::Communication(char *deviceName, bool verbose){
 	this->sp = new SerialRS232(deviceName,300);
-	this->sp->flush_RS232();
 	this->verbose = verbose;
 }
 
@@ -34,6 +32,7 @@ string Communication::getPosition() {
 
 	char *msg;
 
+	/* The data bytes contain two float64 values */
 	msg = this->sp->read_RS232();
 
 	if( msg[0] != SOM || msg[29] != EOM_0 || msg[30] != EOM_1 )
