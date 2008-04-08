@@ -8,16 +8,16 @@
 #define EOM_1    0x03
 
 /* Type of messages */
-#define ACK_MSG             0x06
-#define TRACK_MSG_REQUEST   0x06
-#define TRACK_MSG           0x22
+#define POSITION_XFER     0x02
+#define TIME_XFER         0x05
+#define CMDDAT            0x0A
 
 /* Other constants */
 #define EMPTY_BYTE  0x00
 #define ERR_VALUE   -1000.0
 #define MSG_ERR     "ERROR"
 #define MAX_DEGREE  0x7FFFFFFF
-#define PI (3.141592653589793)
+
 
 using namespace std;
 
@@ -27,8 +27,8 @@ class Communication{
 	SerialRS232 *sp;
 	bool verbose;
 
-	void   requestPosition();
-	string getPosition();
+	void   request(char);
+	char*  getResponse();
 	int    checksum(char *, int);
 
 	public:
@@ -36,6 +36,7 @@ class Communication{
 	Communication(char *deviceName, bool verbose);
 	double getLatitude();
 	double getLongitude();
+	void getTime();
 	
 	~Communication();
 };
