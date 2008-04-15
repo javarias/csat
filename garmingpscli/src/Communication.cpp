@@ -31,15 +31,16 @@ Communication::~Communication(){
 char *Communication::getResponse() {
 
 	char *msg;
-	int i;
+	int i=0;
+	int j=0;
+	int k=0;
 
 	msg = this->sp->read_RS232();
 
 	/* First, we have to handle the ACK stuff */
 	if( msg[0] != SOM )
 		return (char *)MSG_ERR;
-	for(i=1; !(msg[i-1] == EOM_0 && msg[i] == EOM_1); i++);
-	i++;
+	for(i=1; !(msg[i-1] == EOM_0 && msg[i] == EOM_1); i++);  i++;
 
 	if( checksum(msg,i) )
 		return (char *)MSG_ERR;
@@ -50,12 +51,19 @@ char *Communication::getResponse() {
 	if( msg[0] != SOM )
 		return (char *)MSG_ERR;
 
-	for(i=1; !(msg[i-1] == EOM_0 && msg[i] == EOM_1); i++);
-	i++;
-
+	for(i=1; !(msg[i-1] == EOM_0 && msg[i] == EOM_1); i++);  i++;
 	if( checksum(msg,i) )
 		return (char *)MSG_ERR;
 
+	/* Finally, remove all the doubled SOM in the body of the message */
+	for(j=1; j!=i; j++)
+		if( msg[j] == SOM && msg[j+1] == SOM )
+			for(k=j; k!=i; k++)
+				msg[k] = msg[k+1];
+				
+//	for( i=0; !(msg[i] == EOM_0 && msg[i+1] == EOM_1) ; i++)
+//		printf("%02X ", (unsigned char)msg[i]);
+//	printf("\n");
 	return msg;
 }
 
@@ -99,7 +107,14 @@ int Communication::checksum(char *msg, int size) {
 	}
 
 	if( checksum % 0x100 ) {
-		VERBOSITY( fprintf(stderr,"Checksum error!") );
+
+		VERBOSITY(
+			for(i=0; i != size ; i++)
+				printf("%02X ", (unsigned char)msg[i]);
+			printf("\n");
+		);
+
+		VERBOSITY( fprintf(stderr,"Checksum error!\n") );
 		return 1;
 	}
 
@@ -119,7 +134,7 @@ double Communication::getLatitude() {
 		return ERR_VALUE;
 	}
 
-	memcpy(&latitude,msg + 4,8);
+	memcpy(&latitude,msg + 3,8);
 
 	return (latitude*180)/M_PI;
 }
@@ -137,7 +152,7 @@ double Communication::getLongitude() {
 		return ERR_VALUE;
 	}
 
-	memcpy(&longitude, msg+12, 8);
+	memcpy(&longitude, msg+11, 8);
 
 	return (longitude*180)/M_PI;
 }
@@ -153,11 +168,6 @@ void Communication::getTime() {
 		VERBOSITY( fprintf(stderr,"Couldn't get the time from the GPS\n") );
 		return;
 	}
-
-	//int i;
-	//for( i=0; i!=8; i++)
-	//	printf("%02X ", (unsigned char)tmp[i]);
-	//printf("\n");
 
 	uint8_t  month  = msg[3];
 	uint8_t  day    = msg[4];
