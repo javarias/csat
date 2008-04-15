@@ -9,12 +9,6 @@
 <xs:import namespace="urn:schemas-cosylab-com:CDB:1.0" schemaLocation="CDB.xsd"/>
 <xs:import namespace="urn:schemas-cosylab-com:BACI:1.0" schemaLocation="BACI.xsd"/>
 
-<xs:complexType name="AltazVelType">
-   <xs:attribute name="altVel" type="xs:double"/>
-   <xs:attribute name="azmVel" type="xs:double"/>
-</xs:complexType>
-
-
 <xs:complexType name="DevTelescopeType">
    <xs:sequence>
       <xs:element name="realAzm" type="baci:ROdouble"/>

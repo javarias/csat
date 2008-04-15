@@ -68,7 +68,7 @@ NexsimImpl_LIBS          = TypesStubs DevTelescopeStubs csatErrors NexSimStubs
 lpiImpl_OBJECTS          = lpiFrameDevIO lpiPropsDevIO lpiImpl
 lpiImpl_LIBS             = TypesStubs DevCCDStubs csatErrors
 eTrexImpl_OBJECTS        = eTrexCommunication eTrexCoordDevIO eTrexImpl
-eTrexImpl_LIBS           = TypesStubs DevGPSStubs
+eTrexImpl_LIBS           = TypesStubs DevGPSStubs csatErrors SerialCommunication
 CalculationsImpl_OBJECTS = CalculationsImpl
 CalculationsImpl_LIBS    = TypesStubs LocaleStubs CalculationsStubs csatErrors
 

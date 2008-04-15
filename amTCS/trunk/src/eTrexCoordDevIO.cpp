@@ -1,11 +1,12 @@
 #include "eTrexCoordDevIO.h"
+#include <math.h>
 
-eTrexCoordDevIO::eTrexCoordDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx){
+eTrexCoordDevIO::eTrexCoordDevIO(char *deviceName, int coordinate) throw (csatErrors::CannotOpenDeviceEx){
 
 	const char *_METHOD_="eTrexCoordDevIO::eTrexCoordDevIO";
 
 	try{
-		this->comm = new eTrexCommunication(deviceName);
+		this->comm = new eTrexCommunication(deviceName, true);
 	} catch(SerialRS232::SerialRS232Exception serialEx) {
 		ACS_LOG( LM_ERROR , _METHOD_ , (LM_ERROR, "CannotOpenDeviceEx: %s", serialEx.what()) );
 		csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
@@ -13,7 +14,6 @@ eTrexCoordDevIO::eTrexCoordDevIO(char *deviceName, int axis) throw (csatErrors::
 		throw ex.getCannotOpenDeviceEx();
 	}
 
-	//this->sp->flush_RS232();
 	/* Test if the telescope is connected */
 	//try{
 	//	this->sp->write_RS232("Kx",2);
@@ -24,7 +24,7 @@ eTrexCoordDevIO::eTrexCoordDevIO(char *deviceName, int axis) throw (csatErrors::
 	//	throw ex.getCannotOpenDeviceEx();
 	//}
 
-	this->axis = axis;
+	this->coordinate = coordinate;
 }
 
 eTrexCoordDevIO::~eTrexCoordDevIO() {
@@ -33,19 +33,25 @@ eTrexCoordDevIO::~eTrexCoordDevIO() {
 
 CORBA::Double eTrexCoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl) {
 
-	CORBA::Double value(0.0);
-	//unsigned long read_alt, read_azm;
-	//char *msg;
+	double coordinate = 0;
+	char *msg;
 
-	///* Send the message to the telescope */
-	//this->sp->write_RS232("z",1);
-	//msg = this->sp->read_RS232();
-	//this->sp->flush_RS232();
-	//sscanf(msg,"%08lX,%08lX#",&read_azm, &read_alt);
-	//value = ( this->axis == ALTITUDE_AXIS ) ? read_alt/MAX_PRECISE_ROTATION : read_azm/MAX_PRECISE_ROTATION ;
-	//value *= 360.0;
+	///* Send the message to the GPS */
+	this->comm->request( POSITION_XFER );
+	msg = this->comm->getResponse();
 
-	return value;
+	if( !strcmp(msg,MSG_ERR) )	{
+		ACS_ERROR( "Couldn't get the position from the GPS\n");
+		return ERR_VALUE;
+	}
+
+	if( this->coordinate == LATITUDE_COORD )
+		memcpy(&coordinate,msg + 3,8);
+	else
+		memcpy(&coordinate,msg + 11, 8);
+	coordinate = (coordinate*180)/M_PI;
+
+	return (coordinate);
 }
 
 void eTrexCoordDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl){

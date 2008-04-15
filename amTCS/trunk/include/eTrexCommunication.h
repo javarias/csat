@@ -21,6 +21,7 @@
 #define MSG_ERR     "ERROR"
 #define MAX_DEGREE  0x7FFFFFFF
 
+#define VERBOSITY(X)   if( this->verbose ) X;
 
 using namespace std;
 
@@ -32,7 +33,7 @@ class eTrexCommunication{
 	int  checksum(char *, int);
 
 	public:
-	eTrexCommunication(char *deviceName) throw (SerialRS232::SerialRS232Exception);
+	eTrexCommunication(char *deviceName, bool verbose) throw (SerialRS232::SerialRS232Exception);
 	~eTrexCommunication();
 	void   request(char);
 	char*  getResponse();

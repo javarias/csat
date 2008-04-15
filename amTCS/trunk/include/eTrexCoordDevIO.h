@@ -7,6 +7,9 @@
 #include "eTrexCommunication.h"
 #include "csatErrors.h"
 
+#define  LATITUDE_COORD   0
+#define  LONGITUDE_COORD  1
+
 class eTrexCoordDevIO: public DevIO<CORBA::Double>
 {
 
@@ -23,7 +26,7 @@ class eTrexCoordDevIO: public DevIO<CORBA::Double>
 
 	private:
 	eTrexCommunication *comm;
-	int axis;
+	int coordinate;
 };
 
 #endif /* _ETREX_COORD_DEVIO_H_ */

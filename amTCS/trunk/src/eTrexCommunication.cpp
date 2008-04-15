@@ -1,8 +1,9 @@
 #include "eTrexCommunication.h"
 
-eTrexCommunication::eTrexCommunication(char *deviceName) throw (SerialRS232::SerialRS232Exception) {
+eTrexCommunication::eTrexCommunication(char *deviceName, bool verbose) throw (SerialRS232::SerialRS232Exception) {
 
 	this->sp = new SerialRS232(deviceName, 100);
+	this->verbose = verbose;
 
 }
 
@@ -39,15 +40,16 @@ void eTrexCommunication::request(char what) {
 char *eTrexCommunication::getResponse() {
 
 	char *msg;
-	int i;
+	int i=0;
+	int j=0;
+	int k=0;
 
 	msg = this->sp->read_RS232();
 
 	/* First, we have to handle the ACK stuff */
 	if( msg[0] != SOM )
 		return (char *)MSG_ERR;
-	for(i=1; !(msg[i-1] == EOM_0 && msg[i] == EOM_1); i++);
-	i++;
+	for(i=1; !(msg[i-1] == EOM_0 && msg[i] == EOM_1); i++);  i++;
 
 	if( checksum(msg,i) )
 		return (char *)MSG_ERR;
@@ -58,12 +60,16 @@ char *eTrexCommunication::getResponse() {
 	if( msg[0] != SOM )
 		return (char *)MSG_ERR;
 
-	for(i=1; !(msg[i-1] == EOM_0 && msg[i] == EOM_1); i++);
-	i++;
-
+	for(i=1; !(msg[i-1] == EOM_0 && msg[i] == EOM_1); i++);  i++;
 	if( checksum(msg,i) )
 		return (char *)MSG_ERR;
 
+	/* Finally, remove all the doubled SOM in the body of the message */
+	for(j=1; j!=i; j++)
+		if( msg[j] == SOM && msg[j+1] == SOM )
+			for(k=j; k!=i; k++)
+				msg[k] = msg[k+1];
+				
 	return msg;
 }
 
@@ -81,6 +87,14 @@ int eTrexCommunication::checksum(char *msg, int size) {
 	}
 
 	if( checksum % 0x100 ) {
+
+		VERBOSITY(
+			for(i=0; i != size ; i++)
+				printf("%02X ", (unsigned char)msg[i]);
+			printf("\n");
+		);
+
+		VERBOSITY( fprintf(stderr,"Checksum error!\n") );
 		return 1;
 	}
 

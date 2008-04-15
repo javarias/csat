@@ -27,15 +27,29 @@ eTrexImpl::~eTrexImpl(){
 /* Component Lifecycle */
 void eTrexImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 {
+	const char * _METHOD_ = "eTrexImpl::initialize";
 	ACS_TRACE("eTrexImpl::initialize");
 	if( getComponent() != 0){
+
+		eTrexCoordDevIO *latDevIO = NULL;
+		eTrexCoordDevIO *lonDevIO = NULL;
+
+		try {
+			latDevIO = new eTrexCoordDevIO(m_device,LATITUDE_COORD);
+			lonDevIO = new eTrexCoordDevIO(m_device,LONGITUDE_COORD);
+		} catch ( csatErrors::CannotOpenDeviceEx &ex) {
+			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
+			lifeEx.addData("Reason","Cannot create DevIOs");
+			throw lifeEx;
+		}			
+
 		m_latitude_sp = new ROdouble( (component_name
 		                             + std::string(":latitude")).c_str(),
-		                             getComponent(), new eTrexCoordDevIO(m_device,0), true);
+		                             getComponent(), latDevIO, true);
 
 		m_longitude_sp = new ROdouble( (component_name
 		                             + std::string(":longitude")).c_str(),
-		                             getComponent(), new eTrexCoordDevIO(m_device,1), true);
+		                             getComponent(), lonDevIO, true);
 	}
 }
 
