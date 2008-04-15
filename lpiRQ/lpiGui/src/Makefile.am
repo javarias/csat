@@ -7,11 +7,13 @@ INCLUDES = \
 
 bin_PROGRAMS = lpiGui
 
-lpi_SOURCES = \
+lpiGui_SOURCES = \
 	main.c \
+	ccd.c ccd.h \
+	bayer.c bayer.h \
 	support.c support.h \
 	interface.c interface.h \
 	callbacks.c callbacks.h
 
-lpi_LDADD = @PACKAGE_LIBS@ $(INTLLIBS)
+lpiGui_LDADD = @PACKAGE_LIBS@ $(INTLLIBS)
 
