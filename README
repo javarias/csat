@@ -85,6 +85,11 @@ The modules available on the CSAT project are:
    telecli don't have either: the main idea of this module was to learn how to
    connect to the CCD and obtain information from it.
 
+	NOTE: In the lpiRQ/lpiGui module, you have to run './configure
+			--prefix=$INTROOT´ first in order to have a Makefile that complies
+         with the ACS standards. This way, you'll be able to do a 'make build´
+         on the entire CSAT project without problems.
+
  * telesim: The telesim module, as it name says, is a telescope simulator. It
    currently simulates the Celestron Nexstar 4 SE telescope, and is written in
    Java (an older version was written in C, but was thrown away). The class
