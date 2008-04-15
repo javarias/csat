@@ -52,17 +52,13 @@ CalculationsImpl::CalculationsImpl(const ACE_CString &name, maci::ContainerServi
 CalculationsImpl::~CalculationsImpl()
 {
   const char *_METHOD_="Calculations::~CalculationsImpl";
-  // ACS_TRACE is used for debugging purposes
-  ACS_TRACE(_METHOD_);
   ACS_DEBUG_PARAM(_METHOD_, "Destroying %s...", name());
 }
 
 
 void CalculationsImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl) {
 
-	const char* _METHOD_ = "CalculationsImpl::initialize()";
-	ACS_TRACE(_METHOD_);
-
+	const char *_METHOD_="Calculations::~CalculationsImpl";
 	locale_comp = LOCALE_MODULE::Locale::_nil();
 	locale_comp = getContainerServices()->getDefaultComponent<LOCALE_MODULE::Locale>("IDL:alma/LOCALE_MODULE/Locale:1.0");
 
@@ -168,7 +164,7 @@ TYPES::AltazPos CalculationsImpl::Radec2Altaz(const TYPES::RadecPos & pos) throw
  */
 CORBA::Double CalculationsImpl::date2JD(CORBA::Long year, CORBA::Long month, CORBA::Double day) throw(CORBA::SystemException,csatErrors::DateOutOfRangeEx){
 	
-	char *_METHOD_="CalculationsImpl::date2JD";
+	const char *_METHOD_="CalculationsImpl::date2JD";
 	int A, B;
 	CORBA::Double jd;
 	bool isJulian = false; /* The date is from Gregorian or Julian Calendar */

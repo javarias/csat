@@ -1,9 +1,10 @@
 #include <vltPort.h>
-static char *rcsId="@(#) $Id: $";
+static const char *rcsId="@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
 #include <sys/time.h>
 #include "eTrexImpl.h"
+#include "eTrexCoordDevIO.h"
 
 using namespace baci;
 
@@ -15,7 +16,7 @@ eTrexImpl::eTrexImpl(const ACE_CString& name, maci::ContainerServices *container
 {
 	component_name = name.c_str();
 	ACS_TRACE("eTrexImpl::eTrexImpl");
-	m_device = "";
+	m_device = (char *)"/dev/ttyS0";
 	m_locking = true;
 }
 
@@ -30,11 +31,11 @@ void eTrexImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 	if( getComponent() != 0){
 		m_latitude_sp = new ROdouble( (component_name
 		                             + std::string(":latitude")).c_str(),
-		                             getComponent());
+		                             getComponent(), new eTrexCoordDevIO(m_device,0), true);
 
 		m_longitude_sp = new ROdouble( (component_name
 		                             + std::string(":longitude")).c_str(),
-		                             getComponent());
+		                             getComponent(), new eTrexCoordDevIO(m_device,1), true);
 	}
 }
 
