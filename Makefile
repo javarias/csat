@@ -29,8 +29,9 @@
 
 SUBSYSTEM = CSAT
 
-MODULES = EXTERNALS/rxtx EXTERNALS/jogl EXTERNALS/serialRS232 lpiRQ/lpi lpiRQ/lpiGui\
-          telecli garmingpscli telesim/trunk amTCS/trunk Hevelius
+MODULES = EXTERNALS/rxtx EXTERNALS/jogl EXTERNALS/serialRS232 lpiRQ/lpi \
+          lpiRQ/lpiGui telecli garmingpscli telesim/trunk amTCS/trunk \
+          extClients Hevelius
 
 
 MAKE_FLAGS = "-k"

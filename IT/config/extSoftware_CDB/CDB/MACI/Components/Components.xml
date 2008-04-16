@@ -25,7 +25,7 @@
       <_ Name="NEXSIM"
          Code="NexsimImpl"
          Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
-         Default="false"
+         Default="true"
          Container="amContainerCpp"/>
 
       <_ Name="ETREX"
@@ -61,7 +61,7 @@
       <_ Name="CALCULATIONS"
          Code="CalculationsImpl"
          Type="IDL:alma/CALCULATIONS_MODULE/Calculations:1.0"
-         Default="false"
+         Default="true"
          Container="amContainerCpp"/>
 
       <_ Name="LOCALE"
@@ -83,5 +83,3 @@
          Container="amContainer"/>
 
 </Components>
-
-
