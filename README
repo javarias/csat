@@ -109,6 +109,15 @@ The modules available on the CSAT project are:
    connected to the amTCS, so a PC clock and fixed ubication values are being
    used.
 
+ * extClients: This modules contains a wrapper for communicating the amTCS with
+   clients that should connect to a telescope. For example, kstars can be
+   configured to communicate with a Celestron Nexstar telescope. The wrapper
+   creates a device that listens to the incomming request sent from the
+   external clients to a serial port, and translates them into CSAT's calls.
+   This gives the chance to use external clients with their UIs to control any
+   telescope attached to CSAT, even when the telescope is not supported by the
+   external client.
+
  * Hevelius: Finally, Hevelius is a GUI client for the amTCS components. It is
    written in Java, and was developed initially for the "Feria de Software
    2007", but now (that this event has passed away) it is being mantained to
@@ -126,15 +135,15 @@ The dependencies
 
 The dependecies between the modules are as follows:
 
- -------------   ----------------    -------------
- | lpiRQ/lpi |   | lpiRQ/lpiGui |    |  Hevelius |------------\
- -------------   ----------------    -------------             |
-                                           |                   |
-                                           |                   |
-                                           V                   |
- -------------  ----------------     -------------             | 
- |  telecli  |  | garmingpscli |     |   amTCS   |             | 
- -------------  ----------------     -------------             | 
+ -------------   ----------------    --------------     
+ | lpiRQ/lpi |   | lpiRQ/lpiGui |    | extClients |     
+ -------------   ----------------    --------------     
+                                           |          
+                                           |          
+                                           V          
+ -------------  ----------------     -------------      -------------
+ |  telecli  |  | garmingpscli |     |   amTCS   |<---- |  Hevelius |
+ -------------  ----------------     -------------      -------------
        |             |               /     |                   | 
        |             |              /      |                   | 
        |             |             /       V                   | 
