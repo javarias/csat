@@ -91,7 +91,7 @@ void Nexstar::parseInstructions()
 						response = this->isAlignmentComplete();
 						break;
 			case 'L':
-						response = this->isGotoComplete();
+						response = this->isGotoInProgress();
 						break;
 			case 'M':
 						response = this->cancelGoto();
@@ -130,8 +130,8 @@ char *Nexstar::getPreciseRaDec()
 	TYPES::AltazPos aaPos;
 	message = new char[19];
 	this->csatC->getcssClient()->getPos(rdPos,aaPos);
-	ra = (unsigned long)(rdPos.ra*MAX_PRECISE_ROTATION);
-	dec = (unsigned long)(rdPos.dec*MAX_PRECISE_ROTATION);
+	ra = (unsigned long)((rdPos.ra/360.0)*MAX_PRECISE_ROTATION);
+	dec = (unsigned long)((rdPos.dec/360.0)*MAX_PRECISE_ROTATION);
 	sprintf(message,"%08lX,%08lX#%c",ra,dec,ENDCHAR);
 	return message;
 }
@@ -159,8 +159,8 @@ char *Nexstar::getPreciseAzmAlt()
 	TYPES::AltazPos aaPos;
 	message = new char[19];
 	this->csatC->getcssClient()->getPos(rdPos,aaPos);
-	alt = (unsigned long) (aaPos.alt*MAX_PRECISE_ROTATION);
-	azm = (unsigned long) (aaPos.az*MAX_PRECISE_ROTATION);
+	alt = (unsigned long) ((aaPos.alt/360.0)*MAX_PRECISE_ROTATION);
+	azm = (unsigned long) ((aaPos.az/360.0)*MAX_PRECISE_ROTATION);
 	sprintf(message,"%08lX,%08lX#%c",azm,alt,ENDCHAR);
 	return message;
 }
@@ -370,14 +370,18 @@ char *Nexstar::isAlignmentComplete()
 	return this->badMessageResponse();
 }
 
-char *Nexstar::isGotoComplete()
+char *Nexstar::isGotoInProgress()
 {
-	return this->badMessageResponse();
+	char *message;
+	message = new char[3];
+	sprintf(message,"0#%c",ENDCHAR);
+	return message;
 }
 
 char *Nexstar::cancelGoto()
 {
-	return this->badMessageResponse();
+	this->csatC->getcscClient()->stopTelescope();
+	return this->defaultMessageResponse();
 }
 
 char *Nexstar::badMessageResponse()

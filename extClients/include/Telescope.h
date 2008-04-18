@@ -11,12 +11,9 @@
 #include <sys/stat.h>
 #include <stropts.h>
 #include <sys/stropts.h>
-//#include <sys/ptyio.h> 
 #include <signal.h>
 #include <sgtty.h>
 #include <string.h>
-//#include "CSATControlClient.h"
-//#include "CSATStatusClient.h"
 #include "CSATClient.h"
 
 class Telescope
@@ -29,8 +26,6 @@ public:
 protected:
 	bool cscRun;
 	bool cssRun;
-	//CSATControlClient *csc;
-	//CSATStatusClient *css;
 	CSATClient *csatC;
 	int fdm;
 };

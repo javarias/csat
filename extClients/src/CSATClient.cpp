@@ -1,5 +1,13 @@
 #include "CSATClient.h"
 
+void *idle_ping(void *p)
+{
+	SimpleClient *sc;
+	sc = (SimpleClient *) p;
+	sc->run();
+	return NULL;
+}
+
 CSATClient::CSATClient()
 {
 	int i;
@@ -11,8 +19,13 @@ CSATClient::CSATClient()
    strcpy(p[0],"WrapControl");
    strcpy(p[1],"CSATCONTROL");
    strcpy(p[2],"");
-	this->client.init(n,p);
-	this->client.login();
+	this->client = new SimpleClient::SimpleClient();
+	this->client->init(n,p);
+	this->client->login();
+	for(i=0;i<3;i++)
+		delete p[i];
+	delete p;
+	pthread_create(&(this->t1),NULL,idle_ping,(void *)(this->client));
 }
 
 CSATClient::~CSATClient()
@@ -33,7 +46,7 @@ int CSATClient::startCSC()
 {
 	try
 	{
-		this->csc = this->client.getComponent<CSATCONTROL_MODULE::CSATControl>("CSATCONTROL",0,true);
+		this->csc = this->client->getComponent<CSATCONTROL_MODULE::CSATControl>("CSATCONTROL",0,true);
 	}
 	catch(maciErrType::CannotGetComponentExImpl &_ex)
 	{
@@ -47,7 +60,7 @@ int CSATClient::startCSS()
 {
    try
    {
-      this->css = this->client.getComponent<CSATSTATUS_MODULE::CSATStatus>("CSATSTATUS",0,true);
+      this->css = this->client->getComponent<CSATSTATUS_MODULE::CSATStatus>("CSATSTATUS",0,true);
    }
    catch(maciErrType::CannotGetComponentExImpl &_ex)
    {
@@ -59,6 +72,9 @@ int CSATClient::startCSS()
 
 void CSATClient::stop()
 {
-	this->client.logout();
+	this->client->logout();
 	ACE_OS::sleep(3);
+	this->client->doneCORBA();
+	pthread_join(this->t1,NULL);
+	delete this->client;
 }

@@ -32,7 +32,7 @@ public:
 	char *getModel();
 	char *echo();
 	char *isAlignmentComplete();
-	char *isGotoComplete();
+	char *isGotoInProgress();
 	char *cancelGoto();
 	char *badMessageResponse();
 	char *defaultMessageResponse();

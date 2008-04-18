@@ -46,7 +46,8 @@ USER_LIB =		-lACE \
 					-lacserr \
 					-lm \
 					-lloki \
-					-lACSErrTypeCommon
+					-lACSErrTypeCommon \
+					-lpthread
 
 #
 # MODULE CODE DESCRIPTION:

@@ -21,9 +21,10 @@ public:
 	int startCSS();
 	void stop();
 private:
-	SimpleClient client;
+	SimpleClient *client;
 	CSATCONTROL_MODULE::CSATControl_var csc;
 	CSATSTATUS_MODULE::CSATStatus_var css;
+	pthread_t t1;
 };
 
 #endif
