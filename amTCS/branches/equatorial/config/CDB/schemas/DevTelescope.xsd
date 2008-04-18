@@ -9,12 +9,25 @@
 <xs:import namespace="urn:schemas-cosylab-com:CDB:1.0" schemaLocation="CDB.xsd"/>
 <xs:import namespace="urn:schemas-cosylab-com:BACI:1.0" schemaLocation="BACI.xsd"/>
 
+
 <xs:complexType name="DevTelescopeType">
    <xs:sequence>
       <xs:element name="realAzm" type="baci:ROdouble"/>
       <xs:element name="realAlt" type="baci:ROdouble"/>
-      <xs:element name="azmVel" type="baci:RWdouble"/>
-      <xs:element name="altVel" type="baci:RWdouble"/>
+      <xs:element name="azmVel"  type="baci:RWdouble"/>
+      <xs:element name="altVel"  type="baci:RWdouble"/>
+		<xs:element name="mount">
+			<xs:complexType>
+				<xs:complexContent>
+					<xs:restriction base="baci:ROEnum">
+						<xs:attribute name="condition"         type="xs:string" use="optional" default="ALTAZ,EQUATORIAL"/>
+						<xs:attribute name="statesDescription" type="xs:string" use="optional" default="Alt/Az mount type,Equatorial mount type"/>
+						<xs:attribute name="description"       type="xs:string" use="optional" default="mount"/>
+						<xs:attribute name="default_value"     type="xs:int"    use="required" />
+					</xs:restriction>
+				</xs:complexContent>
+			</xs:complexType>
+		</xs:element>
       <xs:element name="locking" type="xs:boolean"/>
    </xs:sequence>
 

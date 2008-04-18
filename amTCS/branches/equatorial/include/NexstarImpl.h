@@ -63,6 +63,8 @@ public:
 
 	virtual ACS::RWdouble_ptr altVel() throw (CORBA::SystemException);
 
+	virtual DEVTELESCOPE_MODULE::ROmountType_ptr mount() throw (CORBA::SystemException);
+
 private:
 
 	// Properties

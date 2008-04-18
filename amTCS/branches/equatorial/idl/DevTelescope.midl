@@ -4,6 +4,7 @@
 #define _DEV_TELESCOPE_IDL_
 
 #include <baci.idl>
+#include <enumpropMACRO.idl>
 #include <Types.idl>
 
 #pragma prefix "alma"
@@ -15,6 +16,14 @@
  * of an amateur telescope.
  */
 module DEVTELESCOPE_MODULE{
+
+	/** Mount types */
+	enum mountType {
+		ALTAZ,
+		EQUATORIAL
+	};
+
+	ACS_ENUM( mountType );
 
 	/**
 	 * @interface DevTelescope
@@ -43,12 +52,7 @@ module DEVTELESCOPE_MODULE{
 		/** Represents the mount type of the telescope. The idea is to set this
 		  * through the CDB, so we can get this information from there.
 		  */
-		enum mountType {
-			ALTAZ,
-			EQUATORIAL
-		};
-
-		ACS_ENUM( mountType );
+		readonly attribute ROmountType mount;
 
 		/** Locking status of the component. The idea is that, when
 		 * locked, no components can give orders to this one (except by

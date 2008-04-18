@@ -1,5 +1,5 @@
 #include <vltPort.h>
-static char *rcsId="@(#) $Id: $";
+static char *rcsId=(char *)"@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
 #include <SerialRS232.h>
@@ -41,10 +41,10 @@ void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,cs
 		NexstarVelDevIO   *azmVelDevIO = NULL;
 
 		try{
-			azmDevIO = new NexstarCoordDevIO("/dev/ttyS0", AZIMUTH_AXIS);
-			altDevIO = new NexstarCoordDevIO("/dev/ttyS0", ALTITUDE_AXIS);
-			azmVelDevIO = new NexstarVelDevIO("/dev/ttyS0", AZIMUTH_AXIS);
-			altVelDevIO = new NexstarVelDevIO("/dev/ttyS0", ALTITUDE_AXIS);
+			azmDevIO = new NexstarCoordDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS);
+			altDevIO = new NexstarCoordDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS);
+			azmVelDevIO = new NexstarVelDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS);
+			altVelDevIO = new NexstarVelDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS);
 		} catch (csatErrors::CannotOpenDeviceEx &ex){
 			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
 			lifeEx.addData("Reason","Cannot create DevIOs");
