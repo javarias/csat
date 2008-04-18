@@ -34,6 +34,22 @@ module DEVTELESCOPE_MODULE{
 		/** This property is the position of the altitude axe in degrees. */
 		readonly attribute ACS::ROdouble realAzm;
 
+		/** The velocity of the azimuth axis of the telescope (on degrees) */
+		readonly attribute ACS::RWdouble azmVel;
+
+		/** The velocity of the altitude axis of the telescope (on degrees) */
+		readonly attribute ACS::RWdouble altVel;
+
+		/** Represents the mount type of the telescope. The idea is to set this
+		  * through the CDB, so we can get this information from there.
+		  */
+		enum mountType {
+			ALTAZ,
+			EQUATORIAL
+		};
+
+		ACS_ENUM( mountType );
+
 		/** Locking status of the component. The idea is that, when
 		 * locked, no components can give orders to this one (except by
 		 * CSATControl and CSATStatus, in certain conditions). It will
@@ -42,12 +58,6 @@ module DEVTELESCOPE_MODULE{
 		 * status.
 		 */
 		readonly attribute boolean locking;
-
-		/** The velocity of the azimuth axis of the telescope (on degrees) */
-		readonly attribute ACS::RWdouble azmVel;
-
-		/** The velocity of the altitude axis of the telescope (on degrees) */
-		readonly attribute ACS::RWdouble altVel;
 
 		/**
 		 * This method is used to synchronize the telescope, so we tell

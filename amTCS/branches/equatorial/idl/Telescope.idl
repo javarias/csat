@@ -77,6 +77,11 @@ module TELESCOPE_MODULE {
 		TYPES::AltazVel getAltAzVel();
 	};
 
+	/** @interface EquatorialTelescope
+	 *  Interaface for controlling equatorial mounted telescopes
+	 */
+	interface EquatorialTelescope : Telescope {
+	};
 };
 
 #endif /* _TELESCOPE_IDL_ */

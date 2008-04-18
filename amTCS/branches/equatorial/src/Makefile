@@ -132,15 +132,17 @@ ACSERRDEF = csatErrors
 
 # Jarfiles and their directories
 #
-JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl SafetyImpl CSATControlImpl CSATStatusImpl
-TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
-CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
-LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
-PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
-TrackingImpl_DIRS=alma/TRACKING_MODULE/TrackingImpl
-SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
-CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
-CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
+JARFILES= TelescopeImpl EquatorialTelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl SafetyImpl CSATControlImpl CSATStatusImpl
+
+          TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
+EquatorialTelescopeImpl_DIRS=alma/TELESCOPE_MODULE/EquatorialTelescopeImpl
+                CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
+             LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
+           PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
+           TrackingImpl_DIRS=alma/TRACKING_MODULE/TrackingImpl
+             SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
+        CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
+         CSATStatusImpl_DIRS=alma/CSATSTATUS_MODULE/CSATStatusImpl
 
 USER_JFLAGS=-Xlint:unchecked
 
