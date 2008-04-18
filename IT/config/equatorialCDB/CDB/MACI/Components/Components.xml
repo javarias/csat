@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Components  xmlns="urn:schemas-cosylab-com:Components:1.0"
+       xmlns:cdb="urn:schemas-cosylab-com:CDB:1.0" 
+       xmlns:baci="urn:schemas-cosylab-com:BACI:1.0" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+      <_ Name="CSATCONTROL"
+         Code="alma.CSATCONTROL_MODULE.CSATControlImpl.CSATControlHelper"
+         Type="IDL:alma/CSATCONTROL_MODULE/CSATControl:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+      <_ Name="CSATSTATUS"
+         Code="alma.CSATSTATUS_MODULE.CSATStatusImpl.CSATStatusHelper"
+         Type="IDL:alma/CSATSTATUS_MODULE/CSATStatus:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+      <_ Name="LPI"
+         Code="lpiImpl"
+         Type="IDL:alma/DEVCCD_MODULE/DevCCD:1.0"
+         Default="true"
+         Container="amContainerCpp"/>
+
+      <_ Name="NEXSIM"
+         Code="NexsimImpl"
+         Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
+         Default="true"
+         Container="amContainerCpp"/>
+
+      <_ Name="ETREX"
+         Code="eTrexImpl"
+         Type="IDL:alma/DEVGPS_MODULE/DevGPS:1.0"
+         Default="true"
+         Container="amContainerCpp"/>
+
+      <_ Name="POINTING"
+         Code="alma.POINTING_MODULE.PointingImpl.PointingHelper"
+         Type="IDL:alma/POINTING_MODULE/Pointing:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+      <_ Name="TRACKING"
+         Code="alma.TRACKING_MODULE.TrackingImpl.TrackingHelper"
+         Type="IDL:alma/TRACKING_MODULE/Tracking:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+      <_ Name="SAFETY"
+         Code="alma.SAFETY_MODULE.SafetyImpl.SafetyHelper"
+         Type="IDL:alma/SAFETY_MODULE/Safety:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+      <_ Name="TELESCOPE"
+         Code="alma.TELESCOPE_MODULE.TelescopeImpl.TelescopeHelper"
+         Type="IDL:alma/TELESCOPE_MODULE/Telescope:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+      <_ Name="CALCULATIONS"
+         Code="CalculationsImpl"
+         Type="IDL:alma/CALCULATIONS_MODULE/Calculations:1.0"
+         Default="true"
+         Container="amContainerCpp"/>
+
+      <_ Name="LOCALE"
+         Code="alma.LOCALE_MODULE.LocaleImpl.LocaleHelper"
+         Type="IDL:alma/LOCALE_MODULE/Locale:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+      <_ Name="CCD"
+         Code="alma.CCD_MODULE.CCDImpl.CCDHelper"
+         Type="IDL:alma/CCD_MODULE/CCD:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+      <_ Name="NEXSIM-SOFT"
+         Code="alma.NEXSIM_MODULE.NexSimImpl.NexSimHelper"
+         Type="IDL:alma/NEXSIM_MODULE/NexSim:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+</Components>
