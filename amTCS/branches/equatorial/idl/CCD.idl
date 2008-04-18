@@ -1,0 +1,42 @@
+/* IDL for CCD component */
+
+#ifndef _CCD_IDL_
+#define _CCD_IDL_
+
+#include <baci.idl>
+#include <Types.idl>
+
+#pragma prefix "alma"
+
+/**
+ * @file CCD.idl
+ * IDL specification for the CCD module interface.
+ * This interface is in charge of controling the DevCCD component.
+ */
+module CCD_MODULE {
+
+	/** @interface CCD
+	 * Defines all the methods that are going to be used to get data from
+	 * the CCD. The asynchronous methods are asychronous because of the
+	 * delay that may exist between giving the order and obtaining the
+	 * image (When taking an image with certain exposure time, this delay
+	 * becomes explicit).
+	 */
+	interface CCD : ACS::ACSComponent
+	{
+
+		/**
+		 * Gets, asynchronously, a preview image from the CCD
+		 */
+		void getPreview(out TYPES::Image img, in ACS::CBvoid cb, in ACS::CBDescIn desc);
+
+		/**
+		 * Gets, asynchronously, an image from the camera for certain
+		 * exposure time
+		 */
+		void getImage(out TYPES::Image img, in double exposure, in ACS::CBvoid cb, in ACS::CBDescIn desc);
+	};
+
+};
+
+#endif /* _CCD_IDL_ */

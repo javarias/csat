@@ -1,0 +1,70 @@
+/* IDL for Calculations component */
+
+#ifndef _CALCULATIONS_IDL_
+#define _CALCULATIONS_IDL_
+
+#include <baci.idl>
+#include <Types.idl>
+#include <csatErrors.idl>
+
+#pragma prefix "alma"
+
+/**
+ * @file Calculations.idl
+ * IDL specification for the Calculations module interface.
+ * 
+ */
+module CALCULATIONS_MODULE {
+
+	/** @interface Calculations
+	 * Defines the interface for doing several calculations that may be
+	 * used by many components
+	 */
+	interface Calculations : ACS::ACSComponent
+	{
+
+		/**
+		 * Returns the corresponding Alt/Az coordinate for a given
+		 * Ra/Dec coordinate
+		 * @param position The Ra/Dec position to convert
+		 */
+		TYPES::AltazPos Radec2Altaz(in TYPES::RadecPos position);
+
+		/**
+		 * Returns the corresponding Ra/Dec coordinate for a given
+		 * Alt/Az coordinate
+		 * @param position The Alt/Az position to convert
+		 */
+		TYPES::RadecPos Altaz2Radec(in TYPES::AltazPos position);
+
+		/**
+		 * Calculates the JD (Julian Day) for a given date of the Gregorian or
+		 * the Julian Calendar and returns it. The day must have decimals to
+		 * represent the hours, minutes and seconds elapsed since the start of
+		 * the day.
+		 * @param year  The year
+		 * @param month The month (January=1, February=2, ...)
+		 * @param day   The month's day, with decimals if neccesary
+		 */
+		double date2JD(in long year, in long month, in double day)
+		  raises(csatErrors::DateOutOfRangeEx);
+
+		/**
+		 * Calculates new coordinates for a given Ra/Dec object by calculating
+		 * the precession effect.
+		 * @param pos The initial position of the object, in Ra/Dec coordinates
+		 * @param jd1 Initial Julian Day associated with the initial position
+		 * @param jd2 Final Julian Day to calculate the new coordinates
+		 */
+		TYPES::RadecPos precessionHR(in TYPES::RadecPos pos, in double jd1, in double jd2);
+		
+		/**
+		 * Returns the sidereal time
+		 */
+		double siderealTime();
+
+	};
+
+};
+
+#endif /* _CALCULATIONS_IDL_ */
