@@ -74,7 +74,7 @@ void CSATClient::stop()
 {
 	this->client->logout();
 	ACE_OS::sleep(3);
-	this->client->doneCORBA();
-	pthread_join(this->t1,NULL);
+	//this->client->doneCORBA();
 	delete this->client;
+	pthread_join(this->t1,NULL);
 }

@@ -5,6 +5,7 @@
 #include "TelTypes.h"
 #include "Telescope.h"
 #include "Nexstar.h"
+#include "Lx200.h"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ int main(int argv, char **argc)
 			printf("%s Wrapper Acquired\n", argc[1]);
 			break;
 		case 1:
-			//tel = new Lx200();
+			tel = (Telescope *)new Lx200();
 			printf("%s Wrapper Acquired\n", argc[1]);
 			break;
 		default:

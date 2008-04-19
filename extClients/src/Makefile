@@ -63,7 +63,7 @@ EXECUTABLES_L   =
 
 #
 # <brief description of xxxxx program>
-Wrap_OBJECTS    = main TelTypes Telescope Nexstar CSATClient
+Wrap_OBJECTS    = main TelTypes Telescope Nexstar Lx200 CSATClient
 Wrap_LIBS       = C++ CSATControlStubs CSATStatusStubs ACSErrTypeCommon TypesStubs
 xxxxx_OBJECTS   =	
 xxxxx_LDFLAGS   =
