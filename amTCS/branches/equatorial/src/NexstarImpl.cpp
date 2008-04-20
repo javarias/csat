@@ -18,6 +18,7 @@ NexstarImpl::NexstarImpl(const ACE_CString& name, maci::ContainerServices *conta
       ,m_realAlt_sp(this)
       ,m_altVel_sp(this)
       ,m_azmVel_sp(this)
+      ,m_mount_sp(this)
 {
 	component_name = name.c_str();
 	ACS_TRACE("NexstarImpl::NexstarImpl");
@@ -60,6 +61,11 @@ void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,cs
 	   	                          getComponent(), altVelDevIO);
 		m_azmVel_sp  = new RWdouble( ( component_name + std::string(":azmVel")).c_str(),
 	   	                          getComponent(), azmVelDevIO);
+
+		m_mount_sp   = new ROEnumImpl<ACS_ENUM_T(DEVTELESCOPE_MODULE::mountType),
+		                              POA_DEVTELESCOPE_MODULE::ROmountType>
+		                            (( component_name + std::string(":mount")).c_str(),
+		                             getComponent() );
 	}
 }
 
@@ -130,6 +136,14 @@ ACS::RWdouble_ptr NexstarImpl::altVel() throw (CORBA::SystemException){
 		return ACS::RWdouble::_nil();
 	}
 	ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_altVel_sp->getCORBAReference());
+	return prop._retn();
+}
+
+DEVTELESCOPE_MODULE::ROmountType_ptr NexstarImpl::mount() throw (CORBA::SystemException){
+	if( m_mount_sp == 0 ){
+		return DEVTELESCOPE_MODULE::ROmountType::_nil();
+	}
+	DEVTELESCOPE_MODULE::ROmountType_var prop = DEVTELESCOPE_MODULE::ROmountType::_narrow(m_mount_sp->getCORBAReference());
 	return prop._retn();
 }
 

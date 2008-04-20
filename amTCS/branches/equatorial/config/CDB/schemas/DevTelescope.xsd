@@ -20,8 +20,7 @@
 			<xs:complexType>
 				<xs:complexContent>
 					<xs:restriction base="baci:ROEnum">
-						<xs:attribute name="condition"         type="xs:string" use="optional" default="ALTAZ,EQUATORIAL"/>
-						<xs:attribute name="statesDescription" type="xs:string" use="optional" default="Alt/Az mount type,Equatorial mount type"/>
+						<xs:attribute name="statesDescription" type="xs:string" use="optional" default="ALTAZ, EQUATORIAL"/>
 						<xs:attribute name="description"       type="xs:string" use="optional" default="mount"/>
 						<xs:attribute name="default_value"     type="xs:int"    use="required" />
 					</xs:restriction>

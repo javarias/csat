@@ -56,15 +56,13 @@ INCLUDES        =
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = NexstarImpl NexsimImpl lpiImpl eTrexImpl CalculationsImpl
+LIBRARIES       = NexstarImpl lpiImpl eTrexImpl CalculationsImpl
 LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
 NexstarImpl_OBJECTS      = NexstarCoordDevIO NexstarVelDevIO NexstarImpl
-NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors SerialCommunication #generated on telecli
-NexsimImpl_OBJECTS       = NexsimCoordDevIO NexsimVelDevIO NexsimImpl
-NexsimImpl_LIBS          = TypesStubs DevTelescopeStubs csatErrors NexSimStubs
+NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors SerialCommunication
 lpiImpl_OBJECTS          = lpiFrameDevIO lpiPropsDevIO lpiImpl
 lpiImpl_LIBS             = TypesStubs DevCCDStubs csatErrors
 eTrexImpl_OBJECTS        = eTrexCommunication eTrexCoordDevIO eTrexImpl
