@@ -107,7 +107,8 @@ The modules available on the CSAT project are:
    that have to be done over the amTCS, because it is the main module of the
    CSAT project, so they will be. At the moment of writing, the GPS is still not
    connected to the amTCS, so a PC clock and fixed ubication values are being
-   used.
+   used. Only the trunk is compiled, while the other branches are test-purpose
+   only.
 
  * extClients: This modules contains a wrapper for communicating the amTCS with
    clients that should connect to a telescope. For example, kstars can be
