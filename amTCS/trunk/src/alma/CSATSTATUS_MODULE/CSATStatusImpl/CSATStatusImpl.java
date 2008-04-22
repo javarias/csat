@@ -55,6 +55,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	private alma.TELESCOPE_MODULE.Telescope telescope_comp;
 	private alma.CALCULATIONS_MODULE.Calculations calculations_comp;
 	private alma.TRACKING_MODULE.Tracking tracking_comp;
+	private alma.SAFETY_MODULE.Safety safety_comp;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -78,7 +79,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 			throw new ComponentLifecycleException("Failed to get Telescope component reference");
 		}
 
-		/* We get the Calculations referece */
+		/* We get the Calculations reference */
 		try{
 			obj = m_containerServices.getDefaultComponent("IDL:alma/CALCULATIONS_MODULE/Calculations:1.0");
 			calculations_comp = alma.CALCULATIONS_MODULE.CalculationsHelper.narrow(obj);
@@ -87,7 +88,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 			throw new ComponentLifecycleException("Failed to get Calculations component reference");
 		}
 
-		/* We get the Tracking referece */
+		/* We get the Tracking reference */
       try{
          obj = m_containerServices.getDefaultComponent("IDL:alma/TRACKING_MODULE/Tracking:1.0");
          tracking_comp = alma.TRACKING_MODULE.TrackingHelper.narrow(obj);
@@ -95,6 +96,15 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
          m_logger.fine("Failed to get Tracking default component reference");
          throw new ComponentLifecycleException("Failed to get Tracking component reference");
       }
+
+		/* We get the Safety reference */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/SAFETY_MODULE/Safety:1.0");
+			safety_comp = alma.SAFETY_MODULE.SafetyHelper.narrow(obj);
+		} catch (AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Safety default component reference");
+			throw new ComponentLifecycleException("Failed to get Safety component reference");
+		}
 
 	}
     
@@ -181,7 +191,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public int getSafety(RadecPos p){
-		return 0;
+		return safety_comp.getSafety(p);
 	}
 
 	public void EmergencyStop(){

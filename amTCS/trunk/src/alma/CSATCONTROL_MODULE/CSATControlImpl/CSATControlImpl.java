@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 
 import alma.ACS.*;
 import alma.TYPES.*;
+import alma.csatErrors.TelescopeAlreadyMovingEx;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
@@ -81,7 +82,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 			m_logger.fine("Failed to get Tracking component reference " + e);
 			throw new ComponentLifecycleException("Failed to get Tracking component reference");
 		}
-		
+	
 		try {
 		 	obj = m_containerServices.getDefaultComponent("IDL:alma/CCD_MODULE/CCD:1.0");
 			ccd = alma.CCD_MODULE.CCDHelper.narrow(obj);
@@ -145,6 +146,10 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 
 	public void setTrackingRate(alma.TYPES.RadecVel v){
+	}
+
+	public void setSlewRate(alma.TYPES.AltazVel v) throws TelescopeAlreadyMovingEx {
+		telescope.setSlewRate(v);
 	}
 
 	public void goToRadec(alma.TYPES.RadecPos p, alma.TYPES.RadecVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
