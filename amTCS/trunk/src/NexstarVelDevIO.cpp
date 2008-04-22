@@ -56,9 +56,9 @@ void NexstarVelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) th
 	// We see which telescope's velocity is adecuated for the given double value
 	if( absValue >= 3 )
 		vel = 9;
-	else if( absValue < (4+2)/2 && absValue >= (2+1)/2 )
+	else if( absValue < (4+2)/2. && absValue >= (2+1)/2. )
 		vel = 8;
-	else if( absValue < (2+1)/2. && absValue >= (1 + 5/60)/2. )
+	else if( absValue < (2+1)/2. && absValue >= (1 + 5/60.)/2. )
 		vel = 7;
 	else if( absValue < (1 + 5/60.)/2. && absValue >= (5/60. + 32/3600.)/2. )
 		vel = 6;
@@ -79,7 +79,7 @@ void NexstarVelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) th
 
    command[0] = 'P';
    command[1] = 2;
-   command[2] = (this->axis == ALTITUDE_AXIS) ? 0x10 : 0x11 ;
+   command[2] = (this->axis == ALTITUDE_AXIS) ? 0x11 : 0x10 ;
    command[3] = ( vel > 0 ) ? 0x24 : 0x25 ;
    command[4] = labs((long int)vel);
    command[5] = 0;
