@@ -315,7 +315,19 @@ char *Nexstar::passThroughCommand()
 {
 	//Important!!
 	char buf[7];
+	int vel;
 	read(fdm,buf,7);
+	switch(buf[0])
+	{
+		case 2:
+				vel = (int)buf[3];
+				break;
+		case 3:
+				vel = 0;
+				break;
+		default:
+				vel = 0;
+	}
 	return this->defaultMessageResponse();
 }
 char *Nexstar::getLocation()

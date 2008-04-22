@@ -5,6 +5,10 @@ Lx200::Lx200()
 	this->csatC = new CSATClient();
 	this->cscRun = false;
 	this->cssRun = false;
+	this->alt = 0;
+	this->az = 0;
+	this->ra = 0;
+	this->dec = 0;
 }
 
 void Lx200::parseInstructions()
@@ -191,28 +195,28 @@ char *Lx200::getInformation()
 	int hr, min, sec;
 	double sdt;
 	read(fdm, &buf, 1);
+	printf("G%c\n",buf);
 	switch(buf)
 	{
 		case 'D':
-					printf("GD\n");
 					read(fdm, &buf, 1);
 					if(buf != '#')
 						return this->badMessageResponse();
 					message = new char[8];
 					this->csatC->getcssClient()->getPos(rdPos,aaPos);
 					sprintf(message,"%c%d*%d#%c",(rdPos.dec < 0)?'-':'+',(int)rdPos.dec,(int)(60*(rdPos.dec-(int)rdPos.dec)),ENDCHAR);
+					printf("Dec: %s\n",message);
 					return message;
 		case 'R':
-					printf("GR\n");
 					read(fdm, &buf, 1);
 					if(buf != '#')
 						return this->badMessageResponse();
 					message = new char[9];
 					this->csatC->getcssClient()->getPos(rdPos,aaPos);
-					sprintf(message,"%d*%d.1#%c",(int)(rdPos.ra/15),(int)(4*(rdPos.ra-(int)rdPos.ra)),ENDCHAR);
+					sprintf(message,"%d*%.1lf#%c",(int)(rdPos.ra/15.0),60*(rdPos.ra/15.0-(int)(rdPos.ra/15.0)),ENDCHAR);
+					printf("Ra: %s\n",message);
 					return message;
 		case 'A':
-					printf("GA\n");
 					read(fdm, &buf, 1);
 					if(buf != '#')
 						return this->badMessageResponse();
@@ -221,7 +225,6 @@ char *Lx200::getInformation()
 					sprintf(message,"%c%d*%d#%c",(aaPos.alt < 0)?'-':'+',(int)aaPos.alt,(int)(60*(aaPos.alt-(int)aaPos.alt)),ENDCHAR);
 					return message;
 		case 'Z':
-					printf("GZ\n");
 					read(fdm, &buf, 1);
 					if(buf != '#')
 						return this->badMessageResponse();
@@ -263,9 +266,9 @@ char *Lx200::getInformation()
 									sprintf(message,"12:11:01#%c",ENDCHAR);
 									break;
 						default:
-									read(fdm, &buf, 1);
-									if(buf != '#')
-										return this->badMessageResponse();
+									printf("GV%c\n",buf);
+									while(buf != '#')
+										read(fdm, &buf, 1);
 									message = this->badMessageResponse();
 					}
 					return message;
@@ -356,6 +359,8 @@ char *Lx200::getInformation()
 					
 		default:
 					printf("G%c\n",buf);
+					while(buf != '#')
+						read(fdm, &buf, 1);
 					message = this->badMessageResponse();
 	}
 	return message;
@@ -383,7 +388,42 @@ char *Lx200::objectsControl()
 
 char *Lx200::movement()
 {
-	return this->badMessageResponse();
+	char *message, buf;
+	TYPES::AltazPos aaPos;
+	TYPES::AltazVel aaVel;
+	TYPES::RadecPos rdPos;
+	ACS::CBDescIn cbin;
+	read(fdm,&buf,1);
+	switch(buf)
+	{
+		case 'A':
+					message = new char[2];
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					aaPos.alt = this->alt;
+					aaPos.az = this->az;
+					this->csatC->getcscClient()->goToAltAz(aaPos,aaVel,(ACS::CBvoid*)NULL,cbin);
+					sprintf(message,"0%c",ENDCHAR);
+					break;
+		case 'S':
+					message = new char[2];
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					rdPos.ra = this->ra;
+					rdPos.dec = this->dec;
+					this->csatC->getcscClient()->preset(rdPos,(ACS::CBvoid*)NULL,cbin);
+					sprintf(message,"0%c",ENDCHAR);
+					break;
+//		case '':
+		default:
+					printf("M%c\n",buf);
+					while(buf != '#')
+						read(fdm, &buf, 1);
+					message = this->badMessageResponse();
+	}
+	return message;
 }
 
 char *Lx200::togglePointingPrecision()
@@ -393,7 +433,13 @@ char *Lx200::togglePointingPrecision()
 
 char *Lx200::haltMovement()
 {
-	return this->badMessageResponse();
+	char *message, buf;
+	read(fdm,&buf,1);
+	while(buf != '#')
+		read(fdm,&buf,1);
+	message = new char[1];
+	sprintf(message,"%c",ENDCHAR);
+	return message;
 }
 
 char *Lx200::fieldDerotatorControl()
@@ -493,8 +539,71 @@ char *Lx200::telescopeSettings()
 					message = new char[2];
 					sprintf(message,"1%c",ENDCHAR);
 					break;
+		case 'a':
+					buffer = new char[7];
+					read(fdm,buffer,6);
+					buffer[6] = '\0';
+					printf("Sa: %s\n",buffer);
+					sscanf(buffer,"%c%d*%d",&sign,&var1,&var2);
+					delete buffer;
+					alt = var1 + var2/60.0;
+					if(sign == '-')
+						alt = -alt;
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					message = new char[2];
+					sprintf(message,"0%c",ENDCHAR);
+					break;
+		case 'd':
+					buffer = new char[11];
+					read(fdm,buffer,10);
+					buffer[10] = '\0';
+					printf("Sd: %s\n",buffer);
+					sscanf(buffer," %c%d:%d:%d",&sign,&var1,&var2,&var3);
+					delete buffer;
+					dec = var1 + var2/60.0 + var3/3600.0;
+					if(sign == '-')
+						dec = -dec;
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					message = new char[2];
+					sprintf(message,"1%c",ENDCHAR);
+					break;
+		case 'r':
+					buffer = new char[10];
+					read(fdm,buffer,9);
+					buffer[9] = '\0';
+					printf("Sr: %s\n",buffer);
+					sscanf(buffer," %d:%d:%d",&var1,&var2,&var3);
+					delete buffer;
+					ra = var1 + var2/60.0 +var3/3600.0;
+					ra = ra*15;
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					message = new char[2];
+					sprintf(message,"1%c",ENDCHAR);
+					break;
+		case 'z':
+					buffer = new char[7];
+					read(fdm,buffer,6);
+					buffer[6] = '\0';
+					printf("Sa: %s\n",buffer);
+					sscanf(buffer,"%d*%d",&var1,&var2);
+					delete buffer;
+					alt = var1 + var2/60.0;
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					message = new char[2];
+					sprintf(message,"1%c",ENDCHAR);
+					break;
 		default:
-					printf("S%c",buf);
+					printf("S%c\n",buf);
+					while(buf != '#')
+						read(fdm, &buf, 1);
 					message = this->badMessageResponse();
 	}
 	return message;

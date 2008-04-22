@@ -11,6 +11,7 @@ public:
 	Lx200();
 	~Lx200();
 	void parseInstructions();
+private:
 	char *getAlignment();
 	char *setAlignment();
 	char *reticuleControl();
@@ -38,6 +39,7 @@ public:
 	char *badMessageResponse();
 	char *defaultMessageResponse();
 	int length(char *msg);
+	float ra, dec, alt, az;
 };
 
 #endif
