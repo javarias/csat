@@ -28,6 +28,9 @@ protected:
 	bool cssRun;
 	CSATClient *csatC;
 	int fdm;
+   int fds;
+	const char *serial;
+	const char *serialbk;
 };
 
 #endif

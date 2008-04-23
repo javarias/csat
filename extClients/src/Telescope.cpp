@@ -2,10 +2,16 @@
 
 Telescope::Telescope()
 {
+	serial   = "/dev/ttyS0";
+	serialbk = "/dev/ttyS0.bk";
 }
 
 Telescope::~Telescope()
 {
+	close(fdm);
+	close(fds);
+	unlink(serial);
+	rename(serialbk,serial);
 }
 
 void Telescope::parseInstructions()
@@ -14,10 +20,7 @@ void Telescope::parseInstructions()
 
 int Telescope::start()
 {
-   int fds;
 	char *slavename;
-	char *serial = "/dev/ttyS0";
-	char *serialbk = "/dev/ttyS0.bk";
 	//char buf;
 	static struct termios termorig;  /* static for zero's */
 
@@ -53,9 +56,5 @@ int Telescope::start()
 	printf("%s\n\n", slavename);
 
 	this->parseInstructions();
-	close(fdm);
-	close(fds);
-	unlink(serial);
-	rename(serialbk,serial);
 	return 0;	
 }

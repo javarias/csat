@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <signal.h>
 
 #include "TelTypes.h"
 #include "Telescope.h"
@@ -9,7 +10,14 @@
 
 using namespace std;
 
+Telescope *tel = NULL;
+
 extern char telType[100][10];
+
+void leave(int sig) {
+	printf("Receiving SIGINT signal, leaving application...\n");
+	delete tel;
+}
 
 int main(int argv, char **argc)
 {
@@ -19,7 +27,7 @@ int main(int argv, char **argc)
 	initTelTypes();
 	while(strcmp(argc[1],telType[i]) && i < 2)
 		i++;
-	Telescope *tel = NULL;
+
 	switch(i)
 	{
 		case 0:
@@ -35,6 +43,9 @@ int main(int argv, char **argc)
 			printf("There's no wrapper for the telescope %s\n", argc[1]);
 			return 0;
 	}
+
+	/* Handle the Ctr-C signal */
+	signal(SIGINT,leave);
 
 	tel->start();
 	delete tel;
