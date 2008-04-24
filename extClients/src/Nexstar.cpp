@@ -1,6 +1,6 @@
 #include "Nexstar.h"
 
-Nexstar::Nexstar()
+Nexstar::Nexstar(bool isLocal) : Telescope(isLocal)
 {
 	this->csatC = new CSATClient();
 	this->cscRun = false;

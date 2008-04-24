@@ -19,13 +19,15 @@
 class Telescope
 {
 public:
-	Telescope();
+	Telescope(bool isLocal);
 	virtual ~Telescope();
 	int start();
 	virtual void parseInstructions();
+
 protected:
 	bool cscRun;
 	bool cssRun;
+	bool isLocal;
 	CSATClient *csatC;
 	int fdm;
    int fds;

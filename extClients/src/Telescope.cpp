@@ -1,7 +1,8 @@
 #include "Telescope.h"
 
-Telescope::Telescope()
+Telescope::Telescope(bool isLocal)
 {
+	this->isLocal = isLocal;
 	serial   = "/dev/ttyS0";
 	serialbk = "/dev/ttyS0.bk";
 }

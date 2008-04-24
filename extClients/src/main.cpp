@@ -21,9 +21,20 @@ void leave(int sig) {
 
 int main(int argv, char **argc)
 {
+	bool isLocal = false;
 	int i = 0;
-	if(argv < 2)
+	if(argv < 2 || argv > 3)
 		return -1;
+
+	if(argv == 3) {
+		if( !strcmp(argc[1],"-l") ) {
+			isLocal = true;
+			argc++;
+		}
+		else if( !strcmp(argc[2],"-l") )
+			isLocal = true;
+	}
+	
 	initTelTypes();
 	while(strcmp(argc[1],telType[i]) && i < 2)
 		i++;
@@ -31,11 +42,11 @@ int main(int argv, char **argc)
 	switch(i)
 	{
 		case 0:
-			tel = (Telescope *)new Nexstar();
+			tel = (Telescope *)new Nexstar(isLocal);
 			printf("%s Wrapper Acquired\n", argc[1]);
 			break;
 		case 1:
-			tel = (Telescope *)new Lx200();
+			tel = (Telescope *)new Lx200(isLocal);
 			printf("%s Wrapper Acquired\n", argc[1]);
 			break;
 		default:

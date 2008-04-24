@@ -1,6 +1,6 @@
 #include "Lx200.h"
 
-Lx200::Lx200()
+Lx200::Lx200(bool isLocal) : Telescope(isLocal)
 {
 	this->csatC = new CSATClient();
 	this->cscRun = false;
