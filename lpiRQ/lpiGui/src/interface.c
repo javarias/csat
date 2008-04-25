@@ -19,6 +19,8 @@
 #include "interface.h"
 #include "support.h"
 
+GtkWidget *resetScale;
+
 #define GLADE_HOOKUP_OBJECT(component,widget,name) \
   g_object_set_data_full (G_OBJECT (component), name, \
     gtk_widget_ref (widget), (GDestroyNotify) gtk_widget_unref)
@@ -58,8 +60,6 @@ create_LpiShow (struct ccd *cam)
   GtkWidget *exposureEntry;
   GtkWidget *vbox3;
   GtkWidget *label2;
-  GtkWidget *resetScale;
-  GtkWidget *resetEntry;
   GtkWidget *vbox4;
   GtkWidget *label3;
   GtkWidget *PixelScale;
@@ -84,6 +84,7 @@ create_LpiShow (struct ccd *cam)
   GtkWidget *blueEntry;
   GtkWidget *label8;
   GtkAccelGroup *accel_group;
+  GtkWidget *resetEntry;
   //to restore the saved values
   //FILE *archConf;
   int num;

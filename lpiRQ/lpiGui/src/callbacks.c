@@ -348,6 +348,7 @@ gboolean update_image(gpointer user_data)
         img = (unsigned char*)malloc(640*480*3);
 	struct ccd *cam; 
         cam = user_data;
+	setbuf(stdout,NULL);
 	read_frame(cam);
         process_image(cam->buffers[0].start, img);
 	gdk_draw_rgb_image (LpiImageG->window, LpiImageG->style->fg_gc[GTK_STATE_NORMAL],0, 110, 640, 480,GDK_RGB_DITHER_MAX, img, 640*3);

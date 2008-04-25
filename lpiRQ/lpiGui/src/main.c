@@ -8,11 +8,15 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <pthread.h>
 
 #include "interface.h"
 #include "support.h"
 
 #include "ccd.h"
+
+int dontFinish = 1;
+
 int
 main (int argc, char *argv[])
 {
@@ -38,9 +42,12 @@ main (int argc, char *argv[])
   init("/dev/video0", &cam);
   LpiShow = create_LpiShow (&cam);
   gtk_widget_show (LpiShow);
-
-  gtk_main ();
+ 
+  pthread_t controlThread;
+  pthread_create(&controlThread, NULL, control_reset_level, (void *)&cam);
+  gtk_main();
+  dontFinish = 0;
+  pthread_join(controlThread,NULL);
   free_ccd(&cam);
   return 0;
 }
-

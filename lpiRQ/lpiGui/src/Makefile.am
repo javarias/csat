@@ -13,7 +13,8 @@ lpiGui_SOURCES = \
 	bayer.c bayer.h \
 	support.c support.h \
 	interface.c interface.h \
-	callbacks.c callbacks.h
+	callbacks.c callbacks.h \
+   sonix_compress.c sonix_compress.h
 
 lpiGui_LDADD = @PACKAGE_LIBS@ $(INTLLIBS)
 

@@ -30,6 +30,8 @@
 #define SN9C102_V4L2_CID_GAMMA (V4L2_CID_PRIVATE_BASE + 4)
 #define SN9C102_V4L2_CID_BAND_FILTER (V4L2_CID_PRIVATE_BASE + 5)
 #define SN9C102_V4L2_CID_BRIGHT_LEVEL (V4L2_CID_PRIVATE_BASE + 6)
+#define SN9C102_V4L2_CID_LOW_RESET_LEVEL_COUNT (V4L2_CID_PRIVATE_BASE + 7)
+#define SN9C102_V4L2_CID_HIGH_RESET_LEVEL_COUNT (V4L2_CID_PRIVATE_BASE + 8)
 
 
 #define CLEAR(x) memset (&(x), 0, sizeof (x))  //fills the memory area pointed to by x with the constant byte 0
@@ -57,7 +59,9 @@ void init(char *device, struct ccd *cam);
 int read_frame(struct ccd *cam);
 void process_image(const void *p,unsigned char *dst);
 void free_ccd(struct ccd *cam);
+int  get_control(struct ccd *cam, int control_id); 
 void change_control(struct ccd *cam,int control_id,int value);
 void check_controls(struct ccd *cam);
+void *control_reset_level(void *args);
 
 #endif

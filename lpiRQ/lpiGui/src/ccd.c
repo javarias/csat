@@ -23,10 +23,15 @@
 #include <sys/ioctl.h>		//ioctl()
 #include <asm/types.h>  	//for videodev2.h
 #include <linux/videodev2.h>	//VIDIOC_QUERYCAP
+#include <gdk/gdkkeysyms.h>
+#include <gtk/gtk.h>
 #include "bayer.h"
+#include "sonix_compress.h"
 
 //open the device
 
+extern int dontFinish;
+extern GtkWidget *resetScale;
 
 void free_buffers(struct ccd *cam)
 {
@@ -174,7 +179,7 @@ void init_device(struct ccd *cam)
         fmt.type                = V4L2_BUF_TYPE_VIDEO_CAPTURE;
         fmt.fmt.pix.width       = 640; 
         fmt.fmt.pix.height      = 480;
-        fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_SBGGR8;
+        fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_SN9C10X;
         //fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_YUYV;
         //fmt.fmt.pix.field       = V4L2_FIELD_INTERLACED;
 
@@ -210,6 +215,34 @@ void enumerate_menu(struct ccd *cam, struct v4l2_querymenu *querymenu,struct v4l
         }
 }
 
+int get_control(struct ccd *cam,int control_id){
+        struct v4l2_queryctrl queryctrl;
+        struct v4l2_control control;
+
+        memset (&queryctrl, 0, sizeof (queryctrl));
+        queryctrl.id = control_id;
+
+        if (-1 == ioctl (cam->fd, VIDIOC_QUERYCTRL, &queryctrl)) {
+                if (errno != EINVAL) {
+                        perror ("VIDIOC_QUERYCTRL");
+                        exit (EXIT_FAILURE);
+                } else {
+                        printf ("The control id %d is not supported\n",control_id);
+                }
+        } else {
+                memset (&control, 0, sizeof (control));
+                control.id = control_id;
+                control.value = 0;
+                if (-1 == ioctl (cam->fd, VIDIOC_G_CTRL, &control)) {
+                        perror ("VIDIOC_G_CTRL");
+                        exit (EXIT_FAILURE);
+                }
+
+                return control.value;
+        }
+        return -1;
+}
+
 void change_control(struct ccd *cam,int control_id,int value){
         struct v4l2_queryctrl queryctrl;
         struct v4l2_control control;
@@ -226,6 +259,8 @@ void change_control(struct ccd *cam,int control_id,int value){
                 }
         } else if (queryctrl.flags & V4L2_CTRL_FLAG_DISABLED) {
                         printf ("The control id %d is not supported\n",control_id);
+        } else if (queryctrl.flags & V4L2_CTRL_FLAG_READ_ONLY) {
+                        printf ("The control id %d is read only\n",control_id);
         } else {
                 memset (&control, 0, sizeof (control));
                 control.id = control_id;
@@ -259,7 +294,7 @@ void check_controls(struct ccd *cam){
                         exit (EXIT_FAILURE);
                 }
         }
-        for (queryctrl.id = V4L2_CID_PRIVATE_BASE;queryctrl.id < V4L2_CID_PRIVATE_BASE + 7;
+        for (queryctrl.id = V4L2_CID_PRIVATE_BASE;queryctrl.id < V4L2_CID_PRIVATE_BASE + 9;
                         queryctrl.id++) {
                 if (0 == ioctl (cam->fd, VIDIOC_QUERYCTRL, &queryctrl)) {
                         if (queryctrl.flags & V4L2_CTRL_FLAG_DISABLED)
@@ -283,9 +318,10 @@ void check_controls(struct ccd *cam){
 void process_image(const void *p,unsigned char *dst)
 {
 	//FILE *image;
-	//dst=(unsigned char*)malloc(640*480*3);
+	unsigned char *tmp=(unsigned char*)malloc(640*480*3);
 	//image = fopen(filename, "w");
-	bayer2rgb24(dst, (unsigned char *)p, 640,480);
+	sonix_decompress(640,480,p,tmp);
+	bayer2rgb24(dst, (unsigned char *)tmp, 640,480);
 	//fwrite(dst, 640*480*3, 1, image);
 	//fclose(image);
 	//printf("%c", dst[0]);
@@ -375,4 +411,37 @@ void init(char *device, struct ccd *cam)
 //        return 0;
 }
 
+void *control_reset_level(void *args) {
 
+        int i;
+		  int low, high;
+		  int resetLevel;
+		  struct ccd *cam;
+
+		  cam = (struct ccd *)args;
+		  resetLevel = get_control(cam,SN9C102_V4L2_CID_RESET_LEVEL);
+
+        for(;dontFinish;) {
+          low  = get_control(cam,SN9C102_V4L2_CID_LOW_RESET_LEVEL_COUNT);
+          high = get_control(cam,SN9C102_V4L2_CID_HIGH_RESET_LEVEL_COUNT);
+
+			 if(low > 100) {
+				if(resetLevel < 63)
+					resetLevel++;
+				change_control(cam,SN9C102_V4L2_CID_RESET_LEVEL,resetLevel);
+				gtk_range_set_value(GTK_RANGE(resetScale), resetLevel);
+			 	sleep(0.5);
+			 }
+			 if( high > 100) {
+				if(resetLevel > 25)
+					resetLevel--;
+				change_control(cam,SN9C102_V4L2_CID_RESET_LEVEL,resetLevel);
+				gtk_range_set_value(GTK_RANGE(resetScale), resetLevel);
+			 	sleep(0.5);
+			 }
+			 else
+				sleep(1);
+
+        }
+
+}
