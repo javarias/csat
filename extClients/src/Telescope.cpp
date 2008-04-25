@@ -70,5 +70,5 @@ int Telescope::start()
 	printf("%s\n\n", slavename);
 
 	this->parseInstructions();
-	return 0;	
+	return 0;
 }
