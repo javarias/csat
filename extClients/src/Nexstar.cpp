@@ -427,3 +427,6 @@ Nexstar::~Nexstar()
 	this->csatC->stop();
 	delete this->csatC;
 }
+
+void Nexstar::configPort(){
+}

@@ -11,6 +11,8 @@ public:
 	Nexstar(bool);
 	~Nexstar();
 	void parseInstructions();
+	void configPort();
+private:
 	char *getRaDec();
 	char *getPreciseRaDec();
 	char *getAzmAlt();

@@ -13,6 +13,7 @@ using namespace std;
 Telescope *tel = NULL;
 
 extern char telType[100][10];
+extern int telNum;
 
 void leave(int sig) {
 	printf("Receiving SIGINT signal, leaving application...\n");
@@ -36,7 +37,7 @@ int main(int argv, char **argc)
 	}
 	
 	initTelTypes();
-	while(strcmp(argc[1],telType[i]) && i < 2)
+	while(strcmp(argc[1],telType[i]) && i < telNum)
 		i++;
 
 	switch(i)

@@ -16,7 +16,7 @@ Telescope::~Telescope()
 		rename(this->serialbk,serial);
 	}
 	else {
-		close(this->fds);
+		close(this->fdm);
 	}
 }
 
@@ -64,7 +64,7 @@ int Telescope::start()
 
 	else {
 		slavename = (char *)this->serial;
-		this->fds = open(slavename,O_RDWR);
+		this->fdm = open(slavename,O_RDWR);
 		this->configPort();
 	}
 
