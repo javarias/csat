@@ -420,8 +420,10 @@ void *control_reset_level(void *args) {
 
 		  cam = (struct ccd *)args;
 		  resetLevel = get_control(cam,SN9C102_V4L2_CID_RESET_LEVEL);
+		  gtk_range_set_value(GTK_RANGE(resetScale), resetLevel);
 
         for(;dontFinish;) {
+		    resetLevel = get_control(cam,SN9C102_V4L2_CID_RESET_LEVEL);
           low  = get_control(cam,SN9C102_V4L2_CID_LOW_RESET_LEVEL_COUNT);
           high = get_control(cam,SN9C102_V4L2_CID_HIGH_RESET_LEVEL_COUNT);
 
