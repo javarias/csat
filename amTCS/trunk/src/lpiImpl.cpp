@@ -1,5 +1,5 @@
 #include <vltPort.h>
-static char *rcsId="@(#) $Id: $";
+static char *rcsId=(char *)"@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
 #include <stdlib.h>
@@ -36,7 +36,7 @@ lpiImpl::~lpiImpl(){
 void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 {
 
-	static char * _METHOD_ = "lpiImpl::initialize";
+	static char * _METHOD_ = (char *)"lpiImpl::initialize";
 
 	ACSErr::Completion_var completion;
 	char *deviceName = m_device_sp->get_sync(completion.out());
@@ -49,7 +49,6 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 		try{
 			int flag = O_RDWR; //read write flag, is the accesmode you have to put in open
 			struct stat st;
-			static char * _METHOD_ = "lpiFrameDevIO::lpiFrameDevIO";
 
 			//we see if the deviceName device exist
 			if (-1 == stat (deviceName, &st)) {

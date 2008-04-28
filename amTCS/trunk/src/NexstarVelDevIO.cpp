@@ -4,7 +4,7 @@
 
 NexstarVelDevIO::NexstarVelDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx){
 
-	char *_METHOD_="NexstarVelDevIO::NexstarVelDevIO";
+	char *_METHOD_=(char *)"NexstarVelDevIO::NexstarVelDevIO";
 
 	try{
 		ACS_TRACE("Creating SeriaRS232 device");

@@ -2,7 +2,7 @@
 
 NexstarCoordDevIO::NexstarCoordDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx){
 
-	char *_METHOD_="NexstarCoordDevIO::NexstarCoordDevIO";
+	char *_METHOD_=(char *)"NexstarCoordDevIO::NexstarCoordDevIO";
 
 	try{
 		this->sp = new SerialRS232(deviceName);

@@ -1,5 +1,5 @@
 #include <vltPort.h>
-static char *rcsId="@(#) $Id: $";
+static char *rcsId=(char *)"@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
 #include <SerialRS232.h>
