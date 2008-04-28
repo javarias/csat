@@ -1,3 +1,6 @@
+#include <termios.h>
+#include <sys/ioctl.h>
+
 #include "Nexstar.h"
 
 Nexstar::Nexstar(bool isLocal) : Telescope(isLocal)

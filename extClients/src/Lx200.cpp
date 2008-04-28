@@ -663,3 +663,7 @@ Lx200::~Lx200()
 	this->csatC->stop();
 	delete this->csatC;
 }
+
+void Lx200::configPort(){
+
+}

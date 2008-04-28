@@ -21,8 +21,9 @@ class Telescope
 public:
 	Telescope(bool isLocal);
 	virtual ~Telescope();
-	int start();
 	virtual void parseInstructions();
+	int start();
+	void configPort();
 
 protected:
 	bool cscRun;

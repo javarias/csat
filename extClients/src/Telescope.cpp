@@ -65,10 +65,21 @@ int Telescope::start()
 	else {
 		slavename = (char *)this->serial;
 		this->fds = open(slavename,O_RDWR);
+		this->configPort();
 	}
 
 	printf("%s\n\n", slavename);
 
 	this->parseInstructions();
 	return 0;
+}
+
+void Telescope::configPort() {
+	struct termio config;
+
+	config.c_cflag  = ~CSTOPB;
+	config.c_cflag |= CS8;
+	config.c_cflag &= ~PARENB;
+	config.c_cflag |= B9600;
+	ioctl (this->fds, TCSETA, &config);
 }

@@ -11,6 +11,7 @@ public:
 	Lx200(bool);
 	~Lx200();
 	void parseInstructions();
+	void configPort();
 private:
 	char *getAlignment();
 	char *setAlignment();
