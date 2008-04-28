@@ -90,6 +90,17 @@ The modules available on the CSAT project are:
          with the ACS standards. This way, you'll be able to do a 'make build´
          on the entire CSAT project without problems.
 
+   NOTE: For the lpiGui software to compile and run, you need the hacked version
+         of the sn9c1xx driver, derived from the 1.34 version of the original
+         one. This driver offers two additional ioctl's calls, each of them
+         getting the value of a register of the CCD that was not being read on
+         the original driver. With this, we can do a control loop over the reset
+         level value of the CCD, and this will allow us to don't get stuck the
+         process that is reading the images from the device.
+         The modified module can be found in:
+
+         git://csrg.inf.utfsm.cl/rtobar/sn9c1xx.git
+
  * telesim: The telesim module, as it name says, is a telescope simulator. It
    currently simulates the Celestron Nexstar 4 SE telescope, and is written in
    Java (an older version was written in C, but was thrown away). The class
