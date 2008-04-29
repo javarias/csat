@@ -14,13 +14,13 @@ void Lx200::parseInstructions()
 {
 	char buf;
 	char *response;
-	while(read(fdm, &buf, 1) && run)
+	while(read(fdm, &buf, 1) && this->run)
 	{
 		if(buf == 'q') {
 			cout << "Got a 'q' command, exiting..." << endl;
 			break;
 		}
-		if(!this->cscRun || !this->cssRun || buf != '#')
+		if(buf != '#')
 		{
 			if(buf == 6)
 			{
@@ -655,7 +655,7 @@ int Lx200::length(char *msg)
 {
 	int i = 0;
 	while(msg[i]!=(char)ENDCHAR) i++;
-	return i+1;
+	return i;
 }
 
 Lx200::~Lx200()
@@ -663,5 +663,4 @@ Lx200::~Lx200()
 }
 
 void Lx200::configPort(){
-
 }

@@ -7,9 +7,10 @@ using namespace std;
 
 Telescope::Telescope(bool isLocal, char *serialPort)
 {
-	this->isLocal = isLocal;
+	this->isLocal  = isLocal;
 	this->serial   = serialPort;
-	this->serialbk = (string(serialPort) + string(".bk")).c_str();
+	this->serialbk = new char[strlen(this->serial) + 4];
+	sprintf(this->serialbk,"%s.bk",this->serial);
 	this->run = true;
 	this->move = false;
 	this->csatC = new CSATClient();
@@ -40,6 +41,7 @@ Telescope::~Telescope()
 			ioctl (this->fdm, TCSETA, &this->termorig);
 			close(this->fdm);
 		}
+	delete this->serialbk;
 }
 
 void Telescope::parseInstructions()
@@ -68,7 +70,7 @@ int Telescope::start()
 		}
 		if( (this->fds = open(slavename, O_RDWR)) < 0) // open slave
 			return -1;
-		if(!strcmp(this->serial,slavename)){
+		if(strcmp(this->serial,slavename)){
 			rename(this->serial,this->serialbk);
 			this->move = true;
 			if(symlink(slavename,this->serial)!=0)
@@ -91,15 +93,27 @@ int Telescope::start()
 		this->fdm = open(slavename,O_RDWR | O_NDELAY);
 		this->configPort();
 	}
-	cout << "Using port '" << slavename << "' for listening to commmands" << endl;
-	cout << "Getting CSATControl reference... ";
-	this->cscRun = (this->csatC->startCSC() == 0);
-	cout << "done!" << endl;
-	cout << "Getting CSATStatus reference... ";
-	this->cssRun = (this->csatC->startCSS() == 0);
-	cout << "done!" << endl;
-	cout << "Ready and listening commands..." << endl;
-	this->parseInstructions();
+	if(this->csatC->getStatus() != 0){
+		cout << "Using port '" << slavename << "' for listening to commmands" << endl;
+		cout << "Getting CSATControl reference... ";
+		this->cscRun = (this->csatC->startCSC() == 0);
+		if(this->cscRun)
+			cout << "done!" << endl;
+		else
+			cout << "failed!" << endl;
+		cout << "Getting CSATStatus reference... ";
+		this->cssRun = (this->csatC->startCSS() == 0);
+		if(this->cssRun)
+			cout << "done!" << endl;
+		else
+			cout << "failed!" << endl;
+		if(this->cssRun && this->cscRun){
+			cout << "Ready and listening commands..." << endl;
+			this->parseInstructions();
+		}
+	}
+	else
+		cout << "Couldn't find manager." << endl;
 	return 0;
 }
 
@@ -110,6 +124,7 @@ void Telescope::stop() {
 		write(this->fds,&buf,1);
 		write(this->fds,&buf,1);
 	}
+	cout << "Done stoping telescope" << endl;
 }
 
 void Telescope::configPort() {

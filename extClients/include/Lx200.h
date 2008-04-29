@@ -2,13 +2,12 @@
 #define _LX200_H_
 
 #include "Telescope.h"
-#define MAX_PRECISE_ROTATION   4294967296.0
 #define ENDCHAR 124
 
-class Lx200: public virtual Telescope
+class Lx200: public Telescope
 {
 public:
-	Lx200(bool, char *);
+	Lx200(bool isLocal, char *serialPort);
 	~Lx200();
 	void parseInstructions();
 	void configPort();

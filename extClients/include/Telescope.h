@@ -23,7 +23,7 @@ public:
 	virtual ~Telescope();
 	virtual void parseInstructions();
 	int start();
-	void stop();
+	virtual void stop();
 	void configPort();
 
 protected:
@@ -36,7 +36,7 @@ protected:
 	int fdm;
    int fds;
 	const char *serial;
-	const char *serialbk;
+	char *serialbk;
 	struct termios termorig;
 };
 

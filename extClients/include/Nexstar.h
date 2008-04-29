@@ -5,10 +5,10 @@
 #define MAX_PRECISE_ROTATION   4294967296.0
 #define ENDCHAR 124
 
-class Nexstar: public virtual Telescope
+class Nexstar: public Telescope
 {
 public:
-	Nexstar(bool, char *);
+	Nexstar(bool isLocal, char *serialPort);
 	~Nexstar();
 	void parseInstructions();
 	void configPort();

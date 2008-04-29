@@ -2,8 +2,8 @@
 
 using namespace std;
 
-char telType[100][10];
 int telNum = 2;
+char telType[100][10];
 
 void initTelTypes()
 {

@@ -12,14 +12,12 @@ using namespace std;
 
 Telescope *tel = NULL;
 
-extern char telType[100][10];
 extern int telNum;
+extern char telType[100][10];
 
 void leave(int sig) {
 	printf("Receiving SIGINT/SIGKILL signal, leaving application...\n");
 	tel->stop();
-	delete tel;
-	tel = NULL;
 }
 
 int main(int argv, char **argc)
@@ -45,7 +43,6 @@ int main(int argv, char **argc)
 	initTelTypes();
 	while(strcmp(argc[1],telType[i]) && i < telNum)
 		i++;
-
 	switch(i)
 	{
 		case 0:
@@ -67,7 +64,6 @@ int main(int argv, char **argc)
 	signal(SIGKILL,leave);
 
 	tel->start();
-	if(tel !=NULL)
-		delete tel;
+	delete tel;
 	return 0;
 }

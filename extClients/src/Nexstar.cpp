@@ -14,18 +14,11 @@ void Nexstar::parseInstructions()
 {
 	char buf;
 	char *response;
-	while(read(fdm, &buf, 1) && run)
+	while(read(fdm, &buf, 1) && this->run)
 	{
 		if(buf == 'q')
 			break;
 		printf("Command: %d, %c\n", buf, buf);
-		if(!this->cscRun || !this->cssRun)
-		{
-			response = this->badMessageResponse();
-			write(fdm,response,this->length(response));
-			delete response;
-			continue;
-		}
 		switch(buf)
 		{
 			case 'E':

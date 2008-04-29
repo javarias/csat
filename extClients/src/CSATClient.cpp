@@ -87,3 +87,8 @@ void CSATClient::stop()
 	if(this->login !=0)
 		pthread_join(this->t1,NULL);
 }
+
+int CSATClient::getStatus()
+{
+	return this->login;
+}

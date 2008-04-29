@@ -20,6 +20,7 @@ public:
 	int startCSC();
 	int startCSS();
 	void stop();
+	int getStatus();
 private:
 	SimpleClient *client;
 	CSATCONTROL_MODULE::CSATControl_var csc;
