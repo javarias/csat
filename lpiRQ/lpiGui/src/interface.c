@@ -69,6 +69,7 @@ create_LpiShow (struct ccd *cam)
   GtkWidget *contrastScale;
   GtkWidget *contrastEntry;
   GtkWidget *LpiImage;
+  GtkWidget *frameToogle;
   GtkWidget *hbox2;
   GtkWidget *vbox6;
   GtkWidget *label5;
@@ -85,12 +86,8 @@ create_LpiShow (struct ccd *cam)
   GtkWidget *label8;
   GtkAccelGroup *accel_group;
   GtkWidget *resetEntry;
-  //to restore the saved values
-  //FILE *archConf;
   int num;
   float value;
-
-  //archConf=fopen("/tmp/values.tdm", "r");
 
   accel_group = gtk_accel_group_new ();
 
@@ -195,7 +192,6 @@ create_LpiShow (struct ccd *cam)
   gtk_widget_show (exposureScale);
   gtk_box_pack_start (GTK_BOX (vbox2), exposureScale, TRUE, TRUE, 0);
   gtk_scale_set_digits (GTK_SCALE (exposureScale), 0);
-//  fscanf(archConf, "exposure: %d\n", &num);
   gtk_range_set_value(GTK_RANGE(exposureScale),num);
 
   exposureEntry = gtk_entry_new ();
@@ -215,7 +211,6 @@ create_LpiShow (struct ccd *cam)
   gtk_widget_show (resetScale);
   gtk_box_pack_start (GTK_BOX (vbox3), resetScale, TRUE, TRUE, 0);
   gtk_scale_set_digits (GTK_SCALE (resetScale), 0);
-//  fscanf(archConf, "reset: %d\n", &num);
   gtk_range_set_value(GTK_RANGE(resetScale),num);
 
   resetEntry = gtk_entry_new ();
@@ -234,7 +229,6 @@ create_LpiShow (struct ccd *cam)
   PixelScale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0, 0)));
   gtk_widget_show (PixelScale);
   gtk_box_pack_start (GTK_BOX (vbox4), PixelScale, TRUE, TRUE, 0);
-//  fscanf(archConf, "pixel: %f\n", &value);
   gtk_range_set_value(GTK_RANGE(PixelScale),value);
 
   pixelEntry = gtk_entry_new ();
@@ -253,7 +247,6 @@ create_LpiShow (struct ccd *cam)
   contrastScale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0, 0)));
   gtk_widget_show (contrastScale);
   gtk_box_pack_start (GTK_BOX (vbox5), contrastScale, TRUE, TRUE, 0);
-//  fscanf(archConf, "contrast: %f\n", &value);
   gtk_range_set_value(GTK_RANGE(contrastScale),value);
 
   contrastEntry = gtk_entry_new ();
@@ -267,6 +260,10 @@ create_LpiShow (struct ccd *cam)
   gtk_widget_set_size_request (LpiImage, 640, 480);
   gtk_widget_set_sensitive (LpiImage, FALSE);
   LpiImageG = LpiImage;
+
+  frameToogle = gtk_toggle_button_new_with_mnemonic (_("Toogle Frame Mode (actual is continuous frame mode)"));
+  gtk_widget_show (frameToogle);
+  gtk_box_pack_start (GTK_BOX (vbox1), frameToogle, FALSE, FALSE, 2);
 
   hbox2 = gtk_hbox_new (FALSE, 0);
   gtk_widget_show (hbox2);
@@ -283,7 +280,6 @@ create_LpiShow (struct ccd *cam)
   redScale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0, 0)));
   gtk_widget_show (redScale);
   gtk_box_pack_start (GTK_BOX (vbox6), redScale, TRUE, TRUE, 0);
-//  fscanf(archConf, "red: %f\n", &value);
   gtk_range_set_value(GTK_RANGE(redScale),value);
 
   redEntry = gtk_entry_new ();
@@ -302,7 +298,6 @@ create_LpiShow (struct ccd *cam)
   greenScale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0, 0)));
   gtk_widget_show (greenScale);
   gtk_box_pack_start (GTK_BOX (vbox7), greenScale, TRUE, TRUE, 0);
-//  fscanf(archConf, "green: %f\n", &value);
   gtk_range_set_value(GTK_RANGE(greenScale),value);
 
   greenEntry = gtk_entry_new ();
@@ -321,7 +316,6 @@ create_LpiShow (struct ccd *cam)
   blueScale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0, 0)));
   gtk_widget_show (blueScale);
   gtk_box_pack_start (GTK_BOX (vbox8), blueScale, TRUE, TRUE, 0);
-//  fscanf(archConf, "blue: %f\n", &value);
   gtk_range_set_value(GTK_RANGE(blueScale),value);
 
   blueEntry = gtk_entry_new ();
@@ -332,9 +326,6 @@ create_LpiShow (struct ccd *cam)
   label8 = gtk_label_new (_("Created by maray@inf.utfsm.cl, tstaig@inf.utfsm.cl, dwinkler@inf.utfsm.cl"));
   gtk_widget_show (label8);
   gtk_box_pack_start (GTK_BOX (vbox1), label8, FALSE, FALSE, 0);
-
-//  fclose(archConf);
-
 
   gtk_idle_add((GtkFunction) update_image, (gpointer)cam);
   g_signal_connect ((gpointer) nuevo1, "activate",
@@ -391,6 +382,9 @@ create_LpiShow (struct ccd *cam)
   g_signal_connect ((gpointer) contrastEntry, "changed",
                     G_CALLBACK (on_contrastEntry_changed),
                     NULL);
+  g_signal_connect ((gpointer) frameToogle, "toggled",
+                    G_CALLBACK (on_frameToogle_toggled),
+                    cam);
   g_signal_connect ((gpointer) LpiImage, "expose_event",
                     G_CALLBACK (on_image_update),
                     cam);
@@ -454,6 +448,7 @@ create_LpiShow (struct ccd *cam)
   GLADE_HOOKUP_OBJECT (LpiShow, contrastScale, "contrastScale");
   GLADE_HOOKUP_OBJECT (LpiShow, contrastEntry, "contrastEntry");
   GLADE_HOOKUP_OBJECT (LpiShow, LpiImage, "LpiImage");
+  GLADE_HOOKUP_OBJECT (LpiShow, frameToogle, "frameToogle");
   GLADE_HOOKUP_OBJECT (LpiShow, hbox2, "hbox2");
   GLADE_HOOKUP_OBJECT (LpiShow, vbox6, "vbox6");
   GLADE_HOOKUP_OBJECT (LpiShow, label5, "label5");

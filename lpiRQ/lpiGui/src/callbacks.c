@@ -348,10 +348,21 @@ gboolean update_image(gpointer user_data)
         img = (unsigned char*)malloc(640*480*3);
 	struct ccd *cam; 
         cam = user_data;
-	setbuf(stdout,NULL);
 	read_frame(cam);
         process_image(cam->buffers[0].start, img);
 	gdk_draw_rgb_image (LpiImageG->window, LpiImageG->style->fg_gc[GTK_STATE_NORMAL],0, 110, 640, 480,GDK_RGB_DITHER_MAX, img, 640*3);
 	free(img);
 	return TRUE;
 }
+
+void
+on_frameToogle_toggled                 (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+	GtkWidget *button = lookup_widget(GTK_WIDGET(togglebutton), "togglebutton");
+	int toggled = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button));
+	struct ccd *cam = user_data;
+	change_control(cam,V4L2_CID_FRAME_MODE, toggled);
+	sleep(0.01);
+}
+

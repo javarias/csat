@@ -103,3 +103,7 @@ on_image_update (GtkWidget *widget,
                 gpointer user_data);
 
 gboolean update_image(gpointer user_data);
+
+void
+on_frameToogle_toggled                 (GtkToggleButton *togglebutton,
+                                        gpointer         user_data);
