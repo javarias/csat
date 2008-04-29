@@ -5,18 +5,13 @@
 
 Nexstar::Nexstar(bool isLocal) : Telescope(isLocal)
 {
-	this->csatC = new CSATClient();
-	this->cscRun = false;
-	this->cssRun = false;
 }
 
 void Nexstar::parseInstructions()
 {
 	char buf;
 	char *response;
-	cscRun = (this->csatC->startCSC() == 0);
-	cssRun = (this->csatC->startCSS() == 0);
-	while(read(fdm, &buf, 1))
+	while(read(fdm, &buf, 1) && run)
 	{
 		if(buf == 'q')
 			break;
@@ -424,8 +419,6 @@ int Nexstar::length(char *msg)
 
 Nexstar::~Nexstar()
 {
-	this->csatC->stop();
-	delete this->csatC;
 }
 
 void Nexstar::configPort(){

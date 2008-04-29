@@ -25,6 +25,7 @@ private:
 	CSATCONTROL_MODULE::CSATControl_var csc;
 	CSATSTATUS_MODULE::CSATStatus_var css;
 	pthread_t t1;
+	int login;
 };
 
 #endif

@@ -23,12 +23,15 @@ public:
 	virtual ~Telescope();
 	virtual void parseInstructions();
 	int start();
+	void stop();
 	void configPort();
 
 protected:
 	bool cscRun;
 	bool cssRun;
 	bool isLocal;
+	bool run;
+	bool move;
 	CSATClient *csatC;
 	int fdm;
    int fds;

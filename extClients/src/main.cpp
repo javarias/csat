@@ -17,7 +17,9 @@ extern int telNum;
 
 void leave(int sig) {
 	printf("Receiving SIGINT signal, leaving application...\n");
+	tel->stop();
 	delete tel;
+	tel = NULL;
 }
 
 int main(int argv, char **argc)
@@ -60,6 +62,7 @@ int main(int argv, char **argc)
 	signal(SIGINT,leave);
 
 	tel->start();
-	delete tel;
+	if(tel !=NULL)
+		delete tel;
 	return 0;
 }

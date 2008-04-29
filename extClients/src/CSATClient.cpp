@@ -12,6 +12,7 @@ CSATClient::CSATClient()
 {
 	int i;
    char **p;
+	this->login = 0;
    p = new char*[3];
    for(i=0;i<3;i++)
       p[i] = new char[15];
@@ -20,12 +21,15 @@ CSATClient::CSATClient()
    strcpy(p[1],"CSATCONTROL");
    strcpy(p[2],"");
 	this->client = new SimpleClient::SimpleClient();
-	this->client->init(n,p);
-	this->client->login();
+	if(this->client->init(n,p) != 0){
+		this->login = this->client->login();
+		if(this->login != 0){
+			pthread_create(&(this->t1),NULL,idle_ping,(void *)(this->client));
+		}
+	}
 	for(i=0;i<3;i++)
 		delete p[i];
 	delete p;
-	pthread_create(&(this->t1),NULL,idle_ping,(void *)(this->client));
 }
 
 CSATClient::~CSATClient()
@@ -44,6 +48,8 @@ CSATSTATUS_MODULE::CSATStatus_var CSATClient::getcssClient()
 
 int CSATClient::startCSC()
 {
+	if(this->login == 0)
+		return -1;
 	try
 	{
 		this->csc = this->client->getComponent<CSATCONTROL_MODULE::CSATControl>("CSATCONTROL",0,true);
@@ -58,6 +64,8 @@ int CSATClient::startCSC()
 
 int CSATClient::startCSS()
 {
+	if(this->login == 0)
+		return -1;
    try
    {
       this->css = this->client->getComponent<CSATSTATUS_MODULE::CSATStatus>("CSATSTATUS",0,true);
@@ -72,9 +80,11 @@ int CSATClient::startCSS()
 
 void CSATClient::stop()
 {
-	this->client->logout();
-	ACE_OS::sleep(3);
-	//this->client->doneCORBA();
+	if(this->login != 0){
+		this->client->logout();
+		ACE_OS::sleep(3);
+	}
 	delete this->client;
-	pthread_join(this->t1,NULL);
+	if(this->login !=0)
+		pthread_join(this->t1,NULL);
 }

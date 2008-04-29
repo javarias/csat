@@ -2,9 +2,6 @@
 
 Lx200::Lx200(bool isLocal) : Telescope(isLocal)
 {
-	this->csatC = new CSATClient();
-	this->cscRun = false;
-	this->cssRun = false;
 	this->alt = 0;
 	this->az = 0;
 	this->ra = 0;
@@ -15,9 +12,7 @@ void Lx200::parseInstructions()
 {
 	char buf;
 	char *response;
-	cscRun = (this->csatC->startCSC() == 0);
-	cssRun = (this->csatC->startCSS() == 0);
-	while(read(fdm, &buf, 1))
+	while(read(fdm, &buf, 1) && run)
 	{
 		if(buf == 'q')
 			break;
@@ -660,8 +655,6 @@ int Lx200::length(char *msg)
 
 Lx200::~Lx200()
 {
-	this->csatC->stop();
-	delete this->csatC;
 }
 
 void Lx200::configPort(){
