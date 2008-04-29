@@ -225,7 +225,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 
 	public AltazPos getAltAz(){
 
-		if( doControl == false && controlThread != null ){
+		if( doControl == false && controlThread == null ){
 			CompletionHolder completionHolder = new CompletionHolder();
 			m_softRealPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
 			m_softRealPos.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
