@@ -322,6 +322,7 @@ void process_image(const void *p,unsigned char *dst)
 	//image = fopen(filename, "w");
 	sonix_decompress(640,480,p,tmp);
 	bayer2rgb24(dst, (unsigned char *)tmp, 640,480);
+	free(tmp);
 	//fwrite(dst, 640*480*3, 1, image);
 	//fclose(image);
 	//printf("%c", dst[0]);
