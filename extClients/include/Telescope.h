@@ -19,7 +19,7 @@
 class Telescope
 {
 public:
-	Telescope(bool isLocal);
+	Telescope(bool isLocal, char *serialPort);
 	virtual ~Telescope();
 	virtual void parseInstructions();
 	int start();
@@ -37,6 +37,7 @@ protected:
    int fds;
 	const char *serial;
 	const char *serialbk;
+	struct termios termorig;
 };
 
 #endif

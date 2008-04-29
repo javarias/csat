@@ -8,7 +8,7 @@
 class Lx200: public virtual Telescope
 {
 public:
-	Lx200(bool);
+	Lx200(bool, char *);
 	~Lx200();
 	void parseInstructions();
 	void configPort();

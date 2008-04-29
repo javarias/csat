@@ -8,7 +8,7 @@
 class Nexstar: public virtual Telescope
 {
 public:
-	Nexstar(bool);
+	Nexstar(bool, char *);
 	~Nexstar();
 	void parseInstructions();
 	void configPort();
