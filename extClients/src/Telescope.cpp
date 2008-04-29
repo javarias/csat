@@ -1,10 +1,15 @@
+#include <iostream>
+#include <string>
+
 #include "Telescope.h"
 
-Telescope::Telescope(bool isLocal)
+using namespace std;
+
+Telescope::Telescope(bool isLocal, char *serialPort)
 {
 	this->isLocal = isLocal;
-	this->serial   = "/dev/ttyS0";
-	this->serialbk = "/dev/ttyS0.bk";
+	this->serial   = serialPort;
+	this->serialbk = (string(serialPort) + string(".bk")).c_str();
 	this->run = true;
 	this->move = false;
 	this->csatC = new CSATClient();
@@ -16,7 +21,9 @@ Telescope::Telescope(bool isLocal)
 
 Telescope::~Telescope()
 {
+	cout << "Closing client connection... ";
 	this->csatC->stop();
+	cout << "done!" << endl;
 	delete this->csatC;
 	if( this->isLocal ) {
 		if(this->fdm > 0)
@@ -28,10 +35,11 @@ Telescope::~Telescope()
 			rename(this->serialbk,serial);
 		}
 	}
-	else {
-		if(this->fdm > 0)
+	else 
+		if(this->fdm > 0) {
+			ioctl (this->fdm, TCSETA, &this->termorig);
 			close(this->fdm);
-	}
+		}
 }
 
 void Telescope::parseInstructions()
@@ -42,9 +50,9 @@ int Telescope::start()
 {
 	char *slavename;
 	struct stat buf;
-	static struct termios termorig;  /* static for zero's */
 
 	if( this->isLocal ) {
+		cout << "Working in local mode, opening slave/master ports..." << endl;
 		if( (this->fdm = open("/dev/ptmx", O_RDWR)) < 0)
 			return -1;
 		printf("fdm: %d\n", this->fdm);
@@ -70,21 +78,27 @@ int Telescope::start()
 		printf("fds: %d\n", this->fds);
 		ioctl(this->fds, I_PUSH, "ptem"); // push ptem
 		ioctl(this->fds, I_PUSH, "ldterm"); // push ldterm
-		if (ioctl(this->fds, TCGETS, &termorig) == -1) {
+		if (ioctl(this->fds, TCGETS, &this->termorig) == -1) {
 			perror("ioctl TCGETS failed");
 			return -1;
 		}
-		termorig.c_lflag = 0;
-		(void) ioctl(this->fds, TCSETS, &termorig);
+		this->termorig.c_lflag = 0;
+		(void) ioctl(this->fds, TCSETS, &this->termorig);
 	}
 	else {
+		cout << "Working in non-local mode" << endl;
 		slavename = (char *)this->serial;
-		this->fdm = open(slavename,O_RDWR);
+		this->fdm = open(slavename,O_RDWR | O_NDELAY);
 		this->configPort();
 	}
-	printf("%s\n\n", slavename);
+	cout << "Using port '" << slavename << "' for listening to commmands" << endl;
+	cout << "Getting CSATControl reference... ";
 	this->cscRun = (this->csatC->startCSC() == 0);
+	cout << "done!" << endl;
+	cout << "Getting CSATStatus reference... ";
 	this->cssRun = (this->csatC->startCSS() == 0);
+	cout << "done!" << endl;
+	cout << "Ready and listening commands..." << endl;
 	this->parseInstructions();
 	return 0;
 }
@@ -101,9 +115,19 @@ void Telescope::stop() {
 void Telescope::configPort() {
 	struct termio config;
 
+	fcntl(this->fdm, F_SETFL, fcntl(this->fdm, F_GETFL, 0) & ~O_NDELAY);
+
+	ioctl( this->fdm, TCGETA, &this->termorig);
+	config.c_lflag &= ~(ICANON | ISIG | ECHO);
+	config.c_iflag &= ~(BRKINT | IGNPAR | PARMRK | INPCK | ISTRIP | INLCR | IGNCR | ICRNL | IUCLC | IXON | IXANY | IXOFF);
+	config.c_iflag |= IGNBRK;
+	config.c_oflag &= ~OPOST;
+
+	config.c_cc[VMIN] = 1;
+	config.c_cc[VTIME] = 1;
 	config.c_cflag  = ~CSTOPB;
 	config.c_cflag |= CS8;
 	config.c_cflag &= ~PARENB;
 	config.c_cflag |= B9600;
-	ioctl (this->fds, TCSETA, &config);
+	ioctl (this->fdm, TCSETA, &config);
 }

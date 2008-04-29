@@ -1,9 +1,12 @@
 #include <termios.h>
 #include <sys/ioctl.h>
+#include <iostream>
 
 #include "Nexstar.h"
 
-Nexstar::Nexstar(bool isLocal) : Telescope(isLocal)
+using namespace std;
+
+Nexstar::Nexstar(bool isLocal, char *serialPort) : Telescope(isLocal,serialPort)
 {
 }
 

@@ -16,7 +16,7 @@ extern char telType[100][10];
 extern int telNum;
 
 void leave(int sig) {
-	printf("Receiving SIGINT signal, leaving application...\n");
+	printf("Receiving SIGINT/SIGKILL signal, leaving application...\n");
 	tel->stop();
 	delete tel;
 	tel = NULL;
@@ -25,6 +25,7 @@ void leave(int sig) {
 int main(int argv, char **argc)
 {
 	bool isLocal = false;
+	char *serialPort = (char *)"/dev/ttyS1";
 	int i = 0;
 	if(argv < 2 || argv > 3)
 		return -1;
@@ -38,6 +39,9 @@ int main(int argv, char **argc)
 			isLocal = true;
 	}
 	
+	// To print into the stdout without buffers :D
+	// This avoids the need of calling fflush(stdout) all the times
+	setbuf(stdout,NULL);
 	initTelTypes();
 	while(strcmp(argc[1],telType[i]) && i < telNum)
 		i++;
@@ -45,11 +49,11 @@ int main(int argv, char **argc)
 	switch(i)
 	{
 		case 0:
-			tel = (Telescope *)new Nexstar(isLocal);
+			tel = (Telescope *)new Nexstar(isLocal,serialPort);
 			printf("%s Wrapper Acquired\n", argc[1]);
 			break;
 		case 1:
-			tel = (Telescope *)new Lx200(isLocal);
+			tel = (Telescope *)new Lx200(isLocal,serialPort);
 			printf("%s Wrapper Acquired\n", argc[1]);
 			break;
 		default:
@@ -60,6 +64,7 @@ int main(int argv, char **argc)
 
 	/* Handle the Ctr-C signal */
 	signal(SIGINT,leave);
+	signal(SIGKILL,leave);
 
 	tel->start();
 	if(tel !=NULL)

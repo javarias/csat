@@ -82,7 +82,6 @@ void CSATClient::stop()
 {
 	if(this->login != 0){
 		this->client->logout();
-		ACE_OS::sleep(3);
 	}
 	delete this->client;
 	if(this->login !=0)

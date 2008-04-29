@@ -1,6 +1,8 @@
 #include "Lx200.h"
 
-Lx200::Lx200(bool isLocal) : Telescope(isLocal)
+using namespace std;
+
+Lx200::Lx200(bool isLocal, char *serialPort) : Telescope(isLocal,serialPort)
 {
 	this->alt = 0;
 	this->az = 0;
@@ -14,13 +16,15 @@ void Lx200::parseInstructions()
 	char *response;
 	while(read(fdm, &buf, 1) && run)
 	{
-		if(buf == 'q')
+		if(buf == 'q') {
+			cout << "Got a 'q' command, exiting..." << endl;
 			break;
+		}
 		if(!this->cscRun || !this->cssRun || buf != '#')
 		{
 			if(buf == 6)
 			{
-				printf("Getting Alignment\n");
+				cout << "Getting Alignment" << endl;
 				response = this->getAlignment();
 			}
 			else
@@ -357,6 +361,7 @@ char *Lx200::getInformation()
 					while(buf != '#')
 						read(fdm, &buf, 1);
 					message = this->badMessageResponse();
+
 	}
 	return message;
 }
@@ -650,7 +655,7 @@ int Lx200::length(char *msg)
 {
 	int i = 0;
 	while(msg[i]!=(char)ENDCHAR) i++;
-	return i;
+	return i+1;
 }
 
 Lx200::~Lx200()
