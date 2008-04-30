@@ -5,7 +5,7 @@ Lx200CoordDevIO::Lx200CoordDevIO(char *deviceName, int axis) throw (csatErrors::
 	char *_METHOD_="Lx200CoordDevIO::Lx200CoordDevIO";
 
 	try{
-		this->sp = new SerialRS232(deviceName);
+		this->sp = new SerialRS232(deviceName,120);
 	} catch(SerialRS232::SerialRS232Exception serialEx) {
 		ACS_LOG( LM_ERROR , _METHOD_ , (LM_ERROR, "CannotOpenDeviceEx: %s", serialEx.what()) );
 		csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
