@@ -9,7 +9,7 @@ Lx200VelDevIO::Lx200VelDevIO(char *deviceName, int axis) throw (csatErrors::Cann
 	CORBA::Double initialSlewRate(0.0);
 
         try{
-                this->sp = new SerialRS232(deviceName);
+                this->sp = new SerialRS232(deviceName,120);
         } catch(SerialRS232::SerialRS232Exception serialEx) {
                 ACS_LOG( LM_ERROR , _METHOD_ , (LM_ERROR, "CannotOpenDeviceEx: %s", serialEx.what()) );
                 csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
@@ -50,15 +50,13 @@ CORBA::Double Lx200VelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseEx
 
 void Lx200VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
 {
-        char *_METHOD_="Lx200VelDevIO::write";
-	char slewRateCmd[8];
+	char *_METHOD_="Lx200VelDevIO::write";
+	char slewRateCmd[9];
 	char moveCmd[4];
 	char posHaltCmd[4];
 	char negHaltCmd[4];
 	bool moving = true;
 	double absValue = fabs(value);
-
-        ACS_TRACE(_METHOD_);
 
 	moveCmd[0] = ':';
 	moveCmd[1] = 'M';
