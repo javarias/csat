@@ -20,7 +20,7 @@ public class ScreenPanel extends JPanel implements Runnable
 {
 	private Image screen, buf, test;
 	private Graphics2D backbuf;
-	private boolean telescopeState = false;
+	private boolean telescopeState = true;
 	private boolean working = false;
 	private boolean doControl = true;
 	private int dx, dy;
