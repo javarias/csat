@@ -310,11 +310,31 @@ char *Nexstar::passThroughCommand()
 	//Important!!
 	char buf[7];
 	int vel;
+	double decVel;
+	TYPES::AltazVel aaVel;
 	read(fdm,buf,7);
+	printf("%d%d%d%d\n",buf[0],buf[1],buf[2],buf[3]);
 	switch(buf[0])
 	{
 		case 2:
+				aaVel = this->csatC->getcssClient()->getSlewRate();
+				printf("Alt: %lf ; Azm: %lf\n",aaVel.altVel, aaVel.azVel);
 				vel = (int)buf[3];
+				decVel = toDegPerSec(vel);
+				if(buf[2] == 37)
+					decVel *= -1;
+				else if(buf[2] != 36)
+					decVel *= 0;
+				if(buf[1] == 16)
+					aaVel.altVel = decVel;
+				else if(buf[1] == 17)
+					aaVel.azVel = decVel;
+				else{
+					aaVel.altVel = 0;
+					aaVel.azVel  = 0;
+				}
+				printf("Alt: %lf ; Azm: %lf\n",aaVel.altVel, aaVel.azVel);
+				this->csatC->getcscClient()->setSlewRate(aaVel);
 				break;
 		case 3:
 				vel = 0;
@@ -411,6 +431,34 @@ int Nexstar::length(char *msg)
 	int i = 0;
 	while(msg[i]!=(char)ENDCHAR) i++;
 	return i;
+}
+
+double Nexstar::toDegPerSec(int vel){
+	switch(vel)
+	{
+		case 0:
+				return 0.0;
+		case 1:
+				return 2/3600;
+		case 2:
+				return 4/3600;
+		case 3:
+				return 8/3600;
+		case 4:
+				return 16/3600;
+		case 5:
+				return 32/3600;
+		case 6:
+				return 128/3600;
+		case 7:
+				return 1.0;
+		case 8:
+				return 2.0;
+		case 9:
+				return 4.0;
+		default:
+				return 0.0;
+	}
 }
 
 Nexstar::~Nexstar()

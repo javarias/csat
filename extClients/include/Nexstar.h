@@ -39,6 +39,7 @@ private:
 	char *badMessageResponse();
 	char *defaultMessageResponse();
 	int length(char *msg);
+	double toDegPerSec(int vel);
 };
 
 #endif
