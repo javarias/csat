@@ -395,7 +395,7 @@ public class Nexstar4PositionControl implements Runnable{
 		variableRateInAltAxis = 0l;
 		totalRateInAltAxis = 0l;
 		
-		System.out.println("slewSpeedSymbol:"+(int)slewSpeedSymbol);
+		//System.out.println("slewSpeedSymbol:"+(int)slewSpeedSymbol);
 		
 		switch (slewSpeedSymbol) {
 		case slewSpeedSymbol_4DegreesPerSec:
