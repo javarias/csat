@@ -25,7 +25,7 @@ NexstarCoordDevIO::NexstarCoordDevIO(char *deviceName, int axis, bool reversed) 
 	}
 
 	this->axis = axis;
-	this->reversed;
+	this->reversed = reversed;
 }
 
 NexstarCoordDevIO::~NexstarCoordDevIO() {

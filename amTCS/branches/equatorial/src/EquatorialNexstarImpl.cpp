@@ -30,7 +30,7 @@ EquatorialNexstarImpl::~EquatorialNexstarImpl(){
 }
 
 /* Component Lifecycle */
-void EquatorialNexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,csatErrors::CannotOpenDeviceEx)
+void EquatorialNexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 {
 	const char * _METHOD_ = "EquatorialNexstarImpl::initialize";
 	ACS_TRACE("EquatorialNexstarImpl::initialize");
@@ -42,9 +42,9 @@ void EquatorialNexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleEx
 		NexstarVelDevIO   *azmVelDevIO = NULL;
 
 		try{
-			azmDevIO = new NexstarCoordDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS, true);
+			azmDevIO = new NexstarCoordDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS, false);
 			altDevIO = new NexstarCoordDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS, true);
-			azmVelDevIO = new NexstarVelDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS, true);
+			azmVelDevIO = new NexstarVelDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS, false);
 			altVelDevIO = new NexstarVelDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS, true);
 		} catch (csatErrors::CannotOpenDeviceEx &ex){
 			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);

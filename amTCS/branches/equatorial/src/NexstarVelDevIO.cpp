@@ -43,9 +43,15 @@ NexstarVelDevIO::~NexstarVelDevIO() {
 CORBA::Double NexstarVelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl) {
 
 	if(this->axis == ALTITUDE_AXIS)
-      return ( (this->reversed) ? this->slewRateElevation*(-1) : this->slewRateElevation);
+		if( this->slewRateElevation )
+	      return ( (this->reversed) ? this->slewRateElevation*(-1) : this->slewRateElevation);
+		else
+			return 0.0;
    else
-      return ( (this->reversed) ? this->slewRateAzimuth*(-1) : this->slewRateAzimuth);
+		if( this->slewRateAzimuth )
+	      return ( (this->reversed) ? this->slewRateAzimuth*(-1) : this->slewRateAzimuth);
+		else
+			return 0.0;
 }
 
 void NexstarVelDevIO::write(const CORBA::Double &recv_value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl){

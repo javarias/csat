@@ -41,7 +41,7 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 	private Logger m_logger;
 
 	private AltazPos m_commandedPos;
-	private AltazPos m_softRealPos;
+	private RadecPos m_softRealPos;
 	private RadecPos m_commandedRadecPos;
 
 	private alma.DEVTELESCOPE_MODULE.DevTelescope devTelescope_comp;
@@ -103,17 +103,17 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 
 		CompletionHolder completionHolder = new CompletionHolder();
 		m_commandedPos = new AltazPos();
-		m_softRealPos  = new AltazPos();
+		m_softRealPos  = new RadecPos();
 		m_commandedRadecPos = new RadecPos();
 
 		m_commandedPos.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
-		m_commandedPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder) - locale_comp.localPos().latitude * Math.cos(m_commandedPos.az*2*Math.PI/360.0);
+		m_commandedPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
 
-		m_softRealPos.alt = m_commandedPos.alt;
-		m_softRealPos.az  = m_commandedPos.az;
+		m_commandedRadecPos.ra  = m_commandedPos.az + calculations_comp.siderealTime();
+		m_commandedRadecPos.dec = m_commandedPos.alt;
 
-		m_commandedRadecPos = calculations_comp.Altaz2Radec(m_commandedPos);
-		
+		m_softRealPos = m_commandedRadecPos;
+
 		controlThread = m_containerServices.getThreadFactory().newThread(this);
 		controlThread.start();
 	}
@@ -176,7 +176,8 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 			controlThread.start();
 		}
 
-		m_commandedPos = calculations_comp.Radec2Altaz(position);
+		m_commandedPos.az  = position.ra - calculations_comp.siderealTime();
+		m_commandedPos.alt = position.dec;
 		m_commandedRadecPos.ra = position.ra;
 		m_commandedRadecPos.dec = position.dec;
 		this.cb = cb;
@@ -200,10 +201,10 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 	}
 
 	public void gotoAltAz(AltazPos position, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
-		m_commandedPos.alt = position.alt;
-		m_commandedPos.az  = position.az;
 
 		m_commandedRadecPos = calculations_comp.Altaz2Radec(m_commandedPos);
+		m_commandedPos.az  = m_commandedRadecPos.ra - calculations_comp.siderealTime();
+		m_commandedPos.alt = m_commandedRadecPos.dec;
 
 		doControl = true;
 
@@ -236,11 +237,11 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 
 		if( doControl == false && controlThread != null ){
 			CompletionHolder completionHolder = new CompletionHolder();
-			m_softRealPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
-			m_softRealPos.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
+			m_softRealPos.dec = devTelescope_comp.realAlt().get_sync(completionHolder);
+			m_softRealPos.ra  = devTelescope_comp.realAzm().get_sync(completionHolder) - calculations_comp.siderealTime();
 		}
 
-		return m_softRealPos;
+		return calculations_comp.Radec2Altaz(m_softRealPos);
 	}
 
 	public void setCurrentAltAz(AltazPos position){
@@ -261,6 +262,8 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 		
 		CompletionHolder completionHolder = new CompletionHolder();
 		AltazVel altazVel = new AltazVel();
+		RadecPos tmprd = new RadecPos();
+		AltazPos tmpaa;
 		double realAltitude;
 		double realAzimuth;
 		double commandedAltitude;
@@ -279,13 +282,26 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 				realAltitude = devTelescope_comp.realAlt().get_sync(completionHolder);
 				realAzimuth  = devTelescope_comp.realAzm().get_sync(completionHolder);
 
-				//System.out.println("Estas son las coordenadas: " + realAltitude + " " + realAzimuth);
-				m_softRealPos.alt = realAltitude - locale_comp.localPos().latitude * Math.cos(realAzimuth*2*Math.PI/360.0);
-				m_softRealPos.az  = realAzimuth;
+				System.out.println("Estas son las coordenadas: " + realAltitude + " " + realAzimuth);
+				System.out.println("Estos son los commanded: " + m_commandedPos.alt + " " + m_commandedPos.az);
+				m_softRealPos.dec = realAltitude;
+				m_softRealPos.ra  = realAzimuth + calculations_comp.siderealTime();
 				
 				/* We add to the commanded position the pointing corrections */
-				commandedAzimuth  = m_commandedPos.az + pointing_comp.azmOffset();
-				commandedAltitude = m_commandedPos.alt + pointing_comp.altOffset() + locale_comp.localPos().latitude * Math.cos(commandedAzimuth*2*Math.PI/360.0);
+				if( pointing_comp.azmOffset() != 0 || pointing_comp.altOffset() != 0) {
+					tmprd.ra  = m_commandedPos.az + calculations_comp.siderealTime();
+					tmprd.dec = m_commandedPos.alt;
+					tmpaa = calculations_comp.Radec2Altaz(tmprd);
+					tmpaa.alt += pointing_comp.altOffset();
+					tmpaa.az  += pointing_comp.azmOffset();
+					tmprd = calculations_comp.Altaz2Radec(tmpaa);
+	
+					commandedAzimuth  = tmprd.ra - calculations_comp.siderealTime();
+					commandedAltitude = tmprd.dec;
+				} else {
+					commandedAzimuth  = m_commandedPos.az;
+					commandedAltitude = m_commandedPos.alt;
+				}
 			
 				/* We search which movement is shorter in azimuth (left or right) */
 				if( commandedAzimuth > realAzimuth ){
@@ -354,6 +370,7 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 				}
 
 				/* Send the velocity to the telescope */
+				System.out.println("Velocidad enviada: " + altazVel.altVel + " " + altazVel.azVel);
 				devTelescope_comp.setVel(altazVel);
 
 				if(altazVel.azVel == 0 && altazVel.altVel == 0)
