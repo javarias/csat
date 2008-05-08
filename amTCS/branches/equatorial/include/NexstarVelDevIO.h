@@ -21,7 +21,7 @@ class NexstarVelDevIO: public DevIO<CORBA::Double>
 
 	public:
 
-	NexstarVelDevIO(char *deviceName, int axist) throw (csatErrors::CannotOpenDeviceEx);
+	NexstarVelDevIO(char *deviceName, int axis, bool reversed) throw (csatErrors::CannotOpenDeviceEx);
 	virtual ~NexstarVelDevIO();
 
 	CORBA::Double read(ACS::Time &timestamp)
@@ -35,6 +35,7 @@ class NexstarVelDevIO: public DevIO<CORBA::Double>
 	int axis;
 	double slewRateElevation;
    double slewRateAzimuth;
+	bool reversed;
 };
 
 #endif /* _NEXSTAR_VEL_DEVIO_H_ */

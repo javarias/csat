@@ -2,9 +2,9 @@
 
 #include "NexstarVelDevIO.h"
 
-NexstarVelDevIO::NexstarVelDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx){
+NexstarVelDevIO::NexstarVelDevIO(char *deviceName, int axis, bool reversed) throw (csatErrors::CannotOpenDeviceEx){
 
-	char *_METHOD_="NexstarVelDevIO::NexstarVelDevIO";
+	char *_METHOD_=(char *)"NexstarVelDevIO::NexstarVelDevIO";
 
 	try{
 		ACS_TRACE("Creating SeriaRS232 device");
@@ -32,6 +32,8 @@ NexstarVelDevIO::NexstarVelDevIO(char *deviceName, int axis) throw (csatErrors::
       this->slewRateElevation = 0;
    else
       this->slewRateAzimuth = 0;
+
+	this->reversed = reversed;
 }
 
 NexstarVelDevIO::~NexstarVelDevIO() {
@@ -39,18 +41,24 @@ NexstarVelDevIO::~NexstarVelDevIO() {
 }
 
 CORBA::Double NexstarVelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl) {
-	//CORBA::Double azm(0.0);
-	//return azm;
+
 	if(this->axis == ALTITUDE_AXIS)
-      return this->slewRateElevation;
+      return ( (this->reversed) ? this->slewRateElevation*(-1) : this->slewRateElevation);
    else
-      return this->slewRateAzimuth;
+      return ( (this->reversed) ? this->slewRateAzimuth*(-1) : this->slewRateAzimuth);
 }
 
-void NexstarVelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl){
+void NexstarVelDevIO::write(const CORBA::Double &recv_value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl){
 
 	int vel = 0;
-	double absValue = fabs(value);
+	double absValue;
+	double value;
+
+	value = recv_value;
+	if( this->reversed )
+		value *= (-1);
+
+	absValue = fabs(value);
 	char command[8];
 
 	// We see which telescope's velocity is adecuated for the given double value
@@ -79,7 +87,7 @@ void NexstarVelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) th
 
    command[0] = 'P';
    command[1] = 2;
-   command[2] = (this->axis == ALTITUDE_AXIS) ? 0x10 : 0x11 ;
+   command[2] = (this->axis == ALTITUDE_AXIS) ? 0x11 : 0x10 ;
    command[3] = ( vel > 0 ) ? 0x24 : 0x25 ;
    command[4] = labs((long int)vel);
    command[5] = 0;
@@ -87,9 +95,9 @@ void NexstarVelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) th
    command[7] = 0;
 
 	if(this->axis == ALTITUDE_AXIS)
-      this->slewRateElevation = vel;
+      this->slewRateElevation = value;
    else
-      this->slewRateAzimuth = vel;
+      this->slewRateAzimuth = value;
 
 	this->sp->write_RS232(command,8);
 	this->sp->read_RS232();

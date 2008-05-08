@@ -56,19 +56,23 @@ INCLUDES        =
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = NexstarImpl lpiImpl eTrexImpl CalculationsImpl
+LIBRARIES       = NexstarImpl EquatorialNexstarImpl lpiImpl eTrexImpl CalculationsImpl PcDummyGpsImpl
 LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
 NexstarImpl_OBJECTS      = NexstarCoordDevIO NexstarVelDevIO NexstarImpl
 NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors SerialCommunication
+EquatorialNexstarImpl_OBJECTS      = NexstarCoordDevIO NexstarVelDevIO EquatorialNexstarImpl
+EquatorialNexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors SerialCommunication
 lpiImpl_OBJECTS          = lpiFrameDevIO lpiPropsDevIO lpiImpl
 lpiImpl_LIBS             = TypesStubs DevCCDStubs csatErrors
 eTrexImpl_OBJECTS        = eTrexCommunication eTrexCoordDevIO eTrexImpl
 eTrexImpl_LIBS           = TypesStubs DevGPSStubs csatErrors SerialCommunication
 CalculationsImpl_OBJECTS = CalculationsImpl
 CalculationsImpl_LIBS    = TypesStubs LocaleStubs CalculationsStubs csatErrors
+PcDummyGpsImpl_OBJECTS   = PcDummyGpsImpl
+PcDummyGpsImpl_LIBS      = TypesStubs DevGPSStubs csatErrors
 
 #
 # Scripts (public and local)
@@ -154,7 +158,7 @@ XML_IDL=
 #
 # Java Component Helper Classes generation on/off
 #
-COMPONENT_HELPERS=on
+#COMPONENT_HELPERS=on
 #
 # Java Entity Classes generation on/off
 #

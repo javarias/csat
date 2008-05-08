@@ -1,6 +1,6 @@
 #include "NexstarCoordDevIO.h"
 
-NexstarCoordDevIO::NexstarCoordDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx){
+NexstarCoordDevIO::NexstarCoordDevIO(char *deviceName, int axis, bool reversed) throw (csatErrors::CannotOpenDeviceEx){
 
 	char *_METHOD_="NexstarCoordDevIO::NexstarCoordDevIO";
 
@@ -25,6 +25,7 @@ NexstarCoordDevIO::NexstarCoordDevIO(char *deviceName, int axis) throw (csatErro
 	}
 
 	this->axis = axis;
+	this->reversed;
 }
 
 NexstarCoordDevIO::~NexstarCoordDevIO() {
@@ -44,6 +45,12 @@ CORBA::Double NexstarCoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSba
 	sscanf(msg,"%08lX,%08lX#",&read_azm, &read_alt);
 	value = ( this->axis == ALTITUDE_AXIS ) ? read_alt/MAX_PRECISE_ROTATION : read_azm/MAX_PRECISE_ROTATION ;
 	value *= 360.0;
+
+	if( this->reversed )
+		value = 360 - value;
+
+	if( value == 360.0 )
+		value = 0.0;
 
 	return value;
 }

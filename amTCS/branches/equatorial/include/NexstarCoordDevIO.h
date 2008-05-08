@@ -22,7 +22,7 @@ class NexstarCoordDevIO: public DevIO<CORBA::Double>
 
 	public:
 
-	NexstarCoordDevIO(char *deviceName, int axis) throw(csatErrors::CannotOpenDeviceEx);
+	NexstarCoordDevIO(char *deviceName, int axis, bool reversed) throw(csatErrors::CannotOpenDeviceEx);
 	virtual ~NexstarCoordDevIO();
 
 	virtual CORBA::Double read(ACS::Time &timestamp)
@@ -34,6 +34,7 @@ class NexstarCoordDevIO: public DevIO<CORBA::Double>
 	private:
 	SerialRS232 *sp;
 	int axis;
+	bool reversed;
 };
 
 #endif /* _NEXSTAR_COORD_DEVIO_H_ */

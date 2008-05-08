@@ -4,7 +4,7 @@ static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
 #include <SerialRS232.h>
 
-#include "NexstarImpl.h"
+#include "EquatorialNexstarImpl.h"
 #include "NexstarCoordDevIO.h"
 #include "NexstarVelDevIO.h"
 #include "csatErrors.h"
@@ -12,7 +12,7 @@ static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 using namespace baci;
 
 /* Constructor */
-NexstarImpl::NexstarImpl(const ACE_CString& name, maci::ContainerServices *containerServices) :
+EquatorialNexstarImpl::EquatorialNexstarImpl(const ACE_CString& name, maci::ContainerServices *containerServices) :
        CharacteristicComponentImpl(name,containerServices)
       ,m_realAzm_sp(this)
       ,m_realAlt_sp(this)
@@ -21,19 +21,19 @@ NexstarImpl::NexstarImpl(const ACE_CString& name, maci::ContainerServices *conta
       ,m_mount_sp(this)
 {
 	component_name = name.c_str();
-	ACS_TRACE("NexstarImpl::NexstarImpl");
+	ACS_TRACE("EquatorialNexstarImpl::EquatorialNexstarImpl");
 	m_locking = true;
 }
 
 /* Destructor */
-NexstarImpl::~NexstarImpl(){
+EquatorialNexstarImpl::~EquatorialNexstarImpl(){
 }
 
 /* Component Lifecycle */
-void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,csatErrors::CannotOpenDeviceEx)
+void EquatorialNexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,csatErrors::CannotOpenDeviceEx)
 {
-	const char * _METHOD_ = "NexstarImpl::initialize";
-	ACS_TRACE("NexstarImpl::initialize");
+	const char * _METHOD_ = "EquatorialNexstarImpl::initialize";
+	ACS_TRACE("EquatorialNexstarImpl::initialize");
 	if( getComponent() != 0){
 
 		NexstarCoordDevIO *azmDevIO = NULL;
@@ -42,10 +42,10 @@ void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,cs
 		NexstarVelDevIO   *azmVelDevIO = NULL;
 
 		try{
-			azmDevIO = new NexstarCoordDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS, false);
-			altDevIO = new NexstarCoordDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS, false);
-			azmVelDevIO = new NexstarVelDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS, false);
-			altVelDevIO = new NexstarVelDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS, false);
+			azmDevIO = new NexstarCoordDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS, true);
+			altDevIO = new NexstarCoordDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS, true);
+			azmVelDevIO = new NexstarVelDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS, true);
+			altVelDevIO = new NexstarVelDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS, true);
 		} catch (csatErrors::CannotOpenDeviceEx &ex){
 			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
 			lifeEx.addData("Reason","Cannot create DevIOs");
@@ -71,28 +71,28 @@ void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,cs
 
 
 /* IDL implementation */
-void NexstarImpl::setCurrentAltAz(const TYPES::AltazPos &p) throw (CORBA::SystemException){
-	ACS_TRACE("NexstarImpl::setCurrentAlzAz");
+void EquatorialNexstarImpl::setCurrentAltAz(const TYPES::AltazPos &p) throw (CORBA::SystemException){
+	ACS_TRACE("EquatorialNexstarImpl::setCurrentAlzAz");
 }
 
-void NexstarImpl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemException){
+void EquatorialNexstarImpl::setVel(const TYPES::AltazVel &vel) throw (CORBA::SystemException){
 
 	azmVel()->set_sync(vel.azVel );
 	altVel()->set_sync(vel.altVel);
 	return;
 }
 
-void NexstarImpl::lock() throw (CORBA::SystemException){
+void EquatorialNexstarImpl::lock() throw (CORBA::SystemException){
 	m_locking = true;
 }
 
-void NexstarImpl::unlock() throw (CORBA::SystemException){
+void EquatorialNexstarImpl::unlock() throw (CORBA::SystemException){
 	m_locking = false;
 }
 
 
 /* Attributes returning */
-TYPES::AltazVel NexstarImpl::getVel() throw (CORBA::SystemException){
+TYPES::AltazVel EquatorialNexstarImpl::getVel() throw (CORBA::SystemException){
 	TYPES::AltazVel velocity;
 
 	ACSErr::Completion_var completion;
@@ -101,13 +101,13 @@ TYPES::AltazVel NexstarImpl::getVel() throw (CORBA::SystemException){
 	return velocity;
 }
 
-bool NexstarImpl::locking() throw (CORBA::SystemException){
+bool EquatorialNexstarImpl::locking() throw (CORBA::SystemException){
 	return m_locking;
 }
 
 /* Properties returning */
 
-ACS::ROdouble_ptr NexstarImpl::realAzm() throw (CORBA::SystemException){
+ACS::ROdouble_ptr EquatorialNexstarImpl::realAzm() throw (CORBA::SystemException){
 	if( m_realAzm_sp == 0 ){
 		return ACS::ROdouble::_nil();
 	}
@@ -115,7 +115,7 @@ ACS::ROdouble_ptr NexstarImpl::realAzm() throw (CORBA::SystemException){
 	return prop._retn();
 }
 
-ACS::ROdouble_ptr NexstarImpl::realAlt() throw (CORBA::SystemException){
+ACS::ROdouble_ptr EquatorialNexstarImpl::realAlt() throw (CORBA::SystemException){
 	if( m_realAlt_sp == 0 ){
 		return ACS::ROdouble::_nil();
 	}
@@ -123,7 +123,7 @@ ACS::ROdouble_ptr NexstarImpl::realAlt() throw (CORBA::SystemException){
 	return prop._retn();
 }
 
-ACS::RWdouble_ptr NexstarImpl::azmVel() throw (CORBA::SystemException){
+ACS::RWdouble_ptr EquatorialNexstarImpl::azmVel() throw (CORBA::SystemException){
 	if( m_azmVel_sp == 0 ){
 		return ACS::RWdouble::_nil();
 	}
@@ -131,7 +131,7 @@ ACS::RWdouble_ptr NexstarImpl::azmVel() throw (CORBA::SystemException){
 	return prop._retn();
 }
 
-ACS::RWdouble_ptr NexstarImpl::altVel() throw (CORBA::SystemException){
+ACS::RWdouble_ptr EquatorialNexstarImpl::altVel() throw (CORBA::SystemException){
 	if( m_altVel_sp == 0 ){
 		return ACS::RWdouble::_nil();
 	}
@@ -139,7 +139,7 @@ ACS::RWdouble_ptr NexstarImpl::altVel() throw (CORBA::SystemException){
 	return prop._retn();
 }
 
-DEVTELESCOPE_MODULE::ROmountType_ptr NexstarImpl::mount() throw (CORBA::SystemException){
+DEVTELESCOPE_MODULE::ROmountType_ptr EquatorialNexstarImpl::mount() throw (CORBA::SystemException){
 	if( m_mount_sp == 0 ){
 		return DEVTELESCOPE_MODULE::ROmountType::_nil();
 	}
@@ -149,7 +149,7 @@ DEVTELESCOPE_MODULE::ROmountType_ptr NexstarImpl::mount() throw (CORBA::SystemEx
 
 /* --------------- [ MACI DLL support functions ] -----------------*/
 #include <maciACSComponentDefines.h>
-MACI_DLL_SUPPORT_FUNCTIONS(NexstarImpl)
+MACI_DLL_SUPPORT_FUNCTIONS(EquatorialNexstarImpl)
 /* ----------------------------------------------------------------*/
 
 /*___oOo___*/
