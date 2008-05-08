@@ -8,6 +8,7 @@ Lx200::Lx200(bool isLocal, char *serialPort) : Telescope(isLocal,serialPort)
 	this->az = 0;
 	this->ra = 0;
 	this->dec = 0;
+	this->rate = 0;
 }
 
 void Lx200::parseInstructions()
@@ -241,7 +242,7 @@ char *Lx200::getInformation()
 									if(buf != '#')
 										return this->badMessageResponse();
 									message = new char[13];
-									sprintf(message,"sep 02 1985#%c",ENDCHAR);
+									sprintf(message,"jun 05 1890#%c",ENDCHAR);
 									break;
 						case 'N':
 									read(fdm, &buf, 1);
@@ -397,26 +398,65 @@ char *Lx200::movement()
 	switch(buf)
 	{
 		case 'A':
-					message = new char[2];
 					read(fdm,&buf,1);
 					if(buf != '#')
 						return this->badMessageResponse();
+					message = new char[2];
 					aaPos.alt = this->alt;
 					aaPos.az = this->az;
 					this->csatC->getcscClient()->goToAltAz(aaPos,aaVel,(ACS::CBvoid*)NULL,cbin);
 					sprintf(message,"0%c",ENDCHAR);
 					break;
 		case 'S':
-					message = new char[2];
 					read(fdm,&buf,1);
 					if(buf != '#')
 						return this->badMessageResponse();
+					message = new char[2];
 					rdPos.ra = this->ra;
 					rdPos.dec = this->dec;
 					this->csatC->getcscClient()->preset(rdPos,(ACS::CBvoid*)NULL,cbin);
 					sprintf(message,"0%c",ENDCHAR);
 					break;
-//		case '':
+		case 'n':
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					message = new char[1];
+					aaVel = this->csatC->getcssClient()->getSlewRate();
+					aaVel.azVel = this->rate;
+					this->csatC->getcscClient()->setSlewRate(aaVel);
+					sprintf(message,"%c",ENDCHAR);
+					break;
+		case 's':
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					message = new char[1];
+					aaVel = this->csatC->getcssClient()->getSlewRate();
+					aaVel.azVel = -this->rate;
+					this->csatC->getcscClient()->setSlewRate(aaVel);
+					sprintf(message,"%c",ENDCHAR);
+					break;
+		case 'e':
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					message = new char[1];
+					aaVel = this->csatC->getcssClient()->getSlewRate();
+					aaVel.altVel = -this->rate;
+					this->csatC->getcscClient()->setSlewRate(aaVel);
+					sprintf(message,"%c",ENDCHAR);
+					break;
+		case 'w':
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					message = new char[1];
+					aaVel = this->csatC->getcssClient()->getSlewRate();
+					aaVel.altVel = this->rate;
+					this->csatC->getcscClient()->setSlewRate(aaVel);
+					sprintf(message,"%c",ENDCHAR);
+					break;
 		default:
 					printf("M%c\n",buf);
 					while(buf != '#')
@@ -428,17 +468,80 @@ char *Lx200::movement()
 
 char *Lx200::togglePointingPrecision()
 {
-	return this->badMessageResponse();
+	char *message, buf;
+	read(fdm,&buf,1);
+	if(buf != '#')
+		return this->badMessageResponse();
+	message = new char[1];
+	sprintf(message,"%c",ENDCHAR);
+	return message;
 }
 
 char *Lx200::haltMovement()
 {
 	char *message, buf;
+	TYPES::AltazVel aaVel;
+	aaVel = this->csatC->getcssClient()->getSlewRate();
 	read(fdm,&buf,1);
-	while(buf != '#')
-		read(fdm,&buf,1);
-	message = new char[1];
-	sprintf(message,"%c",ENDCHAR);
+	switch(buf)
+	{
+		case 'n':
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					if(aaVel.azVel > 0){
+						aaVel.azVel = 0;
+						this->csatC->getcscClient()->setSlewRate(aaVel);
+					}
+					message = new char[1];
+					sprintf(message,"%c",ENDCHAR);
+					break;
+		case 's':
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					if(aaVel.azVel < 0){
+						aaVel.azVel = 0;
+						this->csatC->getcscClient()->setSlewRate(aaVel);
+					}
+					message = new char[1];
+					sprintf(message,"%c",ENDCHAR);
+					break;
+		case 'e':
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					if(aaVel.altVel < 0){
+						aaVel.altVel = 0;
+						this->csatC->getcscClient()->setSlewRate(aaVel);
+					}
+					message = new char[1];
+					sprintf(message,"%c",ENDCHAR);
+					break;
+		case 'w':
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					if(aaVel.altVel > 0){
+						aaVel.altVel = 0;
+						this->csatC->getcscClient()->setSlewRate(aaVel);
+					}
+					message = new char[1];
+					sprintf(message,"%c",ENDCHAR);
+					break;
+		case '#':
+					aaVel.altVel = 0;
+					aaVel.azVel = 0;
+					this->csatC->getcscClient()->setSlewRate(aaVel);
+					message = new char[1];
+					sprintf(message,"%c",ENDCHAR);
+					break;
+		default:
+					printf("Q%c\n",buf);
+					while(buf != '#')
+						read(fdm,&buf,1);
+					message = this->badMessageResponse();
+	}
 	return message;
 }
 
@@ -449,7 +552,49 @@ char *Lx200::fieldDerotatorControl()
 
 char *Lx200::slewRate()
 {
-	return this->badMessageResponse();
+	char *message, buf;
+	read(fdm,&buf,1);
+	switch(buf)
+	{
+		case 'G':
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					message = new char[1];
+					this->rate = this->getSlewRate(1);
+					sprintf(message,"%c",ENDCHAR);
+					break;
+		case 'C':
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					message = new char[1];
+					this->rate = this->getSlewRate(2);
+					sprintf(message,"%c",ENDCHAR);
+					break;
+		case 'M':
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					message = new char[1];
+					this->rate = this->getSlewRate(3);
+					sprintf(message,"%c",ENDCHAR);
+					break;
+		case 'S':
+					read(fdm,&buf,1);
+					if(buf != '#')
+						return this->badMessageResponse();
+					message = new char[1];
+					this->rate = this->getSlewRate(4);
+					sprintf(message,"%c",ENDCHAR);
+					break;
+		default:
+					printf("R%c\n",buf);
+					while(buf != '#')
+						read(fdm,&buf,1);
+					message = this->badMessageResponse();
+	}
+	return message;
 }
 
 char *Lx200::telescopeSettings()
@@ -616,7 +761,13 @@ char *Lx200::trackingControl()
 
 char *Lx200::togglePrecision()
 {
-	return this->badMessageResponse();
+	char *message, buf;
+	read(fdm,&buf,1);
+	if(buf != '#')
+		return this->badMessageResponse();
+	message = new char[1];
+	sprintf(message,"%c",ENDCHAR);
+	return message;
 }
 
 char *Lx200::selectSite()
@@ -656,6 +807,25 @@ int Lx200::length(char *msg)
 	int i = 0;
 	while(msg[i]!=(char)ENDCHAR) i++;
 	return i;
+}
+
+double Lx200::getSlewRate(int val){
+	switch(val)
+	{
+		case 0:
+				return 0.0;
+		case 1:
+				return 8/3600.0;
+		case 2:
+				return 128/3600.0;
+		case 3:
+				return 2.0;
+		case 4:
+				return 8.0;  //7", 8" and 10" Telescopes.
+				//return 6.0; //12" Telescope.
+		default:
+				return 0.0;
+	}
 }
 
 Lx200::~Lx200()

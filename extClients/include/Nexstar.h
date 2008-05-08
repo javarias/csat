@@ -39,7 +39,7 @@ private:
 	char *badMessageResponse();
 	char *defaultMessageResponse();
 	int length(char *msg);
-	double toDegPerSec(int vel);
+	double getSlewRate(int val);
 };
 
 #endif

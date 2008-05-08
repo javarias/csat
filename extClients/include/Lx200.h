@@ -39,7 +39,9 @@ private:
 	char *badMessageResponse();
 	char *defaultMessageResponse();
 	int length(char *msg);
-	float ra, dec, alt, az;
+	double getSlewRate(int val);
+	double ra, dec, alt, az;
+	double rate;
 };
 
 #endif
