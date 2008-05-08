@@ -31,6 +31,12 @@
       <_ Name="ETREX"
          Code="eTrexImpl"
          Type="IDL:alma/DEVGPS_MODULE/DevGPS:1.0"
+         Default="false"
+         Container="amContainerCpp"/>
+
+      <_ Name="PC_GPS"
+         Code="PcDummyGpsImpl"
+         Type="IDL:alma/DEVGPS_MODULE/DevGPS:1.0"
          Default="true"
          Container="amContainerCpp"/>
 
@@ -55,6 +61,12 @@
       <_ Name="TELESCOPE"
          Code="alma.TELESCOPE_MODULE.TelescopeImpl.TelescopeHelper"
          Type="IDL:alma/TELESCOPE_MODULE/Telescope:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+      <_ Name="EQUATORIAL_TELESCOPE"
+         Code="alma.TELESCOPE_MODULE.EquatorialTelescopeImpl.EquatorialTelescopeHelper"
+         Type="IDL:alma/TELESCOPE_MODULE/EquatorialTelescope:1.0"
          Default="true"
          Container="amContainer"/>
 
