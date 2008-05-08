@@ -134,7 +134,7 @@ ACSERRDEF = csatErrors
 
 # Jarfiles and their directories
 #
-JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl SafetyImpl CSATControlImpl CSATStatusImpl
+JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl SafetyImpl CSATControlImpl CSATStatusImpl callbacks
 TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
 CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
 LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
@@ -143,6 +143,7 @@ TrackingImpl_DIRS=alma/TRACKING_MODULE/TrackingImpl
 SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
+callbacks_DIRS=alma/acs/callbacks
 
 USER_JFLAGS=-Xlint:unchecked
 
