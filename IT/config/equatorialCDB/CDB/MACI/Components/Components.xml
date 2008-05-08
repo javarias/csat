@@ -25,13 +25,13 @@
       <_ Name="NEXSTAR"
          Code="NexstarImpl"
          Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
-         Default="true"
+         Default="false"
          Container="amContainerCpp"/>
 
-      <_ Name="ETREX"
-         Code="eTrexImpl"
-         Type="IDL:alma/DEVGPS_MODULE/DevGPS:1.0"
-         Default="false"
+      <_ Name="EQUATORIAL_NEXSTAR"
+         Code="EquatorialNexstarImpl"
+         Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
+         Default="true"
          Container="amContainerCpp"/>
 
       <_ Name="PC_GPS"
