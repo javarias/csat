@@ -117,10 +117,9 @@ USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES= Hevelius callbacks
+JARFILES= Hevelius
 Hevelius_DIRS=Hevelius/
 Hevelius_EXTRAS=Hevelius/images/ Hevelius/catalogues/
-callbacks_DIRS=alma/acs/callbacks
 #
 # java sources in Jarfile on/off
 DEBUG= 
