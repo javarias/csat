@@ -88,7 +88,16 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 			m_logger.fine("Failed to get Calculations default component reference");
 			throw new ComponentLifecycleException("Failed to get Calculations component reference");
 		}
-		
+
+		/* We get the Locale reference */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/LOCALE_MODULE/Locale:1.0");
+			locale_comp = alma.LOCALE_MODULE.LocaleHelper.narrow(obj);
+		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Locale default component reference");
+			throw new ComponentLifecycleException("Failed to get Locale component reference");
+		}
+
 		doControl = true;
 
 		CompletionHolder completionHolder = new CompletionHolder();
@@ -96,8 +105,8 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 		m_softRealPos  = new AltazPos();
 		m_commandedRadecPos = new RadecPos();
 
-		m_commandedPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
 		m_commandedPos.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
+		m_commandedPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder) - locale_comp.localPos().latitude * Math.Cos(m_commandedPos.az*2*Math.PI/360.0);
 
 		m_softRealPos.alt = m_commandedPos.alt;
 		m_softRealPos.az  = m_commandedPos.az;
@@ -270,12 +279,12 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 				realAzimuth  = devTelescope_comp.realAzm().get_sync(completionHolder);
 
 				//System.out.println("Estas son las coordenadas: " + realAltitude + " " + realAzimuth);
-				m_softRealPos.alt = realAltitude;
+				m_softRealPos.alt = realAltitude - locale_comp.localPos().latitude * Math.Cos(realAzimuth*2*Math.PI/360.0);
 				m_softRealPos.az  = realAzimuth;
 				
 				/* We add to the commanded position the pointing corrections */
-				commandedAltitude = m_commandedPos.alt + pointing_comp.altOffset();
 				commandedAzimuth  = m_commandedPos.az + pointing_comp.azmOffset();
+				commandedAltitude = m_commandedPos.alt + pointing_comp.altOffset() + locale_comp.localPos().latitude * Math.Cos(commandedAzimuth*2*Math.PI/360.0);
 			
 				/* We search which movement is shorter in azimuth (left or right) */
 				if( commandedAzimuth > realAzimuth ){
