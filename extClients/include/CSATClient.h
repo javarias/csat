@@ -4,6 +4,7 @@
 #include <maciSimpleClient.h>
 #include <CSATControlC.h>
 #include <CSATStatusC.h>
+#include <csatErrorsC.h>
 #include <ACSErrTypeCommon.h>
 #include <acsutilTimeStamp.h>
 #include <string.h>

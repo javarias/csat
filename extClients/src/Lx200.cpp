@@ -491,7 +491,11 @@ char *Lx200::haltMovement()
 						return this->badMessageResponse();
 					if(aaVel.azVel > 0){
 						aaVel.azVel = 0;
-						this->csatC->getcscClient()->setSlewRate(aaVel);
+						try{
+							this->csatC->getcscClient()->setSlewRate(aaVel);
+						}catch(csatErrors::TelescopeAlreadyMovingEx e){
+							printf("Telescope is being moved by CSAT Control Loop.");
+						}
 					}
 					message = new char[1];
 					sprintf(message,"%c",ENDCHAR);
@@ -502,7 +506,11 @@ char *Lx200::haltMovement()
 						return this->badMessageResponse();
 					if(aaVel.azVel < 0){
 						aaVel.azVel = 0;
-						this->csatC->getcscClient()->setSlewRate(aaVel);
+						try{
+							this->csatC->getcscClient()->setSlewRate(aaVel);
+						}catch(csatErrors::TelescopeAlreadyMovingEx e){
+							printf("Telescope is being moved by CSAT Control Loop.");
+						}
 					}
 					message = new char[1];
 					sprintf(message,"%c",ENDCHAR);
@@ -513,7 +521,11 @@ char *Lx200::haltMovement()
 						return this->badMessageResponse();
 					if(aaVel.altVel < 0){
 						aaVel.altVel = 0;
-						this->csatC->getcscClient()->setSlewRate(aaVel);
+						try{
+							this->csatC->getcscClient()->setSlewRate(aaVel);
+						}catch(csatErrors::TelescopeAlreadyMovingEx e){
+							printf("Telescope is being moved by CSAT Control Loop.");
+						}
 					}
 					message = new char[1];
 					sprintf(message,"%c",ENDCHAR);
@@ -524,7 +536,11 @@ char *Lx200::haltMovement()
 						return this->badMessageResponse();
 					if(aaVel.altVel > 0){
 						aaVel.altVel = 0;
-						this->csatC->getcscClient()->setSlewRate(aaVel);
+						try{
+							this->csatC->getcscClient()->setSlewRate(aaVel);
+						}catch(csatErrors::TelescopeAlreadyMovingEx e){
+							printf("Telescope is being moved by CSAT Control Loop.");
+						}
 					}
 					message = new char[1];
 					sprintf(message,"%c",ENDCHAR);
@@ -532,7 +548,11 @@ char *Lx200::haltMovement()
 		case '#':
 					aaVel.altVel = 0;
 					aaVel.azVel = 0;
-					this->csatC->getcscClient()->setSlewRate(aaVel);
+						try{
+							this->csatC->getcscClient()->setSlewRate(aaVel);
+						}catch(csatErrors::TelescopeAlreadyMovingEx e){
+							printf("Telescope is being moved by CSAT Control Loop.");
+						}
 					message = new char[1];
 					sprintf(message,"%c",ENDCHAR);
 					break;

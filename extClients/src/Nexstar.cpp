@@ -334,7 +334,11 @@ char *Nexstar::passThroughCommand()
 					aaVel.azVel  = 0;
 				}
 				printf("Alt: %lf ; Azm: %lf\n",aaVel.altVel, aaVel.azVel);
-				this->csatC->getcscClient()->setSlewRate(aaVel);
+				try{
+					this->csatC->getcscClient()->setSlewRate(aaVel);
+				}catch(csatErrors::TelescopeAlreadyMovingEx e){
+					printf("Telescope is being moved by CSAT Control Loop.");
+				}
 				break;
 		case 3:
 				vel = 0;
