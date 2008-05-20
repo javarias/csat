@@ -5,6 +5,7 @@
 
 #include <baci.idl>
 #include <Types.idl>
+#include "Telescope.idl"
 
 #pragma prefix "alma"
 
@@ -32,6 +33,12 @@ module TRACKING_MODULE {
 
 		/** Holds the offset in the azimuth direction */
 		readonly attribute TYPES::RadecVel rate;
+
+		/**
+		 * Sets the specified telescope as the tracked one.
+		 * @param tel The tracked telescope
+		 */
+		void setTelescope(in TELESCOPE_MODULE::Telescope tel);
 
 		/**
 		 * Sets an specific additional rate

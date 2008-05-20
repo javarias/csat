@@ -81,7 +81,7 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 			throw new ComponentLifecycleException("Failed to get Pointing component reference");
 		}
 
-		/* We get the Pointing reference */
+		/* We get the Calculations reference */
 		try{
 			obj = m_containerServices.getDefaultComponent("IDL:alma/CALCULATIONS_MODULE/Calculations:1.0");
 			calculations_comp = alma.CALCULATIONS_MODULE.CalculationsHelper.narrow(obj);

@@ -22,6 +22,7 @@
 
 package alma.CSATSTATUS_MODULE.CSATStatusImpl;
 
+import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 import alma.ACS.CBDescIn;
@@ -63,6 +64,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	
 	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException {
 
+		String defaultTelescope = null;
 		com.cosylab.CDB.DAL dal = null;
 		com.cosylab.CDB.DAO dao = null;
 		org.omg.CORBA.Object obj = null;
@@ -74,20 +76,41 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STOP);
 
 		/* Search across the CDB for the default DevTelescope component */
-//		try {
-//			dal = m_containerServices.getCDB();
-//			dao = dal.get_DAO_Servant("MACI/Components/Components.xml");
-//			String nodes = dal.list_nodes("MACI/Components");
-//			System.out.println("Hijos de MACI: " + nodes);
-//			dao.destroy();
-//		} catch(Exception e) {
-//			m_logger.fine("Couldn't retrieve CDB information for components");
-//			throw new ComponentLifecycleException("Failed to get the componets list from the CDB");
-//		}
-		
+		try {
+			dal = m_containerServices.getCDB();
+			dao = dal.get_DAO_Servant("MACI/Components");
+			//String nodes = dal.list_nodes("MACI/Components");
+			//System.out.println("Hijos de MACI: " + nodes);
+			String components = dao.get_string("/_characteristics");
+			System.out.println("Lala: " + components );
+
+			StringTokenizer tokenizer = new StringTokenizer(components, ",");
+			while (tokenizer.hasMoreTokens())
+			{
+				String subname = tokenizer.nextToken().toString();
+				String componentName = subname;
+
+				System.out.print("Componente: " + componentName);
+				if( dao.get_string( "/" + componentName + "/Type").equals("IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0") ) {
+					if( dao.get_string( "/" + componentName + "/Default").equals("true") ) {
+						System.out.print(" default telescope found :D");
+						defaultTelescope = componentName;
+						break;
+					}
+				}
+				System.out.println("");
+			}
+
+			dao.destroy();
+		} catch(Exception e) {
+			m_logger.fine("Couldn't retrieve CDB information for components");
+			throw new ComponentLifecycleException("Failed to get the componets list from the CDB");
+		}
+		System.out.println("Found default telescope: " + defaultTelescope);
 
 		try {
-			dao = dal.get_DAO_Servant("alma/NEXSTAR");
+			dal = m_containerServices.getCDB();
+			dao = dal.get_DAO_Servant("alma/" + defaultTelescope);
 			m_mount = dao.get_long("mount/default_value");
 			dao.destroy();
 		} catch (Exception e) {
@@ -132,6 +155,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
       try{
          obj = m_containerServices.getDefaultComponent("IDL:alma/TRACKING_MODULE/Tracking:1.0");
          tracking_comp = alma.TRACKING_MODULE.TrackingHelper.narrow(obj);
+			tracking_comp.setTelescope(telescope_comp);
       } catch (AcsJContainerServicesEx e) {
          m_logger.fine("Failed to get Tracking default component reference");
          throw new ComponentLifecycleException("Failed to get Tracking component reference");
