@@ -282,8 +282,6 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 				realAltitude = devTelescope_comp.realAlt().get_sync(completionHolder);
 				realAzimuth  = devTelescope_comp.realAzm().get_sync(completionHolder);
 
-				System.out.println("Estas son las coordenadas: " + realAltitude + " " + realAzimuth);
-				System.out.println("Estos son los commanded: " + m_commandedPos.alt + " " + m_commandedPos.az);
 				m_softRealPos.dec = realAltitude;
 				m_softRealPos.ra  = realAzimuth + calculations_comp.siderealTime();
 				
@@ -370,7 +368,6 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 				}
 
 				/* Send the velocity to the telescope */
-				System.out.println("Velocidad enviada: " + altazVel.altVel + " " + altazVel.azVel);
 				devTelescope_comp.setVel(altazVel);
 
 				if(altazVel.azVel == 0 && altazVel.altVel == 0)

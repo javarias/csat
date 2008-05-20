@@ -115,7 +115,7 @@ public class TrackingImpl implements TrackingOperations, ComponentLifecycle, Run
 
 	public void setTelescope(Telescope tel) {
 		this.telescope_comp = tel;
-		logger.info("Got telescope reference on tracking...");
+		m_logger.info("Got telescope reference on tracking...");
 	}
 
 	public void setStatus(boolean status){

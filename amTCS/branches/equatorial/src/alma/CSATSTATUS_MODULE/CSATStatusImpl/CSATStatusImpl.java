@@ -50,7 +50,6 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
-	private int m_mount = -1;
 
 	private TCSStatus status;
 
@@ -64,6 +63,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	
 	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException {
 
+		int m_mount = -1;
 		String defaultTelescope = null;
 		com.cosylab.CDB.DAL dal = null;
 		com.cosylab.CDB.DAO dao = null;
@@ -79,40 +79,30 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		try {
 			dal = m_containerServices.getCDB();
 			dao = dal.get_DAO_Servant("MACI/Components");
-			//String nodes = dal.list_nodes("MACI/Components");
-			//System.out.println("Hijos de MACI: " + nodes);
 			String components = dao.get_string("/_characteristics");
-			System.out.println("Lala: " + components );
-
 			StringTokenizer tokenizer = new StringTokenizer(components, ",");
 			while (tokenizer.hasMoreTokens())
 			{
 				String subname = tokenizer.nextToken().toString();
 				String componentName = subname;
-
-				System.out.print("Componente: " + componentName);
-				if( dao.get_string( "/" + componentName + "/Type").equals("IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0") ) {
+				if(dao.get_string("/" + componentName + "/Type").equals("IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"))
 					if( dao.get_string( "/" + componentName + "/Default").equals("true") ) {
-						System.out.print(" default telescope found :D");
 						defaultTelescope = componentName;
 						break;
 					}
-				}
-				System.out.println("");
 			}
-
-			dao.destroy();
+			//dao.destroy();
 		} catch(Exception e) {
 			m_logger.fine("Couldn't retrieve CDB information for components");
 			throw new ComponentLifecycleException("Failed to get the componets list from the CDB");
 		}
-		System.out.println("Found default telescope: " + defaultTelescope);
 
+		/* Get the mount type for the default telescope */
 		try {
 			dal = m_containerServices.getCDB();
 			dao = dal.get_DAO_Servant("alma/" + defaultTelescope);
 			m_mount = dao.get_long("mount/default_value");
-			dao.destroy();
+			//dao.destroy();
 		} catch (Exception e) {
 			m_logger.fine("Couldn't retrieve mount type for the telescope");
 			throw new ComponentLifecycleException("Failed to get the mount type for the default physical telescope");
