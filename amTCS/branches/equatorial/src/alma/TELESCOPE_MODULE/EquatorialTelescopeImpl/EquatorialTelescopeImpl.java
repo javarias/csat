@@ -202,7 +202,7 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 
 	public void gotoAltAz(AltazPos position, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
 
-		m_commandedRadecPos = calculations_comp.Altaz2Radec(m_commandedPos);
+		m_commandedRadecPos = calculations_comp.Altaz2Radec(position);
 		m_commandedPos.az  = m_commandedRadecPos.ra - calculations_comp.siderealTime();
 		m_commandedPos.alt = m_commandedRadecPos.dec;
 
@@ -302,7 +302,7 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 					commandedAzimuth  = m_commandedPos.az;
 					commandedAltitude = m_commandedPos.alt;
 				}
-			
+
 				/* We search which movement is shorter in azimuth (left or right) */
 				if( commandedAzimuth > realAzimuth ){
 					if( commandedAzimuth - realAzimuth > (realAzimuth + 360) - commandedAzimuth ){

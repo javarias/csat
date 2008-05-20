@@ -105,9 +105,9 @@ void NexstarVelDevIO::write(const CORBA::Double &recv_value, ACS::Time &timestam
    else
       this->slewRateAzimuth = value;
 
+	this->sp->flush_RS232();
 	this->sp->write_RS232(command,8);
 	this->sp->read_RS232();
-	this->sp->flush_RS232();
 
 	return;
 }
