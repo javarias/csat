@@ -312,8 +312,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 					}
 
 					     if( diffAlt <  0.1 )                  altazVel.altVel *= 0.004;
-					else if( diffAlt >= 0.1 && diffAlt < 0.2 ) altazVel.altVel *= 0.008;
-					else if( diffAlt >= 0.2 && diffAlt < 0.5 ) altazVel.altVel *= 0.01;
+					else if( diffAlt >= 0.1 && diffAlt < 0.4 ) altazVel.altVel *= 0.008;
+					else if( diffAlt >= 0.4 && diffAlt < 0.5 ) altazVel.altVel *= 0.01;
 					else if( diffAlt >= 0.5 && diffAlt < 1 )   altazVel.altVel *= 0.5;
 					else if( diffAlt >= 1   && diffAlt < 3 )   altazVel.altVel *= 0.8;
 					else if( diffAlt >= 3   && diffAlt < 5 )   altazVel.altVel *= 1;
@@ -336,8 +336,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 					}
 
 					     if( diffAzm <  0.1 )                  altazVel.azVel *= 0.004;
-					else if( diffAzm >= 0.1 && diffAzm < 0.2 ) altazVel.azVel *= 0.008;
-					else if( diffAzm >= 0.2 && diffAzm < 0.5 ) altazVel.azVel *= 0.01;
+					else if( diffAzm >= 0.1 && diffAzm < 0.4 ) altazVel.azVel *= 0.008;
+					else if( diffAzm >= 0.4 && diffAzm < 0.5 ) altazVel.azVel *= 0.01;
 					else if( diffAzm >= 0.5 && diffAzm < 1 )   altazVel.azVel *= 0.5;
 					else if( diffAzm >= 1   && diffAzm < 3 )   altazVel.azVel *= 0.8;
 					else if( diffAzm >= 3   && diffAzm < 5 )   altazVel.azVel *= 1;
