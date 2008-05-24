@@ -33,6 +33,7 @@ import alma.TYPES.RadecPosHolder;
 import alma.TYPES.AltazPos;
 import alma.TYPES.AltazPosHolder;
 import alma.TYPES.RadecVel;
+import alma.TYPES.AltazVel;
 import alma.TYPES.EarthPos;
 
 import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
@@ -200,6 +201,10 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 
 	public boolean getTrackingStatus(){
 		return tracking_comp.status();
+	}
+
+	public AltazVel getSlewRate(){
+		return telescope_comp.getAltAzVel();
 	}
 
 	public RadecVel getTrackingRate(){

@@ -62,9 +62,9 @@ void NexsimVelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thr
    command[7] = 0;
 
 	if(this->axis == ALTITUDE_AXIS)
-		this->slewRateElevation = vel;
+		this->slewRateElevation = value;
 	else
-		this->slewRateAzimuth = vel;
+		this->slewRateAzimuth = value;
 
 	m_simulator->executeAction(command);
 

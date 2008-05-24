@@ -87,9 +87,9 @@ void NexstarVelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) th
    command[7] = 0;
 
 	if(this->axis == ALTITUDE_AXIS)
-      this->slewRateElevation = vel;
+      this->slewRateElevation = value;
    else
-      this->slewRateAzimuth = vel;
+      this->slewRateAzimuth = value;
 
 	this->sp->write_RS232(command,8);
 	this->sp->read_RS232();

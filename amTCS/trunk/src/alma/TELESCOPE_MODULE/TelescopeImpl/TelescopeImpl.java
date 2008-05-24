@@ -32,6 +32,7 @@ import alma.acs.container.ContainerServices;
 import alma.ACSErr.CompletionHolder;
 
 import alma.csatErrors.TelescopeAlreadyMovingEx;
+import alma.csatErrors.wrappers.AcsJTelescopeAlreadyMovingEx;
 import alma.acs.callbacks.*;
 import alma.TELESCOPE_MODULE.TelescopeOperations;
 
@@ -260,8 +261,10 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 				controlThread = null;
 			}
 		}
-		else if (doControl && (getAltAzVel().altVel != 0 || getAltAzVel().azVel != 0))
-			throw new TelescopeAlreadyMovingEx("Telescope moving when trying to set Slew Rate",null);
+		else if (doControl && (getAltAzVel().altVel != 0 || getAltAzVel().azVel != 0)) {
+			AcsJTelescopeAlreadyMovingEx e = new AcsJTelescopeAlreadyMovingEx("Telescope moving when trying to set Slew Rate");
+			throw e.toTelescopeAlreadyMovingEx();
+		}
 
 		devTelescope_comp.setVel(vel);
 	}

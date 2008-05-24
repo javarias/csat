@@ -112,6 +112,11 @@ module CSATSTATUS_MODULE {
 		boolean getTrackingStatus();
 
 		/**
+		 * Get actual slew rate.
+		 */
+		TYPES::AltazVel getSlewRate();
+
+		/**
 		 * Gets the current tracking rate of the telescope, in Ra/Dec velocity
 		 */
 		TYPES::RadecVel getTrackingRate();
