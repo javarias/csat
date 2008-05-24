@@ -220,6 +220,11 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 
 	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa){
 		p_aa.value = telescope_comp.getAltAz();
+
+		/* Correct back the pointing offsets */
+		p_aa.value.az  -= pointing_comp.azmOffset();
+		p_aa.value.alt -= pointing_comp.altOffset();
+
 		p_rd.value = calculations_comp.Altaz2Radec(p_aa.value);
 	}
 
