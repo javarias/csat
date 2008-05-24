@@ -9,4 +9,8 @@
         name="CannotOpenDevice" 
         description="The device that wants to be accessed cannot be opened"
         shortDescription="Can't open device"/>
+    <ErrorCode
+        name="TelescopeAlreadyMoving" 
+        description="The desired action cannot be performed since the telescope is already being moved"
+        shortDescription="Can't move telescope"/>
 </Type>

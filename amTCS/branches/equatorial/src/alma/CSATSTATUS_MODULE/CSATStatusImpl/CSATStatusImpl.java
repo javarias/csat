@@ -34,6 +34,7 @@ import alma.TYPES.RadecPosHolder;
 import alma.TYPES.AltazPos;
 import alma.TYPES.AltazPosHolder;
 import alma.TYPES.RadecVel;
+import alma.TYPES.AltazVel;
 import alma.TYPES.EarthPos;
 
 import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
@@ -56,6 +57,8 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	private alma.TELESCOPE_MODULE.Telescope telescope_comp;
 	private alma.CALCULATIONS_MODULE.Calculations calculations_comp;
 	private alma.TRACKING_MODULE.Tracking tracking_comp;
+	private alma.SAFETY_MODULE.Safety safety_comp;
+	private alma.POINTING_MODULE.Pointing pointing_comp;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -132,7 +135,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 			}
 		}
 		
-		/* We get the Calculations referece */
+		/* We get the Calculations reference */
 		try{
 			obj = m_containerServices.getDefaultComponent("IDL:alma/CALCULATIONS_MODULE/Calculations:1.0");
 			calculations_comp = alma.CALCULATIONS_MODULE.CalculationsHelper.narrow(obj);
@@ -141,7 +144,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 			throw new ComponentLifecycleException("Failed to get Calculations component reference");
 		}
 
-		/* We get the Tracking referece */
+		/* We get the Tracking reference */
       try{
          obj = m_containerServices.getDefaultComponent("IDL:alma/TRACKING_MODULE/Tracking:1.0");
          tracking_comp = alma.TRACKING_MODULE.TrackingHelper.narrow(obj);
@@ -150,6 +153,24 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
          m_logger.fine("Failed to get Tracking default component reference");
          throw new ComponentLifecycleException("Failed to get Tracking component reference");
       }
+
+		/* We get the Safety reference */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/SAFETY_MODULE/Safety:1.0");
+			safety_comp = alma.SAFETY_MODULE.SafetyHelper.narrow(obj);
+		} catch (AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Safety default component reference");
+			throw new ComponentLifecycleException("Failed to get Safety component reference");
+		}
+
+		/* We get the Pointing reference */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/POINTING_MODULE/Pointing:1.0");
+			pointing_comp = alma.POINTING_MODULE.PointingHelper.narrow(obj);
+		} catch (AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Pointing default component reference");
+			throw new ComponentLifecycleException("Failed to get Pointing component reference");
+		}
 
 	}
     
@@ -225,6 +246,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		p_aa.value.az  -= pointing_comp.azmOffset();
 		p_aa.value.alt -= pointing_comp.altOffset();
 
+		/* Now convert to Ra/Dec coordinates */
 		p_rd.value = calculations_comp.Altaz2Radec(p_aa.value);
 	}
 
@@ -236,12 +258,16 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		return tracking_comp.status();
 	}
 
+	public AltazVel getSlewRate(){
+		return telescope_comp.getAltAzVel();
+	}
+
 	public RadecVel getTrackingRate(){
 		return new RadecVel();
 	}
 
 	public int getSafety(RadecPos p){
-		return 0;
+		return safety_comp.getSafety(p);
 	}
 
 	public void EmergencyStop(){

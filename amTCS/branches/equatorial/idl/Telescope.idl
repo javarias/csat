@@ -5,6 +5,7 @@
 
 #include <baci.idl>
 #include <Types.idl>
+#include <csatErrors.idl>
 
 #pragma prefix "alma"
 
@@ -75,6 +76,16 @@ module TELESCOPE_MODULE {
 		 * Gets current Alt/Az velocities
 		 */
 		TYPES::AltazVel getAltAzVel();
+
+		/**
+		 * Sets a velocity on the two axis. If the telescope is already being
+		 * controlled by another thread, or if it is being moved by another
+		 * method, then it raises an TelescopeAlreadyMovingEx exception.
+		 *
+		 * @param vel The velocity to be set
+		 */
+		void setSlewRate(in TYPES::AltazVel vel)
+		   raises(csatErrors::TelescopeAlreadyMovingEx);
 	};
 
 	/** @interface EquatorialTelescope

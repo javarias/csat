@@ -5,6 +5,7 @@
 
 #include <baci.idl>
 #include <Types.idl>
+#include <csatErrors.idl>
 
 #pragma prefix "alma"
 
@@ -45,6 +46,14 @@ module CSATCONTROL_MODULE {
 		 * @param s The tracking status to set.
 		 */
 		void setTrackingRate(in TYPES::RadecVel v);
+
+		/**
+		 * Sets the slew rate for the telescope.
+		 *
+		 * @param s The slew rate to set.
+		 */
+		void setSlewRate(in TYPES::AltazVel v)
+		  raises(csatErrors::TelescopeAlreadyMovingEx);
 
 		/**
 		 * Goes to a RaDec position by specifing a fixed velocity.

@@ -29,6 +29,7 @@ import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
 
 import alma.ACS.*;
 import alma.TYPES.*;
+import alma.csatErrors.TelescopeAlreadyMovingEx;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
@@ -200,6 +201,10 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 	}
 
 	public void setTrackingRate(alma.TYPES.RadecVel v){
+	}
+
+	public void setSlewRate(alma.TYPES.AltazVel v) throws TelescopeAlreadyMovingEx {
+		telescope.setSlewRate(v);
 	}
 
 	public void goToRadec(alma.TYPES.RadecPos p, alma.TYPES.RadecVel v, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){

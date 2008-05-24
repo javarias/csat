@@ -31,6 +31,8 @@ import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
 import alma.ACSErr.CompletionHolder;
 
+import alma.csatErrors.TelescopeAlreadyMovingEx;
+import alma.csatErrors.wrappers.AcsJTelescopeAlreadyMovingEx;
 import alma.acs.callbacks.*;
 import alma.TELESCOPE_MODULE.TelescopeOperations;
 
@@ -244,6 +246,27 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 		altazVel.altVel = devTelescope_comp.altVel().get_sync(completionHolder);
 		altazVel.azVel = devTelescope_comp.azmVel().get_sync(completionHolder);
 		return altazVel;
+	}
+
+	public void setSlewRate(AltazVel vel) throws TelescopeAlreadyMovingEx {
+		if(doControl && (getAltAzVel().altVel == 0 && getAltAzVel().azVel == 0))
+		{
+			doControl = false;
+			if( controlThread != null ){
+				try {
+					controlThread.join();
+				} catch (InterruptedException e) {
+					m_logger.info("Cannot end the control thread");
+				}
+				controlThread = null;
+			}
+		}
+		else if (doControl && (getAltAzVel().altVel != 0 || getAltAzVel().azVel != 0)) {
+			AcsJTelescopeAlreadyMovingEx e = new AcsJTelescopeAlreadyMovingEx("Telescope moving when trying to set Slew Rate");
+			throw e.toTelescopeAlreadyMovingEx();
+		}
+
+		devTelescope_comp.setVel(vel);
 	}
 
 	public void run() {
