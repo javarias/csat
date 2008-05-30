@@ -2,7 +2,7 @@
 
 Lx200CoordDevIO::Lx200CoordDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx)
 {
-	char *_METHOD_="Lx200CoordDevIO::Lx200CoordDevIO";
+	char *_METHOD_ = (char *)"Lx200CoordDevIO::Lx200CoordDevIO";
 
 	try{
 		this->sp = new SerialRS232(deviceName,120);
@@ -28,7 +28,7 @@ Lx200CoordDevIO::Lx200CoordDevIO(char *deviceName, int axis) throw (csatErrors::
 
 Lx200CoordDevIO::~Lx200CoordDevIO() 
 {
-	char *_METHOD_="Lx200CoordDevIO::~Lx200CoordDevIO";
+	char *_METHOD_ = (char *)"Lx200CoordDevIO::~Lx200CoordDevIO";
 	ACS_TRACE(_METHOD_);
 
 	delete this->sp;
@@ -58,7 +58,7 @@ double Lx200CoordDevIO::sexa2double(const char *sexaStr)
 
 CORBA::Double Lx200CoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
 {
-	char *_METHOD_="Lx200CoordDevIO::read";
+	char *_METHOD_ = (char *)"Lx200CoordDevIO::read";
 	CORBA::Double value(0.0);
 	char *msg;
 	

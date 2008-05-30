@@ -1,5 +1,5 @@
-#ifndef _LX200_IMPL_H_
-#define _LX200_IMPL_H_
+#ifndef _LX200GPS_IMPL_H_
+#define _LX200GPS_IMPL_H_
 
 #ifndef __cplusplus
 #error This is a C++ include file and cannot be used from plain C
@@ -20,7 +20,7 @@ using namespace baci;
  * The class DevTelescope implements 
  */
 
-class Lx200Impl : public virtual CharacteristicComponentImpl,
+class Lx200GPSImpl : public virtual CharacteristicComponentImpl,
                     public virtual POA_DEVTELESCOPE_MODULE::DevTelescope
 {
 	public:
@@ -29,12 +29,12 @@ class Lx200Impl : public virtual CharacteristicComponentImpl,
 		 * @param poa POA which will activate this and also all other COBs
 		 * @param name Component name
 		 */
-		Lx200Impl(const ACE_CString& name, maci::ContainerServices* containerServices);
+		Lx200GPSImpl(const ACE_CString& name, maci::ContainerServices* containerServices);
 
 		/**
 		 * Destructor
 		 */
-		virtual ~Lx200Impl();
+		virtual ~Lx200GPSImpl();
 
 		/**
 		 * Override component lifecycles method
@@ -91,7 +91,7 @@ class Lx200Impl : public virtual CharacteristicComponentImpl,
 		/**
 		 * ALMA C++ coding standards state copy operators should be disabled.
 		 */
-		void operator=(const Lx200Impl&);
+		void operator=(const Lx200GPSImpl&);
 };
 
-#endif /* _LX200_IMPL_H_ */
+#endif /* _LX200GPS_IMPL_H_ */

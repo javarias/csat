@@ -1,5 +1,5 @@
-#ifndef _LX200_VEL_DEVIO_H_
-#define _LX200_VEL_DEVIO_H_
+#ifndef _LX200GPS_VEL_DEVIO_H_
+#define _LX200GPS_VEL_DEVIO_H_
 
 #include <baciDevIO.h>
 #include <acstime.h>
@@ -14,14 +14,14 @@
 	#define ALTITUDE_AXIS 1
 #endif
 
-class Lx200VelDevIO: public DevIO<CORBA::Double>
+class Lx200GPSVelDevIO: public DevIO<CORBA::Double>
 {
 
 	public:
-		Lx200VelDevIO(char *deviceName, int axist) 
+		Lx200GPSVelDevIO(char *deviceName, int axist) 
 			throw (csatErrors::CannotOpenDeviceEx);
 
-		virtual ~Lx200VelDevIO();
+		virtual ~Lx200GPSVelDevIO();
 
 		CORBA::Double read(ACS::Time &timestamp) 
 			throw (ACSErr::ACSbaseExImpl);
@@ -36,4 +36,4 @@ class Lx200VelDevIO: public DevIO<CORBA::Double>
 		double slewRateAzimuth;
 };
 
-#endif /* _LX200_VEL_DEVIO_H_ */
+#endif /* _LX200GPS_VEL_DEVIO_H_ */

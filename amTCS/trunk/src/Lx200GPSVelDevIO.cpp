@@ -1,10 +1,10 @@
 #include <math.h>
 
-#include "Lx200VelDevIO.h"
+#include "Lx200GPSVelDevIO.h"
 
-Lx200VelDevIO::Lx200VelDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx)
+Lx200GPSVelDevIO::Lx200GPSVelDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx)
 {
-        char *_METHOD_="Lx200VelDevIO::Lx200VelDevIO";
+        char *_METHOD_ = (char * )"Lx200GPSVelDevIO::Lx200GPSVelDevIO";
 	ACS::Time time = getTimeStamp();
 	CORBA::Double initialSlewRate(0.0);
 
@@ -29,17 +29,17 @@ Lx200VelDevIO::Lx200VelDevIO(char *deviceName, int axis) throw (csatErrors::Cann
         }
 }
 
-Lx200VelDevIO::~Lx200VelDevIO() 
+Lx200GPSVelDevIO::~Lx200GPSVelDevIO() 
 {
-        char *_METHOD_="Lx200VelDevIO::~Lx200VelDevIO";
+        char *_METHOD_ = (char *)"Lx200GPSVelDevIO::~Lx200GPSVelDevIO";
         ACS_TRACE(_METHOD_);
 
 	delete this->sp;
 }
 
-CORBA::Double Lx200VelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
+CORBA::Double Lx200GPSVelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
 {
-        char *_METHOD_="Lx200VelDevIO::read";
+        char *_METHOD_ = (char *)"Lx200GPSVelDevIO::read";
         ACS_TRACE(_METHOD_);
 
 	if(this->axis == ALTITUDE_AXIS)
@@ -48,9 +48,8 @@ CORBA::Double Lx200VelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseEx
 		return this->slewRateAzimuth;
 }
 
-void Lx200VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
+void Lx200GPSVelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
 {
-	char *_METHOD_="Lx200VelDevIO::write";
 	char slewRateCmd[9];
 	char moveCmd[4];
 	char posHaltCmd[4];
