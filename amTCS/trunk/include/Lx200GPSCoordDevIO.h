@@ -1,5 +1,5 @@
-#ifndef _LX200_COORD_DEVIO_H_
-#define _LX200_COORD_DEVIO_H_
+#ifndef _LX200_GPSCOORD_DEVIO_H_
+#define _LX200_GPSCOORD_DEVIO_H_
 
 #include <baciDevIO.h>
 #include <acstime.h>
@@ -15,7 +15,7 @@
 	#define ALTITUDE_AXIS 1
 #endif
 
-class Lx200CoordDevIO: public DevIO<CORBA::Double>
+class Lx200GPSCoordDevIO: public DevIO<CORBA::Double>
 {
 	private:
 		SerialRS232 *sp;
@@ -23,10 +23,10 @@ class Lx200CoordDevIO: public DevIO<CORBA::Double>
 
 	public:
 
-		Lx200CoordDevIO(char *deviceName, int axis) 
+		Lx200GPSCoordDevIO(char *deviceName, int axis) 
 			throw(csatErrors::CannotOpenDeviceEx);
 
-		virtual ~Lx200CoordDevIO();
+		virtual ~Lx200GPSCoordDevIO();
 
 		double sexa2double(const char *sexaStr);
 
@@ -38,4 +38,4 @@ class Lx200CoordDevIO: public DevIO<CORBA::Double>
 
 };
 
-#endif /* _LX200_COORD_DEVIO_H_ */
+#endif /* _LX200_GPSCOORD_DEVIO_H_ */

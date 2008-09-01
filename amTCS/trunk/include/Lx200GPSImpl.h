@@ -83,10 +83,7 @@ class Lx200GPSImpl : public virtual CharacteristicComponentImpl,
 
 		// Private attributes (IDL)
 		bool m_locking;
-
-		// Private attributes (others)
-		
-		std::string  component_name;	
+		ACE_CString m_name;
 
 		/**
 		 * ALMA C++ coding standards state copy operators should be disabled.

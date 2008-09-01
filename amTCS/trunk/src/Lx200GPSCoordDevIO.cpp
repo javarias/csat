@@ -1,8 +1,8 @@
-#include "Lx200CoordDevIO.h"
+#include "Lx200GPSCoordDevIO.h"
 
-Lx200CoordDevIO::Lx200CoordDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx)
+Lx200GPSCoordDevIO::Lx200GPSCoordDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx)
 {
-	char *_METHOD_ = (char *)"Lx200CoordDevIO::Lx200CoordDevIO";
+	char *_METHOD_ = (char *)"Lx200GPSCoordDevIO::Lx200GPSCoordDevIO";
 
 	try{
 		this->sp = new SerialRS232(deviceName,120);
@@ -26,15 +26,15 @@ Lx200CoordDevIO::Lx200CoordDevIO(char *deviceName, int axis) throw (csatErrors::
 	this->axis = axis;
 }
 
-Lx200CoordDevIO::~Lx200CoordDevIO() 
+Lx200GPSCoordDevIO::~Lx200GPSCoordDevIO() 
 {
-	char *_METHOD_ = (char *)"Lx200CoordDevIO::~Lx200CoordDevIO";
+	char *_METHOD_ = (char *)"Lx200GPSCoordDevIO::~Lx200GPSCoordDevIO";
 	ACS_TRACE(_METHOD_);
 
 	delete this->sp;
 }
 
-double Lx200CoordDevIO::sexa2double(const char *sexaStr)
+double Lx200GPSCoordDevIO::sexa2double(const char *sexaStr)
 {
         double converted = 0;
         double x = 0, y = 0, z = 0;
@@ -56,9 +56,9 @@ double Lx200CoordDevIO::sexa2double(const char *sexaStr)
         return converted;
 }
 
-CORBA::Double Lx200CoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
+CORBA::Double Lx200GPSCoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
 {
-	char *_METHOD_ = (char *)"Lx200CoordDevIO::read";
+	char *_METHOD_ = (char *)"Lx200GPSCoordDevIO::read";
 	CORBA::Double value(0.0);
 	char *msg;
 	
@@ -80,7 +80,7 @@ CORBA::Double Lx200CoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbase
 	return value;
 }
 
-void Lx200CoordDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
+void Lx200GPSCoordDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
 {
-	ACS_SHORT_LOG((LM_ERROR, "Lx200CoordDevIO::write: This method should never be called!"));
+	ACS_SHORT_LOG((LM_ERROR, "Lx200GPSCoordDevIO::write: This method should never be called!"));
 }

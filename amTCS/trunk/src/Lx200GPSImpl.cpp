@@ -5,7 +5,7 @@ static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 #include <SerialRS232.h>
 
 #include "Lx200GPSImpl.h"
-#include "Lx200CoordDevIO.h"
+#include "Lx200GPSCoordDevIO.h"
 #include "Lx200GPSVelDevIO.h"
 #include "csatErrors.h"
 
@@ -20,7 +20,6 @@ Lx200GPSImpl::Lx200GPSImpl(const ACE_CString& name, maci::ContainerServices *con
       ,m_azmVel_sp(this)
 {
 	const char * _METHOD_ = (char *)"Lx200GPSImpl::Lx200GPSImpl";
-	component_name = name.c_str();
 	ACS_TRACE(_METHOD_);
 	m_locking = true;
 }
@@ -40,14 +39,14 @@ void Lx200GPSImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,c
 
         if( getComponent() != 0){
 
-                Lx200CoordDevIO *azmDevIO = NULL;
-                Lx200CoordDevIO *altDevIO = NULL;
+                Lx200GPSCoordDevIO *azmDevIO = NULL;
+                Lx200GPSCoordDevIO *altDevIO = NULL;
                 Lx200GPSVelDevIO   *altVelDevIO = NULL;
                 Lx200GPSVelDevIO   *azmVelDevIO = NULL;
 
                 try{
-                        azmDevIO = new Lx200CoordDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS);
-                        altDevIO = new Lx200CoordDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS);
+                        azmDevIO = new Lx200GPSCoordDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS);
+                        altDevIO = new Lx200GPSCoordDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS);
                         azmVelDevIO = new Lx200GPSVelDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS);
                         altVelDevIO = new Lx200GPSVelDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS);
                 } catch (csatErrors::CannotOpenDeviceEx &ex){
@@ -56,14 +55,14 @@ void Lx200GPSImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,c
                         throw lifeEx;
                 }
 
-                m_realAzm_sp = new ROdouble( (component_name + std::string(":realAzm")).c_str(),
+                m_realAzm_sp = new ROdouble( (m_name + ":realAzm").c_str(),
                                                      getComponent(), azmDevIO);
-                m_realAlt_sp = new ROdouble( (component_name + std::string(":realAlt")).c_str(),
+                m_realAlt_sp = new ROdouble( (m_name + ":realAlt").c_str(),
                                           getComponent(), altDevIO);
 
-                m_altVel_sp  = new RWdouble( ( component_name + std::string(":altVel")).c_str(),
+                m_altVel_sp  = new RWdouble( ( m_name + ":altVel").c_str(),
                                           getComponent(), altVelDevIO);
-                m_azmVel_sp  = new RWdouble( ( component_name + std::string(":azmVel")).c_str(),
+                m_azmVel_sp  = new RWdouble( ( m_name + ":azmVel").c_str(),
                                           getComponent(), azmVelDevIO);
         }
 }
