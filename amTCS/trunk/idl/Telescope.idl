@@ -88,6 +88,11 @@ module TELESCOPE_MODULE {
 		   raises(csatErrors::TelescopeAlreadyMovingEx);
 	};
 
+	/** @interface EquatorialTelescope
+	 *  Interaface for controlling equatorial mounted telescopes
+	 */
+	interface EquatorialTelescope : Telescope {
+	};
 };
 
 #endif /* _TELESCOPE_IDL_ */

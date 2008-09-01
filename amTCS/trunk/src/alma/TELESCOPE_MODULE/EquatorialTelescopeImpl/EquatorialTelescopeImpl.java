@@ -20,7 +20,7 @@
  *    MA 02111-1307  USA
  */
 
-package alma.TELESCOPE_MODULE.TelescopeImpl;
+package alma.TELESCOPE_MODULE.EquatorialTelescopeImpl;
 
 import java.util.logging.Logger;
 
@@ -34,16 +34,16 @@ import alma.ACSErr.CompletionHolder;
 import alma.csatErrors.TelescopeAlreadyMovingEx;
 import alma.csatErrors.wrappers.AcsJTelescopeAlreadyMovingEx;
 import alma.acs.callbacks.*;
-import alma.TELESCOPE_MODULE.TelescopeOperations;
+import alma.TELESCOPE_MODULE.EquatorialTelescopeOperations;
 
-public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, Runnable {
+public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, ComponentLifecycle, Runnable {
 
 	private static final double PRESITION = 0.01;
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
 
 	private AltazPos m_commandedPos;
-	private AltazPos m_softRealPos;
+	private RadecPos m_softRealPos;
 	private RadecPos m_commandedRadecPos;
 
 	private alma.DEVTELESCOPE_MODULE.DevTelescope devTelescope_comp;
@@ -82,7 +82,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 			throw new ComponentLifecycleException("Failed to get Pointing component reference");
 		}
 
-		/* We get the Pointing reference */
+		/* We get the Calculations reference */
 		try{
 			obj = m_containerServices.getDefaultComponent("IDL:alma/CALCULATIONS_MODULE/Calculations:1.0");
 			calculations_comp = alma.CALCULATIONS_MODULE.CalculationsHelper.narrow(obj);
@@ -90,22 +90,22 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 			m_logger.fine("Failed to get Calculations default component reference");
 			throw new ComponentLifecycleException("Failed to get Calculations component reference");
 		}
-		
+
 		doControl = true;
 
 		CompletionHolder completionHolder = new CompletionHolder();
 		m_commandedPos = new AltazPos();
-		m_softRealPos  = new AltazPos();
+		m_softRealPos  = new RadecPos();
 		m_commandedRadecPos = new RadecPos();
 
-		m_commandedPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
 		m_commandedPos.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
+		m_commandedPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
 
-		m_softRealPos.alt = m_commandedPos.alt;
-		m_softRealPos.az  = m_commandedPos.az;
+		m_commandedRadecPos.ra  = m_commandedPos.az + calculations_comp.siderealTime();
+		m_commandedRadecPos.dec = m_commandedPos.alt;
 
-		m_commandedRadecPos = calculations_comp.Altaz2Radec(m_commandedPos);
-		
+		m_softRealPos = m_commandedRadecPos;
+
 		controlThread = m_containerServices.getThreadFactory().newThread(this);
 		controlThread.start();
 	}
@@ -154,7 +154,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 	}
 	
 	/////////////////////////////////////////////////////////////
-	// Implementation of TelescopeOperations
+	// Implementation of EquatorialTelescopeOperations
 	/////////////////////////////////////////////////////////////
 
 	private alma.ACS.CBvoid cb = null;
@@ -168,7 +168,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 			controlThread.start();
 		}
 
-		m_commandedPos = calculations_comp.Radec2Altaz(position);
+		m_commandedPos.az  = position.ra - calculations_comp.siderealTime();
+		m_commandedPos.alt = position.dec;
 		m_commandedRadecPos.ra = position.ra;
 		m_commandedRadecPos.dec = position.dec;
 		this.cb = cb;
@@ -192,10 +193,10 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 	}
 
 	public void gotoAltAz(AltazPos position, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
-		m_commandedPos.alt = position.alt;
-		m_commandedPos.az  = position.az;
 
-		m_commandedRadecPos = calculations_comp.Altaz2Radec(m_commandedPos);
+		m_commandedRadecPos = calculations_comp.Altaz2Radec(position);
+		m_commandedPos.az  = m_commandedRadecPos.ra - calculations_comp.siderealTime();
+		m_commandedPos.alt = m_commandedRadecPos.dec;
 
 		doControl = true;
 
@@ -228,11 +229,11 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 
 		if( doControl == false && controlThread != null ){
 			CompletionHolder completionHolder = new CompletionHolder();
-			m_softRealPos.alt = devTelescope_comp.realAlt().get_sync(completionHolder);
-			m_softRealPos.az  = devTelescope_comp.realAzm().get_sync(completionHolder);
+			m_softRealPos.dec = devTelescope_comp.realAlt().get_sync(completionHolder);
+			m_softRealPos.ra  = devTelescope_comp.realAzm().get_sync(completionHolder) - calculations_comp.siderealTime();
 		}
 
-		return m_softRealPos;
+		return calculations_comp.Radec2Altaz(m_softRealPos);
 	}
 
 	public void setCurrentAltAz(AltazPos position){
@@ -274,6 +275,8 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 		
 		CompletionHolder completionHolder = new CompletionHolder();
 		AltazVel altazVel = new AltazVel();
+		RadecPos tmprd = new RadecPos();
+		AltazPos tmpaa;
 		double realAltitude;
 		double realAzimuth;
 		double commandedAltitude;
@@ -292,14 +295,25 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 				realAltitude = devTelescope_comp.realAlt().get_sync(completionHolder);
 				realAzimuth  = devTelescope_comp.realAzm().get_sync(completionHolder);
 
-				//System.out.println("Estas son las coordenadas: " + realAltitude + " " + realAzimuth);
-				m_softRealPos.alt = realAltitude;
-				m_softRealPos.az  = realAzimuth;
+				m_softRealPos.dec = realAltitude;
+				m_softRealPos.ra  = realAzimuth + calculations_comp.siderealTime();
 				
 				/* We add to the commanded position the pointing corrections */
-				commandedAltitude = m_commandedPos.alt + pointing_comp.altOffset();
-				commandedAzimuth  = m_commandedPos.az + pointing_comp.azmOffset();
-			
+				if( pointing_comp.azmOffset() != 0 || pointing_comp.altOffset() != 0) {
+					tmprd.ra  = m_commandedPos.az + calculations_comp.siderealTime();
+					tmprd.dec = m_commandedPos.alt;
+					tmpaa = calculations_comp.Radec2Altaz(tmprd);
+					tmpaa.alt += pointing_comp.altOffset();
+					tmpaa.az  += pointing_comp.azmOffset();
+					tmprd = calculations_comp.Altaz2Radec(tmpaa);
+	
+					commandedAzimuth  = tmprd.ra - calculations_comp.siderealTime();
+					commandedAltitude = tmprd.dec;
+				} else {
+					commandedAzimuth  = m_commandedPos.az;
+					commandedAltitude = m_commandedPos.alt;
+				}
+
 				/* We search which movement is shorter in azimuth (left or right) */
 				if( commandedAzimuth > realAzimuth ){
 					if( commandedAzimuth - realAzimuth > (realAzimuth + 360) - commandedAzimuth ){
@@ -333,12 +347,15 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 						diffAlt        *= (-1);
 					}
 
-					     if( diffAlt <  0.1 )                  altazVel.altVel *= 0.005;
-					else if( diffAlt >= 0.1 && diffAlt < 0.5 ) altazVel.altVel *= 0.01;
-					else if( diffAlt >= 0.5 && diffAlt < 3 )   altazVel.altVel *= 0.08;
-					else if( diffAlt >= 3   && diffAlt < 5 )   altazVel.altVel *= 0.4;
-					else if( diffAlt >= 5   && diffAlt < 10)   altazVel.altVel *= 1;
-					else if( diffAlt >= 10)                    altazVel.altVel *= 4;					     
+					     if( diffAlt <  0.1 )                  altazVel.altVel *= 0.004;
+					else if( diffAlt >= 0.1 && diffAlt < 0.4 ) altazVel.altVel *= 0.008;
+					else if( diffAlt >= 0.4 && diffAlt < 0.5 ) altazVel.altVel *= 0.01;
+					else if( diffAlt >= 0.5 && diffAlt < 1 )   altazVel.altVel *= 0.5;
+					else if( diffAlt >= 1   && diffAlt < 3 )   altazVel.altVel *= 0.8;
+					else if( diffAlt >= 3   && diffAlt < 5 )   altazVel.altVel *= 1;
+					else if( diffAlt >= 5   && diffAlt < 10)   altazVel.altVel *= 2;
+					else if( diffAlt >= 10  && diffAlt < 15)   altazVel.altVel *= 3;
+					else if( diffAlt >= 15)                    altazVel.altVel *= 8;
 
 					
 				} else {
@@ -355,12 +372,15 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 						diffAzm       *= (-1);
 					}
 
-					     if( diffAzm <  0.1 )                  altazVel.azVel *= 0.005;
-					else if( diffAzm >= 0.1 && diffAzm < 0.5 ) altazVel.azVel *= 0.01;
-					else if( diffAzm >= 0.5 && diffAzm < 3 )   altazVel.azVel *= 0.08;
-					else if( diffAzm >= 3   && diffAzm < 5 )   altazVel.azVel *= 0.4;
-					else if( diffAzm >= 5   && diffAzm < 10)   altazVel.azVel *= 1;
-					else if( diffAzm >= 10)                    altazVel.azVel *= 4;
+					     if( diffAzm <  0.1 )                  altazVel.azVel *= 0.004;
+					else if( diffAzm >= 0.1 && diffAzm < 0.4 ) altazVel.azVel *= 0.008;
+					else if( diffAzm >= 0.4 && diffAzm < 0.5 ) altazVel.azVel *= 0.01;
+					else if( diffAzm >= 0.5 && diffAzm < 1 )   altazVel.azVel *= 0.5;
+					else if( diffAzm >= 1   && diffAzm < 3 )   altazVel.azVel *= 0.8;
+					else if( diffAzm >= 3   && diffAzm < 5 )   altazVel.azVel *= 1;
+					else if( diffAzm >= 5   && diffAzm < 10)   altazVel.azVel *= 2;
+					else if( diffAzm >= 10  && diffAzm < 15)   altazVel.azVel *= 3;
+					else if( diffAzm >= 15)                    altazVel.azVel *= 8;
 
 				} else {
 					altazVel.azVel = 0;

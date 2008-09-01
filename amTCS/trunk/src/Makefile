@@ -56,13 +56,15 @@ INCLUDES        =
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = Lx200GPSImpl NexstarImpl NexsimImpl lpiImpl eTrexImpl PcDummyGpsImpl CalculationsImpl
+LIBRARIES       = Lx200GPSImpl Lx200EMCImpl NexstarImpl NexsimImpl lpiImpl eTrexImpl PcDummyGpsImpl CalculationsImpl
 LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
 Lx200GPSImpl_OBJECTS	    = Lx200GPSCoordDevIO Lx200GPSVelDevIO Lx200GPSImpl
 Lx200GPSImpl_LIBS		    = TypesStubs DevTelescopeStubs csatErrors SerialCommunication
+Lx200EMCImpl_OBJECTS	    = Lx200EMCCoordDevIO Lx200EMCVelDevIO Lx200EMCImpl
+Lx200EMCImpl_LIBS		    = TypesStubs DevTelescopeStubs csatErrors SerialCommunication
 NexstarImpl_OBJECTS      = NexstarCoordDevIO NexstarVelDevIO NexstarImpl
 NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors SerialCommunication
 NexsimImpl_OBJECTS       = NexsimCoordDevIO NexsimVelDevIO NexsimImpl

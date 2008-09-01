@@ -1,5 +1,5 @@
-#ifndef _NEXSTARIMPL_H_
-#define _NEXSTARIMPL_H_
+#ifndef _EQUATORIALNEXSTARIMPL_H_
+#define _EQUATORIALNEXSTARIMPL_H_
 
 #ifndef __cplusplus
 #error This is a C++ include file and cannot be used from plain C
@@ -20,7 +20,7 @@ using namespace baci;
  * The class DevTelescope implements 
  */
 
-class NexstarImpl : public virtual CharacteristicComponentImpl,
+class EquatorialNexstarImpl : public virtual CharacteristicComponentImpl,
                     public virtual POA_DEVTELESCOPE_MODULE::DevTelescope
 //                         public ActionImplementator
 {
@@ -31,11 +31,11 @@ public:
 	 * @param poa POA which will activate this and also all other COBs
 	 * @param name Component name
 	 */
-	NexstarImpl(const ACE_CString& name, maci::ContainerServices* containerServices);
+	EquatorialNexstarImpl(const ACE_CString& name, maci::ContainerServices* containerServices);
 	/**
 	 * Destructor
 	 */
-	virtual ~NexstarImpl();
+	virtual ~EquatorialNexstarImpl();
 
 	/**
 	 * Override component lifecycles method
@@ -84,7 +84,7 @@ private:
 	/**
 	 * ALMA C++ coding standards state copy operators should be disabled.
 	 */
-	void operator=(const NexstarImpl&);
+	void operator=(const EquatorialNexstarImpl&);
 };
 
 #endif /* _NEXSTARIMPL_H_ */

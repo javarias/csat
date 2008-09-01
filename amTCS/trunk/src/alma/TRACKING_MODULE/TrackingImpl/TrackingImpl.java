@@ -30,6 +30,7 @@ import alma.acs.component.ComponentLifecycle;
 import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
 import alma.TRACKING_MODULE.TrackingOperations;
+import alma.TELESCOPE_MODULE.Telescope;
 
 public class TrackingImpl implements TrackingOperations, ComponentLifecycle, Runnable {
 
@@ -39,7 +40,7 @@ public class TrackingImpl implements TrackingOperations, ComponentLifecycle, Run
 	private boolean m_status;
 	private RadecVel m_rate;
 
-	private alma.TELESCOPE_MODULE.Telescope telescope_comp;
+	private Telescope telescope_comp;
 	private Thread trackingThread = null;
 
 	private boolean doControl;
@@ -53,14 +54,14 @@ public class TrackingImpl implements TrackingOperations, ComponentLifecycle, Run
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
 
-		org.omg.CORBA.Object obj = null;
-		try{
-			obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
-			telescope_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
-		} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
-			m_logger.fine("Failed to get Telescope default component reference");
-			throw new ComponentLifecycleException("Failed to get Telescope component reference");
-		}
+		//org.omg.CORBA.Object obj = null;
+		//try{
+		//	obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
+		//	telescope_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
+		//} catch (alma.JavaContainerError.wrappers.AcsJContainerServicesEx e) {
+		//	m_logger.fine("Failed to get Telescope default component reference");
+		//	throw new ComponentLifecycleException("Failed to get Telescope component reference");
+		//}
 
 		doControl = true;
 
@@ -111,6 +112,11 @@ public class TrackingImpl implements TrackingOperations, ComponentLifecycle, Run
 	/////////////////////////////////////////////////////////////
 	// Implementation of TrackingOperations
 	/////////////////////////////////////////////////////////////
+
+	public void setTelescope(Telescope tel) {
+		this.telescope_comp = tel;
+		m_logger.info("Got telescope reference on tracking...");
+	}
 
 	public void setStatus(boolean status){
 		this.m_status = status;

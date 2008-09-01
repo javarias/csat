@@ -2,7 +2,7 @@
 
 #include "NexstarVelDevIO.h"
 
-NexstarVelDevIO::NexstarVelDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx){
+NexstarVelDevIO::NexstarVelDevIO(char *deviceName, int axis, bool reversed) throw (csatErrors::CannotOpenDeviceEx){
 
 	char *_METHOD_=(char *)"NexstarVelDevIO::NexstarVelDevIO";
 
@@ -32,6 +32,8 @@ NexstarVelDevIO::NexstarVelDevIO(char *deviceName, int axis) throw (csatErrors::
       this->slewRateElevation = 0;
    else
       this->slewRateAzimuth = 0;
+
+	this->reversed = reversed;
 }
 
 NexstarVelDevIO::~NexstarVelDevIO() {
@@ -39,18 +41,30 @@ NexstarVelDevIO::~NexstarVelDevIO() {
 }
 
 CORBA::Double NexstarVelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl) {
-	//CORBA::Double azm(0.0);
-	//return azm;
+
 	if(this->axis == ALTITUDE_AXIS)
-      return this->slewRateElevation;
+		if( this->slewRateElevation )
+	      return ( (this->reversed) ? this->slewRateElevation*(-1) : this->slewRateElevation);
+		else
+			return 0.0;
    else
-      return this->slewRateAzimuth;
+		if( this->slewRateAzimuth )
+	      return ( (this->reversed) ? this->slewRateAzimuth*(-1) : this->slewRateAzimuth);
+		else
+			return 0.0;
 }
 
-void NexstarVelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl){
+void NexstarVelDevIO::write(const CORBA::Double &recv_value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl){
 
 	int vel = 0;
-	double absValue = fabs(value);
+	double absValue;
+	double value;
+
+	value = recv_value;
+	if( this->reversed )
+		value *= (-1);
+
+	absValue = fabs(value);
 	char command[8];
 
 	// We see which telescope's velocity is adecuated for the given double value

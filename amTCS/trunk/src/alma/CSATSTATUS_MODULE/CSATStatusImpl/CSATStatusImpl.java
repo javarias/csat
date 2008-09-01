@@ -22,6 +22,7 @@
 
 package alma.CSATSTATUS_MODULE.CSATStatusImpl;
 
+import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 import alma.ACS.CBDescIn;
@@ -64,23 +65,76 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	/////////////////////////////////////////////////////////////
 	
 	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException {
+
+		int m_mount = -1;
+		String defaultTelescope = null;
+		com.cosylab.CDB.DAL dal = null;
+		com.cosylab.CDB.DAO dao = null;
+		org.omg.CORBA.Object obj = null;
+
 		m_containerServices = containerServices;
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
 
 		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STOP);
 
-		org.omg.CORBA.Object obj = null;
-
-		/* We get the Telescope reference */
-		try{
-			obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
-			telescope_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
-		} catch (AcsJContainerServicesEx e) {
-			m_logger.fine("Failed to get Telescope default component reference");
-			throw new ComponentLifecycleException("Failed to get Telescope component reference");
+		/* Search across the CDB for the default DevTelescope component */
+		try {
+			dal = m_containerServices.getCDB();
+			dao = dal.get_DAO_Servant("MACI/Components");
+			String components = dao.get_string("/_characteristics");
+			StringTokenizer tokenizer = new StringTokenizer(components, ",");
+			while (tokenizer.hasMoreTokens())
+			{
+				String subname = tokenizer.nextToken().toString();
+				String componentName = subname;
+				if(dao.get_string("/" + componentName + "/Type").equals("IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"))
+					if( dao.get_string( "/" + componentName + "/Default").equals("true") ) {
+						defaultTelescope = componentName;
+						break;
+					}
+			}
+			//dao.destroy();
+		} catch(Exception e) {
+			m_logger.fine("Couldn't retrieve CDB information for components");
+			throw new ComponentLifecycleException("Failed to get the componets list from the CDB");
 		}
 
+		/* Get the mount type for the default telescope */
+		try {
+			dal = m_containerServices.getCDB();
+			dao = dal.get_DAO_Servant("alma/" + defaultTelescope);
+			m_mount = dao.get_long("mount/default_value");
+			//dao.destroy();
+		} catch (Exception e) {
+			m_logger.fine("Couldn't retrieve mount type for the telescope");
+			throw new ComponentLifecycleException("Failed to get the mount type for the default physical telescope");
+		}
+
+		/* Depending on the mount type we get the telescope reference */
+		if( m_mount == alma.DEVTELESCOPE_MODULE.mountType._ALTAZ ) {
+			m_logger.info("Starting Telescope (we have an Alt/Az telescope here)");
+			/* We get the Telescope reference */
+			try{
+				obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
+				telescope_comp = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
+			} catch (AcsJContainerServicesEx e) {
+				m_logger.fine("Failed to get Telescope default component reference");
+				throw new ComponentLifecycleException("Failed to get Telescope component reference");
+			}
+		}
+		else if( m_mount == alma.DEVTELESCOPE_MODULE.mountType._EQUATORIAL) {
+			m_logger.info("Starting EquatorialTelescope (we have an equatorial telescope here)");
+			/* We get the EquatorialTelescope reference */
+			try{
+				obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/EquatorialTelescope:1.0");
+				telescope_comp = alma.TELESCOPE_MODULE.EquatorialTelescopeHelper.narrow(obj);
+			} catch (AcsJContainerServicesEx e) {
+				m_logger.fine("Failed to get EquatorialTelescope default component reference");
+				throw new ComponentLifecycleException("Failed to get EquatorialTelescope component reference");
+			}
+		}
+		
 		/* We get the Calculations reference */
 		try{
 			obj = m_containerServices.getDefaultComponent("IDL:alma/CALCULATIONS_MODULE/Calculations:1.0");
@@ -94,6 +148,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
       try{
          obj = m_containerServices.getDefaultComponent("IDL:alma/TRACKING_MODULE/Tracking:1.0");
          tracking_comp = alma.TRACKING_MODULE.TrackingHelper.narrow(obj);
+			tracking_comp.setTelescope(telescope_comp);
       } catch (AcsJContainerServicesEx e) {
          m_logger.fine("Failed to get Tracking default component reference");
          throw new ComponentLifecycleException("Failed to get Tracking component reference");
