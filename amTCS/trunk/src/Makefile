@@ -61,8 +61,8 @@ LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-Lx200GPSImpl_OBJECTS	 = Lx200CoordDevIO Lx200GPSVelDevIO Lx200GPSImpl
-Lx200GPSImpl_LIBS		 = TypesStubs DevTelescopeStubs csatErrors SerialCommunication
+Lx200GPSImpl_OBJECTS	    = Lx200CoordDevIO Lx200GPSVelDevIO Lx200GPSImpl
+Lx200GPSImpl_LIBS		    = TypesStubs DevTelescopeStubs csatErrors SerialCommunication
 NexstarImpl_OBJECTS      = NexstarCoordDevIO NexstarVelDevIO NexstarImpl
 NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors SerialCommunication
 NexsimImpl_OBJECTS       = NexsimCoordDevIO NexsimVelDevIO NexsimImpl
