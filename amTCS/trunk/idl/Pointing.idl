@@ -47,8 +47,9 @@ module POINTING_MODULE {
 		 * Obtains the delta values of the pointing model for a given position
 		 * in Ra/Dec coordinates
 		 * @param p The given position in Ra/Dec coordinates
+		 * @param st The current sidereal time
 		 */
-		TYPES::RadecPos offSet(in TYPES::RadecPos p);
+		TYPES::RadecPos offSet(in TYPES::RadecPos p, in double st);
 		
 		/**
 		 * Obtains the delta values of the pointing model for a given position

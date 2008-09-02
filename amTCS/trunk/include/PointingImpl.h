@@ -2,6 +2,9 @@
 #define _POINTINGIMPL_H
  
 #include <acscomponentImpl.h>
+
+#include <ObsList.h>
+
 #include "PointingS.h"
 #include "TypesC.h"
 
@@ -9,6 +12,8 @@ class PointingImpl: virtual public POA_POINTING_MODULE::Pointing,
                     virtual public acscomponent::ACSComponentImpl
 {
 	PointingImpl(const ACE_CString &name, maci::ContainerServices *containerServices);
+
+	void initialize() throw (ACSErr::ACSbaseExImpl);
 
 	::CORBA::Double altOffset () throw (::CORBA::SystemException);
 
@@ -18,7 +23,7 @@ class PointingImpl: virtual public POA_POINTING_MODULE::Pointing,
 
 	void offSetAzm (::CORBA::Double degrees) throw (::CORBA::SystemException);
 
-	::TYPES::RadecPos offSet (const ::TYPES::RadecPos & p) throw (::CORBA::SystemException);
+	::TYPES::RadecPos offSet (const ::TYPES::RadecPos & p, ::CORBA::Double st) throw (::CORBA::SystemException);
 
 	void resetAdjusts () throw(::CORBA::SystemException);
 
@@ -30,6 +35,10 @@ class PointingImpl: virtual public POA_POINTING_MODULE::Pointing,
 
 	::CORBA::Boolean getState (::TYPES::PointingModel model) throw (::CORBA::SystemException);
 
+private:
+
+	ObsList *m_obslist;
+	::TYPES::AltazPos m_manualOffset;
 };
 
 #endif /* _POINTINGIMPL_H */
