@@ -56,7 +56,7 @@ INCLUDES        =
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = Lx200GPSImpl Lx200EMCImpl NexstarImpl NexsimImpl lpiImpl eTrexImpl PcDummyGpsImpl CalculationsImpl
+LIBRARIES       = Lx200GPSImpl Lx200EMCImpl NexstarImpl NexsimImpl lpiImpl eTrexImpl PcDummyGpsImpl CalculationsImpl PointingImpl
 LIBRARIES_L     =
 
 #
@@ -77,6 +77,8 @@ PcDummyGpsImpl_OBJECTS   = PcDummyGpsImpl
 PcDummyGpsImpl_LIBS      = TypesStubs DevGPSStubs csatErrors
 CalculationsImpl_OBJECTS = CalculationsImpl
 CalculationsImpl_LIBS    = TypesStubs LocaleStubs CalculationsStubs csatErrors
+PointingImpl_OBJECTS     = PointingImpl
+PointingImpl_LIBS        = TypesStubs PointingStubs csatErrors
 
 #
 # Scripts (public and local)
@@ -138,11 +140,11 @@ ACSERRDEF = csatErrors
 
 # Jarfiles and their directories
 #
-JARFILES= TelescopeImpl CCDImpl LocaleImpl PointingImpl TrackingImpl SafetyImpl CSATControlImpl CSATStatusImpl callbacks
+JARFILES= TelescopeImpl CCDImpl LocaleImpl TrackingImpl SafetyImpl CSATControlImpl CSATStatusImpl callbacks
 TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
 CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
 LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
-PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
+#PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
 TrackingImpl_DIRS=alma/TRACKING_MODULE/TrackingImpl
 SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl

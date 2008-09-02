@@ -32,29 +32,62 @@ module POINTING_MODULE {
 		readonly attribute double azmOffset;
 
 		/**
-		 * Adds an offset over the current altitude offset
+		 * Adds a manual offset over the current altitude offset
 		 * @param degrees The additional offset
 		 */
 		void offSetAlt(in double degrees);
 
 		/**
-		 * Adds an offset over the current azimuth offset
+		 * Adds a manual offset over the current azimuth offset
 		 * @param degrees The additional offset
 		 */
 		void offSetAzm(in double degrees);
 
-		void offSet(in TYPES::RadecPos p, out double ra_delta, out double dec_delta);
+		/**
+		 * Obtains the delta values of the pointing model for a given position
+		 * in Ra/Dec coordinates
+		 * @param p The given position in Ra/Dec coordinates
+		 */
+		TYPES::RadecPos offSet(in TYPES::RadecPos p);
 		
-		void offSet(in TYPES::AltazPos p, out double alt_delta, out double az_delta);
+		/**
+		 * Obtains the delta values of the pointing model for a given position
+		 * in Alt/Az coordinates
+		 * @param p The given position in Alt/Az coordinates
+		 */
+		//TYPES::AltazPos offSet(in TYPES::AltazPos p);
 
+		/**
+		 * Resets all the pointing manual corrections
+		 */
 		void resetAdjusts();
 
-		void addObs(in TYPES::RadecPos p_t, in TYPES::RadecPos p_d, in double sidereal_time);
+		/**
+		 * Adds an observation to the observation list needed by the automatic
+		 * pointing model for the calculation of the correction coefficients.
+		 * @param p_t The theoretical position, in Ra/Dec coordinates
+		 * @param p_e The experimental position, in Ra/Dec coordinates
+		 * @param sidereal_time The sidereal time of the experimental observation
+		 */
+		void addObs(in TYPES::RadecPos p_t, in TYPES::RadecPos p_e, in double sidereal_time);
 
+		/**
+		 * Calculates the correction coefficients based on the observation list
+		 * for the automatic pointing corrections
+		 */
 		void calculateCoeffs();
 
+		/**
+		 * Enables/disables the manual/automatic pointing
+		 * @param state The new state of the pointing model
+		 * @param model The pointing model which state will be changed
+		 */
 		void setState(in boolean state, in TYPES::PointingModel model);
 
+		/**
+		 * Returns the state of the given pointing model
+		 * @param model The pointing model
+		 */
 		boolean getState(in TYPES::PointingModel model);
 
 	};
