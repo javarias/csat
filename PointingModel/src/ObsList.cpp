@@ -536,7 +536,7 @@ void ObsList::cOffs()
 	fclose(go);
 }
 
-void ObsList::cOff(double inra, double indec, double st)
+void ObsList::cOff(double inra, double indec, double st, double &out_ra_d, double &out_dec_d)
 {
 	int i,j;
 	double lat,rms;
@@ -573,4 +573,7 @@ void ObsList::cOff(double inra, double indec, double st)
 	printf("Off%d: %lf [Arcsecs]\n", 1, Offset1*3600);
 	printf("Off%d: %lf [Arcsecs]\n", 2, Offset2*3600);
 	printf("\n");
+
+	out_ra_d = -Offset1;
+	out_dec_d = Offset2;
 }

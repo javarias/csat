@@ -27,7 +27,7 @@ class ObsList
 		int getNumObs();
 		int getNumTerms();
 		void cCoeffs();
-		void cOff(double ra, double dec, double st);
+		void cOff(double ra, double dec, double st, double &out_ra_d, double &out_dec_d);
 		void cOffs();
 	private:
 		Obs **obs;

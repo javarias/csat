@@ -51,7 +51,7 @@ xxxxx_LIBS      =
 #
 # Includes (.h) files (public only)
 # ---------------------------------
-INCLUDES        =
+INCLUDES        = Term.h Obs.h Model.h ObsList.h
 
 #
 # Libraries (public and local)
@@ -61,7 +61,7 @@ LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-pointingsystem_OBJECTS   = Model Obs ObsList Pointing Term
+pointingsystem_OBJECTS   = Model Obs ObsList Term #Pointing
 pointingsystem_LIBS      = gsl gslcblas
 
 #
