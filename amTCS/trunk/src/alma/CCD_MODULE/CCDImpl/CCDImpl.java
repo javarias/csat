@@ -22,22 +22,17 @@
 
 package alma.CCD_MODULE.CCDImpl;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.logging.Logger;
 
-import javax.imageio.ImageIO;
-
-import alma.ACS.*;
-import alma.ACSErr.Completion;
-import alma.TYPES.*;
+import alma.ACS.CBDescIn;
+import alma.ACS.CBvoid;
+import alma.ACS.ComponentStates;
+import alma.CCD_MODULE.CCDOperations;
+import alma.DEVCCD_MODULE.DevCCD;
+import alma.TYPES.ImageHolder;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
-import alma.CCD_MODULE.CCDOperations;
-import alma.DEVCCD_MODULE.DevCCD;
 
 public class CCDImpl implements CCDOperations, ComponentLifecycle {
 

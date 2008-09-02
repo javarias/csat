@@ -145,14 +145,13 @@ TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
 EquatorialTelescopeImpl_DIRS=alma/TELESCOPE_MODULE/EquatorialTelescopeImpl
 CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
 LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
-#PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl
 TrackingImpl_DIRS=alma/TRACKING_MODULE/TrackingImpl
 SafetyImpl_DIRS=alma/SAFETY_MODULE/SafetyImpl
 CSATControlImpl_DIRS=alma/CSATCONTROL_MODULE/CSATControlImpl
 CSATStatusImpl_DIRS= alma/CSATSTATUS_MODULE/CSATStatusImpl
 callbacks_DIRS=alma/acs/callbacks
 
-USER_JFLAGS=-Xlint:unchecked
+USER_JFLAGS=-Xlint:unchecked -Xlint:deprecated
 
 #
 # java sources in Jarfile on/off

@@ -4,7 +4,7 @@
 
 Lx200EMCVelDevIO::Lx200EMCVelDevIO(char *deviceName, int axis, bool reversed) throw (csatErrors::CannotOpenDeviceEx)
 {
-		  char *_METHOD_="Lx200EMCVelDevIO::Lx200EMCVelDevIO";
+		  char *_METHOD_=(char *)"Lx200EMCVelDevIO::Lx200EMCVelDevIO";
 		  ACS::Time time = getTimeStamp();
 		  CORBA::Double initialSlewRate(0.0);
 
@@ -37,7 +37,7 @@ Lx200EMCVelDevIO::Lx200EMCVelDevIO(char *deviceName, int axis, bool reversed) th
 
 Lx200EMCVelDevIO::~Lx200EMCVelDevIO() 
 {
-		  char *_METHOD_="Lx200EMCVelDevIO::~Lx200EMCVelDevIO";
+		  char *_METHOD_=(char *)"Lx200EMCVelDevIO::~Lx200EMCVelDevIO";
 		  ACS_TRACE(_METHOD_);
 
 		  delete this->sp;
@@ -45,7 +45,7 @@ Lx200EMCVelDevIO::~Lx200EMCVelDevIO()
 
 CORBA::Double Lx200EMCVelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
 {
-	char *_METHOD_="Lx200EMCVelDevIO::read";
+	char *_METHOD_=(char *)"Lx200EMCVelDevIO::read";
 	if(this->axis == ALTITUDE_AXIS)
 		if( this->slewRateElevation )
 	      return ( (this->reversed) ? this->slewRateElevation*(-1) : this->slewRateElevation);
@@ -62,7 +62,7 @@ CORBA::Double Lx200EMCVelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbas
 
 void Lx200EMCVelDevIO::write(const CORBA::Double &recv_value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
 {
-		char *_METHOD_="Lx200EMCVelDevIO::write";
+		char *_METHOD_=(char *)"Lx200EMCVelDevIO::write";
 		char slewRateCmd[4];
 		char moveCmd[4];
 		char posHaltCmd[4];
@@ -71,6 +71,7 @@ void Lx200EMCVelDevIO::write(const CORBA::Double &recv_value, ACS::Time &timesta
 		double value;
 		double absValue;
 
+		ACS_TRACE(_METHOD_);
 		value = recv_value;
 		if( this->reversed )
 			value *= (-1);

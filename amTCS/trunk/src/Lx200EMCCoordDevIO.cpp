@@ -2,7 +2,7 @@
 
 Lx200EMCCoordDevIO::Lx200EMCCoordDevIO(char *deviceName, int axis, bool reversed) throw (csatErrors::CannotOpenDeviceEx)
 {
-	char *_METHOD_="Lx200EMCCoordDevIO::Lx200EMCCoordDevIO";
+	char *_METHOD_=(char *)"Lx200EMCCoordDevIO::Lx200EMCCoordDevIO";
 
 	try{
 		this->sp = new SerialRS232(deviceName,100);
@@ -30,7 +30,7 @@ Lx200EMCCoordDevIO::Lx200EMCCoordDevIO(char *deviceName, int axis, bool reversed
 
 Lx200EMCCoordDevIO::~Lx200EMCCoordDevIO() 
 {
-	char *_METHOD_="Lx200EMCCoordDevIO::~Lx200EMCCoordDevIO";
+	char *_METHOD_=(char *)"Lx200EMCCoordDevIO::~Lx200EMCCoordDevIO";
 	ACS_TRACE(_METHOD_);
 
 	delete this->sp;
@@ -60,7 +60,7 @@ double Lx200EMCCoordDevIO::sexa2double(const char *sexaStr)
 
 CORBA::Double Lx200EMCCoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
 {
-	char *_METHOD_="Lx200EMCCoordDevIO::read";
+	char *_METHOD_=(char *)"Lx200EMCCoordDevIO::read";
 	CORBA::Double value(0.0);
 	char *msg;
 

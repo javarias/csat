@@ -44,6 +44,9 @@ import alma.acs.component.ComponentLifecycle;
 import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
 
+import alma.acsErrTypeLifeCycle.*;
+import alma.acsErrTypeLifeCycle.wrappers.*;
+
 import alma.CSATSTATUS_MODULE.CSATStatusOperations;
 import alma.CSATSTATUS_MODULE.CSATStatusImpl.CSATStatusImpl;
 import alma.CSATSTATUS_MODULE.TCSStatus;
@@ -200,6 +203,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	public ComponentStates componentState() {
 		return m_containerServices.getComponentStateManager().getCurrentState();
 	}
+	
 	public String name() {
 		return m_containerServices.getName();
 	}
@@ -212,15 +216,30 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	// Implementation of CSATStatusOperations
 	/////////////////////////////////////////////////////////////
 
-	public void on(){
+	public void on() throws LifeCycleEx {
+		
+		if( status != TCSStatus.STOP ) {
+			AcsJLifeCycleEx ex = new AcsJLifeCycleEx(new IllegalStateException("TCS is in " + status + " state"));
+			throw ex.toLifeCycleEx();
+		}
 		status = TCSStatus.STAND_BY;
 	}
 
-	public void off(){
+	public void off() throws LifeCycleEx {
+		
+		if( status != TCSStatus.STAND_BY ) {
+			AcsJLifeCycleEx ex = new AcsJLifeCycleEx(new IllegalStateException("TCS is in " + status + " state"));
+			throw ex.toLifeCycleEx();
+		}
 		status = TCSStatus.STOP;
 	}
 
-	public void setUncalibrated(){
+	public void setUncalibrated() throws LifeCycleEx {
+		
+		if( status != TCSStatus.STAND_BY ) {
+			AcsJLifeCycleEx ex = new AcsJLifeCycleEx(new IllegalStateException("TCS is in " + status + " state"));
+			throw ex.toLifeCycleEx();
+		}
 		status = TCSStatus.CALIBRATING;
 		pointing_comp.resetAdjusts();
 		pointing_comp.setState(true, PointingModel.MANUAL);
@@ -228,23 +247,44 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		tracking_comp.setStatus(true);
 	}
 
-	public void setCalibrated(AltazPos p){
+	public void setCalibrated(AltazPos p) throws LifeCycleEx {
+		
+		if( status != TCSStatus.CALIBRATING ) {
+			AcsJLifeCycleEx ex = new AcsJLifeCycleEx(new IllegalStateException("TCS is in " + status + " state"));
+			throw ex.toLifeCycleEx();
+		}
 		pointing_comp.calculateCoeffs();
 		pointing_comp.setState(true, PointingModel.AUTOMATIC);
 		pointing_comp.setState(false, PointingModel.MANUAL);
 		status = TCSStatus.STAND_BY;
 	}
 
-	public void initialize(CBvoid cb, CBDescIn desc){
+	public void initialize(CBvoid cb, CBDescIn desc) throws LifeCycleEx {
+		
+		if( status != TCSStatus.STAND_BY ) {
+			AcsJLifeCycleEx ex = new AcsJLifeCycleEx(new IllegalStateException("TCS is in " + status + " state"));
+			throw ex.toLifeCycleEx();
+		}
 		status = TCSStatus.READY;
 	}
 
-	public void stop(CBvoid cb,CBDescIn desc){
+	public void stop(CBvoid cb,CBDescIn desc) throws LifeCycleEx {
+		
+		if( status != TCSStatus.READY ) {
+			AcsJLifeCycleEx ex = new AcsJLifeCycleEx(new IllegalStateException("TCS is in " + status + " state"));
+			throw ex.toLifeCycleEx();
+		}
 		telescope_comp.stop();
 		status = TCSStatus.STAND_BY;
 	}
 
-	public void setMode(int mode){
+	public void setMode(int mode) throws LifeCycleEx {
+		
+		if( status != TCSStatus.READY && status != TCSStatus.AUTOMATIC ) {
+			AcsJLifeCycleEx ex = new AcsJLifeCycleEx(new IllegalStateException("TCS is in " + status + " state"));
+			throw ex.toLifeCycleEx();
+		}
+		
 		if( status.value() == alma.CSATSTATUS_MODULE.TCSStatus._READY)
 			status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._AUTOMATIC);
 		else if( status.value() == alma.CSATSTATUS_MODULE.TCSStatus._AUTOMATIC)
@@ -295,28 +335,33 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		return new EarthPos();
 	}
 
-	public void addPointingObs() {
+	public void addPointingObs() throws LifeCycleEx {
+		
+		if( status != TCSStatus.CALIBRATING ) {
+			AcsJLifeCycleEx ex = new AcsJLifeCycleEx(new IllegalStateException("TCS is in " + status + " state"));
+			throw ex.toLifeCycleEx();
+		}
 		
 		if( observing_for_pointing )
 			return;
 		
-		if(status == TCSStatus.CALIBRATING) {
-			pointing_comp.resetAdjusts();
-			p_theorical = telescope_comp.getRadec();
-			observing_for_pointing = true;
-		}
+		pointing_comp.resetAdjusts();
+		p_theorical = telescope_comp.getRadec();
+		observing_for_pointing = true;
 	}
 	
-	public void acceptPointingObs(boolean acceptance) {
+	public void acceptPointingObs(boolean acceptance) throws LifeCycleEx {
+
+		if( status != TCSStatus.CALIBRATING ) {
+			AcsJLifeCycleEx ex = new AcsJLifeCycleEx(new IllegalStateException("TCS is in " + status + " state"));
+			throw ex.toLifeCycleEx();
+		}
 		
 		observing_for_pointing = false;
 		if( !acceptance )		
 			return;
 		
-		RadecPos p_experimental;
-		if(status == TCSStatus.CALIBRATING) {
-			p_experimental = telescope_comp.getRadec();
-			pointing_comp.addObs(p_theorical, p_experimental, getSiderealTime());
-		}
+		RadecPos p_experimental = telescope_comp.getRadec();
+		pointing_comp.addObs(p_theorical, p_experimental, getSiderealTime());
 	}
 }

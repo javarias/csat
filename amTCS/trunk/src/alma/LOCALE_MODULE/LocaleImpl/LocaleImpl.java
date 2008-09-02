@@ -23,18 +23,16 @@
 package alma.LOCALE_MODULE.LocaleImpl;
 
 import java.util.logging.Logger;
-import java.util.Calendar;
-import java.util.Date;
 
-import alma.ACS.*;
-import alma.TYPES.*;
+import alma.ACS.ComponentStates;
+import alma.ACSErr.CompletionHolder;
+import alma.DEVGPS_MODULE.DevGPS;
+import alma.LOCALE_MODULE.LocaleOperations;
+import alma.TYPES.EarthPos;
+import alma.TYPES.TimeVal;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
-import alma.ACSErr.CompletionHolder;
-
-import alma.LOCALE_MODULE.LocaleOperations;
-import alma.DEVGPS_MODULE.DevGPS;
 
 public class LocaleImpl implements LocaleOperations, ComponentLifecycle {
 

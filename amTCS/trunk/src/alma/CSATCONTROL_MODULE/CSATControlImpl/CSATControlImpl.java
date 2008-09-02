@@ -25,18 +25,13 @@ package alma.CSATCONTROL_MODULE.CSATControlImpl;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
+import alma.ACS.ComponentStates;
+import alma.CSATCONTROL_MODULE.CSATControlOperations;
 import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
-
-import alma.ACS.*;
-import alma.TYPES.*;
-import alma.csatErrors.TelescopeAlreadyMovingEx;
 import alma.acs.component.ComponentLifecycle;
 import alma.acs.component.ComponentLifecycleException;
 import alma.acs.container.ContainerServices;
-//import alma.acs.callbacks.ResponseReceiver;
-//import alma.ACS.CBDescIn;
-import alma.CSATCONTROL_MODULE.CSATControlOperations;
-import alma.CSATCONTROL_MODULE.CSATControlImpl.CSATControlImpl;
+import alma.csatErrors.TelescopeAlreadyMovingEx;
 
 public class CSATControlImpl implements CSATControlOperations, ComponentLifecycle {
 
