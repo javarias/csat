@@ -78,7 +78,7 @@ PcDummyGpsImpl_LIBS      = TypesStubs DevGPSStubs csatErrors
 CalculationsImpl_OBJECTS = CalculationsImpl
 CalculationsImpl_LIBS    = TypesStubs LocaleStubs CalculationsStubs csatErrors
 PointingImpl_OBJECTS     = PointingImpl
-PointingImpl_LIBS        = TypesStubs PointingStubs csatErrors
+PointingImpl_LIBS        = TypesStubs PointingStubs csatErrors pointingsystem
 
 #
 # Scripts (public and local)
