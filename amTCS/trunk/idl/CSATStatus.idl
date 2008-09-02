@@ -3,6 +3,7 @@
 #ifndef _CSATSTATUS_IDL_
 #define _CSATSTATUS_IDL_
 
+#include <acsErrTypeLifeCycle.idl>
 #include <baci.idl>
 #include <Types.idl>
 
@@ -44,21 +45,27 @@ module CSATSTATUS_MODULE {
 		 * Moves the TCS from the "Stop" state to the "Stand-by" state.  In this
 		 * step all hardware is initialized (set on). No software components are
 		 * initialized yet after on() is called.
+		 * @throw LifeCycleEx If the current state is different from "Stop"
 		 */
-		void on();
+		void on()
+		   raises (acsErrTypeLifeCycle::LifeCycleEx);
 
 		/*
 		 * Moves the TCS from the "Stand-by" state to the "Stop" state.  This
 		 * implies shutting off all posible hardware components.
+		 * @throw LifeCycleEx If the current state is different from "Stand-by"
 		 */
-		void off();
+		void off()
+		   raises (acsErrTypeLifeCycle::LifeCycleEx);
 
 		/**
 		 * Moves the TCS from the "Stand-by" state to the "Calibrating" state In
 		 * this step the telescope is set as uncalibrated, and tunning can be
 		 * done in it, until calibration is done.
+		 * @throw LifeCycleEx If the current state is different from "Stand-by"
 		 */
-		void setUncalibrated();
+		void setUncalibrated()
+		   raises (acsErrTypeLifeCycle::LifeCycleEx);
 
 		/**
 		 * Moves the TCS from the "Calibrating" state to the "Stand-by" state In
@@ -66,31 +73,40 @@ module CSATSTATUS_MODULE {
 		 * pointing to a certain position.
 		 * 
 		 * @param p The position which the telesocope is pointing at
+		 * @throw LifeCycleEx If the current state is different from "Calibrating"
 		 */
-		void setCalibrated(in TYPES::AltazPos p);
+		void setCalibrated(in TYPES::AltazPos p)
+		   raises (acsErrTypeLifeCycle::LifeCycleEx);
 
 		/**
 		 * Moves the TCS from the "Stand-by" state to the "Ready" state.  In this
 		 * step the software components are get and configured (this assumes that
 		 * the hardware is properly configured). After this call is done, the TCS
 		 * is ready to operate.
+		 * @throw LifeCycleEx If the current state is different from "Stand-by"
 		 */
-		void initialize(in ACS::CBvoid cb, in ACS::CBDescIn desc);
+		void initialize(in ACS::CBvoid cb, in ACS::CBDescIn desc)
+		   raises (acsErrTypeLifeCycle::LifeCycleEx);
 
 		/**
 		 * Moves the TCS from the "Ready" state to the "Stand-by" state.  In this
 		 * step the software components are released and the hardware is not
 		 * going to be accessed.
+		 * @throw LifeCycleEx If the current state is different from "Ready"
 		 */
-		void stop(in ACS::CBvoid cb, in ACS::CBDescIn desc);
+		void stop(in ACS::CBvoid cb, in ACS::CBDescIn desc)
+		   raises (acsErrTypeLifeCycle::LifeCycleEx);
 
 		/**
 		 * Moves the TCS from "Ready" to "Automatic" (or viceversa, depending on
 		 * the the value of <i>mode</i>). If the TCS is in Automatic mode, then
 		 * it uses the scheduler to observe. Otherwise, the observations are
 		 * manual.
+		 * @throw LifeCycleEx If the current state is different from "Ready" or
+		 *                    automatic
 		 */
-		void setMode(in long mode);
+		void setMode(in long mode)
+		   raises (acsErrTypeLifeCycle::LifeCycleEx);
 
 		/**
 		 * Gets the current position of the telescope, in Ra/Dec and Alt/Az
@@ -149,16 +165,20 @@ module CSATSTATUS_MODULE {
 		 * called once the telescope has arrived to the desired theoretical
 		 * position, and should be ended with a call to the acceptPointingObs
 		 * method.
+		 * @throw LifeCycleEx If the current state is different from "Calibrating"
 		 */
-		void addPointingObs();
+		void addPointingObs()
+		   raises (acsErrTypeLifeCycle::LifeCycleEx);
 
 		/**
 		 * Finalizes the measurement of differences between theoretical and
 		 * experimental coordinates of an observation started with the
 		 * addPointingObs method.
 		 * @param acceptance true if the observation is accepted, false if not
+		 * @throw LifeCycleEx If the current state is different from "Calibrating"
 		 */
-		void acceptPointingObs(in boolean acceptance);
+		void acceptPointingObs(in boolean acceptance)
+		   raises (acsErrTypeLifeCycle::LifeCycleEx);
 	};
 
 };
