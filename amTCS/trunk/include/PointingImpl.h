@@ -23,7 +23,7 @@ class PointingImpl: virtual public POA_POINTING_MODULE::Pointing,
 
 	void offSetAzm (::CORBA::Double degrees) throw (::CORBA::SystemException);
 
-	::TYPES::RadecPos offSet (const ::TYPES::RadecPos & p, ::CORBA::Double st) throw (::CORBA::SystemException);
+	::TYPES::RadecPos offSet (const ::TYPES::RadecPos & p, const ::CORBA::Double st) throw (::CORBA::SystemException);
 
 	void resetAdjusts () throw(::CORBA::SystemException);
 
@@ -39,6 +39,7 @@ private:
 
 	ObsList *m_obslist;
 	::TYPES::AltazPos m_manualOffset;
+	bool m_state[2];
 };
 
 #endif /* _POINTINGIMPL_H */
