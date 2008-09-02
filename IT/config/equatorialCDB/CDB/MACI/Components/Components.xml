@@ -31,13 +31,13 @@
       <_ Name="EQUATORIAL_NEXSTAR"
          Code="EquatorialNexstarImpl"
          Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
-         Default="false"
+         Default="true"
          Container="amContainerCpp"/>
 
       <_ Name="LX200_OCA"
          Code="Lx200Impl"
          Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
-         Default="true"
+         Default="false"
          Container="amContainerCpp"/>
 
       <_ Name="PC_GPS"

@@ -140,8 +140,9 @@ ACSERRDEF = csatErrors
 
 # Jarfiles and their directories
 #
-JARFILES= TelescopeImpl CCDImpl LocaleImpl TrackingImpl SafetyImpl CSATControlImpl CSATStatusImpl callbacks
+JARFILES= EquatorialTelescopeImpl TelescopeImpl CCDImpl LocaleImpl TrackingImpl SafetyImpl CSATControlImpl CSATStatusImpl callbacks
 TelescopeImpl_DIRS=alma/TELESCOPE_MODULE/TelescopeImpl
+EquatorialTelescopeImpl_DIRS=alma/TELESCOPE_MODULE/EquatorialTelescopeImpl
 CCDImpl_DIRS=alma/CCD_MODULE/CCDImpl
 LocaleImpl_DIRS=alma/LOCALE_MODULE/LocaleImpl
 #PointingImpl_DIRS=alma/POINTING_MODULE/PointingImpl

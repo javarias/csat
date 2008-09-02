@@ -47,10 +47,10 @@
          Container="amContainerCpp"/>
 
       <_ Name="POINTING"
-         Code="alma.POINTING_MODULE.PointingImpl.PointingHelper"
+         Code="PointingImpl"
          Type="IDL:alma/POINTING_MODULE/Pointing:1.0"
          Default="true"
-         Container="amContainer"/>
+         Container="amContainerCpp"/>
 
       <_ Name="TRACKING"
          Code="alma.TRACKING_MODULE.TrackingImpl.TrackingHelper"
@@ -91,6 +91,12 @@
       <_ Name="NEXSIM-SOFT"
          Code="alma.NEXSIM_MODULE.NexSimImpl.NexSimHelper"
          Type="IDL:alma/NEXSIM_MODULE/NexSim:1.0"
+         Default="true"
+         Container="amContainer"/>
+
+      <_ Name="EQUATORIAL_TELESCOPE"
+         Code="alma.TELESCOPE_MODULE.EquatorialTelescopeImpl.EquatorialTelescopeHelper"
+         Type="IDL:alma/TELESCOPE_MODULE/EquatorialTelescope:1.0"
          Default="true"
          Container="amContainer"/>
 

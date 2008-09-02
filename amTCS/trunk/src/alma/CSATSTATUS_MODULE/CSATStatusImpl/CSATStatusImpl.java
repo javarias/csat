@@ -36,6 +36,7 @@ import alma.TYPES.AltazPosHolder;
 import alma.TYPES.RadecVel;
 import alma.TYPES.AltazVel;
 import alma.TYPES.EarthPos;
+import alma.TYPES.PointingModel;
 
 import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
 
@@ -60,6 +61,9 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	private alma.SAFETY_MODULE.Safety safety_comp;
 	private alma.POINTING_MODULE.Pointing pointing_comp;
 
+	private RadecPos p_theorical;
+	private boolean observing_for_pointing;
+	
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
 	/////////////////////////////////////////////////////////////
@@ -67,6 +71,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	public void initialize(ContainerServices containerServices) throws ComponentLifecycleException {
 
 		int m_mount = -1;
+		observing_for_pointing = false;
 		String defaultTelescope = null;
 		com.cosylab.CDB.DAL dal = null;
 		com.cosylab.CDB.DAO dao = null;
@@ -76,7 +81,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		m_logger = m_containerServices.getLogger();
 		m_logger.info("initialize() called...");
 
-		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STOP);
+		status = TCSStatus.STOP;
 
 		/* Search across the CDB for the default DevTelescope component */
 		try {
@@ -208,28 +213,35 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	/////////////////////////////////////////////////////////////
 
 	public void on(){
-		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STAND_BY);
+		status = TCSStatus.STAND_BY;
 	}
 
 	public void off(){
-		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STOP);
+		status = TCSStatus.STOP;
 	}
 
 	public void setUncalibrated(){
-		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._CALIBRATING);
+		status = TCSStatus.CALIBRATING;
+		pointing_comp.resetAdjusts();
+		pointing_comp.setState(true, PointingModel.MANUAL);
+		pointing_comp.setState(false, PointingModel.AUTOMATIC);
+		tracking_comp.setStatus(true);
 	}
 
 	public void setCalibrated(AltazPos p){
-		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STAND_BY);
+		pointing_comp.calculateCoeffs();
+		pointing_comp.setState(true, PointingModel.AUTOMATIC);
+		pointing_comp.setState(false, PointingModel.MANUAL);
+		status = TCSStatus.STAND_BY;
 	}
 
 	public void initialize(CBvoid cb, CBDescIn desc){
-		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._READY);
+		status = TCSStatus.READY;
 	}
 
 	public void stop(CBvoid cb,CBDescIn desc){
 		telescope_comp.stop();
-		status = TCSStatus.from_int(alma.CSATSTATUS_MODULE.TCSStatus._STAND_BY);
+		status = TCSStatus.STAND_BY;
 	}
 
 	public void setMode(int mode){
@@ -250,8 +262,8 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		p_rd.value = calculations_comp.Altaz2Radec(p_aa.value);
 	}
 
-	public int getState(){
-		return status.value();
+	public TCSStatus getState(){
+		return status;
 	}
 
 	public boolean getTrackingStatus(){
@@ -283,4 +295,28 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		return new EarthPos();
 	}
 
+	public void addPointingObs() {
+		
+		if( observing_for_pointing )
+			return;
+		
+		if(status == TCSStatus.CALIBRATING) {
+			pointing_comp.resetAdjusts();
+			p_theorical = telescope_comp.getRadec();
+			observing_for_pointing = true;
+		}
+	}
+	
+	public void acceptPointingObs(boolean acceptance) {
+		
+		observing_for_pointing = false;
+		if( !acceptance )		
+			return;
+		
+		RadecPos p_experimental;
+		if(status == TCSStatus.CALIBRATING) {
+			p_experimental = telescope_comp.getRadec();
+			pointing_comp.addObs(p_theorical, p_experimental, getSiderealTime());
+		}
+	}
 }

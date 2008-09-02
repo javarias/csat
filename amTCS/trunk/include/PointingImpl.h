@@ -11,6 +11,8 @@
 class PointingImpl: virtual public POA_POINTING_MODULE::Pointing,
                     virtual public acscomponent::ACSComponentImpl
 {
+
+public:
 	PointingImpl(const ACE_CString &name, maci::ContainerServices *containerServices);
 
 	void initialize() throw (ACSErr::ACSbaseExImpl);

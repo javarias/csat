@@ -1,8 +1,10 @@
+#include <stdio.h>
 #include "PointingImpl.h"
 
 PointingImpl::PointingImpl(const ACE_CString &name, maci::ContainerServices *containerServices) :
 	ACSComponentImpl(name,containerServices)
 {
+	printf("pico\n");
 	m_state[0] = false;
 	m_state[1] = false;
 	resetAdjusts();
@@ -76,3 +78,8 @@ void PointingImpl::setState (::CORBA::Boolean state, ::TYPES::PointingModel mode
 ::CORBA::Boolean PointingImpl::getState (::TYPES::PointingModel model) throw (::CORBA::SystemException){
 	return m_state[model];
 }
+
+/* --------------- [ MACI DLL support functions ] -----------------*/
+#include <maciACSComponentDefines.h>
+MACI_DLL_SUPPORT_FUNCTIONS(PointingImpl)
+/* ----------------------------------------------------------------*/

@@ -10,6 +10,7 @@
    <realAlt description="realAlt"/>
    <azmVel/>
    <altVel/>
+	<mount default_value="1"/>
    <locking>true</locking>
 
 </DevTelescope>

@@ -60,6 +60,10 @@ void NexsimImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,csa
 	   	                          getComponent(), new NexsimVelDevIO(m_simulator, ALTITUDE_AXIS));
 		m_azmVel_sp  = new RWdouble( ( component_name + std::string(":azmVel")).c_str(),
 	   	                          getComponent(), new NexsimVelDevIO(m_simulator, AZIMUTH_AXIS));
+		m_mount_sp   = new ROEnumImpl<ACS_ENUM_T(DEVTELESCOPE_MODULE::mountType),
+		                              POA_DEVTELESCOPE_MODULE::ROmountType>
+		                            (( component_name + std::string(":mount")).c_str(),
+		                             getComponent() );
 	}
 }
 
