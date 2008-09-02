@@ -10,6 +10,7 @@
 
 #include <baciROdouble.h>
 #include <baciRWdouble.h>
+#include <enumpropROImpl.h>
 
 #include "DevTelescopeS.h"
 #include "TypesC.h"
@@ -73,6 +74,9 @@ class Lx200GPSImpl : public virtual CharacteristicComponentImpl,
 		virtual ACS::RWdouble_ptr altVel() 
 			throw (CORBA::SystemException);
 
+		virtual DEVTELESCOPE_MODULE::ROmountType_ptr mount()
+		   throw (CORBA::SystemException);
+
 	private:
 
 		// Properties
@@ -80,6 +84,7 @@ class Lx200GPSImpl : public virtual CharacteristicComponentImpl,
 		SmartPropertyPointer<ROdouble> m_realAlt_sp;
 		SmartPropertyPointer<RWdouble> m_altVel_sp;
 		SmartPropertyPointer<RWdouble> m_azmVel_sp;
+		SmartPropertyPointer<ROEnumImpl<ACS_ENUM_T(DEVTELESCOPE_MODULE::mountType), POA_DEVTELESCOPE_MODULE::ROmountType> > m_mount_sp;
 
 		// Private attributes (IDL)
 		bool m_locking;

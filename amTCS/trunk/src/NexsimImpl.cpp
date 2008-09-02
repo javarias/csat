@@ -19,6 +19,7 @@ NexsimImpl::NexsimImpl(const ACE_CString& name, maci::ContainerServices *contain
       ,m_realAlt_sp(this)
       ,m_altVel_sp(this)
       ,m_azmVel_sp(this)
+      ,m_mount_sp(this)
 {
 	component_name = name.c_str();
 	ACS_TRACE("NexsimImpl::NexsimImpl");
@@ -127,6 +128,14 @@ ACS::RWdouble_ptr NexsimImpl::altVel() throw (CORBA::SystemException){
 		return ACS::RWdouble::_nil();
 	}
 	ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_altVel_sp->getCORBAReference());
+	return prop._retn();
+}
+
+DEVTELESCOPE_MODULE::ROmountType_ptr NexsimImpl::mount() throw (CORBA::SystemException){
+	if( m_mount_sp == 0 ){
+		return DEVTELESCOPE_MODULE::ROmountType::_nil();
+	}
+	DEVTELESCOPE_MODULE::ROmountType_var prop = DEVTELESCOPE_MODULE::ROmountType::_narrow(m_mount_sp->getCORBAReference());
 	return prop._retn();
 }
 

@@ -13,7 +13,7 @@ static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 using namespace baci;
 
 /* Constructor */
-Lx200EMCImpl::Lx200Impl(const ACE_CString& name, maci::ContainerServices *containerServices) :
+Lx200EMCImpl::Lx200EMCImpl(const ACE_CString& name, maci::ContainerServices *containerServices) :
        CharacteristicComponentImpl(name,containerServices)
       ,m_realAzm_sp(this)
       ,m_realAlt_sp(this)
@@ -21,16 +21,16 @@ Lx200EMCImpl::Lx200Impl(const ACE_CString& name, maci::ContainerServices *contai
       ,m_azmVel_sp(this)
       ,m_mount_sp(this)
 {
-	const char * _METHOD_ = "Lx200EMCImpl::Lx200Impl";
-	component_name = name.c_str();
+	const char * _METHOD_ = "Lx200EMCImpl::Lx200EMCImpl";
 	ACS_TRACE(_METHOD_);
 	m_locking = true;
+	m_name = name;
 }
 
 /* Destructor */
-Lx200EMCImpl::~Lx200Impl()
+Lx200EMCImpl::~Lx200EMCImpl()
 {
-	const char * _METHOD_ = "Lx200EMCImpl::~Lx200Impl";
+	const char * _METHOD_ = "Lx200EMCImpl::~Lx200EMCImpl";
 	ACS_TRACE(_METHOD_);
 }
 
@@ -58,18 +58,18 @@ void Lx200EMCImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,c
                         throw lifeEx;
                 }
 
-                m_realAzm_sp = new ROdouble( (component_name + std::string(":realAzm")).c_str(),
+                m_realAzm_sp = new ROdouble( ( m_name + ":realAzm").c_str(),
                                                      getComponent(), azmDevIO);
-                m_realAlt_sp = new ROdouble( (component_name + std::string(":realAlt")).c_str(),
+                m_realAlt_sp = new ROdouble( ( m_name + ":realAlt").c_str(),
                                           getComponent(), altDevIO);
 
-                m_altVel_sp  = new RWdouble( ( component_name + std::string(":altVel")).c_str(),
+                m_altVel_sp  = new RWdouble( ( m_name + ":altVel").c_str(),
                                           getComponent(), altVelDevIO);
-                m_azmVel_sp  = new RWdouble( ( component_name + std::string(":azmVel")).c_str(),
+                m_azmVel_sp  = new RWdouble( ( m_name + ":azmVel").c_str(),
                                           getComponent(), azmVelDevIO);
                 m_mount_sp   = new ROEnumImpl<ACS_ENUM_T(DEVTELESCOPE_MODULE::mountType),
                                               POA_DEVTELESCOPE_MODULE::ROmountType>
-                                            (( component_name + std::string(":mount")).c_str(),
+                                            (( m_name + ":mount").c_str(),
                                              getComponent() );
         }
 }

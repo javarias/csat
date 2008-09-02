@@ -70,9 +70,9 @@ void NexstarVelDevIO::write(const CORBA::Double &recv_value, ACS::Time &timestam
 	// We see which telescope's velocity is adecuated for the given double value
 	if( absValue >= 3 )
 		vel = 9;
-	else if( absValue < (4+2)/2 && absValue >= (2+1)/2 )
+	else if( absValue < (4+2)/2. && absValue >= (2+1)/2. )
 		vel = 8;
-	else if( absValue < (2+1)/2. && absValue >= (1 + 5/60)/2. )
+	else if( absValue < (2+1)/2. && absValue >= (1 + 5/60.)/2. )
 		vel = 7;
 	else if( absValue < (1 + 5/60.)/2. && absValue >= (5/60. + 32/3600.)/2. )
 		vel = 6;
@@ -105,9 +105,9 @@ void NexstarVelDevIO::write(const CORBA::Double &recv_value, ACS::Time &timestam
    else
       this->slewRateAzimuth = value;
 
-	this->sp->flush_RS232();
 	this->sp->write_RS232(command,8);
 	this->sp->read_RS232();
+	this->sp->flush_RS232();
 
 	return;
 }

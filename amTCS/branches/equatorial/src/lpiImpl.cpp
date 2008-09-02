@@ -1,5 +1,5 @@
 #include <vltPort.h>
-static char *rcsId="@(#) $Id: $";
+static char *rcsId=(char *)"@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
 #include <stdlib.h>
@@ -25,7 +25,6 @@ lpiImpl::lpiImpl(const ACE_CString& name, maci::ContainerServices *containerServ
       ,m_exposure_sp(this)
 {
 	component_name = name.c_str();
-	m_device_sp = new RWstring(name+":device", getComponent());
 }
 
 /* Destructor */
@@ -36,9 +35,10 @@ lpiImpl::~lpiImpl(){
 void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 {
 
-	static char * _METHOD_ = "lpiImpl::initialize";
+	static char * _METHOD_ = (char *)"lpiImpl::initialize";
 
 	ACSErr::Completion_var completion;
+	m_device_sp = new RWstring((string(component_name)+":device").c_str(), getComponent());
 	char *deviceName = m_device_sp->get_sync(completion.out());
 	int fd;
 

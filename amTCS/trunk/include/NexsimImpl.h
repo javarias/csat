@@ -7,7 +7,7 @@
 
 #include <baciCharacteristicComponentImpl.h>
 #include <baciSmartPropertyPointer.h>
-
+#include <enumpropROImpl.h>
 #include <baciROdouble.h>
 #include <baciRWdouble.h>
 
@@ -64,6 +64,8 @@ public:
 
 	virtual ACS::RWdouble_ptr altVel() throw (CORBA::SystemException);
 
+	virtual DEVTELESCOPE_MODULE::ROmountType_ptr mount() throw (CORBA::SystemException);
+
 private:
 
 	// Properties
@@ -71,6 +73,7 @@ private:
 	SmartPropertyPointer<ROdouble> m_realAlt_sp;
 	SmartPropertyPointer<RWdouble> m_altVel_sp;
 	SmartPropertyPointer<RWdouble> m_azmVel_sp;
+	SmartPropertyPointer<ROEnumImpl<ACS_ENUM_T(DEVTELESCOPE_MODULE::mountType), POA_DEVTELESCOPE_MODULE::ROmountType> > m_mount_sp;
 
 	// Private attributes (IDL)
 	bool m_locking;

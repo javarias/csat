@@ -1,8 +1,8 @@
 #include "Lx200EMCCoordDevIO.h"
 
-Lx200EMCCoordDevIO::Lx200CoordDevIO(char *deviceName, int axis, bool reversed) throw (csatErrors::CannotOpenDeviceEx)
+Lx200EMCCoordDevIO::Lx200EMCCoordDevIO(char *deviceName, int axis, bool reversed) throw (csatErrors::CannotOpenDeviceEx)
 {
-	char *_METHOD_="Lx200EMCCoordDevIO::Lx200CoordDevIO";
+	char *_METHOD_="Lx200EMCCoordDevIO::Lx200EMCCoordDevIO";
 
 	try{
 		this->sp = new SerialRS232(deviceName,100);
@@ -28,9 +28,9 @@ Lx200EMCCoordDevIO::Lx200CoordDevIO(char *deviceName, int axis, bool reversed) t
 	this->reversed = reversed;
 }
 
-Lx200EMCCoordDevIO::~Lx200CoordDevIO() 
+Lx200EMCCoordDevIO::~Lx200EMCCoordDevIO() 
 {
-	char *_METHOD_="Lx200EMCCoordDevIO::~Lx200CoordDevIO";
+	char *_METHOD_="Lx200EMCCoordDevIO::~Lx200EMCCoordDevIO";
 	ACS_TRACE(_METHOD_);
 
 	delete this->sp;

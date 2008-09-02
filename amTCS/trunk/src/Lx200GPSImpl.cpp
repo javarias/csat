@@ -18,10 +18,12 @@ Lx200GPSImpl::Lx200GPSImpl(const ACE_CString& name, maci::ContainerServices *con
       ,m_realAlt_sp(this)
       ,m_altVel_sp(this)
       ,m_azmVel_sp(this)
+      ,m_mount_sp(this)
 {
 	const char * _METHOD_ = (char *)"Lx200GPSImpl::Lx200GPSImpl";
 	ACS_TRACE(_METHOD_);
 	m_locking = true;
+	m_name = name;
 }
 
 /* Destructor */
@@ -55,15 +57,19 @@ void Lx200GPSImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,c
                         throw lifeEx;
                 }
 
-                m_realAzm_sp = new ROdouble( (m_name + ":realAzm").c_str(),
+                m_realAzm_sp = new ROdouble( ( m_name + ":realAzm").c_str(),
                                                      getComponent(), azmDevIO);
-                m_realAlt_sp = new ROdouble( (m_name + ":realAlt").c_str(),
+                m_realAlt_sp = new ROdouble( ( m_name + ":realAlt").c_str(),
                                           getComponent(), altDevIO);
 
                 m_altVel_sp  = new RWdouble( ( m_name + ":altVel").c_str(),
                                           getComponent(), altVelDevIO);
                 m_azmVel_sp  = new RWdouble( ( m_name + ":azmVel").c_str(),
                                           getComponent(), azmVelDevIO);
+                m_mount_sp   = new ROEnumImpl<ACS_ENUM_T(DEVTELESCOPE_MODULE::mountType),
+                                              POA_DEVTELESCOPE_MODULE::ROmountType>
+                                            (( m_name + ":mount").c_str(),
+                                             getComponent() );
         }
 }
 
@@ -158,6 +164,14 @@ ACS::RWdouble_ptr Lx200GPSImpl::altVel() throw (CORBA::SystemException)
 		return ACS::RWdouble::_nil();
 	}
 	ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_altVel_sp->getCORBAReference());
+	return prop._retn();
+}
+
+DEVTELESCOPE_MODULE::ROmountType_ptr Lx200GPSImpl::mount() throw (CORBA::SystemException){
+	if( m_mount_sp == 0 ){
+		return DEVTELESCOPE_MODULE::ROmountType::_nil();
+	}
+	DEVTELESCOPE_MODULE::ROmountType_var prop = DEVTELESCOPE_MODULE::ROmountType::_narrow(m_mount_sp->getCORBAReference());
 	return prop._retn();
 }
 

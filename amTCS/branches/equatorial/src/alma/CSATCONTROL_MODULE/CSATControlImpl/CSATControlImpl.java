@@ -137,7 +137,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 			m_logger.fine("Failed to get Tracking component reference " + e);
 			throw new ComponentLifecycleException("Failed to get Tracking component reference");
 		}
-		
+
 		try {
 		 	obj = m_containerServices.getDefaultComponent("IDL:alma/CCD_MODULE/CCD:1.0");
 			ccd = alma.CCD_MODULE.CCDHelper.narrow(obj);

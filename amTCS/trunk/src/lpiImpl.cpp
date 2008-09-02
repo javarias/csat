@@ -49,7 +49,7 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 		try{
 			int flag = O_RDWR; //read write flag, is the accesmode you have to put in open
 			struct stat st;
-			static char * _METHOD_ = "lpiFrameDevIO::lpiFrameDevIO";
+			static char * _METHOD_ = (char *)"lpiFrameDevIO::lpiFrameDevIO";
 
 			//we see if the deviceName device exist
 			if (-1 == stat (deviceName, &st)) {

@@ -262,7 +262,7 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 			}
 		}
 		else if (doControl && (getAltAzVel().altVel != 0 || getAltAzVel().azVel != 0)) {
-			AcsJTelescopeAlreadyMovingEx e = new AcsJTelescopeAlreadyMovingEx("Telescope moving when trying to set Slew Rate");
+			AcsJTelescopeAlreadyMovingEx e = new AcsJTelescopeAlreadyMovingEx(new IllegalStateException("Telescope moving when trying to set Slew Rate"));
 			throw e.toTelescopeAlreadyMovingEx();
 		}
 

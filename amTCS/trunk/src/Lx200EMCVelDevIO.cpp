@@ -2,9 +2,9 @@
 
 #include "Lx200EMCVelDevIO.h"
 
-Lx200EMCVelDevIO::Lx200VelDevIO(char *deviceName, int axis, bool reversed) throw (csatErrors::CannotOpenDeviceEx)
+Lx200EMCVelDevIO::Lx200EMCVelDevIO(char *deviceName, int axis, bool reversed) throw (csatErrors::CannotOpenDeviceEx)
 {
-		  char *_METHOD_="Lx200EMCVelDevIO::Lx200VelDevIO";
+		  char *_METHOD_="Lx200EMCVelDevIO::Lx200EMCVelDevIO";
 		  ACS::Time time = getTimeStamp();
 		  CORBA::Double initialSlewRate(0.0);
 
@@ -35,9 +35,9 @@ Lx200EMCVelDevIO::Lx200VelDevIO(char *deviceName, int axis, bool reversed) throw
 	this->reversed = reversed;
 }
 
-Lx200EMCVelDevIO::~Lx200VelDevIO() 
+Lx200EMCVelDevIO::~Lx200EMCVelDevIO() 
 {
-		  char *_METHOD_="Lx200EMCVelDevIO::~Lx200VelDevIO";
+		  char *_METHOD_="Lx200EMCVelDevIO::~Lx200EMCVelDevIO";
 		  ACS_TRACE(_METHOD_);
 
 		  delete this->sp;

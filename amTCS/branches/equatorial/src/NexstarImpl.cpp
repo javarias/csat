@@ -61,7 +61,6 @@ void NexstarImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,cs
 	   	                          getComponent(), altVelDevIO);
 		m_azmVel_sp  = new RWdouble( ( component_name + std::string(":azmVel")).c_str(),
 	   	                          getComponent(), azmVelDevIO);
-
 		m_mount_sp   = new ROEnumImpl<ACS_ENUM_T(DEVTELESCOPE_MODULE::mountType),
 		                              POA_DEVTELESCOPE_MODULE::ROmountType>
 		                            (( component_name + std::string(":mount")).c_str(),

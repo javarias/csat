@@ -58,7 +58,7 @@ CalculationsImpl::~CalculationsImpl()
 
 void CalculationsImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl) {
 
-	const char *_METHOD_="Calculations::~CalculationsImpl";
+	const char* _METHOD_ = "CalculationsImpl::initialize()";
 	locale_comp = LOCALE_MODULE::Locale::_nil();
 	locale_comp = getContainerServices()->getDefaultComponent<LOCALE_MODULE::Locale>("IDL:alma/LOCALE_MODULE/Locale:1.0");
 

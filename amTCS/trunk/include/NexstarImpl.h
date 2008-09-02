@@ -78,7 +78,6 @@ private:
 	bool m_locking;
 
 	// Private attributes (others)
-	
 	std::string  component_name;	
 
 	/**
