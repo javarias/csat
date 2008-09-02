@@ -43,6 +43,20 @@ module POINTING_MODULE {
 		 */
 		void offSetAzm(in double degrees);
 
+		void offSet(in TYPES::RadecPos p, out double ra_delta, out double dec_delta);
+		
+		void offSet(in TYPES::AltazPos p, out double alt_delta, out double az_delta);
+
+		void resetAdjusts();
+
+		void addObs(in TYPES::RadecPos p_t, in TYPES::RadecPos p_d, in double sidereal_time);
+
+		void calculateCoeffs();
+
+		void setState(in boolean state, in TYPES::PointingModel model);
+
+		boolean getState(in TYPES::PointingModel model);
+
 	};
 
 };

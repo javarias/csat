@@ -62,6 +62,11 @@ module TYPES
 	 * \typedef Image
 	 */
 	typedef sequence<long> Image;
+
+	enum PointingModel {
+		MANUAL,
+		AUTOMATIC
+	}
 };
 
 #endif /* _TYPES_IDL_ */
