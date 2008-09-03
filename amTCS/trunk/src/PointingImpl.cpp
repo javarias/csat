@@ -4,9 +4,8 @@
 PointingImpl::PointingImpl(const ACE_CString &name, maci::ContainerServices *containerServices) :
 	ACSComponentImpl(name,containerServices)
 {
-	printf("pico\n");
-	m_state[0] = false;
-	m_state[1] = false;
+	m_state[::TYPES::MANUAL] = false;
+	m_state[::TYPES::AUTOMATIC] = false;
 	resetAdjusts();
 }
 
@@ -17,33 +16,33 @@ void PointingImpl::initialize() throw (ACSErr::ACSbaseExImpl) {
 }
 
 ::CORBA::Double PointingImpl::altOffset () throw (::CORBA::SystemException){
-	if(m_state[0])
+	if(m_state[::TYPES::MANUAL])
 		return m_manualOffset.alt;
 	else
 		return 0;
 }
 
 ::CORBA::Double PointingImpl::azmOffset () throw (::CORBA::SystemException){
-	if(m_state[0])
+	if(m_state[::TYPES::MANUAL])
 		return m_manualOffset.az;
 	else
 		return 0;
 }
 
 void PointingImpl::offSetAlt (::CORBA::Double degrees) throw (::CORBA::SystemException){
-	if(m_state[0])
+	if(m_state[::TYPES::MANUAL])
 		m_manualOffset.alt += degrees;
 }
 
 void PointingImpl::offSetAzm (::CORBA::Double degrees) throw (::CORBA::SystemException){
-	if(m_state[0])
+	if(m_state[::TYPES::MANUAL])
 		m_manualOffset.az += degrees;
 }
 
 ::TYPES::RadecPos PointingImpl::offSet (const ::TYPES::RadecPos & p, const ::CORBA::Double st) throw (::CORBA::SystemException){
 	double ra_d, dec_d;
 	::TYPES::RadecPos return_p;
-	if(m_state[1])
+	if(m_state[::TYPES::AUTOMATIC])
 	{
 		m_obslist->cOff((double)p.ra, (double)p.dec, (double)st, ra_d, dec_d);
 		return_p.ra = ra_d;
@@ -67,8 +66,11 @@ void PointingImpl::addObs (const ::TYPES::RadecPos & p_t, const ::TYPES::RadecPo
 }
 
 void PointingImpl::calculateCoeffs () throw(::CORBA::SystemException){
-	if(m_state[1])
+	if(m_state[::TYPES::AUTOMATIC])
+	{
 		m_obslist->cCoeffs();
+		m_obslist->cOffs();
+	}
 }
 
 void PointingImpl::setState (::CORBA::Boolean state, ::TYPES::PointingModel model) throw (::CORBA::SystemException){

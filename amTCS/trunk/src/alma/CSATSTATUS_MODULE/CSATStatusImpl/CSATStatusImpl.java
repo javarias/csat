@@ -247,15 +247,15 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		tracking_comp.setStatus(true);
 	}
 
-	public void setCalibrated(AltazPos p) throws LifeCycleEx {
+	public void setCalibrated() throws LifeCycleEx {
 		
 		if( status != TCSStatus.CALIBRATING ) {
 			AcsJLifeCycleEx ex = new AcsJLifeCycleEx(new IllegalStateException("TCS is in " + status + " state"));
 			throw ex.toLifeCycleEx();
 		}
-		pointing_comp.calculateCoeffs();
 		pointing_comp.setState(true, PointingModel.AUTOMATIC);
 		pointing_comp.setState(false, PointingModel.MANUAL);
+		pointing_comp.calculateCoeffs();
 		status = TCSStatus.STAND_BY;
 	}
 

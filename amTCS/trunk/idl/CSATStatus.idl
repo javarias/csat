@@ -75,7 +75,7 @@ module CSATSTATUS_MODULE {
 		 * @param p The position which the telesocope is pointing at
 		 * @throw LifeCycleEx If the current state is different from "Calibrating"
 		 */
-		void setCalibrated(in TYPES::AltazPos p)
+		void setCalibrated()
 		   raises (acsErrTypeLifeCycle::LifeCycleEx);
 
 		/**
