@@ -276,7 +276,9 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 		CompletionHolder completionHolder = new CompletionHolder();
 		AltazVel altazVel = new AltazVel();
 		RadecPos tmprd = new RadecPos();
+		RadecPos delta_rd;
 		AltazPos tmpaa;
+		double st;
 		double realAltitude;
 		double realAzimuth;
 		double commandedAltitude;
@@ -291,27 +293,38 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 			/* Just control the telescope if doControl is true */
 			if(doControl){
 				
+				st = calculations_comp.siderealTime();
 				/* We get the real values from the telescope */
 				realAltitude = devTelescope_comp.realAlt().get_sync(completionHolder);
 				realAzimuth  = devTelescope_comp.realAzm().get_sync(completionHolder);
 
 				m_softRealPos.dec = realAltitude;
-				m_softRealPos.ra  = realAzimuth + calculations_comp.siderealTime();
+				m_softRealPos.ra  = realAzimuth + st;
+
+				/* We add to the commanded position the Automatic pointing corrections */
+				tmprd.ra = m_commandedPos.az + st;
+				tmprd.dec = m_commandedPos.alt;
+				delta_rd = pointing_comp.offSet(tmprd,st);
+				if( delta_rd.ra != 0 || delta_rd.dec != 0){
+					commandedAzimuth = tmprd.ra + delta_rd.ra - st;
+					commandedAltitude = tmprd.dec + delta_rd.dec;
+				}
+				else{
+					commandedAzimuth = m_commandedPos.az;
+					commandedAltitude = m_commandedPos.alt;
+				}
 				
-				/* We add to the commanded position the pointing corrections */
+				/* We add to the commanded position the manual pointing corrections */
 				if( pointing_comp.azmOffset() != 0 || pointing_comp.altOffset() != 0) {
-					tmprd.ra  = m_commandedPos.az + calculations_comp.siderealTime();
-					tmprd.dec = m_commandedPos.alt;
+					tmprd.ra  = commandedAzimuth + calculations_comp.siderealTime();
+					tmprd.dec = commandedAltitude;
 					tmpaa = calculations_comp.Radec2Altaz(tmprd);
 					tmpaa.alt += pointing_comp.altOffset();
 					tmpaa.az  += pointing_comp.azmOffset();
 					tmprd = calculations_comp.Altaz2Radec(tmpaa);
-	
+
 					commandedAzimuth  = tmprd.ra - calculations_comp.siderealTime();
 					commandedAltitude = tmprd.dec;
-				} else {
-					commandedAzimuth  = m_commandedPos.az;
-					commandedAltitude = m_commandedPos.alt;
 				}
 
 				/* We search which movement is shorter in azimuth (left or right) */

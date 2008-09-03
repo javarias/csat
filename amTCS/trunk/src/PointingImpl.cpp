@@ -50,8 +50,8 @@ void PointingImpl::offSetAzm (::CORBA::Double degrees) throw (::CORBA::SystemExc
 	}
 	else
 	{
-		return_p.ra = 0;
-		return_p.dec = 0;
+		return_p.ra = 0.0;
+		return_p.dec = 0.0;
 	}
 	return return_p;
 }
