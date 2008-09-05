@@ -60,8 +60,11 @@ TYPES::Image* PcDummyCCDImpl::image(CORBA::Double exposure) throw (CORBA::System
 
 	TYPES::Image_var image = TYPES::Image(length);
 	image->length((CORBA::ULong)length);
-	for(unsigned int i=0;i!=length;i++)
-		image[i] = 0;
+	for(unsigned int i=0;i!=length/3.;i++) {
+		image[3*i+0] = 255*m_red_sp->get_sync(comp.out());
+		image[3*i+1] = 255*m_green_sp->get_sync(comp.out());
+		image[3*i+2] = 255*m_blue_sp->get_sync(comp.out());
+	}
 
 	ACS_SHORT_LOG((LM_INFO,"PcDummyCCDImpl::image: Obtained the Image"));
 	return image._retn();
