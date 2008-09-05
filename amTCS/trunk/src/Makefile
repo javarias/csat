@@ -56,7 +56,7 @@ INCLUDES        =
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = Lx200GPSImpl Lx200EMCImpl NexstarImpl NexsimImpl lpiImpl eTrexImpl PcDummyGpsImpl CalculationsImpl PointingImpl
+LIBRARIES       = Lx200GPSImpl Lx200EMCImpl NexstarImpl NexsimImpl lpiImpl eTrexImpl PcDummyGpsImpl CalculationsImpl PointingImpl PcDummyCCDImpl
 LIBRARIES_L     =
 
 #
@@ -79,6 +79,8 @@ CalculationsImpl_OBJECTS = CalculationsImpl
 CalculationsImpl_LIBS    = TypesStubs LocaleStubs CalculationsStubs csatErrors
 PointingImpl_OBJECTS     = PointingImpl
 PointingImpl_LIBS        = TypesStubs PointingStubs csatErrors pointingsystem
+PcDummyCCDImpl_OBJECTS   = PcDummyCCDImpl
+PcDummyCCDImpl_LIBS      = TypesStubs DevCCDStubs csatErrors
 
 #
 # Scripts (public and local)

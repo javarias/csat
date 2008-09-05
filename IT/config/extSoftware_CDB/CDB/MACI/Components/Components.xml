@@ -19,6 +19,12 @@
       <_ Name="LPI"
          Code="lpiImpl"
          Type="IDL:alma/DEVCCD_MODULE/DevCCD:1.0"
+         Default="false"
+         Container="amContainerCpp"/>
+
+      <_ Name="PC_CCD"
+         Code="PcDummyCCDImpl"
+         Type="IDL:alma/DEVCCD_MODULE/DevCCD:1.0"
          Default="true"
          Container="amContainerCpp"/>
 
