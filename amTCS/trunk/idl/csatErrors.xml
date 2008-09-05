@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<Type _prefix="alma" name="csatErrors" type="900907"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ACSError.xsd">
+<Type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Alma/ACSError" xsi:schemaLocation="Alma/ACSError ACSError.xsd" name="csatErrors" type="900907" _prefix="alma" >
     <ErrorCode
         name="DateOutOfRange" 
         description="The given year/month/day date is out of range. The month must be in the range [1,12] and the day must be in the range [1,32["
