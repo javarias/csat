@@ -19,6 +19,8 @@ import java.util.logging.Logger;
 import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
 import alma.acs.component.client.ComponentClient;
 
+import alma.acsErrTypeLifeCycle.LifeCycleEx;
+
 import Hevelius.interfaz.*;
 //import alma.demo.HelloDemo;
 
@@ -107,37 +109,61 @@ public class CSATStatusClient extends ComponentClient
 	public void on()
 	{
 		if(csstatus!=null)
-			csstatus.on();
+			try {
+				csstatus.on();
+			} catch( LifeCycleEx e ) {
+				e.printStackTrace();
+			}
 	}
 
 	public void stop()
 	{
 		if(csstatus!=null)
-			csstatus.stop(null, null);
+			try {
+				csstatus.stop(null, null);
+			} catch( LifeCycleEx e ) {
+				e.printStackTrace();
+			}
 	}
 
 	public void off()
 	{
 		if(csstatus!=null)
-			csstatus.off();
+			try {
+				csstatus.off();
+			} catch( LifeCycleEx e ) {
+				e.printStackTrace();
+			}
 	}
 
 	public void setUncalibrated()
 	{
 		if(csstatus!=null)
-			csstatus.setUncalibrated();
+			try {
+				csstatus.setUncalibrated();
+			} catch( LifeCycleEx e ) {
+				e.printStackTrace();
+			}
 	}
 
 	public void setCalibrated(AltazPos p)
 	{
 		if(csstatus!=null)
-			csstatus.setCalibrated(p);
+			try {
+				csstatus.setCalibrated();
+			} catch( LifeCycleEx e ) {
+				e.printStackTrace();
+			}
 	}
 
 	public void initialize()
 	{
 		if(csstatus!=null)
-			csstatus.initialize(null, null);
+			try {
+				csstatus.initialize(null, null);
+			} catch( LifeCycleEx e ) {
+				e.printStackTrace();
+			}
 	}
 
 	/**
@@ -159,7 +185,7 @@ public class CSATStatusClient extends ComponentClient
 	public int getState()
 	{
 		if(csstatus!=null)
-			return csstatus.getState();
+			return csstatus.getState().value();
 		return -1;
 	}
 
@@ -223,7 +249,11 @@ public class CSATStatusClient extends ComponentClient
 	public void setMode(int s)
 	{
 		if(csstatus!=null)
-			csstatus.setMode(s);
+			try {
+				csstatus.setMode(s);
+			} catch( LifeCycleEx e ) {
+				e.printStackTrace();
+			}
 	}
 
 	/**

@@ -120,6 +120,8 @@ USER_IDL =
 JARFILES= Hevelius
 Hevelius_DIRS=Hevelius/
 Hevelius_EXTRAS=Hevelius/images/ Hevelius/catalogues/
+
+#USER_JFLAGS=-Xlint:unchecked
 #
 # java sources in Jarfile on/off
 DEBUG= 
