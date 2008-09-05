@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This is to receive the images from the CCD component
 export ORBgiopMaxMsgSize=10000000
 
+# Start the real python client for the pointing
 pointingClientPython
