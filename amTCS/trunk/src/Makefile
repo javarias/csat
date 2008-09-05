@@ -62,25 +62,25 @@ LIBRARIES_L     =
 #
 # <brief description of lllll library>
 Lx200GPSImpl_OBJECTS	    = Lx200GPSCoordDevIO Lx200GPSVelDevIO Lx200GPSImpl
-Lx200GPSImpl_LIBS		    = TypesStubs DevTelescopeStubs csatErrors SerialCommunication
+Lx200GPSImpl_LIBS		    = TypesStubs DevTelescopeStubs csatErrors SerialCommunication baci acsutil acserr
 Lx200EMCImpl_OBJECTS	    = Lx200EMCCoordDevIO Lx200EMCVelDevIO Lx200EMCImpl
-Lx200EMCImpl_LIBS		    = TypesStubs DevTelescopeStubs csatErrors SerialCommunication
+Lx200EMCImpl_LIBS		    = TypesStubs DevTelescopeStubs csatErrors SerialCommunication baci acsutil acserr
 NexstarImpl_OBJECTS      = NexstarCoordDevIO NexstarVelDevIO NexstarImpl
-NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors SerialCommunication
+NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors SerialCommunication baci acsutil acserr
 NexsimImpl_OBJECTS       = NexsimCoordDevIO NexsimVelDevIO NexsimImpl
-NexsimImpl_LIBS          = TypesStubs DevTelescopeStubs csatErrors NexSimStubs
+NexsimImpl_LIBS          = TypesStubs DevTelescopeStubs csatErrors NexSimStubs baci acsutil acserr
 lpiImpl_OBJECTS          = lpiFrameDevIO lpiPropsDevIO lpiImpl
-lpiImpl_LIBS             = TypesStubs DevCCDStubs csatErrors
+lpiImpl_LIBS             = TypesStubs DevCCDStubs csatErrors baci acsutil acserr
 eTrexImpl_OBJECTS        = eTrexCommunication eTrexCoordDevIO eTrexImpl
-eTrexImpl_LIBS           = TypesStubs DevGPSStubs csatErrors SerialCommunication
+eTrexImpl_LIBS           = TypesStubs DevGPSStubs csatErrors SerialCommunication baci acsutil acserr
 PcDummyGpsImpl_OBJECTS   = PcDummyGpsImpl
-PcDummyGpsImpl_LIBS      = TypesStubs DevGPSStubs csatErrors
+PcDummyGpsImpl_LIBS      = TypesStubs DevGPSStubs csatErrors baci acsutil acserr
 CalculationsImpl_OBJECTS = CalculationsImpl
-CalculationsImpl_LIBS    = TypesStubs LocaleStubs CalculationsStubs csatErrors
+CalculationsImpl_LIBS    = TypesStubs LocaleStubs CalculationsStubs csatErrors baci acsutil acserr
 PointingImpl_OBJECTS     = PointingImpl
-PointingImpl_LIBS        = TypesStubs PointingStubs csatErrors pointingsystem
+PointingImpl_LIBS        = TypesStubs PointingStubs csatErrors pointingsystem baci acsutil acserr
 PcDummyCCDImpl_OBJECTS   = PcDummyCCDImpl
-PcDummyCCDImpl_LIBS      = TypesStubs DevCCDStubs csatErrors
+PcDummyCCDImpl_LIBS      = TypesStubs DevCCDStubs csatErrors baci acsutil acserr
 
 #
 # Scripts (public and local)

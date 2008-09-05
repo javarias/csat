@@ -64,12 +64,6 @@ public:
 
 	virtual ACS::RWlong_ptr    exposure() throw (CORBA::SystemException);
 
-	//virtual TYPES::TimeVal time() throw (CORBA::SystemException);
-
-	//virtual ACS::ROdouble_ptr latitude() throw (CORBA::SystemException);
-
-	//virtual ACS::ROdouble_ptr longitude() throw (CORBA::SystemException);
-
 private:
 
 	// Properties

@@ -3,8 +3,6 @@ static char *rcsId=(char *)"@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
 #include <stdlib.h>
-#include "lpiFrameDevIO.h"
-#include "lpiPropsDevIO.h"
 #include "PcDummyCCDImpl.h"
 #include "csatErrors.h"
 
@@ -38,7 +36,7 @@ void PcDummyCCDImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 	ACSErr::Completion_var completion;
 	m_device_sp = new RWstring((string(component_name)+":device").c_str(), getComponent());
 
-	ACS_TRACE("PcDummyCCDImpl::initialize");
+	ACS_TRACE( _METHOD_ );
 	if( getComponent() != 0){
 
 		ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::lpiFrameDevIO: Video device opened!"));

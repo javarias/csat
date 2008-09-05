@@ -1,5 +1,5 @@
 #include <vltPort.h>
-static char *rcsId="@(#) $Id: $";
+static char *rcsId=(char *)"@(#) $Id: $";
 static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 
 #include <SerialRS232.h>
@@ -48,10 +48,10 @@ void Lx200EMCImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)//,c
                 Lx200EMCVelDevIO   *azmVelDevIO = NULL;
 
                 try{
-                        azmDevIO = new Lx200EMCCoordDevIO("/dev/ttyS0", AZIMUTH_AXIS,false);
-                        altDevIO = new Lx200EMCCoordDevIO("/dev/ttyS0", ALTITUDE_AXIS,true);
-                        azmVelDevIO = new Lx200EMCVelDevIO("/dev/ttyS0", AZIMUTH_AXIS,false);
-                        altVelDevIO = new Lx200EMCVelDevIO("/dev/ttyS0", ALTITUDE_AXIS,true);
+                        azmDevIO = new Lx200EMCCoordDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS,false);
+                        altDevIO = new Lx200EMCCoordDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS,true);
+                        azmVelDevIO = new Lx200EMCVelDevIO((char *)"/dev/ttyS0", AZIMUTH_AXIS,false);
+                        altVelDevIO = new Lx200EMCVelDevIO((char *)"/dev/ttyS0", ALTITUDE_AXIS,true);
                 } catch (csatErrors::CannotOpenDeviceEx &ex){
                         acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
                         lifeEx.addData("Reason","Cannot create DevIOs");
