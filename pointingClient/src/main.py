@@ -15,7 +15,7 @@ class calGUI:
 		gobject.threads_init()
 		gtk.gdk.threads_init()
 		
-		self.xml = glade.XML("calClient.glade")
+		self.xml = glade.XML("../calClient.glade")
 		self.TCSCal = self.xml.get_widget("TCSCal")
 		self.xml.signal_connect("on_TCSCal_destroy",self.quit)
 
