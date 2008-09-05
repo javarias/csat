@@ -66,7 +66,7 @@ lllll_OBJECTS   =
 #
 # Scripts (public and local)
 # ----------------------------
-SCRIPTS         =
+SCRIPTS         = pointingClient
 SCRIPTS_L       =
 
 #
@@ -78,7 +78,7 @@ TCL_SCRIPTS_L   =
 #
 # Python stuff (public and local)
 # ----------------------------
-PY_SCRIPTS         = main
+PY_SCRIPTS         = pointingClientPython
 PY_SCRIPTS_L       =
 
 PY_MODULES         =

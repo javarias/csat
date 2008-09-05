@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export ORBgiopMaxMsgSize=10000000
+
+pointingClientPython
