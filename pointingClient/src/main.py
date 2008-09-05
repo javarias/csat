@@ -7,8 +7,10 @@ import gobject
 from threading import Thread
 from Acspy.Clients.SimpleClient import PySimpleClient
 import ACS
+import ACS__POA
 import TYPES
 import Numeric
+import time
 
 class calGUI:
 	def __init__(self):
@@ -36,42 +38,75 @@ class calGUI:
 		self.offset = self.xml.get_widget("offset")
 
 	def quit(self,w):
-		#self.simpleClient.disconnect()
+		gtk.gdk.threads_leave()
+		self.cupd.stop()
+		self.iupd.stop()
+		self.cupd.join()
+		self.iupd.join()
+		self.simpleClient.disconnect()
+		gtk.gdk.threads_enter()
 		gtk.main_quit()
-		#gtk.gdk.threads_leave()
-		#gtk.gdk.threads_enter()
 
 	def run(self):
 		self.simpleClient = PySimpleClient.getInstance()
 		self.ccinstance = self.simpleClient.getDefaultComponent("IDL:alma/CSATCONTROL_MODULE/CSATControl:1.0")
 		self.csinstance = self.simpleClient.getDefaultComponent("IDL:alma/CSATSTATUS_MODULE/CSATStatus:1.0")
-		self.upd = coorUpdater(self.img,self.csinstance)
-		#self.upd.run()
+		self.cupd = coorUpdater(self.ra,self.dec,self.csinstance)
+		self.iupd = imgUpdater(self.img,self.ccinstance)
+		self.cupd.start()
+		self.iupd.start()
 		gtk.main()
 
 class coorUpdater(Thread):
-	def __init__(self, img, csinst):
+	def __init__(self, ra_coor, dec_coor, csinst):
 		Thread.__init__(self)
 		self.csinstance = csinst
-		self.image = img
+		self.ra = ra_coor
+		self.dec = dec_coor
+		self.quit = False
 
 	def run(self):
-		gtk.gdk.threads_enter()
+		while(not self.quit):
+			(rd_p, aa_p) = self.csinstance.getPos()
+			gtk.gdk.threads_enter()
+			self.ra.set_text(str(rd_p.ra))
+			self.dec.set_text(str(rd_p.dec))
+			gtk.gdk.threads_leave()
+			time.sleep(1.0)
+
+	def stop(self):
+		self.quit = True
+
+class imgUpdater(Thread):
+	def __init__(self, img, ccinst):
+		Thread.__init__(self)
+		self.ccinstance = ccinst
+		self.image = img
+		self.quit = False
+		self.video = True
+
+	def run(self):
 		self.data = Numeric.zeros((480,640,3),'b');
-		while(self.salir):
-			while(self.bool):
-				tmp = self.ccdinstance.getImage()
+		desc = ACS.CBDescIn(0L,0L,0L)
+		while(not self.quit):
+			if(self.video):
+				tmp = self.ccinstance.getPreviewImage(None, desc)
 				for i in range(480):
 					for j in range(640):
 						self.data[i][j][0] = tmp[3*(i*640+j) + 0]
 						self.data[i][j][1] = tmp[3*(i*640+j) + 1]
 						self.data[i][j][2] = tmp[3*(i*640+j) + 2]
+				gtk.gdk.threads_enter()
 				self.pixbuf= gtk.gdk.pixbuf_new_from_array(self.data , gtk.gdk.COLORSPACE_RGB, 8)
 				self.image.set_from_pixbuf(self.pixbuf)
 				self.image.show()
-				if self.bool2:
-					self.bool=False
-		gtk.gdk.threads_leave()
+				gtk.gdk.threads_leave()
+			time.sleep(2.0)
+
+	def stop(self):
+		self.quit = True
+		self.video = False
+
 
 if __name__ == "__main__":
 	app = calGUI()
