@@ -570,9 +570,9 @@ void ObsList::cOff(double inra, double indec, double st, double &out_ra_d, doubl
 			Offset2 += this->coeffs[i]*this->Off2(i,alt,azm,lat);
 		}
 	}
-	printf("Off%d: %lf [Arcsecs]\n", 1, Offset1*3600);
-	printf("Off%d: %lf [Arcsecs]\n", 2, Offset2*3600);
-	printf("\n");
+	//printf("Off%d: %lf [Arcsecs]\n", 1, Offset1*3600);
+	//printf("Off%d: %lf [Arcsecs]\n", 2, Offset2*3600);
+	//printf("\n");
 
 	out_ra_d = -Offset1;
 	out_dec_d = Offset2;

@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+import os
 import gtk
 from gtk import glade
 import string
@@ -14,10 +15,14 @@ import time
 
 class calGUI:
 	def __init__(self):
+		self.video = False
 		gobject.threads_init()
 		gtk.gdk.threads_init()
-		
-		self.xml = glade.XML("../calClient.glade")
+		gladeFile = "../calClient.glade"
+		if(not os.path.exists(gladeFile)):
+			introot = 'os.environ.get("INTROOT")'
+			gladeFile = introot+'/calClient.glade'
+		self.xml = glade.XML(gladeFile)
 		self.TCSCal = self.xml.get_widget("TCSCal")
 		self.xml.signal_connect("on_TCSCal_destroy",self.quit)
 
@@ -42,7 +47,8 @@ class calGUI:
 		self.cupd.stop()
 		self.iupd.stop()
 		self.cupd.join()
-		self.iupd.join()
+		if(self.video):
+			self.iupd.join()
 		self.simpleClient.disconnect()
 		gtk.gdk.threads_enter()
 		gtk.main_quit()
@@ -54,7 +60,8 @@ class calGUI:
 		self.cupd = coorUpdater(self.ra,self.dec,self.csinstance)
 		self.iupd = imgUpdater(self.img,self.ccinstance)
 		self.cupd.start()
-		self.iupd.start()
+		if(self.video):
+			self.iupd.start()
 		gtk.main()
 
 class coorUpdater(Thread):
@@ -82,7 +89,7 @@ class imgUpdater(Thread):
 		Thread.__init__(self)
 		self.ccinstance = ccinst
 		self.image = img
-		self.quit = False
+		self.quit = True
 		self.video = True
 
 	def run(self):
@@ -101,7 +108,6 @@ class imgUpdater(Thread):
 				self.image.set_from_pixbuf(self.pixbuf)
 				self.image.show()
 				gtk.gdk.threads_leave()
-			time.sleep(2.0)
 
 	def stop(self):
 		self.quit = True
