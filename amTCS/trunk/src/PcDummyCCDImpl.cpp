@@ -39,8 +39,6 @@ void PcDummyCCDImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 	ACS_TRACE( _METHOD_ );
 	if( getComponent() != 0){
 
-		ACS_SHORT_LOG((LM_INFO,"lpiFrameDevIO::lpiFrameDevIO: Video device opened!"));
-
 		m_frame_sp = new ROlongSeq( (component_name + std::string(":frame")).c_str(), getComponent());
 		m_red_sp = new RWlong( (component_name + std::string(":red")).c_str(), getComponent());
 		m_blue_sp = new RWlong( (component_name + std::string(":blue")).c_str(), getComponent());
@@ -66,7 +64,7 @@ TYPES::Image* PcDummyCCDImpl::image(CORBA::Double exposure) throw (CORBA::System
 		image[3*i+2] = 255*m_blue_sp->get_sync(comp.out());
 	}
 
-	ACS_SHORT_LOG((LM_INFO,"PcDummyCCDImpl::image: Obtained the Image"));
+	ACS_SHORT_LOG((LM_INFO,"PcDummyCCDImpl::image: Obtained an image"));
 	return image._retn();
 }
 
