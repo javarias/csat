@@ -20,7 +20,7 @@ class calGUI:
 		gtk.gdk.threads_init()
 		gladeFile = "../calClient.glade"
 		if(not os.path.exists(gladeFile)):
-			introot = 'os.environ.get("INTROOT")'
+			introot = os.environ.get("INTROOT")
 			gladeFile = introot+'/calClient.glade'
 		self.xml = glade.XML(gladeFile)
 		self.TCSCal = self.xml.get_widget("TCSCal")
