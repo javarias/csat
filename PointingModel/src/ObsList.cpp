@@ -335,7 +335,7 @@ void ObsList::cCoeffs()
 	double chi;
 	gsl_matrix *cov;
 	this->createVector();
-	if(this->nterms > 0)
+	if(this->nterms > 0 && this->n > this->nterms/2)
 	{
 		this->selectedTerms();
 		this->createMatrix();
@@ -422,6 +422,9 @@ void ObsList::cCoeffs()
 		gsl_multifit_linear_free(W);
 		gsl_matrix_free(cov);
 	}
+	else
+		for(i = 0; i < this->nterms; i++)
+			this->coeffs[i] = 0;
 }
 
 void ObsList::cOffs()
