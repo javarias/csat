@@ -16,31 +16,47 @@ import time
 class calGUI:
 	def __init__(self):
 		self.video = False
+		self.guiFailure = False
 		gobject.threads_init()
 		gtk.gdk.threads_init()
 		gladeFile = "../calClient.glade"
 		if(not os.path.exists(gladeFile)):
 			introot = os.environ.get("INTROOT")
 			gladeFile = introot+'/calClient.glade'
-		self.xml = glade.XML(gladeFile)
-		self.TCSCal = self.xml.get_widget("TCSCal")
-		self.xml.signal_connect("on_TCSCal_destroy",self.quit)
+		if(not os.path.exists(gladeFile)):
+				print 'GUI file not found. Quitting...'
+				self.guiFailure = True
+		else:
+			self.xml = glade.XML(gladeFile)
+			self.TCSCal = self.xml.get_widget("TCSCal")
+			self.xml.signal_connect("on_TCSCal_destroy" ,self.quit)
+			self.xml.signal_connect("on_start_clicked"  ,self.startCal)
+			self.xml.signal_connect("on_stop_clicked"   ,self.stopCal)
+			self.xml.signal_connect("on_current_clicked",self.currentPos)
+			self.xml.signal_connect("on_preset_clicked" ,self.presetTo)
+			self.xml.signal_connect("on_up_clicked"     ,self.up)
+			self.xml.signal_connect("on_left_clicked"   ,self.left)
+			self.xml.signal_connect("on_right_clicked"  ,self.right)
+			self.xml.signal_connect("on_down_clicked"   ,self.down)
+			self.xml.signal_connect("on_accept_clicked" ,self.acceptPos)
+			self.xml.signal_connect("on_cancel_clicked" ,self.cancelPos)
+			#self.xml.signal_connect("on_set_clicked"    ,self.setOff)
 
-		self.ra = self.xml.get_widget("ra")
-		self.dec = self.xml.get_widget("dec")
-		self.start = self.xml.get_widget("start")
-		self.stop = self.xml.get_widget("stop")
-		self.current = self.xml.get_widget("current")
-		self.preset = self.xml.get_widget("preset")
-		self.accept = self.xml.get_widget("accept")
-		self.cancel = self.xml.get_widget("cancel")
-		self.set = self.xml.get_widget("set")
-		self.up = self.xml.get_widget("up")
-		self.down = self.xml.get_widget("down")
-		self.left = self.xml.get_widget("left")
-		self.right = self.xml.get_widget("right")
-		self.img = self.xml.get_widget("img")
-		self.offset = self.xml.get_widget("offset")
+			self.ra = self.xml.get_widget("ra")
+			self.dec = self.xml.get_widget("dec")
+			self.start = self.xml.get_widget("start")
+			self.stop = self.xml.get_widget("stop")
+			self.current = self.xml.get_widget("current")
+			self.preset = self.xml.get_widget("preset")
+			self.accept = self.xml.get_widget("accept")
+			self.cancel = self.xml.get_widget("cancel")
+			self.set = self.xml.get_widget("set")
+			self.up = self.xml.get_widget("up")
+			self.down = self.xml.get_widget("down")
+			self.left = self.xml.get_widget("left")
+			self.right = self.xml.get_widget("right")
+			self.img = self.xml.get_widget("img")
+			self.offset = self.xml.get_widget("offset")
 
 	def quit(self,w):
 		gtk.gdk.threads_leave()
@@ -63,6 +79,47 @@ class calGUI:
 		if(self.video):
 			self.iupd.start()
 		gtk.main()
+
+	def guiFailed(self):
+		return self.guiFailure
+
+	def startCal(self,w):
+		self.csinstance.on()
+		self.csinstance.setUncalibrated()
+
+	def stopCal(self,w):
+		self.csinstance.setCalibrated()
+
+	def currentPos(self,w):
+		self.csinstance.addPointingObs()
+
+	def presetTo(self,w):
+		p = TYPES.RadecPos()
+		p.ra = double(self.ra.get_text())
+		p.dec = double(self.dec.get_text())
+		self.ccinstance.preset(p)
+
+	def up(self,w):
+		off = float(self.offset.get_text())
+		self.ccinstance.AltitudeOffSet(off)
+
+	def left(self,w):
+		off = float(self.offset.get_text())
+		self.ccinstance.AzimuthOffSet(-off)
+
+	def right(self,w):
+		off = float(self.offset.get_text())
+		self.ccinstance.AzimuthOffSet(off)
+
+	def down(self,w):
+		off = float(self.offset.get_text())
+		self.ccinstance.AltitudeffSet(-off)
+
+	def acceptPos(self,w):
+		self.csinstance.acceptPointingObs(True)
+
+	def cancelPos(self,w):
+		self.csinstance.acceptPointingObs(False)
 
 class coorUpdater(Thread):
 	def __init__(self, ra_coor, dec_coor, csinst):
@@ -116,5 +173,6 @@ class imgUpdater(Thread):
 
 if __name__ == "__main__":
 	app = calGUI()
-	app.TCSCal.show()
-	app.run()
+	if(not app.guiFailed()):
+		app.TCSCal.show()
+		app.run()
