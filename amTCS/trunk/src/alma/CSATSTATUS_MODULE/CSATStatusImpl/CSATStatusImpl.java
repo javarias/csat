@@ -292,14 +292,26 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public void getPos(RadecPosHolder p_rd, AltazPosHolder p_aa){
+		RadecPos delta_rd, tmp_rd;
 		p_aa.value = telescope_comp.getAltAz();
 
-		/* Correct back the pointing offsets */
-		p_aa.value.az  -= pointing_comp.azmOffset();
-		p_aa.value.alt -= pointing_comp.altOffset();
+		/* Correct back the manual pointing offsets */
+		if(pointing_comp.getState(PointingModel.MANUAL)){
+			p_aa.value.az  -= pointing_comp.azmOffset();
+			p_aa.value.alt -= pointing_comp.altOffset();
+		}
 
 		/* Now convert to Ra/Dec coordinates */
 		p_rd.value = calculations_comp.Altaz2Radec(p_aa.value);
+
+		/* Correct back the automatic pointing offsets */
+		if(pointing_comp.getState(PointingModel.AUTOMATIC)){
+			tmp_rd = telescope_comp.getRadec();
+			delta_rd = pointing_comp.offSet(tmp_rd,getSiderealTime());
+			p_rd.value.ra -= delta_rd.ra;
+			p_rd.value.dec -= delta_rd.dec;
+			p_aa.value = calculations_comp.Radec2Altaz(p_rd.value);
+		}
 	}
 
 	public TCSStatus getState(){
@@ -356,7 +368,9 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 			AcsJLifeCycleEx ex = new AcsJLifeCycleEx(new IllegalStateException("TCS is in " + status + " state"));
 			throw ex.toLifeCycleEx();
 		}
-		
+
+		if( !observing_for_pointing )
+			return;
 		observing_for_pointing = false;
 		if( !acceptance )		
 			return;

@@ -22,7 +22,7 @@ class NexsimVelDevIO: public DevIO<CORBA::Double>
 
 	public:
 
-	NexsimVelDevIO(NEXSIM_MODULE::NexSim_var simulator, int axis);
+	NexsimVelDevIO(NEXSIM_MODULE::NexSim_var simulator, int axis, bool reversed);
 
 	virtual CORBA::Double read(ACS::Time &timestamp)
 	              throw (ACSErr::ACSbaseExImpl);
@@ -33,6 +33,7 @@ class NexsimVelDevIO: public DevIO<CORBA::Double>
 	private:
 	NEXSIM_MODULE::NexSim_var m_simulator;
 	int axis;
+	bool reversed;
 	double slewRateElevation;
 	double slewRateAzimuth;
 };

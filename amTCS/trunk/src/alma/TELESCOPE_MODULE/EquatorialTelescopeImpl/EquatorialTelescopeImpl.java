@@ -52,6 +52,7 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 	private Thread controlThread = null;
 	
 	private boolean doControl;
+	private boolean moving;
 
 	/////////////////////////////////////////////////////////////
 	// Implementation of ComponentLifecycle
@@ -92,6 +93,7 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 		}
 
 		doControl = true;
+		moving = false;
 
 		CompletionHolder completionHolder = new CompletionHolder();
 		m_commandedPos = new AltazPos();
@@ -161,6 +163,8 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 	private alma.ACS.CBDescIn descIn = null;
 
 	public void presetting(RadecPos position, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
+		if(moving)
+			return;
 		doControl = true;
 
 		if( controlThread == null ){
@@ -170,6 +174,8 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 
 		m_commandedPos.az  = position.ra - calculations_comp.siderealTime();
 		m_commandedPos.alt = position.dec;
+		if(moving)
+			return;
 		m_commandedRadecPos.ra = position.ra;
 		m_commandedRadecPos.dec = position.dec;
 		this.cb = cb;
@@ -193,11 +199,7 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 	}
 
 	public void gotoAltAz(AltazPos position, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
-
-		m_commandedRadecPos = calculations_comp.Altaz2Radec(position);
-		m_commandedPos.az  = m_commandedRadecPos.ra - calculations_comp.siderealTime();
-		m_commandedPos.alt = m_commandedRadecPos.dec;
-
+		moving = true;
 		doControl = true;
 
 		if( controlThread == null ){
@@ -205,8 +207,15 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 			controlThread.start();
 		}
 
+		m_commandedRadecPos = calculations_comp.Altaz2Radec(position);
+		m_commandedPos.az  = m_commandedRadecPos.ra - calculations_comp.siderealTime();
+		m_commandedPos.alt = m_commandedRadecPos.dec;
+
+		//System.out.println("GotoAltAz" +" "+ m_commandedRadecPos.ra +" "+ m_commandedRadecPos.dec+" "+ position.alt+" "+ position.az);
+
 		this.cb = cb;
 		descIn = desc;
+		moving = false;
 	}
 
 	public void stop(){
@@ -316,14 +325,14 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 				
 				/* We add to the commanded position the manual pointing corrections */
 				if( pointing_comp.azmOffset() != 0 || pointing_comp.altOffset() != 0) {
-					tmprd.ra  = commandedAzimuth + calculations_comp.siderealTime();
+					tmprd.ra  = commandedAzimuth + st;
 					tmprd.dec = commandedAltitude;
 					tmpaa = calculations_comp.Radec2Altaz(tmprd);
 					tmpaa.alt += pointing_comp.altOffset();
 					tmpaa.az  += pointing_comp.azmOffset();
 					tmprd = calculations_comp.Altaz2Radec(tmpaa);
 
-					commandedAzimuth  = tmprd.ra - calculations_comp.siderealTime();
+					commandedAzimuth  = tmprd.ra - st;
 					commandedAltitude = tmprd.dec;
 				}
 

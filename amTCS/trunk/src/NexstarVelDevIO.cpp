@@ -59,13 +59,13 @@ void NexstarVelDevIO::write(const CORBA::Double &recv_value, ACS::Time &timestam
 	int vel = 0;
 	double absValue;
 	double value;
+	char command[8];
 
 	value = recv_value;
 	if( this->reversed )
 		value *= (-1);
 
 	absValue = fabs(value);
-	char command[8];
 
 	// We see which telescope's velocity is adecuated for the given double value
 	if( absValue >= 3 )

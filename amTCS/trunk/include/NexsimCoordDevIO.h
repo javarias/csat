@@ -22,7 +22,7 @@ class NexsimCoordDevIO: public DevIO<CORBA::Double>
 
 	public:
 
-	NexsimCoordDevIO(NEXSIM_MODULE::NexSim_var simulator, int axis);
+	NexsimCoordDevIO(NEXSIM_MODULE::NexSim_var simulator, int axis, bool reversed);
 
 	virtual CORBA::Double read(ACS::Time &timestamp)
 	              throw (ACSErr::ACSbaseExImpl);
@@ -33,6 +33,7 @@ class NexsimCoordDevIO: public DevIO<CORBA::Double>
 	private:
 	NEXSIM_MODULE::NexSim_var m_simulator;
 	int axis;
+	bool reversed;
 };
 
 #endif /* _NEXSIM_COORD_DEVIO_H_ */

@@ -1,10 +1,11 @@
 #include "NexsimCoordDevIO.h"
 
-NexsimCoordDevIO::NexsimCoordDevIO(NEXSIM_MODULE::NexSim_var simulator, int axis){
+NexsimCoordDevIO::NexsimCoordDevIO(NEXSIM_MODULE::NexSim_var simulator, int axis, bool reversed){
 
 	//char *_METHOD_="NexsimCoordDevIO::NexsimCoordDevIO";
 	this->m_simulator = simulator;
 	this->axis = axis;
+	this->reversed = reversed;
 }
 
 CORBA::Double NexsimCoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl) {
@@ -17,6 +18,10 @@ CORBA::Double NexsimCoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbas
 	sscanf(msg,"%08lX,%08lX#",&read_azm, &read_alt);
 	value = ( this->axis == ALTITUDE_AXIS ) ? read_alt/MAX_PRECISE_ROTATION : read_azm/MAX_PRECISE_ROTATION ;
 	value *= 360;
+	if( this->reversed )
+		value = 360 - value;
+	if( value == 360.0 )
+		value = 0.0;
 	return value;
 }
 

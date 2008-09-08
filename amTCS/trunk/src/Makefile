@@ -56,7 +56,7 @@ INCLUDES        =
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = Lx200GPSImpl Lx200EMCImpl NexstarImpl NexsimImpl lpiImpl eTrexImpl PcDummyGpsImpl CalculationsImpl PointingImpl PcDummyCCDImpl
+LIBRARIES       = Lx200GPSImpl Lx200EMCImpl NexstarImpl NexsimImpl EquatorialNexsimImpl lpiImpl eTrexImpl PcDummyGpsImpl CalculationsImpl PointingImpl PcDummyCCDImpl
 LIBRARIES_L     =
 
 #
@@ -69,6 +69,8 @@ NexstarImpl_OBJECTS      = NexstarCoordDevIO NexstarVelDevIO NexstarImpl
 NexstarImpl_LIBS         = TypesStubs DevTelescopeStubs csatErrors SerialCommunication baci acsutil acserr
 NexsimImpl_OBJECTS       = NexsimCoordDevIO NexsimVelDevIO NexsimImpl
 NexsimImpl_LIBS          = TypesStubs DevTelescopeStubs csatErrors NexSimStubs baci acsutil acserr
+EquatorialNexsimImpl_OBJECTS       = NexsimCoordDevIO NexsimVelDevIO EquatorialNexsimImpl
+EquatorialNexsimImpl_LIBS          = TypesStubs DevTelescopeStubs csatErrors NexSimStubs baci acsutil acserr
 lpiImpl_OBJECTS          = lpiFrameDevIO lpiPropsDevIO lpiImpl
 lpiImpl_LIBS             = TypesStubs DevCCDStubs csatErrors baci acsutil acserr
 eTrexImpl_OBJECTS        = eTrexCommunication eTrexCoordDevIO eTrexImpl
