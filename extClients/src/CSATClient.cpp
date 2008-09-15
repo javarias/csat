@@ -52,7 +52,7 @@ int CSATClient::startCSC()
 		return -1;
 	try
 	{
-		this->csc = this->client->getComponent<CSATCONTROL_MODULE::CSATControl>("CSATCONTROL",0,true);
+		this->csc = this->client->getComponent<CSATCONTROL_MODULE::CSATControl>("CSATCONTROL",NULL,true);
 	}
 	catch(maciErrType::CannotGetComponentExImpl &_ex)
 	{
