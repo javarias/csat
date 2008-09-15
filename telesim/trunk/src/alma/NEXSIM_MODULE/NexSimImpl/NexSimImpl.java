@@ -116,7 +116,7 @@ public class NexSimImpl implements NexSimOperations, ComponentLifecycle {
 					message = new String(message+(char)0+(char)0+(char)0);
 			}
 			response = m_messageWrapper.executeAction(message);
-			m_logger.info("message delivered to Nexstar4 Simulator: "+message.charAt(0));
+			//m_logger.info("message delivered to Nexstar4 Simulator: "+message.charAt(0));
 		}
 		else{
 			m_logger.info("message not delivered to Nexstar4 Simulator because simulator is off; message: "+message);
