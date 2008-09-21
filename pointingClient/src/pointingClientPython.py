@@ -75,6 +75,7 @@ class calGUI:
 		self.csinstance = self.simpleClient.getDefaultComponent("IDL:alma/CSATSTATUS_MODULE/CSATStatus:1.0")
 		self.cupd = coorUpdater(self.ra,self.dec,self.csinstance)
 		self.iupd = imgUpdater(self.img,self.ccinstance)
+		self.csinstance.on()
 		self.cupd.start()
 		if(self.video):
 			self.iupd.start()
@@ -84,7 +85,6 @@ class calGUI:
 		return self.guiFailure
 
 	def startCal(self,w):
-		self.csinstance.on()
 		self.csinstance.setUncalibrated()
 
 	def stopCal(self,w):
@@ -113,7 +113,7 @@ class calGUI:
 
 	def down(self,w):
 		off = float(self.offset.get_text())
-		self.ccinstance.AltitudeffSet(-off)
+		self.ccinstance.AltitudeOffSet(-off)
 
 	def acceptPos(self,w):
 		self.csinstance.acceptPointingObs(True)
