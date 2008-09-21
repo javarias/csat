@@ -162,7 +162,7 @@ char *Nexstar::getPreciseAzmAlt()
 char *Nexstar::gotoRaDec()
 {
 	char buf[5], num[9], comma;
-	long ra, dec;
+	unsigned long ra, dec;
 	double rad, decd;
 	TYPES::RadecPos rdPos;
 	ACS::CBDescIn cbin;
@@ -188,7 +188,7 @@ char *Nexstar::gotoRaDec()
 char *Nexstar::gotoPreciseRaDec()
 {
 	char buf[9], num[9], comma;
-   long ra, dec;
+   unsigned long ra, dec;
    double rad, decd;
 	TYPES::RadecPos rdPos;
 	ACS::CBDescIn cbin;
@@ -214,7 +214,7 @@ char *Nexstar::gotoPreciseRaDec()
 char *Nexstar::gotoAzmAlt()
 {
 	char buf[5], num[9], comma;
-	long alt, azm;
+	unsigned long alt, azm;
 	double altd, azmd;
 	TYPES::AltazPos aaPos;
 	TYPES::AltazVel aaVel;
@@ -241,7 +241,7 @@ char *Nexstar::gotoAzmAlt()
 char *Nexstar::gotoPreciseAzmAlt()
 {
 	char buf[9], num[9], comma;
-	long alt, azm;
+	unsigned long alt, azm;
 	double altd, azmd;
 	TYPES::AltazPos aaPos;
 	TYPES::AltazVel aaVel;
