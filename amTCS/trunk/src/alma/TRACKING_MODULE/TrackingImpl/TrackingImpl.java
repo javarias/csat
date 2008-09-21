@@ -158,6 +158,11 @@ public class TrackingImpl implements TrackingOperations, ComponentLifecycle, Run
 					m_logger.info("Adjusting position according to tracking");
 					pos = telescope_comp.getRadec();
 					telescope_comp.presetting(pos, null, null);
+					try{
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 			else break;

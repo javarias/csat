@@ -66,11 +66,8 @@ void PointingImpl::addObs (const ::TYPES::RadecPos & p_t, const ::TYPES::RadecPo
 }
 
 void PointingImpl::calculateCoeffs () throw(::CORBA::SystemException){
-	if(m_state[::TYPES::AUTOMATIC])
-	{
-		m_obslist->cCoeffs();
-		m_obslist->cOffs();
-	}
+	m_obslist->cCoeffs();
+	m_obslist->cOffs();
 }
 
 void PointingImpl::setState (::CORBA::Boolean state, ::TYPES::PointingModel model) throw (::CORBA::SystemException){

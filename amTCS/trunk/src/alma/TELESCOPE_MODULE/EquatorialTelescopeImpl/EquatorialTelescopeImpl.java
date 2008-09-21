@@ -163,8 +163,6 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 	private alma.ACS.CBDescIn descIn = null;
 
 	public void presetting(RadecPos position, alma.ACS.CBvoid cb, alma.ACS.CBDescIn desc){
-		if(moving)
-			return;
 		doControl = true;
 
 		if( controlThread == null ){
@@ -172,10 +170,10 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 			controlThread.start();
 		}
 
-		m_commandedPos.az  = position.ra - calculations_comp.siderealTime();
-		m_commandedPos.alt = position.dec;
 		if(moving)
 			return;
+		m_commandedPos.az  = position.ra - calculations_comp.siderealTime();
+		m_commandedPos.alt = position.dec;
 		m_commandedRadecPos.ra = position.ra;
 		m_commandedRadecPos.dec = position.dec;
 		this.cb = cb;
@@ -211,11 +209,10 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 		m_commandedPos.az  = m_commandedRadecPos.ra - calculations_comp.siderealTime();
 		m_commandedPos.alt = m_commandedRadecPos.dec;
 
-		//System.out.println("GotoAltAz" +" "+ m_commandedRadecPos.ra +" "+ m_commandedRadecPos.dec+" "+ position.alt+" "+ position.az);
+		moving = false;
 
 		this.cb = cb;
 		descIn = desc;
-		moving = false;
 	}
 
 	public void stop(){

@@ -253,9 +253,9 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 			AcsJLifeCycleEx ex = new AcsJLifeCycleEx(new IllegalStateException("TCS is in " + status + " state"));
 			throw ex.toLifeCycleEx();
 		}
-		pointing_comp.setState(true, PointingModel.AUTOMATIC);
-		pointing_comp.setState(false, PointingModel.MANUAL);
 		pointing_comp.calculateCoeffs();
+		pointing_comp.setState(false, PointingModel.MANUAL);
+		pointing_comp.setState(true, PointingModel.AUTOMATIC);
 		status = TCSStatus.STAND_BY;
 	}
 
