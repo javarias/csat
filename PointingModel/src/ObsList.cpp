@@ -335,10 +335,10 @@ void ObsList::cCoeffs()
 	double chi;
 	gsl_matrix *cov;
 	this->createVector();
-	if(this->nterms > 0 && this->n > this->nterms/2)
+	this->selectedTerms();
+	this->createMatrix();
+	if((this->nterms > 0) && (2*this->n > this->nterms))
 	{
-		this->selectedTerms();
-		this->createMatrix();
 		x = gsl_vector_alloc(this->nterms);
 
 		W = gsl_multifit_linear_alloc(2*this->n,this->nterms);
@@ -415,16 +415,20 @@ void ObsList::cCoeffs()
 		//this->coeffs[0] = 18.4/3600.;
 		//this->coeffs[0] = -15.451/3600.;
 		//this->coeffs[0] = 18.14/3600.;
-		for(i=0;i<this->nterms;i++)
-			printf("C%d: %lf [Arcsecs]\n",i,this->coeffs[i]*3600);
-		printf("\n");
 		gsl_vector_free(x);
 		gsl_multifit_linear_free(W);
 		gsl_matrix_free(cov);
 	}
 	else
+	{
+		delete [] this->coeffs;
+		this->coeffs = new double[this->nterms];
 		for(i = 0; i < this->nterms; i++)
 			this->coeffs[i] = 0;
+	}
+	//for(i=0;i<this->nterms;i++)
+	//	printf("C%d: %lf [Arcsecs]\n",i,this->coeffs[i]*3600);
+	//printf("\n");
 }
 
 void ObsList::cOffs()
@@ -434,11 +438,11 @@ void ObsList::cOffs()
 	double lat,rms, rmso, mean, meano, psd, psdo;
 	double alt, azm, dec, h, Offset1, Offset2;
 	double diff1, diff2, diffo1, diffo2, disto, distn;
-	FILE *fn, *fo, *gn, *go;
-	fn = fopen("data/outputap.dat", "w+");
-	fo = fopen("data/outputbp.dat", "w+");
-	gn = fopen("data/outputapg.dat", "w+");
-	go = fopen("data/outputbpg.dat", "w+");
+	//FILE *fn, *fo, *gn, *go;
+	//fn = fopen("data/outputap.dat", "w+");
+	//fo = fopen("data/outputbp.dat", "w+");
+	//gn = fopen("data/outputapg.dat", "w+");
+	//go = fopen("data/outputbpg.dat", "w+");
 	lat = this->lat*PI/180;
 	rms = 0;
 	rmso = 0;
@@ -446,8 +450,8 @@ void ObsList::cOffs()
 	meano = 0;
 	psd = 0;
 	psdo = 0;
-	fprintf(gn,"A:dZ\n");
-	fprintf(go,"A:dZ\n");
+	//fprintf(gn,"A:dZ\n");
+	//fprintf(go,"A:dZ\n");
 	for(j=0;j<this->n;j++)
 	{
 		dec = this->obs[j]->getDecT()*PI/180.;
@@ -491,11 +495,11 @@ void ObsList::cOffs()
 			printf("DiffO: ra: %lf [Arcsecs] \t dec: %lf [Arcsecs] \t rms: %lf [Arcsecs] \n",diffo1, diffo2, disto);
 			printf("DiffN: ra: %lf [Arcsecs] \t dec: %lf [Arcsecs] \t rms: %lf [Arcsecs] \n",diff1, diff2, distn);
 			printf("lala: %lf\n", acos(sin((this->obs[j]->getDecT()+Offset2)*PI/180.)*sin(this->obs[j]->getDecE()*PI/180.) + cos((this->obs[j]->getDecT()+Offset2)*PI/180.)*cos(this->obs[j]->getDecE()*PI/180.)*cos(diff1/3600*PI/180.))*3600*180/PI );
-			fprintf(fn,"%lf:%lf\n",diff1*cos((this->obs[j]->getDecT() + this->obs[j]->getDecE()+Offset2)/2.*PI/180.),diff2);
-			fprintf(fo,"%lf:%lf\n",diffo1*cos((this->obs[j]->getDecT() + this->obs[j]->getDecE())/2.*PI/180.),diffo2);
+			//fprintf(fn,"%lf:%lf\n",diff1*cos((this->obs[j]->getDecT() + this->obs[j]->getDecE()+Offset2)/2.*PI/180.),diff2);
+			//fprintf(fo,"%lf:%lf\n",diffo1*cos((this->obs[j]->getDecT() + this->obs[j]->getDecE())/2.*PI/180.),diffo2);
 			tmp = new Obs(this->obs[j]->getRaT()-Offset1, this->obs[j]->getDecT()+Offset2, this->obs[j]->getRaE(), this->obs[j]->getDecE(), this->obs[j]->getSt(), this->obs[j]->getLat());
-			fprintf(gn,"%lf:%lf\n",tmp->getAzmT(),tmp->getdZ()*3600);
-			fprintf(go,"%lf:%lf\n",this->obs[j]->getAzmT(),this->obs[j]->getdZ()*3600);
+			//fprintf(gn,"%lf:%lf\n",tmp->getAzmT(),tmp->getdZ()*3600);
+			//fprintf(go,"%lf:%lf\n",this->obs[j]->getAzmT(),this->obs[j]->getdZ()*3600);
 			//rms += pow(diff1,2) + pow(diff2,2);
 			rmso += pow(disto,2);
 			rms += pow(distn,2);
@@ -513,8 +517,8 @@ void ObsList::cOffs()
 			diff2 = -(Offset2+this->obs[j]->getAzmT()-this->obs[j]->getAzmE())*3600;
 			printf("DiffO: ra: %lf [Arcsecs] \t dec: %lf [Arcsecs]\n",this->vec[j]*3600, this->vec[j+this->n]*3600);
 			printf("DiffN: ra: %lf [Arcsecs] \t dec: %lf [Arcsecs]\n",diff1, diff2);
-			fprintf(fn,"%lf:%lf\n",diff2,diff1);
-			fprintf(fo,"%lf:%lf\n",diffo2,diffo1);
+			//fprintf(fn,"%lf:%lf\n",diff2,diff1);
+			//fprintf(fo,"%lf:%lf\n",diffo2,diffo1);
 			rms += pow(diff1,2) + pow(diff2,2);
 			printf("\n");
 		}
@@ -531,12 +535,12 @@ void ObsList::cOffs()
 	psdo = sqrt(psdo/(this->n));
 	printf("Rms: %lf PSD: %lf %lf\n", rms, psd, rms+psd);
 	printf("Rmso: %lf PSD: %lf %lf\n", rmso, psdo, psdo);
-	fprintf(fn,"rms%lf",rms);
-	fprintf(fo,"rms%lf",rmso);
-	fclose(fn);
-	fclose(fo);
-	fclose(gn);
-	fclose(go);
+	//fprintf(fn,"rms%lf",rms);
+	//fprintf(fo,"rms%lf",rmso);
+	//fclose(fn);
+	//fclose(fo);
+	//fclose(gn);
+	//fclose(go);
 }
 
 void ObsList::cOff(double inra, double indec, double st, double &out_ra_d, double &out_dec_d)
