@@ -362,7 +362,7 @@ on_frameToogle_toggled                 (GtkToggleButton *togglebutton,
 	GtkWidget *button = lookup_widget(GTK_WIDGET(togglebutton), "togglebutton");
 	int toggled = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button));
 	struct ccd *cam = user_data;
-	change_control(cam,V4L2_CID_FRAME_MODE, toggled);
+	change_control(cam,SN9C102_V4L2_CID_FRAME_MODE, toggled);
 	sleep(0.01);
 }
 
