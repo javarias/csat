@@ -32,6 +32,7 @@
 #define SN9C102_V4L2_CID_BRIGHT_LEVEL (V4L2_CID_PRIVATE_BASE + 6)
 #define SN9C102_V4L2_CID_LOW_RESET_LEVEL_COUNT (V4L2_CID_PRIVATE_BASE + 7)
 #define SN9C102_V4L2_CID_HIGH_RESET_LEVEL_COUNT (V4L2_CID_PRIVATE_BASE + 8)
+#define SN9C102_V4L2_CID_FRAME_MODE (V4L2_CID_PRIVATE_BASE + 9)
 
 
 #define CLEAR(x) memset (&(x), 0, sizeof (x))  //fills the memory area pointed to by x with the constant byte 0
