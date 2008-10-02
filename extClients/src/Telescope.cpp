@@ -71,8 +71,21 @@ int Telescope::start()
 		if( (this->fds = open(slavename, O_RDWR)) < 0) // open slave
 			return -1;
 		if(strcmp(this->serial,slavename)){
-			rename(this->serial,this->serialbk);
-			this->move = true;
+			//rename(this->serial,this->serialbk);
+			if( lstat( strcat(getenv("INTROOT"), "/var"), &buf ) ){
+				if ( !S_ISDIR(buf.st_mode) ){
+					printf("A file with the name \"%s\" exists. Please delete it.\n", strcat(getenv("INTROOT"), "/var"));
+					return -1;
+					
+				}
+			}else{
+				if( !mkdir( strcat(getenv("INTROOT"), "/var"), S_IRWXU|S_IRWXG|S_IRWXO ) ){
+					printf("Unable to create %s directory\n", strcat(getenv("INTROOT"), "/var"));
+					return -1;
+                                }
+			}
+			this->serial=strcat(getenv("INTROOT"), "/var/pts0");
+			//this->move = true;
 			if(symlink(slavename,this->serial)!=0)
 				printf("Unable to create Symlink\n");
 		}
