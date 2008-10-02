@@ -51,6 +51,7 @@ void Telescope::parseInstructions()
 int Telescope::start()
 {
 	char *slavename;
+	char *path;
 	struct stat buf;
 
 	if( this->isLocal ) {
@@ -72,17 +73,19 @@ int Telescope::start()
 			return -1;
 		if(strcmp(this->serial,slavename)){
 			//rename(this->serial,this->serialbk);
-			if( lstat( strcat(getenv("INTROOT"), "/var"), &buf ) ){
-				if ( !S_ISDIR(buf.st_mode) ){
-					printf("A file with the name \"%s\" exists. Please delete it.\n", strcat(getenv("INTROOT"), "/var"));
-					return -1;
-					
+			path = strcat(getenv("INTROOT"), "/var");
+			if( lstat( path, &buf ) ){
+				if ( !S_ISDIR(buf.st_mode)){
+					printf("%o\n",buf.st_mode);
+					if ( buf.st_mode != 0){
+						printf("A file with the name \"%s\" exists. Please delete it.\n", path);
+						return -1;
+					}
+					if( !mkdir( path, S_IRWXU|S_IRWXG|S_IRWXO ) ){
+						printf("Unable to create %s directory\n", path);
+						return -1;
+					}
 				}
-			}else{
-				if( !mkdir( strcat(getenv("INTROOT"), "/var"), S_IRWXU|S_IRWXG|S_IRWXO ) ){
-					printf("Unable to create %s directory\n", strcat(getenv("INTROOT"), "/var"));
-					return -1;
-                                }
 			}
 			this->serial=strcat(getenv("INTROOT"), "/var/pts0");
 			//this->move = true;
