@@ -36,7 +36,8 @@ protected:
 	int fdm;
    int fds;
 	const char *serial;
-	char *serialbk;
+	char *sympath;
+	char *path;
 	struct termios termorig;
 };
 

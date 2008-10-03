@@ -7,10 +7,15 @@ using namespace std;
 
 Telescope::Telescope(bool isLocal, char *serialPort)
 {
+	char *introot;
 	this->isLocal  = isLocal;
 	this->serial   = serialPort;
-	this->serialbk = new char[strlen(this->serial) + 4];
-	sprintf(this->serialbk,"%s.bk",this->serial);
+	this->sympath  = NULL;
+	introot = getenv("INTROOT");
+	this->path = new char[strlen(introot)+4];
+	sprintf(path,"%s/var",introot);
+	this->sympath = new char[strlen(this->path)+5];
+	sprintf(this->sympath,"%s/pts0",this->path);
 	this->run = true;
 	this->move = false;
 	this->csatC = new CSATClient();
@@ -31,17 +36,16 @@ Telescope::~Telescope()
 			close(this->fdm);
 		if(this->fds > 0)
 			close(this->fds);
-		if(this->move){
-			unlink(this->serial);
-			rename(this->serialbk,serial);
-		}
+		if(this->move)
+			unlink(this->sympath);
 	}
 	else 
 		if(this->fdm > 0) {
 			ioctl (this->fdm, TCSETA, &this->termorig);
 			close(this->fdm);
 		}
-	delete this->serialbk;
+	delete this->path;
+	delete this->sympath;
 }
 
 void Telescope::parseInstructions()
@@ -51,7 +55,6 @@ void Telescope::parseInstructions()
 int Telescope::start()
 {
 	char *slavename;
-	char *path;
 	struct stat buf;
 
 	if( this->isLocal ) {
@@ -65,32 +68,22 @@ int Telescope::start()
 		if( (slavename = ptsname(this->fdm)) == NULL) // get name of slave
 			return -1;
 		lstat(this->serial, &buf);
-		if ((buf.st_mode & S_IFMT) == S_IFLNK){
+		if ((buf.st_mode & S_IFMT) == S_IFLNK)
 			printf("Device is a Symlink, check it.\n");
-			return -1;
-		}
 		if( (this->fds = open(slavename, O_RDWR)) < 0) // open slave
 			return -1;
-		if(strcmp(this->serial,slavename)){
-			//rename(this->serial,this->serialbk);
-			path = strcat(getenv("INTROOT"), "/var");
-			if( lstat( path, &buf ) ){
-				if ( !S_ISDIR(buf.st_mode)){
-					printf("%o\n",buf.st_mode);
-					if ( buf.st_mode != 0){
-						printf("A file with the name \"%s\" exists. Please delete it.\n", path);
-						return -1;
-					}
-					if( !mkdir( path, S_IRWXU|S_IRWXG|S_IRWXO ) ){
-						printf("Unable to create %s directory\n", path);
-						return -1;
-					}
-				}
+		if( lstat( this->path, &buf ) ){
+			if( mkdir( this->path, S_IRWXU|S_IRWXG|S_IRWXO ) ){
+					printf("Unable to create %s directory\n", this->path);
+					return -1;
 			}
-			this->serial=strcat(getenv("INTROOT"), "/var/pts0");
-			//this->move = true;
-			if(symlink(slavename,this->serial)!=0)
-				printf("Unable to create Symlink\n");
+		}
+		else
+		{
+			if ( !S_ISDIR(buf.st_mode)){
+				printf("A file with the name \"%s\" exists. Please delete it.\n", this->path);
+				return -1;
+			}
 		}
 		chmod(slavename, S_IRWXU|S_IRWXG|S_IRWXO);
 		printf("fds: %d\n", this->fds);
@@ -109,8 +102,13 @@ int Telescope::start()
 		this->fdm = open(slavename,O_RDWR | O_NDELAY);
 		this->configPort();
 	}
+	this->move = true;
+	if(symlink(slavename,this->sympath)!=0){
+		printf("Unable to create Symlink\n");
+		return -1;
+	}
 	if(this->csatC->getStatus() != 0){
-		cout << "Using port '" << slavename << "' for listening to commmands" << endl;
+		cout << "Using port '" << slavename << "' with symlink '" << sympath << "' for listening to commmands" << endl;
 		cout << "Getting CSATControl reference... ";
 		this->cscRun = (this->csatC->startCSC() == 0);
 		if(this->cscRun)
