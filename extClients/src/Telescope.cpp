@@ -12,9 +12,9 @@ Telescope::Telescope(bool isLocal, char *serialPort)
 	this->serial   = serialPort;
 	this->sympath  = NULL;
 	introot = getenv("INTROOT");
-	this->path = new char[strlen(introot)+4];
+	this->path = new char[strlen(introot)+5];
 	sprintf(path,"%s/var",introot);
-	this->sympath = new char[strlen(this->path)+5];
+	this->sympath = new char[strlen(this->path)+6];
 	sprintf(this->sympath,"%s/pts0",this->path);
 	this->run = true;
 	this->move = false;
