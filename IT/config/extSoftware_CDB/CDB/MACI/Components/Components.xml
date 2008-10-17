@@ -31,7 +31,7 @@
       <_ Name="NEXSIM"
          Code="NexsimImpl"
          Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
-         Default="true"
+         Default="false"
          Container="amContainerCpp"/>
 
       <_ Name="NEXSTAR"
@@ -105,5 +105,11 @@
          Type="IDL:alma/TELESCOPE_MODULE/EquatorialTelescope:1.0"
          Default="true"
          Container="amContainer"/>
+
+		<_ Name="EQUATORIAL_NEXSTAR"
+			Code="EquatorialNexstarImpl"
+			Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
+			Default="true"
+			Container="amContainerCpp" />
 
 </Components>
