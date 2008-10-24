@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<DevGPS
+   xmlns="urn:schemas-cosylab-com:DevGPS:1.0"
+   xmlns:cdb="urn:schemas-cosylab-com:CDB:1.0"
+   xmlns:baci="urn:schemas-cosylab-com:BACI:1.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <latitude  description="latitude"  default_value="-33.48489461624478" />
+   <longitude description="longitude" default_value="-71.53421745579344" />
+   <device>/dev/null</device>
+   <locking>true</locking>
+</DevGPS>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<DevCCD
+   xmlns="urn:schemas-cosylab-com:DevCCD:1.0"
+   xmlns:cdb="urn:schemas-cosylab-com:CDB:1.0"
+   xmlns:baci="urn:schemas-cosylab-com:BACI:1.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <frame description="frame" default_value="0" />
+   <device description="device" default_value ="0" />
+   <red description="red" default_value="0" />
+   <blue description="blue" default_value="0" />
+   <green description="green" default_value="0" />
+   <pixelBias description="pixelBias" default_value="0" />
+   <resetLevel description="resetLevel" default_value="0" />
+   <exposure description="exposure" default_value="1" />
+   <locking>true</locking>
+   <powered>false</powered>
+</DevCCD>
