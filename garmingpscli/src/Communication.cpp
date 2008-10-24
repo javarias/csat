@@ -9,6 +9,8 @@
  *
  * \author Rodrigo Tobar <rtobar@csrg.inf.utfsm.cl>
  */
+#include <string.h>
+#include <stdlib.h>
 #include <iostream>
 #include <math.h>
 
