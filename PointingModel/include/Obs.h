@@ -28,6 +28,8 @@ class Obs
 		double getdE();
 		double getdP();
 		double getdZ();
+		bool getState();
+		void setState(bool state);
 		~Obs();
 	private:
 		double raE, hE, decE, raT, hT, decT;
@@ -37,6 +39,7 @@ class Obs
 		double dR, dH, dD, dA, dE;
 		double dHDNP,dZ, dAANP, dTR;
 		double dU, dL, dP, dS, dN, dW, dV;
+		bool state;
 };
 
 #endif

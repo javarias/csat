@@ -29,6 +29,8 @@ class ObsList
 		void cCoeffs();
 		void cOff(double ra, double dec, double st, double &out_ra_d, double &out_dec_d);
 		void cOffs();
+		Obs *getObservation(int i);
+		void countObs();
 	private:
 		Obs **obs;
 		double *mat, *vec;
@@ -37,6 +39,7 @@ class ObsList
 		int mount;
 		double lat;
 		int n; //Number of observations.
+		int k; //Number of observations being used.
 		Term *defaultTerms[9];
 		Term **harmonicTerms;
 		Term **customTerms;

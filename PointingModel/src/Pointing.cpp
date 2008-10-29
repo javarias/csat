@@ -71,7 +71,10 @@ void calculateOffsets()
 
 void calculateOffset(double inra, double indec, double st)
 {
-	oList->cOff(inra,indec,st);
+	double rad, decd;
+	double &ra = (double &) rad;
+	double &dec = (double &) decd;;
+	oList->cOff(inra,indec,st, ra, dec);
 }
 
 int getNumCoeffs()

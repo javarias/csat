@@ -11,6 +11,7 @@ Obs::Obs(double raT, double decT, double raE, double decE, double st, double lat
 	//this->decT = decT;
 	//this->raE = raE;
 	//this->decE = decE;
+	this->state = true;
 	this->st = st;
 	this->lat = lat;
 	lat = lat*PI/180.;
@@ -154,4 +155,12 @@ double Obs::getdP()
 double Obs::getdZ()
 {
 	return -this->dZ;
+}
+
+bool Obs::getState(){
+	return state;
+}
+
+void Obs::setState(bool state){
+	this->state = state;
 }

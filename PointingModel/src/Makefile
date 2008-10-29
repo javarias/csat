@@ -61,7 +61,7 @@ LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-pointingsystem_OBJECTS   = Model Obs ObsList Term #Pointing
+pointingsystem_OBJECTS   = Model Obs ObsList Term
 pointingsystem_LIBS      = gsl gslcblas
 
 #

@@ -9,6 +9,7 @@
 ObsList::ObsList(int mount, double lat)
 {
 	this->n = 0;
+	this->k = 0;
 	this->dn = 9;
 	this->hn = 0;
 	this->cn = 0;
@@ -48,10 +49,8 @@ ObsList::~ObsList()
 
 void ObsList::add(double traT,double tdecT,double traE,double tdecE, double st)
 {
-	int i;
-	double r;
 	Obs **tobs;
-	double lat = this->lat*PI/180.;
+	//double lat = this->lat*PI/180.;
 
 	tobs = this->obs;
 	this->obs = new Obs*[this->n+1];
@@ -72,16 +71,19 @@ void ObsList::add(double traT,double tdecT,double traE,double tdecE, double st)
 
 void ObsList::createMatrix()
 {
-	int i,j;
+	int i,j,l;
 	double lat = this->lat*PI/180.;
 	double dec, h, alt, azm;
 	if(this->mat != NULL)
 		delete[] this->mat;
 	this->mat = NULL;
-	if(this->n > 0)
-		this->mat = new double[2*this->nterms*this->n];
+	if(this->k > 0)
+		this->mat = new double[2*this->nterms*this->k];
+	l = 0;
 	for(i=0;i<this->n;i++)
 	{
+		if(!this->obs[i]->getState())
+			continue;
 		h = this->obs[i]->gethT()*PI/180.;
 		dec = this->obs[i]->getDecT()*PI/180.;
 		alt = this->obs[i]->getAltT()*PI/180.;
@@ -90,16 +92,17 @@ void ObsList::createMatrix()
 		{
 			if(mount == 1)
 			{
-				this->mat[this->nterms*i+j] = cos((this->obs[i]->getDecT()+this->obs[i]->getDecE())/2*PI/180.)*inuseTerms[j]->Off1(h,dec,lat);
-				this->mat[this->nterms*this->n+this->nterms*i+j] = inuseTerms[j]->Off2(h,dec,lat);
+				this->mat[this->nterms*l+j] = cos((this->obs[i]->getDecT()+this->obs[i]->getDecE())/2*PI/180.)*inuseTerms[j]->Off1(h,dec,lat);
+				this->mat[this->nterms*this->k+this->nterms*l+j] = inuseTerms[j]->Off2(h,dec,lat);
 			}
 			else if(mount == 0)
 			{
-				this->mat[this->nterms*i+j] = inuseTerms[j]->Off1(alt,azm,lat);
-				this->mat[this->nterms*this->n+this->nterms*i+j] = inuseTerms[j]->Off2(alt,azm,lat);
+				this->mat[this->nterms*l+j] = inuseTerms[j]->Off1(alt,azm,lat);
+				this->mat[this->nterms*this->k+this->nterms*l+j] = inuseTerms[j]->Off2(alt,azm,lat);
 			}
 			//printf("%lf ",this->mat[this->nterms*i+j]);
 			//printf("%lf ",this->mat[this->nterms*this->n+this->nterms*i+j]);
+			l++;
 		}
 		//printf("xx\n");
 	}
@@ -107,25 +110,30 @@ void ObsList::createMatrix()
 
 void ObsList::createVector()
 {
-	int i,j;
+	int i,l;
 	if(this->vec != NULL)
 		delete[] this->vec;
 	this->vec = NULL;
-	if(this->n > 0)
-		this->vec = new double[2*this->n];
+	if(this->k > 0)
+		this->vec = new double[2*this->k];
+	this->k = 0;
+	l = 0;
 	for(i=0;i<this->n;i++)
 	{
+		if(!this->obs[i]->getState())
+			continue;
 		if(mount == 1)
 		{
-			this->vec[i] = cos((this->obs[i]->getDecT()+this->obs[i]->getDecE())/2*PI/180.)*(this->obs[i]->gethE()-this->obs[i]->gethT());
-			this->vec[this->n+i] = (this->obs[i]->getDecE() - this->obs[i]->getDecT());
+			this->vec[l] = cos((this->obs[i]->getDecT()+this->obs[i]->getDecE())/2*PI/180.)*(this->obs[i]->gethE()-this->obs[i]->gethT());
+			this->vec[this->k+l] = (this->obs[i]->getDecE() - this->obs[i]->getDecT());
 		}
 		else if(mount == 0)
 		{
-			this->vec[i] = (this->obs[i]->getAltE() - this->obs[i]->getAltT());
-			this->vec[this->n+i] = (this->obs[i]->getAzmE() - this->obs[i]->getAzmT());
-			printf("Vec %lf %lf\n", this->vec[i],this->vec[this->n+i]);
+			this->vec[l] = (this->obs[i]->getAltE() - this->obs[i]->getAltT());
+			this->vec[this->k+l] = (this->obs[i]->getAzmE() - this->obs[i]->getAzmT());
+			printf("Vec %lf %lf\n", this->vec[l],this->vec[this->k+l]);
 		}
+		l++;
 	}
 }
 
@@ -141,6 +149,7 @@ void ObsList::resetObsList()
 		this->obs = NULL;
 	}
 	this->n = 0;
+	this->k = 0;
 }
 
 void ObsList::resetAll()
@@ -256,7 +265,6 @@ void ObsList::addHarmonicTerm()
 void ObsList::selectedTerms()
 {
 	int i,j;
-	Term *tmp;
 	if(inuseTerms != NULL)
 	{
 		free(inuseTerms);
@@ -324,30 +332,29 @@ int ObsList::getNumTerms()
 
 void ObsList::cCoeffs()
 {
-	int i,j;
+	int i;
 	double *m, *v;
-	double *res;
 	gsl_matrix_view mat;
-	gsl_matrix *V;
 	gsl_vector_view vec;
-	gsl_vector *S, *x;
+	gsl_vector *x;
 	gsl_multifit_linear_workspace *W;
 	double chi;
 	gsl_matrix *cov;
+	this->countObs();
 	this->createVector();
 	this->selectedTerms();
 	this->createMatrix();
-	if((this->nterms > 0) && (2*this->n > this->nterms))
+	if((this->nterms > 0) && (2*this->k > this->nterms))
 	{
 		x = gsl_vector_alloc(this->nterms);
 
-		W = gsl_multifit_linear_alloc(2*this->n,this->nterms);
+		W = gsl_multifit_linear_alloc(2*this->k,this->nterms);
 		cov = gsl_matrix_alloc(this->nterms,this->nterms);
 
 		m = this->mat;
 		v = this->vec;
-		mat = gsl_matrix_view_array(m,2*this->n,this->nterms);
-		vec = gsl_vector_view_array(v,2*this->n);
+		mat = gsl_matrix_view_array(m,2*this->k,this->nterms);
+		vec = gsl_vector_view_array(v,2*this->k);
 
 
 //
@@ -454,6 +461,8 @@ void ObsList::cOffs()
 	//fprintf(go,"A:dZ\n");
 	for(j=0;j<this->n;j++)
 	{
+		if(!this->obs[j]->getState())
+			continue;
 		dec = this->obs[j]->getDecT()*PI/180.;
 		h = this->obs[j]->gethT()*PI/180.;
 		alt = this->obs[j]->getAltT()*PI/180.;
@@ -515,7 +524,7 @@ void ObsList::cOffs()
 		{
 			diff1 = -(Offset1+this->obs[j]->getAltT()-this->obs[j]->getAltE())*3600;
 			diff2 = -(Offset2+this->obs[j]->getAzmT()-this->obs[j]->getAzmE())*3600;
-			printf("DiffO: ra: %lf [Arcsecs] \t dec: %lf [Arcsecs]\n",this->vec[j]*3600, this->vec[j+this->n]*3600);
+			printf("DiffO: ra: %lf [Arcsecs] \t dec: %lf [Arcsecs]\n",this->vec[j]*3600, this->vec[j+this->k]*3600);
 			printf("DiffN: ra: %lf [Arcsecs] \t dec: %lf [Arcsecs]\n",diff1, diff2);
 			//fprintf(fn,"%lf:%lf\n",diff2,diff1);
 			//fprintf(fo,"%lf:%lf\n",diffo2,diffo1);
@@ -525,14 +534,14 @@ void ObsList::cOffs()
 	}
 	//psd = psd - mean*mean/this->n;
 	printf("%lf %lf\n", psd, mean);
-	mean = mean/this->n;
-	meano = meano/this->n;
-	rms = sqrt(rms/this->n);
-	rmso = sqrt(rmso/this->n);
-	psd = psd - this->n * pow(mean,2);
-	psdo = psdo - this->n * pow(meano,2);
-	psd = sqrt(psd/(this->n));
-	psdo = sqrt(psdo/(this->n));
+	mean = mean/this->k;
+	meano = meano/this->k;
+	rms = sqrt(rms/this->k);
+	rmso = sqrt(rmso/this->k);
+	psd = psd - this->k * pow(mean,2);
+	psdo = psdo - this->k * pow(meano,2);
+	psd = sqrt(psd/(this->k));
+	psdo = sqrt(psdo/(this->k));
 	printf("Rms: %lf PSD: %lf %lf\n", rms, psd, rms+psd);
 	printf("Rmso: %lf PSD: %lf %lf\n", rmso, psdo, psdo);
 	//fprintf(fn,"rms%lf",rms);
@@ -545,7 +554,7 @@ void ObsList::cOffs()
 
 void ObsList::cOff(double inra, double indec, double st, double &out_ra_d, double &out_dec_d)
 {
-	int i,j;
+	int i;
 	double lat,rms;
 	double alt, azm, dec, h, Offset1, Offset2;
 	lat = this->lat*PI/180;
@@ -583,4 +592,16 @@ void ObsList::cOff(double inra, double indec, double st, double &out_ra_d, doubl
 
 	out_ra_d = -Offset1;
 	out_dec_d = Offset2;
+}
+
+Obs *ObsList::getObservation(int i){
+	return this->obs[i];
+}
+
+void ObsList::countObs(){
+	int i;
+	this->k = 0;
+	for(i = 0; i < this->n; i++)
+		if(obs[i]->getState())
+			this->k++;
 }
