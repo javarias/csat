@@ -56,11 +56,13 @@ INCLUDES        =
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = Lx200GPSImpl Lx200EMCImpl NexstarImpl NexsimImpl EquatorialNexsimImpl EquatorialNexstarImpl lpiImpl eTrexImpl PcDummyGpsImpl CalculationsImpl PointingImpl PcDummyCCDImpl
+LIBRARIES       = ESO50Impl Lx200GPSImpl Lx200EMCImpl NexstarImpl NexsimImpl EquatorialNexsimImpl EquatorialNexstarImpl lpiImpl eTrexImpl PcDummyGpsImpl CalculationsImpl PointingImpl PcDummyCCDImpl
 LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
+ESO50Impl_OBJECTS           = ESO50CoordDevIO ESO50VelDevIO ESO50Impl
+ESO50Impl_LIBS              = TypesStubs DevTelescopeStubs csatErrors SerialCommunication baci acsutil acserr
 Lx200GPSImpl_OBJECTS	    = Lx200GPSCoordDevIO Lx200GPSVelDevIO Lx200GPSImpl
 Lx200GPSImpl_LIBS		    = TypesStubs DevTelescopeStubs csatErrors SerialCommunication baci acsutil acserr
 Lx200EMCImpl_OBJECTS	    = Lx200EMCCoordDevIO Lx200EMCVelDevIO Lx200EMCImpl
