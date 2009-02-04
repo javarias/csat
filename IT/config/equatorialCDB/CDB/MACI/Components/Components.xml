@@ -31,6 +31,12 @@
       <_ Name="EQUATORIAL_NEXSTAR"
          Code="EquatorialNexstarImpl"
          Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
+         Default="false"
+         Container="amContainerCpp"/>
+	
+      <_ Name="ESO50"
+         Code="ESO50Impl"
+         Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
          Default="true"
          Container="amContainerCpp"/>
 
@@ -39,6 +45,7 @@
          Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
          Default="false"
          Container="amContainerCpp"/>
+
 
       <_ Name="PC_GPS"
          Code="PcDummyGpsImpl"
