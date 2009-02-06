@@ -64,7 +64,7 @@ void ESO50Impl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
                                               POA_DEVTELESCOPE_MODULE::ROmountType>
                                             (( m_name + ":mount").c_str(),
                                              getComponent() );
-		printf("\n\ndone\n\n");
+		printf("\n\ndone \n\n");
 	}
 }
 

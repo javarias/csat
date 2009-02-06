@@ -32,7 +32,7 @@ ESO50CoordDevIO::~ESO50CoordDevIO()
 	char *_METHOD_ = (char *)"ESO50CoordDevIO::~ESO50CoordDevIO";
 	ACS_TRACE(_METHOD_);
 
-	delete this->sp;
+//	delete this->sp;
 }
 
 double ESO50CoordDevIO::sexa2double(const char *sexaStr)

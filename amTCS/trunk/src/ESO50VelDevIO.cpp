@@ -35,7 +35,7 @@ ESO50VelDevIO::~ESO50VelDevIO()
         char *_METHOD_ = (char *)"ESO50VelDevIO::~ESO50VelDevIO";
         ACS_TRACE(_METHOD_);
 
-	delete this->sp;
+//	delete this->sp;
 }
 
 CORBA::Double ESO50VelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
