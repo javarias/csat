@@ -8,10 +8,10 @@
 #include "csatErrors.h"
 
 #ifndef AZIMUTH_AXIS
-	#define AZIMUTH_AXIS 0
+	#define AZIMUTH_AXIS 164
 #endif
 #ifndef ALTITUDE_AXIS
-	#define ALTITUDE_AXIS 1
+	#define ALTITUDE_AXIS 162
 #endif
 
 class ESO50VelDevIO: public DevIO<CORBA::Double>
@@ -25,6 +25,8 @@ class ESO50VelDevIO: public DevIO<CORBA::Double>
 
 		CORBA::Double read(ACS::Time &timestamp) 
 			throw (ACSErr::ACSbaseExImpl);
+
+		unsigned short bytefix(float data,int i);
 
 		void write(const CORBA::Double &value, ACS::Time &timestap) 
 			throw (ACSErr::ACSbaseExImpl);

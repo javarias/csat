@@ -9,10 +9,10 @@
 #include "csatErrors.h"
 
 #ifndef AZIMUTH_AXIS
-	#define AZIMUTH_AXIS 0
+	#define AZIMUTH_AXIS 164
 #endif
 #ifndef ALTITUDE_AXIS
-	#define ALTITUDE_AXIS 1
+	#define ALTITUDE_AXIS 162
 #endif
 
 class ESO50CoordDevIO: public DevIO<CORBA::Double>

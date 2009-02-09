@@ -48,7 +48,7 @@ void ESO50Impl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 			altDevIO = new ESO50CoordDevIO((char *)"/dev/ttyACM0", ALTITUDE_AXIS );
 			azmVelDevIO = new ESO50VelDevIO((char *)"/dev/ttyACM0", AZIMUTH_AXIS );
 			altVelDevIO = new ESO50VelDevIO((char *)"/dev/ttyACM0", ALTITUDE_AXIS );
-			printf("\n\nSe completaron las instancias\n\n");
+			printf("\n\nSe completaron las instancias %d %d\n\n",AZIMUTH_AXIS,ALTITUDE_AXIS);
 		} catch (csatErrors::CannotOpenDeviceEx &ex){
 			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
 			lifeEx.addData("Reason","Cannot create DevIOs");

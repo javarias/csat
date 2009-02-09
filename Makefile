@@ -30,7 +30,7 @@
 SUBSYSTEM = CSAT
 
 MODULES = EXTERNALS/rxtx EXTERNALS/jogl EXTERNALS/serialRS232 lpiRQ/lpi \
-          lpiRQ/lpiGui telecli garmingpscli telesim/trunk PointingModel/ \
+          lpiRQ/lpiGui telecli eso50cli garmingpscli telesim/trunk PointingModel/ \
           amTCS/trunk extClients Hevelius
 
 
