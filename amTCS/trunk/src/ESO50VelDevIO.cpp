@@ -64,13 +64,22 @@ CORBA::Double ESO50VelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseEx
 {
         char *_METHOD_ = (char *)"ESO50VelDevIO::read";
         ACS_TRACE(_METHOD_);
+	FILE *fp;
 
-	/*if(this->axis == ALTITUDE_AXIS)
-		return this->slewRateElevation;
+	fp = fopen("velReceive.txt","a");
+
+	if(this->axis == ALTITUDE_AXIS)
+	{
+		fprintf(fp,"dec %lf \n",this->velocityDec);
+		fclose(fp);
+		return this->velocityDec;
+	}
 	else
-		return this->slewRateAzimuth;*/
-	printf("\n\n\n\nreading ESO50VelDevIO\n\n\n\n");
-	return 0.0;
+	{
+		fprintf(fp,"ha %lf \n",this->velocityHA);
+		fclose(fp);
+		return this->velocityHA;
+	}
 }
 
 unsigned short ESO50VelDevIO::bytefix(float data,int i)
@@ -112,7 +121,7 @@ void ESO50VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thro
 	char *send;
 	FILE *fp;
 
-	fp = fopen("telescopio.txt","a");
+	fp = fopen("velSend.txt","a");
 
 	
 	tty_buffer[0] = '#';
@@ -121,8 +130,11 @@ void ESO50VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thro
 	tty_buffer[3] = 32;    //I2C_BUF_LEN
 	tty_buffer[4] = 0;     //ack 
 	tty_buffer[5] = 1;     //libre
+	
+	if(this->axis == ALTITUDE_AXIS)	this->velocityDec = value;
+	else this->velocityHA = value;
 
-	auxWref = (double)value;
+	auxWref = (float)value;
 
 	auxRun = 1;
 	auxSide = 1;
