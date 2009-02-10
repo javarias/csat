@@ -2,29 +2,6 @@
 
 #include "ESO50VelDevIO.h"
 
-typedef struct 
-{
-    char        Tm;
-    char        MtrCtrl;
-    unsigned short int   Tmr0;
-    short int   Vfin;
-    short int   Wref_Lo;
-    short int   Wref_Hi;
-    short int   Ki_Lo;
-    short int   Ki_Hi;
-    short int   Kp_Lo;
-    short int   Kp_Hi;
-} SlavePWM_t;
-
-typedef struct 
-{
-     short int HAAxis;
-     short int HAWorm;
-     short int DecAxis;
-     short int DecWorm;
-} ESO50AbsEnc_t;
-
-
 ESO50VelDevIO::ESO50VelDevIO(char *deviceName, int axis) throw (csatErrors::CannotOpenDeviceEx)
 {
         char *_METHOD_ = (char * )"ESO50VelDevIO::ESO50VelDevIO";
