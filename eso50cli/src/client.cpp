@@ -31,24 +31,11 @@ void leave(int sig);
 
 typedef struct 
 {
-    char        Tm;     
-    char        MtrCtrl;     
-    unsigned short int Tmr0;       
-    short int   Vfin;         
-    short int   Wref;       
-    short int   Ki;         
-    short int   Kp;         
-} SlavePWM_t;
-
-typedef struct 
-{
      short int HAAxis;
      short int HAWorm;
      short int DecAxis;
      short int DecWorm;
 } ESO50AbsEnc_t;
-
-
 
 /**
  * Main routine. Starts the communication through the default serial port.
