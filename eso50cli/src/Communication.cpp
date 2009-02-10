@@ -87,7 +87,7 @@ char* Communication::readFrom()
 	SlavePWM_t* test;
 	mensaje = this->sp->read_RS232();
 	this->sp->flush_RS232();
-	if(mensaje[38]==0) //Ifthe checksum == 0
+	if(mensaje[0]==0) 
 	for(i=0;i<40;i++) *(mensaje +i)=0;
 
 	return mensaje;
