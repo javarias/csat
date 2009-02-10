@@ -14,6 +14,20 @@
 	#define ALTITUDE_AXIS 162
 #endif
 
+typedef struct 
+		{
+			char        Tm;
+			char        MtrCtrl;
+			unsigned short int   Tmr0;
+			short int   Vfin;
+			short int   Wref_Lo;
+			short int   Wref_Hi;
+			short int   Ki_Lo;
+			short int   Ki_Hi;
+			short int   Kp_Lo;
+			short int   Kp_Hi;
+		} SlavePWM_t;
+
 class ESO50VelDevIO: public DevIO<CORBA::Double>
 {
 
@@ -34,8 +48,8 @@ class ESO50VelDevIO: public DevIO<CORBA::Double>
 	private:
 		SerialRS232 *sp;	
 		int axis;
-		double slewRateElevation;
-		double slewRateAzimuth;
+		double velocityHA;
+		double velocityDec;
 };
 
 #endif /* _ESO50_VEL_DEVIO_H_ */

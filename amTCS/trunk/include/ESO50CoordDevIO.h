@@ -15,6 +15,14 @@
 	#define ALTITUDE_AXIS 162
 #endif
 
+typedef struct 
+{
+     short int HAAxis;
+     short int HAWorm;
+     short int DecAxis;
+     short int DecWorm;
+} ESO50AbsEnc_t;
+
 class ESO50CoordDevIO: public DevIO<CORBA::Double>
 {
 	private:
