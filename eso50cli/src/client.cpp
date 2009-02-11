@@ -86,7 +86,6 @@ int main(int args, char *argv[])
 	setbuf(stdout,NULL);
 	com = new Communication(serialPort);
 	//gps = new Communication("/dev/ttyUSB0");
-	SlavePWM_t* test;
 	ESO50AbsEnc_t* test2;
 	signal(SIGINT, leave);
 
