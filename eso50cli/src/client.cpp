@@ -8,6 +8,7 @@
 #include <pthread.h>
 #include <sys/types.h>
 #include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
 #include "freemode.cpp"
 
 

@@ -19,7 +19,7 @@
 
 #
 # user definable C-compilation flags
-USER_CFLAGS = -lpthread `sdl-config --cflags --libs`  
+USER_CFLAGS = -lpthread `sdl-config --cflags --libs` -lSDL_ttf  
 
 #
 # additional include and library search paths

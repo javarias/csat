@@ -59,7 +59,7 @@ class Communication{
 		char* getLongitude(char *mensaje);
 		double strtodou(char* msg);
 		double getAltitude();
-                int writeTo(int direction, int msg_type);
+                int writeTo(float wref, int address, int msg_type, int run, int side, int pi);
 };
 
 #endif
