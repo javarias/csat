@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,6 +7,9 @@
 #include <Communication.h>
 #include <pthread.h>
 #include <sys/types.h>
+#include <SDL/SDL.h>
+#include "freemode.cpp"
+
 
 /** The default serial port's device file */
 #define DEFAULT_PORT "/dev/ttyACM0"
@@ -36,25 +38,7 @@ typedef struct
      short int DecAxis;
      short int DecWorm;
 } ESO50AbsEnc_t;
-
-/**
- * Main routine. Starts the communication through the default serial port.
- * @param args number of command-line arguments passed.
- * @param argv command-line arguments values passed.
- * @returns EXIT_SUCCESS on successful termination or EXIT_FAILURE on
- * unsuccessful termination.
- */
-
-/*void* readTelescope(void* pcom)
-{
-	while(1)
-	{
-		telescope_info1 = com->readFrom();
-		if(telescope_info1[0] == 35) send = true;
-	}
-	pthread_exit(NULL);
-}*/
-
+		
 void* readGps(void* pcom)
 {
 	while(1)
@@ -69,14 +53,17 @@ int main(int args, char *argv[])
 	char serialPort[NAME_MAX],*data,stime[15],slatitude[15],slongitude[15],saltitude[15],*orientation,sorientation[1];
 	int option,i,checksum;
 	pthread_t thread1, thread2;
-	bool loop = true;
+	bool loop = true, free = true;
 	char *gps_inf;
 	int thread_id1, thread_id2;
-	int direction;
+	int address;
 	char msg_aux1[32],msg_aux2[32],*mensaje;
 	int time,msg_type;
 	int deg, min;
 	double seg;
+
+	float wref;
+	int run,side,pi,running=1;
 
 	double latitude, longitude, altitude;
 
@@ -105,24 +92,34 @@ int main(int args, char *argv[])
 		printf("5.-	Get Latitude(GPS)\n");
 		printf("6.-	Get Logitude(GPS)\n");
 		printf("7.-	Get Altitud(GPS)\n");
-		printf("8.-	Exit\n\n");
+		printf("8.-	**FREE MODE**\n");
+		printf("9.-	Exit\n\n");
 		printf("Seleccione su opcion: ");
 		scanf("%i",&option);
-	
+		//endwin();
 		switch(option)
 		{
 			case 1:
 				printf("\nAddress: ");
-				scanf("%i",&direction);
+				scanf("%i",&address);
 				printf("\nmessage type (1/0): ");
 				scanf("%i",&msg_type);
-	
-				checksum = com->writeTo(direction,msg_type);
-				/*data = com->readFrom();
-				if( msg_type == 0 ){
-					if( checksum 
-				printf("\nchecksum send %d \nchecksem receive %d\n",checksum,data[38]);
-				//if(data[38]==checksum+1) printf("\nmensaje send");*/
+
+				printf("\nwref (>20): ");
+				scanf("%f",&wref);
+				while(wref<20)
+				{
+					printf("wred debe ser mayor que 20\n");
+					scanf("%f",&wref);
+				}
+				printf("\nrun (1/0): ");
+				scanf("%i",&run);
+				printf("\nside  (1/0): ");
+				scanf("%i",&side);
+				printf("\npi (1/0): ");
+				scanf("%i",&pi);
+
+				checksum = com->writeTo(wref,address,msg_type,run,side,pi);
 
 				break;
 			case 3:
@@ -181,7 +178,11 @@ int main(int args, char *argv[])
 				printf("\n");
 				for(i=0;i<40;i++)printf("%i ",data[i]);
 				break;
+			
 			case 8:
+				freemode(com);
+				break;
+			case 9:
 				loop=false;
 				break;
 		}

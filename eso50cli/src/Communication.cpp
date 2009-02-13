@@ -140,7 +140,7 @@ double Communication::strtodou(char *msg)
 }
 	
 
-int Communication::writeTo(int direction, int msg_type)
+int Communication::writeTo(float wref,int direction, int msg_type, int run, int side, int pi)
 {
 	SlavePWM_t msgSend,msgReceive;
 	int auxTmr0,auxVfin,i,length,auxTm,auxRun,auxSide,auxPi;
@@ -157,10 +157,10 @@ int Communication::writeTo(int direction, int msg_type)
 	tty_buffer[4] = 0;     //ack 
 	tty_buffer[5] = msg_type;     //libre
 
-	printf("\nESCRIBA EL MENSAJE A ENVIAR\n");
-
 	if(msg_type == 0)// tty_buffer[2] == 8 )
 	{
+		printf("\nESCRIBA EL MENSAJE A ENVIAR\n");
+
 		scanf("%s",mensaje);
 		length = (int)sizeof(mensaje);
 		pointer = (char *) & mensaje;
@@ -168,23 +168,16 @@ int Communication::writeTo(int direction, int msg_type)
 
 	if(msg_type == 1)//direction == 0xA2|| direction == 0xA4)
 	{
-		printf("\nIngrese Wref :");
-		scanf("%f",&auxWref);
-		while(auxWref<20)
-		{
-			printf("Wred debe ser mayor que 20\n");
-			scanf("%f",&auxWref);
-		}
-
+/*
 		printf("Ingrese Run (1/0) ");
 		scanf("%i",&auxRun);
 		printf("Ingrese Side (1/0) ");
 		scanf("%i",&auxSide);
 		printf("Ingrese Pi (1/0) ");
-		scanf("%i",&auxPi);
+		scanf("%i",&auxPi);*/
 
-		msgSend.Wref_Lo = bytefix(auxWref,0);
-		msgSend.Wref_Hi = bytefix(auxWref,1);
+		msgSend.Wref_Lo = bytefix(wref,0);
+		msgSend.Wref_Hi = bytefix(wref,1);
 		msgSend.Ki_Lo = bytefix(1000,0);
 		msgSend.Ki_Hi = bytefix(1000,1);
 		msgSend.Kp_Lo = bytefix(500,0);
@@ -203,9 +196,9 @@ int Communication::writeTo(int direction, int msg_type)
 		msgSend.Vfin = 0;
 
 		msgSend.MtrCtrl = 0;		
-		if(auxRun == 1) msgSend.MtrCtrl += 1;
-		if(auxSide == 1) msgSend.MtrCtrl += 2;
-		if(auxPi == 1) msgSend.MtrCtrl += 4;
+		if(run == 1) msgSend.MtrCtrl += 1;
+		if(side == 1) msgSend.MtrCtrl += 2;
+		if(pi == 1) msgSend.MtrCtrl += 4;
 
 		length = (int)sizeof(msgSend);
 		pointer = (char *) & msgSend;
@@ -235,7 +228,7 @@ int Communication::writeTo(int direction, int msg_type)
 	tty_buffer[6 + 32] = ChkSum;
 	tty_buffer[6 + 32 + 1] = '*';
 
-	for(i=0;i<40;i++) printf("%d ",tty_buffer[i]);
+	//for(i=0;i<40;i++) printf("%d ",tty_buffer[i]);
 
 	this->sp->flush_RS232();
 	this->sp->write_RS232(tty_buffer,40);
