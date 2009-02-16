@@ -1,4 +1,6 @@
+
 void freemode(Communication *com){
+
 	SDL_Surface *screen;
 	SDL_Event event;
 	int running=1;

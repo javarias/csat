@@ -32,11 +32,19 @@ typedef struct
 
 typedef struct 
 {
-     short int HAAxis;
-     short int HAWorm;
-     short int DecAxis;
-     short int DecWorm;
-} ESO50AbsEnc_t;
+     unsigned short int Target_HAAxis;
+     unsigned short int Target_HAWorm;
+     unsigned short int Target_DecAxis;
+     unsigned short int Target_DecWorm;
+     unsigned short int KpHA;
+     unsigned short int KiHA;
+     unsigned short int KdHA_Lo;
+     unsigned short int KdHA_Hi;
+     unsigned short int KpDec;
+     unsigned short int KiDec;
+     unsigned short int KdDec_Lo;
+     unsigned short int KdDec_Hi;
+} ESO50Prms_t;
 
 
 unsigned short bytefix(float data,int i)
@@ -157,7 +165,7 @@ int Communication::writeTo(float wref,int direction, int msg_type, int run, int 
 	tty_buffer[4] = 0;     //ack 
 	tty_buffer[5] = msg_type;     //libre
 
-	if(msg_type == 0)// tty_buffer[2] == 8 )
+	if(msg_type == 0)
 	{
 		printf("\nESCRIBA EL MENSAJE A ENVIAR\n");
 
@@ -166,16 +174,8 @@ int Communication::writeTo(float wref,int direction, int msg_type, int run, int 
 		pointer = (char *) & mensaje;
 	}
 
-	if(msg_type == 1)//direction == 0xA2|| direction == 0xA4)
+	if(msg_type == 1)
 	{
-/*
-		printf("Ingrese Run (1/0) ");
-		scanf("%i",&auxRun);
-		printf("Ingrese Side (1/0) ");
-		scanf("%i",&auxSide);
-		printf("Ingrese Pi (1/0) ");
-		scanf("%i",&auxPi);*/
-
 		msgSend.Wref_Lo = bytefix(wref,0);
 		msgSend.Wref_Hi = bytefix(wref,1);
 		msgSend.Ki_Lo = bytefix(1000,0);
@@ -235,3 +235,67 @@ int Communication::writeTo(float wref,int direction, int msg_type, int run, int 
 
 	return tty_buffer[38];
 }
+
+void Communication::sendData(int option)
+{	
+	ESO50Prms_t ESO50Prms;
+	char tty_buffer[40], *pointer;
+	unsigned char checksum;
+	int lenght;
+	int i;
+	
+	ESO50Prms.Target_HAAxis  = 12;
+	ESO50Prms.Target_HAWorm  = 23;
+	ESO50Prms.Target_DecAxis = 12;
+	ESO50Prms.Target_DecWorm = 34;
+	
+	ESO50Prms.KpHA  = 1;
+	ESO50Prms.KiHA  = 0;
+	
+	ESO50Prms.KpDec = 1;
+	ESO50Prms.KiDec = 0;
+	
+	ESO50Prms.KdDec_Hi = 23;
+	ESO50Prms.KdDec_Lo = 33;
+	ESO50Prms.KdHA_Hi = 12;
+	ESO50Prms.KdHA_Lo = 11;
+	
+	tty_buffer[0] = '#';
+	tty_buffer[1] = 2;
+ 	tty_buffer[2] = 8;
+	tty_buffer[3] = 0;
+	tty_buffer[4] = 0; //
+	tty_buffer[5] = 1;
+	
+	checksum = 0;
+	lenght = (int) sizeof( ESO50Prms );
+
+	for( i = 0; i < 6; i ++ )
+	{
+		checksum += tty_buffer[i];
+	}
+	pointer = (char *) & ESO50Prms;
+	for( i = 0; i < lenght; i ++ )
+	{
+		tty_buffer[6 + i] = pointer[i];
+		checksum += pointer[i];
+	}
+
+	tty_buffer[6 + lenght] = (char)option; /*el importante*/
+
+	checksum += tty_buffer[6 + lenght]; 
+    	lenght ++;
+	for( i = 6 + lenght; i < 38; i ++ )
+	{
+		tty_buffer[i] = 0;
+	}
+	
+	tty_buffer[6 + 32] = (char)checksum;
+	tty_buffer[6 + 32 + 1] = '*';
+//	for(i=0;i<40;i++) printf("%u ",tty_buffer[i]);
+	
+	this->sp->flush_RS232();
+	this->sp->write_RS232(tty_buffer,40);
+
+}
+	

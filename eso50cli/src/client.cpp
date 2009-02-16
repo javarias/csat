@@ -34,11 +34,19 @@ void leave(int sig);
 
 typedef struct 
 {
-     short int HAAxis;
-     short int HAWorm;
-     short int DecAxis;
-     short int DecWorm;
-} ESO50AbsEnc_t;
+     unsigned short int Target_HAAxis;
+     unsigned short int Target_HAWorm;
+     unsigned short int Target_DecAxis;
+     unsigned short int Target_DecWorm;
+     unsigned short int KpHA;
+     unsigned short int KiHA;
+     unsigned short int KdHA_Lo;
+     unsigned short int KdHA_Hi;
+     unsigned short int KpDec;
+     unsigned short int KiDec;
+     unsigned short int KdDec_Lo;
+     unsigned short int KdDec_Hi;
+} ESO50Prms_t;
 		
 void* readGps(void* pcom)
 {
@@ -52,7 +60,7 @@ void* readGps(void* pcom)
 int main(int args, char *argv[])
 {
 	char serialPort[NAME_MAX],*data,stime[15],slatitude[15],slongitude[15],saltitude[15],*orientation,sorientation[1];
-	int option,i,checksum;
+	int option,i,checksum,optionHADec;
 	pthread_t thread1, thread2;
 	bool loop = true, free = true;
 	char *gps_inf;
@@ -74,7 +82,7 @@ int main(int args, char *argv[])
 	setbuf(stdout,NULL);
 	com = new Communication(serialPort);
 	//gps = new Communication("/dev/ttyUSB0");
-	ESO50AbsEnc_t* test2;
+	ESO50Prms_t* test;
 	signal(SIGINT, leave);
 
 	//thread_id1 = pthread_create(&thread1, NULL, readTelescope,(void *) serialPort);
@@ -122,16 +130,28 @@ int main(int args, char *argv[])
 
 				checksum = com->writeTo(wref,address,msg_type,run,side,pi);
 
+				break;	
+			case 2:
+				
+				data = com->readFrom();
+				printf("\n");
+				for(i=0;i<40;i++)printf("%u ",data[i]);
 				break;
 			case 3:
-				mensaje = com->readFrom();
+				//printf("\noption: ");
+				//scanf("%i",&optionHADec);
+				//if(optionHADec!=3)
+				com->sendData(1);//optionHADec);
 
+				mensaje = com->readFrom();
+				//printf("\n");
+				//for(i=0;i<40;i++) printf("%d ",mensaje[i]);
 				for(i=6; i<38; i++) msg_aux1[i-6]=mensaje[i];
-				test2 = (ESO50AbsEnc_t*) msg_aux1;
-				printf("\nHAAxis : %d\n",test2->HAAxis);
-				printf("HAWorm : %d\n",test2->HAWorm);
-				printf("DecAxis : %d\n",test2->DecAxis);
-				printf("DecWorm : %d\n",test2->DecWorm);
+				test = (ESO50Prms_t*) msg_aux1;
+				printf("\nHAAxis : %d\n",test->Target_HAAxis);
+				printf("HAWorm : %d\n",test->Target_HAWorm);
+				printf("DecAxis : %d\n",test->Target_DecAxis);
+				printf("DecWorm : %d\n",test->Target_DecWorm);
 				break;
 			case 4:
 				data = gps->getGdata(gps_info,0);
@@ -139,7 +159,7 @@ int main(int args, char *argv[])
 				printf("\n");
 				for(i=0;i<6;i+=2)
 				{
-					printf("%c%c",stime[i],stime[i+1]);
+					printf("%c%c",stime[i],stime[i+1]);//
 					if(i!=4)printf(":");
 				}
 				printf("\n");
@@ -173,13 +193,6 @@ int main(int args, char *argv[])
 				for(i=0;i<15;i++) saltitude[i] = data[i];
 				printf("\n%s M\n",saltitude);
 				break;
-		
-			case 2:
-				data = com->readFrom();
-				printf("\n");
-				for(i=0;i<40;i++)printf("%i ",data[i]);
-				break;
-			
 			case 8:
 				freemode(com);
 				break;

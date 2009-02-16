@@ -60,6 +60,7 @@ class Communication{
 		double strtodou(char* msg);
 		double getAltitude();
                 int writeTo(float wref, int address, int msg_type, int run, int side, int pi);
+		void sendData(int option);
 };
 
 #endif
