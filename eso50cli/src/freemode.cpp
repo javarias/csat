@@ -111,23 +111,23 @@ void freemode(Communication *com){
 				case SDL_KEYUP:		//A key has been released
 					if(!strcmp("up",SDL_GetKeyName(event.key.keysym.sym))){
 						if(event.key.type == SDL_KEYDOWN) 
-						com->writeTo(wref,162,1,1,1,1);
-						else com->writeTo(wref,162,1,0,1,1);
+						com->writeTo(wref,162,1,1,1,1,NULL);
+						else com->writeTo(wref,162,1,0,1,1,NULL);
 						}
 					if(!strcmp("down",SDL_GetKeyName(event.key.keysym.sym))){
 						if(event.key.type == SDL_KEYDOWN) 
-						com->writeTo(wref,162,1,1,0,1);
-						else com->writeTo(wref,162,1,0,0,1);
+						com->writeTo(wref,162,1,1,0,1,NULL);
+						else com->writeTo(wref,162,1,0,0,1,NULL);
 						}
 					if(!strcmp("right",SDL_GetKeyName(event.key.keysym.sym))){
 						if(event.key.type == SDL_KEYDOWN) 
-						com->writeTo(wref,164,1,1,1,1);
-						else com->writeTo(wref,164,1,0,1,1);
+						com->writeTo(wref,164,1,1,1,1,NULL);
+						else com->writeTo(wref,164,1,0,1,1,NULL);
 						}
 					if(!strcmp("left",SDL_GetKeyName(event.key.keysym.sym))){
 						if(event.key.type == SDL_KEYDOWN) 
-						com->writeTo(wref,164,1,1,0,1);
-						else com->writeTo(wref,164,1,0,0,1);
+						com->writeTo(wref,164,1,1,0,1,NULL);
+						else com->writeTo(wref,164,1,0,0,1,NULL);
 						}
 					if(!strcmp("f1",SDL_GetKeyName(event.key.keysym.sym))){
 						if(event.key.type == SDL_KEYUP) 

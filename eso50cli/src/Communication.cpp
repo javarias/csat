@@ -81,6 +81,7 @@ Communication::Communication(char *deviceName)
 	this->sp = new SerialRS232(deviceName,80);
 	this->device = deviceName;
 	this->sp->flush_RS232();
+	this->writeTo(0,8, 0, 0, 0, 0,"ESO50");
 }
 
 Communication::~Communication()
@@ -92,9 +93,10 @@ char* Communication::readFrom()
 {
 	int i;
 	char *mensaje,msg[32];
-	SlavePWM_t* test;
+
 	mensaje = this->sp->read_RS232();
 	this->sp->flush_RS232();
+
 	if(mensaje[0]==0) 
 	for(i=0;i<40;i++) *(mensaje +i)=0;
 
@@ -148,9 +150,9 @@ double Communication::strtodou(char *msg)
 }
 	
 
-int Communication::writeTo(float wref,int direction, int msg_type, int run, int side, int pi)
+int Communication::writeTo(float wref,int direction, int msg_type, int run, int side, int pi, char* msg)
 {
-	SlavePWM_t msgSend,msgReceive;
+	SlavePWM_t msgSend;
 	int auxTmr0,auxVfin,i,length,auxTm,auxRun,auxSide,auxPi;
 	float auxWref,auxKi,auxKp;
 	unsigned char ChkSum = 0;
@@ -167,9 +169,8 @@ int Communication::writeTo(float wref,int direction, int msg_type, int run, int 
 
 	if(msg_type == 0)
 	{
-		printf("\nESCRIBA EL MENSAJE A ENVIAR\n");
-
-		scanf("%s",mensaje);
+		for(i=0;i<32;i++) mensaje[i] = msg[i];
+		printf("%s",mensaje);
 		length = (int)sizeof(mensaje);
 		pointer = (char *) & mensaje;
 	}
@@ -228,8 +229,6 @@ int Communication::writeTo(float wref,int direction, int msg_type, int run, int 
 	tty_buffer[6 + 32] = ChkSum;
 	tty_buffer[6 + 32 + 1] = '*';
 
-	//for(i=0;i<40;i++) printf("%d ",tty_buffer[i]);
-
 	this->sp->flush_RS232();
 	this->sp->write_RS232(tty_buffer,40);
 
@@ -244,27 +243,27 @@ void Communication::sendData(int option)
 	int lenght;
 	int i;
 	
-	ESO50Prms.Target_HAAxis  = 12;
-	ESO50Prms.Target_HAWorm  = 23;
-	ESO50Prms.Target_DecAxis = 12;
-	ESO50Prms.Target_DecWorm = 34;
+	ESO50Prms.Target_HAAxis  = 0;
+	ESO50Prms.Target_HAWorm  = 0;
+	ESO50Prms.Target_DecAxis = 0;
+	ESO50Prms.Target_DecWorm = 0;
 	
-	ESO50Prms.KpHA  = 1;
+	ESO50Prms.KpHA  = 0;
 	ESO50Prms.KiHA  = 0;
 	
-	ESO50Prms.KpDec = 1;
+	ESO50Prms.KpDec = 0;
 	ESO50Prms.KiDec = 0;
 	
-	ESO50Prms.KdDec_Hi = 23;
-	ESO50Prms.KdDec_Lo = 33;
-	ESO50Prms.KdHA_Hi = 12;
-	ESO50Prms.KdHA_Lo = 11;
+	ESO50Prms.KdDec_Hi = 0;
+	ESO50Prms.KdDec_Lo = 0;
+	ESO50Prms.KdHA_Hi = 0;
+	ESO50Prms.KdHA_Lo = 0;
 	
 	tty_buffer[0] = '#';
 	tty_buffer[1] = 2;
  	tty_buffer[2] = 8;
 	tty_buffer[3] = 0;
-	tty_buffer[4] = 0; //
+	tty_buffer[4] = 0;
 	tty_buffer[5] = 1;
 	
 	checksum = 0;
@@ -296,6 +295,6 @@ void Communication::sendData(int option)
 	
 	this->sp->flush_RS232();
 	this->sp->write_RS232(tty_buffer,40);
-
+//	this->sp->flush_RS232();
 }
 	

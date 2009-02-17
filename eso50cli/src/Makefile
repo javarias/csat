@@ -40,7 +40,7 @@ EXECUTABLES_L   =
 
 #
 # <brief description of xxxxx program>
-cli_eso50_OBJECTS    = client Communication
+cli_eso50_OBJECTS    = client Communication 
 cli_eso50_LIBS       = SerialCommunication C++
 #
 # special compilation flags for single c sources
