@@ -7,6 +7,7 @@
 #include <SerialRS232.h>
 
 #include "csatErrors.h"
+#include "BufferThread.h"
 
 #ifndef AZIMUTH_AXIS
 	#define AZIMUTH_AXIS 164
@@ -17,26 +18,35 @@
 
 typedef struct 
 {
-     short int HAAxis;
-     short int HAWorm;
-     short int DecAxis;
-     short int DecWorm;
-} ESO50AbsEnc_t;
+     unsigned short int Target_HAAxis;
+     unsigned short int Target_HAWorm;
+     unsigned short int Target_DecAxis;
+     unsigned short int Target_DecWorm;
+     unsigned short int KpHA;
+     unsigned short int KiHA;
+     unsigned short int KdHA_Lo;
+     unsigned short int KdHA_Hi;
+     unsigned short int KpDec;
+     unsigned short int KiDec;
+     unsigned short int KdDec_Lo;
+     unsigned short int KdDec_Hi;
+} ESO50Prms_t;
 
 class ESO50CoordDevIO: public DevIO<CORBA::Double>
 {
 	private:
 		SerialRS232 *sp;
+		ESO50Prms_t *ESO50Prms;
 		int axis;
-
+		BufferThread *thread_p;
 	public:
 
-		ESO50CoordDevIO(char *deviceName, int axis)
+		ESO50CoordDevIO(char *deviceName, int axis, BufferThread *thread_p)
 			throw(csatErrors::CannotOpenDeviceEx);
 
 		virtual ~ESO50CoordDevIO();
 
-		double sexa2double(const char *sexaStr);
+		void msg2send(int msg_type, int option);
 
 		virtual CORBA::Double read(ACS::Time &timestamp) 
 			throw (ACSErr::ACSbaseExImpl);

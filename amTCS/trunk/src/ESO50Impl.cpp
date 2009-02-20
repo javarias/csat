@@ -7,8 +7,10 @@ static void *use_rcsId = ((void)&use_rcsId,(void *) &rcsId);
 #include "ESO50Impl.h"
 #include "ESO50CoordDevIO.h"
 #include "ESO50VelDevIO.h"
+#include "BufferThread.h"
 #include "csatErrors.h"
 
+using namespace acscomponent;
 using namespace baci;
 
 /* Constructor */
@@ -24,7 +26,6 @@ ESO50Impl::ESO50Impl(const ACE_CString& name, maci::ContainerServices *container
 	ACS_TRACE("ESO50Impl::ESO50Impl");
 	m_locking = true;
 	m_name = name;
-	printf("\n\n\n\nESO50Impl\n\n\n\n");
 }
 
 /* Destructor */
@@ -44,11 +45,13 @@ void ESO50Impl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 		ESO50VelDevIO   *azmVelDevIO = NULL;
 
 		try{
-			azmDevIO = new ESO50CoordDevIO((char *)"/dev/ttyACM0", AZIMUTH_AXIS );
-			altDevIO = new ESO50CoordDevIO((char *)"/dev/ttyACM0", ALTITUDE_AXIS );
+			this->thread_p = getContainerServices()->getThreadManager()->create<BufferThread>("/dev/ttyACM0");
+        		this->thread_p->resume();
+			azmDevIO = new ESO50CoordDevIO((char *)"/dev/ttyACM0", AZIMUTH_AXIS, this->thread_p);
+			altDevIO = new ESO50CoordDevIO((char *)"/dev/ttyACM0", ALTITUDE_AXIS, this->thread_p);
 			azmVelDevIO = new ESO50VelDevIO((char *)"/dev/ttyACM0", AZIMUTH_AXIS );
 			altVelDevIO = new ESO50VelDevIO((char *)"/dev/ttyACM0", ALTITUDE_AXIS );
-			printf("\n\nSe completaron las instancias %d %d\n\n",AZIMUTH_AXIS,ALTITUDE_AXIS);
+
 		} catch (csatErrors::CannotOpenDeviceEx &ex){
 			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
 			lifeEx.addData("Reason","Cannot create DevIOs");
@@ -64,7 +67,6 @@ void ESO50Impl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
                                               POA_DEVTELESCOPE_MODULE::ROmountType>
                                             (( m_name + ":mount").c_str(),
                                              getComponent() );
-		printf("\n\ndone \n\n");
 	}
 }
 
@@ -93,10 +95,14 @@ void ESO50Impl::unlock() throw (CORBA::SystemException){
 /* Attributes returning */
 TYPES::AltazVel ESO50Impl::getVel() throw (CORBA::SystemException){
 	TYPES::AltazVel velocity;
-
+	
 	ACSErr::Completion_var completion;
 	velocity.azVel  = azmVel()->get_sync(completion.out());
 	velocity.altVel = altVel()->get_sync(completion.out());
+	printf("velocidad HA %lf \n",velocity.azVel);
+	printf("velocidad Dec %lf \n",velocity.altVel);
+	printf("coordedanas Ha %lf \n",realAzm()->get_sync(completion.out()));
+	printf("coordenadas Dec %lf \n",realAlt()->get_sync(completion.out()));
 	return velocity;
 }
 
@@ -108,7 +114,6 @@ bool ESO50Impl::locking() throw (CORBA::SystemException){
 
 ACS::ROdouble_ptr ESO50Impl::realAzm() throw (CORBA::SystemException)
 {
-	printf("\n\nyeah!!!\n\n");
 	if( m_realAzm_sp == 0 ){
 		return ACS::ROdouble::_nil();
 	}

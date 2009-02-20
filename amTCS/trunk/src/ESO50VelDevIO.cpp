@@ -7,7 +7,6 @@ ESO50VelDevIO::ESO50VelDevIO(char *deviceName, int axis) throw (csatErrors::Cann
         char *_METHOD_ = (char * )"ESO50VelDevIO::ESO50VelDevIO";
 	ACS::Time time = getTimeStamp();
 	CORBA::Double initialSlewRate(0.0);
-	printf("\n\n\n\nESO50VelDevIO\n\n\n\n");
 
         try{
                 this->sp = new SerialRS232(deviceName,120);
@@ -21,7 +20,7 @@ ESO50VelDevIO::ESO50VelDevIO(char *deviceName, int axis) throw (csatErrors::Cann
         /*Check telescope connection by setting initial slew rate */
         try{
 		this->axis = axis;
-		//write(initialSlewRate, time);
+		write(initialSlewRate, time);
 
         } catch(SerialRS232::SerialRS232Exception serialEx) {
                 csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
@@ -43,18 +42,12 @@ CORBA::Double ESO50VelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseEx
         ACS_TRACE(_METHOD_);
 	FILE *fp;
 
-	fp = fopen("velReceive.txt","a");
-
 	if(this->axis == ALTITUDE_AXIS)
 	{
-		fprintf(fp,"dec %lf \n",this->velocityDec);
-		fclose(fp);
 		return this->velocityDec;
 	}
 	else
 	{
-		fprintf(fp,"ha %lf \n",this->velocityHA);
-		fclose(fp);
 		return this->velocityHA;
 	}
 }
@@ -96,11 +89,7 @@ void ESO50VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thro
 	unsigned char ChkSum = 0;
 	char *pointer, mensaje[32], tty_buffer[40];
 	char *send;
-	FILE *fp;
 
-	fp = fopen("velSend.txt","a");
-
-	
 	tty_buffer[0] = '#';
 	tty_buffer[1] = 1;  //para quien va
  	tty_buffer[2] = this->axis;     //origen quien lo envia	
@@ -116,6 +105,8 @@ void ESO50VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thro
 	auxRun = 1;
 	auxSide = 1;
 	auxPi = 1;
+
+	if(value == 0) auxRun = 0;
 
 	msgSend.Wref_Lo = bytefix(auxWref,0);
 	msgSend.Wref_Hi = bytefix(auxWref,1);
@@ -134,9 +125,9 @@ void ESO50VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thro
 	msgSend.Tmr0 = 60535;
 	msgSend.Vfin = 0;
 	msgSend.MtrCtrl = 0;		
-	if(auxRun == 1) msgSend.MtrCtrl += 1;
-	if(auxSide == 1) msgSend.MtrCtrl += 2;
-	if(auxPi == 1) msgSend.MtrCtrl += 4;
+	if(auxRun) msgSend.MtrCtrl += 1;
+	if(auxSide) msgSend.MtrCtrl += 2;
+	if(auxPi) msgSend.MtrCtrl += 4;
 
 	length = (int)sizeof(msgSend);
 	pointer = (char *) & msgSend;
@@ -165,17 +156,7 @@ void ESO50VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thro
 
 	tty_buffer[6 + 32] = ChkSum;
 	tty_buffer[6 + 32 + 1] = '*';
-	
-	fprintf(fp, "\n_________________________________________________________________________________________ \n");
-
-	for(i=0;i<40;i++){
-	fprintf(fp, "%d ",tty_buffer[i]);
-	}
-
-	fclose(fp);
-	//for(i=0;i<40;i++) printf("%d ",tty_buffer[i]);
 
 	this->sp->flush_RS232();
 	this->sp->write_RS232(tty_buffer,40);
-	//printf("\n\n\n\nwriting ESO50VelDevIO\n\n\n\n");
 }

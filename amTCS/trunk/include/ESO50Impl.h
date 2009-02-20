@@ -13,6 +13,7 @@
 
 #include "DevTelescopeS.h"
 #include "TypesC.h"
+#include "BufferThread.h"
 
 using namespace baci;
 
@@ -24,6 +25,7 @@ class ESO50Impl : public virtual CharacteristicComponentImpl,
                     public virtual POA_DEVTELESCOPE_MODULE::DevTelescope
 {
 	public:
+		BufferThread *thread_p;
 		/**
 		 * Constructor
 		 * @param poa POA which will activate this and also all other COBs

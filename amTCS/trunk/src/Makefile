@@ -61,8 +61,8 @@ LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-ESO50Impl_OBJECTS           = ESO50CoordDevIO ESO50VelDevIO ESO50Impl
-ESO50Impl_LIBS              = TypesStubs DevTelescopeStubs csatErrors SerialCommunication baci acsutil acserr
+ESO50Impl_OBJECTS           = ESO50CoordDevIO ESO50VelDevIO ESO50Impl BufferThread
+ESO50Impl_LIBS              = TypesStubs DevTelescopeStubs csatErrors SerialCommunication baci acsutil acserr acsThread
 Lx200GPSImpl_OBJECTS	    = Lx200GPSCoordDevIO Lx200GPSVelDevIO Lx200GPSImpl
 Lx200GPSImpl_LIBS		    = TypesStubs DevTelescopeStubs csatErrors SerialCommunication baci acsutil acserr
 Lx200EMCImpl_OBJECTS	    = Lx200EMCCoordDevIO Lx200EMCVelDevIO Lx200EMCImpl
