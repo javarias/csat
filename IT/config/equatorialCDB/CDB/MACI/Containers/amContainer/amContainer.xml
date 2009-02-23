@@ -5,22 +5,21 @@
         xmlns:baci="urn:schemas-cosylab-com:BACI:1.0" 
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
         xmlns:log="urn:schemas-cosylab-com:LoggingConfig:1.0" 
-        CommandLine="" 
         Timeout="20.0" 
         UseIFR="1"
         ManagerRetry="10" 
-        ManagerReference="">
+        ImplLang="java">
   <Autoload>
     <cdb:_ string="baci" />
   </Autoload>
 
-<DeployInfo Type="java" Host="dellito" Instance="0" Flags="" KeepAliveTime="-1"/>
+<DeployInfo Host="dellito" Instance="0" Flags="" KeepAliveTime="-1"/>
 
   <LoggingConfig 
           centralizedLogger="Log" 
-          minLogLevel="5" 
+          minLogLevel="4" 
           dispatchPacketSize="1" 
           immediateDispatchLevel="31"
-          minLogLevelLocal="5">
+          minLogLevelLocal="4">
   </LoggingConfig>
 </Container>

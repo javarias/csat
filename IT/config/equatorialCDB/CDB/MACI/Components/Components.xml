@@ -46,7 +46,6 @@
          Default="false"
          Container="amContainerCpp"/>
 
-
       <_ Name="PC_GPS"
          Code="PcDummyGpsImpl"
          Type="IDL:alma/DEVGPS_MODULE/DevGPS:1.0"
@@ -54,10 +53,10 @@
          Container="amContainerCpp"/>
 
       <_ Name="POINTING"
-         Code="alma.POINTING_MODULE.PointingImpl.PointingHelper"
+         Code="PointingImpl"
          Type="IDL:alma/POINTING_MODULE/Pointing:1.0"
          Default="true"
-         Container="amContainer"/>
+         Container="amContainerCpp"/>
 
       <_ Name="TRACKING"
          Code="alma.TRACKING_MODULE.TrackingImpl.TrackingHelper"
