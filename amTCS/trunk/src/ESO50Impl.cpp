@@ -39,6 +39,7 @@ void ESO50Impl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 	ACS_TRACE("ESO50Impl::initialize");
 	if( getComponent() != 0){
 
+		//BufferThread *thread_p = NULL;
 		ESO50CoordDevIO *azmDevIO = NULL;
 		ESO50CoordDevIO *altDevIO = NULL;
 		ESO50VelDevIO   *altVelDevIO = NULL;
@@ -101,7 +102,7 @@ TYPES::AltazVel ESO50Impl::getVel() throw (CORBA::SystemException){
 	velocity.altVel = altVel()->get_sync(completion.out());
 	printf("velocidad HA %lf \n",velocity.azVel);
 	printf("velocidad Dec %lf \n",velocity.altVel);
-	printf("coordedanas Ha %lf \n",realAzm()->get_sync(completion.out()));
+	printf("coordenadas HA %lf \n",realAzm()->get_sync(completion.out()));
 	printf("coordenadas Dec %lf \n",realAlt()->get_sync(completion.out()));
 	return velocity;
 }
