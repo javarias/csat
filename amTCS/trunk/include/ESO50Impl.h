@@ -25,7 +25,6 @@ class ESO50Impl : public virtual CharacteristicComponentImpl,
                     public virtual POA_DEVTELESCOPE_MODULE::DevTelescope
 {
 	public:
-		BufferThread *thread_p;
 		/**
 		 * Constructor
 		 * @param poa POA which will activate this and also all other COBs
@@ -90,6 +89,7 @@ class ESO50Impl : public virtual CharacteristicComponentImpl,
 		// Private attributes (IDL)
 		bool m_locking;
 		ACE_CString m_name;
+		BufferThread *thread_p;
 
 		/**
 		 * ALMA C++ coding standards state copy operators should be disabled.
