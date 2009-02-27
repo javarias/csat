@@ -94,6 +94,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 		if( m_mount == alma.DEVTELESCOPE_MODULE.mountType._ALTAZ ) {
 			m_logger.info("Starting Telescope (we have an Alt/Az telescope here)");
 			/* We get the Telescope reference */
+
 			try{
 				obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/Telescope:1.0");
 				telescope = alma.TELESCOPE_MODULE.TelescopeHelper.narrow(obj);
@@ -105,6 +106,7 @@ public class CSATControlImpl implements CSATControlOperations, ComponentLifecycl
 		else if( m_mount == alma.DEVTELESCOPE_MODULE.mountType._EQUATORIAL) {
 			m_logger.info("Starting EquatorialTelescope (we have an equatorial telescope here)");
 			/* We get the EquatorialTelescope reference */
+
 			try{
 				obj = m_containerServices.getDefaultComponent("IDL:alma/TELESCOPE_MODULE/EquatorialTelescope:1.0");
 				telescope = alma.TELESCOPE_MODULE.EquatorialTelescopeHelper.narrow(obj);

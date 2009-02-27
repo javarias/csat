@@ -106,6 +106,8 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 		m_commandedRadecPos.ra  = m_commandedPos.az + calculations_comp.siderealTime();
 		m_commandedRadecPos.dec = m_commandedPos.alt;
 
+		System.out.println(m_commandedRadecPos.ra + " yeah!!!!" + m_commandedRadecPos.dec);
+
 		m_softRealPos = m_commandedRadecPos;
 
 		controlThread = m_containerServices.getThreadFactory().newThread(this);
@@ -306,6 +308,8 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 
 				m_softRealPos.dec = realAltitude;
 				m_softRealPos.ra  = realAzimuth + st;
+				
+				System.out.println(m_commandedRadecPos.ra + "\n" + m_commandedRadecPos.dec);
 
 				/* We add to the commanded position the Automatic pointing corrections */
 				tmprd.ra = m_commandedPos.az + st;
@@ -420,7 +424,7 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 				}
 				
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(1500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

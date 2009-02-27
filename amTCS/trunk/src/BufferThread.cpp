@@ -109,23 +109,25 @@ void BufferThread::runLoop()
 	char *msg;
 	int i;
 	char message[32];
-
+	//while(1){
 	msg = this->sp->read_RS232();
+	for(i=0; i<40; i++) printf("%i ",msg[i]);
+	printf("\n");
 	//printf("tratando...\n");
 	//this->sp->flush_RS232();
 	//while(!(msg[0]==35 && msg[1]==8 && msg[2]==1 && msg[4]==0)) msg = this->sp->read_RS232();
-	if(msg[0]==35 && msg[1]==8 && msg[2]==1 && msg[4]==0)
+	if(msg[1]==8 && msg[2]==1 && msg[4]==0)
 	{	
 		//printf("tratando...bueno\n");
-		for(i=0; i<40; i++) printf("%i ",msg[i]);
-		printf("\n");
+		//for(i=0; i<40; i++) printf("%i ",msg[i]);
+		//printf("\n");
 		
 		for(i=6; i<38; i++)
 		message[i-6]=msg[i];
 		this->ESO50Stat = (ESO50Stat_t*) message;
 		this->receiving = false;
-		//printf("haaxis :%i\n",this->ESO50Stat->Current_HAAxis);
-		//printf("decaxis :%i\n",this->ESO50Stat->Current_DecAxis);
+		//printf("haaxis :%i\n",this->ESO50Stat->Current_HA);
+		//printf("decaxis :%i\n",this->ESO50Stat->Current_Dec);
 		this->HA = (double)this->ESO50Stat->Current_HA;
 		this->Dec = (double)this->ESO50Stat->Current_Dec;
 	}
@@ -138,21 +140,13 @@ void BufferThread::runLoop()
 	}*/
 };
 
-char* BufferThread::getCoord()
-{
-	if(this->ok)
-		return this->coordinates;
-	else 
-		return (char *)"\0";
-}
-
 double BufferThread::getRA()
 {
-	return this->HA;
+	return (this->HA - 240*512)*(360.0/(1536.0*240.0));//(((this->HA * 24)/(1024*240)) - 12.75);//((this->HA * 360)/(1024*240));
 }
 
 double BufferThread::getDec()
 {
-	return this->Dec;
+	return -33.26 + (360.0/(1024.0*288.0))*(this->Dec - 288*512);//(180 - ((this->Dec * 360)/(1024*288)));//((this->Dec * 360)/(1024*288));
 }
 

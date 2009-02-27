@@ -1,4 +1,5 @@
 #include "ESO50CoordDevIO.h"
+#include "CalculationsImpl.h"
 
 ESO50CoordDevIO::ESO50CoordDevIO(char *deviceName, int axis,BufferThread *thread_p) throw (csatErrors::CannotOpenDeviceEx)
 {
@@ -7,6 +8,7 @@ ESO50CoordDevIO::ESO50CoordDevIO(char *deviceName, int axis,BufferThread *thread
 	try{
 		//this->sp = new SerialRS232(deviceName,120);
 		this->thread_p = thread_p;
+
 	} catch(SerialRS232::SerialRS232Exception serialEx) {
 		ACS_LOG( LM_ERROR , _METHOD_ , (LM_ERROR, "CannotOpenDeviceEx: %s", serialEx.what()) );
 		csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
@@ -98,8 +100,7 @@ void ESO50CoordDevIO::msg2send(int msg_type,int option)
 	this->sp->flush_RS232();
 	this->sp->write_RS232(tty_buffer,40);
 
-}
-	
+}	
 
 CORBA::Double ESO50CoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)
 {
@@ -110,83 +111,16 @@ CORBA::Double ESO50CoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbase
 
 	ACS_TRACE(_METHOD_);
 
-	//printf("\nEn ESOcoord\n");
-	/*msg = this->thread_p->getCoord();//msg = this->sp->read_RS232();//msg = this->thread_p->getCoord();
-
-	while(!(msg[0]==35 && msg[1]==8 && msg[2]==1 && msg[4]==0)) msg = this->thread_p->getCoord();//msg = 
-
-	for(i=6; i<38; i++)
-	message[i-6]=msg[i];
-	this->ESO50Stat = (ESO50Stat_t*) message;
-
-	/* Get information according to axis */
-	/*if (this->axis == ALTITUDE_AXIS) {
-		if(this->ESO50Stat->Current_DecAxis > 0){
-		value = this->ESO50Stat->Current_Dec;
-		printf("DecAxis %lf\n",value);}
-	} 
-	else {
-		if(this->ESO50Stat->Current_HAAxis > 0){
-		value = this->ESO50Stat->Current_HA;
-		printf("HAAxis %lf\n",value);}
-	}*/
-	//msg = this->sp->read_RS232();
-	//this->sp->flush_RS232();
-	//msg = this->thread_p->getCoord();
-	//printf("\nEn ESOcoord\n");
-	//while(!(msg[0]==35 && msg[1]==8 && msg[2]==1 && msg[4]==0)) msg = this->sp->read_RS232();
-	//for(i=0;i<40;i++) printf("%i ",msg[i]);
-	//printf("\n");*/
-	/*if(msg[0]==35 && msg[1]==8 && msg[2]==1 && msg[4]==0)
-	{
-		//for(i=0; i<40; i++) printf("%i ",msg[i]);
-		//printf("\n");
-		for(i=6; i<38; i++)
-		message[i-6]=msg[i];
-		this->ESO50Stat = (ESO50Stat_t*) message;
-		this->receiving = true;
-	}
-
-	if(this->receiving){
-		if (this->axis == ALTITUDE_AXIS) {
-			value = this->ESO50Stat->Current_DecAxis;
-			printf("DecAxis %lf\n",value);
-		} 
-		else {
-			value = this->ESO50Stat->Current_HAAxis;
-			printf("HAAxis %lf\n",value);
-		}
-		this->receiving=false;
-	}*/
-	/*
-	//msg = this->thread_p->getCoord();
-	//msg = this->sp->read_RS232();
-	//while(!(msg[0]==35 && msg[1]==8 && msg[2]==1 && msg[4]==0)) msg = this->sp->read_RS232();
-	*/
 	if (this->axis == ALTITUDE_AXIS) {
 		value = this->thread_p->getDec();
-		printf("DecAxis %lf\n",value);
+		//printf("DecAxis %lf\n",value);
 	} 
 	else {
 		value = this->thread_p->getRA();
-		printf("HAAxis %lf\n",value);
+		//printf("HAAxis %lf\n",value);
 	}
 
-	//return value;*/
-	/*msg = this->thread_p->getCoord();//this->sp->read_RS232();
-	while(!(msg[0]==35 && msg[1]==8 && msg[2]==1 && msg[4]==0)) msg = this->thread_p->getCoord();//this->sp->read_RS232();
-	for(i=6; i<38; i++)
-	message[i-6]=msg[i];
-	this->ESO50Stat = (ESO50Stat_t*) message;
-
-	/* Get information according to axis */
-	/*if (this->axis == ALTITUDE_AXIS) {
-		value = this->ESO50Stat->Current_DecAxis;
-	} else {
-		value = this->ESO50Stat->Current_HAAxis;
-	}
-
-	return value;*/
+	return value;
 }
 
 void ESO50CoordDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) throw (ACSErr::ACSbaseExImpl)

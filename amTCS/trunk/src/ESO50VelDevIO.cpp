@@ -9,7 +9,9 @@ ESO50VelDevIO::ESO50VelDevIO(char *deviceName, int axis) throw (csatErrors::Cann
 	CORBA::Double initialSlewRate(0.0);
 
         try{
+
                 this->sp = new SerialRS232(deviceName,120);
+
         } catch(SerialRS232::SerialRS232Exception serialEx) {
                 ACS_LOG( LM_ERROR , _METHOD_ , (LM_ERROR, "CannotOpenDeviceEx: %s", serialEx.what()) );
                 csatErrors::CannotOpenDeviceExImpl ex(__FILE__,__LINE__,_METHOD_);
@@ -19,6 +21,7 @@ ESO50VelDevIO::ESO50VelDevIO(char *deviceName, int axis) throw (csatErrors::Cann
 
         /*Check telescope connection by setting initial slew rate */
         try{
+
 		this->axis = axis;
 		write(initialSlewRate, time);
 
@@ -44,11 +47,11 @@ CORBA::Double ESO50VelDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbaseEx
 
 	if(this->axis == ALTITUDE_AXIS)
 	{
-		return this->velocityDec;
+		return this->slewRateDeclination;
 	}
 	else
 	{
-		return this->velocityHA;
+		return this->slewRateHA;
 	}
 }
 
@@ -97,16 +100,22 @@ void ESO50VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thro
 	tty_buffer[4] = 0;     //ack 
 	tty_buffer[5] = 1;     //libre
 	
-	if(this->axis == ALTITUDE_AXIS)	this->velocityDec = value;
-	else this->velocityHA = value;
+	if(this->axis == ALTITUDE_AXIS)	this->slewRateDeclination = value;
+	else this->slewRateHA = value;
 
-	auxWref = (float)value;
-
+	auxWref = (float)(value * (-35.0175088) + 300.14007);
+	if(auxWref < 20) auxWref = 20;
 	auxRun = 1;
+
 	auxSide = 1;
 	auxPi = 1;
 
 	if(value == 0) auxRun = 0;
+	if(value < 0 ) 
+	{
+		auxSide = 0;
+		auxWref *= -1;
+	}
 
 	msgSend.Wref_Lo = bytefix(auxWref,0);
 	msgSend.Wref_Hi = bytefix(auxWref,1);
@@ -114,6 +123,7 @@ void ESO50VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thro
 	msgSend.Ki_Hi = bytefix(1000,1);
 	msgSend.Kp_Lo = bytefix(500,0);
 	msgSend.Kp_Hi = bytefix(500,1);
+
 	if(auxWref >=20 && auxWref <=100)
 	{
 		msgSend.Ki_Lo = bytefix(200,0);
@@ -124,7 +134,8 @@ void ESO50VelDevIO::write(const CORBA::Double &value, ACS::Time &timestamp) thro
 	msgSend.Tm = (char)1;
 	msgSend.Tmr0 = 60535;
 	msgSend.Vfin = 0;
-	msgSend.MtrCtrl = 0;		
+	msgSend.MtrCtrl = 0;
+		
 	if(auxRun) msgSend.MtrCtrl += 1;
 	if(auxSide) msgSend.MtrCtrl += 2;
 	if(auxPi) msgSend.MtrCtrl += 4;

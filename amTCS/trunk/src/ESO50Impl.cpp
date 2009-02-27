@@ -39,17 +39,17 @@ void ESO50Impl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 	ACS_TRACE("ESO50Impl::initialize");
 	if( getComponent() != 0){
 
-		//BufferThread *thread_p = NULL;
+		BufferThread *thread_p = NULL;
 		ESO50CoordDevIO *azmDevIO = NULL;
 		ESO50CoordDevIO *altDevIO = NULL;
 		ESO50VelDevIO   *altVelDevIO = NULL;
 		ESO50VelDevIO   *azmVelDevIO = NULL;
 
 		try{
-			this->thread_p = getContainerServices()->getThreadManager()->create<BufferThread>("/dev/ttyACM0");
-        		this->thread_p->resume();
-			azmDevIO = new ESO50CoordDevIO((char *)"/dev/ttyACM0", AZIMUTH_AXIS, this->thread_p);
-			altDevIO = new ESO50CoordDevIO((char *)"/dev/ttyACM0", ALTITUDE_AXIS, this->thread_p);
+			thread_p = getContainerServices()->getThreadManager()->create<BufferThread>("/dev/ttyACM0");
+        		thread_p->resume();
+			azmDevIO = new ESO50CoordDevIO((char *)"/dev/ttyACM0", AZIMUTH_AXIS, thread_p);
+			altDevIO = new ESO50CoordDevIO((char *)"/dev/ttyACM0", ALTITUDE_AXIS, thread_p);
 			azmVelDevIO = new ESO50VelDevIO((char *)"/dev/ttyACM0", AZIMUTH_AXIS );
 			altVelDevIO = new ESO50VelDevIO((char *)"/dev/ttyACM0", ALTITUDE_AXIS );
 
