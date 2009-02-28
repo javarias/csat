@@ -5,11 +5,14 @@
 #include <signal.h>
 #include <dirent.h>
 #include <Communication.h>
+#include <Freemode.h>
+#include <Telescope.h>
+#include <Gps.h>
 #include <pthread.h>
 #include <sys/types.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
-#include "freemode.cpp"
+
 
 
 /** The default serial port's device file */
@@ -17,7 +20,7 @@
 
 /** Communication object */
 Communication *com = NULL;
-Communication *gps = NULL;
+Gps *gps = NULL;
 
 char *gps_info;
 char *tlc_info;
@@ -33,61 +36,7 @@ int ChkSum;
  */ 
 void leave(int sig);
 
-typedef struct 
-{
-     unsigned short int Target_HAAxis;
-     unsigned short int Target_HAWorm;
-     unsigned short int Target_DecAxis;
-     unsigned short int Target_DecWorm;
-     unsigned short int KpHA;
-     unsigned short int KiHA;
-     unsigned short int KdHA_Lo;
-     unsigned short int KdHA_Hi;
-     unsigned short int KpDec;
-     unsigned short int KiDec;
-     unsigned short int KdDec_Lo;
-     unsigned short int KdDec_Hi;
-} ESO50Prms_t;
-
 ESO50Prms_t *absenc;
-		
-void* readGps(void* pcom)
-{
-	while(1)
-	{
-		gps_info = gps->readFrom();
-	}
-	pthread_exit(NULL);
-}
-
-void* readTelescope(void* pcom)
-{
-	int i;
-	char msg[32];
-	while(1)
-	{
-		tlc_info = com->readFrom();
-
-		if(tlc_info[0]==35 && tlc_info[1]==8 && tlc_info[2]==1 && tlc_info[4]==0)
-		{
-			for(i=6; i<38; i++)
-			msg[i-6]=tlc_info[i];
-			absenc = (ESO50Prms_t*) msg;
-		}
-	
-		if(tlc_info[0]==35 && (tlc_info[2]==1 || tlc_info[2]==0) && tlc_info[4]==1)
-		{
-			for(i=0;i<40;i++) answer[i] = tlc_info[i];
-			send = true;
-		}
-
-		if(tlc_info[0]==35 && tlc_info[1]==8 && tlc_info[2]==2 && tlc_info[4]==1)
-		{
-			encoder = true;
-		}
-	}
-	pthread_exit(NULL);
-}
 
 int main(int args, char *argv[])
 {
@@ -113,19 +62,20 @@ int main(int args, char *argv[])
 	printf("Using default port %s.\n", "/dev/ttyUSB0");
 	strcpy(serialPort, DEFAULT_PORT);
 	setbuf(stdout,NULL);
+
 	com = new Communication(serialPort);
-	//gps = new Communication("/dev/ttyUSB0");
-	
+	//gps = new Gps((char *)"/dev/ttyUSB0",true);
+
+	Freemode *freemode = new Freemode(com);
+	Telescope *tlc = new Telescope(com);
+	tlc->start();
+
 	signal(SIGINT, leave);
 
-	//thread_id2 = pthread_create(&thread2, NULL, readGps,(void *) serialPort);
-
-	thread_id1 = pthread_create(&thread1, NULL, readTelescope,(void *) serialPort);
 	system("clear");
 	printf("*************************************************\n");
 	printf("################  client eso50  #################\n");
 	printf("*************************************************\n");
-	
 
 	while(loop)
 	{
@@ -165,15 +115,14 @@ int main(int args, char *argv[])
 				printf("\npi (1/0): ");
 				scanf("%i",&pi);
 
-				checksum = com->writeTo(wref,address,msg_type,run,side,pi,"hola");
+				checksum = com->write(wref,address,msg_type,run,side,pi,"hola");
 				}
 				else if(msg_type == 0)
 				{
 					printf("\nESCRIBA EL MENSAJE A ENVIAR\n");
 					scanf("%s",msg);
-					checksum = com->writeTo(0,address,msg_type,0,0,0,msg);
+					checksum = com->write(0,address,msg_type,0,0,0,msg);
 				}
-				if(checksum == answer[38]) printf("\n send!!!!\n");
 
 				break;	
 			case 2:
@@ -203,17 +152,13 @@ int main(int args, char *argv[])
 
 				break;
 			case 4:
-				if(encoder)
-				{
-					printf("\nHAAxis : %d\n",absenc->Target_HAAxis);
-					printf("HAWorm : %d\n",absenc->Target_HAWorm);
-					printf("DecAxis : %d\n",absenc->Target_DecAxis);
-					printf("DecWorm : %d\n",absenc->Target_DecWorm);
-				}
-				else printf("\nno encoders\n");	
+				printf("\nHAAxis : %lf\n",tlc->getCoordRa());
+				printf("DecAxis : %lf\n",tlc->getCoordDec());
 				break;
 			case 5:
-				data = gps->getGdata(gps_info,0);
+		
+				
+				/*data = gps->getGdata(gps_info,0);
 				for(i=0;i<15;i++) stime[i] = data[i];
 				printf("\n");
 				for(i=0;i<6;i+=2)
@@ -221,10 +166,11 @@ int main(int args, char *argv[])
 					printf("%c%c",stime[i],stime[i+1]);
 					if(i!=4)printf(":");
 				}
-				printf("\n");
+				printf("\n");*/
 				break;
 			case 6:
-				data = gps->getGdata(gps_info,1);
+				//printf("latitude : %lf\n",gps->getLatitude());
+				/*data = gps->getGdata(gps_info,1);
 				for(i=0;i<15;i++) slatitude[i] = data[i];
 				latitude = gps->strtodou(slatitude);
 				orientation = gps->getGdata(gps_info,4);
@@ -233,9 +179,11 @@ int main(int args, char *argv[])
 				min = (int)latitude%100;
 				deg = ((int)latitude-min)/100;
 				printf("\n%d° %d' %.2lf'' ",deg,min,seg);
-				printf("%c\n",sorientation[0]);
+				printf("%c\n",sorientation[0]);*/
 				break;
 			case 7:
+				//printf("longitude : %lf\n",gps->getLongitude());
+				/*
 				data = gps->getGdata(gps_info,2);
 				for(i=0;i<15;i++) slongitude[i] = data[i];
 				longitude = gps->strtodou(slongitude);
@@ -245,15 +193,17 @@ int main(int args, char *argv[])
 				min = (int)longitude%100;
 				deg = ((int)longitude-min)/100;
 				printf("\n%d°%d'%.2lf''",deg,min,seg);
-				printf("%s\n",sorientation);
+				printf("%s\n",sorientation);*/
 				break;
 			case 8:
+				//printf("altitude : %ld\n",gps->getAltitude());
+				/*
 				data = gps->getGdata(gps_info,3);
 				for(i=0;i<15;i++) saltitude[i] = data[i];
-				printf("\n%s M\n",saltitude);
+				printf("\n%s M\n",saltitude);*/
 				break;
 			case 9:
-				freemode(com);
+				freemode->start();
 				break;
 			case 10:
 				loop=false;

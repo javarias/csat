@@ -16,37 +16,6 @@
 
 #include "Communication.h"
 
-typedef struct 
-{
-    char        Tm;
-    char        MtrCtrl;
-    unsigned short int   Tmr0;
-    short int   Vfin;
-    short int   Wref_Lo;
-    short int   Wref_Hi;
-    short int   Ki_Lo;
-    short int   Ki_Hi;
-    short int   Kp_Lo;
-    short int   Kp_Hi;
-} SlavePWM_t;
-
-typedef struct 
-{
-     unsigned short int Target_HAAxis;
-     unsigned short int Target_HAWorm;
-     unsigned short int Target_DecAxis;
-     unsigned short int Target_DecWorm;
-     unsigned short int KpHA;
-     unsigned short int KiHA;
-     unsigned short int KdHA_Lo;
-     unsigned short int KdHA_Hi;
-     unsigned short int KpDec;
-     unsigned short int KiDec;
-     unsigned short int KdDec_Lo;
-     unsigned short int KdDec_Hi;
-} ESO50Prms_t;
-
-
 unsigned short bytefix(float data,int i)
 {
 	char *pointer;
@@ -80,8 +49,8 @@ Communication::Communication(char *deviceName)
 {
 	this->sp = new SerialRS232(deviceName,80);
 	this->device = deviceName;
-	this->sp->flush_RS232();
-	this->writeTo(0,8, 0, 0, 0, 0,"ESO50");
+	//this->sp->flush_RS232();
+	//this->write(0,8, 0, 0, 0, 0,"ESO50");
 }
 
 Communication::~Communication()
@@ -89,21 +58,22 @@ Communication::~Communication()
         delete this->sp;
 }
 
-char* Communication::readFrom()
+char* Communication::read()
 {
 	int i;
 	char *mensaje,msg[32];
 
 	mensaje = this->sp->read_RS232();
 	this->sp->flush_RS232();
-
+	//for(i=0;i<40;i++) printf("%i",mensaje[i]);
+	//printf("\n");
 	if(mensaje[0]==0) 
 	for(i=0;i<40;i++) *(mensaje +i)=0;
 
 	return mensaje;
 }
 
-
+/*
 char* Communication::getGdata(char *mensaje, int option)
 {
 	char *msg;
@@ -141,7 +111,7 @@ char* Communication::getGdata(char *mensaje, int option)
         msg[sizeof(str)-1] = '\0';
 	return msg;
 }
-
+*/
 double Communication::strtodou(char *msg)
 {
 	double data;
@@ -150,7 +120,7 @@ double Communication::strtodou(char *msg)
 }
 	
 
-int Communication::writeTo(float wref,int direction, int msg_type, int run, int side, int pi, char* msg)
+int Communication::write(float wref,int direction, int msg_type, int run, int side, int pi, char* msg)
 {
 	SlavePWM_t msgSend;
 	int auxTmr0,auxVfin,i,length,auxTm,auxRun,auxSide,auxPi;
@@ -237,64 +207,64 @@ int Communication::writeTo(float wref,int direction, int msg_type, int run, int 
 
 void Communication::sendData(int option)
 {	
-	ESO50Prms_t ESO50Prms;
 	char tty_buffer[40], *pointer;
 	unsigned char checksum;
 	int lenght;
 	int i;
-	
-	ESO50Prms.Target_HAAxis  = 0;
-	ESO50Prms.Target_HAWorm  = 0;
-	ESO50Prms.Target_DecAxis = 0;
-	ESO50Prms.Target_DecWorm = 0;
-	
-	ESO50Prms.KpHA  = 0;
-	ESO50Prms.KiHA  = 0;
-	
-	ESO50Prms.KpDec = 0;
-	ESO50Prms.KiDec = 0;
-	
-	ESO50Prms.KdDec_Hi = 0;
-	ESO50Prms.KdDec_Lo = 0;
-	ESO50Prms.KdHA_Hi = 0;
+
+	/*ESO50Prms.Target_HA_Lo = 0;
+	ESO50Prms.Target_HA_Hi = 0;
+	ESO50Prms.Target_Dec_Lo = 0;
+	ESO50Prms.Target_Dec_Hi = 0;
+	ESO50Prms.KpHA_Lo = 0;
+	ESO50Prms.KpHA_Hi = 0;
+	ESO50Prms.KiHA_Lo = 0;
+	ESO50Prms.KiHA_Hi = 0;
 	ESO50Prms.KdHA_Lo = 0;
-	
+	ESO50Prms.KdHA_Hi = 0;
+ 	ESO50Prms.KpDec_Lo = 0;
+	ESO50Prms.KpDec_Hi = 0;
+	ESO50Prms.KiDec_Lo = 0;
+	ESO50Prms.KiDec_Hi = 0;
+	ESO50Prms.KdDec_Lo = 0;
+	ESO50Prms.KdDec_Hi = 0;*/
+	/*MsgHead.Start  = '#';
+   	MsgHead.From   = 0;
+    	MsgHead.To     = 8;
+    	MsgHead.Length = 32;
+    	MsgHead.Ack    = 0;
+    	MsgHead.Free   = 2;*/
+
 	tty_buffer[0] = '#';
-	tty_buffer[1] = 2;
+	tty_buffer[1] = 0;
  	tty_buffer[2] = 8;
-	tty_buffer[3] = 0;
+	tty_buffer[3] = 32;
 	tty_buffer[4] = 0;
-	tty_buffer[5] = 1;
+	tty_buffer[5] = 2;
 	
 	checksum = 0;
-	lenght = (int) sizeof( ESO50Prms );
 
 	for( i = 0; i < 6; i ++ )
 	{
 		checksum += tty_buffer[i];
 	}
-	pointer = (char *) & ESO50Prms;
-	for( i = 0; i < lenght; i ++ )
-	{
-		tty_buffer[6 + i] = pointer[i];
-		checksum += pointer[i];
-	}
+	
+	tty_buffer[6]=0;
+	
+	if(option)
+	tty_buffer[6] = 1;
 
-	tty_buffer[6 + lenght] = (char)option; /*el importante*/
+	checksum += tty_buffer[6];
 
-	checksum += tty_buffer[6 + lenght]; 
-    	lenght ++;
-	for( i = 6 + lenght; i < 38; i ++ )
+	for(i=1; i<32 ; i++)
 	{
-		tty_buffer[i] = 0;
+		tty_buffer[6 + i] = 0;
 	}
 	
 	tty_buffer[6 + 32] = (char)checksum;
 	tty_buffer[6 + 32 + 1] = '*';
-//	for(i=0;i<40;i++) printf("%u ",tty_buffer[i]);
-	
+
 	this->sp->flush_RS232();
 	this->sp->write_RS232(tty_buffer,40);
-//	this->sp->flush_RS232();
 }
 	
