@@ -49,7 +49,7 @@ void ESO50Impl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 			thread_p = getContainerServices()->getThreadManager()->create<BufferThread>("/dev/ttyACM0");
         		thread_p->resume();
 			azmDevIO = new ESO50CoordDevIO((char *)"/dev/ttyACM0", AZIMUTH_AXIS, thread_p);
-			altDevIO = new ESO50CoordDevIO((char *)"/dev/ttyACM0", ALTITUDE_AXIS, thread_p);
+			altDevIO = new ESO50CoordDevIO((char *)"/dev/ttyACM0", ALTITUDE_AXIS, thread_p, false);
 			azmVelDevIO = new ESO50VelDevIO((char *)"/dev/ttyACM0", AZIMUTH_AXIS );
 			altVelDevIO = new ESO50VelDevIO((char *)"/dev/ttyACM0", ALTITUDE_AXIS );
 

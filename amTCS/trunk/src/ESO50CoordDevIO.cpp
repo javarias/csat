@@ -1,7 +1,7 @@
 #include "ESO50CoordDevIO.h"
 #include "CalculationsImpl.h"
 
-ESO50CoordDevIO::ESO50CoordDevIO(char *deviceName, int axis,BufferThread *thread_p) throw (csatErrors::CannotOpenDeviceEx)
+ESO50CoordDevIO::ESO50CoordDevIO(char *deviceName, int axis,BufferThread *thread_p, bool reversed) throw (csatErrors::CannotOpenDeviceEx)
 {
 	char *_METHOD_ = (char *)"ESO50CoordDevIO::ESO50CoordDevIO";
 
@@ -30,6 +30,7 @@ ESO50CoordDevIO::ESO50CoordDevIO(char *deviceName, int axis,BufferThread *thread
 
 	this->axis = axis;
 	this->receiving = false;
+	this->reversed = reversed;
 	//this->thread_p->startmsg();
 }
 
@@ -119,6 +120,9 @@ CORBA::Double ESO50CoordDevIO::read(ACS::Time &timestamp) throw (ACSErr::ACSbase
 		value = this->thread_p->getRA();
 		//printf("HAAxis %lf\n",value);
 	}
+
+	if( this->reversed )
+		value = 360 - reversed;
 
 	return value;
 }
