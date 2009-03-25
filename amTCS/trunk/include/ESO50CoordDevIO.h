@@ -35,10 +35,11 @@ class ESO50CoordDevIO: public DevIO<CORBA::Double>
 		int axis;
 		//BufferThread *thread_p;
 		bool receiving;
+		bool reversed;
 		double value;
 		BufferThread *thread_p;
 	public:
-		ESO50CoordDevIO(char *deviceName, int axis, BufferThread *thread_p)
+		ESO50CoordDevIO(char *deviceName, int axis, BufferThread *thread_p, bool reversed = true)
 			throw(csatErrors::CannotOpenDeviceEx);
 
 		virtual ~ESO50CoordDevIO();

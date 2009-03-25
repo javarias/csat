@@ -33,7 +33,7 @@ class BufferThread :public ACS::Thread
 	public:
 		BufferThread(const ACE_CString & name,
 		const ACS::TimeInterval & responseTime=ACS::ThreadBase::defaultResponseTime,
-		const ACS::TimeInterval & sleepTime=2000,
+		const ACS::TimeInterval & sleepTime=defaultSleepTime ,
 		const bool del=false,
 		const long _thrFlags=THR_NEW_LWP | THR_DETACHED) throw (acsthreadErrType::CanNotSpawnThreadExImpl);
 		virtual ~BufferThread();
