@@ -204,7 +204,7 @@ endif
 # TARGETS
 # -------
 all:	do_all
-	@cd lpi-gui-src/; ./configure --prefix=$(INTROOT); make
+	@cd lpi-gui-src/; sh autogen.sh; ./configure --prefix=$(INTROOT); make
 	@echo " . . . 'all' done" 
 
 clean : clean_all 
