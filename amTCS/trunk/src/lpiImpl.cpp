@@ -99,6 +99,7 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 		} catch (csatErrors::CannotOpenDeviceEx &ex){
 			acsErrTypeLifeCycle::LifeCycleExImpl lifeEx(ex,__FILE__,__LINE__,_METHOD_);
 			lifeEx.addData("Reason","Cannot create DevIOs");
+			delete m_device_sp;
 			throw lifeEx;
 		}
 
