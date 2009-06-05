@@ -18,6 +18,8 @@
 #include <stdlib.h>		//exit()
 #include <sys/types.h>		//stat()
 #include <sys/stat.h>		//stat()
+#include <sys/time.h>
+#include <time.h>
 #include <errno.h>		//errno
 #include <string.h>		//strerror(), memset()
 #include <sys/ioctl.h>		//ioctl()
@@ -294,7 +296,7 @@ void check_controls(struct ccd *cam){
                         exit (EXIT_FAILURE);
                 }
         }
-        for (queryctrl.id = V4L2_CID_PRIVATE_BASE;queryctrl.id < V4L2_CID_PRIVATE_BASE + 9;
+        for (queryctrl.id = V4L2_CID_PRIVATE_BASE;queryctrl.id < V4L2_CID_PRIVATE_BASE + 10;
                         queryctrl.id++) {
                 if (0 == ioctl (cam->fd, VIDIOC_QUERYCTRL, &queryctrl)) {
                         if (queryctrl.flags & V4L2_CTRL_FLAG_DISABLED)
@@ -331,6 +333,9 @@ void process_image(const void *p,unsigned char *dst)
 
 int read_frame(struct ccd *cam)
 {
+		  struct timeval tv, tvFinal;
+        struct timezone tz;
+        gettimeofday(&tv,&tz);
         if (-1 == read (cam->fd, cam->buffers[0].start, cam->buffers[0].length)) 
         {
                 switch (errno) 
@@ -347,6 +352,12 @@ int read_frame(struct ccd *cam)
                                 errno_exit ("read");
                 }
         }
+        gettimeofday(&tvFinal,&tz);
+        if( tvFinal.tv_usec < tv.tv_usec ) {
+          tvFinal.tv_sec--;
+          tvFinal.tv_usec += 1000000;
+		  }
+        printf("Got frame in %ld.%ld seconds\n", tvFinal.tv_sec - tv.tv_sec, tvFinal.tv_usec - tv.tv_usec);
         return 1;
 }
 
@@ -354,7 +365,7 @@ void init_ccd(struct ccd *cam, const char *file){
         // Allocate the device name: the main idea is to support
         // several devices in a future
         cam->dev_name=(char *)malloc(strlen(file)+1);
-        strncpy(cam->dev_name,file,strlen(file));
+        sprintf(cam->dev_name,"%s",file);
         // Try to open the device
         open_device(cam);
         init_device(cam);
@@ -363,53 +374,12 @@ void init_ccd(struct ccd *cam, const char *file){
 
 void init(char *device, struct ccd *cam)
 {       
-/*      struct ccd cam;
-        if (argc!=3){
-                fprintf(stdout,"USAGE: %s device output.rgb\n",argv[0]);
-                exit(0);
-        }
-*/
-//        fprintf(stdout,"Initialiting CCD...\t");
-//        fflush(stdout);
         init_ccd(cam,device);
-//        fprintf(stdout,"[OK]\n");
         check_controls(cam);
-        //Defaults
-/*
-        change_control(cam,V4L2_CID_EXPOSURE,0x250);
-        change_control(cam,SN9C102_V4L2_CID_GREEN_BALANCE,0x1e);
-        change_control(cam,V4L2_CID_RED_BALANCE,0x00);
-        change_control(cam,V4L2_CID_BLUE_BALANCE,0x20);
-        change_control(cam,SN9C102_V4L2_CID_RESET_LEVEL,0x3f);
-        change_control(cam,SN9C102_V4L2_CID_PIXEL_BIAS_VOLTAGE,0);
 
-
-        change_control(cam,SN9C102_V4L2_CID_GREEN_BALANCE,0x1e);
-        change_control(cam,V4L2_CID_RED_BALANCE,0x1e);
-        change_control(cam,V4L2_CID_BLUE_BALANCE,0x1e);
-        change_control(cam,SN9C102_V4L2_CID_RESET_LEVEL,0x38);
-        change_control(cam,SN9C102_V4L2_CID_PIXEL_BIAS_VOLTAGE,0x02);
-        change_control(cam,V4L2_CID_EXPOSURE,65535);
-*/
-        //change_control(cam,SN9C102_V4L2_CID_RESET_LEVEL,0x3f);
-        //change_control(cam,SN9C102_V4L2_CID_PIXEL_BIAS_VOLTAGE,0x07);
-//        fprintf(stdout,"Grabbing Frame...\t");
-//        fflush(stdout);
-//        read_frame(cam);
-//        fprintf(stdout,"[OK]\n");
-
-//        fprintf(stdout,"Saving to '%s'file...\t",argv[2]);
-//        fflush(stdout);
-//        process_image (cam->buffers[0].start,argv[2]);
-//        fprintf(stdout,"[OK]\n");
-
-//        fprintf(stdout,"Freeing CCD...\t");
-//        fflush(stdout);
-//        free_ccd(cam);
-//        fprintf(stdout,"[OK]\n");
-
-//        exit (EXIT_SUCCESS);
-//        return 0;
+        // Some important values...
+        change_control(cam,V4L2_CID_EXPOSURE,592);
+        change_control(cam,SN9C102_V4L2_CID_FRAME_MODE,0);
 }
 
 void *control_reset_level(void *args) {

@@ -196,7 +196,7 @@ on_PixelScale_value_changed            (GtkRange        *range,
         //sprintf(number, "%f", num);
 	//number[3]='\0';
         //gtk_entry_set_text(GTK_ENTRY(entry), number);
-	change_control(cam,SN9C102_V4L2_CID_PIXEL_BIAS_VOLTAGE, (int)(num*7));
+	change_control(cam,SN9C102_V4L2_CID_PIXEL_BIAS_VOLTAGE, (int)(num));
 	sleep(0.01);
 }
 
@@ -359,7 +359,7 @@ void
 on_frameToogle_toggled                 (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
-	GtkWidget *button = lookup_widget(GTK_WIDGET(togglebutton), "togglebutton");
+	GtkWidget *button = lookup_widget(GTK_WIDGET(togglebutton), "frameToogle");
 	int toggled = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button));
 	struct ccd *cam = user_data;
 	change_control(cam,SN9C102_V4L2_CID_FRAME_MODE, toggled);

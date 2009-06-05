@@ -527,6 +527,25 @@
       </child>
 
       <child>
+	<widget class="GtkToggleButton" id="frameToogle">
+	  <property name="visible">True</property>
+	  <property name="can_focus">True</property>
+	  <property name="label" translatable="yes">Toogle Frame Mode (actual is continuous frame mode)</property>
+	  <property name="use_underline">True</property>
+	  <property name="relief">GTK_RELIEF_NORMAL</property>
+	  <property name="focus_on_click">True</property>
+	  <property name="active">False</property>
+	  <property name="inconsistent">False</property>
+	  <signal name="toggled" handler="on_frameToogle_toggled" last_modification_time="Tue, 29 Apr 2008 22:40:24 GMT"/>
+	</widget>
+	<packing>
+	  <property name="padding">2</property>
+	  <property name="expand">False</property>
+	  <property name="fill">False</property>
+	</packing>
+      </child>
+
+      <child>
 	<widget class="GtkHBox" id="hbox2">
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>

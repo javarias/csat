@@ -226,7 +226,7 @@ create_LpiShow (struct ccd *cam)
   gtk_widget_show (label3);
   gtk_box_pack_start (GTK_BOX (vbox4), label3, FALSE, FALSE, 0);
 
-  PixelScale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0, 0)));
+  PixelScale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 7, 0.2, 0, 0)));
   gtk_widget_show (PixelScale);
   gtk_box_pack_start (GTK_BOX (vbox4), PixelScale, TRUE, TRUE, 0);
   gtk_range_set_value(GTK_RANGE(PixelScale),value);
