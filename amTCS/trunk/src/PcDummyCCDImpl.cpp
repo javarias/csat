@@ -134,7 +134,8 @@ ACS::RWlong_ptr PcDummyCCDImpl::green() throw (CORBA::SystemException)
 		return ACS::RWlong::_nil();
 	}
 	ACS::RWlong_var prop = ACS::RWlong::_narrow(m_green_sp->getCORBAReference());
-	return prop._retn();}
+	return prop._retn();
+}
 
 ACS::RWlong_ptr PcDummyCCDImpl::pixelBias() throw (CORBA::SystemException)
 {
@@ -142,7 +143,8 @@ ACS::RWlong_ptr PcDummyCCDImpl::pixelBias() throw (CORBA::SystemException)
 		return ACS::RWlong::_nil();
 	}
 	ACS::RWlong_var prop = ACS::RWlong::_narrow(m_pixelBias_sp->getCORBAReference());
-	return prop._retn();}
+	return prop._retn();
+}
 
 ACS::RWlong_ptr PcDummyCCDImpl::resetLevel() throw (CORBA::SystemException)
 {
@@ -150,7 +152,8 @@ ACS::RWlong_ptr PcDummyCCDImpl::resetLevel() throw (CORBA::SystemException)
 		return ACS::RWlong::_nil();
 	}
 	ACS::RWlong_var prop = ACS::RWlong::_narrow(m_resetLevel_sp->getCORBAReference());
-	return prop._retn();}
+	return prop._retn();
+}
 
 ACS::RWlong_ptr PcDummyCCDImpl::exposure() throw (CORBA::SystemException)
 {
@@ -158,7 +161,8 @@ ACS::RWlong_ptr PcDummyCCDImpl::exposure() throw (CORBA::SystemException)
 		return ACS::RWlong::_nil();
 	}
 	ACS::RWlong_var prop = ACS::RWlong::_narrow(m_exposure_sp->getCORBAReference());
-	return prop._retn();}
+	return prop._retn();
+}
 
 
 /* --------------- [ MACI DLL support functions ] -----------------*/
