@@ -38,7 +38,7 @@ import alma.TELESCOPE_MODULE.TelescopeOperations;
 
 public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, Runnable {
 
-	private static final double PRESITION = 0.01;
+	private static final double PRESITION = 0.005;
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
 
@@ -333,12 +333,13 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 						diffAlt        *= (-1);
 					}
 
-					     if( diffAlt <  0.1 )                  altazVel.altVel *= 0.005;
-					else if( diffAlt >= 0.1 && diffAlt < 0.5 ) altazVel.altVel *= 0.01;
-					else if( diffAlt >= 0.5 && diffAlt < 3 )   altazVel.altVel *= 0.08;
-					else if( diffAlt >= 3   && diffAlt < 5 )   altazVel.altVel *= 0.4;
-					else if( diffAlt >= 5   && diffAlt < 10)   altazVel.altVel *= 1;
-					else if( diffAlt >= 10)                    altazVel.altVel *= 4;					     
+					     if( diffAlt <  0.05 )                  altazVel.altVel *= 0.001;
+					else if( diffAlt >= 0.05 && diffAlt < 0.1 ) altazVel.altVel *= 0.004;
+					else if( diffAlt >= 0.1  && diffAlt < 0.5 ) altazVel.altVel *= 0.01;
+					else if( diffAlt >= 0.5  && diffAlt < 3 )   altazVel.altVel *= 0.08;
+					else if( diffAlt >= 3    && diffAlt < 5 )   altazVel.altVel *= 0.4;
+					else if( diffAlt >= 5    && diffAlt < 10)   altazVel.altVel *= 1;
+					else if( diffAlt >= 10)                     altazVel.altVel *= 4;					     
 
 					
 				} else {
@@ -355,12 +356,13 @@ public class TelescopeImpl implements TelescopeOperations, ComponentLifecycle, R
 						diffAzm       *= (-1);
 					}
 
-					     if( diffAzm <  0.1 )                  altazVel.azVel *= 0.005;
-					else if( diffAzm >= 0.1 && diffAzm < 0.5 ) altazVel.azVel *= 0.01;
-					else if( diffAzm >= 0.5 && diffAzm < 3 )   altazVel.azVel *= 0.08;
-					else if( diffAzm >= 3   && diffAzm < 5 )   altazVel.azVel *= 0.4;
-					else if( diffAzm >= 5   && diffAzm < 10)   altazVel.azVel *= 1;
-					else if( diffAzm >= 10)                    altazVel.azVel *= 4;
+					     if( diffAzm <  0.05 )                  altazVel.azVel *= 0.001;
+					else if( diffAzm >= 0.05 && diffAzm < 0.1 ) altazVel.azVel *= 0.004;
+					else if( diffAzm >= 0.1  && diffAzm < 0.5 ) altazVel.azVel *= 0.01;
+					else if( diffAzm >= 0.5  && diffAzm < 3 )   altazVel.azVel *= 0.08;
+					else if( diffAzm >= 3    && diffAzm < 5 )   altazVel.azVel *= 0.4;
+					else if( diffAzm >= 5    && diffAzm < 10)   altazVel.azVel *= 1;
+					else if( diffAzm >= 10)                     altazVel.azVel *= 4;
 
 				} else {
 					altazVel.azVel = 0;

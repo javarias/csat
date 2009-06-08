@@ -63,6 +63,7 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	private alma.TRACKING_MODULE.Tracking tracking_comp;
 	private alma.SAFETY_MODULE.Safety safety_comp;
 	private alma.POINTING_MODULE.Pointing pointing_comp;
+	private alma.LOCALE_MODULE.Locale locale_comp;
 
 	private RadecPos p_theorical;
 	private boolean observing_for_pointing;
@@ -178,6 +179,15 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 		} catch (AcsJContainerServicesEx e) {
 			m_logger.fine("Failed to get Pointing default component reference");
 			throw new ComponentLifecycleException("Failed to get Pointing component reference");
+		}
+
+		/* We get the Locale reference */
+		try{
+			obj = m_containerServices.getDefaultComponent("IDL:alma/LOCALE_MODULE/Locale:1.0");
+			locale_comp = alma.LOCALE_MODULE.LocaleHelper.narrow(obj);
+		} catch (AcsJContainerServicesEx e) {
+			m_logger.fine("Failed to get Lointing default component reference");
+			throw new ComponentLifecycleException("Failed to get Lointing component reference");
 		}
 
 	}
@@ -344,7 +354,9 @@ public class CSATStatusImpl implements CSATStatusOperations, ComponentLifecycle 
 	}
 
 	public EarthPos getLocalPos(){
-		return new EarthPos();
+		if( locale_comp != null )
+			return locale_comp.localPos();
+		return new EarthPos(-1,-1);
 	}
 
 	public void addPointingObs() throws LifeCycleEx {

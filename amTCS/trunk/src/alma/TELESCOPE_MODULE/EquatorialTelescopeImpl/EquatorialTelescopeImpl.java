@@ -38,7 +38,7 @@ import alma.TELESCOPE_MODULE.EquatorialTelescopeOperations;
 
 public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, ComponentLifecycle, Runnable {
 
-	private static final double PRESITION = 0.01;
+	private static final double PRESITION = 0.005;
 	private ContainerServices m_containerServices;
 	private Logger m_logger;
 
@@ -105,8 +105,6 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 
 		m_commandedRadecPos.ra  = m_commandedPos.az + calculations_comp.siderealTime();
 		m_commandedRadecPos.dec = m_commandedPos.alt;
-
-		System.out.println(m_commandedRadecPos.ra + " yeah!!!!" + m_commandedRadecPos.dec);
 
 		m_softRealPos = m_commandedRadecPos;
 
@@ -309,8 +307,6 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 				m_softRealPos.dec = realAltitude;
 				m_softRealPos.ra  = realAzimuth + st;
 				
-				System.out.println(m_commandedRadecPos.ra + "\n" + m_commandedRadecPos.dec);
-
 				/* We add to the commanded position the Automatic pointing corrections */
 				tmprd.ra = m_commandedPos.az + st;
 				tmprd.dec = m_commandedPos.alt;
@@ -370,14 +366,15 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 						diffAlt        *= (-1);
 					}
 
-					     if( diffAlt <  0.1 )                  altazVel.altVel *= 0.004;
-					else if( diffAlt >= 0.1 && diffAlt < 0.4 ) altazVel.altVel *= 0.008;
-					else if( diffAlt >= 0.4 && diffAlt < 0.5 ) altazVel.altVel *= 0.01;
-					else if( diffAlt >= 0.5 && diffAlt < 1 )   altazVel.altVel *= 0.5;
-					else if( diffAlt >= 1   && diffAlt < 3 )   altazVel.altVel *= 0.8;
-					else if( diffAlt >= 3   && diffAlt < 5 )   altazVel.altVel *= 1;
-					else if( diffAlt >= 5   && diffAlt < 10)   altazVel.altVel *= 2;
-					else if( diffAlt >= 10  && diffAlt < 15)   altazVel.altVel *= 3;
+					     if( diffAlt <  0.05 )                  altazVel.altVel *= 0.001;
+					else if( diffAlt >= 0.05 && diffAlt < 0.1 ) altazVel.altVel *= 0.004;
+					else if( diffAlt >= 0.1  && diffAlt < 0.4 ) altazVel.altVel *= 0.008;
+					else if( diffAlt >= 0.4  && diffAlt < 0.5 ) altazVel.altVel *= 0.01;
+					else if( diffAlt >= 0.5  && diffAlt < 1 )   altazVel.altVel *= 0.5;
+					else if( diffAlt >= 1    && diffAlt < 3 )   altazVel.altVel *= 0.8;
+					else if( diffAlt >= 3    && diffAlt < 5 )   altazVel.altVel *= 1;
+					else if( diffAlt >= 5    && diffAlt < 10)   altazVel.altVel *= 2;
+					else if( diffAlt >= 10   && diffAlt < 15)   altazVel.altVel *= 3;
 					else if( diffAlt >= 15)                    altazVel.altVel *= 8;
 
 					
@@ -395,15 +392,16 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 						diffAzm       *= (-1);
 					}
 
-					     if( diffAzm <  0.1 )                  altazVel.azVel *= 0.004;
-					else if( diffAzm >= 0.1 && diffAzm < 0.4 ) altazVel.azVel *= 0.008;
-					else if( diffAzm >= 0.4 && diffAzm < 0.5 ) altazVel.azVel *= 0.01;
-					else if( diffAzm >= 0.5 && diffAzm < 1 )   altazVel.azVel *= 0.5;
-					else if( diffAzm >= 1   && diffAzm < 3 )   altazVel.azVel *= 0.8;
-					else if( diffAzm >= 3   && diffAzm < 5 )   altazVel.azVel *= 1;
-					else if( diffAzm >= 5   && diffAzm < 10)   altazVel.azVel *= 2;
-					else if( diffAzm >= 10  && diffAzm < 15)   altazVel.azVel *= 3;
-					else if( diffAzm >= 15)                    altazVel.azVel *= 8;
+					     if( diffAzm <  0.05 )                  altazVel.azVel *= 0.001;
+					else if( diffAzm >= 0.05 && diffAzm < 0.1 ) altazVel.azVel *= 0.004;
+					else if( diffAzm >= 0.1  && diffAzm < 0.4 ) altazVel.azVel *= 0.008;
+					else if( diffAzm >= 0.4  && diffAzm < 0.5 ) altazVel.azVel *= 0.01;
+					else if( diffAzm >= 0.5  && diffAzm < 1 )   altazVel.azVel *= 0.5;
+					else if( diffAzm >= 1    && diffAzm < 3 )   altazVel.azVel *= 0.8;
+					else if( diffAzm >= 3    && diffAzm < 5 )   altazVel.azVel *= 1;
+					else if( diffAzm >= 5    && diffAzm < 10)   altazVel.azVel *= 2;
+					else if( diffAzm >= 10   && diffAzm < 15)   altazVel.azVel *= 3;
+					else if( diffAzm >= 15)                     altazVel.azVel *= 8;
 
 				} else {
 					altazVel.azVel = 0;
@@ -424,7 +422,7 @@ public class EquatorialTelescopeImpl implements EquatorialTelescopeOperations, C
 				}
 				
 				try {
-					Thread.sleep(1500);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
