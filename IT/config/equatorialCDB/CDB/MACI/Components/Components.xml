@@ -20,7 +20,7 @@
          Code="lpiImpl"
          Type="IDL:alma/DEVCCD_MODULE/DevCCD:1.0"
          Default="true"
-         Container="amContainerCpp"/>
+         Container="amContainerCCD"/>
 
       <_ Name="NEXSTAR"
          Code="NexstarImpl"
@@ -31,13 +31,13 @@
       <_ Name="EQUATORIAL_NEXSTAR"
          Code="EquatorialNexstarImpl"
          Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
-         Default="false"
+         Default="true"
          Container="amContainerCpp"/>
 	
       <_ Name="ESO50"
          Code="ESO50Impl"
          Type="IDL:alma/DEVTELESCOPE_MODULE/DevTelescope:1.0"
-         Default="true"
+         Default="false"
          Container="amContainerCpp"/>
 
       <_ Name="LX200_OCA"
