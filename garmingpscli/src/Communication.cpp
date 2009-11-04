@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <math.h>
+#include <stdint.h>
 
 #include "Communication.h"
 #include "verbosity.h"

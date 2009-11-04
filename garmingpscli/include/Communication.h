@@ -1,4 +1,7 @@
 #include <string>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 
 #include <SerialRS232.h>
 
