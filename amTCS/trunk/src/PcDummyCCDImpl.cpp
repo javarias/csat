@@ -34,7 +34,7 @@ void PcDummyCCDImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 	static char * _METHOD_ = (char *)"PcDummyCCDImpl::initialize";
 
 	ACSErr::Completion_var completion;
-	m_device_sp = new RWstring((string(component_name)+":device").c_str(), getComponent());
+	m_device_sp = new RWstring(ACE_CString(name())+":device", getComponent());
 
 	ACS_TRACE( _METHOD_ );
 	if( getComponent() != 0){

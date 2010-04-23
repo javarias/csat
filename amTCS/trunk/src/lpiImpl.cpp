@@ -38,7 +38,7 @@ void lpiImpl::initialize() throw (acsErrTypeLifeCycle::LifeCycleExImpl)
 	static char * _METHOD_ = (char *)"lpiImpl::initialize";
 
 	ACSErr::Completion_var completion;
-	m_device_sp = new RWstring((string(component_name)+":device").c_str(), getComponent());
+	m_device_sp = new RWstring(ACE_CString(name())+":device", getComponent());
 	char *deviceName = m_device_sp->get_sync(completion.out());
 	int fd;
 
