@@ -155,9 +155,10 @@ public class TrackingImpl implements TrackingOperations, ComponentLifecycle, Run
 		while(true){
 			if(m_status && doControl){
 				if(telescope_comp != null) {
-					m_logger.info("Adjusting position according to tracking");
 					pos = telescope_comp.getRadec();
+					m_logger.info("Adjusting position according to tracking: " + pos.ra + " - " + pos.dec);
 					telescope_comp.presetting(pos, null, null);
+					
 					try{
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
