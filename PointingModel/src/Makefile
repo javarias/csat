@@ -19,12 +19,12 @@
 
 #
 # user definable C-compilation flags
-#USER_CFLAGS = 
+USER_CFLAGS = 
 
 #
 # additional include and library search paths
 #USER_INC = 
-#USER_LIB = 
+USER_LIB = -lstdc++
 
 #
 # MODULE CODE DESCRIPTION:
